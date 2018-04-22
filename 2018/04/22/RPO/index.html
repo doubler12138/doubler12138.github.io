@@ -8,20 +8,27 @@
 
 <title>
   
-    Archive
+    RPO漏洞学习笔记
   
 </title>
 
-<meta name="description" content="一直学习就好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Double--R blog">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta name="description" content="**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPO漏洞学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/22/RPO/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="一直学习就好">
+<meta property="og:description" content="**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO3.png">
+<meta property="og:updated_time" content="2018-04-22T02:49:47.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Double--R blog">
-<meta name="twitter:description" content="一直学习就好">
+<meta name="twitter:title" content="RPO漏洞学习笔记">
+<meta name="twitter:description" content="**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO5.png">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -155,43 +162,26 @@
       
         <div style="max-width: 1000px">
       
-          
-
+          <article id="post-RPO" class="article article-type-post">
+  
+    <h1 class="article-header">
+      RPO漏洞学习笔记
+    </h1>
   
   
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <h1><a href="/archives/2018" class="archive-year">2018</a></h1>
-        </div>
-        <div class="post-list">
-    
-  
 
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2018/04/22/RPO/" >
-  RPO漏洞学习笔记
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2018/04/22/RPO/"><span class="article-date">
+  <div class="article-info">
+    <span class="article-date">
   2018-04-22
 </span>
-</a>
-        
 
-        
+    
 
-      </div>
-      <div class="article-entry">
-        
-          <p>**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。</p>
+    
+
+  </div>
+  <div class="article-entry">
+    <p>**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。</p>
 <p><strong>参考博客：</strong> </p>
 <p><a href="http://www.52bug.cn/%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF/4732.html" target="_blank" rel="noopener">K0rz3n师傅的博客</a></p>
 <hr>
@@ -200,99 +190,65 @@
 <ul>
 <li>RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现的差异，并借助文件中包含的相对路径的css或者js造成跨目录读取css或者js，甚至可以将本身不是css或者js的页面当做css或者js解析，从而触发xss等进一步的攻击手段。 </li>
 </ul>
-          <p>
-            <a href="/2018/04/22/RPO/">
-              Read More
-            </a>
-          </p>
-        
-      </div>
-    </div>
+<a id="more"></a>
+<font color="0099ff"> 触发条件： </font>
 
-  
+<ol>
+<li><p>Apache 配置错误导致AllowEncodedSlashes这个选项开启（对Apache来说默认情况下 AllowEncodedSlashes 这个选项是关闭的），或者nginx服务器。 </p>
+</li>
+<li><p>存在相对路径的js或者css的引用 </p>
+</li>
+</ol>
+<font color="0099ff"> 触发条件1： </font>
 
-  
-  
+<ul>
+<li><p>对于Apache的配置我在本地和阿里云服务器都没有没有成功，Apache2的配置文件里并没有AllowEncodedSlashes的配置内容，搜索了大多数技术文档，给出的方法是在apache.conf中自己添加,但我实践后并没有成功（问题待解决）</p>
+</li>
+<li><p>对于Nginx，我在本地使用phpstudy，使用PHP-5.4.45-NTS和Nginx</p>
+</li>
+<li><p>我在本地RPO的目录下创建了apache.php和nginx.php文件，内容分别是输出apache.php和nginx.php。</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO5.png" alt="Alt text"></p>
+<ul>
+<li><strong><em>测试：</em></strong></li>
+</ul>
+<p>Apache:</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO2.png" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO4.png" alt="Alt text"></p>
+<p>Nginx:</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO1.png" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO3.png" alt="Alt text"></p>
+<ul>
+<li><p><strong><em>分析：</em></strong></p>
+</li>
+<li><p>可以看到面对类似的url，Apache和Nginx的处理方式时不同的，对于apache，在没有开启AllowEncodedSlashes时服务器并不认识..%2f这个符号所以它将这个符号认成文件名的一部分，在它看来我们访问的时a目录下的..%2fapache.php文件，显然a路径不存在，..%2fapache.php文件也不存在，所以访问错误。但Nginx不同，它理解..%2f符号并能对其惊醒url解码，所以在它看来我们访问的是<a href="http://127.0.0.1/RPO/a/../nginx.php，而../这个符号对于服务器来说就是向前跳转一个目录，所以即使RPO目录下并没有a目录也没有关系，因为我们向前跳转了一个目录，所以我们访问的是RPO目录下的nginx.php，而在这个目录下文件是存在的" target="_blank" rel="noopener">http://127.0.0.1/RPO/a/../nginx.php，而../这个符号对于服务器来说就是向前跳转一个目录，所以即使RPO目录下并没有a目录也没有关系，因为我们向前跳转了一个目录，所以我们访问的是RPO目录下的nginx.php，而在这个目录下文件是存在的</a></p>
+</li>
+</ul>
+
+  </div>
+  <footer class="article-footer">
     
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2018/04/21/create/" >
-  博客创建
-</a>
-
-      </h3>
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
       
-
-      <div class="article-info">
-        <a href="/2018/04/21/create/"><span class="article-date">
-  2018-04-21
-</span>
-</a>
+          <img src="/images/cc/by.png">
         
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
 
-        
 
-      </div>
-      <div class="article-entry">
-        
-          <p><strong>今天Double–R的博客创建了</strong></p>
-<hr>
-<p><strong>2018-4-21 我创建了我的博客</strong></p>
-<p><br>以后我会将自己的学习笔记，CTF的write up和一些看到的好文章写到博客上<br><br>最后菜的要死的Double–R只要一直学习就好了<br><br><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/yellow.jpg" alt="Alt text"><br>
-          <p>
-            <a href="/2018/04/21/create/">
-              Read More
-            </a>
-          </p>
-        
-      </div>
-    </div>
-
-  
-
-  
-  
     
-  
 
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2018/04/21/hello-world/" >
-  Hello World
-</a>
+  </footer>
+</article>
 
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2018/04/21/hello-world/"><span class="article-date">
-  2018-04-21
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-      </div>
-    </div>
-
-  
 
 
 
