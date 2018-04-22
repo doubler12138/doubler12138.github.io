@@ -24,7 +24,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO4.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO3.png">
-<meta property="og:updated_time" content="2018-04-22T03:27:21.210Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO6.png">
+<meta property="og:updated_time" content="2018-04-22T04:41:23.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPO漏洞学习笔记">
 <meta name="twitter:description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现">
@@ -230,8 +231,46 @@
 <p>而../这个符号对于服务器来说就是向前跳转一个目录，所以即使RPO目录下并没有a目录也没有关系，因为我们向前跳转了一个目录，所以我们访问的是RPO目录下的nginx.php，而在这个目录下文件是存在的</p>
 <font color="0099ff"> 两者结合： </font>
 
-
-
+<ul>
+<li><p><strong>1.跨目录读取js：</strong></p>
+</li>
+<li><p>首先我在RPO目录下创建index.php，访问后会加载本目录下的a.js，注意这个a.js前面没有/（斜杠）代表是相对路径。</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>文件内容：</strong></p>
+<p><html><br><head></head><br><body><br><script src="a.js"></script><br></body><br></html><br>&lt;?php</p>
+<pre><code>echo &quot;js in test folder&quot;;
+</code></pre><p>?&gt;</p>
+</li>
+<li><p>与index.php同目录下的test文件夹中有a.js，一但被调用就会弹出对话框alert(“Read file successfully”)</p>
+</li>
+<li><p>我们访问locallhost/RPO/test/..%2findex.php</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO6.png" alt="Alt text"></p>
+<ul>
+<li><p>发现本来只能读取和自己同一目录路下的a.js的index.php成功的读取了test目录下的a.js。</p>
+</li>
+<li><p><strong>分析：</strong></p>
+</li>
+<li><p>1.我们想服务器发送我们的请求<a href="http://localhost/RPO/test/..%2findex.php" target="_blank" rel="noopener">http://localhost/RPO/test/..%2findex.php</a> </p>
+</li>
+<li><p>2.Nginx对..%2f进行解码，所以服务器实际认为我们访问的是<a href="http://localhost/RPO/index.php" target="_blank" rel="noopener">http://localhost/RPO/index.php</a> </p>
+</li>
+<li><p>3.而浏览器根据URL路径处理index.php中引用的相对地址的脚本，可在浏览器眼中，我们访问的是test/..%2findex.php文件，所以其加载的也是test目录下的a.js，即使..%2findex.php文件根本不存在。</p>
+</li>
+<li><p><strong>2.将服务器返回的内容按照js脚本的方式解析：</strong></p>
+</li>
+<li><p>因为URL重写的配置文件我写不对所以我无法实测，这里就贴一下如何开启URL重写</p>
+</li>
+<li><p><a href="https://blog.csdn.net/silence1214/article/details/8031423" target="_blank" rel="noopener">Apache</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/dutsoft/article/details/55104860" target="_blank" rel="noopener">Nginx</a></p>
+</li>
+</ul>
+<hr>
+<p><strong>等后面K0rz3n师傅把他的配置文件发出来后我再补全这个贴，后面等师傅的题出来我也会写一下WP</strong></p>
 
   </div>
   <footer class="article-footer">
