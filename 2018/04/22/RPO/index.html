@@ -12,22 +12,22 @@
   
 </title>
 
-<meta name="description" content="**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析">
+<meta name="description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RPO漏洞学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/04/22/RPO/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析">
+<meta property="og:description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO5.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO4.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO3.png">
-<meta property="og:updated_time" content="2018-04-22T02:49:47.067Z">
+<meta property="og:updated_time" content="2018-04-22T03:27:21.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPO漏洞学习笔记">
-<meta name="twitter:description" content="**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析">
+<meta name="twitter:description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO5.png">
 
 
@@ -181,7 +181,7 @@
 
   </div>
   <div class="article-entry">
-    <p>**2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。</p>
+    <p><strong>2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。</strong></p>
 <p><strong>参考博客：</strong> </p>
 <p><a href="http://www.52bug.cn/%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF/4732.html" target="_blank" rel="noopener">K0rz3n师傅的博客</a></p>
 <hr>
@@ -211,7 +211,7 @@
 </ul>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO5.png" alt="Alt text"></p>
 <ul>
-<li><strong><em>测试：</em></strong></li>
+<li><strong>测试：</strong></li>
 </ul>
 <p>Apache:</p>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO2.png" alt="Alt text"></p>
@@ -220,11 +220,18 @@
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO1.png" alt="Alt text"></p>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO3.png" alt="Alt text"></p>
 <ul>
-<li><p><strong><em>分析：</em></strong></p>
+<li><p><strong>分析：</strong></p>
 </li>
-<li><p>可以看到面对类似的url，Apache和Nginx的处理方式时不同的，对于apache，在没有开启AllowEncodedSlashes时服务器并不认识..%2f这个符号所以它将这个符号认成文件名的一部分，在它看来我们访问的时a目录下的..%2fapache.php文件，显然a路径不存在，..%2fapache.php文件也不存在，所以访问错误。但Nginx不同，它理解..%2f符号并能对其惊醒url解码，所以在它看来我们访问的是<a href="http://127.0.0.1/RPO/a/../nginx.php，而../这个符号对于服务器来说就是向前跳转一个目录，所以即使RPO目录下并没有a目录也没有关系，因为我们向前跳转了一个目录，所以我们访问的是RPO目录下的nginx.php，而在这个目录下文件是存在的" target="_blank" rel="noopener">http://127.0.0.1/RPO/a/../nginx.php，而../这个符号对于服务器来说就是向前跳转一个目录，所以即使RPO目录下并没有a目录也没有关系，因为我们向前跳转了一个目录，所以我们访问的是RPO目录下的nginx.php，而在这个目录下文件是存在的</a></p>
+<li><p>可以看到面对类似的url，Apache和Nginx的处理方式时不同的，对于apache，在没有开启AllowEncodedSlashes时服务器并不认识..%2f这个符号所以它将这个符号认成文件名的一部分，在它看来我们访问的时a目录下的..%2fapache.php文件，显然a路径不存在，..%2fapache.php文件也不存在，所以访问错误。但Nginx不同，它理解..%2f符号并能对其惊醒url解码，所以在它看来我们访问的是:</p>
 </li>
 </ul>
+<pre>http://127.0.0.1/RPO/a/../nginx.php</pre>
+
+<p>而../这个符号对于服务器来说就是向前跳转一个目录，所以即使RPO目录下并没有a目录也没有关系，因为我们向前跳转了一个目录，所以我们访问的是RPO目录下的nginx.php，而在这个目录下文件是存在的</p>
+<font color="0099ff"> 两者结合： </font>
+
+
+
 
   </div>
   <footer class="article-footer">
