@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    SQL学习笔记(二)
+  
+</title>
+
+<meta name="description" content="继续写SQL注入的学习笔记，感觉之前第一部分写的太基础了，接下来就不写这些了，写些重要的   1.第二部分主要讲一下注入的一般步骤、主要的过滤方式和代码实现。 2.第三部分讲一下针对主要过滤方式的绕过方式，这些主要是针对有回显的注入。 3.第四部分讲一下盲注的方式 4.第五部分就写一下一些CTF注入题的思路 SQL注入的内容比较多，可能花的时间会比较多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL学习笔记(二)">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/SQL-2/index.html">
+<meta property="og:site_name" content="Double--R blog">
+<meta property="og:description" content="继续写SQL注入的学习笔记，感觉之前第一部分写的太基础了，接下来就不写这些了，写些重要的   1.第二部分主要讲一下注入的一般步骤、主要的过滤方式和代码实现。 2.第三部分讲一下针对主要过滤方式的绕过方式，这些主要是针对有回显的注入。 3.第四部分讲一下盲注的方式 4.第五部分就写一下一些CTF注入题的思路 SQL注入的内容比较多，可能花的时间会比较多">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/aichong/14.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL8.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL9.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL10.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL11.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL12.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL13.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL14.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL15.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL16.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL17.png">
+<meta property="og:updated_time" content="2018-04-24T07:12:15.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL学习笔记(二)">
+<meta name="twitter:description" content="继续写SQL注入的学习笔记，感觉之前第一部分写的太基础了，接下来就不写这些了，写些重要的   1.第二部分主要讲一下注入的一般步骤、主要的过滤方式和代码实现。 2.第三部分讲一下针对主要过滤方式的绕过方式，这些主要是针对有回显的注入。 3.第四部分讲一下盲注的方式 4.第五部分就写一下一些CTF注入题的思路 SQL注入的内容比较多，可能花的时间会比较多">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/aichong/14.jpg">
+
+
+  <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+</head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Double--R blog</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Double--R blog</a></h1>
+    
+      <p class="subtitle">
+        菜的要死的Double--R
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+          <div class="description">一直学习就好</div>
+        
+        
+          <div class="author">Double--R</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">8</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-SQL-2" class="article article-type-post">
+  
+    <h1 class="article-header">
+      SQL学习笔记(二)
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2018-04-23
+</span>
+
+    
+
+    
+
+  </div>
+  <div class="article-entry">
+    <p><strong>继续写SQL注入的学习笔记，感觉之前第一部分写的太基础了，接下来就不写这些了，写些重要的</strong></p>
+<hr>
+<ul>
+<li><strong>1.第二部分主要讲一下注入的一般步骤、主要的过滤方式和代码实现。</strong></li>
+<li><strong>2.第三部分讲一下针对主要过滤方式的绕过方式，这些主要是针对有回显的注入。</strong></li>
+<li><strong>3.第四部分讲一下盲注的方式</strong></li>
+<li><strong>4.第五部分就写一下一些CTF注入题的思路</strong></li>
+<li><strong>SQL注入的内容比较多，可能花的时间会比较多</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/aichong/14.jpg" alt="Alt text"></p>
+<a id="more"></a>
+<font color="0099ff"> Order by语句： </font>
+
+<ul>
+<li><p>在找到注入点后，我们一般会用order by子句判断几个字段。网上很多博客对order by语句具体查的是查询的字段数还是数据库表中的字段数讲的很模糊。我实测了一下order by猜的是查询出的列数，而不是表实际的列数。order by本来就是指定的结果如何order，针对的就是查询结果而不是原表。所以order by猜解得到的列数还跟在后端的逻辑有关:</p>
+</li>
+<li><p>看实测，order by 2没有问题可以正常查询，但order by 3就没有查询过结果了。</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL1.png" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL2.png" alt="Alt text"></p>
+<ul>
+<li>那么数据库的表中真的只要两个字段吗？其实不然，我们可以看到表中其实要八个字段</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL4.png" alt="Alt text"></p>
+<ul>
+<li>看源码我们就能知道为什么order by 2能成功而order by 3就失败了，因为它的查询语句里面就查询了first_name和last_name两个字段。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL3.png" alt="Alt text"></p>
+<ul>
+<li>如果我们更改一下源码，改为select <em> from users where user_id=’$id’，看看能order by 几,可以看到order by 8是能成功的，因为select </em>就是查询全表，而表中有八个字段。而之所以first_name变成了1，是因为我们对所有字段进行了排序user_id排在前，所以先显示出来了</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL5.png" alt="Alt text"></p>
+<font color="0099ff"> 判断显示字段是哪些： </font>
+
+<ul>
+<li>上一步我们通过order by子句得出了原有查询语句查询了几个字段，现在我们就需要构造payload去判断哪些查询字段是被显示的，显示在哪些位置。payload:-1’ union select 1,2,3….,n #；n就是通过order by子句得出的查询字段个数。我们通过联合查询 union select（UNION 用于合并两个或多个 SELECT 语句的结果集，并消去表中任何重复行。<br>UNION 内部的 SELECT 语句必须拥有相同数量的列，列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同.）去判断，当然首先我们要让原有的查询没有查询结果，才能显示我们的查询。对于数字型注入可以将id之类的值赋为-1，因为-1这个id一般是不存在的，所以不会有查询结果，或者后面跟一个逻辑判断 and 1=2，显然是不成立的所以原有查询语句不会执行，也就没有查询结果。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL6.png" alt="Alt text"></p>
+<p>可以看到我们注入出来的1，2位置都会被显示出来，那我们接下来将所有的注入结果都替换这里的1和2，这样注入结果就都会被显示出来。</p>
+<font color="0099ff"> 开始注入： </font>
+
+<ul>
+<li><p><strong>爆出当前库和数据库版本：</strong></p>
+</li>
+<li><p>payload:-1’ union select database(),version() #  database()和version()</p>
+</li>
+<li><p>是mysql中的两个函数，用来显示当前正在链接的数据库和mysql的版本。</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL7.png" alt="Alt text"></p>
+<ul>
+<li><p><strong>爆出其它库：</strong></p>
+</li>
+<li><p>payload:-1’ union select 1,schema_name from information_schema.schemata limit 0,1 #</p>
+</li>
+<li><p>information_schema是mysql数据库自带的一个库，用来储存数据库中所有库、表和字段的信息。shemata是库中的一个表，存放数据库中所有库名，schem_name就是表中存放库名的字段名。limit 0,1用来列举查询结果，limit m,n表示从第m+1条记录开始取n条结果。</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL8.png" alt="Alt text"></p>
+<ul>
+<li>由于输出位在源码中限制了只输出一个字符串，所以即使我们取三条结果它也只输出了一条，这时可以使用mysql中的group_concat()函数，我理解的他的作用是将查询内容按顺序连接成一个字符串，并删除重复内容。这样我们就能显示全部查询结果了。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL9.png" alt="Alt text"></p>
+<ul>
+<li><p><strong>爆对应库的数据表：</strong></p>
+</li>
+<li><p>payload：-1’ union select 1,group_concat(table_name) from information_schema.tables where table_schema=’dvwa’ #</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL10.png" alt="Alt text"></p>
+<ul>
+<li><p><strong>爆对应库和表的各个字段：</strong></p>
+</li>
+<li><p>payload:-1’ union select 1,group_concat(column_name) from information_schema.columns where table_schema=’dvwa’ and table_name=’users’ #</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL11.png" alt="Alt text"></p>
+<ul>
+<li><p><strong>爆数据：</strong></p>
+</li>
+<li><p>payload:-1’ union select 1,group_concat(字段名) from 库名.表名 #</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL12.png" alt="Alt text"></p>
+<p><strong>以上就是SQL注入的常规步骤和最简单的payload，具体的payload还要视源码过滤而定，构造能绕过过滤的payload的是SQL注入最终要的部分。下面就讲讲常见的过滤方式</strong></p>
+<hr>
+<font color="0099ff"> 闭合方式的过滤： </font>
+
+<ul>
+<li>在数据闭合时可不能不再时简单的单引号了，可能是双引号，括号，或者两者三者的结合，这种过滤比较简单。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL13.png" alt="Alt text"></p>
+<font color="0099ff"> 过滤空格等一些符号： </font>
+
+<ul>
+<li>php中有很多函数可以对字符串进行操作，例如preg_replace(),str_replace(),strtr()等，我个人认为preg_replace()被使用的多一点。他的语法是preg_repalce($pattern1，$pattern2,$str),搜索目标$str，把字符串中的$pattern1换位$pattern2</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL14.png" alt="Alt text"></p>
+<ul>
+<li>可以看到我们对post的id的值做了个处理后才赋值给id变量，具体的处理是preg_replace(‘/\s+/‘,’’,$_POST[$id]),/\s+/是正则表达式，\s表示匹配任何空包字符，包括空格、制表符、换页符等等，+表示匹配子表达式一次或多次，就是匹配一个或连续多个符号。那么实际效果就是，我们输入的普通注入语句中的空格全没了。这种方式可以过滤大多数符号，具体看正则表达式怎么写（正则表达式我后面系统学的时候再细写笔记）。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL15.png" alt="Alt text"></p>
+<font color="0099ff"> 关键字过滤： </font>
+
+<ul>
+<li>在注入时，我们避免不了使用mysql中的一些关键字，例如联合查询的union，所以我们可以对输入的数据进行关键字顾虑</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL16.png" alt="Alt text"></p>
+<ul>
+<li>可以看到我们先定义了keyword，内容是一些用|分隔的mysql关键字，explode函数的作用就是将字符串按照特定的分隔符号分成一个数组，str_ireplace函数的作用与preg_replace类似，但ireplace表示它的比较是不区分大小写的，最终普通的payload被过滤阉割了。例如我们输入这样的payload：-1’ union select 1,group_concat(table_name) from information_schema.tables where table_schema=’dvwa’ #实际效果：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL17.png" alt="Alt text"></p>
+<ul>
+<li>常见的过滤方式大概就这三种，具体过滤因具体的正则表达和要过滤的关键字不同而不同，下一部分将讲一下常见的绕过方式。具体不同的CTF题的过滤方式千奇百怪，但万变不离其宗，知道它的如何过滤我们就能绕过。</li>
+</ul>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2018 Double--R blog - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/PhotoSwipe/photoswipe.js"></script>
+  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+<script src="/scripts/main.js"></script>
+
+</body>
+</html>
