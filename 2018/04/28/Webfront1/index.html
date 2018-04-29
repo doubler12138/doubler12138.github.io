@@ -15,12 +15,12 @@
 <meta name="description" content="第1章 Web安全的关键点  记录今天看的第一章的重点知识，这几个关键点对理解整个Web安全，，甚至整个安全体系都都有很大的帮助。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web前端黑客技术揭秘第1章">
-<meta property="og:url" content="http://yoursite.com/2018/04/28/Webfront/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/04/28/Webfront1/index.html">
 <meta property="og:site_name" content="Double--R blog">
 <meta property="og:description" content="第1章 Web安全的关键点  记录今天看的第一章的重点知识，这几个关键点对理解整个Web安全，，甚至整个安全体系都都有很大的帮助。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793368.25.jpg">
-<meta property="og:updated_time" content="2018-04-28T15:28:45.958Z">
+<meta property="og:updated_time" content="2018-04-29T03:24:15.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端黑客技术揭秘第1章">
 <meta name="twitter:description" content="第1章 Web安全的关键点  记录今天看的第一章的重点知识，这几个关键点对理解整个Web安全，，甚至整个安全体系都都有很大的帮助。">
@@ -91,22 +91,22 @@
           
             
               <li class="category-list-container">
-                <a href="javascript:;">Category</a>
+                <a href="javascript:;">分类</a>
                 
               </li>
             
           
             
               <li class="tag-list-container">
-                <a href="javascript:;">Tag</a>
+                <a href="javascript:;">标签</a>
                 
               </li>
             
           
             
               <li class="archive-list-container">
-                <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">14</span></li></ul>
+                <a href="javascript:;">归档</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">15</span></li></ul>
               </li>
             
           
@@ -158,7 +158,7 @@
       
         <div style="max-width: 1000px">
       
-          <article id="post-Webfront" class="article article-type-post">
+          <article id="post-Webfront1" class="article article-type-post">
   
     <h1 class="article-header">
       Web前端黑客技术揭秘第1章
@@ -184,15 +184,15 @@
 <hr>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793368.25.jpg" alt="Alt text"></p>
 <a id="more"></a>
+<p><strong>1.1 数据与指令：</strong></p>
 <ul>
-<li><p><strong>1.1 数据与指令：</strong></p>
-</li>
 <li><p>数据：服务端存储（数据库，内存，文件系统等）、客户端存储（本地Cookies、Flash Cookies等）、传输中（JSON数据、XML数据等）、文本数据（HTML、JavaScript、CSS等)、多媒体数据（Flash、MP3等）、图片数据。</p>
 </li>
 <li><p>跨站攻击发生在浏览器客户端，而SQL注入攻击由于针对的对象是数据库，一般情况下，数据库都在服务端，所以SQL注入是发生在服务端的攻击。但HTML5提供了一个新的客户端存储机制：在浏览器端，使用SQLite数据库保存客户端数据，该机制允许使用Javascript脚本操作SQL语句，从而与本地数据库进行交互。</p>
 </li>
-<li><p><strong>1.2 浏览器的同源策略：</strong></p>
-</li>
+</ul>
+<p><strong>1.2 浏览器的同源策略：</strong></p>
+<ul>
 <li><p>计算机的本地与web是不同的层面，Web（通常成为Internet域）运行在浏览器上面，而被限制了直接进行本地数据（通常称为本地域）的读写。</p>
 </li>
 <li><p>同源策略是众多安全策略的一个，是web层面上的策略。</p>
@@ -215,29 +215,29 @@
 </li>
 <li><p>DOM全称Document Object Model,即文档对象模型，就是浏览器将HTML/XML这样的文档抽象成一个树形结构，树上的每个节点都代表HTML/XML中的标签、标签属性或标签内容等。</p>
 </li>
-<li><p><strong>1.3 信任与信任关系：</strong></p>
-</li>
-<li><p>服务器与服务器、网站与网站、Web服务的不同子域、Web层面与浏览器第三方插件、Web层面与浏览器特殊API、浏览器特殊API与本地文件系统、嵌入的Flash与当前DMOM树、不同协议之间等等都存在信任关系。一个安全性非常好的网站可能有时候会因为建立了不可靠的信任关系而导致网站被黑。</p>
-</li>
-<li><p><strong>1.4 社会工程学的作用：</strong></p>
-</li>
-<li><p>常用的社工辅助技巧有：Google Hack、SNS垂直搜索、各种收集的数据库集合查询等</p>
-</li>
-<li><p><strong>1.5 攻防不单一：</strong></p>
-</li>
-<li><p>一次完整的渗透会利用到多种攻击手法。攻和防都得考虑道攻击手法组合的情况。</p>
-</li>
-<li><p><strong>1.6 场景很重要：</strong></p>
-</li>
-<li><p>任何一次攻击都脱离不了具体场景</p>
-</li>
+</ul>
+<p><strong>1.3 信任与信任关系：</strong></p>
+<ul>
+<li>服务器与服务器、网站与网站、Web服务的不同子域、Web层面与浏览器第三方插件、Web层面与浏览器特殊API、浏览器特殊API与本地文件系统、嵌入的Flash与当前DMOM树、不同协议之间等等都存在信任关系。一个安全性非常好的网站可能有时候会因为建立了不可靠的信任关系而导致网站被黑。</li>
+</ul>
+<p><strong>1.4 社会工程学的作用：</strong></p>
+<ul>
+<li>常用的社工辅助技巧有：Google Hack、SNS垂直搜索、各种收集的数据库集合查询等</li>
+</ul>
+<p><strong>1.5 攻防不单一：</strong></p>
+<ul>
+<li>一次完整的渗透会利用到多种攻击手法。攻和防都得考虑道攻击手法组合的情况。</li>
+</ul>
+<p><strong>1.6 场景很重要：</strong></p>
+<ul>
+<li>任何一次攻击都脱离不了具体场景</li>
 </ul>
 
   </div>
   <footer class="article-footer">
     
   <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
       <img src="/images/cc/cc.png">
       
           <img src="/images/cc/by.png">
@@ -245,7 +245,7 @@
           <img src="/images/cc/sa.png">
       
       <span>
-        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
       </span>
     </a>
   </div>

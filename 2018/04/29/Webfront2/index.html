@@ -8,23 +8,21 @@
 
 <title>
   
-    XXE Injection学习笔记
+    Web前端黑客技术揭秘第2章
   
 </title>
 
-<meta name="description" content="之前写的XXE Injection的学习笔记，就不重新写了，贴一下github的地址，里面有源码和pdf格式的笔记  github XXE">
+<meta name="description" content="第2章 前端基础  记录一下第二章的重点知识，基础第一。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XXE Injection学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/04/22/XXE-Injection/index.html">
+<meta property="og:title" content="Web前端黑客技术揭秘第2章">
+<meta property="og:url" content="http://yoursite.com/2018/04/29/Webfront2/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="之前写的XXE Injection的学习笔记，就不重新写了，贴一下github的地址，里面有源码和pdf格式的笔记  github XXE">
+<meta property="og:description" content="第2章 前端基础  记录一下第二章的重点知识，基础第一。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XXE.png">
-<meta property="og:updated_time" content="2018-04-22T05:00:38.073Z">
+<meta property="og:updated_time" content="2018-04-29T07:22:29.068Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XXE Injection学习笔记">
-<meta name="twitter:description" content="之前写的XXE Injection的学习笔记，就不重新写了，贴一下github的地址，里面有源码和pdf格式的笔记  github XXE">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XXE.png">
+<meta name="twitter:title" content="Web前端黑客技术揭秘第2章">
+<meta name="twitter:description" content="第2章 前端基础  记录一下第二章的重点知识，基础第一。">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -158,17 +156,17 @@
       
         <div style="max-width: 1000px">
       
-          <article id="post-XXE-Injection" class="article article-type-post">
+          <article id="post-Webfront2" class="article article-type-post">
   
     <h1 class="article-header">
-      XXE Injection学习笔记
+      Web前端黑客技术揭秘第2章
     </h1>
   
   
 
   <div class="article-info">
     <span class="article-date">
-  2018-04-22
+  2018-04-29
 </span>
 
     
@@ -177,11 +175,60 @@
 
   </div>
   <div class="article-entry">
-    <p><strong>之前写的XXE Injection的学习笔记，就不重新写了，贴一下github的地址，里面有源码和pdf格式的笔记</strong></p>
+    <p><strong>第2章 前端基础</strong></p>
+<ul>
+<li>记录一下第二章的重点知识，基础第一。</li>
+</ul>
 <hr>
-<p><a href="https://github.com/doubler12138/zhoubao/tree/master/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/XXE%20Injection" target="_blank" rel="noopener">github XXE</a></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XXE.png" alt="Alt text"></p>
+<p><img src="" alt="Alt text"></p>
 <a id="more"></a>
+<p><strong>2.1 W3C的世界法则：</strong></p>
+<ul>
+<li><p>W3C即万维网联盟，它指定了很多推荐标准，比如：HTML、XML、JavaScript、CSS等。</p>
+</li>
+<li><p>W3C指定的是推荐标准，很多网站并没有严格按照这些标准执行或者使用自己的解决方案。例如微软的IE和Mozilla的FireFox浏览器。由此就可能导致“不兼容”问题。比如为了解决CSS兼容性而发展的CSS Reset技术和为解决JavaScript兼容性，而诞生的jQuery、YUI等javaScript框架。</p>
+</li>
+<li><p>web安全事件的角色：W3C,浏览器厂商、web厂商、攻击者、被攻击者</p>
+</li>
+</ul>
+<p><strong>2.2 URL：</strong></p>
+<ul>
+<li><p>url格式：<scheme>://<netloc>/<path></path>?<query>#<fragment>.以<a href="http://www.foo.com/path/f.php?id=1#new为例，其对应关系是：" target="_blank" rel="noopener">http://www.foo.com/path/f.php?id=1#new为例，其对应关系是：</a><scheme>–http <netloc>–<a href="http://www.foo.com" target="_blank" rel="noopener">www.foo.com</a> <path></path>–/path/f.php <query>–id=1 <fragment>–new。</fragment></query></netloc></scheme></fragment></query></netloc></scheme></p>
+</li>
+<li><p>对于需要HTTP basic认证的URL请求，可以将用户名与密码直接放入URL中，在<netloc>之前，格式如：<a href="http://username:password@www.foo.com/" target="_blank" rel="noopener">http://username:password@www.foo.com/</a></netloc></p>
+</li>
+<li><p>平时接触最多的是HTTP/HTTPS协议的URL，这是web安全的入口点，各种安全威胁都是伴随着URL的请求进行的，如果客户端道服务端各层的解析没做好，就可能出现安全问题。</p>
+</li>
+<li><p>URL的三类编码方式：escape、encodeURL、encodeURIComponent，其对应的解码函数是：unescape、decodeURI、decodeURIComponent。</p>
+</li>
+</ul>
+<p><strong>2.3 HTTP协议：</strong></p>
+<ul>
+<li><p>URL的请求协议几乎都是HTTP，它是一种无状态的请求响应，即每次的请求响应之后，连接会立即断开或延时断开（保持一定的连接有效期），断开后，下一次请求再重新建立。</p>
+</li>
+<li><p>请求与响应一般都分为头部与体部（之间以空行分隔）。对于请求体来说，一般出现在POST方法中，比如表单的键值对。响应体就在浏览器中看到的内容，比如：HTML/JSON/JavaScript/XML等。</p>
+</li>
+<li><p>请求头中的重点：User-Agent：用于表名身份。从中可以看到操作系统、浏览器、浏览器内核及对应版本号等信息；Referer:表名从哪里访问过来的；Cookie：在每次连接时，服务端通过Cookie进行会话跟踪，第一次响应时设置的Cookie在随后的每次请求中都会发送出去。Cookie还可以包括登陆认证后的身份信息。</p>
+</li>
+<li><p>响应头中的重点：Server：包含服务端的一些信息，例如Web容器、操作系统、服务端语言及对应版本。Content-Length：响应体的长度。Content-Type：响应资源的类型与字符集。针对不同的资源类型会有不同的解析方式，这个会影响到浏览器对响应体里的资源解析方式。字符集也会影响到浏览器的解析方式。</p>
+</li>
+<li><p>响应头中的Set-Cookie：每个Set-Cookie都设置一个Cookie（key=value)，随后接如下内容：expires：过期时间，如果过期时间是过去，那就表名这个Cookie要被删除。path：相对路径，只有这个路径下的资源可以访问这个Cookie。domain：域名，有权限设置为更高一级的域名。HttpOnly：标志（默认无，如果有的话，表明Cookie存在于HTTP层面，不能被客户端脚本读取）Secure:标志（默认无，如果有的话，表明Cookie仅通过HTTPS协议进行安全传输。</p>
+</li>
+</ul>
+<p><strong>2.4 松散的HTML世界：</strong></p>
+<ul>
+<li><p>为什么说HTML是松散的，HTML是由众多标签组成的，标签内还有对应的各种属性。这些标签可以不区分大小写，有的可以不需要闭合。属性的值可以用单引号、双引号】反单引号包围，甚至不需要引号。多余的空格于Tab毫不影响HTML解析。HTML里可以内嵌CSS,JavaScript等内容，不强调分离，等等。</p>
+</li>
+<li><p>DOM树：很多数据都存在于DOM树中。其实HTML文档就是一个DOM树。我们的隐私数据可能存储在HTML内容中、浏览器本地存储中、URL地址中等等。</p>
+</li>
+<li><p>iframe标签是HTML中一个非常重要的标签，很多网站都通过iframe标签嵌入第三方内容。当网页使用iframe方式起纳入一个页面时，网站页面为父页，嵌入页面为子页。如果父页和子页之间时同域的，父页可以通过调用子夜的contentWindow来操作子页的DOM树，反之亦然。如果不同域，则必须遵守同源策略，但子页还是可以对父页的location值进行谢操作，这样可以让父页重定向到其它网页。</p>
+</li>
+<li><p>HTML内嵌脚本执行，JavsScipt脚本除了出现在js文件里，被嵌入执行外，还可以出现在HTML的<script></script>标签内，HTML标签的on事件中，以及一些标签的href,src等属性的伪协议中。</p>
+</li>
+</ul>
+<hr>
+<p><strong>先记这么多，复习期中考去了，不然线代要挂科了。下次再记</strong></p>
+
   </div>
   <footer class="article-footer">
     
