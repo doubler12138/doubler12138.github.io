@@ -8,23 +8,23 @@
 
 <title>
   
-    Web前端黑客技术揭秘第1章
+    2018年大一下学期第8周总结
   
 </title>
 
-<meta name="description" content="第1章 Web安全的关键点  记录今天看的第一章的重点知识，这几个关键点对理解整个Web安全，，甚至整个安全体系都都有很大的帮助。">
+<meta name="description" content="第七周总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Web前端黑客技术揭秘第1章">
-<meta property="og:url" content="http://yoursite.com/2018/04/28/Webfront1/index.html">
+<meta property="og:title" content="2018年大一下学期第8周总结">
+<meta property="og:url" content="http://yoursite.com/2018/05/01/2018-8/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="第1章 Web安全的关键点  记录今天看的第一章的重点知识，这几个关键点对理解整个Web安全，，甚至整个安全体系都都有很大的帮助。">
+<meta property="og:description" content="第七周总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793368.25.jpg">
-<meta property="og:updated_time" content="2018-04-29T03:24:15.103Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793374.04.jpg">
+<meta property="og:updated_time" content="2018-05-01T13:07:21.877Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web前端黑客技术揭秘第1章">
-<meta name="twitter:description" content="第1章 Web安全的关键点  记录今天看的第一章的重点知识，这几个关键点对理解整个Web安全，，甚至整个安全体系都都有很大的帮助。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793368.25.jpg">
+<meta name="twitter:title" content="2018年大一下学期第8周总结">
+<meta name="twitter:description" content="第七周总结">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793374.04.jpg">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -158,17 +158,17 @@
       
         <div style="max-width: 1000px">
       
-          <article id="post-Webfront1" class="article article-type-post">
+          <article id="post-2018-8" class="article article-type-post">
   
     <h1 class="article-header">
-      Web前端黑客技术揭秘第1章
+      2018年大一下学期第8周总结
     </h1>
   
   
 
   <div class="article-info">
     <span class="article-date">
-  2018-04-28
+  2018-05-01
 </span>
 
     
@@ -177,60 +177,12 @@
 
   </div>
   <div class="article-entry">
-    <p><strong>第1章 Web安全的关键点</strong></p>
-<ul>
-<li>记录今天看的第一章的重点知识，这几个关键点对理解整个Web安全，，甚至整个安全体系都都有很大的帮助。</li>
-</ul>
+    <p><strong>第七周总结</strong></p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793368.25.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793374.04.jpg" alt="Alt text"></p>
 <a id="more"></a>
-<p><strong>1.1 数据与指令：</strong></p>
 <ul>
-<li><p>数据：服务端存储（数据库，内存，文件系统等）、客户端存储（本地Cookies、Flash Cookies等）、传输中（JSON数据、XML数据等）、文本数据（HTML、JavaScript、CSS等)、多媒体数据（Flash、MP3等）、图片数据。</p>
-</li>
-<li><p>跨站攻击发生在浏览器客户端，而SQL注入攻击由于针对的对象是数据库，一般情况下，数据库都在服务端，所以SQL注入是发生在服务端的攻击。但HTML5提供了一个新的客户端存储机制：在浏览器端，使用SQLite数据库保存客户端数据，该机制允许使用Javascript脚本操作SQL语句，从而与本地数据库进行交互。</p>
-</li>
-</ul>
-<p><strong>1.2 浏览器的同源策略：</strong></p>
-<ul>
-<li><p>计算机的本地与web是不同的层面，Web（通常成为Internet域）运行在浏览器上面，而被限制了直接进行本地数据（通常称为本地域）的读写。</p>
-</li>
-<li><p>同源策略是众多安全策略的一个，是web层面上的策略。</p>
-</li>
-<li><p>同源策略规定：不同域的客户端脚本在没明确授权的情况下，不能直接读写对方的资源。</p>
-</li>
-<li><p>同域要求两个站点同协议、同域名、同端口。以 <a href="http://www.foo.com" target="_blank" rel="noopener">http://www.foo.com</a> 为例，下列各站点是否同域：</p>
-</li>
-</ul>
-<table><br><tr><th>站点</th><th>是否同域</th><th>原因</th></tr><br><tr><th><a href="https://www.foo.com" target="_blank" rel="noopener">https://www.foo.com</a></th><th>不同域</th><th>协议不同，https与http是不同的协议</th></tr><br><tr><th><a href="http://xyz.foo.com" target="_blank" rel="noopener">http://xyz.foo.com</a></th><th>不同域</th><th>域名不同，xyz子域与www子域不同</th></tr><br><tr><th><a href="http://foo.com" target="_blank" rel="noopener">http://foo.com</a></th><th>不同域</th><th>域名不同，顶级域与www子域不是一个概念</th></tr><br><tr><th><a href="http://www.foo.com:8080" target="_blank" rel="noopener">http://www.foo.com:8080</a></th><th>不同域</th><th>端口不同，8080与默认的80端口不同</th></tr><br><tr><th><a href="http://www.foo.com/a/" target="_blank" rel="noopener">http://www.foo.com/a/</a></th><th>同域</th><th>满足同协议、同域名、同端口，只是这里多了一个目录而已</th></tr><br></table>
-
-<ul>
-<li><p>客户端脚本主要指Javascript（各个浏览器原生态支持的脚本语言）、ActionScript（Flash的脚本语言），一级Javascript和ActionScript都遵循的ECMAScript脚本标准。</p>
-</li>
-<li><p>授权往往想到是服务端对客户端访问的授权。客户端也存在授权现象。例如：HTML5新标准中关于AJAX跨域访问的情况，默认情况下是不允许跨域访问的，只有目标站点 <a href="http://www.foo.com" target="_blank" rel="noopener">http://www.foo.com</a> 明确返回HTTP响应头：Access-Control-Allow-Origin: <a href="http://www.evil.com" target="_blank" rel="noopener">http://www.evil.com</a> 那么 <a href="http://www.evil.com" target="_blank" rel="noopener">www.evil.com</a> 站点上的客户端脚本就有全通过AJAX技术对 <a href="http://www.foo.com" target="_blank" rel="noopener">www.foo.com</a> 上面的数据进行读写操作。</p>
-</li>
-<li><p>AJAX是 Asynchronous JavaScript And XML 的缩写，让数据在后台进行异步传输，常见的使用场景有：对网页的局部数据进行更新时，不需要刷新整个网页，以节省带宽资源。</p>
-</li>
-<li><p>资源是一个很广泛的概念，只要是数据，都可以认为是资源。同源策略中的资源是指Web客户端的资源。一般来说，资源包括：HTTP消息头、整棵DOM树、浏览器存储（如：Cookies、Flash Cookies、localStorage等）</p>
-</li>
-<li><p>DOM全称Document Object Model,即文档对象模型，就是浏览器将HTML/XML这样的文档抽象成一个树形结构，树上的每个节点都代表HTML/XML中的标签、标签属性或标签内容等。</p>
-</li>
-</ul>
-<p><strong>1.3 信任与信任关系：</strong></p>
-<ul>
-<li>服务器与服务器、网站与网站、Web服务的不同子域、Web层面与浏览器第三方插件、Web层面与浏览器特殊API、浏览器特殊API与本地文件系统、嵌入的Flash与当前DMOM树、不同协议之间等等都存在信任关系。一个安全性非常好的网站可能有时候会因为建立了不可靠的信任关系而导致网站被黑。</li>
-</ul>
-<p><strong>1.4 社会工程学的作用：</strong></p>
-<ul>
-<li>常用的社工辅助技巧有：Google Hack、SNS垂直搜索、各种收集的数据库集合查询等</li>
-</ul>
-<p><strong>1.5 攻防不单一：</strong></p>
-<ul>
-<li>一次完整的渗透会利用到多种攻击手法。攻和防都得考虑道攻击手法组合的情况。</li>
-</ul>
-<p><strong>1.6 场景很重要：</strong></p>
-<ul>
-<li>任何一次攻击都脱离不了具体场景</li>
+<li>这周运动会举办了，啥项目也没参加，身体素质是越来越不行了，天天电脑前呆着，以后还是要多锻炼啊。这周最主要的事就是参加了全国大学生信息安全竞赛，礼拜六开始礼拜天结束。礼拜六虽然补课，但是老师给请了假，但我居然还是去上课了。线代高数不上不行啊，尤其是线代，不上要凉，整天听课都听的云里雾里的，一节课不上下节课就可以梦游了。扯远了…..总的来说国赛处了MSIC的赛题bug，少的可怜的web题，总是爆炸的web环境，web题出题人的脑X，华为云的“顶级配置办”和被人D炸了选择题外等等还是不错的。这是我第一次参加这样的大型比赛，虽然没做出几道题（第二天直接放弃…）,但是跟着协会其它17级大佬还是学了很多，大家聚在一起做题的氛围挺好的。这次国赛让我明白了什么是pwn爷爷re爸爸和web狗，这个比赛对web方向的人来说太恶意了，让我一度想转方向。但是既然入了web坑就好好学吧，希望下次国赛自己能变得更强（不存在的）。最后，由于这个贴是后来补的，看的技术博客帖子啥的地址全忘了，懒得一个个找回来贴了（这个是重点），所以就补贴了…..（逃，爬墙去了，沉迷刺客信条</li>
 </ul>
 
   </div>
