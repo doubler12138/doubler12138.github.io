@@ -20,13 +20,13 @@
 <meta property="og:description" content="开始从头开始系统学习一下XSS，前端安全我学的很差，要花点时间，XSS是前端安全中最重要的，希望自己能通过努力把这方面学好。毕竟不是人人都有那个高二学弟的天赋，可以说是很羡慕了。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793377.88.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/05/05/XSS1/1">
-<meta property="og:image" content="http://yoursite.com/2018/05/05/XSS1/2">
-<meta property="og:image" content="http://yoursite.com/2018/05/05/XSS1/3">
-<meta property="og:image" content="http://yoursite.com/2018/05/05/XSS1/4">
-<meta property="og:image" content="http://yoursite.com/2018/05/05/XSS1/5">
-<meta property="og:image" content="http://yoursite.com/2018/05/05/XSS1/6">
-<meta property="og:updated_time" content="2018-05-05T13:14:52.958Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/3.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/4.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/5.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/6.jpg">
+<meta property="og:updated_time" content="2018-05-05T14:58:50.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS学习笔记:入门篇">
 <meta name="twitter:description" content="开始从头开始系统学习一下XSS，前端安全我学的很差，要花点时间，XSS是前端安全中最重要的，希望自己能通过努力把这方面学好。毕竟不是人人都有那个高二学弟的天赋，可以说是很羡慕了。">
@@ -97,21 +97,21 @@
           
             
               <li class="category-list-container">
-                <a href="javascript:;">Category</a>
+                <a href="javascript:;">分类</a>
                 
               </li>
             
           
             
               <li class="tag-list-container">
-                <a href="javascript:;">Tag</a>
+                <a href="javascript:;">标签</a>
                 
               </li>
             
           
             
               <li class="archive-list-container">
-                <a href="javascript:;">Archive</a>
+                <a href="javascript:;">归档</a>
                 <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">20</span></li></ul>
               </li>
             
@@ -209,14 +209,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <p>到响应体中，然后浏览器解析触发执行。</p>
 <p>结果：</p>
-<p><img src="1" alt="Alt text"></p>
-<p><img src="2" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/1.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/2.jpg" alt="Alt text"></p>
 </li>
 <li><p>示例2：</p>
 <p>源码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&apos;Location: &apos;.$_GET[&apos;x&apos;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 <p>输入的x的值作为响应头部的Location字段值输出，正常情况下，会跳转到输入的地址下:</p>
-<p><img src="3" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/3.jpg" alt="Alt text"></p>
 <p>构造payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/XSS/Non-XSS2.php?x=data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg%3d%3d</span><br></pre></td></tr></table></figure>
 <p>跳转到了data:协议上，text/html时MIME或Content-Type，表名文档类型，base64是指后面的编码方式，后面这段经过URL解码和base64解码以后就是</p>
@@ -234,8 +234,8 @@
 <p>eval() 函数可计算某个字符串，并执行其中的的 JavaScript 代码。Location 对象包含有关当前 URL 的信息。构造payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/XSS/Dom-XSS1.html#alert(document.cookie)</span><br></pre></td></tr></table></figure>
 <p>#代表网页中的一个位置。其右面的字符，就是该位置的标识符。#是用来指导浏览器动作的，对服务器端完全无用。所以，HTTP请求中不包括#。<a href="https://blog.csdn.net/baidu_31333625/article/details/54288223" target="_blank" rel="noopener">location.hash详解</a></p>
-<p><img src="4" alt="Alt text"></p>
-<p><img src="5" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/4.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/5.jpg" alt="Alt text"></p>
 </li>
 <li><p>示例2：</p>
 <p>源码：</p>
@@ -244,7 +244,7 @@
 <p>构造payload1：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; onclick=alert(document.cookie) //</span><br></pre></td></tr></table></figure>
 <p>首先用一个单引号闭合掉href的第一个单引号，然后插入一个onclick事件，最后利用注释符”//“注释掉第二个单引号</p>
-<p><img src="6" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/XSS/6.jpg" alt="Alt text"></p>
 <p>构造payload2：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;&gt;&lt;img src=# onerror=alert(document.cookie) /&gt;&lt;&apos;</span><br></pre></td></tr></table></figure>
 <p>这样写入的内容就成了：</p>
@@ -265,7 +265,7 @@
   <footer class="article-footer">
     
   <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
       <img src="/images/cc/cc.png">
       
           <img src="/images/cc/by.png">
@@ -273,7 +273,7 @@
           <img src="/images/cc/sa.png">
       
       <span>
-        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
       </span>
     </a>
   </div>
