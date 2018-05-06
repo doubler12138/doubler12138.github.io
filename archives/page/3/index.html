@@ -8,23 +8,20 @@
 
 <title>
   
-    近期的学习计划
+    Archive
   
 </title>
 
-<meta name="description" content="给自己定点目标，立贴为证，学完删贴  1.深入学习SQL注入，尤其是SQL注入insert查询的利用，利用操作系统和盲注利用的部分  2.学习一下Web前端安全，主要是XSS和CSRF  3.开始深入学习python，要做到熟练运用，以python核心编程这本书为主  一直学习就好">
-<meta property="og:type" content="article">
-<meta property="og:title" content="近期的学习计划">
-<meta property="og:url" content="http://yoursite.com/2018/04/27/xuexijihua/index.html">
+<meta name="description" content="一直学习就好">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Double--R blog">
+<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="给自己定点目标，立贴为证，学完删贴  1.深入学习SQL注入，尤其是SQL注入insert查询的利用，利用操作系统和盲注利用的部分  2.学习一下Web前端安全，主要是XSS和CSRF  3.开始深入学习python，要做到熟练运用，以python核心编程这本书为主  一直学习就好">
+<meta property="og:description" content="一直学习就好">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793454.13.jpg">
-<meta property="og:updated_time" content="2018-04-27T13:16:15.326Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="近期的学习计划">
-<meta name="twitter:description" content="给自己定点目标，立贴为证，学完删贴  1.深入学习SQL注入，尤其是SQL注入insert查询的利用，利用操作系统和盲注利用的部分  2.学习一下Web前端安全，主要是XSS和CSRF  3.开始深入学习python，要做到熟练运用，以python核心编程这本书为主  一直学习就好">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793454.13.jpg">
+<meta name="twitter:title" content="Double--R blog">
+<meta name="twitter:description" content="一直学习就好">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -158,64 +155,108 @@
       
         <div style="max-width: 1000px">
       
-          <article id="post-xuexijihua" class="article article-type-post">
+          
+
   
-    <h1 class="article-header">
-      近期的学习计划
-    </h1>
   
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <h1><a href="/archives/2018" class="archive-year">2018</a></h1>
+        </div>
+        <div class="post-list">
+    
   
 
-  <div class="article-info">
-    <span class="article-date">
-  2018-04-27
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2018/04/22/RPO/" >
+  RPO漏洞学习笔记
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/04/22/RPO/"><span class="article-date">
+  2018-04-22
 </span>
-
-    
-
-    
-
-  </div>
-  <div class="article-entry">
-    <p><strong>给自己定点目标，立贴为证，学完删贴</strong></p>
-<ul>
-<li><p>1.深入学习SQL注入，尤其是SQL注入insert查询的利用，利用操作系统和盲注利用的部分</p>
-</li>
-<li><p>2.学习一下Web前端安全，主要是XSS和CSRF</p>
-</li>
-<li><p>3.开始深入学习python，要做到熟练运用，以python核心编程这本书为主</p>
-</li>
-<li><p>一直学习就好</p>
-</li>
-</ul>
-<hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793454.13.jpg" alt="Alt text"></p>
-<a id="more"></a>
-  </div>
-  <footer class="article-footer">
-    
-  <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
-      <img src="/images/cc/cc.png">
-      
-          <img src="/images/cc/by.png">
+</a>
         
-          <img src="/images/cc/sa.png">
-      
-      <span>
-        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-      </span>
-    </a>
-  </div>
 
+        
 
+      </div>
+      <div class="article-entry">
+        
+          <p><strong>2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。</strong></p>
+<p><strong>参考博客：</strong> </p>
+<p><a href="http://www.52bug.cn/%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF/4732.html" target="_blank" rel="noopener">K0rz3n师傅的博客</a></p>
+<hr>
+<font color="0099ff"> 什么是RPO： </font>
+
+<ul>
+<li>RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现的差异，并借助文件中包含的相对路径的css或者js造成跨目录读取css或者js，甚至可以将本身不是css或者js的页面当做css或者js解析，从而触发xss等进一步的攻击手段。 </li>
+</ul>
+          <p>
+            <a href="/2018/04/22/RPO/">
+              Read More
+            </a>
+          </p>
+        
+      </div>
+    </div>
+
+  
+
+  
+  
     
+  
 
-  </footer>
-</article>
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2018/04/21/create/" >
+  博客创建
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/04/21/create/"><span class="article-date">
+  2018-04-21
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <p><strong>今天Double–R的博客创建了</strong></p>
+<hr>
+<p><strong>2018-4-21 我创建了我的博客</strong></p>
+<p><br>以后我会将自己的学习笔记，CTF的write up和一些看到的好文章写到博客上<br><br>最后菜的要死的Double–R只要一直学习就好了<br><br><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/yellow.jpg" alt="Alt text"><br>
+          <p>
+            <a href="/2018/04/21/create/">
+              Read More
+            </a>
+          </p>
+        
+      </div>
+    </div>
+
+  
 
 
 
+  <div class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/page/2/">Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
+  </div>
 
 
 
