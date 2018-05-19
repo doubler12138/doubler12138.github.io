@@ -20,10 +20,16 @@
 <meta property="og:description" content="最近就是找点题做吧，感觉打CTF找各种训练平台做题提升蛮快的，可以学到更多的姿势">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793401.01.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/05/15/ShiYanBa-EasySqli3/1">
-<meta property="og:image" content="http://yoursite.com/2018/05/15/ShiYanBa-EasySqli3/2">
-<meta property="og:image" content="http://yoursite.com/2018/05/15/ShiYanBa-EasySqli3/3">
-<meta property="og:updated_time" content="2018-05-18T15:23:26.329Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/3.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/4.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/5.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/6.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/7.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/8.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/9.jpg">
+<meta property="og:updated_time" content="2018-05-19T12:57:29.107Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实验吧CTF-简单的sql注入之3">
 <meta name="twitter:description" content="最近就是找点题做吧，感觉打CTF找各种训练平台做题提升蛮快的，可以学到更多的姿势">
@@ -109,7 +115,7 @@
             
               <li class="archive-list-container">
                 <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">26</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">27</span></li></ul>
               </li>
             
           
@@ -187,15 +193,26 @@
 <ul>
 <li>看题目界面，一个输入框，输入1，输出hello，输入1’，报错。输入1’ and 1=1 #,输出hello，输入1’ and 1=2 #，什么都没输出。确定了是没有回显的盲注，区别就是输出有没有hello。</li>
 </ul>
-<p><img src="1" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/1.jpg" alt="Alt text"></p>
 <ul>
 <li><p>题目说到底过滤了什么，我感觉什么都没过滤。直接写脚本：</p>
 <p>1.跑出库名：</p>
 <p>payload：’ and ascii(substr((select database()),”+str(i)+”,1))=”+str(j)+” %23</p>
-<p><img src="2" alt="Alt text"></p>
-<p><img src="3" alt="Alt text"></p>
-<p>库名：web</p>
-<p>2.跑出表名，开三个线程跑快一点</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/2.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/3.jpg" alt="Alt text"></p>
+<p>库名：web1</p>
+<p>2.跑出表名，开三个线程跑快一点：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/4.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/5.jpg" alt="Alt text"></p>
+<p>拼接出表名，一个flag，一个web。</p>
+<p>3.跑出flag表下的字段名：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/6.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/7.jpg" alt="Alt text"></p>
+<p>跑出两个字段，flag，id。</p>
+<p>4.跑flag：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/8.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/9.jpg" alt="Alt text"></p>
+<p>flag:flag{Y0u_@r3_50_dAmn_900d}</p>
 </li>
 </ul>
 
