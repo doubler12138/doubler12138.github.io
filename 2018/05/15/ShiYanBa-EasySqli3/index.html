@@ -8,23 +8,26 @@
 
 <title>
   
-    近期的学习计划
+    实验吧CTF-简单的sql注入之3
   
 </title>
 
-<meta name="description" content="给自己定点目标，立贴为证，学完删贴  1.深入学习SQL注入，尤其是SQL注入insert查询的利用，利用操作系统和盲注利用的部分  2.学习一下Web前端安全，主要是XSS和CSRF  3.开始深入学习python，要做到熟练运用，以python核心编程这本书为主  一直学习就好">
+<meta name="description" content="最近就是找点题做吧，感觉打CTF找各种训练平台做题提升蛮快的，可以学到更多的姿势">
 <meta property="og:type" content="article">
-<meta property="og:title" content="近期的学习计划">
-<meta property="og:url" content="http://yoursite.com/2018/04/27/XueXijiHua/index.html">
+<meta property="og:title" content="实验吧CTF-简单的sql注入之3">
+<meta property="og:url" content="http://yoursite.com/2018/05/15/ShiYanBa-EasySqli3/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="给自己定点目标，立贴为证，学完删贴  1.深入学习SQL注入，尤其是SQL注入insert查询的利用，利用操作系统和盲注利用的部分  2.学习一下Web前端安全，主要是XSS和CSRF  3.开始深入学习python，要做到熟练运用，以python核心编程这本书为主  一直学习就好">
+<meta property="og:description" content="最近就是找点题做吧，感觉打CTF找各种训练平台做题提升蛮快的，可以学到更多的姿势">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793454.13.jpg">
-<meta property="og:updated_time" content="2018-04-27T13:16:15.326Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793401.01.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/15/ShiYanBa-EasySqli3/1">
+<meta property="og:image" content="http://yoursite.com/2018/05/15/ShiYanBa-EasySqli3/2">
+<meta property="og:image" content="http://yoursite.com/2018/05/15/ShiYanBa-EasySqli3/3">
+<meta property="og:updated_time" content="2018-05-18T15:23:26.329Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="近期的学习计划">
-<meta name="twitter:description" content="给自己定点目标，立贴为证，学完删贴  1.深入学习SQL注入，尤其是SQL注入insert查询的利用，利用操作系统和盲注利用的部分  2.学习一下Web前端安全，主要是XSS和CSRF  3.开始深入学习python，要做到熟练运用，以python核心编程这本书为主  一直学习就好">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793454.13.jpg">
+<meta name="twitter:title" content="实验吧CTF-简单的sql注入之3">
+<meta name="twitter:description" content="最近就是找点题做吧，感觉打CTF找各种训练平台做题提升蛮快的，可以学到更多的姿势">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793401.01.jpg">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -158,17 +161,17 @@
       
         <div style="max-width: 1000px">
       
-          <article id="post-XueXijiHua" class="article article-type-post">
+          <article id="post-ShiYanBa-EasySqli3" class="article article-type-post">
   
     <h1 class="article-header">
-      近期的学习计划
+      实验吧CTF-简单的sql注入之3
     </h1>
   
   
 
   <div class="article-info">
     <span class="article-date">
-  2018-04-27
+  2018-05-15
 </span>
 
     
@@ -177,20 +180,25 @@
 
   </div>
   <div class="article-entry">
-    <p><strong>给自己定点目标，立贴为证，学完删贴</strong></p>
+    <p><strong>最近就是找点题做吧，感觉打CTF找各种训练平台做题提升蛮快的，可以学到更多的姿势</strong></p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793401.01.jpg" alt="Alt text"></p>
+<a id="more"></a>
 <ul>
-<li><p>1.深入学习SQL注入，尤其是SQL注入insert查询的利用，利用操作系统和盲注利用的部分</p>
-</li>
-<li><p>2.学习一下Web前端安全，主要是XSS和CSRF</p>
-</li>
-<li><p>3.开始深入学习python，要做到熟练运用，以python核心编程这本书为主</p>
-</li>
-<li><p>一直学习就好</p>
+<li>看题目界面，一个输入框，输入1，输出hello，输入1’，报错。输入1’ and 1=1 #,输出hello，输入1’ and 1=2 #，什么都没输出。确定了是没有回显的盲注，区别就是输出有没有hello。</li>
+</ul>
+<p><img src="1" alt="Alt text"></p>
+<ul>
+<li><p>题目说到底过滤了什么，我感觉什么都没过滤。直接写脚本：</p>
+<p>1.跑出库名：</p>
+<p>payload：’ and ascii(substr((select database()),”+str(i)+”,1))=”+str(j)+” %23</p>
+<p><img src="2" alt="Alt text"></p>
+<p><img src="3" alt="Alt text"></p>
+<p>库名：web</p>
+<p>2.跑出表名，开三个线程跑快一点</p>
 </li>
 </ul>
-<hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793454.13.jpg" alt="Alt text"></p>
-<a id="more"></a>
+
   </div>
   <footer class="article-footer">
     

