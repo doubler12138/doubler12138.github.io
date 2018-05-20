@@ -34,8 +34,6 @@
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805171603306969.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805171640571905.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172216577101.jpeg">
-<meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172218318009.jpeg">
-<meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172223532994.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172230363469.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172246589052.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172259545298.jpeg">
@@ -54,7 +52,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/makerctf/RE1.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/makerctf/RE2.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/makerctf/RE3.jpg">
-<meta property="og:updated_time" content="2018-05-20T03:55:50.515Z">
+<meta property="og:updated_time" content="2018-05-20T03:58:48.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MakerCTF Write Up">
 <meta name="twitter:description" content="MakerCTF Write-Up">
@@ -338,12 +336,10 @@
 <p>经过一些测试以后，发现空格被过滤了，但是管道符没有被过滤，在网上找了一些资料，和01师傅发的命令注入的资料，可以构造，先构造了一个payload测试思路：</p>
 <p><img src="http://120.77.152.169/pic_upload/upload/201805172216577101.jpeg" alt=""></p>
 <p>在自己的服务器上可以监听到打回来的数据</p>
-<p><img src="http://120.77.152.169/pic_upload/upload/201805172218318009.jpeg" alt=""></p>
 <p>可以看出来whoami的执行结果是www-data</p>
 <p>那么现在我们可以构造payload：</p>
 <p><code>ls|base64|head%0a-n%0a2|tail%0a1</code></p>
 <p>在服务器上接受到base64之后的数据</p>
-<p><img src="http://120.77.152.169/pic_upload/upload/201805172223532994.jpeg" alt=""></p>
 <p>将打回来的数据base64解密以后可以得到：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--6xakjdhcfhcnsk</span><br><span class="line">--7xabf8sahdchfudy.txt</span><br><span class="line">css</span><br><span class="line">index.php</span><br></pre></td></tr></table></figure>
 <p>猜想flag应该在–7xabf8sahdchfudy.txt中，直接请求这个文件夹即可得到flag</p>
