@@ -96,14 +96,14 @@
             
               <li class="tag-list-container">
                 <a href="javascript:;">Tag</a>
-                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li></ul>
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">28</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">29</span></li></ul>
               </li>
             
           
@@ -236,6 +236,95 @@
 
     <div class="post-list-item article">
       <h3 class="article-header">
+        <a href="/2018/05/20/NanYouCTF-WriteUp/" >
+  南京邮电大学网络攻防训练平台Write-Up
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/05/20/NanYouCTF-WriteUp/"><span class="article-date">
+  2018-05-20
+</span>
+</a>
+        
+
+        
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li></ul>
+	</span>
+
+
+      </div>
+      <div class="article-entry">
+        
+          <p><strong>二刷南邮CTF平台的web题，写个wp，为实验班考试做准备</strong></p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793407.09.jpg" alt="Alt text"></p>
+<p><strong>签到题：</strong></p>
+<ul>
+<li><p>打开题目地址，F12出flag</p>
+<p><img src="1" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>md5 collision:</strong></p>
+<ul>
+<li><p>考察php弱类型，题目界面给了源码</p>
+<p><img src="2" alt="Alt text"></p>
+<p>分析一下就是md51是字符串md5加密以后的结果，md52是GET传参md5加密后的结果，传入的参数不能是原字符串，但加密结果要与原字符串加密结果一样。但用的是两个等号。原字符串加密后是0e开头的。</p>
+<p><img src="3" alt="Alt text"></p>
+<p>那么我们只要传入一个字符串加密后是0e开头的,在比较这连哥哥字符串时，php会将0e这类字符串识别为科学计数法，0无论多少次都等于0，就能让两者相等。</p>
+<p><img src="4" alt="Alt text"></p>
+<p><img src="5" alt="Alt text"></p>
+<p><a href="https://www.cnblogs.com/Mrsm1th/p/6745532.html" target="_blank" rel="noopener">php弱类型总结</a></p>
+</li>
+</ul>
+<p><strong>签到2：</strong></p>
+<ul>
+<li><p>题目地址界面让输入登陆口令，但是口令11个字，但输入框输入长度限制为10。F12改一下前端限制。</p>
+<p><img src="6" alt="Alt text"></p>
+<p><img src="7" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>这题不是WEB：</strong></p>
+<ul>
+<li><p>这题是MISC图片隐写，题目地址界面把gif图片保存到本地，winhex打开看一下，出flag</p>
+<p><img src="8" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>层层递进：</strong></p>
+<ul>
+<li><p>打开题目地址，什么都没发现，F12，刷新一下，在网络里看到它请求了一个特殊的文件，404.html.看一下返回信息，拼接出flag</p>
+<p><img src="9" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>AAencode:</strong></p>
+<ul>
+<li><p>AAencode是一种加密方法，可以把javascript加密成颜文字。这道题我看了很多wp说是直接在控制台里跑一下加密后的颜文字就行了，但我火狐和edge都没跑出来，只能找一个解密网站解密了。</p>
+<p><img src="10" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>单身二十年：</strong></p>
+<ul>
+<li><p>单身100年都没用，打开题目地址，有一个链接，点一下，直接跳转，到一个没用的界面。用burp抓包一下，发现中间访问了一个页面，这个页面上有flag，但它直接跳转到那个没用的界面。所以没有burp，单身100年也没用。</p>
+<p><img src="11" alt="Alt text"></p>
+</li>
+</ul>
+
+        
+      </div>
+    </div>
+
+  
+
+  
+  
+    
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
         <a href="/2018/05/20/2018-11/" >
   2018年大一下学期第11周总结
 </a>
@@ -261,7 +350,7 @@
         
           <p><strong>第十一周总结</strong></p>
 <hr>
-<p><img src="" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793403.61.jpg" alt="Alt text"></p>
           <p>
             <a href="/2018/05/20/2018-11/">
               Read More
@@ -564,50 +653,6 @@
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793380.69.jpg" alt="Alt text"></p>
           <p>
             <a href="/2018/05/06/2018-9/">
-              Read More
-            </a>
-          </p>
-        
-      </div>
-    </div>
-
-  
-
-  
-  
-    
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2018/05/06/XSS2/" >
-  XSS学习笔记:反射型XSS
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2018/05/06/XSS2/"><span class="article-date">
-  2018-05-06
-</span>
-</a>
-        
-
-        
-	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-	</span>
-
-
-      </div>
-      <div class="article-entry">
-        
-          <p><strong>这部分主要学一下XSS中的反射型XSS，大多发生在HTML标签之中</strong></p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793379.66.jpg" alt="Alt text"></p>
-          <p>
-            <a href="/2018/05/06/XSS2/">
               Read More
             </a>
           </p>

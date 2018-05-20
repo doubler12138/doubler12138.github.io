@@ -8,24 +8,35 @@
 
 <title>
   
-    SQL注入（一）
+    南京邮电大学网络攻防训练平台Write-Up
   
 </title>
 
-<meta name="description" content="之前写的SQL注入的学习笔记，就不重新写了，贴一下github的地址，里面有pdf格式的笔记  github SQL(1)">
-<meta name="keywords" content="学习笔记">
+<meta name="description" content="二刷南邮CTF平台的web题，写个wp，为实验班考试做准备   签到题：  打开题目地址，F12出flag    md5 collision:  考察php弱类型，题目界面给了源码  分析一下就是md51是字符串md5加密以后的结果，md52是GET传参md5加密后的结果，传入的参数不能是原字符串，但加密结果要与原字符串加密结果一样。但用的是两个等号。原字符串加密后是0e开头的。  那么我们只要传">
+<meta name="keywords" content="CTF-WriteUp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入（一）">
-<meta property="og:url" content="http://yoursite.com/2018/04/22/SQL-1/index.html">
+<meta property="og:title" content="南京邮电大学网络攻防训练平台Write-Up">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="之前写的SQL注入的学习笔记，就不重新写了，贴一下github的地址，里面有pdf格式的笔记  github SQL(1)">
+<meta property="og:description" content="二刷南邮CTF平台的web题，写个wp，为实验班考试做准备   签到题：  打开题目地址，F12出flag    md5 collision:  考察php弱类型，题目界面给了源码  分析一下就是md51是字符串md5加密以后的结果，md52是GET传参md5加密后的结果，传入的参数不能是原字符串，但加密结果要与原字符串加密结果一样。但用的是两个等号。原字符串加密后是0e开头的。  那么我们只要传">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL.png">
-<meta property="og:updated_time" content="2018-05-20T03:23:11.613Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793407.09.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/1">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/2">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/3">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/4">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/5">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/6">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/7">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/8">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/9">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/10">
+<meta property="og:image" content="http://yoursite.com/2018/05/20/NanYouCTF-WriteUp/11">
+<meta property="og:updated_time" content="2018-05-20T15:14:33.207Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL注入（一）">
-<meta name="twitter:description" content="之前写的SQL注入的学习笔记，就不重新写了，贴一下github的地址，里面有pdf格式的笔记  github SQL(1)">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL.png">
+<meta name="twitter:title" content="南京邮电大学网络攻防训练平台Write-Up">
+<meta name="twitter:description" content="二刷南邮CTF平台的web题，写个wp，为实验班考试做准备   签到题：  打开题目地址，F12出flag    md5 collision:  考察php弱类型，题目界面给了源码  分析一下就是md51是字符串md5加密以后的结果，md52是GET传参md5加密后的结果，传入的参数不能是原字符串，但加密结果要与原字符串加密结果一样。但用的是两个等号。原字符串加密后是0e开头的。  那么我们只要传">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793407.09.jpg">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -159,34 +170,82 @@
       
         <div style="max-width: 1000px">
       
-          <article id="post-SQL-1" class="article article-type-post">
+          <article id="post-NanYouCTF-WriteUp" class="article article-type-post">
   
     <h1 class="article-header">
-      SQL注入（一）
+      南京邮电大学网络攻防训练平台Write-Up
     </h1>
   
   
 
   <div class="article-info">
     <span class="article-date">
-  2018-04-22
+  2018-05-20
 </span>
 
     
 
     
 	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li></ul>
 	</span>
 
 
   </div>
   <div class="article-entry">
-    <p><strong>之前写的SQL注入的学习笔记，就不重新写了，贴一下github的地址，里面有pdf格式的笔记</strong></p>
+    <p><strong>二刷南邮CTF平台的web题，写个wp，为实验班考试做准备</strong></p>
 <hr>
-<p><a href="https://github.com/doubler12138/zhoubao/tree/master/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5" target="_blank" rel="noopener">github SQL(1)</a></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL.png" alt="Alt text"></p>
-<a id="more"></a>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793407.09.jpg" alt="Alt text"></p>
+<p><strong>签到题：</strong></p>
+<ul>
+<li><p>打开题目地址，F12出flag</p>
+<p><img src="1" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>md5 collision:</strong></p>
+<ul>
+<li><p>考察php弱类型，题目界面给了源码</p>
+<p><img src="2" alt="Alt text"></p>
+<p>分析一下就是md51是字符串md5加密以后的结果，md52是GET传参md5加密后的结果，传入的参数不能是原字符串，但加密结果要与原字符串加密结果一样。但用的是两个等号。原字符串加密后是0e开头的。</p>
+<p><img src="3" alt="Alt text"></p>
+<p>那么我们只要传入一个字符串加密后是0e开头的,在比较这连哥哥字符串时，php会将0e这类字符串识别为科学计数法，0无论多少次都等于0，就能让两者相等。</p>
+<p><img src="4" alt="Alt text"></p>
+<p><img src="5" alt="Alt text"></p>
+<p><a href="https://www.cnblogs.com/Mrsm1th/p/6745532.html" target="_blank" rel="noopener">php弱类型总结</a></p>
+</li>
+</ul>
+<p><strong>签到2：</strong></p>
+<ul>
+<li><p>题目地址界面让输入登陆口令，但是口令11个字，但输入框输入长度限制为10。F12改一下前端限制。</p>
+<p><img src="6" alt="Alt text"></p>
+<p><img src="7" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>这题不是WEB：</strong></p>
+<ul>
+<li><p>这题是MISC图片隐写，题目地址界面把gif图片保存到本地，winhex打开看一下，出flag</p>
+<p><img src="8" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>层层递进：</strong></p>
+<ul>
+<li><p>打开题目地址，什么都没发现，F12，刷新一下，在网络里看到它请求了一个特殊的文件，404.html.看一下返回信息，拼接出flag</p>
+<p><img src="9" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>AAencode:</strong></p>
+<ul>
+<li><p>AAencode是一种加密方法，可以把javascript加密成颜文字。这道题我看了很多wp说是直接在控制台里跑一下加密后的颜文字就行了，但我火狐和edge都没跑出来，只能找一个解密网站解密了。</p>
+<p><img src="10" alt="Alt text"></p>
+</li>
+</ul>
+<p><strong>单身二十年：</strong></p>
+<ul>
+<li><p>单身100年都没用，打开题目地址，有一个链接，点一下，直接跳转，到一个没用的界面。用burp抓包一下，发现中间访问了一个页面，这个页面上有flag，但它直接跳转到那个没用的界面。所以没有burp，单身100年也没用。</p>
+<p><img src="11" alt="Alt text"></p>
+</li>
+</ul>
+
   </div>
   <footer class="article-footer">
     
