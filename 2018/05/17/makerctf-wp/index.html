@@ -35,7 +35,6 @@
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805171640571905.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172216577101.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172218318009.jpeg">
-<meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172221005305.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172223532994.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172230363469.jpeg">
 <meta property="og:image" content="http://120.77.152.169/pic_upload/upload/201805172246589052.jpeg">
@@ -55,7 +54,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/makerctf/RE1.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/makerctf/RE2.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/makerctf/RE3.jpg">
-<meta property="og:updated_time" content="2018-05-20T01:50:43.419Z">
+<meta property="og:updated_time" content="2018-05-20T03:55:50.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MakerCTF Write Up">
 <meta name="twitter:description" content="MakerCTF Write-Up">
@@ -126,21 +125,21 @@
           
             
               <li class="category-list-container">
-                <a href="javascript:;">Category</a>
+                <a href="javascript:;">類別</a>
                 
               </li>
             
           
             
               <li class="tag-list-container">
-                <a href="javascript:;">Tag</a>
+                <a href="javascript:;">標籤</a>
                 <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
-                <a href="javascript:;">Archive</a>
+                <a href="javascript:;">彙整</a>
                 <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">27</span></li></ul>
               </li>
             
@@ -224,7 +223,7 @@
 <ul>
 <li><p><strong>队名：</strong>Doubl–R   <strong>QQ:</strong>1036460042 </p>
 </li>
-<li><p><strong>队员：</strong><br>   张恒志    学号：17180110101         QQ：923435274<br>   祝佳磊    学号：17189110002         QQ：1036460042<br>   曹植晨    学号：17180110045       QQ：572929574</p>
+<li><p><strong>队员：</strong><br>   张恒志<br>   祝佳磊<br>   曹植晨    </p>
 </li>
 </ul>
 <ul>
@@ -342,7 +341,7 @@
 <p><img src="http://120.77.152.169/pic_upload/upload/201805172218318009.jpeg" alt=""></p>
 <p>可以看出来whoami的执行结果是www-data</p>
 <p>那么现在我们可以构造payload：</p>
-<p><img src="http://120.77.152.169/pic_upload/upload/201805172221005305.jpeg" alt=""></p>
+<p><code>ls|base64|head%0a-n%0a2|tail%0a1</code></p>
 <p>在服务器上接受到base64之后的数据</p>
 <p><img src="http://120.77.152.169/pic_upload/upload/201805172223532994.jpeg" alt=""></p>
 <p>将打回来的数据base64解密以后可以得到：</p>
@@ -431,7 +430,7 @@
   <footer class="article-footer">
     
   <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="姓名標示-相同方式分享">
       <img src="/images/cc/cc.png">
       
           <img src="/images/cc/by.png">
@@ -439,7 +438,7 @@
           <img src="/images/cc/sa.png">
       
       <span>
-        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+        本著作係採用創用 CC 姓名標示-相同方式分享 4.0 國際 授權條款授權.
       </span>
     </a>
   </div>
