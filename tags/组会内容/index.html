@@ -8,26 +8,20 @@
 
 <title>
   
-    SQL学习笔记(三)
+    Tag: 组会内容
   
 </title>
 
-<meta name="description" content="第三部分讲一下SQL注入常见过滤的绕过方式(瞎几把讲）">
-<meta name="keywords" content="学习笔记">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SQL学习笔记(三)">
-<meta property="og:url" content="http://yoursite.com/2018/04/24/SQL-3/index.html">
+<meta name="description" content="一直学习就好">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Double--R blog">
+<meta property="og:url" content="http://yoursite.com/tags/组会内容/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="第三部分讲一下SQL注入常见过滤的绕过方式(瞎几把讲）">
+<meta property="og:description" content="一直学习就好">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/aichong/13.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL18.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL19.png">
-<meta property="og:updated_time" content="2018-05-20T03:23:20.356Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL学习笔记(三)">
-<meta name="twitter:description" content="第三部分讲一下SQL注入常见过滤的绕过方式(瞎几把讲）">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/aichong/13.jpg">
+<meta name="twitter:title" content="Double--R blog">
+<meta name="twitter:description" content="一直学习就好">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -161,103 +155,197 @@
       
         <div style="max-width: 1000px">
       
-          <article id="post-SQL-3" class="article article-type-post">
+          <h1>组会内容</h1>
+
+
   
-    <h1 class="article-header">
-      SQL学习笔记(三)
-    </h1>
   
+    <div class="post-list">
   
 
-  <div class="article-info">
-    <span class="article-date">
-  2018-04-24
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2018/05/12/Easy-Unserialize-Writeup/" >
+  php反序列化组会例题和makerctf easy_unserialize的wp
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/05/12/Easy-Unserialize-Writeup/"><span class="article-date">
+  2018-05-12
 </span>
+</a>
+        
 
-    
-
-    
+        
 	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组会内容/">组会内容</a></li></ul>
 	</span>
 
 
-  </div>
-  <div class="article-entry">
-    <p><strong>第三部分讲一下SQL注入常见过滤的绕过方式(瞎几把讲）</strong></p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/aichong/13.jpg" alt="Alt text"></p>
-<a id="more"></a>
-<font color="0099ff"> 闭合方式过滤的绕过： </font>
-
-<ul>
-<li>太简单了，不讲了，反正就那么几种闭合，排列组合一下试呗。</li>
-</ul>
-<font color="0099ff"> 特殊符号的过滤： </font>
-
-<ul>
-<li><p><strong>大小于号过滤的绕过：</strong></p>
-</li>
-<li><p>在盲注时我们常常猜解单个字符，需要用二分法确定字符的ascii码值，这时就需要比较ascii码值的大小。那么如果大小于号被过滤了怎么办？用greatest函数绕过，前提时等于号没有被过滤。用法greatest(a,b)返回a和b中较大的那个数。举个例子，如果我们原先的payload是-1’ and ascii(substr((select table_name from information_schema.tables where table_schema=’DBnaeme’ limit i,1),i,1))&gt;90 #这个payload的作用是截取数据库中第i+1个表的表名的第i个字符，并判断它的ascii码值是否大于90。当大于号被过滤了，我们就用greatest构造payload：-1’ and greatest(ascii(substr((select table_name from information_schema.tables where table_schema=’DBnaeme’ limit i,1),i,1)),90)=90 #当字符的ascii码值大于90时，greatest函数返回的时ascii码值，当然不等于90，所以返回0。当字符的ascii码值小于90时，greatest返回的就是90，整个返回为1 。我们就能确定ascii码值了。</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL18.png" alt="Alt text"></p>
-<ul>
-<li><p>可以看到我们比较了dvwa库中第一个表的表名的第一个字符的ascii码值和90那个大，输出的是0，说明是ascii码值大，而第一个表的表名是guestbook，小写g的ascii码值是103，确实大于90 。</p>
-</li>
-<li><p><strong>逗号被过滤:</strong></p>
-</li>
-<li><p>不能使用逗号的情况较少，往往是因为逗号有某些特殊的作用，被单独处理了。通常，猜解都是要用到逗号的，因为需要mid，substr函数取字符。绕过的方法是使用from x for y。语法类似substr(字符串 from 1 for 1)。</p>
-</li>
-<li><p><strong>空格被过滤：</strong></p>
-</li>
-<li><p>注释绕过过滤这是最基本的方法，在一些自动化SQL注射工具中，使用也十分普遍。在MySQL中，用/<em>注释</em>/来标记注释的内容。比如SQL查询：select user() from dual我们用注释替换空格，就可以变成：select/<strong>/user()/</strong>/from/**/dual。</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/SQL/SQL19.png" alt="Alt text"></p>
-<ul>
-<li>括号绕过空格空格被过滤，但括号没有被过滤，可通过括号绕过。我的经验是，在MySQL中，括号是用来包围子查询的。因此，任何可以计算出结果的语句，都可以用括号包围起来。而括号的两端，可以没有多余的空格。括号绕过空格的方法，在timebased盲注中，是屡试不爽的。举例说明，我们有这样的一条SQL查询：select user() from dual where 1=1 and 2=2如何把空格减到最少？观察到user()可以算值，那么user()两边要加括号，变成：select(user())from dual where 1=1 and 2=2;继续，1=1和2=2可以算值，也加括号，去空格，变成：select(user())from dual where(1=1)and(2=2)dual两边的空格，通常是由程序员自己添加，我们一般无法控制。所以上面就是空格最少的结果。用我常用的一条time based盲注语句做个总结：<a href="http://www.xxx.com/index.php?id=(sleep(ascii(mid(user()from(2)for(1)))=109))这条语句是猜解user()第二个字符的ascii码是不是109，若是109，则页面加载将延迟。它：1" target="_blank" rel="noopener">http://www.xxx.com/index.php?id=(sleep(ascii(mid(user()from(2)for(1)))=109))这条语句是猜解user()第二个字符的ascii码是不是109，若是109，则页面加载将延迟。它：1</a>) 既没有用到逗号、大小于符号2) 也没有使用空格却可以完成数据的猜解工作！</li>
-</ul>
-<font color="0099ff"> 关键字的过滤： </font>
-
-<ul>
-<li><p>1.使用注释符绕过，常用注释符：//，– , /<strong>/, #, –+, – -, ;,%00,–a。用法：un/</strong>/ion。</p>
-</li>
-<li><p>2.使用大小写绕过</p>
-</li>
-<li><p>3.使用内联注释绕过</p>
-</li>
-<li><p>4.双关键字绕过</p>
-</li>
-<li><p>5.通用绕过（编码）：URLEncode编码，ASCII,HEx,unicode编码绕过</p>
-</li>
-</ul>
-<hr>
-<p>看到一篇很好的文章，里面列举了平时能看到的所有绕过方式<br><a href="https://www.cnblogs.com/Vinson404/p/7253255.html" target="_blank" rel="noopener">SQL注入绕过技巧-VVVinson</a></p>
-
-  </div>
-  <footer class="article-footer">
-    
-  <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
-      <img src="/images/cc/cc.png">
-      
-          <img src="/images/cc/by.png">
+      </div>
+      <div class="article-entry">
         
-          <img src="/images/cc/sa.png">
+          <p><strong>因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。</strong></p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793388.68.jpg" alt="Alt text"></p>
+          <p>
+            <a href="/2018/05/12/Easy-Unserialize-Writeup/">
+              Read More
+            </a>
+          </p>
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2018/05/11/php-unseriablize/" >
+  php反序列化漏洞
+</a>
+
+      </h3>
       
-      <span>
-        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-      </span>
-    </a>
-  </div>
+
+      <div class="article-info">
+        <a href="/2018/05/11/php-unseriablize/"><span class="article-date">
+  2018-05-11
+</span>
+</a>
+        
+
+        
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组会内容/">组会内容</a></li></ul>
+	</span>
 
 
-    
+      </div>
+      <div class="article-entry">
+        
+          <p><strong>php反序列化是01师傅之前发的内容，但由于我最近一直在重新学习之前的内容，所以一直没去看。明天组会知弦师傅要讲php反序列化，所以今晚预习一下。</strong></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793388.24.jpg" alt="Alt text"></p>
+          <p>
+            <a href="/2018/05/11/php-unseriablize/">
+              Read More
+            </a>
+          </p>
+        
+      </div>
+    </div>
 
-  </footer>
-</article>
+  
+    </div>
+  
 
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2018/04/26/RPO-wp/" >
+  K0rz3n师傅的RPO题目的wp
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/04/26/RPO-wp/"><span class="article-date">
+  2018-04-26
+</span>
+</a>
+        
+
+        
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组会内容/">组会内容</a></li></ul>
+	</span>
+
+
+      </div>
+      <div class="article-entry">
+        
+          <p><strong>讲一下自己做K0rz3n师傅的题的过程</strong></p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/aichong/3.jpg" alt="Alt text"></p>
+          <p>
+            <a href="/2018/04/26/RPO-wp/">
+              Read More
+            </a>
+          </p>
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2018/04/22/RPO/" >
+  RPO漏洞学习笔记
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/04/22/RPO/"><span class="article-date">
+  2018-04-22
+</span>
+</a>
+        
+
+        
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组会内容/">组会内容</a></li></ul>
+	</span>
+
+
+      </div>
+      <div class="article-entry">
+        
+          <p><strong>2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。</strong></p>
+<p><strong>参考博客：</strong> </p>
+<p><a href="http://www.52bug.cn/%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF/4732.html" target="_blank" rel="noopener">K0rz3n师傅的博客</a></p>
+<hr>
+<font color="0099ff"> 什么是RPO： </font>
+
+<ul>
+<li>RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现的差异，并借助文件中包含的相对路径的css或者js造成跨目录读取css或者js，甚至可以将本身不是css或者js的页面当做css或者js解析，从而触发xss等进一步的攻击手段。 </li>
+</ul>
+          <p>
+            <a href="/2018/04/22/RPO/">
+              Read More
+            </a>
+          </p>
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
 
 
 
