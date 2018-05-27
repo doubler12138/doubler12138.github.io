@@ -20,10 +20,14 @@
 <meta property="og:site_name" content="Double--R blog">
 <meta property="og:description" content="实验班考试前突击MISC方向，刷一下南邮的MISC题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T14:27:13.429Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793427.28.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/62.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/63.jpg">
+<meta property="og:updated_time" content="2018-05-26T12:09:47.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="南京邮电大学网络攻防训练平台MISC题Write-Up">
 <meta name="twitter:description" content="实验班考试前突击MISC方向，刷一下南邮的MISC题">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793427.28.jpg">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -98,14 +102,14 @@
             
               <li class="tag-list-container">
                 <a href="javascript:;">Tag</a>
-                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li></ul>
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">31</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">34</span></li></ul>
               </li>
             
           
@@ -182,9 +186,100 @@
   <div class="article-entry">
     <p><strong>实验班考试前突击MISC方向，刷一下南邮的MISC题</strong></p>
 <hr>
-<p><img src="" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793427.28.jpg" alt=""></p>
 <a id="more"></a>
+<p><strong>图种：</strong></p>
+<ul>
+<li><p>一张gif图，开虚拟机foremost一下，出另外一张gif图，最后一句话首字母</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/62.jpg" alt=""></p>
+</li>
+</ul>
+<p><strong>丘比龙De女神：</strong></p>
+<ul>
+<li><p>winhex打开，发现图片藏了个压缩包，把内容复制出来，加zip的头，解压密码love,出图片，查看图片的MD5值就行了</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/63.jpg" alt=""></p>
+</li>
+</ul>
+<hr>
+<p><strong>MISC基础知识：</strong></p>
+<ul>
+<li><p><strong>各种图片类型的格式：</strong></p>
+<ul>
+<li><p>JPG文件格式：</p>
+<p>JPG = “段” + 经过压缩编码的图像数据。段 = 段标识 + 段类型 + 段长度 + 段内容（其中文件头和文件尾属于没有段长度和段内容的特殊段）</p>
+<p>段标识是一种固定的符号，段的类型有30种，其中十种是每个JPG 图片中必须存在的：</p>
+<p>1.D8—-文件头    2.D9—-文件尾    3.FE—-注释<br>4.C0—-帧开始    5.C1—-帧结束    6.C4—-定义Huffman表    7.DA—-扫描行开始    8.DB—-定义量化表    9.DD—-定义重新开始间隔    10.E0—-敌营交换格式和图像识别信息</p>
+<p>因此，一般的JPG格式的图片文件头为FF D8，文件尾为FF D9.</p>
+</li>
+<li><p>PNG文件格式：</p>
+<p>PNG文件 =  PNG标识  +  数据块   + 数据块  + ……  + 数据块（其中数据块的个数最少是4）</p>
+<p>PNG标识是固定的，以十六进制表示为：【89  50  4E  47  0D  0A  1A  0A】，对应的符号为：【 ‰  P  N  G  .  .  .  . 】</p>
+<p>数据块分析如下：</p>
+<p>PNG文件 -  PNG标识  =   IHDR  + 可选数据块  +  PLTE  +  可选数据块  +  IDAT  +  可选数据块  +  IEND </p>
+<p>分别说明如下：</p>
+<p>【1】IHDR数据块，文件头数据块，在一个PNG文件里只能有一个。</p>
+<p>【2】PLTE数据块，调色板数据块，它仅与索引彩色图像有关，其中，‘索引图像’是指–一种把像素值直接作为RGB调色板下标的图像。</p>
+<p>【3】IDAT数据块，图像数据块，存储实际的图像数据，在数据流中包含多个连续顺序的图像数据块。</p>
+<p>【4】IEND数据块，图像结束数据块，表示–数据流已结束，放在文件的末尾。</p>
+<p>以上的数据块都是以自己的名字作为开头来控制一段数据。其中，结尾数据块IEND的内容固定：</p>
+<p>【00  00  00  00  49  45  4E  44  AE  42  60  82】，对应的符号如下：</p>
+<p>【.   .    .    .   I   E   N   D  】（后四位为CRC校验码）</p>
+</li>
+<li><p>GIF文件格式：</p>
+<p>文件的单位是数据块，文件的结构如下：</p>
+<p>GIF文件  =  文件头  +  GIF数据流  +  文件结束块</p>
+<p>GIF数据流  =  控制块  +   成像块   +  特殊用途块</p>
+<p>文件头大小为6个字节，而且【文件头  =  标识符（3字节） +  版本（3字节）】，其中，标识符为“GIF”，版本一般是“87a”或者“89a”。</p>
+<p>文件结束块是一个单字节的数据块，它指示数据流的结束，值为“0x3B”，符号是“；”。</p>
+<p>注意：GIF文件中的每个数据块都有一个块尾记录，大小为1个字节，同样也是“0x3B”。</p>
+</li>
+<li><p>zip文件格式：</p>
+<p>50 4B 01 02 核心目录文件header标识</p>
+<p>50 4B 03 04 文件头标识</p>
+<p>50 4B 05 06 核心目录结束标记</p>
+</li>
+</ul>
+</li>
+<li><p><strong>常见题型和解法：</strong></p>
+<ul>
+<li><p>查看图片基本信息：</p>
+<p>1.右键查看图片属性，检查图片简介、备注中是否有FLAG</p>
+<p>2.winhex打开，搜索</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>*    多图层：
 
+    1.stegsolve，查看各图层
+
+    2.LSB低位隐写，0、1、2位
+
+
+*    复合文件：
+
+    1.后缀改成zip或rar解压缩
+
+    2.foremost分离，命令：foremost 1.jpg
+
+    3.winhex打开找到第一张图尾部，把第二张图的头加一下，分离
+
+*    改图片高度：
+
+    1.PNG文件，第二行第六列是高度位，改大就行
+
+    2.其他格式图片，可以看图片属性，得到宽高值，转16进制数，搜索更改
+
+*    双图：
+
+    1.stegslove的image combiner一下
+
+    2.盲水印，提取命令：python bwm.py decode 原图 有盲水印的图 保存水印的图
+
+*    图片的MD5值：
+
+    cmd命令：certutil -hashfile 文件 MD5
+</code></pre>
   </div>
   <footer class="article-footer">
     
