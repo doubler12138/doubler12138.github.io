@@ -8,20 +8,24 @@
 
 <title>
   
-    Archive: 2020
+    SUCTF Web题homework 复现
   
 </title>
 
-<meta name="description" content="一直学习就好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Double--R blog">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+<meta name="description" content="在服务器上搭了个docker，顺便运行了一下SUCTF web题 homework的容器，跟着wp复现了一下这道题">
+<meta name="keywords" content="CTF-WriteUp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SUCTF Web题homework 复现">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/SuCTF-Web-Homework/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="一直学习就好">
+<meta property="og:description" content="在服务器上搭了个docker，顺便运行了一下SUCTF web题 homework的容器，跟着wp复现了一下这道题">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://p0.ssl.qhimg.com/t013dc232b067950e6e.png">
+<meta property="og:updated_time" content="2018-05-30T14:38:12.815Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Double--R blog">
-<meta name="twitter:description" content="一直学习就好">
+<meta name="twitter:title" content="SUCTF Web题homework 复现">
+<meta name="twitter:description" content="在服务器上搭了个docker，顺便运行了一下SUCTF web题 homework的容器，跟着wp复现了一下这道题">
+<meta name="twitter:image" content="https://p0.ssl.qhimg.com/t013dc232b067950e6e.png">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -155,70 +159,79 @@
       
         <div style="max-width: 1000px">
       
-          
-
+          <article id="post-SuCTF-Web-Homework" class="article article-type-post">
+  
+    <h1 class="article-header">
+      SUCTF Web题homework 复现
+    </h1>
   
   
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <h1><a href="/archives/2020" class="archive-year">2020</a></h1>
-        </div>
-        <div class="post-list">
-    
-  
 
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2020/04/22/Links/" >
-  常用链接
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2020/04/22/Links/"><span class="article-date">
-  2020-04-22
+  <div class="article-info">
+    <span class="article-date">
+  2018-05-30
 </span>
-</a>
-        
 
-        
+    
+
+    
 	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/链接/">链接</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li></ul>
 	</span>
 
 
-      </div>
-      <div class="article-entry">
-        
-          <p><strong>由于这个hexo主题我不知道怎么加友情链接，所以把我常用的链接贴在这里（不定期增加）：</strong></p>
+  </div>
+  <div class="article-entry">
+    <p><strong>在服务器上搭了个docker，顺便运行了一下SUCTF web题 homework的容器，跟着wp复现了一下这道题</strong></p>
 <hr>
-<p><a href="https://bbs.xdsec.org/" target="_blank" rel="noopener">协会论坛</a></p>
-<p><a href="https://github.com/doubler12138" target="_blank" rel="noopener">我的github</a></p>
-<p><a href="http://wr.xdsec.club" target="_blank" rel="noopener">周报提交地址</a></p>
-<p><a href="http://f1sh.site/" target="_blank" rel="noopener">鱼师傅的博客</a></p>
-<p><a href="http://www.k0rz3n.com/" target="_blank" rel="noopener">k0rz3n师傅的博客</a></p>
-<p><a href="http://pupiles.com/" target="_blank" rel="noopener">puliles师傅的博客</a></p>
-<p><a href="http://www.cnblogs.com/iamstudy/" target="_blank" rel="noopener">l3m0n师傅的博客</a></p>
-<p><a href="https://ox1234.github.io" target="_blank" rel="noopener">恒志大佬的博客</a></p>
-<p><a href="http://codeqi.top" target="_blank" rel="noopener">琪琪的博客</a></p>
-<p><a href="http://quincyblog.top" target="_blank" rel="noopener">Quincy的博客</a></p>
-<p><a href="https://blog.void0red.top" target="_blank" rel="noopener">V神博客</a></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/aichong/10.jpg" alt="Alt text"></p>
-          <p>
-            <a href="/2020/04/22/Links/">
-              Read More
-            </a>
-          </p>
-        
-      </div>
-    </div>
+<p><img src="https://p0.ssl.qhimg.com/t013dc232b067950e6e.png" alt=""></p>
+<a id="more"></a>
+<p><strong>环境搭建：</strong></p>
+<ul>
+<li><p>官方wp给了docker镜像文件 suctf/2018-web-homework。先把镜像下下来</p>
+<p><code>docker pull suctf/2018-web-homework</code></p>
+<p>启动一个容器并运行一下</p>
+<p>`docker run -d –name suctfhomework -p xxxx:80 suctf/2018-web-homework:latest</p>
+<p>docker start suctfhomework`</p>
+<p>查看一下运行情况</p>
+<p><code>docker ps</code></p>
+<p>完成环境搭建</p>
+</li>
+</ul>
+<p><strong>解题步骤：</strong></p>
+<ul>
+<li><p>反正是看着wp做的，直接贴一个官方wp连接：<a href="https://www.anquanke.com/post/id/146419#h3-4" target="_blank" rel="noopener">SUCTF WriteUp</a></p>
+</li>
+<li><p>这里就说两个注意点：</p>
+<p>一个是读源码时原文件的路径在容器里面是/var/www/html</p>
+<p>一个是evil.xml改成evil.dtd</p>
+</li>
+</ul>
+<p><strong>具体用到的报错注入的方法，明天写一篇学习文章</strong></p>
 
-  
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
 
 
 
