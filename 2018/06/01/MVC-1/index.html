@@ -22,8 +22,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793461.02.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/06/01/MVC-1/1">
-<meta property="og:image" content="http://yoursite.com/2018/06/01/MVC-1/2">
-<meta property="og:updated_time" content="2018-06-03T13:26:48.935Z">
+<meta property="og:updated_time" content="2018-06-04T07:26:09.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于fastphp学习搭建MVC框架（一）">
 <meta name="twitter:description" content="打算开始学习php的MVC框架，所以打算跟着fastphp的模板自己写一遍，把所学到的记下来，后面照着这个框架做一部分的更改，然后自己审计其中可能存在的安全问题">
@@ -94,21 +93,21 @@
           
             
               <li class="category-list-container">
-                <a href="javascript:;">分类</a>
+                <a href="javascript:;">Category</a>
                 
               </li>
             
           
             
               <li class="tag-list-container">
-                <a href="javascript:;">标签</a>
+                <a href="javascript:;">Tag</a>
                 <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a><span class="tag-list-count">3</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
-                <a href="javascript:;">归档</a>
+                <a href="javascript:;">Archive</a>
                 <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">41</span></li></ul>
               </li>
             
@@ -225,42 +224,33 @@
 <li><p>在开始前，先把项目建立起来</p>
 <p>假设我们建立的项目为 project，MVC的框架命名为 fastphp，那么接下来，第一步要把目录结构设置好。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">project  WEB部署目录</span><br><span class="line">├─application           应用目录</span><br><span class="line">│  ├─controllers        控制器目录</span><br><span class="line">│  ├─models             模块目录</span><br><span class="line">│  ├─views              视图目录</span><br><span class="line">├─config                配置文件目录</span><br><span class="line">├─fastphp               框架核心目录</span><br><span class="line">├─static                静态文件目录</span><br><span class="line">├─index.php             入口文件</span><br><span class="line">然后把Nginx或者Apache的站点根目录配置到project目录。</span><br></pre></td></tr></table></figure>
-<p><img src="2" alt=""></p>
 </li>
 </ul>
 <p><strong>2.代码规范:</strong></p>
+<ul>
+<li><p>在目录设置好以后，我们接下来规定代码的规范：<br>MySQL的表名需小写或小写加下划线，如：</p>
+<p>  item，car_orders。</p>
+<p>模块名（Models）需用大驼峰命名法，即首字母大写，并在名称后添加Model，如：</p>
+<p>  ItemModel，CarModel。</p>
+<p>控制器（Controllers）需用大驼峰命名法，即首字母大写，并在名称后添加Controller，如：</p>
+<p>ItemController，CarController。</p>
+<p>方法名（Action）需用小驼峰命名法，即首字母小写，如：</p>
+<p>  index，indexPost。</p>
+<p>视图（Views）部署结构为控制器名/行为名，如：</p>
+<p>  item/view.php，car/buy.php。</p>
+<p>上述规则是为了程序能更好地相互调用。</p>
 </li>
 </ul>
-<pre><code>*    在目录设置好以后，我们接下来规定代码的规范：
-    MySQL的表名需小写或小写加下划线，如：
-
-        item，car_orders。
-
-    模块名（Models）需用大驼峰命名法，即首字母大写，并在名称后添加Model，如：
-
-        ItemModel，CarModel。
-
-    控制器（Controllers）需用大驼峰命名法，即首字母大写，并在名称后添加Controller，如：
-
-    ItemController，CarController。
-
-    方法名（Action）需用小驼峰命名法，即首字母小写，如：
-
-        index，indexPost。
-
-    视图（Views）部署结构为控制器名/行为名，如：
-
-        item/view.php，car/buy.php。
-
-    上述规则是为了程序能更好地相互调用。
-</code></pre><hr>
+</li>
+</ul>
+<hr>
 <p><strong>接下来就开始真正的PHP MVC编程了</strong></p>
 
   </div>
   <footer class="article-footer">
     
   <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
       <img src="/images/cc/cc.png">
       
           <img src="/images/cc/by.png">
@@ -268,7 +258,7 @@
           <img src="/images/cc/sa.png">
       
       <span>
-        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
       </span>
     </a>
   </div>
