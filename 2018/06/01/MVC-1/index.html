@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    基于fastphp学习搭建MVC框架（一）
+  
+</title>
+
+<meta name="description" content="打算开始学习php的MVC框架，所以打算跟着fastphp的模板自己写一遍，把所学到的记下来，后面照着这个框架做一部分的更改，然后自己审计其中可能存在的安全问题">
+<meta name="keywords" content="项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于fastphp学习搭建MVC框架（一）">
+<meta property="og:url" content="http://yoursite.com/2018/06/01/MVC-1/index.html">
+<meta property="og:site_name" content="Double--R blog">
+<meta property="og:description" content="打算开始学习php的MVC框架，所以打算跟着fastphp的模板自己写一遍，把所学到的记下来，后面照着这个框架做一部分的更改，然后自己审计其中可能存在的安全问题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793461.02.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/06/01/MVC-1/1">
+<meta property="og:image" content="http://yoursite.com/2018/06/01/MVC-1/2">
+<meta property="og:updated_time" content="2018-06-03T13:26:48.935Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于fastphp学习搭建MVC框架（一）">
+<meta name="twitter:description" content="打算开始学习php的MVC框架，所以打算跟着fastphp的模板自己写一遍，把所学到的记下来，后面照着这个框架做一部分的更改，然后自己审计其中可能存在的安全问题">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793461.02.jpg">
+
+
+  <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+</head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Double--R blog</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Double--R blog</a></h1>
+    
+      <p class="subtitle">
+        菜的要死的Double--R
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+          <div class="description">一直学习就好</div>
+        
+        
+          <div class="author">Double--R</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/touxiang.png"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">分类</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">标签</a>
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a><span class="tag-list-count">3</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">归档</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">41</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-MVC-1" class="article article-type-post">
+  
+    <h1 class="article-header">
+      基于fastphp学习搭建MVC框架（一）
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2018-06-01
+</span>
+
+    
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目/">项目</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <p><strong>打算开始学习php的MVC框架，所以打算跟着fastphp的模板自己写一遍，把所学到的记下来，后面照着这个框架做一部分的更改，然后自己审计其中可能存在的安全问题</strong></p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793461.02.jpg" alt=""></p>
+<a id="more"></a>
+<p><strong>什么是MVC框架</strong></p>
+<ul>
+<li><p>MVC模式（Model-View-Controller）是软件工程中的一种软件架构模式。</p>
+<p>MVC框架把软件系统分为三个基本部分：<code>模型（Model）、视图（View）和控制器（Controller）</code>。</p>
+<p>PHP中的MVC模式也称Web MVC，从上世纪70年代进化而来。</p>
+<p>MVC的目的是实现一种动态的程序涉及，便于后续对程序的修改和扩张简化，并且是程序的某一部分的重复利用成为可能。</p>
+<p>除此之外，此模式通过对复杂度的简化，是程序结构更加直观。</p>
+<p>MVC各部分的职能：</p>
+<ul>
+<li><p><strong>模型Model</strong>——管理<code>大部分的业务逻辑</code>和<code>所有的数据库逻辑</code>。模型提供了连接和操作数据库的抽象层。</p>
+</li>
+<li><p><strong>控制器Controller</strong>——负责<code>响应用户请求、准备数据</code>，以及决定如何展示数据。</p>
+</li>
+<li><p><strong>视图View</strong>——负责<code>渲染数据</code>，通过HTML方式呈现个用户</p>
+</li>
+</ul>
+<p><img src="1" alt="MVC流程图"></p>
+<p>一个典型的Web MVC流程：</p>
+<ul>
+<li><p>Controller截获用户发出的请求；</p>
+</li>
+<li><p>Controller调用Model完成状态的读写操作；</p>
+</li>
+<li><p>Controller把数据传递给View；</p>
+</li>
+<li><p>View渲染最终结果并呈现给用户</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>准备开发自己的MVC框架</strong></p>
+<ul>
+<li><p><strong>1.目录准备：</strong></p>
+<ul>
+<li><p>在开始前，先把项目建立起来</p>
+<p>假设我们建立的项目为 project，MVC的框架命名为 fastphp，那么接下来，第一步要把目录结构设置好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">project  WEB部署目录</span><br><span class="line">├─application           应用目录</span><br><span class="line">│  ├─controllers        控制器目录</span><br><span class="line">│  ├─models             模块目录</span><br><span class="line">│  ├─views              视图目录</span><br><span class="line">├─config                配置文件目录</span><br><span class="line">├─fastphp               框架核心目录</span><br><span class="line">├─static                静态文件目录</span><br><span class="line">├─index.php             入口文件</span><br><span class="line">然后把Nginx或者Apache的站点根目录配置到project目录。</span><br></pre></td></tr></table></figure>
+<p><img src="2" alt=""></p>
+</li>
+</ul>
+<p><strong>2.代码规范:</strong></p>
+</li>
+</ul>
+<pre><code>*    在目录设置好以后，我们接下来规定代码的规范：
+    MySQL的表名需小写或小写加下划线，如：
+
+        item，car_orders。
+
+    模块名（Models）需用大驼峰命名法，即首字母大写，并在名称后添加Model，如：
+
+        ItemModel，CarModel。
+
+    控制器（Controllers）需用大驼峰命名法，即首字母大写，并在名称后添加Controller，如：
+
+    ItemController，CarController。
+
+    方法名（Action）需用小驼峰命名法，即首字母小写，如：
+
+        index，indexPost。
+
+    视图（Views）部署结构为控制器名/行为名，如：
+
+        item/view.php，car/buy.php。
+
+    上述规则是为了程序能更好地相互调用。
+</code></pre><hr>
+<p><strong>接下来就开始真正的PHP MVC编程了</strong></p>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2018 Double--R blog - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/PhotoSwipe/photoswipe.js"></script>
+  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+<script src="/scripts/main.js"></script>
+
+</body>
+</html>
