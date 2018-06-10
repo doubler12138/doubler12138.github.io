@@ -12,18 +12,18 @@
   
 </title>
 
-<meta name="description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求">
+<meta name="description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求.这部分一篇文章是写不完了，要学的太多了，可能这部分要写个四五篇吧">
 <meta name="keywords" content="项目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于fastphp学习搭建MVC框架（三）">
 <meta property="og:url" content="http://yoursite.com/2018/06/03/MVC-3/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求">
+<meta property="og:description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求.这部分一篇文章是写不完了，要学的太多了，可能这部分要写个四五篇吧">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-03T13:19:21.859Z">
+<meta property="og:updated_time" content="2018-06-04T11:23:26.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于fastphp学习搭建MVC框架（三）">
-<meta name="twitter:description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求">
+<meta name="twitter:description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求.这部分一篇文章是写不完了，要学的太多了，可能这部分要写个四五篇吧">
 
 
   <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
@@ -90,22 +90,22 @@
           
             
               <li class="category-list-container">
-                <a href="javascript:;">Category</a>
+                <a href="javascript:;">分类</a>
                 
               </li>
             
           
             
               <li class="tag-list-container">
-                <a href="javascript:;">Tag</a>
-                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a><span class="tag-list-count">3</span></li></ul>
+                <a href="javascript:;">标签</a>
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a><span class="tag-list-count">3</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
-                <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">41</span></li></ul>
+                <a href="javascript:;">归档</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">43</span></li></ul>
               </li>
             
           
@@ -180,25 +180,31 @@
 
   </div>
   <div class="article-entry">
-    <p><strong>这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求</strong></p>
+    <p><strong>这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求.这部分一篇文章是写不完了，要学的太多了，可能这部分要写个四五篇吧</strong></p>
 <hr>
 <p><img src="" alt=""></p>
 <a id="more"></a>
-<p><strong>框架核心类</strong></p>
+<p><strong>框架核心类1</strong></p>
 <ul>
 <li><p><strong>创建Fastphp.php文件：</strong></p>
 <p>入口文件对框架类做了两步操作：<code>实例化，调用run()方法</code></p>
 <p>实例化操作接收接收$config参数配置，并保存到类属性中。</p>
 <p>run()方法则调用类自身方法，完成：<code>自动加载类文件、检测开发环境、过滤敏感字符、移除全局变量的老用法和处理路由</code></p>
-<p>Fastphp.php文件内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<p><strong>Fastphp.php文件内容：</strong></p>
+<ul>
+<li><p><strong>第一部分：</strong></p>
+<p>类初始化和程序运行</p>
+<p><img src="" alt=""></p>
+</li>
+</ul>
+</li>
 </ul>
 
   </div>
   <footer class="article-footer">
     
   <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="Attribution-ShareAlike">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
       <img src="/images/cc/cc.png">
       
           <img src="/images/cc/by.png">
@@ -206,7 +212,7 @@
           <img src="/images/cc/sa.png">
       
       <span>
-        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
       </span>
     </a>
   </div>

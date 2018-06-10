@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    RSA学习笔记
+  
+</title>
+
+<meta name="description" content="学习一下密码学中相当重要的RSA加密和解密过程，以及CTF中关于RSA加密的解法">
+<meta name="keywords" content="学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RSA学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/06/10/Crypto-RSA/index.html">
+<meta property="og:site_name" content="Double--R blog">
+<meta property="og:description" content="学习一下密码学中相当重要的RSA加密和解密过程，以及CTF中关于RSA加密的解法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793456.02.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/3.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/4.jpg">
+<meta property="og:updated_time" content="2018-06-10T12:33:25.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RSA学习笔记">
+<meta name="twitter:description" content="学习一下密码学中相当重要的RSA加密和解密过程，以及CTF中关于RSA加密的解法">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793456.02.jpg">
+
+
+  <link rel="alternative" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+</head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Double--R blog</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Double--R blog</a></h1>
+    
+      <p class="subtitle">
+        菜的要死的Double--R
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+          <div class="description">一直学习就好</div>
+        
+        
+          <div class="author">Double--R</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/touxiang.png"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">分类</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">标签</a>
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a><span class="tag-list-count">3</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">归档</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">43</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-Crypto-RSA" class="article article-type-post">
+  
+    <h1 class="article-header">
+      RSA学习笔记
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2018-06-10
+</span>
+
+    
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <p><strong>学习一下密码学中相当重要的RSA加密和解密过程，以及CTF中关于RSA加密的解法</strong></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793456.02.jpg" alt=""></p>
+<hr>
+<a id="more"></a>
+<h3 id="RSA算法的基本原理"><a href="#RSA算法的基本原理" class="headerlink" title="RSA算法的基本原理"></a>RSA算法的基本原理</h3><ul>
+<li><h5 id="什么是RSA"><a href="#什么是RSA" class="headerlink" title="什么是RSA"></a>什么是RSA</h5><p>RSA算法是现今使用最广泛的公钥密码算法，也是号称地球上最安全的加密算法。</p>
+<p>在了解RSA算法之前，先熟悉下几个术语  ：</p>
+<p>根据密钥的使用方法，可以将密码分为对称密码和公钥密码   </p>
+<p>对称密码：加密和解密使用同一种密钥的方式   </p>
+<p>公钥密码：加密和解密使用不同的密码的方式，因此公钥密码通常也称为非对称密码。、</p>
+</li>
+<li><h5 id="RSA加密"><a href="#RSA加密" class="headerlink" title="RSA加密"></a>RSA加密</h5><p>RSA加密可以用一个公式来表达<br>$$<br>密文＝明文^EmodN<br>$$<br>也就是说RSA加密是对明文的E次方后除以N后求取余数的过程。只要知道E和N就能进行RSA加密，所以说E、N是RSA加密的密钥，也就是说E和N的组合就是公钥。<br>$$<br>公钥=（E,N)<br>$$<br>不过E和N并不是随便什么数都可以，它是需要经过严格的数学计算得出的。</p>
+</li>
+<li><h5 id="RSA解密"><a href="#RSA解密" class="headerlink" title="RSA解密"></a>RSA解密</h5><p>RSA的解密同样可以用一个公式来表示<br>$$<br>明文=密文^DmodN<br>$$<br>也就是说密文进行D次方后除以N的余数就是明文，这就是RSA解密过程。知道D和N就能进行解密，所以D和N的组合就是私钥</p>
+</li>
+</ul>
+<p>$$<br>私钥=（D,N)<br>$$</p>
+<p>​    所以最后的密钥对就是<br>$$<br>密钥=（E,D,N）<br>$$</p>
+<ul>
+<li><h5 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h5><ul>
+<li><p><strong>求N</strong></p>
+<p>准备两个质数p,q。这两个质数不能太小，不然容易破解。<br>$$<br>N = p*q<br>$$</p>
+</li>
+<li><p><strong>求L（L为中间过程的中间数）</strong></p>
+<p>L是p-1和q-1的最小公倍数，可用如下表达式表示</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>$$
+L = lcm（p-1,q-1）
+$$
+</code></pre><ul>
+<li><p><strong>求E</strong></p>
+<p>E必须满足两个条件：E是一个比1大比L小的数，E和L的最大公约数为1<br>$$<br>1&lt;E&lt;L<br>$$</p>
+<p>$$<br>gcd（E,L） = 1<br>$$</p>
+<p>之所以血药E和L的最大公约数为1是为了保证一定存在解密时需要使用的数D。</p>
+</li>
+<li><p><strong>求D</strong></p>
+<p>数D是由数E计算出来的。D、E和L之间必须满足以下关系<br>$$<br>1&lt;D&lt;L<br>$$</p>
+<p>$$<br>E*D mod L = 1<br>$$</p>
+</li>
+</ul>
+<ul>
+<li><h5 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h5><p>我们用具体的数字来时间一下RSA的密钥对生成，及其加解密的全过程</p>
+<ul>
+<li><p>准备两个很小的一对质数 </p>
+<p>p = 17 </p>
+<p>q = 19</p>
+<p>N = p * q = 323</p>
+</li>
+<li><p>求L </p>
+<p>L = lcm(p-1,q-1) = lcm(16,18) = 144</p>
+</li>
+<li><p>求E</p>
+<p>E必须满足两个条件，显然5是满足的，故E=5</p>
+</li>
+<li><p>求D </p>
+<p>D也必须满足两个调教，显然29是满足的，5*29 mod 144 = 145 mod 144 =1</p>
+</li>
+<li><p>加密</p>
+<p>准备的明文必须是小于N的数，因为加密或者解密都是要mod N其结果必须小于N。</p>
+<p>假设明文 = 123</p>
+<p>则 密文 = 明文^EmodN = 123^5mod323=225. </p>
+</li>
+<li><p>解密</p>
+<p>明文 = 密文^DmodN = 225^29mod323 = 123</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="CTF中RSA加密题的解法"><a href="#CTF中RSA加密题的解法" class="headerlink" title="CTF中RSA加密题的解法"></a>CTF中RSA加密题的解法</h4><pre><code>##### 这里我用一道实验吧的题目做例子：
+</code></pre><ul>
+<li><p>点击链接获得一个压缩包，拖进虚拟机里解压缩得到两个文件，分别是flag.enc和public.pem两个文件，这是要用到openssl</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/1.jpg" alt=""></p>
+<p>openssl：是一个安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及SSL协议，并提供丰富的应用程序供测试或其它目的使用 </p>
+</li>
+<li><p>打开终端，输入openssl进入openssl状态</p>
+<p>输入命令rsa -pubin -text -modulus -in public.pem(public.pem 为公钥文件)读取N和E</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/2.jpg" alt=""></p>
+<p>可以看到N=A41006DEFD378B7395B4E2EB1EC9BF56A61CD9C3B5A0A73528521EEB2FB817A7E=65537</p>
+<p>将N转换为10进制得到了N=74207624142945242263057035287110983967646020057307828709587969646701361764263 </p>
+</li>
+</ul>
+<ul>
+<li><p>分解N得出P和Q以便求出私钥D。</p>
+<p>这里使用软件yafu：用于自动整数因式分解，在RSA中，当P、Q的取值差异过大或过于相近时，使用yafu可以快速的把N分解出P、Q的值。</p>
+<p>打开cmd，进入yafu所在路径，输入yafu-64的命令，进入yafu工作阶段。输入factor(N的值)</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/3.jpg" alt=""></p>
+<p>这样我们就得到了P=258631601377848992211685134376492365269</p>
+<p>​                             Q=286924040788547268861394901519826758027</p>
+</li>
+<li><p>用python生成.pem密钥文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line">arsa=RSA.generate(<span class="number">1024</span>)</span><br><span class="line">arsa.p=<span class="number">258631601377848992211685134376492365269</span></span><br><span class="line">arsa.q=<span class="number">286924040788547268861394901519826758027</span></span><br><span class="line">arsa.e=<span class="number">65537</span></span><br><span class="line">arsa.n=arsa.p*arsa.q</span><br><span class="line">Fn=long((arsa.p<span class="number">-1</span>)*(arsa.q<span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#此处原理e*d=Fn*i+1</span></span><br><span class="line">i=<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">True</span>):</span><br><span class="line">    x=(Fn*i)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>(x%arsa.e==<span class="number">0</span>):</span><br><span class="line">           arsa.d=x/arsa.e</span><br><span class="line">           <span class="keyword">break</span></span><br><span class="line">    i=i+<span class="number">1</span></span><br><span class="line">private=open(<span class="string">'private.pem'</span>,<span class="string">'w'</span>)</span><br><span class="line">private.write(arsa.exportKey())</span><br><span class="line">private.close()</span><br></pre></td></tr></table></figure>
+<p>得到解密文件后复制进虚拟机</p>
+</li>
+<li><p>在虚拟机终端输入openssl进入openssl。</p>
+<p>输入： rsautl -decrypt -in flag.enc(密文文件) -inkey private.pem(密钥文件)</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/4.jpg" alt=""></p>
+<p>获得明文。</p>
+</li>
+</ul>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2018 Double--R blog - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/PhotoSwipe/photoswipe.js"></script>
+  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+<script src="/scripts/main.js"></script>
+
+</body>
+</html>
