@@ -15,25 +15,26 @@
 
 
 
-<meta name="description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现">
+<meta name="description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客    什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出">
 <meta name="keywords" content="组会内容">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RPO漏洞学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/04/22/RPO/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现">
+<meta property="og:description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客    什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/28.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO5.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO4.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO3.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO6.png">
-<meta property="og:updated_time" content="2018-05-20T03:21:18.835Z">
+<meta property="og:updated_time" content="2018-07-21T05:33:46.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPO漏洞学习笔记">
-<meta name="twitter:description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客   什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出现">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/RPO/RPO5.png">
+<meta name="twitter:description" content="2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。 参考博客：  K0rz3n师傅的博客    什么是RPO：    RPO (Relative Path Overwrite)相对路径覆盖，作为一种相对新型的攻击方式,由 Gareth Heyes在2014年首次提出，利用的是nginx服务器、配置错误的Apache服务器和浏览器之间对URL解析出">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/28.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -81,7 +82,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: 
+        search: false
     }
 </script>
 
@@ -105,7 +106,7 @@
 <div class="intrude-less">
     <header id="header" class="inner">
         <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
+            <img src="/img/timg.jpg" class="animated zoomIn">
         </a>
         <hgroup>
           <h1 class="header-author"><a href="/">Double--R</a></h1>
@@ -179,11 +180,13 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" href="/1036460042@qq.com" title="Email"></a>
                             
-                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
                             
                                 <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa QQ" href="/1036460042" title="QQ"></a>
                             
                         </ul>
                     </nav>
@@ -192,7 +195,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
                     </div>
                 </section>
                 
@@ -203,7 +206,21 @@
                     
                       <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
                     
                       <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
                     
@@ -215,11 +232,15 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">菜的真实，只能学习</div>
                 </section>
                 
             </div>
         </div>
+		
+		<div style="position:absolute; bottom:120px left:auto; width:85%">
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=86 src="//music.163.com/outchain/player?type=2&id=29828423&auto=1&height=66"></iframe>
+		</div>
     </header>                
 </div>
     </div>
@@ -232,7 +253,7 @@
     <div class="intrude-less">
         <header id="header" class="inner">
             <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
+                <img src="/img/timg.jpg" class="animated zoomIn">
             </a>
             <hgroup>
               <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
@@ -257,11 +278,13 @@
             <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="/1036460042@qq.com" title="Email"></a>
                             
-                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
                             
                                 <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1036460042" title="QQ"></a>
                             
                         </ul>
             </nav>
@@ -312,6 +335,7 @@
         <p><strong>2018-4-21协会Web组会K0rz3n学长讲解了RPO漏洞，这里简单的记录一下我对RPO的理解。</strong></p>
 <p><strong>参考博客：</strong> </p>
 <p><a href="http://www.52bug.cn/%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF/4732.html" target="_blank" rel="noopener">K0rz3n师傅的博客</a></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/28.jpg" alt=""></p>
 <hr>
 <font color="0099ff"> 什么是RPO： </font>
 
@@ -409,7 +433,7 @@
         <p><span>本文标题:</span><a href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2018-04-22, 09:50:51</p>
-        <p><span>最后更新:</span>2018-05-20, 11:21:18</p>
+        <p><span>最后更新:</span>2018-07-21, 13:33:46</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/04/22/RPO/" title="RPO漏洞学习笔记">http://yoursite.com/2018/04/22/RPO/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/04/22/RPO/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -515,7 +539,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/22/Links/">常用链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/18/2018-15/">2018年大一下学期第15周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/2018-14/">2018年大一下学期第14周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/2018-13/">2018年大一下学期第13周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/SuCTF-Web-Homework/">SUCTF Web题homework 复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/WEB-OS/">命令执行漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/2018-12/">2018年大一下学期第12周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/2018-11/">2018年大一下学期第11周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/19/Ubuntu-Command/">Ubuntu-Command</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/ShiYanBa-EasySqli3/">实验吧CTF-简单的sql注入之3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/2018-10/">2018年大一下学期第十周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/11/PHP-Unseriablize/">php反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/2018-9/">2018年大一下学期第9周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/XSS2/">XSS学习笔记:反射型XSS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/05/XSS1/">XSS学习笔记:入门篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/02/Webfront4/">Web前端黑客技术揭秘第2章（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/2018-8/">2018年大一下学期第8周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/Webfront3/">Web前端黑客技术揭秘第2章（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/29/Webfront2/">Web前端黑客技术揭秘第2章（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/Webfront1/">Web前端黑客技术揭秘第1章</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/XueXijiHua/">近期的学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/Task/">第十一届全国大学生信息安全竞赛创新实践能力赛在线初赛赛前模拟测试（1/3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/RPO-wp/">K0rz3n师傅的RPO题目的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/SQL-3/">SQL学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/23/SQL-2/">SQL学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/2018-7/">2018年大一下学期第七周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/SQL-1/">SQL注入（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/XXE-Injection/">XXE Injection学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/Python-Selenium库/">Python Selenium库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Create/">博客创建</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/06/18/2018-15/">2018年大一下学期第15周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/2018-14/">2018年大一下学期第14周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/2018-13/">2018年大一下学期第13周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/SuCTF-Web-Homework/">SUCTF Web题homework 复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/WEB-OS/">命令执行漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/2018-12/">2018年大一下学期第12周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/2018-11/">2018年大一下学期第11周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/ShiYanBa-EasySqli3/">实验吧CTF-简单的sql注入之3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/2018-10/">2018年大一下学期第十周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/11/PHP-Unseriablize/">php反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/2018-9/">2018年大一下学期第9周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/XSS2/">XSS学习笔记:反射型XSS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/05/XSS1/">XSS学习笔记:入门篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/02/Webfront4/">Web前端黑客技术揭秘第2章（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/2018-8/">2018年大一下学期第8周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/Webfront3/">Web前端黑客技术揭秘第2章（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/29/Webfront2/">Web前端黑客技术揭秘第2章（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/Webfront1/">Web前端黑客技术揭秘第1章</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/XueXijiHua/">近期的学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/Task/">第十一届全国大学生信息安全竞赛创新实践能力赛在线初赛赛前模拟测试（1/3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/RPO-wp/">K0rz3n师傅的RPO题目的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/SQL-3/">SQL学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/23/SQL-2/">SQL学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/2018-7/">2018年大一下学期第七周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/SQL-1/">SQL注入（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/XXE-Injection/">XXE Injection学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/Python-Selenium库/">Python Selenium库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Create/">博客创建</a></li></ul>
 
 
 
@@ -529,7 +553,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2018 Double--R
+                2018 Double--R
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

