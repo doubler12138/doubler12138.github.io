@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bugku/welcome/7.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bugku/welcome/8.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bugku/welcome/9.jpg">
-<meta property="og:updated_time" content="2018-07-21T05:25:21.247Z">
+<meta property="og:updated_time" content="2018-07-23T01:29:27.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BugKuCTF-Web题 Welcome to bugkuctf Write Up">
 <meta name="twitter:description" content="pupil师傅出品，必属精品">
@@ -355,8 +355,7 @@
 <hr>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/13.jpg" alt=""></p>
 <a id="more"></a>
-<p><strong>第一部分：</strong></p>
-<ul>
+<h4 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h4><ul>
 <li><p>这一部分主要考察php伪协议。</p>
 <p>   进入题目界面，F12，给出了一部分源码。</p>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bugku/welcome/1.jpg" alt=""></p>
@@ -369,8 +368,7 @@
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bugku/welcome/4.jpg" alt=""></p>
 </li>
 </ul>
-<p><strong>第二部分：</strong></p>
-<ul>
+<h4 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h4><ul>
 <li><p>分析hint.php的源码，发现这一部分是toString的php反序列化。但是hint.php只有类，没有反序列话，于是用同样的方法去读index.php的源码</p>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/bugku/welcome/5.jpg" alt=""></p>
 <p>就看到了反序列化的内容了，触发条件都写了，我们只要把构造好的POC用password参数传进去就行了，注意这里要把file改成hint.php。构造POC的源码</p>
@@ -384,7 +382,8 @@
 <p>注释掉可还行</p>
 </li>
 </ul>
-
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=521503671&auto=1&height=66"></iframe></div>
       
     </div>
     
@@ -395,7 +394,7 @@
         <p><span>本文标题:</span><a href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2018-05-22, 21:47:39</p>
-        <p><span>最后更新:</span>2018-07-21, 13:25:21</p>
+        <p><span>最后更新:</span>2018-07-23, 09:29:27</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/" title="BugKuCTF-Web题 Welcome to bugkuctf Write Up">http://yoursite.com/2018/05/22/BugKu-Web-Welcome-WriteUp/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/22/BugKu-Web-Welcome-WriteUp/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -431,7 +430,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一部分"><span class="toc-number">1.</span> <span class="toc-text">第一部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二部分"><span class="toc-number">2.</span> <span class="toc-text">第二部分</span></a></li></ol>
         
     </div>
     <style>
@@ -501,7 +500,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/21/SummerVacation1/">大一总结及暑期计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/18/2018-15/">2018年大一下学期第15周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/2018-14/">2018年大一下学期第14周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/2018-13/">2018年大一下学期第13周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/SuCTF-Web-Homework/">SUCTF Web题homework 复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/WEB-OS/">命令执行漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/2018-12/">2018年大一下学期第12周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/2018-11/">2018年大一下学期第11周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/ShiYanBa-EasySqli3/">实验吧CTF-简单的sql注入之3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/2018-10/">2018年大一下学期第十周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/11/PHP-Unseriablize/">php反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/2018-9/">2018年大一下学期第9周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/XSS2/">XSS学习笔记:反射型XSS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/05/XSS1/">XSS学习笔记:入门篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/02/Webfront4/">Web前端黑客技术揭秘第2章（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/2018-8/">2018年大一下学期第8周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/Webfront3/">Web前端黑客技术揭秘第2章（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/29/Webfront2/">Web前端黑客技术揭秘第2章（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/Webfront1/">Web前端黑客技术揭秘第1章</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/XueXijiHua/">近期的学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/Task/">第十一届全国大学生信息安全竞赛创新实践能力赛在线初赛赛前模拟测试（1/3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/RPO-wp/">K0rz3n师傅的RPO题目的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/SQL-3/">SQL学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/23/SQL-2/">SQL学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/2018-7/">2018年大一下学期第七周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/SQL-1/">SQL注入（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/XXE-Injection/">XXE Injection学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/Python-Selenium库/">Python Selenium库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Create/">博客创建</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/21/SummerVacation1/">大一总结及暑期计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/18/2018-15/">2018年大一下学期第15周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/2018-14/">2018年大一下学期第14周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/2018-13/">2018年大一下学期第13周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/SuCTF-Web-Homework/">SUCTF Web题homework 复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/2018-12/">2018年大一下学期第12周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/2018-11/">2018年大一下学期第11周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/ShiYanBa-EasySqli3/">实验吧CTF-简单的sql注入之3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/2018-10/">2018年大一下学期第十周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/11/PHP-Unseriablize/">php反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/2018-9/">2018年大一下学期第9周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/2018-8/">2018年大一下学期第8周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/RPO-wp/">K0rz3n师傅的RPO题目的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/2018-7/">2018年大一下学期第七周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Create/">博客创建</a></li></ul>
 
 
 

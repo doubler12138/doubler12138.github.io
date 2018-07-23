@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/10.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/11.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/12.jpg">
-<meta property="og:updated_time" content="2018-07-21T05:27:19.976Z">
+<meta property="og:updated_time" content="2018-07-23T01:37:21.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ISCC-2018 web题&quot;SQL注入的艺术&quot; write up">
 <meta name="twitter:description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
@@ -322,7 +322,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">719字</span>
+			<span class="post-count">715字</span>
 		</span>
 	</span>
 	
@@ -358,8 +358,7 @@
 <hr>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg" alt="Alt text"></p>
 <a id="more"></a>
-<p><strong>首先，看一下题目界面：</strong></p>
-<ul>
+<h4 id="第一步：看题"><a href="#第一步：看题" class="headerlink" title="第一步：看题"></a>第一步：看题</h4><ul>
 <li>进去以后有两个界面，一个首页，一个个人信息界面：</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/1.jpg" alt="Alt text"></p>
@@ -368,14 +367,12 @@
 <li>在个人信息界面看到?id=1，疑似注入点，单引号闭合一下，没有成功，单引号疑似被转义。极大可能是宽字节注入。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/3.jpg" alt="Alt text"></p>
-<p><strong>讲一下宽字节注入:</strong></p>
-<ul>
+<h4 id="讲一下宽字节注入"><a href="#讲一下宽字节注入" class="headerlink" title="讲一下宽字节注入"></a>讲一下宽字节注入</h4><ul>
 <li><p><a href="https://www.cnblogs.com/lcamry/articles/5625276.html" target="_blank" rel="noopener">sql宽字节注入详解</a></p>
 <p>   gbk编码中汉字占两个字节，mysql在使用gbk编码时会认为两个字符是一个汉字（前一个的ascii码值要大于128，才到汉字范围）。当单引号被转义后’就变成了\’,如果我们把单引号改成%df’，转义后就是%df\’,\的ascii码值是5c，gbk编码认为%df%5c是一个汉字，所以单引号逃出转义，我们就能闭合查询语句。注意：虽然gb2312也是宽字节中的一员，但gb2312编码的取值范围高位为0xA1~0xF7，低位为0xA~0xFE,\号不再范围中，所以无法被编码。</p>
 </li>
 </ul>
-<p><strong>尝试宽字节注入：</strong></p>
-<ul>
+<h4 id="尝试宽字节注入"><a href="#尝试宽字节注入" class="headerlink" title="尝试宽字节注入"></a>尝试宽字节注入</h4><ul>
 <li>构造payload：1 %df’ and 1=1 %23 和 1 %df’ and 1=2 %23看能否宽字节注入。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/4.jpg" alt="Alt text"></p>
@@ -383,19 +380,16 @@
 <ul>
 <li>1=1逻辑成立，查询成功，有显示内容。1=2逻辑不成立，查询失败，无显示内容。成功将语句插入到查询语句中，宽字节注入可行。</li>
 </ul>
-<p><strong>Order by 子句猜查询字段数：</strong></p>
-<ul>
+<h4 id="Order-by-子句猜查询字段数"><a href="#Order-by-子句猜查询字段数" class="headerlink" title="Order by 子句猜查询字段数"></a>Order by 子句猜查询字段数</h4><ul>
 <li>构造payload：1 %df’ order by n %23. n从1开始逐渐变大，当n为8时能正常显示，n为9时无显示。说明查询语句查询了8个字段。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/6.jpg" alt="Alt text"></p>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/7.jpg" alt="Alt text"></p>
-<p><strong>判断查询结果输出的位置：</strong></p>
-<ul>
+<h4 id="判断查询结果输出的位置"><a href="#判断查询结果输出的位置" class="headerlink" title="判断查询结果输出的位置"></a>判断查询结果输出的位置</h4><ul>
 <li>构造payload：-1 %df’ union select 1,2,3,4,5,6,7,8 %23. 2、7、4位的信息输出。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/8.jpg" alt="ALt text"></p>
-<p><strong>开始获得数据库信息：</strong></p>
-<ul>
+<h4 id="开始获得数据库信息"><a href="#开始获得数据库信息" class="headerlink" title="开始获得数据库信息"></a>开始获得数据库信息</h4><ul>
 <li>构造payload：-1 %df’ union select 1,database(),3,version(),5,6,7,8 %23 查询当前使用数据库名和版本信息。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/9.jpg" alt="ALt text"></p>
@@ -414,8 +408,9 @@
 <ul>
 <li>出flag,提交成功，题目解出。</li>
 </ul>
-<p><strong>总结：题目与一些盲注比起来还是比较简单的，没有什么过滤，也不用写注入脚本，手注就行了。做下来没有什么地方卡住的。还是要继续努力，下次做出一些难题来。</strong></p>
-
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>题目与一些盲注比起来还是比较简单的，没有什么过滤，也不用写注入脚本，手注就行了。做下来没有什么地方卡住的。还是要继续努力，下次做出一些难题来。</strong></p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=487190408&auto=1&height=66"></iframe></div>
       
     </div>
     
@@ -426,7 +421,7 @@
         <p><span>本文标题:</span><a href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题&#34;SQL注入的艺术&#34; write up</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2018-05-01, 19:33:08</p>
-        <p><span>最后更新:</span>2018-07-21, 13:27:19</p>
+        <p><span>最后更新:</span>2018-07-23, 09:37:21</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/05/01/ISCC-2018-web6/" title="ISCC-2018 web题&#34;SQL注入的艺术&#34; write up">http://yoursite.com/2018/05/01/ISCC-2018-web6/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/01/ISCC-2018-web6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -449,8 +444,8 @@
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/04/30/Webfront3/">
-                    Web前端黑客技术揭秘第2章（2）
+                <a href="/2018/04/27/BugKu-Login3/">
+                    BugKuCTF-Login3的Write Up
                 </a>
             </div>
         
@@ -462,7 +457,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一步：看题"><span class="toc-number">1.</span> <span class="toc-text">第一步：看题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#讲一下宽字节注入"><span class="toc-number">2.</span> <span class="toc-text">讲一下宽字节注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#尝试宽字节注入"><span class="toc-number">3.</span> <span class="toc-text">尝试宽字节注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Order-by-子句猜查询字段数"><span class="toc-number">4.</span> <span class="toc-text">Order by 子句猜查询字段数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#判断查询结果输出的位置"><span class="toc-number">5.</span> <span class="toc-text">判断查询结果输出的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始获得数据库信息"><span class="toc-number">6.</span> <span class="toc-text">开始获得数据库信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
         
     </div>
     <style>
@@ -526,13 +521,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/04/30/Webfront3/" title="下一篇: Web前端黑客技术揭秘第2章（2）">
+            <a href="/2018/04/27/BugKu-Login3/" title="下一篇: BugKuCTF-Login3的Write Up">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/21/SummerVacation1/">大一总结及暑期计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/18/2018-15/">2018年大一下学期第15周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/2018-14/">2018年大一下学期第14周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/2018-13/">2018年大一下学期第13周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/SuCTF-Web-Homework/">SUCTF Web题homework 复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/WEB-OS/">命令执行漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/2018-12/">2018年大一下学期第12周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/2018-11/">2018年大一下学期第11周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/ShiYanBa-EasySqli3/">实验吧CTF-简单的sql注入之3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/2018-10/">2018年大一下学期第十周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/11/PHP-Unseriablize/">php反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/2018-9/">2018年大一下学期第9周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/XSS2/">XSS学习笔记:反射型XSS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/05/XSS1/">XSS学习笔记:入门篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/02/Webfront4/">Web前端黑客技术揭秘第2章（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/2018-8/">2018年大一下学期第8周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/Webfront3/">Web前端黑客技术揭秘第2章（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/29/Webfront2/">Web前端黑客技术揭秘第2章（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/28/Webfront1/">Web前端黑客技术揭秘第1章</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/XueXijiHua/">近期的学习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/Task/">第十一届全国大学生信息安全竞赛创新实践能力赛在线初赛赛前模拟测试（1/3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/RPO-wp/">K0rz3n师傅的RPO题目的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/SQL-3/">SQL学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/23/SQL-2/">SQL学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/2018-7/">2018年大一下学期第七周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/SQL-1/">SQL注入（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/XXE-Injection/">XXE Injection学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/Python-Selenium库/">Python Selenium库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Create/">博客创建</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/21/SummerVacation1/">大一总结及暑期计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/18/2018-15/">2018年大一下学期第15周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/2018-14/">2018年大一下学期第14周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/2018-13/">2018年大一下学期第13周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/30/SuCTF-Web-Homework/">SUCTF Web题homework 复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/27/2018-12/">2018年大一下学期第12周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/2018-11/">2018年大一下学期第11周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/15/ShiYanBa-EasySqli3/">实验吧CTF-简单的sql注入之3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/2018-10/">2018年大一下学期第十周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/11/PHP-Unseriablize/">php反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/2018-9/">2018年大一下学期第9周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/2018-8/">2018年大一下学期第8周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/RPO-wp/">K0rz3n师傅的RPO题目的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/2018-7/">2018年大一下学期第七周总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/22/RPO/">RPO漏洞学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/21/Create/">博客创建</a></li></ul>
 
 
 
