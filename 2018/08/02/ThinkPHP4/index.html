@@ -15,22 +15,22 @@
 
 
 
-<meta name="description" content="实验班考试前突击MISC方向，刷一下南邮的MISC题">
-<meta name="keywords" content="CTF-WriteUp">
+<meta name="description" content="前言 接上篇博客，继续学习ThinkPHP的控制器部分">
+<meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="南京邮电大学网络攻防训练平台MISC题Write-Up">
-<meta property="og:url" content="http://yoursite.com/2018/05/22/NanYouCTF-MISC-WriteUp/index.html">
+<meta property="og:title" content="ThinkPHP框架学习--控制器（二）">
+<meta property="og:url" content="http://yoursite.com/2018/08/02/ThinkPHP4/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="实验班考试前突击MISC方向，刷一下南邮的MISC题">
+<meta property="og:description" content="前言 接上篇博客，继续学习ThinkPHP的控制器部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/24.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/62.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/63.jpg">
-<meta property="og:updated_time" content="2018-07-23T02:02:45.815Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/45.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/16.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/17.jpg">
+<meta property="og:updated_time" content="2018-08-02T15:58:36.593Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="南京邮电大学网络攻防训练平台MISC题Write-Up">
-<meta name="twitter:description" content="实验班考试前突击MISC方向，刷一下南邮的MISC题">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/24.jpg">
+<meta name="twitter:title" content="ThinkPHP框架学习--控制器（二）">
+<meta name="twitter:description" content="前言 接上篇博客，继续学习ThinkPHP的控制器部分">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/45.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -62,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>南京邮电大学网络攻防训练平台MISC题Write-Up | Double--R blog</title>
+<title>ThinkPHP框架学习--控制器（二） | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -288,11 +288,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-NanYouCTF-MISC-WriteUp" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ThinkPHP4" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/05/22/NanYouCTF-MISC-WriteUp/" class="article-date">
-      <time datetime="2018-05-22T11:43:30.000Z" itemprop="datePublished">2018-05-22</time>
+      <a href="/2018/08/02/ThinkPHP4/" class="article-date">
+      <time datetime="2018-08-02T02:10:41.000Z" itemprop="datePublished">2018-08-02</time>
 </a>
 
 
@@ -307,7 +307,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      南京邮电大学网络攻防训练平台MISC题Write-Up
+      ThinkPHP框架学习--控制器（二）
     </h1>
   
 
@@ -316,7 +316,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">999字</span>
+			<span class="post-count">1,114字</span>
 		</span>
 	</span>
 	
@@ -325,7 +325,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">4分</span>
+			<span class="post-count">5分</span>
 		</span>
 	</span>
 </div>
@@ -338,7 +338,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -348,95 +348,48 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>实验班考试前突击MISC方向，刷一下南邮的MISC题</strong></p>
+        <p><strong>前言</strong></p>
+<p>接上篇博客，继续学习ThinkPHP的控制器部分</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/24.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/45.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="图种："><a href="#图种：" class="headerlink" title="图种："></a><strong>图种：</strong></h4><ul>
-<li><p>一张gif图，开虚拟机foremost一下，出另外一张gif图，最后一句话首字母</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/62.jpg" alt=""></p>
-</li>
-</ul>
-<h4 id="丘比龙De女神："><a href="#丘比龙De女神：" class="headerlink" title="丘比龙De女神："></a><strong>丘比龙De女神：</strong></h4><ul>
-<li><p>winhex打开，发现图片藏了个压缩包，把内容复制出来，加zip的头，解压密码love,出图片，查看图片的MD5值就行了</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/63.jpg" alt=""></p>
-</li>
-</ul>
 <hr>
-<h4 id="MISC基础知识："><a href="#MISC基础知识：" class="headerlink" title="MISC基础知识："></a><strong>MISC基础知识：</strong></h4><ul>
-<li><p><strong>各种图片类型的格式：</strong></p>
-<ul>
-<li><p>JPG文件格式：</p>
-<p>JPG = “段” + 经过压缩编码的图像数据。段 = 段标识 + 段类型 + 段长度 + 段内容（其中文件头和文件尾属于没有段长度和段内容的特殊段）</p>
-<p>段标识是一种固定的符号，段的类型有30种，其中十种是每个JPG 图片中必须存在的：</p>
-<p>1.D8—-文件头    2.D9—-文件尾    3.FE—-注释<br>4.C0—-帧开始    5.C1—-帧结束    6.C4—-定义Huffman表    7.DA—-扫描行开始    8.DB—-定义量化表    9.DD—-定义重新开始间隔    10.E0—-敌营交换格式和图像识别信息</p>
-<p>因此，一般的JPG格式的图片文件头为FF D8，文件尾为FF D9.</p>
-<p>  PNG文件格式：</p>
-<p>PNG文件 =  PNG标识  +  数据块   + 数据块  + ……  + 数据块（其中数据块的个数最少是4）</p>
-<p>PNG标识是固定的，以十六进制表示为：【89  50  4E  47  0D  0A  1A  0A】，对应的符号为：【 ‰  P  N  G  .  .  .  . 】</p>
-<p>数据块分析如下：</p>
-<p>PNG文件 -  PNG标识  =   IHDR  + 可选数据块  +  PLTE  +  可选数据块  +  IDAT  +  可选数据块  +  IEND </p>
-<p>分别说明如下：</p>
-<p>【1】IHDR数据块，文件头数据块，在一个PNG文件里只能有一个。</p>
-<p>【2】PLTE数据块，调色板数据块，它仅与索引彩色图像有关，其中，‘索引图像’是指–一种把像素值直接作为RGB调色板下标的图像。</p>
-<p>【3】IDAT数据块，图像数据块，存储实际的图像数据，在数据流中包含多个连续顺序的图像数据块。</p>
-<p>【4】IEND数据块，图像结束数据块，表示–数据流已结束，放在文件的末尾。</p>
-<p>以上的数据块都是以自己的名字作为开头来控制一段数据。其中，结尾数据块IEND的内容固定：</p>
-<p>【00  00  00  00  49  45  4E  44  AE  42  60  82】，对应的符号如下：</p>
-<p>【.   .    .    .   I   E   N   D  】（后四位为CRC校验码）</p>
-<p>  GIF文件格式：</p>
-<p>文件的单位是数据块，文件的结构如下：</p>
-<p>GIF文件  =  文件头  +  GIF数据流  +  文件结束块</p>
-<p>GIF数据流  =  控制块  +   成像块   +  特殊用途块</p>
-<p>文件头大小为6个字节，而且【文件头  =  标识符（3字节） +  版本（3字节）】，其中，标识符为“GIF”，版本一般是“87a”或者“89a”。</p>
-<p>文件结束块是一个单字节的数据块，它指示数据流的结束，值为“0x3B”，符号是“；”。</p>
-<p>注意：GIF文件中的每个数据块都有一个块尾记录，大小为1个字节，同样也是“0x3B”。</p>
-<p>  zip文件格式：</p>
-<p>50 4B 01 02 核心目录文件header标识</p>
-<p>50 4B 03 04 文件头标识</p>
-<p>50 4B 05 06 核心目录结束标记</p>
-<p><strong>常见题型和解法：</strong></p>
-<p>  查看图片基本信息：</p>
-<p>1.右键查看图片属性，检查图片简介、备注中是否有FLAG</p>
-<p>2.winhex打开，搜索</p>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>*    多图层：
-
-    1.stegsolve，查看各图层
-
-    2.LSB低位隐写，0、1、2位
-
-
-*    复合文件：
-
-    1.后缀改成zip或rar解压缩
-
-    2.foremost分离，命令：foremost 1.jpg
-
-    3.winhex打开找到第一张图尾部，把第二张图的头加一下，分离
-
-*    改图片高度：
-
-    1.PNG文件，第二行第六列是高度位，改大就行
-
-    2.其他格式图片，可以看图片属性，得到宽高值，转16进制数，搜索更改
-
-*    双图：
-
-    1.stegslove的image combiner一下
-
-    2.盲水印，提取命令：python bwm.py decode 原图 有盲水印的图 保存水印的图
-
-*    图片的MD5值：
-
-    cmd命令：certutil -hashfile 文件 MD5
-</code></pre><hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=167876&auto=1&height=66"></iframe></div>
-
-
+<h2 id="重定向和页面跳转"><a href="#重定向和页面跳转" class="headerlink" title="重定向和页面跳转"></a>重定向和页面跳转</h2><p><strong>重定向</strong></p>
+<p>ThinkPHP重定向的方法名为redirect，该方法是Controller的成员方法，需要在控制器中才能调用。</p>
+<p>编辑<code>Application/Home/Controller/IndexController.class.php</code>，内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Home</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Think</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">indexAction</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;redirect(<span class="string">'login'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">loginAction</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"这是登陆页"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/16.jpg" alt=""></p>
+<p>redirect的第一个参数为URL地址表达式，第二参数为URL参数，第三个参数为延迟时间，第四个参数为提示消息。</p>
+<p>此外ThinkPHP还内置了一个redirect函数，该函数接收三个参数，第一个参数为URL地址，第二个参数为延迟时间，第三个参数为提示消息。</p>
+<p>两者的区别redirect函数的第一个参数是一个独立的URL地址，系统不会对其做任何处理，而控制器的redirect方法第一个参数是URL地址表达式，ThinkPHP会根据URL_MODEL生成相应的URL。</p>
+<p><strong>页面跳转</strong></p>
+<p>ThinkPHP内置success和error方法实现页面跳转</p>
+<p>编辑<code>Application/Home/Controller/IndexController.class.php</code>，内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Home</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Think</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">indexAction</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;show(<span class="string">'&lt;style type="text/css"&gt;*&#123; padding: 0; margin: 0; &#125; div&#123; padding: 4px 48px;&#125; body&#123; background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px&#125; h1&#123; font-size: 100px; font-weight: normal; margin-bottom: 12px; &#125; p&#123; line-height: 1.8em; font-size: 36px &#125; a,a:hover&#123;color:blue;&#125;&lt;/style&gt;&lt;div style="padding: 24px 48px;"&gt; &lt;h1&gt;:)&lt;/h1&gt;&lt;p&gt;欢迎使用 &lt;b&gt;ThinkPHP&lt;/b&gt;！&lt;/p&gt;&lt;br/&gt;版本 V&#123;$Think.version&#125;&lt;/div&gt;&lt;script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"&gt;&lt;/script&gt;&lt;thinkad id="ad_55e75dfae343f5a1"&gt;&lt;/thinkad&gt;&lt;script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"&gt;&lt;/script&gt;'</span>,<span class="string">'utf-8'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">buyAction</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;success(<span class="string">'购买成功，3秒后跳转首页'</span>,U(<span class="string">'index'</span>),<span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/ThinkPHP/17.jpg" alt=""></p>
+<p>success和error方法的第一个参数表示提示信息，第二参数表示跳转地址（建议用U 方法生成），第三个参数是跳转时间。</p>
+<p>如果跳转地址为空，success默认跳转”$_SERVER[‘HTTP_REFERER’]”，error默认”javascript:history.back(-1)”。</p>
+<p>success的默认跳转延迟是1秒，error是3秒。</p>
+<p>和redirect方法不同的是，success和error方法都可以使用模板，而redirect方法只能输出字符床，success和error默认的模板文件地址为THINK_PATH.’Tpl/dispatch_jump.tpl’，success方法可以配置”TMPL_ACTION_SUCCESS”改变模板地址，error方法可以配置”TMPL_ACTION_ERROR”改变模板地址。</p>
+<h2 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h2><p>很多情况下，需要判断当前HTTP请求的方法，ThinkPHP内置了一些常量用来判断请求方法。ThinkPHP内置一些常量用来判断请求方法。形式：<code>IS_请求方法（GET、POST、PUT、DELETE、AJAX）</code>，都是布尔型。还有<code>REQUEST_METHOD</code>常量，字符串类型，表示当前请求方法。</p>
+<h2 id="读取输入"><a href="#读取输入" class="headerlink" title="读取输入"></a>读取输入</h2><p>ThinkPHP框架使用”I”函数进行变量的获取和过滤，变量定义如下：</p>
+<p><code>I(&#39;变量来源.变量名/修饰符&#39;,[&#39;默认值&#39;],[&#39;过滤方法或操作函数函数名&#39;],[&#39;额外数据源&#39;])</code></p>
+<p><strong>以POST为例：</strong><code>echo I(&#39;post.username&#39;); //等效于 echo $_POST[&#39;username&#39;];</code></p>
+<p><strong>默认值：</strong><code>echo I(&#39;post.username&#39;,&#39;admin&#39;);//如果$_POST[&#39;username&#39;]为空，则输出&#39;admin&#39;</code></p>
+<p><strong>过滤方法：</strong><code>echo I(&#39;post.username&#39;,&#39;&#39;,&#39;htmlspecialchars&#39;)；//等效于echo htmlspecialchars(empty($_POST[&#39;username&#39;])?&#39;&#39;:$_POST[&#39;username&#39;])</code></p>
+<p>I函数支持获取整个变量数组，如：I(‘post.’)，等效于$_POST。</p>
+<p>如果在调用I函数时没有指定过滤方法，系统会采用配置”DEFAULT_FILTER”的值（默认为htmlspecialchars）作为函数进行过滤，该参数支持多个过滤函数，例如：</p>
+<p><code>&quot;DEFAULT_FILTER&quot;=&gt;&quot;strip_tags,htmlspecialchars&quot;</code></p>
+<p>I(‘post.username’)等效于htmlspecialchars(strio_tags($_POST[‘username’]))，注意顺序。</p>
+<p>I函数的第三个参数如果传入的是函数名，则使用该函数对变量进行操作并返回操作结果（如果变量是数组，则使用array_map进行处理），否则调用PHP内置的filter_var方法进行处理，例如：I(‘post.email’,’’,FILTER_VALIDATE_EMAIL)等效于filter_var($_POST[‘email’],FILTER_VALIDATE_EMAIL)。</p>
+<p><strong>不进行过滤：</strong>I(‘post.content’,’’,false)</p>
+<p><strong>变量修饰符：</strong>s-强制转换为字符串；d-强制转换为整型；b-强制转换为布尔型；a-强制转换为数组；f-强制转换为浮点型</p>
+<h2 id="空操作"><a href="#空操作" class="headerlink" title="空操作"></a>空操作</h2><p>当ThinkPHP找不到请求的操作时，会执行”_empty”方法，利用该机制，可以是想错误页面和一些URL优化</p>
+<h2 id="空控制器"><a href="#空控制器" class="headerlink" title="空控制器"></a>空控制器</h2><p>当ThinkPHP查找补刀对应的控制器文件时，会尝试请求空控制器EmptyController，与空操作类似，也可以用该机制定制错误页面和URL优化。</p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29759733&auto=1&height=66"></iframe></div>
       
     </div>
     
@@ -444,13 +397,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/02/ThinkPHP4/">ThinkPHP框架学习--控制器（二）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-05-22, 19:43:30</p>
-        <p><span>最后更新:</span>2018-07-23, 10:02:45</p>
+        <p><span>发布时间:</span>2018-08-02, 10:10:41</p>
+        <p><span>最后更新:</span>2018-08-02, 23:58:36</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/05/22/NanYouCTF-MISC-WriteUp/" title="南京邮电大学网络攻防训练平台MISC题Write-Up">http://yoursite.com/2018/05/22/NanYouCTF-MISC-WriteUp/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/22/NanYouCTF-MISC-WriteUp/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/02/ThinkPHP4/" title="ThinkPHP框架学习--控制器（二）">http://yoursite.com/2018/08/02/ThinkPHP4/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/02/ThinkPHP4/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -462,16 +415,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">
-                    BugKuCTF-Web题 Welcome to bugkuctf Write Up
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/05/20/NanYouCTF-Web-WriteUp/">
-                    南京邮电大学网络攻防训练平台Web题Write-Up
+                <a href="/2018/07/31/ThinkPHP3/">
+                    ThinkPHP框架学习--控制器（一）
                 </a>
             </div>
         
@@ -483,7 +430,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#图种："><span class="toc-number">1.</span> <span class="toc-text">图种：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#丘比龙De女神："><span class="toc-number">2.</span> <span class="toc-text">丘比龙De女神：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MISC基础知识："><span class="toc-number">3.</span> <span class="toc-text">MISC基础知识：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#重定向和页面跳转"><span class="toc-number">1.</span> <span class="toc-text">重定向和页面跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP请求方法"><span class="toc-number">2.</span> <span class="toc-text">HTTP请求方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取输入"><span class="toc-number">3.</span> <span class="toc-text">读取输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#空操作"><span class="toc-number">4.</span> <span class="toc-text">空操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#空控制器"><span class="toc-number">5.</span> <span class="toc-text">空控制器</span></a></li></ol>
         
     </div>
     <style>
@@ -519,7 +466,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"南京邮电大学网络攻防训练平台MISC题Write-Up　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ThinkPHP框架学习--控制器（二）　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -539,15 +486,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/05/22/BugKu-Web-Welcome-WriteUp/" title="上一篇: BugKuCTF-Web题 Welcome to bugkuctf Write Up">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/05/20/NanYouCTF-Web-WriteUp/" title="下一篇: 南京邮电大学网络攻防训练平台Web题Write-Up">
+            <a href="/2018/07/31/ThinkPHP3/" title="下一篇: ThinkPHP框架学习--控制器（一）">
                 <i class="fa fa-angle-right"></i>
             </a>
         
