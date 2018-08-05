@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 最近几天开始审计DedeCMS，做一些已有漏洞的复现，看看能不能自己审个洞出来">
+<meta name="keywords" content="代码审计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DedeCMS代码审计Day1">
+<meta property="og:url" content="http://yoursite.com/2018/08/04/DedeCMS1/index.html">
+<meta property="og:site_name" content="Double--R blog">
+<meta property="og:description" content="前言 最近几天开始审计DedeCMS，做一些已有漏洞的复现，看看能不能自己审个洞出来">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/31.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/3.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/4.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/5.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/6.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/7.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/8.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/9.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/10.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/11.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/12.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/13.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/14.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/15.jpg">
+<meta property="og:updated_time" content="2018-08-05T05:54:58.829Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DedeCMS代码审计Day1">
+<meta name="twitter:description" content="前言 最近几天开始审计DedeCMS，做一些已有漏洞的复现，看看能不能自己审个洞出来">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/31.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Double--R blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>DedeCMS代码审计Day1 | Double--R blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/timg.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">菜的要死的Double--R</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP代码审计/">PHP代码审计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码审计/">代码审计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目/">项目</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/timg.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">菜的要死的Double--R</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-DedeCMS1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/04/DedeCMS1/" class="article-date">
+      <time datetime="2018-08-04T13:50:59.000Z" itemprop="datePublished">2018-08-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DedeCMS代码审计Day1
+    </h1>
+  
+
+		<div style="margin-top:20px; margin-left:3cm">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">1,584字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">6分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>最近几天开始审计DedeCMS，做一些已有漏洞的复现，看看能不能自己审个洞出来</p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/31.jpg" alt="Alt text"></p>
+<a id="more"></a>
+<hr>
+<h2 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><ul>
+<li>漏洞公布时间：2018.01.17</li>
+<li>影响版本：V5.7SP2</li>
+<li>修复时间：未定</li>
+<li>漏洞条件：开启会员注册的功能，保证会员能正常地注册，且会员空间能正常访问</li>
+</ul>
+<h2 id="漏洞说明"><a href="#漏洞说明" class="headerlink" title="漏洞说明"></a>漏洞说明</h2><p>DedeCMS对前台用户认证时采用的是通过cookie的验证方式，通过cookie中的DedeUserID和DedeUserID_ckMd5对当前用户的身份以及登陆状态进行验证。此漏洞的原因是将DedeUserID和DedeUserID__ckMd5伪造成为了其他用户的值，这样就导致伪造其他用户的Cookie而能够以其他的用户登录。 </p>
+<h2 id="审计过程"><a href="#审计过程" class="headerlink" title="审计过程"></a>审计过程</h2><p>这个漏洞是已有漏洞，下面阐述一下我的审计过程。</p>
+<h3 id="登陆验证"><a href="#登陆验证" class="headerlink" title="登陆验证"></a>登陆验证</h3><p>DedeCMS对会员管理的文件存放在<code>uploads/member</code>路径下，在该路径下的<code>index.php</code>文件的第25行，对登陆状态进行了判断</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/1.jpg" alt=""></p>
+<p>当<code>$cfg_ml-&gt;IsLogin()</code>为false时，加载<code>index-notlogin.htm</code>文件，否则加载会员登陆界面。我们追踪<code>IsLogin()</code>方法，看它是如何返回值的。</p>
+<p>追踪IsLogin()函数到<code>\uploads\include\memberlogin.class.php</code>文件中，看到了IsLogin方法函数的定义</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/2.jpg" alt=""></p>
+<p>当$this-&gt;M_ID有值时返回TRUE否则返回FALSE，所以我们想要进入登陆后的界面就要让$this-&gt;M_ID有值。追踪这个变量，看它如何获取值。</p>
+<p>在同一文件的<code>__construct</code>方法中给<code>$this-&gt;M_ID</code>复制了</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/3.jpg" alt=""></p>
+<p>我们先去追踪GetNum方法，它也在当前文件，作用就是对传入的参数进行一次操作，将参数做所有非数字的字符全都替换成空。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/4.jpg" alt=""></p>
+<p>我们再去追踪GetCookie函数，它在<code>\uploads\include\helpers\cookie.helper.php</code>文件中定义。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/5.jpg" alt=""></p>
+<p>分析一下这个函数，它先判断以传入参数为名的cookie和传入参数与<code>__ckMd5</code>拼接为名的cookie是否存在。从之前的函数调用传入的参数来看，也就是判断以<code>DedeUserID</code>和<code>DedeUserID__ckMd5</code>为键名的cookie值是否存在。如果存在则对两个值进行比较，具体代码就是这一行：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>($_COOKIE[$key.<span class="string">'__ckMd5'</span>]!=substr(md5($cfg_cookie_encode.$_COOKIE[$key]),<span class="number">0</span>,<span class="number">16</span>))</span><br></pre></td></tr></table></figure>
+<p>它将<code>$cfg_cookie_encode</code>的值和<code>DedeUserID</code>的cookie值进行拼接，然后进行md5加密，并截取它前16个字符与<code>DedeUserID__ckMd5</code>的cookie值进行比较，防止前台任意更改cookie。如果不同返回空，相同就返回<code>DedeUserID</code>的值，就登陆成功了。</p>
+<p>而这里的DedeUserID就是就是当前用户的ID，也就是数据库中<code>dede_member</code>表中的mid字段</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/6.jpg" alt=""></p>
+<p>所以我们只要知道目标账号的<code>mid（也就是DedeUserID）</code>和<code>DedeUserID__ckMd5</code>就能通过更改cookie登入目标账号。但是<code>$cfg_cookie_encode</code>的值是在系统安装时管理员设置的，我们并不知掉，所以我们并没有办法直接获取<code>DedeUserID__ckMd5</code>的值。这时候我们就需要去找一个漏洞触发点。</p>
+<h3 id="漏洞触发"><a href="#漏洞触发" class="headerlink" title="漏洞触发"></a>漏洞触发</h3><p>在<code>/uploads/member/index.php</code>文件，也就是会员登陆界面，还有一段代码用来登陆会员空间，也就是最大分支的else部分，这个分支语句判断了$uid参数是否为空，为空就进行登陆，非空就执行下列代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span>(DEDEMEMBER.<span class="string">'/inc/config_space.php'</span>);</span><br><span class="line"><span class="keyword">if</span>($action == <span class="string">''</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">include_once</span>(DEDEINC.<span class="string">"/channelunit.func.php"</span>);</span><br><span class="line">    $dpl = <span class="keyword">new</span> DedeTemplate();</span><br><span class="line">    $tplfile = DEDEMEMBER.<span class="string">"/space/&#123;$_vars['spacestyle']&#125;/index.htm"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//更新最近访客记录及站点统计记录</span></span><br><span class="line">    $vtime = time();</span><br><span class="line">    $last_vtime = GetCookie(<span class="string">'last_vtime'</span>);</span><br><span class="line">    $last_vid = GetCookie(<span class="string">'last_vid'</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($last_vtime))</span><br><span class="line">    &#123;</span><br><span class="line">        $last_vtime = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>($vtime - $last_vtime &gt; <span class="number">3600</span> || !preg_match(<span class="string">'#,'</span>.$uid.<span class="string">',#i'</span>, <span class="string">','</span>.$last_vid.<span class="string">','</span>) )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>($last_vid!=<span class="string">''</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            $last_vids = explode(<span class="string">','</span>,$last_vid);</span><br><span class="line">            $i = <span class="number">0</span>;</span><br><span class="line">            $last_vid = $uid;</span><br><span class="line">            <span class="keyword">foreach</span>($last_vids <span class="keyword">as</span> $lsid)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>($i&gt;<span class="number">10</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>($lsid != $uid)</span><br><span class="line">                &#123;</span><br><span class="line">                    $i++;</span><br><span class="line">                    $last_vid .= <span class="string">','</span>.$last_vid;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            $last_vid = $uid;</span><br><span class="line">        &#125;</span><br><span class="line">        PutCookie(<span class="string">'last_vtime'</span>, $vtime, <span class="number">3600</span>*<span class="number">24</span>, <span class="string">'/'</span>);</span><br><span class="line">        PutCookie(<span class="string">'last_vid'</span>, $last_vid, <span class="number">3600</span>*<span class="number">24</span>, <span class="string">'/'</span>);</span><br><span class="line">        <span class="keyword">if</span>($cfg_ml-&gt;IsLogin() &amp;&amp; $cfg_ml-&gt;M_LoginID != $uid)</span><br><span class="line">        &#123;</span><br><span class="line">            $vip = GetIP();</span><br><span class="line">            $arr = $dsql-&gt;GetOne(<span class="string">"SELECT * FROM `#@__member_vhistory` WHERE mid='&#123;$_vars['mid']&#125;' AND vid='&#123;$cfg_ml-&gt;M_ID&#125;' "</span>);</span><br><span class="line">            <span class="keyword">if</span>(is_array($arr))</span><br><span class="line">            &#123;</span><br><span class="line">                $dsql-&gt;ExecuteNoneQuery(<span class="string">"UPDATE `#@__member_vhistory` SET vip='$vip',vtime='$vtime',count=count+1 WHERE mid='&#123;$_vars['mid']&#125;' AND vid='&#123;$cfg_ml-&gt;M_ID&#125;' "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                $query = <span class="string">"INSERT INTO `#@__member_vhistory`(mid,loginid,vid,vloginid,count,vip,vtime)</span></span><br><span class="line"><span class="string">                         VALUES('&#123;$_vars['mid']&#125;','&#123;$_vars['userid']&#125;','&#123;$cfg_ml-&gt;M_ID&#125;','&#123;$cfg_ml-&gt;M_LoginID&#125;','1','$vip','$vtime'); "</span>;</span><br><span class="line">                $dsql-&gt;ExecuteNoneQuery($query);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $dsql-&gt;ExecuteNoneQuery(<span class="string">"UPDATE `#@__member_tj` SET homecount=homecount+1 WHERE mid='&#123;$_vars['mid']&#125;' "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $dpl-&gt;LoadTemplate($tplfile);</span><br><span class="line">    $dpl-&gt;display();</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">require_once</span>(DEDEMEMBER.<span class="string">'/inc/space_action.php'</span>);</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们分析一下几个关键点：</p>
+<p>当<code>$action</code>参数为空时，回去获取<code>last_vid</code>的cookie值</p>
+<p>当上次来访时间间隔过长时，或者匹配到<code>$uid</code>的值试，当<code>last_vid</code>为空时，它将<code>$uid</code>的值赋值给<code>$last_vid</code>，然后作为参数传入<code>PutCookie</code>方法中，让我们去追踪一下这个方法</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/7.jpg" alt=""></p>
+<p>这个方法的作用就是根据传进来的参数设置两个cookie，仔细看它第二个cookie值的设置方法是不是很熟悉。没错，它和<code>DedeUserID__ckMd5</code>的设置方法是一样的，所以我们可以用它的这个缺陷，获取我们想要的<code>DedeUserID__ckMd5</code>的值。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>我们已知admin的账号的mid为1，所以它的<code>DedeUserID</code>是1，但是<code>DedeUserID__ckMd5</code>的值我们是不知道的。这时候我们去注册一个正常的账号，用户名比如说是test1，aaaa22之类的，只要前面是字母，最后的数字是目标账号的mid值就行了。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/8.jpg" alt=""></p>
+<p>刚注册的账号还访问不了自己的会员空间</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/9.jpg" alt=""></p>
+<p>当我们的账号在后台过审，资料状态编程正常使用的时候</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/10.jpg" alt=""></p>
+<p>我们正常登陆自己的会员账号，清除本地cookie。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/11.jpg" alt=""></p>
+<p>然后访问自己的会员空间，这时cookie设置了，然后刷新，抓包，就能看到cookie值了</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/12.jpg" alt=""></p>
+<p>这时候last_vid=test1，last_vid_ckMd5的值是用同样的算法对test1处理后的值。</p>
+<p>我们退出登陆，清除本地cookie，重新登陆，这时候我们能看到它的<code>DedeUserID</code>和<code>DedeUserID__ckMd5</code>值是我们自己的账号。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/13.jpg" alt=""></p>
+<p>我们把这里的<code>DedeUserID</code>设置成test1，把<code>DedeUserID__ckMd5</code>设置成抓包获得last_vid_ckMd5的值.</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/14.jpg" alt=""></p>
+<p>我们重新刷新这个界面，就将登陆admin的账号。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/15.jpg" alt=""></p>
+<p>因为它们是同一个算法得出的，所以后台比较相等后返回test1，被GetNum函数处理后，将test全都替换成空，所以最后只剩下1，那我们就将登陆mid值为1的账号。利用这个漏洞我们可以进行任意会员账号的前台登陆。</p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=551591414&auto=1&height=66"></iframe></div>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/08/04/DedeCMS1/">DedeCMS代码审计Day1</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2018-08-04, 21:50:59</p>
+        <p><span>最后更新:</span>2018-08-05, 13:54:58</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/04/DedeCMS1/" title="DedeCMS代码审计Day1">http://yoursite.com/2018/08/04/DedeCMS1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/04/DedeCMS1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/08/03/ThinkPHP5/">
+                    ThinkPHP框架学习--模型（一）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞信息"><span class="toc-number">1.</span> <span class="toc-text">漏洞信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞说明"><span class="toc-number">2.</span> <span class="toc-text">漏洞说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#审计过程"><span class="toc-number">3.</span> <span class="toc-text">审计过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#登陆验证"><span class="toc-number">3.1.</span> <span class="toc-text">登陆验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#漏洞触发"><span class="toc-number">3.2.</span> <span class="toc-text">漏洞触发</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用"><span class="toc-number">4.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"DedeCMS代码审计Day1　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/08/03/ThinkPHP5/" title="下一篇: ThinkPHP框架学习--模型（一）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/DedeCMS1/">DedeCMS代码审计Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/03/ThinkPHP5/">ThinkPHP框架学习--模型（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/02/ThinkPHP4/">ThinkPHP框架学习--控制器（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/ThinkPHP3/">ThinkPHP框架学习--控制器（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/PHP-Audit-Labs-Day1/">代码审计Day1-in_array函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/29/OneThink/">OneThink1.0文件缓存漏洞分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/28/ThinkPHP2/">ThinkPHP框架学习--路由</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/26/ThinkPHP1/">ThinkPHP框架学习--配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/25/PHP-Anony/">PHP匿名函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/11/AWD1/">线下AWD模式的学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/01/MVC-1/">基于fastphp学习搭建MVC框架（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
