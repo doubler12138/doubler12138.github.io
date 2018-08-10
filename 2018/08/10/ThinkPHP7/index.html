@@ -15,21 +15,20 @@
 
 
 
-<meta name="description" content="前言 跟着红日安全的PHP-Audit-Labs项目学习代码审计，今天的内容是in_array函数的缺陷。">
-<meta name="keywords" content="PHP代码审计">
+<meta name="description" content="前言 ThinkPHP的视图学习笔记，内容较少。">
+<meta name="keywords" content="学习笔记，PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码审计Day1-in_array函数缺陷">
-<meta property="og:url" content="http://yoursite.com/2018/07/31/PHP-Audit-Labs-Day1/index.html">
+<meta property="og:title" content="ThinkPHP框架学习">
+<meta property="og:url" content="http://yoursite.com/2018/08/10/ThinkPHP7/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言 跟着红日安全的PHP-Audit-Labs项目学习代码审计，今天的内容是in_array函数的缺陷。">
+<meta property="og:description" content="前言 ThinkPHP的视图学习笔记，内容较少。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/34.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/TIM%E6%88%AA%E5%9B%BE20180731145653.jpg">
-<meta property="og:updated_time" content="2018-08-02T02:18:03.749Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/1.jpg">
+<meta property="og:updated_time" content="2018-08-10T04:40:58.848Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="代码审计Day1-in_array函数缺陷">
-<meta name="twitter:description" content="前言 跟着红日安全的PHP-Audit-Labs项目学习代码审计，今天的内容是in_array函数的缺陷。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/34.jpg">
+<meta name="twitter:title" content="ThinkPHP框架学习">
+<meta name="twitter:description" content="前言 ThinkPHP的视图学习笔记，内容较少。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/1.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>代码审计Day1-in_array函数缺陷 | Double--R blog</title>
+<title>ThinkPHP框架学习 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -287,11 +286,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="posts-ThinkPHP7" class="article article-type-posts" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/07/31/PHP-Audit-Labs-Day1/" class="article-date">
-      <time datetime="2018-07-31T05:48:07.000Z" itemprop="datePublished">2018-07-31</time>
+      <a href="/2018/08/10/ThinkPHP7/" class="article-date">
+      <time datetime="2018-08-10T01:57:43.000Z" itemprop="datePublished">2018-08-10</time>
 </a>
 
 
@@ -306,7 +305,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      代码审计Day1-in_array函数缺陷
+      ThinkPHP框架学习
     </h1>
   
 
@@ -315,7 +314,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">919字</span>
+			<span class="post-count">603字</span>
 		</span>
 	</span>
 	
@@ -324,7 +323,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">4分</span>
+			<span class="post-count">2分</span>
 		</span>
 	</span>
 </div>
@@ -337,7 +336,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP代码审计/">PHP代码审计</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记，PHP/">学习笔记，PHP</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -348,32 +347,43 @@
       
           
         <p><strong>前言</strong></p>
-<p>跟着红日安全的PHP-Audit-Labs项目学习代码审计，今天的内容是in_array函数的缺陷。</p>
+<p>ThinkPHP的视图学习笔记，内容较少。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/34.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/1.jpg" alt=""></p>
 <a id="more"></a>
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>先看下面这部分的代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Challenge</span></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> UPLOAD_DIRECTORY = <span class="string">'./solutions/'</span>;</span><br><span class="line">    <span class="keyword">private</span> $file;</span><br><span class="line">    <span class="keyword">private</span> $whitelist;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;whitelist = range(<span class="number">1</span>,<span class="number">24</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(in_array(<span class="keyword">$this</span>-&gt;file[<span class="string">'name'</span>],<span class="keyword">$this</span>-&gt;whitelist))&#123;</span><br><span class="line">            move_uploaded_file(</span><br><span class="line">            	<span class="keyword">$this</span>-&gt;file[<span class="string">'tmp_name'</span>],</span><br><span class="line">            	<span class="keyword">self</span>::UPLOAD_DIRECTORY . <span class="keyword">$this</span>-&gt;file[<span class="string">'name'</span>]</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$challenge = <span class="keyword">new</span> Challenge($_FILES[<span class="string">'solution'</span>]);</span><br></pre></td></tr></table></figure>
-<p><strong>漏洞解析：</strong></p>
-<p>这一段代码是一个任意文件上传漏洞，而导致这一漏洞的发生则是不安全的使用 <strong>in_array()</strong> 函数来检测上传的文件名，即上图中的第12行部分。由于该函数并未将第三个参数设置为 <strong>true</strong> ，这导致攻击者可以通过构造的文件名来绕过服务端的检测，例如文件名为 <strong>7shell.php</strong> 。因为PHP在使用 <strong>in_array()</strong> 函数判断时，会将 <strong>7shell.php</strong> 强制转换成数字7，而数字7在 <strong>range(1,24)</strong> 数组中，最终绕过 <strong>in_array()</strong> 函数判断，导致任意文件上传漏洞。 （这里之所以会发生强制类型转换，是因为目标数组中的元素为数字类型） </p>
-<p>下面是PHP手册对in_array()函数的定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">in_array:(PHP 4,PHP 5,PHP 7)</span><br><span class="line">功能：检查数组中是否存在某个值</span><br><span class="line">定义： bool in_array( mixed $needle , array $haystack [, bool $strict = FALSE ] )</span><br><span class="line"></span><br><span class="line">在 $haystack 中搜索 $needle ，如果第三个参数 $strict 的值为 TRUE ，则 in_array() 函数会进行强检查，检查 $needle 的类型是否和 $haystack 中的相同。如果找到 $haystack ，则返回 TRUE，否则返回 FALSE。</span><br></pre></td></tr></table></figure>
-<h2 id="预留题解法"><a href="#预留题解法" class="headerlink" title="预留题解法"></a>预留题解法</h2><p>作者在博客后面预留了一道CTF题.</p>
-<p><strong>题目代码：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'config.php'</span>;</span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password, $dbname);</span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"连接失败: "</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$sql = <span class="string">"SELECT COUNT(*) FROM users"</span>;</span><br><span class="line">$whitelist = <span class="keyword">array</span>();</span><br><span class="line">$result = $conn-&gt;query($sql);</span><br><span class="line"><span class="keyword">if</span>($result-&gt;num_rows &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    $row = $result-&gt;fetch_assoc();</span><br><span class="line">    $whitelist = range(<span class="number">1</span>, $row[<span class="string">'COUNT(*)'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$id = stop_hack($_GET[<span class="string">'id'</span>]);</span><br><span class="line">$sql = <span class="string">"SELECT * FROM users WHERE id=$id"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!in_array($id, $whitelist)) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"id $id is not in whitelist."</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$result = $conn-&gt;query($sql);</span><br><span class="line"><span class="keyword">if</span>($result-&gt;num_rows &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    $row = $result-&gt;fetch_assoc();</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;center&gt;&lt;table border='1'&gt;"</span>;</span><br><span class="line">    <span class="keyword">foreach</span> ($row <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;tr&gt;&lt;td&gt;&lt;center&gt;$key&lt;/center&gt;&lt;/td&gt;&lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;td&gt;&lt;center&gt;$value&lt;/center&gt;&lt;/td&gt;&lt;/tr&gt;&lt;br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;/table&gt;&lt;/center&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>($conn-&gt;error);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>配置文件：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//config.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">""</span>;</span><br><span class="line">$password = <span class="string">""</span>;</span><br><span class="line">$dbname = <span class="string">"day1"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stop_hack</span><span class="params">($value)</span></span>&#123;</span><br><span class="line">    $pattern = <span class="string">"insert|delete|or|concat|concat_ws|group_concat|join|floor|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile|dumpfile|sub|hex|file_put_contents|fwrite|curl|system|eval"</span>;</span><br><span class="line">    $back_list = explode(<span class="string">"|"</span>,$pattern);</span><br><span class="line">    <span class="keyword">foreach</span>($back_list <span class="keyword">as</span> $hack)&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">"/$hack/i"</span>, $value))</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"$hack detected!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>MySQL搭建命令：</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>代码分析：</strong></p>
-<p>首先查询了user表中有几条记录,$whitelist为一个数组，里面的内容就是1，2，3，4等到记录数，但是在使用in_array判断传入参数是否在$whitelist中时，第三个参数没有设置为True，所以存在利用缺陷，可以实行SQL注入。在看一下config.php文件中的stop_hack函数，看它对哪些关键字进行了过滤就可以写注入语句了。</p>
-<p>因为union被过滤掉了，所以我们采用updatexml报错注入，当updatexml中存在特殊字符或字母时，会发生报错 ，报错信息为特殊字符、字母之后的内容。但是它过滤了字符串拼接函数，所以我们需要用其它方法将特殊字符和查询结果拼接起来，这里我们使用SQL里面的make_set，举个例子：</p>
-<p>make_set(3,’a’,’b’)的结果是’a,b’。</p>
-<p>所以我们最后的注入语句是<code>?id=1 and (select updatexml(1,make_set(3,&#39;~&#39;,(select flag from flag)),1))</code></p>
-<p>结果：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/TIM%E6%88%AA%E5%9B%BE20180731145653.jpg" alt=""></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29572804&auto=1&height=66"></iframe></div>
+<h2 id="模板定义"><a href="#模板定义" class="headerlink" title="模板定义"></a>模板定义</h2><p>每个模块的模板文件是独立的，默认的模板文件定义规则是：</p>
+<p><code>视图目录/[模板主题]/控制器名/操作名+视图后缀</code></p>
+<p>默认的视图目录是模块的View目录，框架默认的视图后缀为”.html”，系统默认不启用模块主题功能。</p>
+<p>按照该规则，可以推断Home模块下User控制器add方法对应的模块文件路径应为：</p>
+<p><code>Application/Home/View/User/add.html</code></p>
+<p>如果项目的视图目录不是View，可以通过以下配置更改目录：</p>
+<p><code>&#39;DEFAULT_V_LAYER&#39; =&gt; &#39;Template&#39;，//设置默认的视图层名称</code></p>
+<p>模板目录就成了<code>Application/Home/Template</code></p>
+<p>如果需要更改模板文件的后缀，可以通过配置”TMPL_TEMPLATE_SUFFIX”，例如：</p>
+<p><code>&#39;TMPL_TEMPLATE_SUFFIX&#39; =&gt; &#39;.tpl&#39;</code></p>
+<p>模板文件的后缀就成了”.tpl”</p>
+<h2 id="模板主题"><a href="#模板主题" class="headerlink" title="模板主题"></a>模板主题</h2><p>如果某个模板需要支持多个主题的话，可以使用模板主题功能。配置”DEFAULT_THEME”即可，例如：</p>
+<p><code>&#39;DEFAULT_THEME&#39; =&gt; &#39;main&#39;</code></p>
+<p>启用模块主题之后，模块文件的目录为：</p>
+<p><code>Application/Home/View/default/User/add.html</code></p>
+<p>如果需要动态改变模块主题，可以在视图渲染之前，调用一下方法：</p>
+<p><code>$this-&gt;theme(&#39;blue&#39;)-&gt;display();</code></p>
+<h2 id="模板赋值"><a href="#模板赋值" class="headerlink" title="模板赋值"></a>模板赋值</h2><p>如果要在模板中输出变量，必须在控制器中把变量传递个模板，系统提供了assign方法对模板变量赋值，无论何种变量都同一使用assign赋值。</p>
+<p><code>$this-&gt;assign(&#39;data&#39;,$data)</code></p>
+<p>如果需要赋值多个变量，可以采用数组的形式进行赋值操作。</p>
+<h2 id="模板渲染"><a href="#模板渲染" class="headerlink" title="模板渲染"></a>模板渲染</h2><p>模板定义后就可以渲染模板输出，系统也支持直接渲染内容输出，模板复制必须在模板渲染之前操作，渲染方法名为”display”。</p>
+<p>方法原型如下：</p>
+<p><code>display([模板文件路径],[字符编码],[mime类型])</code></p>
+<p>”模板文件路径“支持以下写法：</p>
+<ul>
+<li><code>无参数</code>：系统自动定位模板文件，默认情况下是”模块名/View/控制器方法/方法名.html”</li>
+<li><code>[模块@][控制器:][操作]</code>：如$this-&gt;display(‘User:login’)，系统将定位到”模块名/View/User/login.html”</li>
+<li>完整模块文件路径</li>
+</ul>
+<p>如果不需要直接输出可以使用”fetch”方法，该方法与”display”方法的区别是”display”输出模板内容，”fetch”不输出。可以利用该特性进行“页面缓存”功能的开发。</p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=457695432&auto=1&height=66"></iframe></div>
       
     </div>
     
@@ -381,13 +391,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/07/31/PHP-Audit-Labs-Day1/">代码审计Day1-in_array函数缺陷</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/10/ThinkPHP7/">ThinkPHP框架学习</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-07-31, 13:48:07</p>
-        <p><span>最后更新:</span>2018-08-02, 10:18:03</p>
+        <p><span>发布时间:</span>2018-08-10, 09:57:43</p>
+        <p><span>最后更新:</span>2018-08-10, 12:40:58</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/07/31/PHP-Audit-Labs-Day1/" title="代码审计Day1-in_array函数缺陷">http://yoursite.com/2018/07/31/PHP-Audit-Labs-Day1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/07/31/PHP-Audit-Labs-Day1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/10/ThinkPHP7/" title="ThinkPHP框架学习">http://yoursite.com/2018/08/10/ThinkPHP7/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/10/ThinkPHP7/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -399,16 +409,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/07/31/ThinkPHP3/">
-                    ThinkPHP框架学习--控制器（一）
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/07/29/OneThink/">
-                    OneThink1.0文件缓存漏洞分析
+                <a href="/2018/08/06/ThinkPHP6/">
+                    ThinkPHP框架学习--模型（二）
                 </a>
             </div>
         
@@ -420,7 +424,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码分析"><span class="toc-number">1.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预留题解法"><span class="toc-number">2.</span> <span class="toc-text">预留题解法</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模板定义"><span class="toc-number">1.</span> <span class="toc-text">模板定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板主题"><span class="toc-number">2.</span> <span class="toc-text">模板主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板赋值"><span class="toc-number">3.</span> <span class="toc-text">模板赋值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板渲染"><span class="toc-number">4.</span> <span class="toc-text">模板渲染</span></a></li></ol>
         
     </div>
     <style>
@@ -456,7 +460,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"代码审计Day1-in_array函数缺陷　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ThinkPHP框架学习　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -476,15 +480,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/07/31/ThinkPHP3/" title="上一篇: ThinkPHP框架学习--控制器（一）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/07/29/OneThink/" title="下一篇: OneThink1.0文件缓存漏洞分析">
+            <a href="/2018/08/06/ThinkPHP6/" title="下一篇: ThinkPHP框架学习--模型（二）">
                 <i class="fa fa-angle-right"></i>
             </a>
         
