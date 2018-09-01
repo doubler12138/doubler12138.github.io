@@ -15,21 +15,32 @@
 
 
 
-<meta name="description" content="前言 跟着红日安全的PHP-Audit-Labs项目学习代码审计，今天的内容是in_array函数的缺陷。">
-<meta name="keywords" content="代码审计,PHP">
+<meta name="description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
+<meta name="keywords" content="代码审计,CMS漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码审计Day1-in_array函数缺陷">
-<meta property="og:url" content="http://yoursite.com/2018/07/31/PHP-Audit-Labs-Day1/index.html">
+<meta property="og:title" content="DedeCMS代码审计Day3">
+<meta property="og:url" content="http://yoursite.com/2018/09/01/DedeCMS3/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言 跟着红日安全的PHP-Audit-Labs项目学习代码审计，今天的内容是in_array函数的缺陷。">
+<meta property="og:description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/34.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/TIM%E6%88%AA%E5%9B%BE20180731145653.jpg">
-<meta property="og:updated_time" content="2018-08-10T04:48:14.601Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/30.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/31.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/32.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/33.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/26.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/27.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/28.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/29.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/34.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/35.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/36.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/37.jpg">
+<meta property="og:updated_time" content="2018-09-01T12:43:00.196Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="代码审计Day1-in_array函数缺陷">
-<meta name="twitter:description" content="前言 跟着红日安全的PHP-Audit-Labs项目学习代码审计，今天的内容是in_array函数的缺陷。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/34.jpg">
+<meta name="twitter:title" content="DedeCMS代码审计Day3">
+<meta name="twitter:description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +72,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>代码审计Day1-in_array函数缺陷 | Double--R blog</title>
+<title>DedeCMS代码审计Day3 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -293,11 +304,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-DedeCMS3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/07/31/PHP-Audit-Labs-Day1/" class="article-date">
-      <time datetime="2018-07-31T05:48:07.000Z" itemprop="datePublished">2018-07-31</time>
+      <a href="/2018/09/01/DedeCMS3/" class="article-date">
+      <time datetime="2018-09-01T11:39:15.000Z" itemprop="datePublished">2018-09-01</time>
 </a>
 
 
@@ -312,7 +323,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      代码审计Day1-in_array函数缺陷
+      DedeCMS代码审计Day3
     </h1>
   
 
@@ -321,7 +332,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">919字</span>
+			<span class="post-count">836字</span>
 		</span>
 	</span>
 	
@@ -330,7 +341,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">4分</span>
+			<span class="post-count">3分</span>
 		</span>
 	</span>
 </div>
@@ -343,7 +354,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -354,32 +365,45 @@
       
           
         <p><strong>前言</strong></p>
-<p>跟着红日安全的PHP-Audit-Labs项目学习代码审计，今天的内容是in_array函数的缺陷。</p>
+<p>今天复现一个最重要的漏洞，管理员后台密码修改</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/34.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg" alt=""></p>
 <a id="more"></a>
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>先看下面这部分的代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Challenge</span></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> UPLOAD_DIRECTORY = <span class="string">'./solutions/'</span>;</span><br><span class="line">    <span class="keyword">private</span> $file;</span><br><span class="line">    <span class="keyword">private</span> $whitelist;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;whitelist = range(<span class="number">1</span>,<span class="number">24</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(in_array(<span class="keyword">$this</span>-&gt;file[<span class="string">'name'</span>],<span class="keyword">$this</span>-&gt;whitelist))&#123;</span><br><span class="line">            move_uploaded_file(</span><br><span class="line">            	<span class="keyword">$this</span>-&gt;file[<span class="string">'tmp_name'</span>],</span><br><span class="line">            	<span class="keyword">self</span>::UPLOAD_DIRECTORY . <span class="keyword">$this</span>-&gt;file[<span class="string">'name'</span>]</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$challenge = <span class="keyword">new</span> Challenge($_FILES[<span class="string">'solution'</span>]);</span><br></pre></td></tr></table></figure>
-<p><strong>漏洞解析：</strong></p>
-<p>这一段代码是一个任意文件上传漏洞，而导致这一漏洞的发生则是不安全的使用 <strong>in_array()</strong> 函数来检测上传的文件名，即上图中的第12行部分。由于该函数并未将第三个参数设置为 <strong>true</strong> ，这导致攻击者可以通过构造的文件名来绕过服务端的检测，例如文件名为 <strong>7shell.php</strong> 。因为PHP在使用 <strong>in_array()</strong> 函数判断时，会将 <strong>7shell.php</strong> 强制转换成数字7，而数字7在 <strong>range(1,24)</strong> 数组中，最终绕过 <strong>in_array()</strong> 函数判断，导致任意文件上传漏洞。 （这里之所以会发生强制类型转换，是因为目标数组中的元素为数字类型） </p>
-<p>下面是PHP手册对in_array()函数的定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">in_array:(PHP 4,PHP 5,PHP 7)</span><br><span class="line">功能：检查数组中是否存在某个值</span><br><span class="line">定义： bool in_array( mixed $needle , array $haystack [, bool $strict = FALSE ] )</span><br><span class="line"></span><br><span class="line">在 $haystack 中搜索 $needle ，如果第三个参数 $strict 的值为 TRUE ，则 in_array() 函数会进行强检查，检查 $needle 的类型是否和 $haystack 中的相同。如果找到 $haystack ，则返回 TRUE，否则返回 FALSE。</span><br></pre></td></tr></table></figure>
-<h2 id="预留题解法"><a href="#预留题解法" class="headerlink" title="预留题解法"></a>预留题解法</h2><p>作者在博客后面预留了一道CTF题.</p>
-<p><strong>题目代码：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'config.php'</span>;</span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password, $dbname);</span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"连接失败: "</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$sql = <span class="string">"SELECT COUNT(*) FROM users"</span>;</span><br><span class="line">$whitelist = <span class="keyword">array</span>();</span><br><span class="line">$result = $conn-&gt;query($sql);</span><br><span class="line"><span class="keyword">if</span>($result-&gt;num_rows &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    $row = $result-&gt;fetch_assoc();</span><br><span class="line">    $whitelist = range(<span class="number">1</span>, $row[<span class="string">'COUNT(*)'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$id = stop_hack($_GET[<span class="string">'id'</span>]);</span><br><span class="line">$sql = <span class="string">"SELECT * FROM users WHERE id=$id"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!in_array($id, $whitelist)) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"id $id is not in whitelist."</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$result = $conn-&gt;query($sql);</span><br><span class="line"><span class="keyword">if</span>($result-&gt;num_rows &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    $row = $result-&gt;fetch_assoc();</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;center&gt;&lt;table border='1'&gt;"</span>;</span><br><span class="line">    <span class="keyword">foreach</span> ($row <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;tr&gt;&lt;td&gt;&lt;center&gt;$key&lt;/center&gt;&lt;/td&gt;&lt;br&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;td&gt;&lt;center&gt;$value&lt;/center&gt;&lt;/td&gt;&lt;/tr&gt;&lt;br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;/table&gt;&lt;/center&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>($conn-&gt;error);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>配置文件：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//config.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">""</span>;</span><br><span class="line">$password = <span class="string">""</span>;</span><br><span class="line">$dbname = <span class="string">"day1"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stop_hack</span><span class="params">($value)</span></span>&#123;</span><br><span class="line">    $pattern = <span class="string">"insert|delete|or|concat|concat_ws|group_concat|join|floor|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile|dumpfile|sub|hex|file_put_contents|fwrite|curl|system|eval"</span>;</span><br><span class="line">    $back_list = explode(<span class="string">"|"</span>,$pattern);</span><br><span class="line">    <span class="keyword">foreach</span>($back_list <span class="keyword">as</span> $hack)&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">"/$hack/i"</span>, $value))</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"$hack detected!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>MySQL搭建命令：</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>代码分析：</strong></p>
-<p>首先查询了user表中有几条记录,$whitelist为一个数组，里面的内容就是1，2，3，4等到记录数，但是在使用in_array判断传入参数是否在$whitelist中时，第三个参数没有设置为True，所以存在利用缺陷，可以实行SQL注入。在看一下config.php文件中的stop_hack函数，看它对哪些关键字进行了过滤就可以写注入语句了。</p>
-<p>因为union被过滤掉了，所以我们采用updatexml报错注入，当updatexml中存在特殊字符或字母时，会发生报错 ，报错信息为特殊字符、字母之后的内容。但是它过滤了字符串拼接函数，所以我们需要用其它方法将特殊字符和查询结果拼接起来，这里我们使用SQL里面的make_set，举个例子：</p>
-<p>make_set(3,’a’,’b’)的结果是’a,b’。</p>
-<p>所以我们最后的注入语句是<code>?id=1 and (select updatexml(1,make_set(3,&#39;~&#39;,(select flag from flag)),1))</code></p>
-<p>结果：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/TIM%E6%88%AA%E5%9B%BE20180731145653.jpg" alt=""></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29572804&auto=1&height=66"></iframe></div>
+<h2 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><p>上篇博客我复现了前台任意用户密码修改的漏洞，dedecms还有一个漏洞是管理员的前台密码修改会同时修改后台密码，通过前台任意用户密码修改的漏洞，我们就能修改管理员的密码。</p>
+<h2 id="审计过程"><a href="#审计过程" class="headerlink" title="审计过程"></a>审计过程</h2><p>前台任意用户密码重置漏洞的审计我前面有讲，这里主要看管理员前台重置其后台密码的代码。首先我们登陆前台，它的系统设置功能中有个基本资料更新，可以更新其前台密码，其文件是edit_baseinfo.php</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/30.jpg" alt=""></p>
+<p>我们去查看该文件的源码，重点是这一部分</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/31.jpg" alt=""></p>
+<p>当它判断当前账号为管理员是，为了方便管理员，它在修改前台密码的同时也会同时修改管理员的后台密码，这就带来了极大的风险。</p>
+<p>它判断当前账号是否为管理员的方式也很简单，当<code>$cfg_ml-&gt;fields[&#39;matt&#39;]</code>等于10时当前账号就是管理原账号，我们追踪<code>$cfg-ml-&gt;fields</code>，看它的值是如何获取的。</p>
+<p>在<code>DedeCMS\uploads\m\view.php</code>文件中，<code>$cfg_ml</code>调用了<code>Memberlogin</code>类，也就是控制会员登陆的类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cfg_ml = new MemberLogin();</span><br></pre></td></tr></table></figure>
+<p>我们继追踪这个类</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/32.jpg" alt=""></p>
+<p>当这个类生成时，就会根据<code>M_ID</code>去查询会员表member，将查询结果赋值给<code>$this-&gt;fields</code>，我们去看一下表结构</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/33.jpg" alt=""></p>
+<p>里面有一个字段matt，代表账号权限，admin账号的权限为10，是最高权限。所以我们只要登陆到管理员的前台就能修改到后台密码。但是我们不知道管理员的密码，而且管理员的前台是不能直接登陆的。</p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>虽然dedecms对管理员的前台登陆做出了限制，但是我们利用前台任意用户密码修改漏洞是能绕过这些限制的。我们可以任意用户前台密码修改管理员的前台密码，不过这里的修改并不会更改后台，但是为了更好的用户体验，当密码修改成功后会自动跳转到当前账号的前台，我们可以在那里修改管理员的前台密码，这是后台密码也跟着变了。这里我只演示第二种方法。</p>
+<p>跟之前的步骤都是一样的，发送特定请求</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/26.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/27.jpg" alt=""></p>
+<p>更改密码</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/28.jpg" alt=""></p>
+<p>修改成功后等待跳转</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/29.jpg" alt=""></p>
+<p>跳转后成功登陆到管理员的前台</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/34.jpg" alt=""></p>
+<p>到系统设置里更改前台密码，这里有一个原登陆密码是必填的，虽然之前管理员的密码我们不知道，但是这并不影响，因为在跳转之前我们已经改过密码了。这里原密码填你修改的密码就行，邮箱随便填一个。这里我们管理员的最初的密码是admin，我们跳转前将它修改为123456，最后我们把它修改成了666</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/35.jpg" alt=""></p>
+<p>密码修改成功!</p>
+<p>如果这时候我们知道后台的目录，直接访问后台目录，然后用修改的密码登陆，就能登陆成为管理员</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/36.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/37.jpg" alt=""></p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=429318&auto=1&height=66"></iframe></div>
+
+
       
     </div>
     
@@ -387,13 +411,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/07/31/PHP-Audit-Labs-Day1/">代码审计Day1-in_array函数缺陷</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/01/DedeCMS3/">DedeCMS代码审计Day3</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-07-31, 13:48:07</p>
-        <p><span>最后更新:</span>2018-08-10, 12:48:14</p>
+        <p><span>发布时间:</span>2018-09-01, 19:39:15</p>
+        <p><span>最后更新:</span>2018-09-01, 20:43:00</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/07/31/PHP-Audit-Labs-Day1/" title="代码审计Day1-in_array函数缺陷">http://yoursite.com/2018/07/31/PHP-Audit-Labs-Day1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/07/31/PHP-Audit-Labs-Day1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/01/DedeCMS3/" title="DedeCMS代码审计Day3">http://yoursite.com/2018/09/01/DedeCMS3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/01/DedeCMS3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -405,16 +429,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/07/31/ThinkPHP3/">
-                    ThinkPHP框架学习--控制器（一）
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/07/29/OneThink/">
-                    OneThink1.0文件缓存漏洞分析
+                <a href="/2018/08/22/ThinkPHP11/">
+                    ThinkPHP框架学习--缓存
                 </a>
             </div>
         
@@ -426,7 +444,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码分析"><span class="toc-number">1.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预留题解法"><span class="toc-number">2.</span> <span class="toc-text">预留题解法</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞信息"><span class="toc-number">1.</span> <span class="toc-text">漏洞信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#审计过程"><span class="toc-number">2.</span> <span class="toc-text">审计过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞复现"><span class="toc-number">3.</span> <span class="toc-text">漏洞复现</span></a></li></ol>
         
     </div>
     <style>
@@ -462,7 +480,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"代码审计Day1-in_array函数缺陷　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"DedeCMS代码审计Day3　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -482,15 +500,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/07/31/ThinkPHP3/" title="上一篇: ThinkPHP框架学习--控制器（一）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/07/29/OneThink/" title="下一篇: OneThink1.0文件缓存漏洞分析">
+            <a href="/2018/08/22/ThinkPHP11/" title="下一篇: ThinkPHP框架学习--缓存">
                 <i class="fa fa-angle-right"></i>
             </a>
         
