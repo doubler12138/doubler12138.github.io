@@ -15,35 +15,20 @@
 
 
 
-<meta name="description" content="实验班考试前突击密码学方向，刷一下南邮的密码学题">
-<meta name="keywords" content="CTF-WriteUp">
+<meta name="description" content="前言 今天看Java的流程控制，因为大部分的内容和其它语言是相同的，就简短的记记，所以记得可能比较杂乱。">
+<meta name="keywords" content="学习笔记,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="南京邮电大学网络攻防训练平台密码学题Write-Up">
-<meta property="og:url" content="http://yoursite.com/2018/05/24/NanYouCTF-Crypto-WriteUp/index.html">
+<meta property="og:title" content="Java学习笔记（二）--流程控制">
+<meta property="og:url" content="http://yoursite.com/2018/09/03/JAVA2/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="实验班考试前突击密码学方向，刷一下南邮的密码学题">
+<meta property="og:description" content="前言 今天看Java的流程控制，因为大部分的内容和其它语言是相同的，就简短的记记，所以记得可能比较杂乱。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/20.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/64.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/65.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/66.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/67.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/68.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/69.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/70.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/71.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/72.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/73.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/74.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/75.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/76.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/77.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/78.jpg">
-<meta property="og:updated_time" content="2018-07-23T02:01:22.629Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/10.jpg">
+<meta property="og:updated_time" content="2018-09-03T14:59:25.925Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="南京邮电大学网络攻防训练平台密码学题Write-Up">
-<meta name="twitter:description" content="实验班考试前突击密码学方向，刷一下南邮的密码学题">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/20.jpg">
+<meta name="twitter:title" content="Java学习笔记（二）--流程控制">
+<meta name="twitter:description" content="前言 今天看Java的流程控制，因为大部分的内容和其它语言是相同的，就简短的记记，所以记得可能比较杂乱。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/10.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -75,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>南京邮电大学网络攻防训练平台密码学题Write-Up | Double--R blog</title>
+<title>Java学习笔记（二）--流程控制 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -307,11 +292,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-NanYouCTF-Crypto-WriteUp" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JAVA2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/05/24/NanYouCTF-Crypto-WriteUp/" class="article-date">
-      <time datetime="2018-05-24T03:19:10.000Z" itemprop="datePublished">2018-05-24</time>
+      <a href="/2018/09/03/JAVA2/" class="article-date">
+      <time datetime="2018-09-03T13:09:12.000Z" itemprop="datePublished">2018-09-03</time>
 </a>
 
 
@@ -326,7 +311,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      南京邮电大学网络攻防训练平台密码学题Write-Up
+      Java学习笔记（二）--流程控制
     </h1>
   
 
@@ -335,7 +320,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">530字</span>
+			<span class="post-count">841字</span>
 		</span>
 	</span>
 	
@@ -344,7 +329,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">2分</span>
+			<span class="post-count">3分</span>
 		</span>
 	</span>
 </div>
@@ -357,7 +342,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -367,74 +352,200 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>实验班考试前突击密码学方向，刷一下南邮的密码学题</strong></p>
+        <p><strong>前言</strong></p>
+<p>今天看Java的流程控制，因为大部分的内容和其它语言是相同的，就简短的记记，所以记得可能比较杂乱。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/20.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/10.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="easy！："><a href="#easy！：" class="headerlink" title="easy！："></a><strong>easy！：</strong></h4><ul>
-<li><p>base64解密一下出flag：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/64.jpg" alt=""></p>
-</li>
-</ul>
-<h4 id="KeyBoard："><a href="#KeyBoard：" class="headerlink" title="KeyBoard："></a><strong>KeyBoard：</strong></h4><ul>
-<li>ytfvbhn tgbgy hjuygbn yhnmki tgvhn uygbnjm uygbn yhnijm<br>跟据这些字母在键盘上分布的样式画字母，flag：nctf{areuhack}</li>
-</ul>
-<h4 id="base64全家桶："><a href="#base64全家桶：" class="headerlink" title="base64全家桶："></a><strong>base64全家桶：</strong></h4><ul>
-<li><p>原字符串：</p>
-<p><code>R1pDVE1NWlhHUTNETU4yQ0dZWkRNTUpYR00zREtNWldHTTJES1JSV0dJM0RDTlpUR1kyVEdNWlRHSTJVTU5SUkdaQ1RNTkJWSVkzREVOUlJHNFpUTU5KVEdFWlRNTjJF</code></p>
-<p>base64解码：</p>
-<p><code>GZCTMMZXGQ3DMN2CGYZDMMJXGM3DKMZWGM2DKRRWGI3DCNZTGY2TGMZTGI2UMNRRGZCTMNBVIY3DENRRG4ZTMNJTGEZTMN2E</code></p>
-<p>base32解码：</p>
-<p><code>6E 63 74 66 7B 62 61 73 65 36 34 5F 62 61 73 65 33 32 5F 61 6E 64 5F 62 61 73 65 31 36 7D</code></p>
-<p>hex转字符：nctf{base64_base32_and_base16}</p>
-</li>
-</ul>
-<h4 id="n次base64："><a href="#n次base64：" class="headerlink" title="n次base64："></a><strong>n次base64：</strong></h4><ul>
-<li><p>给了一长串密文不知道加密了多少次，python写各小脚本跑一下</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/65.jpg" alt=""></p>
-<p>跑了出flag就无法再解密了，所以报错</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/66.jpg" alt=""></p>
-</li>
-</ul>
-<h4 id="骚年来一发吗？："><a href="#骚年来一发吗？：" class="headerlink" title="骚年来一发吗？："></a><strong>骚年来一发吗？：</strong></h4><ul>
-<li><p>给了一个密文，给了php写的加密的代码。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/67.jpg" alt=""></p>
-<p>分析一下他的加密过程，先是用strrev函数进行字符串反转，再是自定义函数对每个字符的ASCII码值加一，再base64编码，反转，str_rot13函数对每个字母前移13各字母。</p>
-<p>分析一下解密过程，先str_rot13一下，这样前移26个字母，就移回来了，再反转，再base64解码，再ASCII码值减一，再反转。php写个解码脚本。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/68.jpg" alt=""></p>
-<p>跑一下出flag</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/69.jpg" alt=""></p>
-</li>
-</ul>
-<h4 id="mixed-base64："><a href="#mixed-base64：" class="headerlink" title="mixed_base64："></a><strong>mixed_base64：</strong></h4><ul>
-<li><p>题目用python写了个脚本对flag进行了加密</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/70.jpg" alt=""></p>
-<p>分析一下这个加密脚本，随机选择16，32，64三个数字中的一个，，调用字典中对应值的函数，lambda表达式用来表达匿名函数，分别进行base16、32、64的加密，连续加密十次。</p>
-<p>分析一下解密过程，用try和except尝试三种解密方式，循环10就行了。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/71.jpg" alt=""></p>
-<p>跑一下出flag</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/72.jpg" alt=""></p>
-</li>
-</ul>
-<h4 id="异性相吸："><a href="#异性相吸：" class="headerlink" title="异性相吸："></a><strong>异性相吸：</strong></h4><ul>
-<li><p>题目给了提示，压缩包解压开来有两个txt文件，一个里面写了明文，一个写了密文</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/73.jpg" alt=""></p>
-<p>然后我就被提示给坑了，就想着先换成2进制再异或再换成16进制再转成字符，解密脚本半天写不出。后来一想，直接hex异或转字符就行了</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/74.jpg" alt=""></p>
-<p>跑一下出flag</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/75.jpg" alt=""></p>
-</li>
-</ul>
-<h4 id="MD5："><a href="#MD5：" class="headerlink" title="MD5："></a><strong>MD5：</strong></h4><ul>
-<li><p>题目给了一段丢失的md5密文和明文</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/76.jpg" alt=""></p>
-<p>直接写python脚本爆破一下明文</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/77.jpg" alt=""></p>
-<p>跑一下出flag</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/NanYou/78.jpg" alt=""></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=33071053&auto=1&height=66"></iframe></div></li>
-</ul>
+<h2 id="复合语句"><a href="#复合语句" class="headerlink" title="复合语句"></a>复合语句</h2><p>Java语言的复合语句是以整个区块为单位的语句，所以又称块语句。复合语句由开括号”{“开始，闭括号”}”结束。复合语句中的每个语句都是从上到下被执行的，复合语句中话可以嵌套复合语句，例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Compound</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">20</span>;</span><br><span class="line">        &#123;                             <span class="comment">//复合语句</span></span><br><span class="line">            <span class="keyword">int</span> y = <span class="number">40</span>;</span><br><span class="line">            System.out.println(y);</span><br><span class="line">            <span class="keyword">int</span> z = <span class="number">245</span>;</span><br><span class="line">            <span class="keyword">boolean</span> b;</span><br><span class="line">            &#123;                         <span class="comment">//嵌套的复合语句</span></span><br><span class="line">                b = y &gt; z;</span><br><span class="line">                System.out.println(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        String word = <span class="string">"hello Java"</span>;</span><br><span class="line">        System.out.println(word);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<p>复合语句为局部变量创建了一个作用域，该作用域为程序的一部分，在该作用域中某个变量被创建并能够被使用。如果在某个变量的作用域外使用该变量，则会发生错误，例如在本例中，如果在复合语句外使用变量y、z、b将会发生错误，而变量x可在整个方法体中使用。</p>
+<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><p><strong>分支语句和三元运算符：</strong></p>
+<p>对于if…else语句可以使用三元运算符对语句进行简化，如下面的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a&gt;<span class="number">0</span>)</span><br><span class="line">	b = a;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	b=-a;</span><br><span class="line"><span class="comment">//可以简写成：</span></span><br><span class="line">b = a &gt; <span class="number">0</span>?a:-a;</span><br></pre></td></tr></table></figure>
+<p>使用三元运算符的好处是可以是代码简洁，并且有一个返回值。</p>
+<p><strong>switch多分支语句：</strong></p>
+<p>switch语句中的表达式值必须是整型、字符型或字符串类型，常量1~n必须也是整型、字符型或字符串类型。</p>
+<p>语句中的default语句为可选的，如果它不存在，且switch语句中表达式的值不与任何case的常量值相同，switch不做任何处理。</p>
+<p>在switch语句中，case语句后常量表达式的值绝对不可以是实数。</p>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GetSwitch</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> week=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">switch</span> (week)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                System.out.println(<span class="string">"Monday"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                System.out.println(<span class="string">"Tuesday"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                System.out.println(<span class="string">"Wednesday"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                System.out.println(<span class="string">"Sorry,I don't Know"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p><strong>do…while循环语句：</strong></p>
+<p>do..while循环语句会先执行一次循环后再判断条件是否成立，也就是说do…while循环语句中”{}”中的程序至少要被执行一次。注意;do…while语句在结尾处多了一个分号。</p>
+<p><strong>for语句：</strong></p>
+<p>在编程时，有时候会使用for循环的特殊语法格式来实现无限循环，这种循环可以通过break来跳出，语法格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(;;)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>foreach语句：</strong></p>
+<p>foreach语句是for语句的特殊简化版本，不能完全取代for语句，但foreach语句都可以改写为for语句版本。foreach并不是一个关键字，习惯上将这种特殊的for语句格式称为foreach语句，语法格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>foreach语句中的元素变量x，不必对其进行初始化，实例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Repetition</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[] = &#123;<span class="number">7</span>,<span class="number">10</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        System.out.println(<span class="string">"一维数组中的元素分别是："</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x:arr)&#123;</span><br><span class="line">            System.out.println(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=498462&auto=1&height=66"></iframe></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     </div>
@@ -443,13 +554,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/03/JAVA2/">Java学习笔记（二）--流程控制</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-05-24, 11:19:10</p>
-        <p><span>最后更新:</span>2018-07-23, 10:01:22</p>
+        <p><span>发布时间:</span>2018-09-03, 21:09:12</p>
+        <p><span>最后更新:</span>2018-09-03, 22:59:25</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/" title="南京邮电大学网络攻防训练平台密码学题Write-Up">http://yoursite.com/2018/05/24/NanYouCTF-Crypto-WriteUp/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/24/NanYouCTF-Crypto-WriteUp/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/03/JAVA2/" title="Java学习笔记（二）--流程控制">http://yoursite.com/2018/09/03/JAVA2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/03/JAVA2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -461,16 +572,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/05/26/BugKu-MISC-WriteUp/">
-                    BugKuCTF训练平台MISC题Write-Up
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">
-                    BugKuCTF-Web题 Welcome to bugkuctf Write Up
+                <a href="/2018/09/02/PHP-Audit-Labs-Day2/">
+                    代码审计-parse_str函数缺陷
                 </a>
             </div>
         
@@ -482,7 +587,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#easy！："><span class="toc-number">1.</span> <span class="toc-text">easy！：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#KeyBoard："><span class="toc-number">2.</span> <span class="toc-text">KeyBoard：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#base64全家桶："><span class="toc-number">3.</span> <span class="toc-text">base64全家桶：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#n次base64："><span class="toc-number">4.</span> <span class="toc-text">n次base64：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#骚年来一发吗？："><span class="toc-number">5.</span> <span class="toc-text">骚年来一发吗？：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mixed-base64："><span class="toc-number">6.</span> <span class="toc-text">mixed_base64：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异性相吸："><span class="toc-number">7.</span> <span class="toc-text">异性相吸：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MD5："><span class="toc-number">8.</span> <span class="toc-text">MD5：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#复合语句"><span class="toc-number">1.</span> <span class="toc-text">复合语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件语句"><span class="toc-number">2.</span> <span class="toc-text">条件语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-number">3.</span> <span class="toc-text">循环语句</span></a></li></ol>
         
     </div>
     <style>
@@ -518,7 +623,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"南京邮电大学网络攻防训练平台密码学题Write-Up　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（二）--流程控制　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -538,15 +643,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/05/26/BugKu-MISC-WriteUp/" title="上一篇: BugKuCTF训练平台MISC题Write-Up">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/05/22/BugKu-Web-Welcome-WriteUp/" title="下一篇: BugKuCTF-Web题 Welcome to bugkuctf Write Up">
+            <a href="/2018/09/02/PHP-Audit-Labs-Day2/" title="下一篇: 代码审计-parse_str函数缺陷">
                 <i class="fa fa-angle-right"></i>
             </a>
         
