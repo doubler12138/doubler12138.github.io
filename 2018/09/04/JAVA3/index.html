@@ -15,21 +15,20 @@
 
 
 
-<meta name="description" content="这一部分主要是写重定向、入口文件和配置文件，还是在做前期的准备工作。">
-<meta name="keywords" content="项目">
+<meta name="description" content="前言 今天看Java的字符串部分的内容，主要主要是字符串的操作部分">
+<meta name="keywords" content="学习笔记,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于fastphp学习搭建MVC框架（二）">
-<meta property="og:url" content="http://yoursite.com/2018/06/03/MVC-2/index.html">
+<meta property="og:title" content="Java学习笔记（三）--字符串">
+<meta property="og:url" content="http://yoursite.com/2018/09/04/JAVA3/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="这一部分主要是写重定向、入口文件和配置文件，还是在做前期的准备工作。">
+<meta property="og:description" content="前言 今天看Java的字符串部分的内容，主要主要是字符串的操作部分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/22.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/06/03/MVC-2/3">
-<meta property="og:updated_time" content="2018-07-23T01:52:54.029Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/11.jpg">
+<meta property="og:updated_time" content="2018-09-04T07:35:00.649Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于fastphp学习搭建MVC框架（二）">
-<meta name="twitter:description" content="这一部分主要是写重定向、入口文件和配置文件，还是在做前期的准备工作。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/22.jpg">
+<meta name="twitter:title" content="Java学习笔记（三）--字符串">
+<meta name="twitter:description" content="前言 今天看Java的字符串部分的内容，主要主要是字符串的操作部分">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/11.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>基于fastphp学习搭建MVC框架（二） | Double--R blog</title>
+<title>Java学习笔记（三）--字符串 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -293,11 +292,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-MVC-2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JAVA3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/03/MVC-2/" class="article-date">
-      <time datetime="2018-06-03T03:13:31.000Z" itemprop="datePublished">2018-06-03</time>
+      <a href="/2018/09/04/JAVA3/" class="article-date">
+      <time datetime="2018-09-04T05:15:56.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
 
 
@@ -312,7 +311,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      基于fastphp学习搭建MVC框架（二）
+      Java学习笔记（三）--字符串
     </h1>
   
 
@@ -321,7 +320,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,281字</span>
+			<span class="post-count">2,183字</span>
 		</span>
 	</span>
 	
@@ -330,7 +329,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
+			<span class="post-count">8分</span>
 		</span>
 	</span>
 </div>
@@ -343,7 +342,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目/">项目</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -353,67 +352,136 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>这一部分主要是写重定向、入口文件和配置文件，还是在做前期的准备工作。</strong></p>
+        <p><strong>前言</strong></p>
+<p>今天看Java的字符串部分的内容，主要主要是字符串的操作部分</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/22.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/11.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a><strong>重定向</strong></h4><h5 id="重定向的目的："><a href="#重定向的目的：" class="headerlink" title="重定向的目的："></a><strong>重定向的目的：</strong></h5><ul>
-<li><p>设置根目录为<code>project</code>所在的位置</p>
-<p>   将所有的请求都发送给index.php文件</p>
-<p><strong>Apache服务器：</strong></p>
-<p>   <strong>创建重定向文件：</strong></p>
-<p>在project目录下新建一个<code>.htaccess</code>文件，内容为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#如果mode_rewrite.c模块存在 则执行以下指令</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">#打开Rewrite功能</span><br><span class="line">RewriteEngine On</span><br><span class="line"></span><br><span class="line">#如果请求的是真实存在的文件或目录，直接访问</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line"></span><br><span class="line">#如果访问的文件或目录不是真实存在，分发请求至index.php</span><br><span class="line">RewriteRule . index.php</span><br><span class="line"></span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-<p>   <strong>文件命令分析：</strong></p>
-<p>RewriteCond表示重写条件，语法是：</p>
-<p><code>RewriteCond TestString CondPattern [flags]</code></p>
-<p>-f（常规文件） ：</p>
-<p>将TestString视为一个路径名并测试它是否为一个存在的目录</p>
-<p>-d（目录）：</p>
-<p>将TestString视为一个路径名并测试他是否为一个存在的目录</p>
-<p>RewriteRule表示重写规则，即在符合重写条件时的操作</p>
-<p>   <strong>.htaccess文件：</strong></p>
-<p>.htaccess文件（分布式配置文件）提供针对目录改变配置的方法，即在一个特定的文档目录中防止一个包含一个或多个指令的文件，以作用于此目录及其所有子目录。其可以帮我们实现：网页301重定向、自定义404错误界面、改变文件扩张名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能</p>
-<p>启用.htaccess，需要修改apache的配置文件http.conf，启用AllowOverride，并可以用AccessFileName限制特定命令</p>
-<p><img src="3" alt=""></p>
-<p>学习博客<a href="https://blog.csdn.net/weilee2009/article/details/12905081" target="_blank" rel="noopener">.htaccess详解及.htacess参数说明</a></p>
-<p><strong>Nginx服务器：</strong></p>
-</li>
-</ul>
-<p>在server块中加入如下重定向：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line"> # 重新向所有非真实存在的请求到index.php</span><br><span class="line"> try_files $uri $uri/ /index.php$args;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="重定向的原因："><a href="#重定向的原因：" class="headerlink" title="重定向的原因："></a><strong>重定向的原因：</strong></h5><ul>
-<li><p><strong>静态文件能直接访问：</strong></p>
-<p>如果文件或者目录真实存在，则直接访问存在的文件/目录</p>
-<p>比如，静态文件<code>static/css/main.css</code>真实存在，就可以直接访问它</p>
-<p>   <strong>程序有单一的入口：</strong></p>
-<p>这种情况时请求地址不是真实存在的文件或目录，这样请求就会传到index.php上</p>
-<p>例如，访问地址：`localhost/item/view/1,在文件系统中并不存在这样的文件或目录</p>
-<p>那么Apache或Nginx服务器会把请求发送给index.php，并把域名之后的字符串赋值给REQUEST_URI变量，这样在PHP中用$_SERVER[‘REQUEST_URI’]就能拿到/item/view/1</p>
-<p>   <strong>可以用来生成美化的URL，利于SEO：</strong></p>
-<p>SEO优化，就是让网站在搜索引擎中排位更靠前</p>
-</li>
-</ul>
-<h4 id="入口文件"><a href="#入口文件" class="headerlink" title="入口文件"></a><strong>入口文件</strong></h4><h5 id="创建index-php入口文件，文件内容："><a href="#创建index-php入口文件，文件内容：" class="headerlink" title="创建index.php入口文件，文件内容："></a><strong>创建index.php入口文件，文件内容：</strong></h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//应用目录为当前目录</span></span><br><span class="line">define(<span class="string">'APP_PATH'</span>,<span class="keyword">__DIR__</span> . <span class="string">'/'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//开启调试模式</span></span><br><span class="line">define(<span class="string">'APP_DEBUG'</span>, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//加载框架文件</span></span><br><span class="line"><span class="keyword">require</span>(APP_PATH . <span class="string">'fastphp/Fastphp.php'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//加载配置文件</span></span><br><span class="line">$config = <span class="keyword">require</span>(APP_PATH . <span class="string">'config/config.php'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//实例化框架类</span></span><br><span class="line">(<span class="keyword">new</span> Fastphp($config))-&gt;run();</span><br></pre></td></tr></table></figure>
-<h5 id="文件分析："><a href="#文件分析：" class="headerlink" title="文件分析："></a><strong>文件分析：</strong></h5><p>PHP define()函数用于定义要给常量，常量设定后常量值无法更改。常量名不需要开头的美元符号，作用域不影响对常量的访问，常量值只能是字符串或数字。</p>
-<p><strong>DIR</strong>取当前内容所处文件的文件目录<a href="https://www.cnblogs.com/aademeng/articles/6223463.html" target="_blank" rel="noopener">php – 取路径：getcwd()、<strong>DIR</strong>、<strong>FILE</strong> 的区别</a></p>
-<p>require()函数包含文件<a href="http://www.runoob.com/php/php-includes.html" target="_blank" rel="noopener">PHP inculde和require语句</a></p>
-<p>注意：上面的PHP代码中，并没有添加PHP结束符号<code>?&gt;</code>。这样做的主要原因是：</p>
-<p>对于只有PHP代码的文件最好没有结束标志，PHP自身并不需要结束符号，不加结束符号让程序更加安全，很大程度防止了末尾被注入的额外内容</p>
-<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a><strong>配置文件</strong></h4><h4 id="创建配置文件："><a href="#创建配置文件：" class="headerlink" title="创建配置文件："></a><strong>创建配置文件：</strong></h4><p>在入口文件中我们加载了config.php文件，其作用是定义数据库连接参数，以及配置默认控制器名和操作名，其内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">​</span><br></pre></td></tr></table></figure>
-<p>&lt;?php</p>
-<p>define(‘DB_NAME’，’project’);<br>define(‘DB_USER’, ‘root’);<br>define(‘DB_PASSWORD’, ‘root’);<br>define(‘DB_HOST’, ‘localhost’);</p>
-<p>$config[‘defaultController’] = ‘Item’;<br>$config[‘defaultAction’] = ‘index’;</p>
-<p>return $config;<br>​<code></code></p>
-<p><strong>文件分析：</strong></p>
-<p>定义了数据连接所需要的数据库名、用户名、密码和允许连接用户的常量，设置了一个数组，默认控制器名为Item，默认操作名为index。</p>
-<p>return写在函数外面是PHP的特殊用法之一，在同一个文件中，如果执行了return，则return 语句后面的内容将不会被执行了；若文件调用另一个文件中的方法或其他代码，在该方法或代码中使用return 则该方法后面的语句不再执行，但调用该方法或代码的源文件照常执行。并且return的值会当作require的返回值</p>
-<p><a href="https://blog.csdn.net/u013372487/article/details/51363850" target="_blank" rel="noopener">php return的用法</a></p>
-<p>入口中的$config变量接收到配置参数后，在传给框架的核心类，也就是Fastphp类</p>
-<p><strong>到着前期的所有准备工作就完成了，下面就是核心框架类的编写了</strong></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27890306&auto=1&height=66"></iframe></div>
+<h2 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h2><p><strong>声明字符串：</strong></p>
+<p>字符串声明语法格式：</p>
+<p><code>String str = [null]</code></p>
+<ul>
+<li>String:指定该变量为字符串类型</li>
+<li>str:任意有效的标识符，表示字符串的名称</li>
+<li>null:如果省略null，表示str变量是未初始化的状态，否则表示声明的字符串的值等于null。</li>
+</ul>
+<p>声明字符串必须经过初始化才能使用，否则编译器会报出”变量未被初始化错误“</p>
+<p><strong>创建字符串：</strong></p>
+<p>用一个字符数组a创建String对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[] = &#123;<span class="string">'g'</span>,<span class="string">'o'</span>,<span class="string">'o'</span>,<span class="string">'d'</span>&#125;;</span><br><span class="line">String s = <span class="keyword">new</span> String(a);  <span class="comment">//等价于 String s = new String("good")</span></span><br></pre></td></tr></table></figure>
+<p>通过字符串常量的引用赋值创建String对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1,str2;</span><br><span class="line">str1 = <span class="string">"We are students"</span>;</span><br><span class="line">str2 = <span class="string">"We are students"</span>;</span><br></pre></td></tr></table></figure>
+<p>此时str1和str2引用相同的字符串常量，因此具有相同的实体。</p>
+<h2 id="连接字符串"><a href="#连接字符串" class="headerlink" title="连接字符串"></a>连接字符串</h2><p>使用”+”运算符可以实现连接多个字符串的功能。</p>
+<p>字符串也可以同其它基本数据类型进行连接。如果将字符串同这些数据类型进行连接，会自动调用toString()方法，将其转换成字符串形式。</p>
+<p>只要”+”运算符的一个操作数是字符串，编译器就会将其它数据都转换成字符串形式。</p>
+<h2 id="获取字符串信息"><a href="#获取字符串信息" class="headerlink" title="获取字符串信息"></a>获取字符串信息</h2><p><strong>获取字符串长度：</strong></p>
+<p>使用String类的length()方法可以获取声明的字符串对象的长度。示例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"We are students"</span>;</span><br><span class="line"><span class="keyword">int</span> size = str.length();</span><br></pre></td></tr></table></figure>
+<p><strong>字符串查找：</strong></p>
+<p>String类提供了两种查找字符串的方法，即indexOf()与lastIndexOf()方法。这两种方法都允许在字符串中搜索指定条件的字符或字符串。indexOf()方法返回的是搜索的字符或字符串首次出现的位置，lastIndexOf()方法返回的是搜索的字符或字符串最后一次出现的位置。</p>
+<p>如果lastIndexOf()方法中的参数是空字符串””，则返回的结果为当前字符串的长度。</p>
+<p><strong>获得指定索引位置的字符：</strong><br>使用charAt()方法可以将指定索引处的字符返回，语法如下：<code>str.charAt(int index)</code></p>
+<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p><strong>获取子字符串：</strong></p>
+<p>通过String类的substring()方法可对字符串进行截取。substring()方法被两种不同的方法重载：</p>
+<ul>
+<li>substring(int beginIndex)：该方法返回的是从指定的索引位置开始截取直到改字符串结尾的子串</li>
+<li>substring(int beginIndex,int endIndex)：该方法返回的是从字符串某一索引位置开始截取至某一索引位置结束</li>
+</ul>
+<p><strong>去掉空格：</strong></p>
+<p>trim()方法返回字符串的副本，忽略前导空格和尾部空格，语法如下：<code>str.trim()</code></p>
+<p><strong>字符串替换：</strong></p>
+<p>replace()方法可实现将指定的字符或字符串替换成新的字符或字符串，语法如下：</p>
+<p><code>str.replace(char oldChar,char newChar)</code></p>
+<p>replace()方法返回的结果是一个新的字符串，如果要替换的字符oldChar在字符串中重复出现多次，replace()方法会将所有oldChar全部替换掉。</p>
+<p><strong>判断字符串的开始与结尾：</strong></p>
+<p>startsWith()方法与endsWith()方法分别用于判断字符串是否以指定的内容开始或结束，两个方法的返回值都为Boolean型。语法如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.startsWith(String prefix); <span class="comment">//prefix是指作为前缀的字符串</span></span><br><span class="line">str.endsWith(String suffix);   <span class="comment">//suffix是指作为后缀的字符串</span></span><br></pre></td></tr></table></figure>
+<p><strong>判断字符串是否相等：</strong></p>
+<p>对字符串对象进行比较不能简单地使用比较运算符”==”，因为比较运算符比较的是两个字符串的地址是否相同。即使两个字符串的内容相同，连个对象的内存地址也是不同的，使用比较运算符仍然会返回false。</p>
+<p>因此，比较两个字符串是否相等，应使用equals()方法和equalsIgnoreCase()方法，前者对字符串进行比较时区分大小写，后者不区分。语法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.equals(String otherstr);</span><br><span class="line">str.equalsIngoreCase(String otherstr);</span><br></pre></td></tr></table></figure>
+<p><strong>按字典顺序比较两个字符串：</strong></p>
+<p>compareTo()方法为按字典顺序比较两个字符串，该比较基于字符串中的各个字符的Unicode值。如果按字典吮吸此String对象位于参数字符串之前，则比较结果为一个负整数；如果按字典顺序此String对象位于参数字符串之后，则比较结果为一个正整数；如果这两个字符串相等，则结果为0 。语法如下：</p>
+<p><code>str.compareTo(String otherstr)</code></p>
+<p><strong>字母大小写转换：</strong></p>
+<p>字符串的toLowerCase()方法可将字符串中的所有字符从大写字母改写为小写字母，而toUpperCase()方法可将字符串中的小写字母改写为大写字母。</p>
+<ul>
+<li>toLowerCase()方法：将String转换为小写，如果没有应该被转换的字符则将原字符串返回，否则将返回一个新字符串。</li>
+<li>toUpperCase()方法：将String转换为大写。如果没有应该被转换的字符则将原字符串返回，否则将返回一个新字符串。</li>
+</ul>
+<p><strong>字符串分割：</strong></p>
+<p>使用split()方法可以是字符串按指定的分割字符或字符串对内容进行分割，并将分割后的结果存放在字符串数组中。split()方法提供以下两种重载形式。</p>
+<ul>
+<li>split(String sign)：该方法可根据给定的分隔符对字符串进行拆分，其中sign为分割字符串的分割符，也可以使用正则表达。</li>
+<li>split(String sign,int limit)：该方法可根据给定的分割符对字符串进行拆分，并限定拆分的次数</li>
+</ul>
+<p>实例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Division</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        String str = <span class="keyword">new</span> String(<span class="string">"abc,def,ghi,jkl"</span>);</span><br><span class="line">        String[] newstr = str.split(<span class="string">","</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; newstr.length;i++)&#123;</span><br><span class="line">            System.out.println(newstr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        String[] newstr2 = str.split(<span class="string">","</span>,<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; newstr2.length;i++)&#123;</span><br><span class="line">            System.out.println(newstr2[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h2><p>String类的静态format()方法用创建格式化的字符串。format()有两种重载形式：</p>
+<ul>
+<li>format(String format,Object…args)：该方法使用指定的格式字符串和参数返回要给格式化字符串，格式化后的新字符使用本地默认的语言环境。</li>
+<li>format(Local,String format,Object…args)：Local格式化过程中要应用的语言环境。如果为null，则不进行本地化</li>
+</ul>
+<p><strong>日期和时间字符串格式化：</strong></p>
+<p>实例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Date;  <span class="comment">//导入java.util.Date类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Eval</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        String year = String.format(<span class="string">"%tY"</span>,date);</span><br><span class="line">        String month = String.format(<span class="string">"%tB"</span>,date);</span><br><span class="line">        String day = String.format(<span class="string">"%td"</span>,date);</span><br><span class="line">        String hour = String.format(<span class="string">"%tH"</span>,date);</span><br><span class="line">        String minute = String.format(<span class="string">"%tM"</span>,date);</span><br><span class="line">        String second = String.format(<span class="string">"%tS"</span>,date);</span><br><span class="line">        System.out.println(<span class="string">"今年是："</span> + year + <span class="string">"年"</span>);</span><br><span class="line">        System.out.println(<span class="string">"现在是："</span> + month);</span><br><span class="line">        System.out.println(<span class="string">"今天是："</span> + day + <span class="string">"号"</span>);</span><br><span class="line">        System.out.println(<span class="string">"现在是"</span> + hour + <span class="string">"时"</span> + minute + <span class="string">"分"</span> + second + <span class="string">"秒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>格式化常见的日期时间组合：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转换符</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%tF</td>
+<td style="text-align:center">“年-月-日”格式（4位年份）</td>
+<td style="text-align:center">2018-09-04</td>
+</tr>
+<tr>
+<td style="text-align:center">%tD</td>
+<td style="text-align:center">“月/日/年”（2位年份）</td>
+<td style="text-align:center">09/04/18</td>
+</tr>
+<tr>
+<td style="text-align:center">%tc</td>
+<td style="text-align:center">全部日期和时间信息</td>
+<td style="text-align:center">星期二 九月 4 15:15:00 CST 2018</td>
+</tr>
+<tr>
+<td style="text-align:center">%tr</td>
+<td style="text-align:center">“时：分：秒 PM(AM)”格式（12时制）</td>
+<td style="text-align:center">03:16:06 下午</td>
+</tr>
+<tr>
+<td style="text-align:center">%tT</td>
+<td style="text-align:center">“时：分：秒”格式（24时制）</td>
+<td style="text-align:center">15:17:33</td>
+</tr>
+<tr>
+<td style="text-align:center">%tR</td>
+<td style="text-align:center">“时：分”格式（24时制）</td>
+<td style="text-align:center">15:18</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符串生成器"><a href="#字符串生成器" class="headerlink" title="字符串生成器"></a>字符串生成器</h2><p>创建成功的字符串对象，其长度是固定的，内容不能被改变和编译。虽然使用”+”可以达到附加新字符和字符串的效果，但是”+”会产生一个新的String实例，会在内存中创建新字符串对象。如果重复地对字符串进行修改，将极大地增加系统开销。如果在程序中频繁地附加字符串，建议使用StringBuilder。新建的StringBuilder对象初始容量是16个字符，可以自行指定初始长度。如果附加字符超过可容纳的长度，则StringBuilder对象将自动增长长度以容纳被附加的字符。若要使用StringBuilder最后输出字符串结果，可以使用toString方法。利用StringBuilder类中的方法可动态的执行添加、删除和插入操作。该类的常用方法如下：</p>
+<ul>
+<li>append()方法：该方法用于向字符串生成器中追加内容。通过该方法的多个重载形式，可实现接收任何类型的数据</li>
+<li>insert(int offset,arg)方法：该方法用于向字符串生成器中的指定位置插入数据内容</li>
+<li>delete(int start, int end)方法：移除此序列的子字符串中的字符。</li>
+</ul>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1305425959&auto=1&height=66"></iframe></div>
+
+
+
+
+
 
 
 
@@ -424,13 +492,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/04/JAVA3/">Java学习笔记（三）--字符串</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-06-03, 11:13:31</p>
-        <p><span>最后更新:</span>2018-07-23, 09:52:54</p>
+        <p><span>发布时间:</span>2018-09-04, 13:15:56</p>
+        <p><span>最后更新:</span>2018-09-04, 15:35:00</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/03/MVC-2/" title="基于fastphp学习搭建MVC框架（二）">http://yoursite.com/2018/06/03/MVC-2/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/06/03/MVC-2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/04/JAVA3/" title="Java学习笔记（三）--字符串">http://yoursite.com/2018/09/04/JAVA3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/04/JAVA3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -442,16 +510,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/06/03/MVC-3/">
-                    基于fastphp学习搭建MVC框架（三）
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/01/MVC-1/">
-                    基于fastphp学习搭建MVC框架（一）
+                <a href="/2018/09/03/JAVA2/">
+                    Java学习笔记（二）--流程控制
                 </a>
             </div>
         
@@ -463,7 +525,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#重定向"><span class="toc-number">1.</span> <span class="toc-text">重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#重定向的目的："><span class="toc-number">1.1.</span> <span class="toc-text">重定向的目的：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#重定向的原因："><span class="toc-number">1.2.</span> <span class="toc-text">重定向的原因：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#入口文件"><span class="toc-number">2.</span> <span class="toc-text">入口文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建index-php入口文件，文件内容："><span class="toc-number">2.1.</span> <span class="toc-text">创建index.php入口文件，文件内容：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#文件分析："><span class="toc-number">2.2.</span> <span class="toc-text">文件分析：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置文件"><span class="toc-number">3.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建配置文件："><span class="toc-number">4.</span> <span class="toc-text">创建配置文件：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String类"><span class="toc-number">1.</span> <span class="toc-text">String类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接字符串"><span class="toc-number">2.</span> <span class="toc-text">连接字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取字符串信息"><span class="toc-number">3.</span> <span class="toc-text">获取字符串信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串操作"><span class="toc-number">4.</span> <span class="toc-text">字符串操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化字符串"><span class="toc-number">5.</span> <span class="toc-text">格式化字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串生成器"><span class="toc-number">6.</span> <span class="toc-text">字符串生成器</span></a></li></ol>
         
     </div>
     <style>
@@ -499,7 +561,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"基于fastphp学习搭建MVC框架（二）　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（三）--字符串　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -519,15 +581,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/06/03/MVC-3/" title="上一篇: 基于fastphp学习搭建MVC框架（三）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/01/MVC-1/" title="下一篇: 基于fastphp学习搭建MVC框架（一）">
+            <a href="/2018/09/03/JAVA2/" title="下一篇: Java学习笔记（二）--流程控制">
                 <i class="fa fa-angle-right"></i>
             </a>
         
