@@ -15,22 +15,20 @@
 
 
 
-<meta name="description" content="今天做了一道实验吧的Web题，以前一直没怎么关注过Web里面有关密码的一部分，既然今天做到就记一下，顺便写一下wp">
-<meta name="keywords" content="学习笔记">
+<meta name="description" content="前言 因为数组的主要内容和其它语言大致相同，所以就记一些不同的和重要的。">
+<meta name="keywords" content="学习笔记,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="哈希长度扩展攻击">
-<meta property="og:url" content="http://yoursite.com/2018/06/12/Hash-Length-Extension-Attacks/index.html">
+<meta property="og:title" content="Java学习笔记（四）--数组">
+<meta property="og:url" content="http://yoursite.com/2018/09/05/JAVA4/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="今天做了一道实验吧的Web题，以前一直没怎么关注过Web里面有关密码的一部分，既然今天做到就记一下，顺便写一下wp">
+<meta property="og:description" content="前言 因为数组的主要内容和其它语言大致相同，所以就记一些不同的和重要的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/17.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/10.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/11.jpg">
-<meta property="og:updated_time" content="2018-07-25T12:00:48.855Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/15.jpg">
+<meta property="og:updated_time" content="2018-09-05T15:08:41.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="哈希长度扩展攻击">
-<meta name="twitter:description" content="今天做了一道实验吧的Web题，以前一直没怎么关注过Web里面有关密码的一部分，既然今天做到就记一下，顺便写一下wp">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/17.jpg">
+<meta name="twitter:title" content="Java学习笔记（四）--数组">
+<meta name="twitter:description" content="前言 因为数组的主要内容和其它语言大致相同，所以就记一些不同的和重要的。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/15.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -62,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>哈希长度扩展攻击 | Double--R blog</title>
+<title>Java学习笔记（四）--数组 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -300,11 +298,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Hash-Length-Extension-Attacks" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JAVA4" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/12/Hash-Length-Extension-Attacks/" class="article-date">
-      <time datetime="2018-06-12T11:33:42.000Z" itemprop="datePublished">2018-06-12</time>
+      <a href="/2018/09/05/JAVA4/" class="article-date">
+      <time datetime="2018-09-05T01:21:19.000Z" itemprop="datePublished">2018-09-05</time>
 </a>
 
 
@@ -319,7 +317,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      哈希长度扩展攻击
+      Java学习笔记（四）--数组
     </h1>
   
 
@@ -328,7 +326,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,339字</span>
+			<span class="post-count">1,142字</span>
 		</span>
 	</span>
 	
@@ -350,7 +348,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -360,37 +358,58 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>今天做了一道实验吧的Web题，以前一直没怎么关注过Web里面有关密码的一部分，既然今天做到就记一下，顺便写一下wp</strong></p>
+        <p><strong>前言</strong></p>
+<p>因为数组的主要内容和其它语言大致相同，所以就记一些不同的和重要的。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/17.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/15.jpg" alt=""></p>
 <a id="more"></a>
-<p><strong>哈希长度扩展攻击（Hash-Length-Extension-Attacks）</strong></p>
-<h4 id="MD5扩展攻击介绍"><a href="#MD5扩展攻击介绍" class="headerlink" title="MD5扩展攻击介绍"></a>MD5扩展攻击介绍</h4><p>说真的，这部分的内容我也只能算看的个一知半解，不是很懂，可能是因为数学水平不太够，对MD5的加密        方式不是很了解</p>
-<p>MD5加密算法的过程：</p>
-<p>因为对于攻击来说我们不用了解很多，所以讲一部分重要的：</p>
-<p>MD5加密过程中512比特（64字节）为一组，属于分组加密，而且运算过程中，将512比特分为32bit*16块，分块运算</p>
-<p>MD5不管怎么加密，每一块加密得到的密文作为下一次加密的初始向量IV</p>
-<p>当加密的数据比较少时，及不够512比特时就会存在填充，填充方式就是在明文数据后填一位1（二进制）然后其余补零，最后8字节用来表示明文长度。举个例子假设明文数据是admin，其十六进制是0x61646d696e ,显然不满512比特，所以我们进行填充，填充结果：</p>
-<p><code>0x61646d696e8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002800000000000000</code></p>
-<p>这里注意两点：1.为什么e后面是8而不是1，因为补的1是二进制的，后面跟的全是0，那么转换成十六进制就是8000……00，同理后面的28也是十六进制0x28=40，admin长度是40比特。2.为什么28写在最后8个字节的最前面，因为MD5中存储是小端模式，我理解的小端模式就是从后往前存，所以最后8字节的第1字节存数据</p>
-<h4 id="MD5扩展攻击的具体实现"><a href="#MD5扩展攻击的具体实现" class="headerlink" title="MD5扩展攻击的具体实现"></a>MD5扩展攻击的具体实现</h4><p>首先我们看一下实验吧的这道题的源码（源码的获得方式：burp抓包，改一下cookie中的source)</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$flag = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXX"</span>;</span><br><span class="line">$secret = <span class="string">"XXXXXXXXXXXXXXX"</span>; <span class="comment">// This secret is 15 characters long for security!</span></span><br><span class="line"></span><br><span class="line">$username = $_POST[<span class="string">"username"</span>];</span><br><span class="line">$password = $_POST[<span class="string">"password"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($_COOKIE[<span class="string">"getmein"</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (urldecode($username) === <span class="string">"admin"</span> &amp;&amp; urldecode($password) != <span class="string">"admin"</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($COOKIE[<span class="string">"getmein"</span>] === md5($secret . urldecode($username . $password))) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Congratulations! You are a registered user.\n"</span>;</span><br><span class="line">            <span class="keyword">die</span> (<span class="string">"The flag is "</span>. $flag);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">die</span> (<span class="string">"Your cookies don't match up! STOP HACKING THIS SITE."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">die</span> (<span class="string">"You are not an admin! LEAVE."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setcookie(<span class="string">"sample-hash"</span>, md5($secret . urldecode(<span class="string">"admin"</span> . <span class="string">"admin"</span>)), time() + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">empty</span>($_COOKIE[<span class="string">"source"</span>])) &#123;</span><br><span class="line">    setcookie(<span class="string">"source"</span>, <span class="number">0</span>, time() + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> ($_COOKIE[<span class="string">"source"</span>] != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">""</span>; <span class="comment">// This source code is outputted here</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>首先分析一下源码，它通过post获取username和password参数然后和一个不知到的值进行拼接，如cookie中的getmein值和拼接字符串的MD5加密值相等，就输出flag。但我们并不知道这个secret是什么，所以这里就要用到哈希长度扩展攻击了。</p>
-<p>要进行哈希长度扩展攻击首先我们要知道字符串长度，源码告诉我们secret的长度是15，然后它有一个sample的值是secret和adminamdin拼接后的MD5值，但是它源码又做了限制，不允许密码输入为admin</p>
-<p>但是前面的字符传的加密信息我们是知道的，而MD5会用前面的加密信息算下一部分的加密（在MD5中有四个32位的被称作链接变量的整数参数 ，这个ABCD是初始的固定的值)A=0x67452301，B=0xefcdab89，C=0x98badcfe，D=0x10325476。然后通过一些计算会生成关于明文的A,B,C,D然后按小端规则转换过来就是明文的MD5值，而这组A,B,C,D会成为下组明文的的初始值，直到算出最后的MD5值）。所以我们通过已知secret（假设secret的字符串为key)和adminamdin的MD5值可以倒推出它的A,B,C,D。然后我们把keyadminadmin填充到512比特，这样MD5值不变，但是无论后面我们输入什么都已经在512比特之外了，属于下一组的内容，所以就需要用上一组的A,B,C,D去算下一组的明文的MD5值。而上一组的A,B,C,D可以通过它们的MD5值倒推出来，所以无论下一组的数据是什么我们都能直接算它的MD5值。但是，口算MD5是做不到的，所以上工具。</p>
-<p>这里我们使用HashPump，一个使用简单但功能完善的哈希扩展长度攻击的工具在Linux下安装的方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bwall/HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line">cd HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>然后使用也很简单</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># hashpump</span><br><span class="line">Input Signature: 571580b26c65f306376d4f64e53cb5c7</span><br><span class="line">Input Data: adminadmin</span><br><span class="line">Input Key Length: 15</span><br><span class="line">Input Data to Add: doubler</span><br><span class="line">或者</span><br><span class="line">hashpump -s 571580b26c65f306376d4f64e53cb5c7 -d admin -k 20 -a doubler</span><br></pre></td></tr></table></figure>
-<p>分析一下：首先signature(-s)是签名，也就是已知的哈希值；data(-d)是已知的字符串的内容，或是想要添加的内容；key length(-k)是未知的字符串长度，Data to Add(-a):随便输，就是最后别加密的明文，决定了你需要输入的MD5值</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/10.jpg" alt=""></p>
-<p>第一行就是加密后的MD5值，第二行就是我们填充的内容，所以我们post的username为admin，password为admin和后面的一大串，注意将\x换成%因为源码对post进来的数据是要进行urldecode处理的，然后cookie中加上getmein=MD5值就行了。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/11.jpg" alt=""></p>
-<h4 id="学习文章："><a href="#学习文章：" class="headerlink" title="学习文章："></a>学习文章：</h4><hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=574921549&auto=1&height=66"></iframe></div>
+<hr>
+<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p>数组作为对象允许使用new关键字进行内存分配，在使用数组前，必须首先定义数组变量的类型并分配内存空间</p>
+<p><strong>先声明再分配内存：</strong></p>
+<p>声明方式：</p>
+<p><code>数组元素类型 数组名字[];</code></p>
+<p><code>数组元素类型[] 数组名字;</code></p>
+<p>分配空间：</p>
+<p><code>数组名字 = new 数组元素类型[数组元素的个数];</code></p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[];</span><br><span class="line">arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br></pre></td></tr></table></figure>
+<p><strong>声明的同时为数组分配内存：</strong></p>
+<p><code>数组元素类型 数组名 = new 数组元素类型[数组元素的个数]</code></p>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p><strong>先声明再分配内存：</strong></p>
+<p><code>数组元素类型 数组名字[][];</code></p>
+<p><code>数组元素类型[][] 数组名字</code></p>
+<p>为每一维数组分配内存：<code>a = new int[2][4]</code></p>
+<p>分别为每一维数组分配内存：<code>a = new int[2][] a[0] = new int[2] a[1] = new int[3]</code></p>
+<p><strong>声明的同时为数组分配内存：</strong></p>
+<p><code>数组元素类型 数组名 = new 数组元素类型[第一维个数][第二维个数]</code></p>
+<h2 id="数组的基本操作"><a href="#数组的基本操作" class="headerlink" title="数组的基本操作"></a>数组的基本操作</h2><p><strong>遍历数组：</strong></p>
+<p>遍历二维数组的常用方法是使用双层for循环，通过数组的length属性可获取数组的长度，而使用foreach语句可能会更加简单，示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tautog</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr2[][] = &#123;&#123;<span class="number">4</span>,<span class="number">3</span>&#125;,&#123;<span class="number">2</span>,<span class="number">1</span>&#125;&#125;;</span><br><span class="line">        System.out.println(<span class="string">"二维数组中的元素："</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x[]:arr2)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> e:x)&#123;</span><br><span class="line">                System.out.println(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>填充替换数组元素：</strong></p>
+<p>数组中的元素定义完成后，可以通过Arrays类的静态方法fill()来对数组中的元素进行替换。fill()方法有两种参数类型：</p>
+<p><code>fill(int[] a, int value)</code>，实例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swap</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        Arrays.fill(arr,<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; arr.length;i++)&#123;</span><br><span class="line">            System.out.println(<span class="string">"第"</span>+i+<span class="string">"个元素是："</span>+arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>fill(int[] a,int fromIndex,int toIndex, int value)</code>，将指定的int值分配给指定范围中的每个元素，实例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swap</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        Arrays.fill(arr,<span class="number">2</span>,<span class="number">4</span>,<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; arr.length;i++)&#123;</span><br><span class="line">            System.out.println(<span class="string">"第"</span>+i+<span class="string">"个元素是："</span>+arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果指定的索引位置大于或等于要进行填充的数组的长度，则会爆出ArrayIndexOutOfBoundsException（数组越界异常）</p>
+<p><strong>对数组进行排序：</strong></p>
+<p>通过Arrays类的静态sort()方法可以是想对数组的排序，语法如下：<code>Arrays.sort(object)</code></p>
+<p>Java中的String类型数组的排序算法是根据字典编排顺序排序的，因此数字排在字母前，大写字母排在小写字母前</p>
+<p><strong>复制数组：</strong></p>
+<p>Arrays类的copyOf()方法与copyOfRange()方法可以实现对数组的复制。copyOf()方法是复制数组至指定长度。copyOfRange()方法则将指定数组的指定长度复制到一个新数组中。</p>
+<p><code>copyOf(arr,int newlength)</code>，newlength指复制后的新数组的长度。如果新数组的长度大于数组arr的长度，则根据复制数组的类型来决定填充的值，整形数组用0，char型数组用null；如果复制后的数组长度小于数组arr的长度，则会从数组arr的第一个元素开始截取至满足新数组长度为止。</p>
+<p><code>copyOfRange(arr,int fromIndex,int toIndex)</code>新数组不包括索引是toIndex的元素。</p>
+<p><strong>数组查询：</strong></p>
+<p>Arrays类的binarySearch()方法，可使用二分法搜索指定数组，以获取指定对象。该方法返回要搜索元素的索引值。语法如下：</p>
+<p><code>binaryString(Object[] a,Object key)</code></p>
+<p><code>binaryString(Object[] a,int fromIndex,int toIndex,Object key)</code></p>
+<p>在进行此调用前要对数组进行排序（通过sort()方法）。如果没有对数组进行排序，则结果是不确定的。如果数组包含多个带有指定值的元素，则无法保证找到的是哪一个。</p>
+<p>如果key包含在数组中，则返回搜索值的索引；否则返回-1或-(第一个大于此键的元素索引)，如果数组中所有元素都小于指定的键，则返回-(a.length)。</p>
+<p>实例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Reference</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ia[] = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        Arrays.sort(ia);</span><br><span class="line">        <span class="keyword">int</span> index = Arrays.binarySearch(ia,<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">        System.out.println(index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28643203&auto=1&height=66"></iframe></div>
 
-<p>​    </p>
-<p>​    </p>
 
       
     </div>
@@ -399,13 +418,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/05/JAVA4/">Java学习笔记（四）--数组</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-06-12, 19:33:42</p>
-        <p><span>最后更新:</span>2018-07-25, 20:00:48</p>
+        <p><span>发布时间:</span>2018-09-05, 09:21:19</p>
+        <p><span>最后更新:</span>2018-09-05, 23:08:41</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/12/Hash-Length-Extension-Attacks/" title="哈希长度扩展攻击">http://yoursite.com/2018/06/12/Hash-Length-Extension-Attacks/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/06/12/Hash-Length-Extension-Attacks/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/05/JAVA4/" title="Java学习笔记（四）--数组">http://yoursite.com/2018/09/05/JAVA4/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/05/JAVA4/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -417,16 +436,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/07/25/PHP-Anony/">
-                    PHP匿名函数
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/10/Crypto-RSA/">
-                    RSA学习笔记
+                <a href="/2018/09/04/PHP-Phar/">
+                    phar扩展在PHP反序列化中的利用
                 </a>
             </div>
         
@@ -438,7 +451,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#MD5扩展攻击介绍"><span class="toc-number">1.</span> <span class="toc-text">MD5扩展攻击介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MD5扩展攻击的具体实现"><span class="toc-number">2.</span> <span class="toc-text">MD5扩展攻击的具体实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#学习文章："><span class="toc-number">3.</span> <span class="toc-text">学习文章：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一维数组"><span class="toc-number">1.</span> <span class="toc-text">一维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二维数组"><span class="toc-number">2.</span> <span class="toc-text">二维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的基本操作"><span class="toc-number">3.</span> <span class="toc-text">数组的基本操作</span></a></li></ol>
         
     </div>
     <style>
@@ -474,7 +487,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"哈希长度扩展攻击　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（四）--数组　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -494,15 +507,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/07/25/PHP-Anony/" title="上一篇: PHP匿名函数">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/10/Crypto-RSA/" title="下一篇: RSA学习笔记">
+            <a href="/2018/09/04/PHP-Phar/" title="下一篇: phar扩展在PHP反序列化中的利用">
                 <i class="fa fa-angle-right"></i>
             </a>
         
