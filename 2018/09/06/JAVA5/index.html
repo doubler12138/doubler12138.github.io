@@ -15,24 +15,20 @@
 
 
 
-<meta name="description" content="学习一下密码学中相当重要的RSA加密和解密过程，以及CTF中关于RSA加密的解法">
-<meta name="keywords" content="学习笔记">
+<meta name="description" content="前言 这一部分学习Java中最重要的类和对象部分，主要是概念。">
+<meta name="keywords" content="学习笔记,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RSA学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/06/10/Crypto-RSA/index.html">
+<meta property="og:title" content="Java学习笔记（五） --类和对象">
+<meta property="og:url" content="http://yoursite.com/2018/09/06/JAVA5/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="学习一下密码学中相当重要的RSA加密和解密过程，以及CTF中关于RSA加密的解法">
+<meta property="og:description" content="前言 这一部分学习Java中最重要的类和对象部分，主要是概念。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/15.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/3.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/4.jpg">
-<meta property="og:updated_time" content="2018-07-23T01:31:39.938Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/16.jpg">
+<meta property="og:updated_time" content="2018-09-07T01:42:44.858Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RSA学习笔记">
-<meta name="twitter:description" content="学习一下密码学中相当重要的RSA加密和解密过程，以及CTF中关于RSA加密的解法">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/15.jpg">
+<meta name="twitter:title" content="Java学习笔记（五） --类和对象">
+<meta name="twitter:description" content="前言 这一部分学习Java中最重要的类和对象部分，主要是概念。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/16.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -64,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>RSA学习笔记 | Double--R blog</title>
+<title>Java学习笔记（五） --类和对象 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -302,11 +298,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Crypto-RSA" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JAVA5" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/10/Crypto-RSA/" class="article-date">
-      <time datetime="2018-06-10T06:54:47.000Z" itemprop="datePublished">2018-06-10</time>
+      <a href="/2018/09/06/JAVA5/" class="article-date">
+      <time datetime="2018-09-06T13:17:01.000Z" itemprop="datePublished">2018-09-06</time>
 </a>
 
 
@@ -321,7 +317,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      RSA学习笔记
+      Java学习笔记（五） --类和对象
     </h1>
   
 
@@ -330,7 +326,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,147字</span>
+			<span class="post-count">2,301字</span>
 		</span>
 	</span>
 	
@@ -339,7 +335,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
+			<span class="post-count">8分</span>
 		</span>
 	</span>
 </div>
@@ -352,7 +348,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -362,96 +358,110 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>学习一下密码学中相当重要的RSA加密和解密过程，以及CTF中关于RSA加密的解法</strong></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/15.jpg" alt=""></p>
+        <p><strong>前言</strong></p>
+<p>这一部分学习Java中最重要的类和对象部分，主要是概念。</p>
 <hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/16.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="RSA算法的基本原理"><a href="#RSA算法的基本原理" class="headerlink" title="RSA算法的基本原理"></a>RSA算法的基本原理</h4><ul>
-<li><h5 id="什么是RSA"><a href="#什么是RSA" class="headerlink" title="什么是RSA"></a><strong>什么是RSA</strong></h5><p>RSA算法是现今使用最广泛的公钥密码算法，也是号称地球上最安全的加密算法。</p>
-<p>在了解RSA算法之前，先熟悉下几个术语  ：</p>
-<p>根据密钥的使用方法，可以将密码分为对称密码和公钥密码   </p>
-<p>对称密码：加密和解密使用同一种密钥的方式   </p>
-<p>公钥密码：加密和解密使用不同的密码的方式，因此公钥密码通常也称为非对称密码。</p>
-<p>RSA加密可以用一个公式来表达<br>$$<br>密文＝明文^EmodN<br>$$<br>也就是说RSA加密是对明文的E次方后除以N后求取余数的过程。只要知道E和N就能进行RSA加密，所以说E、N是RSA加密的密钥，也就是说E和N的组合就是公钥。<br>$$<br>公钥=（E,N)<br>$$<br>不过E和N并不是随便什么数都可以，它是需要经过严格的数学计算得出的。</p>
-<p>RSA的解密同样可以用一个公式来表示<br>$$<br>明文=密文^DmodN<br>$$<br>也就是说密文进行D次方后除以N的余数就是明文，这就是RSA解密过程。知道D和N就能进行解密，所以D和N的组合就是私钥</p>
-</li>
-</ul>
-<p>$$<br>私钥=（D,N)<br>$$</p>
-<p>​    所以最后的密钥对就是<br>$$<br>密钥=（E,D,N）<br>$$</p>
+<hr>
+<h2 id="面向对象概述"><a href="#面向对象概述" class="headerlink" title="面向对象概述"></a>面向对象概述</h2><p><strong>对象：</strong></p>
+<p>对象是事物存在的实体，对象通常划分为两个部分，即静态部分与动态部分。静态部分通常被称为属性，任何对象都会具备其自身属性。动态部分通常成为行为。类实质上是封装对象属性和行为的载体，而对象则是类抽象出来的一个实例。</p>
+<p><strong>类：</strong></p>
+<p>类是同一类事物的统称，类是构造对象时所依赖的规范，具有相同特性和行为的一类事物就称为类。类是封装对象的属性和行为的载体，反过来说具有相同属性和行为的一类实体被称为类。</p>
+<p><strong>封装：</strong></p>
+<p>面向对象程序设计具有一下特点：</p>
 <ul>
-<li><h5 id="求N"><a href="#求N" class="headerlink" title="求N"></a><strong>求N</strong></h5><p>准备两个质数p,q。这两个质数不能太小，不然容易破解。<br>$$<br>N = p*q<br>$$</p>
-</li>
-<li><h5 id="求L（L为中间过程的中间数）"><a href="#求L（L为中间过程的中间数）" class="headerlink" title="求L（L为中间过程的中间数）"></a><strong>求L（L为中间过程的中间数）</strong></h5><p>L是p-1和q-1的最小公倍数，可用如下表达式表示</p>
-</li>
+<li>封装性</li>
+<li>继承性</li>
+<li>多态性</li>
 </ul>
-<p>$$<br>  L = lcm（p-1,q-1）<br>$$</p>
+<p>封装是面向对象编程的核心思想。将对象的属性和行为封装起来，其载体就是类，类通常对客户隐藏其实现细节，这就是封装的思想。</p>
+<p>采用封装的思想保证了类内部数据的完整性，应用该类的用户不能轻易地直接操作此数据结构，只能执行类允许公开的数据。这样就避免了外部操作对内部数据的影响，提高了程序的可维护性。使用类实现封装特性：</p>
+<p><code>类将内部数据隐藏--&gt;类--&gt;为用户提供对象的属性和行为接口--&gt;用户通过这些接口使用这些类</code></p>
+<p><strong>继承：</strong></p>
+<p>类之间的关系被称为关联。关联主要描述两个类之间的一般二元关系，继承是关联中的一种。</p>
+<p>继承性主要利用特定对象之间的共有属性。例如，平行四边形是四边形，平行四边形与四边形具有共同的特性，就是拥有四个边，可以将平行四边形类看做四边形的延伸，平行四边形复用了四边形的属性和行为，同时添加了平行四边形独有的属性和行为。这里可以将平行四边形类看做是从四边形类中继承的。在Java语言中将类似于平行四边形的类称为子类，将类似四边形类的类称为父类或超类。子类的实例都是父类的实例，但不能说父类的实例是子类的实例。</p>
+<p><strong>多态：</strong></p>
+<p>将父类对象应用于子类的特征就是多态。多态性允许以统一的风格编写程序，以处理种类繁多的已存在的类及相关类。多态的实现并不依赖具体类，而是依赖于抽象类和接口。抽象类不能实例化对象。在多态的机制中，父类通常会被定义为抽象类，在抽象类中给出一个方法的标准，而不给出实现的具体流程。由抽象方法组成的集合就是接口</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p><strong>成员变量：</strong></p>
+<p>在Java中对象的属性也称为成员变量。成员变量可以设置为Java中合法的数据类型，其实成员变量就是普通变量，可以为他设置初始值，也可以不设置。如果不设置初始值，则会有默认值。</p>
+<p><strong>成员方法：</strong></p>
+<p>在Java语言中使用成员方法对应于类对象的行为。一个成员方法可以有参数，这个参数可以是对象也可以是基本数据类型的变量，同时成员方法有返回值和不返回值的选择，如果方法需要返回值可以子啊方法体中使用return关键字。</p>
+<p>如果一个方法中含有与成员变量同名的局部变量，则方法中对这个变量的访问以局部变量进行。</p>
+<p>类成员变量和成员方法也可以统称为类成员。</p>
+<p><strong>权限修饰符：</strong></p>
+<p>Java中的权限修饰符主要包括private、public和protected。其修饰权限如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">访问包位置</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">类修饰符</th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">private</td>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">public</td>
+</tr>
+<tr>
+<td style="text-align:center">本类</td>
+<td style="text-align:center">可见</td>
+<td style="text-align:center">可见</td>
+<td style="text-align:center">可见</td>
+</tr>
+<tr>
+<td style="text-align:center">同包其他类或子类</td>
+<td style="text-align:center">不可见</td>
+<td style="text-align:center">可见</td>
+<td style="text-align:center">可见</td>
+</tr>
+<tr>
+<td style="text-align:center">其他包的类或子类</td>
+<td style="text-align:center">不可见</td>
+<td style="text-align:center">不可见</td>
+<td style="text-align:center">可见</td>
+</tr>
+</tbody>
+</table>
+<p>当声明类时不适用修饰符设置类的权限，则这个类预设为包存取范围，即只有一个包中的类可以调用这个类的成员变量或成员方法。类的权限设定会约束类成员的权限设定。</p>
+<p><strong>局部变量及其有效范围：</strong></p>
+<p>局部变量是在方法被执行时创建，在方法执行结束时被销毁。局部变量在使用时必须进行赋值操作或初始化。局部变量的有效范围从该变量的声明开始到该变量的结束为止。在相互不嵌套的作用域中可以同时声明两个名称和类型相同的局部变量。但是在相互嵌套的区域中不可以这样声明。</p>
+<p><strong>this关键字：</strong></p>
+<p>在Java语言中规定使用this关键字来代表本类对象的引用。this引用的就是本类的一个对象。this除了可以调用成员变量或成员方法之外，还可以作为方法的返回值，返回本类的对象。</p>
+<h2 id="类的构造方法"><a href="#类的构造方法" class="headerlink" title="类的构造方法"></a>类的构造方法</h2><p>构造方法是一个与类同名的方法，构造方法没有返回值，构造方法的名称要与本类的名称相同。在构造方法中可以为成员变量赋值，这样当实例化一个本类的对象时，相应的成员变量也将被初始化。如果类中没有明确定义构造方法，编译器会自动创建一个不带参数的默认构造方法。实例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnyThting</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AnyThting</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(<span class="string">"this调用有参构造方法"</span>);</span><br><span class="line">        System.out.println(<span class="string">"无参构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AnyThting</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        AnyThting test = <span class="keyword">new</span> AnyThting();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在无参构造方法中可以使用this关键字调用有参的构造方法，但是用这种方式需要注意的是只可以在无参构造方法中的第一句使用this调用有参构造方法。</p>
+<h2 id="静态变量、常量和方法"><a href="#静态变量、常量和方法" class="headerlink" title="静态变量、常量和方法"></a>静态变量、常量和方法</h2><p>由static修饰的变量、常量和方法被称为静态变量、常量和方法。被声明为static的变量、常量和方法被称为静态成员。静态成员属于类所有，区别于个别对象，可以在本类或其它类中是哦那个类名和”.”运算符调用静态成员。静态数据与静态方法的作用通常是为了提供共享数据或方法，但静态成员同样遵循着public、private和protected修饰符的约束。</p>
+<p>注意：在静态方法中不可以使用this关键字，不可以直接调用非静态方法。</p>
+<h2 id="类的主方法"><a href="#类的主方法" class="headerlink" title="类的主方法"></a>类的主方法</h2><p>主方法是类的入口点，它定义了程序从何处开始；主方法提供对程序流向的控制。主方法具有以下特征：</p>
 <ul>
-<li><h5 id="求E"><a href="#求E" class="headerlink" title="求E"></a><strong>求E</strong></h5><p>E必须满足两个条件：E是一个比1大比L小的数，E和L的最大公约数为1<br>$$<br>1&lt;E&lt;L<br>$$</p>
-<p>$$<br>gcd（E,L） = 1<br>$$</p>
-<p>之所以血药E和L的最大公约数为1是为了保证一定存在解密时需要使用的数D。</p>
-</li>
-<li><h5 id="求D"><a href="#求D" class="headerlink" title="求D"></a><strong>求D</strong></h5><p>数D是由数E计算出来的。D、E和L之间必须满足以下关系<br>$$<br>1&lt;D&lt;L<br>$$</p>
-<p>$$<br>E*D mod L = 1<br>$$</p>
-</li>
+<li>主方法是静态的，所以如要在主方法中调用其它方法，则该方法必须也是静态的。</li>
+<li>主方法没有返回值</li>
+<li>主方法的形参为数组。其中arg[0]~arg[n]分别代表程序的第一个参数到第n个参数，可以使用args.length获取参数个数</li>
 </ul>
-<p>我们用具体的数字来时间一下RSA的密钥对生成，及其加解密的全过程</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p><strong>对象的创建：</strong></p>
+<p>在Java语言中使用new操作符调用构造方法创建对象，创建与初始化是被捆绑在一起的。每个对象都是相互独立的，在内存中占据独立的内存地址，并且每个对象都具有自己的生命周期，当一个对象的生命周期结束时，对象就会变成垃圾，由Java虚拟机自带的垃圾回收机制处理，不能再被使用</p>
+<p><strong>访问对象的属性和行为：</strong><br>当用户使用new操作符创建一个对象后，可以使用“对象.类成员”来获取对象的属性和行为。</p>
+<p>两个对象的产生是相互独立的，一个对象得知的改变不会影响另一个对象。</p>
+<p><strong>对象的引用：</strong></p>
+<p>引用的语法：<code>类名 对象引用名称</code></p>
+<p>通常一个引用不一定需要一个对象相关联。引用与对象相关联的语法如下：<code>类名 对象 = new 类名</code></p>
+<p>引用只是存放一个对象的内存地址，并非存放一个对象</p>
+<p><strong>对象的比较：</strong><br>在Java中有两种对象的比较形式，”==”运算符比较两个对象的引用的地址是否相同，equals()方法是String类中的方法，用于比较两个对象引用所指的内容是否相同</p>
+<p><strong>对象的销毁：</strong></p>
+<p>对象被视为垃圾的两种情况：</p>
 <ul>
-<li><p>准备两个很小的一对质数 </p>
-<p>p = 17 </p>
-<p>q = 19</p>
-<p>N = p * q = 323</p>
-</li>
-<li><p>求L </p>
-<p>L = lcm(p-1,q-1) = lcm(16,18) = 144</p>
-</li>
-<li><p>求E</p>
-<p>E必须满足两个条件，显然5是满足的，故E=5</p>
-</li>
-<li><p>求D </p>
-<p>D也必须满足两个调教，显然29是满足的，5*29 mod 144 = 145 mod 144 =1</p>
-</li>
-<li><p>加密</p>
-<p>准备的明文必须是小于N的数，因为加密或者解密都是要mod N其结果必须小于N。</p>
-<p>假设明文 = 123</p>
-<p>则 密文 = 明文^EmodN = 123^5mod323=225. </p>
-</li>
-<li><p>解密</p>
-<p>明文 = 密文^DmodN = 225^29mod323 = 123</p>
-</li>
-</ul>
-<h4 id="CTF中RSA加密题的解法"><a href="#CTF中RSA加密题的解法" class="headerlink" title="CTF中RSA加密题的解法"></a><strong>CTF中RSA加密题的解法</strong></h4><pre><code>##### 这里我用一道实验吧的题目做例子：
-</code></pre><ul>
-<li><p>点击链接获得一个压缩包，拖进虚拟机里解压缩得到两个文件，分别是flag.enc和public.pem两个文件，这是要用到openssl</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/1.jpg" alt=""></p>
-<p>openssl：是一个安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及SSL协议，并提供丰富的应用程序供测试或其它目的使用 </p>
-</li>
-<li><p>打开终端，输入openssl进入openssl状态</p>
-<p>输入命令rsa -pubin -text -modulus -in public.pem(public.pem 为公钥文件)读取N和E</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/2.jpg" alt=""></p>
-<p>可以看到N=A41006DEFD378B7395B4E2EB1EC9BF56A61CD9C3B5A0A73528521EEB2FB817A7E=65537</p>
-<p>将N转换为10进制得到了N=74207624142945242263057035287110983967646020057307828709587969646701361764263 </p>
-</li>
-</ul>
-<ul>
-<li><p>分解N得出P和Q以便求出私钥D。</p>
-<p>这里使用软件yafu：用于自动整数因式分解，在RSA中，当P、Q的取值差异过大或过于相近时，使用yafu可以快速的把N分解出P、Q的值。</p>
-<p>打开cmd，进入yafu所在路径，输入yafu-64的命令，进入yafu工作阶段。输入factor(N的值)</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/3.jpg" alt=""></p>
-<p>这样我们就得到了P=258631601377848992211685134376492365269</p>
-<p>​                             Q=286924040788547268861394901519826758027</p>
-</li>
-<li><p>用python生成.pem密钥文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line">arsa=RSA.generate(<span class="number">1024</span>)</span><br><span class="line">arsa.p=<span class="number">258631601377848992211685134376492365269</span></span><br><span class="line">arsa.q=<span class="number">286924040788547268861394901519826758027</span></span><br><span class="line">arsa.e=<span class="number">65537</span></span><br><span class="line">arsa.n=arsa.p*arsa.q</span><br><span class="line">Fn=long((arsa.p<span class="number">-1</span>)*(arsa.q<span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#此处原理e*d=Fn*i+1</span></span><br><span class="line">i=<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">True</span>):</span><br><span class="line">    x=(Fn*i)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>(x%arsa.e==<span class="number">0</span>):</span><br><span class="line">           arsa.d=x/arsa.e</span><br><span class="line">           <span class="keyword">break</span></span><br><span class="line">    i=i+<span class="number">1</span></span><br><span class="line">private=open(<span class="string">'private.pem'</span>,<span class="string">'w'</span>)</span><br><span class="line">private.write(arsa.exportKey())</span><br><span class="line">private.close()</span><br></pre></td></tr></table></figure>
-<p>得到解密文件后复制进虚拟机</p>
-</li>
-<li><p>在虚拟机终端输入openssl进入openssl。</p>
-<p>输入： rsautl -decrypt -in flag.enc(密文文件) -inkey private.pem(密钥文件)</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/RSA/4.jpg" alt=""></p>
-<p>获得明文。</p>
-</li>
+<li>对象引用超过其范围</li>
+<li>对象赋值为null</li>
 </ul>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=546201466&auto=1&height=66"></iframe></div>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1296583188&auto=1&height=66"></iframe></div>
+
+
       
     </div>
     
@@ -459,13 +469,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/06/JAVA5/">Java学习笔记（五） --类和对象</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-06-10, 14:54:47</p>
-        <p><span>最后更新:</span>2018-07-23, 09:31:39</p>
+        <p><span>发布时间:</span>2018-09-06, 21:17:01</p>
+        <p><span>最后更新:</span>2018-09-07, 09:42:44</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/10/Crypto-RSA/" title="RSA学习笔记">http://yoursite.com/2018/06/10/Crypto-RSA/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/06/10/Crypto-RSA/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/06/JAVA5/" title="Java学习笔记（五） --类和对象">http://yoursite.com/2018/09/06/JAVA5/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/06/JAVA5/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -477,16 +487,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/06/12/Hash-Length-Extension-Attacks/">
-                    哈希长度扩展攻击
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/03/MVC-3/">
-                    基于fastphp学习搭建MVC框架（三）
+                <a href="/2018/09/05/JAVA4/">
+                    Java学习笔记（四）--数组
                 </a>
             </div>
         
@@ -498,7 +502,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#RSA算法的基本原理"><span class="toc-number">1.</span> <span class="toc-text">RSA算法的基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#什么是RSA"><span class="toc-number">1.1.</span> <span class="toc-text">什么是RSA</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#求N"><span class="toc-number">1.2.</span> <span class="toc-text">求N</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#求L（L为中间过程的中间数）"><span class="toc-number">1.3.</span> <span class="toc-text">求L（L为中间过程的中间数）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#求E"><span class="toc-number">1.4.</span> <span class="toc-text">求E</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#求D"><span class="toc-number">1.5.</span> <span class="toc-text">求D</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CTF中RSA加密题的解法"><span class="toc-number">2.</span> <span class="toc-text">CTF中RSA加密题的解法</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象概述"><span class="toc-number">1.</span> <span class="toc-text">面向对象概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-number">2.</span> <span class="toc-text">类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的构造方法"><span class="toc-number">3.</span> <span class="toc-text">类的构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态变量、常量和方法"><span class="toc-number">4.</span> <span class="toc-text">静态变量、常量和方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的主方法"><span class="toc-number">5.</span> <span class="toc-text">类的主方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-number">6.</span> <span class="toc-text">对象</span></a></li></ol>
         
     </div>
     <style>
@@ -534,7 +538,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"RSA学习笔记　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（五） --类和对象　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -554,15 +558,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/06/12/Hash-Length-Extension-Attacks/" title="上一篇: 哈希长度扩展攻击">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/03/MVC-3/" title="下一篇: 基于fastphp学习搭建MVC框架（三）">
+            <a href="/2018/09/05/JAVA4/" title="下一篇: Java学习笔记（四）--数组">
                 <i class="fa fa-angle-right"></i>
             </a>
         
