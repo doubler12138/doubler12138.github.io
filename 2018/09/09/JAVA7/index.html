@@ -15,21 +15,20 @@
 
 
 
-<meta name="description" content="这一部分主要是写重定向、入口文件和配置文件，还是在做前期的准备工作。">
-<meta name="keywords" content="项目">
+<meta name="description" content="前言 这一部分学习Java对数字处理的包装类">
+<meta name="keywords" content="学习笔记,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于fastphp学习搭建MVC框架（二）">
-<meta property="og:url" content="http://yoursite.com/2018/06/03/MVC-2/index.html">
+<meta property="og:title" content="Java学习笔记（七）--数字处理类">
+<meta property="og:url" content="http://yoursite.com/2018/09/09/JAVA7/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="这一部分主要是写重定向、入口文件和配置文件，还是在做前期的准备工作。">
+<meta property="og:description" content="前言 这一部分学习Java对数字处理的包装类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/22.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/06/03/MVC-2/3">
-<meta property="og:updated_time" content="2018-07-23T01:52:54.029Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg">
+<meta property="og:updated_time" content="2018-09-09T08:12:06.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于fastphp学习搭建MVC框架（二）">
-<meta name="twitter:description" content="这一部分主要是写重定向、入口文件和配置文件，还是在做前期的准备工作。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/22.jpg">
+<meta name="twitter:title" content="Java学习笔记（七）--数字处理类">
+<meta name="twitter:description" content="前言 这一部分学习Java对数字处理的包装类">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>基于fastphp学习搭建MVC框架（二） | Double--R blog</title>
+<title>Java学习笔记（七）--数字处理类 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -303,11 +302,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-MVC-2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JAVA7" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/03/MVC-2/" class="article-date">
-      <time datetime="2018-06-03T03:13:31.000Z" itemprop="datePublished">2018-06-03</time>
+      <a href="/2018/09/09/JAVA7/" class="article-date">
+      <time datetime="2018-09-09T01:37:42.000Z" itemprop="datePublished">2018-09-09</time>
 </a>
 
 
@@ -322,7 +321,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      基于fastphp学习搭建MVC框架（二）
+      Java学习笔记（七）--数字处理类
     </h1>
   
 
@@ -331,7 +330,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,281字</span>
+			<span class="post-count">1,210字</span>
 		</span>
 	</span>
 	
@@ -353,7 +352,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目/">项目</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -363,68 +362,110 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>这一部分主要是写重定向、入口文件和配置文件，还是在做前期的准备工作。</strong></p>
+        <p><strong>前言</strong></p>
+<p>这一部分学习Java对数字处理的包装类</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/22.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a><strong>重定向</strong></h4><h5 id="重定向的目的："><a href="#重定向的目的：" class="headerlink" title="重定向的目的："></a><strong>重定向的目的：</strong></h5><ul>
-<li><p>设置根目录为<code>project</code>所在的位置</p>
-<p>   将所有的请求都发送给index.php文件</p>
-<p><strong>Apache服务器：</strong></p>
-<p>   <strong>创建重定向文件：</strong></p>
-<p>在project目录下新建一个<code>.htaccess</code>文件，内容为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#如果mode_rewrite.c模块存在 则执行以下指令</span><br><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">#打开Rewrite功能</span><br><span class="line">RewriteEngine On</span><br><span class="line"></span><br><span class="line">#如果请求的是真实存在的文件或目录，直接访问</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line"></span><br><span class="line">#如果访问的文件或目录不是真实存在，分发请求至index.php</span><br><span class="line">RewriteRule . index.php</span><br><span class="line"></span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-<p>   <strong>文件命令分析：</strong></p>
-<p>RewriteCond表示重写条件，语法是：</p>
-<p><code>RewriteCond TestString CondPattern [flags]</code></p>
-<p>-f（常规文件） ：</p>
-<p>将TestString视为一个路径名并测试它是否为一个存在的目录</p>
-<p>-d（目录）：</p>
-<p>将TestString视为一个路径名并测试他是否为一个存在的目录</p>
-<p>RewriteRule表示重写规则，即在符合重写条件时的操作</p>
-<p>   <strong>.htaccess文件：</strong></p>
-<p>.htaccess文件（分布式配置文件）提供针对目录改变配置的方法，即在一个特定的文档目录中防止一个包含一个或多个指令的文件，以作用于此目录及其所有子目录。其可以帮我们实现：网页301重定向、自定义404错误界面、改变文件扩张名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能</p>
-<p>启用.htaccess，需要修改apache的配置文件http.conf，启用AllowOverride，并可以用AccessFileName限制特定命令</p>
-<p><img src="3" alt=""></p>
-<p>学习博客<a href="https://blog.csdn.net/weilee2009/article/details/12905081" target="_blank" rel="noopener">.htaccess详解及.htacess参数说明</a></p>
-<p><strong>Nginx服务器：</strong></p>
-</li>
-</ul>
-<p>在server块中加入如下重定向：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line"> # 重新向所有非真实存在的请求到index.php</span><br><span class="line"> try_files $uri $uri/ /index.php$args;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="重定向的原因："><a href="#重定向的原因：" class="headerlink" title="重定向的原因："></a><strong>重定向的原因：</strong></h5><ul>
-<li><p><strong>静态文件能直接访问：</strong></p>
-<p>如果文件或者目录真实存在，则直接访问存在的文件/目录</p>
-<p>比如，静态文件<code>static/css/main.css</code>真实存在，就可以直接访问它</p>
-<p>   <strong>程序有单一的入口：</strong></p>
-<p>这种情况时请求地址不是真实存在的文件或目录，这样请求就会传到index.php上</p>
-<p>例如，访问地址：`localhost/item/view/1,在文件系统中并不存在这样的文件或目录</p>
-<p>那么Apache或Nginx服务器会把请求发送给index.php，并把域名之后的字符串赋值给REQUEST_URI变量，这样在PHP中用$_SERVER[‘REQUEST_URI’]就能拿到/item/view/1</p>
-<p>   <strong>可以用来生成美化的URL，利于SEO：</strong></p>
-<p>SEO优化，就是让网站在搜索引擎中排位更靠前</p>
-</li>
-</ul>
-<h4 id="入口文件"><a href="#入口文件" class="headerlink" title="入口文件"></a><strong>入口文件</strong></h4><h5 id="创建index-php入口文件，文件内容："><a href="#创建index-php入口文件，文件内容：" class="headerlink" title="创建index.php入口文件，文件内容："></a><strong>创建index.php入口文件，文件内容：</strong></h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//应用目录为当前目录</span></span><br><span class="line">define(<span class="string">'APP_PATH'</span>,<span class="keyword">__DIR__</span> . <span class="string">'/'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//开启调试模式</span></span><br><span class="line">define(<span class="string">'APP_DEBUG'</span>, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//加载框架文件</span></span><br><span class="line"><span class="keyword">require</span>(APP_PATH . <span class="string">'fastphp/Fastphp.php'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//加载配置文件</span></span><br><span class="line">$config = <span class="keyword">require</span>(APP_PATH . <span class="string">'config/config.php'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//实例化框架类</span></span><br><span class="line">(<span class="keyword">new</span> Fastphp($config))-&gt;run();</span><br></pre></td></tr></table></figure>
-<h5 id="文件分析："><a href="#文件分析：" class="headerlink" title="文件分析："></a><strong>文件分析：</strong></h5><p>PHP define()函数用于定义要给常量，常量设定后常量值无法更改。常量名不需要开头的美元符号，作用域不影响对常量的访问，常量值只能是字符串或数字。</p>
-<p><strong>DIR</strong>取当前内容所处文件的文件目录<a href="https://www.cnblogs.com/aademeng/articles/6223463.html" target="_blank" rel="noopener">php – 取路径：getcwd()、<strong>DIR</strong>、<strong>FILE</strong> 的区别</a></p>
-<p>require()函数包含文件<a href="http://www.runoob.com/php/php-includes.html" target="_blank" rel="noopener">PHP inculde和require语句</a></p>
-<p>注意：上面的PHP代码中，并没有添加PHP结束符号<code>?&gt;</code>。这样做的主要原因是：</p>
-<p>对于只有PHP代码的文件最好没有结束标志，PHP自身并不需要结束符号，不加结束符号让程序更加安全，很大程度防止了末尾被注入的额外内容</p>
-<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a><strong>配置文件</strong></h4><h4 id="创建配置文件："><a href="#创建配置文件：" class="headerlink" title="创建配置文件："></a><strong>创建配置文件：</strong></h4><p>在入口文件中我们加载了config.php文件，其作用是定义数据库连接参数，以及配置默认控制器名和操作名，其内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">​</span><br></pre></td></tr></table></figure>
-<p>&lt;?php</p>
-<p>define(‘DB_NAME’，’project’);<br>define(‘DB_USER’, ‘root’);<br>define(‘DB_PASSWORD’, ‘root’);<br>define(‘DB_HOST’, ‘localhost’);</p>
-<p>$config[‘defaultController’] = ‘Item’;<br>$config[‘defaultAction’] = ‘index’;</p>
-<p>return $config;<br>​<code></code></p>
-<p><strong>文件分析：</strong></p>
-<p>定义了数据连接所需要的数据库名、用户名、密码和允许连接用户的常量，设置了一个数组，默认控制器名为Item，默认操作名为index。</p>
-<p>return写在函数外面是PHP的特殊用法之一，在同一个文件中，如果执行了return，则return 语句后面的内容将不会被执行了；若文件调用另一个文件中的方法或其他代码，在该方法或代码中使用return 则该方法后面的语句不再执行，但调用该方法或代码的源文件照常执行。并且return的值会当作require的返回值</p>
-<p><a href="https://blog.csdn.net/u013372487/article/details/51363850" target="_blank" rel="noopener">php return的用法</a></p>
-<p>入口中的$config变量接收到配置参数后，在传给框架的核心类，也就是Fastphp类</p>
-<p><strong>到着前期的所有准备工作就完成了，下面就是核心框架类的编写了</strong></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27890306&auto=1&height=66"></iframe></div>
-
+<h2 id="数字格式化"><a href="#数字格式化" class="headerlink" title="数字格式化"></a>数字格式化</h2><p>Java主要对浮点型数据进行数字格式化操作，其中浮点型数据包括double型和float型数据，在Java中使用java.text.DecimalFormat格式化数字。</p>
+<p>在Java中没有格式化的数据遵循以下原则：</p>
+<ul>
+<li>如果数据绝对值大于0.001并且小于10000000，Java将以常规小数形式表示</li>
+<li>如果数据绝对值小于0.001或者大于10000000，使用科学计数法表示</li>
+</ul>
+<p>DecimalFormat是NumberFormat的一个子类，用于格式化十进制数字。它可以将一些数字格式化为证书、浮点数、科学计数法、百分数等。一般情况下可以在实例化DecimalFormat对象时传递数字格式化，也可以通过DecimalFormat类中的applyPatter()方法来实现数字格式化。</p>
+<pre><code>DecimalFormat 类中特殊字符说明
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">表示数字的一位阿拉伯数字，如果该位不存在数字，则显示0</td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td style="text-align:center">表示数字的一位阿拉伯数字，如果存在则显示字符，不存在不显示</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">小数分隔符</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">负号</td>
+</tr>
+<tr>
+<td style="text-align:center">，</td>
+<td style="text-align:center">分组分隔符</td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:center">分隔科学计数法中的尾数和指数</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">本符号放置在数字的前缀或后缀，将数字乘以100显示为百分数</td>
+</tr>
+<tr>
+<td style="text-align:center">\u2030</td>
+<td style="text-align:center">本符号放置在数字的前缀或后缀，将数字乘以1000显示为千分数</td>
+</tr>
+<tr>
+<td style="text-align:center">\u00A4</td>
+<td style="text-align:center">本符号放置在数字的前缀或后缀，作为货币记号</td>
+</tr>
+<tr>
+<td style="text-align:center">‘</td>
+<td style="text-align:center">当上述字符出现在数字中时，需要用单引号引起，系统会将其作为普通符号处理</td>
+</tr>
+</tbody>
+</table>
+<p>数字格式化的使用实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.DecimalFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimgleFormat</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Simgle</span><span class="params">(String pattern,<span class="keyword">double</span> value)</span></span>&#123;</span><br><span class="line">        DecimalFormat myFormat = <span class="keyword">new</span> DecimalFormat(pattern);</span><br><span class="line">        String output = myFormat.format(value);</span><br><span class="line">        System.out.println(value + <span class="string">" "</span>+ pattern + <span class="string">" "</span> + output);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">UseApplyPatternMethodFormat</span><span class="params">(String pattern,<span class="keyword">double</span> value)</span></span>&#123;</span><br><span class="line">        DecimalFormat myFormat = <span class="keyword">new</span> DecimalFormat();</span><br><span class="line">        myFormat.applyPattern(pattern);</span><br><span class="line">        System.out.println(value + <span class="string">" "</span> + pattern + <span class="string">" "</span> + myFormat.format(value));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Simgle(<span class="string">"###,###.###"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        Simgle(<span class="string">"00000000.###kg"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        Simgle(<span class="string">"000000.000"</span>,<span class="number">123.45</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"#.###%"</span>,<span class="number">0.789</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"###.##"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"0.00\u2030"</span>,<span class="number">0.789</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在DecimalFormat类中除了可以设置格式化模式来格式化数字之外，还可以使用有些特殊方法对数字进行格式化设置，例如setGroupingSize方法可以设置格式化数字分组大小。</p>
+<h2 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h2><p>在Java语言中提供了一个执行数学基本运算的Math类，该类包括常用的数学孕妇按方法，如三角函数方法、指数函数方法、对数函数方法、平方根函数方法等一些常用数学函数，除此之外还提供了一些常用的数学方法。</p>
+<p><strong>三角函数方法：</strong></p>
+<ul>
+<li>public static double sin(double a)：返回一个值的三角正弦</li>
+<li>public static double cos(double a)：返回一个值的三角余弦</li>
+<li>public static double tan(double a)：返回一个值的三角正切</li>
+<li>public static double asin(double a)：返回一个值的反正弦</li>
+<li>public static double acos(double a)：返回一个值的反余弦</li>
+<li>public static double atan(double a)：返回一个值的反正切</li>
+<li>public static double toRadians(double a)：将角度转换为弧度</li>
+<li>public static double toDegrees(double a)：将弧度转换为角度</li>
+</ul>
+<p>使用示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrigonometricFunction</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"90度的正弦值："</span> + Math.sin(Math.PI/<span class="number">2</span>));</span><br><span class="line">        System.out.println(<span class="string">"0度的余弦值："</span> + Math.cos(<span class="number">0</span>));</span><br><span class="line">        System.out.println(<span class="string">"60度的正切值："</span> + Math.tan(Math.PI/<span class="number">3</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>指数函数方法：</strong></p>
+<ul>
+<li>public static double exp(double a)：用于获取e的a次方</li>
+<li>public static double log(double a)：用于取自然对数</li>
+<li>public static double log10(double a)：用于取底数为10的对数</li>
+<li>public static double sqrt(double a)：用于取a的平方根</li>
+<li>public static double cbrt(double a)：用于取a的立方根</li>
+<li>public static double pow(double a,double b)：用于取a的b次方</li>
+</ul>
+<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><p><strong>Math.random()方法：</strong></p>
+<p>这个方法默认生成大于等于0.0小于1.0的double型随机数</p>
+<p><strong>Random类：</strong></p>
+<p>Java中还提供一种可以获取随机数的java.util.Random类，语法如下：<code>Random r = new Random();</code></p>
+<h2 id="大数字运算"><a href="#大数字运算" class="headerlink" title="大数字运算"></a>大数字运算</h2><p><strong>BigInteger：</strong></p>
+<p>Java提供java.math.BigInteger类进行大数字运算，BigInteger类型的数字范围较Integer类型的数字范围要大很多。BigInteger支持任意精度的证书，也就是说在运算中BigInteger类型可以准确地表示任何大小的整数值而不不会丢失任何信息，语法如下：<code>public BigInteger(String val)</code></p>
+<p><strong>BigDecimal：</strong><br>BigDecimal和BigInteger都能实现大数字的运算，不同的是BigDecimal加入小数的概念。BigDecimal类支持任何精度的定点数。</p>
+<p>常用的两个构造方法如下：</p>
+<ul>
+<li>public BigDecimal(double val)：实例化时将双精度型转换为BigDecimal类型</li>
+<li>public BigDecimal(String val)：实例化时将字符串形式转换为BigDecimal类型</li>
+</ul>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=26508186&auto=1&height=66"></iframe></div>
 
 
       
@@ -434,13 +475,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/03/MVC-2/">基于fastphp学习搭建MVC框架（二）</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/09/JAVA7/">Java学习笔记（七）--数字处理类</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-06-03, 11:13:31</p>
-        <p><span>最后更新:</span>2018-07-23, 09:52:54</p>
+        <p><span>发布时间:</span>2018-09-09, 09:37:42</p>
+        <p><span>最后更新:</span>2018-09-09, 16:12:06</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/03/MVC-2/" title="基于fastphp学习搭建MVC框架（二）">http://yoursite.com/2018/06/03/MVC-2/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/06/03/MVC-2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/09/JAVA7/" title="Java学习笔记（七）--数字处理类">http://yoursite.com/2018/09/09/JAVA7/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/09/JAVA7/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -452,16 +493,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/06/03/MVC-3/">
-                    基于fastphp学习搭建MVC框架（三）
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/01/MVC-1/">
-                    基于fastphp学习搭建MVC框架（一）
+                <a href="/2018/09/08/JAVA6/">
+                    Java学习笔记（六）--包装类
                 </a>
             </div>
         
@@ -473,7 +508,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#重定向"><span class="toc-number">1.</span> <span class="toc-text">重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#重定向的目的："><span class="toc-number">1.1.</span> <span class="toc-text">重定向的目的：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#重定向的原因："><span class="toc-number">1.2.</span> <span class="toc-text">重定向的原因：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#入口文件"><span class="toc-number">2.</span> <span class="toc-text">入口文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建index-php入口文件，文件内容："><span class="toc-number">2.1.</span> <span class="toc-text">创建index.php入口文件，文件内容：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#文件分析："><span class="toc-number">2.2.</span> <span class="toc-text">文件分析：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置文件"><span class="toc-number">3.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建配置文件："><span class="toc-number">4.</span> <span class="toc-text">创建配置文件：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数字格式化"><span class="toc-number">1.</span> <span class="toc-text">数字格式化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数学运算"><span class="toc-number">2.</span> <span class="toc-text">数学运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#随机数"><span class="toc-number">3.</span> <span class="toc-text">随机数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大数字运算"><span class="toc-number">4.</span> <span class="toc-text">大数字运算</span></a></li></ol>
         
     </div>
     <style>
@@ -509,7 +544,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"基于fastphp学习搭建MVC框架（二）　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（七）--数字处理类　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -529,15 +564,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/06/03/MVC-3/" title="上一篇: 基于fastphp学习搭建MVC框架（三）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/01/MVC-1/" title="下一篇: 基于fastphp学习搭建MVC框架（一）">
+            <a href="/2018/09/08/JAVA6/" title="下一篇: Java学习笔记（六）--包装类">
                 <i class="fa fa-angle-right"></i>
             </a>
         
