@@ -15,20 +15,20 @@
 
 
 
-<meta name="description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求.这部分一篇文章是写不完了，要学的太多了，可能这部分要写个四五篇吧">
-<meta name="keywords" content="项目">
+<meta name="description" content="前言 在Java中不能定义基本类型对象，为了能将基本类型视为对象进行处理，并能连接相关的方法，Java为每个基本类型都提供了包装类，今天主要学习各个基本类型的包装类。">
+<meta name="keywords" content="学习笔记,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于fastphp学习搭建MVC框架（三）">
-<meta property="og:url" content="http://yoursite.com/2018/06/03/MVC-3/index.html">
+<meta property="og:title" content="Java学习笔记（六）--包装类">
+<meta property="og:url" content="http://yoursite.com/2018/09/08/JAVA6/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求.这部分一篇文章是写不完了，要学的太多了，可能这部分要写个四五篇吧">
+<meta property="og:description" content="前言 在Java中不能定义基本类型对象，为了能将基本类型视为对象进行处理，并能连接相关的方法，Java为每个基本类型都提供了包装类，今天主要学习各个基本类型的包装类。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/23.jpg">
-<meta property="og:updated_time" content="2018-07-23T01:58:52.596Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/18.jpg">
+<meta property="og:updated_time" content="2018-09-09T01:35:56.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于fastphp学习搭建MVC框架（三）">
-<meta name="twitter:description" content="这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求.这部分一篇文章是写不完了，要学的太多了，可能这部分要写个四五篇吧">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/23.jpg">
+<meta name="twitter:title" content="Java学习笔记（六）--包装类">
+<meta name="twitter:description" content="前言 在Java中不能定义基本类型对象，为了能将基本类型视为对象进行处理，并能连接相关的方法，Java为每个基本类型都提供了包装类，今天主要学习各个基本类型的包装类。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/18.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>基于fastphp学习搭建MVC框架（三） | Double--R blog</title>
+<title>Java学习笔记（六）--包装类 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -302,11 +302,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-MVC-3" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JAVA6" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/03/MVC-3/" class="article-date">
-      <time datetime="2018-06-03T11:02:16.000Z" itemprop="datePublished">2018-06-03</time>
+      <a href="/2018/09/08/JAVA6/" class="article-date">
+      <time datetime="2018-09-08T02:38:12.000Z" itemprop="datePublished">2018-09-08</time>
 </a>
 
 
@@ -321,7 +321,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      基于fastphp学习搭建MVC框架（三）
+      Java学习笔记（六）--包装类
     </h1>
   
 
@@ -330,7 +330,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">199字</span>
+			<span class="post-count">992字</span>
 		</span>
 	</span>
 	
@@ -339,7 +339,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">1分</span>
+			<span class="post-count">4分</span>
 		</span>
 	</span>
 </div>
@@ -352,7 +352,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目/">项目</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -362,25 +362,103 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>这一部分就到了最重要的框架核心类的编写了，它的作用在于调用相应的模型、控制器和视图来完成相应的请求.这部分一篇文章是写不完了，要学的太多了，可能这部分要写个四五篇吧</strong></p>
+        <p><strong>前言</strong></p>
+<p>在Java中不能定义基本类型对象，为了能将基本类型视为对象进行处理，并能连接相关的方法，Java为每个基本类型都提供了包装类，今天主要学习各个基本类型的包装类。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/23.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/18.jpg" alt=""></p>
 <a id="more"></a>
-<p><strong>框架核心类1</strong></p>
+<hr>
+<h2 id="Integer"><a href="#Integer" class="headerlink" title="Integer"></a>Integer</h2><p>java.lang包中的Integer类、Long类和Short类，分别将基本类型int、long和short封装成一个类。由于这些类都是Number的子类，区别就是封装不同的数据类型，其包含的方法基本相同，所以这里主要通过Integer类为例学习整数包装类。</p>
+<p><strong>构造方法：</strong></p>
+<p><code>Integer(int number)</code>：以一个int型变量作为参数创建Integer对象。</p>
+<p><code>Integer(String str)</code>：以一个String型变量作为参数创建Integer对象。</p>
+<p><strong>Integer类的常用方法：</strong></p>
 <ul>
-<li><p><strong>创建Fastphp.php文件：</strong></p>
-<p>入口文件对框架类做了两步操作：<code>实例化，调用run()方法</code></p>
-<p>实例化操作接收接收$config参数配置，并保存到类属性中。</p>
-<p>run()方法则调用类自身方法，完成：<code>自动加载类文件、检测开发环境、过滤敏感字符、移除全局变量的老用法和处理路由</code></p>
-<p><strong>Fastphp.php文件内容：</strong></p>
+<li>byteValue()：以byte类型返回改Integer的值</li>
+<li>compareTo()：比较两个Integer独享。如果相等返回0，前者小于后者返回负值，反之正值。</li>
+<li>equals(Object IntegerObj)：比较此对象与指定的对象是否相等。</li>
+<li>intValue()：以int类型返回此Integer对象</li>
+<li>shortValue()：以short类型返回此Integer对象</li>
+<li>toString()：返回一个表示该Integer值的String对象</li>
+<li>valueOf(String str)：返回保存指定的String值的Integer对象</li>
+<li>parseInt(String str)：返回包含在由str指定的字符串中的数字的等价整数值</li>
+</ul>
+<p><strong>常量：</strong></p>
+<p>Integer类提供了以下4个常量：</p>
 <ul>
-<li><p><strong>第一部分：</strong></p>
-<p>类初始化和程序运行</p>
-<p><img src="" alt=""></p>
-</li>
+<li>MAX_VALUE：表示int类型可取的最大值</li>
+<li>MIN_ VALUE：表示int类型可取的最小值</li>
+<li>SIZE：表示用二进制补码形式表示int值的位数</li>
+<li>TYPE：表示基本类型int的Class实例</li>
 </ul>
-</li>
+<h2 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h2><p>Boolean类将基本类型为Boolean的值包装在一个对象中。一个Boolean类型的对象只包含一个类型为Boolean的字段。</p>
+<p><strong>构造方法：</strong></p>
+<ul>
+<li>Boolean(boolean value)：创建一个表示value参数的Boolean对象</li>
+<li>Boolean（String str)：以String变量作为参数创建Boolean对象</li>
 </ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li>booleanValue：将Boolean对象那的值以对应的boolean值返回</li>
+<li>parseBoolean：将字符串参数解析为boolean值</li>
+</ul>
+<p><strong>常量：</strong></p>
+<p>Boolean提供一下三种常量：</p>
+<ul>
+<li>TRUE：对应基值为true的Boolean对象</li>
+<li>FALSE：对应基值为false的Boolean对象</li>
+<li>TYPE：基本类型boolean的Class对象</li>
+</ul>
+<h2 id="Byte"><a href="#Byte" class="headerlink" title="Byte"></a>Byte</h2><p><strong>构造方法：</strong></p>
+<p>和之前的一样</p>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li>doubleValue：以一个double值返回此Byte的值</li>
+<li>intValue：以一个int值返回此Byte的值</li>
+</ul>
+<p><strong>常量：</strong></p>
+<ul>
+<li>MIN_VALUE：byte类型可取的最小值</li>
+<li>MAX_VALUE：byte类型可取的最大值</li>
+<li>SIZE：用于以二进制补码形式表示byte值的位数</li>
+<li>TYPE：表示基本类型byte的Class实例</li>
+</ul>
+<h2 id="Character"><a href="#Character" class="headerlink" title="Character"></a>Character</h2><p><strong>构造方法：</strong></p>
+<p><code>Character(char value)</code>：该类的构造函数必须是一个char类型的数据。通过该构造函数创建的Character类对象包含由char类型参数提供的值，一旦Character类被创建，它包含的数值就不能改变。</p>
+<p><strong>常用函数：</strong></p>
+<ul>
+<li>toUpperCase(char ch)：将字符参数转换为大写</li>
+<li>toLowerCase(char ch)：将字符参数转换为小写</li>
+<li>isUpperCase(char ch)：判断指定字符是否是大写</li>
+<li>isLowerCase(char ch)：判断指定字符是否是小写</li>
+</ul>
+<p><strong>常量：</strong></p>
+<ul>
+<li>CONNECTOR_PUNCTUATION：返回byte型值，表示Unicode规范中的常规类别”Pe”</li>
+<li>UNASSIGNED：返回byte型值，表示Unicode规范中的常规类别”Cn”</li>
+<li>TITLECASE_LETTER：返回byte型值，</li>
+</ul>
+<h2 id="Double"><a href="#Double" class="headerlink" title="Double"></a>Double</h2><p>Double和Float包装类是对double、float基本类型的封装，他们都是Number类的子类</p>
+<p><strong>构造方法：</strong></p>
+<ul>
+<li>Double(double value)：基于double参数创建Double类对象</li>
+<li>Double(String str)：构造一个新分配的Double对象，表示用字符串表示的都办了类型的浮点值</li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li>isNaN()：如果次double值是非数字值，则返回true；否则返回false</li>
+<li>longValue()：以long形式返回此double的值</li>
+</ul>
+<p><strong>常量：</strong></p>
+<ul>
+<li>MAX_EXPONENT：返回int值，表示有限double变量可能具有的最大指数</li>
+<li>MIN_EXPONENT：返回int值，表示标准化double变量可能具有的最小指数</li>
+<li>NEGATIVE_INFINTY：返回double值，表示保存double类型的负无穷大值的常量</li>
+<li>POSTIVE_INFINTY：返回double值，表示保存double类型的正无穷大值的常量</li>
+</ul>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29761059&auto=1&height=66"></iframe></div>
+
 
       
     </div>
@@ -389,13 +467,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/03/MVC-3/">基于fastphp学习搭建MVC框架（三）</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/08/JAVA6/">Java学习笔记（六）--包装类</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-06-03, 19:02:16</p>
-        <p><span>最后更新:</span>2018-07-23, 09:58:52</p>
+        <p><span>发布时间:</span>2018-09-08, 10:38:12</p>
+        <p><span>最后更新:</span>2018-09-09, 09:35:56</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/03/MVC-3/" title="基于fastphp学习搭建MVC框架（三）">http://yoursite.com/2018/06/03/MVC-3/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/06/03/MVC-3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/08/JAVA6/" title="Java学习笔记（六）--包装类">http://yoursite.com/2018/09/08/JAVA6/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/08/JAVA6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -407,16 +485,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/06/10/Crypto-RSA/">
-                    RSA学习笔记
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/03/MVC-2/">
-                    基于fastphp学习搭建MVC框架（二）
+                <a href="/2018/09/07/DedeCMS4/">
+                    DedeCMS代码审计Day4
                 </a>
             </div>
         
@@ -428,7 +500,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Integer"><span class="toc-number">1.</span> <span class="toc-text">Integer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boolean"><span class="toc-number">2.</span> <span class="toc-text">Boolean</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Byte"><span class="toc-number">3.</span> <span class="toc-text">Byte</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Character"><span class="toc-number">4.</span> <span class="toc-text">Character</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Double"><span class="toc-number">5.</span> <span class="toc-text">Double</span></a></li></ol>
         
     </div>
     <style>
@@ -464,7 +536,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"基于fastphp学习搭建MVC框架（三）　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（六）--包装类　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -484,15 +556,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/06/10/Crypto-RSA/" title="上一篇: RSA学习笔记">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/03/MVC-2/" title="下一篇: 基于fastphp学习搭建MVC框架（二）">
+            <a href="/2018/09/07/DedeCMS4/" title="下一篇: DedeCMS代码审计Day4">
                 <i class="fa fa-angle-right"></i>
             </a>
         
