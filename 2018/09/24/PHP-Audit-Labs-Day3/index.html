@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day3/3.png">
-<meta property="og:updated_time" content="2018-09-25T15:18:12.706Z">
+<meta property="og:updated_time" content="2018-09-25T15:20:06.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP代码审计-实例化任意对象漏洞">
 <meta name="twitter:description" content="前言 PHP-Audit-Labs-Day3-实例化任意对象漏洞，学习一下。">
@@ -205,17 +205,19 @@
                     
                       <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
-                    
                       <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
                     
                       <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
                     
@@ -240,6 +242,8 @@
                       <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
                     
                       <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
                     
@@ -337,7 +341,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">848字</span>
+			<span class="post-count">922字</span>
 		</span>
 	</span>
 	
@@ -388,7 +392,7 @@
 <p>第二个漏洞是第10行，实例化类的类名和传入类的参数均是可控的，所以攻击者可以通过该漏洞，构造任意函数。即使代码本身不包含易受攻击的构造函数，我们也可以使用SimpleXMLElement来进行XXE攻击，当然这里是一个Blind XXE，所以要通过引用外部实体的方法进行攻击，但我再写.dtd文件时总是有问题，等下次解决了再改。除此之外我们还可以利用这个漏洞进行命令执行（前提是安装了PHP扩展插件expect）。</p>
 <h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>下面对与他留下来的题目进行分析。</p>
 <p><strong>题目源码：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotFound</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'404'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">spl_autoload_register(</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="params">($class)</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> NotFound();</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line">$classname = <span class="keyword">isset</span>($_GET[<span class="string">'name'</span>]) ? $_GET[<span class="string">'name'</span>] : <span class="keyword">null</span>;</span><br><span class="line">$param = <span class="keyword">isset</span>($_GET[<span class="string">'param'</span>]) ? $_GET[<span class="string">'param'</span>] : <span class="keyword">null</span>;</span><br><span class="line">$param2 = <span class="keyword">isset</span>($_GET[<span class="string">'param2'</span>]) ? $_GET[<span class="string">'param2'</span>] : <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span>(class_exists($classname))&#123;</span><br><span class="line">    $newclass = <span class="keyword">new</span> $classname($param,$param2);</span><br><span class="line">    var_dump($newclass);</span><br><span class="line">    <span class="keyword">foreach</span> ($newclass <span class="keyword">as</span> $key=&gt;$value)</span><br><span class="line">        <span class="keyword">echo</span> $key.<span class="string">'=&gt;'</span>.$value.<span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// f1agi3hEre.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$flag = <span class="string">"HRCTF&#123;X33_W1tH_S1mpl3Xml3l3m3nt&#125;"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>题目分析：</strong></p>
 <p>这道题主要就是之前提到的实例化漏洞和XXE漏洞的结合，他同样使用了class_exists函数来判断类是否存在，但是这里并没有__autoload函数，而是通过spl_autoload_register注册了一个类似__autoload做用的函数，即输出404信息，spl_autoload_register函数的定义如下：</p>
@@ -417,7 +421,7 @@
         <p><span>本文标题:</span><a href="/2018/09/24/PHP-Audit-Labs-Day3/">PHP代码审计-实例化任意对象漏洞</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2018-09-24, 19:47:16</p>
-        <p><span>最后更新:</span>2018-09-25, 23:18:12</p>
+        <p><span>最后更新:</span>2018-09-25, 23:20:06</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/09/24/PHP-Audit-Labs-Day3/" title="PHP代码审计-实例化任意对象漏洞">http://yoursite.com/2018/09/24/PHP-Audit-Labs-Day3/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/24/PHP-Audit-Labs-Day3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
