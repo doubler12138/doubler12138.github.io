@@ -15,20 +15,40 @@
 
 
 
-<meta name="description" content="前言 ThinkPHP学习的最后一章内容–缓存，另外，今天的BGM有点搞">
-<meta name="keywords" content="学习笔记,PHP">
+<meta name="description" content="前言 今天初步学习了一下Servlet项目的创建和Tomcat的使用，直接头秃">
+<meta name="keywords" content="Java,Servlet">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ThinkPHP框架学习--缓存">
-<meta property="og:url" content="http://yoursite.com/2018/08/22/ThinkPHP11/index.html">
+<meta property="og:title" content="Java-Servlet学习笔记（一）">
+<meta property="og:url" content="http://yoursite.com/2018/09/29/Java-Servlet1/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言 ThinkPHP学习的最后一章内容–缓存，另外，今天的BGM有点搞">
+<meta property="og:description" content="前言 今天初步学习了一下Servlet项目的创建和Tomcat的使用，直接头秃">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/6.jpg">
-<meta property="og:updated_time" content="2018-09-01T10:02:24.208Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/28.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/8.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/9.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/10.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/11.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/12.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/13.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/14.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/15.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/16.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/17.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/18.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/19.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/20.png">
+<meta property="og:updated_time" content="2018-09-29T14:54:22.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ThinkPHP框架学习--缓存">
-<meta name="twitter:description" content="前言 ThinkPHP学习的最后一章内容–缓存，另外，今天的BGM有点搞">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/6.jpg">
+<meta name="twitter:title" content="Java-Servlet学习笔记（一）">
+<meta name="twitter:description" content="前言 今天初步学习了一下Servlet项目的创建和Tomcat的使用，直接头秃">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/28.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +80,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>ThinkPHP框架学习--缓存 | Double--R blog</title>
+<title>Java-Servlet学习笔记（一） | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -310,11 +330,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-ThinkPHP11" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java-Servlet1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/22/ThinkPHP11/" class="article-date">
-      <time datetime="2018-08-22T08:56:20.000Z" itemprop="datePublished">2018-08-22</time>
+      <a href="/2018/09/29/Java-Servlet1/" class="article-date">
+      <time datetime="2018-09-29T13:54:54.000Z" itemprop="datePublished">2018-09-29</time>
 </a>
 
 
@@ -329,7 +349,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ThinkPHP框架学习--缓存
+      Java-Servlet学习笔记（一）
     </h1>
   
 
@@ -338,7 +358,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">790字</span>
+			<span class="post-count">299字</span>
 		</span>
 	</span>
 	
@@ -347,7 +367,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">3分</span>
+			<span class="post-count">1分</span>
 		</span>
 	</span>
 </div>
@@ -360,7 +380,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -371,60 +391,63 @@
       
           
         <p><strong>前言</strong></p>
-<p>ThinkPHP学习的最后一章内容–缓存，另外，今天的BGM有点搞</p>
+<p>今天初步学习了一下Servlet项目的创建和Tomcat的使用，直接头秃</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/6.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/28.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="数据缓存"><a href="#数据缓存" class="headerlink" title="数据缓存"></a>数据缓存</h2><p>ThinkPHP内置S函数用来操作数据缓存，包括写入缓存、读取缓存、删除缓存。S函数原型如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">S</span><span class="params">($name,$value=<span class="string">''</span>,$options=null)</span></span></span><br></pre></td></tr></table></figure>
-<p>根据传入参数的不同会有不同的实现方式：</p>
-<p><strong>写入缓存：</strong></p>
-<p>使用方法如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S(<span class="string">'name'</span>,$value,<span class="number">300</span>);<span class="comment">//以"name"为key名称缓存$value300秒</span></span><br></pre></td></tr></table></figure>
-<p><strong>读取缓存：</strong></p>
-<p>使用方法如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$value = S(<span class="string">'name'</span>);<span class="comment">//如果缓存存在且有效则返回缓存的数据，否则返回false</span></span><br></pre></td></tr></table></figure>
-<p><strong>删除缓存：</strong><br>使用方法如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S(<span class="string">'name'</span>,<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="页面缓存"><a href="#页面缓存" class="headerlink" title="页面缓存"></a>页面缓存</h2><p>CMS一般会有个生成静态页面的功能，静态页面性能比动态页面性能高。</p>
-<p>静态缓存的开启需要手动配置”HTML_CACHE_ON”，并且同时配置”HTML_CACHE_RULES”，配置代码如下所示：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'HTML_CACHE_ON'</span> =&gt; <span class="keyword">true</span>, <span class="comment">//开启静态缓存</span></span><br><span class="line"><span class="string">'HTML_CACHE_TIME'</span> =&gt; <span class="number">60</span>, <span class="comment">//全局静态缓存有效期（秒）</span></span><br><span class="line"><span class="string">'HTML_FILE_SUFFIX'</span> =&gt; <span class="string">'.html'</span>, <span class="comment">//设置静态文件后缀</span></span><br><span class="line"><span class="string">'HTML_CACHE_RULES'</span> =&gt; <span class="keyword">array</span>( <span class="comment">//定义静态缓存规则</span></span><br><span class="line">	<span class="string">'访问地址'</span> =&gt; <span class="keyword">array</span>(<span class="string">'静态规则'</span>,<span class="string">'有效期'</span>,<span class="string">'附加规则'</span>),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p><strong>访问地址定义：</strong></p>
-<p>全局的action规则，例如定义所有的view操作的静态规则如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'view'</span> =&gt; <span class="keyword">array</span>(<span class="string">'&#123;id&#125;'</span>,<span class="number">60</span>)；</span><br></pre></td></tr></table></figure>
-<p>表示所有action为”view”的页面都会被缓存60秒，{id}表示$_GET[‘id’]。</p>
-<p>全局的controller规则，例如定义所有的Article控制器的静态规则如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'article:'</span> =&gt; <span class="keyword">array</span>(<span class="string">'Article/&#123;:action&#125;_&#123;id&#125;'</span>,<span class="number">60</span>);</span><br></pre></td></tr></table></figure>
-<p>表示所有article的操作都会被缓存60秒，{:action}表示当前action名称</p>
-<p>特定控制器特定操作的规则，例如定义new控制器的view操作的静态规则如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'new:view'</span> =&gt; <span class="keyword">array</span>(<span class="string">'&#123;id&#125;'</span>,<span class="number">60</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>静态规则定义：</strong></p>
-<p>静态规则是用于定义要生成的静态文件的名称，静态规则的定义要确保不会冲突，写法可以包括以下情况：</p>
-<ul>
-<li>使用PHP变量，包括：</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_GET $_POST $_SERVERT $_SESSION $_COOKIE</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>使用ThinkPHP变量，包括{:module}、{:controller}、{:action}分别表示当前模块名、控制器名和操作名</p>
-</li>
-<li><p>使用函数，使用形式为{|functionName}</p>
-</li>
-<li>混合使用</li>
-</ul>
-<p><strong>有效期：</strong></p>
-<p>单位秒，如果不定义，则读取配置参数”HTML_CACHE_TIME”，如果为0，则永不过期</p>
-<p><strong>附加规则：</strong></p>
-<p>一般对定义的规则附加额外的函数运算，例如MD5等</p>
-<h2 id="数据库查询缓存"><a href="#数据库查询缓存" class="headerlink" title="数据库查询缓存"></a>数据库查询缓存</h2><p>对于及时性要求不高的数据，可以使用数据库查询缓存。</p>
-<p>ThinkPHP的Model已经实现了cache方法，不需要用户自己实现数据库查询缓存。使用方法如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$model-&gt;cache(<span class="keyword">true</span>)-&gt;limit(<span class="number">30</span>)-&gt;select();</span><br></pre></td></tr></table></figure>
-<p>如果使用cache(true)，ThinkPHP在查询的时候就会根据查询条件生成一个唯一的缓存标识。如果传入的是cache(‘keyname’)，ThinkPHP则直接使用keyname作为缓存表示。</p>
-<p>ThinkPHP默认采用DATA_CACHE_TYPE参数设置的缓存方式进行缓存，缓存时间为DATA_CACHE_TIME参数设置的时间，如果需要临时改变以上参数，可以在调用cache方法时传入参数。代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$model-&gt;cache(<span class="keyword">true</span>,<span class="number">3600</span>,<span class="string">'xcache'</span>)-&gt;select();</span><br></pre></td></tr></table></figure>
-<p>表示当前查询使用xcache缓存一个小时</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><strong>编译器：</strong>IntelliJ IDEA-2018.2.2 x64</p>
+<p><strong>SDK：</strong>java version “10.0.2”</p>
+<p><strong>Tomcat：</strong>Tomcat 9.0.121</p>
+<h2 id="创建配置Servlet项目"><a href="#创建配置Servlet项目" class="headerlink" title="创建配置Servlet项目"></a>创建配置Servlet项目</h2><p><strong>创建一个Web项目：</strong></p>
+<p>选择Web Application，勾选Create web.xml</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/1.png" alt=""></p>
+<p>确定项目名称</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/2.png" alt=""></p>
+<p><strong>创建目录：</strong></p>
+<p>在web目录下创建class和lib目录，右键web-&gt;新建-&gt;目录</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/3.png" alt=""></p>
+<p>输入目录名称</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/4.png" alt=""></p>
+<p><strong>配置文件夹路径：</strong></p>
+<p>class目录用来放.class文件，lib目录用来需要用到的包，右键项目-&gt;Open Modules Setting</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/5.png" alt=""></p>
+<p>点击Paths，勾选Use module compile output path，两个路径均设置为我们创建的class目录</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/6.png" alt=""></p>
+<p>点击Dependenci-&gt;点击加号-&gt;点击第一个</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/7.png" alt=""></p>
+<p>选择lib目录</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/8.png" alt=""></p>
+<p>选择Jar Directory</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/9.png" alt=""></p>
+<p>添加servlet的包，选择第二个</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/10.png" alt=""></p>
+<p>选择一个包</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/11.png" alt=""></p>
+<p>确认，配置结束。</p>
+<p><strong>配置Tomcat容器：</strong></p>
+<p>点击Add Configuration…</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/12.png" alt=""></p>
+<p>点击Templates-&gt;点击Tomcat Server-&gt;点击Local-&gt;选择Tomcat版本</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/13.png" alt=""></p>
+<p>点击Deployment-&gt;点击+号-&gt;选择第一个</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/14.png" alt=""></p>
+<p>确认，配置完成</p>
+<h2 id="编写Servlet源代码"><a href="#编写Servlet源代码" class="headerlink" title="编写Servlet源代码"></a>编写Servlet源代码</h2><p>右键src-&gt;新建-&gt;Servlet</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/15.png" alt=""></p>
+<p>输入文件名称</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/16.png" alt=""></p>
+<p>编写MyServlet.java文件</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/17.png" alt=""></p>
+<p>编写web.xml文件</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/18.png" alt=""></p>
+<p>运行index.jsp文件：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/19.png" alt=""></p>
+<p>输入在web.xml下设置的/my的地址</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Java/Servlet/20.png" alt=""></p>
+<p>成功运行</p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1294924781&auto=1&height=66"></iframe></div>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=479408216&auto=1&height=66"></iframe></div>
 
 
       
@@ -434,13 +457,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/22/ThinkPHP11/">ThinkPHP框架学习--缓存</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/29/Java-Servlet1/">Java-Servlet学习笔记（一）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-08-22, 16:56:20</p>
-        <p><span>最后更新:</span>2018-09-01, 18:02:24</p>
+        <p><span>发布时间:</span>2018-09-29, 21:54:54</p>
+        <p><span>最后更新:</span>2018-09-29, 22:54:22</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/22/ThinkPHP11/" title="ThinkPHP框架学习--缓存">http://yoursite.com/2018/08/22/ThinkPHP11/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/22/ThinkPHP11/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/29/Java-Servlet1/" title="Java-Servlet学习笔记（一）">http://yoursite.com/2018/09/29/Java-Servlet1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/29/Java-Servlet1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -452,16 +475,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/01/DedeCMS3/">
-                    DedeCMS代码审计Day3
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/08/20/DedeCMS2/">
-                    DedeCMS代码审计Day2
+                <a href="/2018/09/28/PHP-Audit-Labs-Day5/">
+                    PHP代码审计-mail函数参数的漏洞利用
                 </a>
             </div>
         
@@ -473,7 +490,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据缓存"><span class="toc-number">1.</span> <span class="toc-text">数据缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面缓存"><span class="toc-number">2.</span> <span class="toc-text">页面缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库查询缓存"><span class="toc-number">3.</span> <span class="toc-text">数据库查询缓存</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境"><span class="toc-number">1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建配置Servlet项目"><span class="toc-number">2.</span> <span class="toc-text">创建配置Servlet项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写Servlet源代码"><span class="toc-number">3.</span> <span class="toc-text">编写Servlet源代码</span></a></li></ol>
         
     </div>
     <style>
@@ -509,7 +526,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"ThinkPHP框架学习--缓存　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java-Servlet学习笔记（一）　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -529,15 +546,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/01/DedeCMS3/" title="上一篇: DedeCMS代码审计Day3">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/08/20/DedeCMS2/" title="下一篇: DedeCMS代码审计Day2">
+            <a href="/2018/09/28/PHP-Audit-Labs-Day5/" title="下一篇: PHP代码审计-mail函数参数的漏洞利用">
                 <i class="fa fa-angle-right"></i>
             </a>
         
