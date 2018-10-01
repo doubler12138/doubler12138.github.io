@@ -15,22 +15,20 @@
 
 
 
-<meta name="description" content="今天做了一道实验吧的Web题，以前一直没怎么关注过Web里面有关密码的一部分，既然今天做到就记一下，顺便写一下wp">
-<meta name="keywords" content="学习笔记">
+<meta name="description" content="前言 正则问题一直没有好好看过，趁现在学习一下">
+<meta name="keywords" content="代码审计,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="哈希长度扩展攻击">
-<meta property="og:url" content="http://yoursite.com/2018/06/12/Hash-Length-Extension-Attacks/index.html">
+<meta property="og:title" content="PHP代码审计-正则使用不当导致的路径穿越">
+<meta property="og:url" content="http://yoursite.com/2018/10/01/PHP-Audit-Labs-Day6/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="今天做了一道实验吧的Web题，以前一直没怎么关注过Web里面有关密码的一部分，既然今天做到就记一下，顺便写一下wp">
+<meta property="og:description" content="前言 正则问题一直没有好好看过，趁现在学习一下">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/17.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/10.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/11.jpg">
-<meta property="og:updated_time" content="2018-07-25T12:00:48.855Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/29.jpg">
+<meta property="og:updated_time" content="2018-10-01T11:55:11.208Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="哈希长度扩展攻击">
-<meta name="twitter:description" content="今天做了一道实验吧的Web题，以前一直没怎么关注过Web里面有关密码的一部分，既然今天做到就记一下，顺便写一下wp">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/17.jpg">
+<meta name="twitter:title" content="PHP代码审计-正则使用不当导致的路径穿越">
+<meta name="twitter:description" content="前言 正则问题一直没有好好看过，趁现在学习一下">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/29.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -62,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>哈希长度扩展攻击 | Double--R blog</title>
+<title>PHP代码审计-正则使用不当导致的路径穿越 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,11 +310,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Hash-Length-Extension-Attacks" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day6" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/12/Hash-Length-Extension-Attacks/" class="article-date">
-      <time datetime="2018-06-12T11:33:42.000Z" itemprop="datePublished">2018-06-12</time>
+      <a href="/2018/10/01/PHP-Audit-Labs-Day6/" class="article-date">
+      <time datetime="2018-10-01T09:50:19.000Z" itemprop="datePublished">2018-10-01</time>
 </a>
 
 
@@ -331,7 +329,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      哈希长度扩展攻击
+      PHP代码审计-正则使用不当导致的路径穿越
     </h1>
   
 
@@ -340,7 +338,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,339字</span>
+			<span class="post-count">1,654字</span>
 		</span>
 	</span>
 	
@@ -349,7 +347,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
+			<span class="post-count">7分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +360,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -372,37 +370,121 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>今天做了一道实验吧的Web题，以前一直没怎么关注过Web里面有关密码的一部分，既然今天做到就记一下，顺便写一下wp</strong></p>
+        <p><strong>前言</strong></p>
+<p>正则问题一直没有好好看过，趁现在学习一下</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/17.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/29.jpg" alt=""></p>
 <a id="more"></a>
-<p><strong>哈希长度扩展攻击（Hash-Length-Extension-Attacks）</strong></p>
-<h4 id="MD5扩展攻击介绍"><a href="#MD5扩展攻击介绍" class="headerlink" title="MD5扩展攻击介绍"></a>MD5扩展攻击介绍</h4><p>说真的，这部分的内容我也只能算看的个一知半解，不是很懂，可能是因为数学水平不太够，对MD5的加密        方式不是很了解</p>
-<p>MD5加密算法的过程：</p>
-<p>因为对于攻击来说我们不用了解很多，所以讲一部分重要的：</p>
-<p>MD5加密过程中512比特（64字节）为一组，属于分组加密，而且运算过程中，将512比特分为32bit*16块，分块运算</p>
-<p>MD5不管怎么加密，每一块加密得到的密文作为下一次加密的初始向量IV</p>
-<p>当加密的数据比较少时，及不够512比特时就会存在填充，填充方式就是在明文数据后填一位1（二进制）然后其余补零，最后8字节用来表示明文长度。举个例子假设明文数据是admin，其十六进制是0x61646d696e ,显然不满512比特，所以我们进行填充，填充结果：</p>
-<p><code>0x61646d696e8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002800000000000000</code></p>
-<p>这里注意两点：1.为什么e后面是8而不是1，因为补的1是二进制的，后面跟的全是0，那么转换成十六进制就是8000……00，同理后面的28也是十六进制0x28=40，admin长度是40比特。2.为什么28写在最后8个字节的最前面，因为MD5中存储是小端模式，我理解的小端模式就是从后往前存，所以最后8字节的第1字节存数据</p>
-<h4 id="MD5扩展攻击的具体实现"><a href="#MD5扩展攻击的具体实现" class="headerlink" title="MD5扩展攻击的具体实现"></a>MD5扩展攻击的具体实现</h4><p>首先我们看一下实验吧的这道题的源码（源码的获得方式：burp抓包，改一下cookie中的source)</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$flag = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXX"</span>;</span><br><span class="line">$secret = <span class="string">"XXXXXXXXXXXXXXX"</span>; <span class="comment">// This secret is 15 characters long for security!</span></span><br><span class="line"></span><br><span class="line">$username = $_POST[<span class="string">"username"</span>];</span><br><span class="line">$password = $_POST[<span class="string">"password"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($_COOKIE[<span class="string">"getmein"</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (urldecode($username) === <span class="string">"admin"</span> &amp;&amp; urldecode($password) != <span class="string">"admin"</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($COOKIE[<span class="string">"getmein"</span>] === md5($secret . urldecode($username . $password))) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Congratulations! You are a registered user.\n"</span>;</span><br><span class="line">            <span class="keyword">die</span> (<span class="string">"The flag is "</span>. $flag);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">die</span> (<span class="string">"Your cookies don't match up! STOP HACKING THIS SITE."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">die</span> (<span class="string">"You are not an admin! LEAVE."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setcookie(<span class="string">"sample-hash"</span>, md5($secret . urldecode(<span class="string">"admin"</span> . <span class="string">"admin"</span>)), time() + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">empty</span>($_COOKIE[<span class="string">"source"</span>])) &#123;</span><br><span class="line">    setcookie(<span class="string">"source"</span>, <span class="number">0</span>, time() + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> ($_COOKIE[<span class="string">"source"</span>] != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">""</span>; <span class="comment">// This source code is outputted here</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>首先分析一下源码，它通过post获取username和password参数然后和一个不知到的值进行拼接，如cookie中的getmein值和拼接字符串的MD5加密值相等，就输出flag。但我们并不知道这个secret是什么，所以这里就要用到哈希长度扩展攻击了。</p>
-<p>要进行哈希长度扩展攻击首先我们要知道字符串长度，源码告诉我们secret的长度是15，然后它有一个sample的值是secret和adminamdin拼接后的MD5值，但是它源码又做了限制，不允许密码输入为admin</p>
-<p>但是前面的字符传的加密信息我们是知道的，而MD5会用前面的加密信息算下一部分的加密（在MD5中有四个32位的被称作链接变量的整数参数 ，这个ABCD是初始的固定的值)A=0x67452301，B=0xefcdab89，C=0x98badcfe，D=0x10325476。然后通过一些计算会生成关于明文的A,B,C,D然后按小端规则转换过来就是明文的MD5值，而这组A,B,C,D会成为下组明文的的初始值，直到算出最后的MD5值）。所以我们通过已知secret（假设secret的字符串为key)和adminamdin的MD5值可以倒推出它的A,B,C,D。然后我们把keyadminadmin填充到512比特，这样MD5值不变，但是无论后面我们输入什么都已经在512比特之外了，属于下一组的内容，所以就需要用上一组的A,B,C,D去算下一组的明文的MD5值。而上一组的A,B,C,D可以通过它们的MD5值倒推出来，所以无论下一组的数据是什么我们都能直接算它的MD5值。但是，口算MD5是做不到的，所以上工具。</p>
-<p>这里我们使用HashPump，一个使用简单但功能完善的哈希扩展长度攻击的工具在Linux下安装的方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bwall/HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line">cd HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>然后使用也很简单</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># hashpump</span><br><span class="line">Input Signature: 571580b26c65f306376d4f64e53cb5c7</span><br><span class="line">Input Data: adminadmin</span><br><span class="line">Input Key Length: 15</span><br><span class="line">Input Data to Add: doubler</span><br><span class="line">或者</span><br><span class="line">hashpump -s 571580b26c65f306376d4f64e53cb5c7 -d admin -k 20 -a doubler</span><br></pre></td></tr></table></figure>
-<p>分析一下：首先signature(-s)是签名，也就是已知的哈希值；data(-d)是已知的字符串的内容，或是想要添加的内容；key length(-k)是未知的字符串长度，Data to Add(-a):随便输，就是最后别加密的明文，决定了你需要输入的MD5值</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/10.jpg" alt=""></p>
-<p>第一行就是加密后的MD5值，第二行就是我们填充的内容，所以我们post的username为admin，password为admin和后面的一大串，注意将\x换成%因为源码对post进来的数据是要进行urldecode处理的，然后cookie中加上getmein=MD5值就行了。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/shiyanba/11.jpg" alt=""></p>
-<h4 id="学习文章："><a href="#学习文章：" class="headerlink" title="学习文章："></a>学习文章：</h4><hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=574921549&auto=1&height=66"></iframe></div>
+<hr>
+<h2 id="DAY6-Forst-Pattern"><a href="#DAY6-Forst-Pattern" class="headerlink" title="DAY6-Forst Pattern"></a>DAY6-Forst Pattern</h2><p>题目叫做福斯特模式，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TokenStorage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">performAction</span><span class="params">($action, $data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> ($action) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'create'</span>:</span><br><span class="line">                <span class="keyword">$this</span>-&gt;createToken($data);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'delete'</span>:</span><br><span class="line">                <span class="keyword">$this</span>-&gt;clearToken($data);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">'Unknown action'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createToken</span><span class="params">($seed)</span> </span>&#123;</span><br><span class="line">        $token = md5($seed);</span><br><span class="line">        file_put_contents(<span class="string">'/tmp/tokens/'</span> . $token, <span class="string">'...data'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">clearToken</span><span class="params">($token)</span> </span>&#123;</span><br><span class="line">        $file = preg_replace(<span class="string">"/[^a-z.-_]/"</span>, <span class="string">""</span>, $token);</span><br><span class="line">        unlink(<span class="string">'/tmp/tokens/'</span> . $file);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$storage = <span class="keyword">new</span> TokenStorage();</span><br><span class="line">$storage-&gt;performAction($_GET[<span class="string">'action'</span>], $_GET[<span class="string">'data'</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>漏洞解析：</strong></p>
+<p>这里面没有什么复杂的东西，TokenStorage类定义两个函数，通过两个参数$data和$action来实现token文件的创建和删除。而且在clearToken函数中使用了preg_replace函数对传入的文件名进行一次正则匹配。先来看看preg_replace函数的定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">preg_replace：(PHP 4, PHP 5, PHP 7)</span><br><span class="line"></span><br><span class="line">功能 ： 函数执行一个正则表达式的搜索和替换</span><br><span class="line"></span><br><span class="line">定义 ： mixed preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit = -1 [, int &amp;$count ]] )</span><br><span class="line"></span><br><span class="line">搜索 subject 中匹配 pattern 的部分， 如果匹配成功将其替换成 replacement 。</span><br></pre></td></tr></table></figure>
+<p>再来看它写的正则，<code>[^a-z.-_]</code>表示匹配除了a到z、._之间的所有字符，一旦匹配到就将删除。但是该正则并没有起到过滤目录路径字符的作用。.和/都在.到_之间，所以i我们人可以是用点和斜杠符号进行路径穿越，最终删除任意文件，例如：<code></code>action = delete＆data = ../../ config.php`</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p><strong>题目源码：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'flag.php'</span>;</span><br><span class="line"><span class="keyword">if</span>  (<span class="string">"POST"</span> == $_SERVER[<span class="string">'REQUEST_METHOD'</span>])</span><br><span class="line">&#123;</span><br><span class="line">    $password = $_POST[<span class="string">'password'</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> &gt;= preg_match(<span class="string">'/^[[:graph:]]&#123;12,&#125;$/'</span>, $password))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Wrong Format'</span>;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">TRUE</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        $reg = <span class="string">'/([[:punct:]]+|[[:digit:]]+|[[:upper:]]+|[[:lower:]]+)/'</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">6</span> &gt; preg_match_all($reg, $password, $arr))</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        $c = <span class="number">0</span>;</span><br><span class="line">        $ps = <span class="keyword">array</span>(<span class="string">'punct'</span>, <span class="string">'digit'</span>, <span class="string">'upper'</span>, <span class="string">'lower'</span>);</span><br><span class="line">        <span class="keyword">foreach</span> ($ps <span class="keyword">as</span> $pt)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (preg_match(<span class="string">"/[[:$pt:]]+/"</span>, $password))</span><br><span class="line">            $c += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ($c &lt; <span class="number">3</span>) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"42"</span> == $password) <span class="keyword">echo</span> $flag;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">echo</span> <span class="string">'Wrong password'</span>;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// flag.php</span></span><br><span class="line"><span class="meta">&lt;?php</span> $flag = <span class="string">"HRCTF&#123;Pr3g_R3plac3_1s_Int3r3sting&#125;"</span>;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>题目分析：</strong></p>
+<p>主要是一个弱类型比较，当传入的$password参数等于42时输出flag，但是在比较之前有三个正则匹配，我们逐个来看。</p>
+<p>第一处是在这：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>首先我们来了解一下PHP正则表达式的字符类，也就是上面中的graph到底是个什么东西</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">alnum</th>
+<th style="text-align:center">字母和数字</th>
+<th style="text-align:center">alnum</th>
+<th style="text-align:center">字母和数字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">alpha</td>
+<td style="text-align:center">字母</td>
+<td style="text-align:center">print</td>
+<td style="text-align:center">可打印字符，包括空格</td>
+</tr>
+<tr>
+<td style="text-align:center">ascii</td>
+<td style="text-align:center">0-127的ascii字符</td>
+<td style="text-align:center">punct</td>
+<td style="text-align:center">可打印字符，不包括字母和数字</td>
+</tr>
+<tr>
+<td style="text-align:center">blank</td>
+<td style="text-align:center">空格和水平制表符</td>
+<td style="text-align:center">space</td>
+<td style="text-align:center">空白字符</td>
+</tr>
+<tr>
+<td style="text-align:center">cntrl</td>
+<td style="text-align:center">控制字符</td>
+<td style="text-align:center">upper</td>
+<td style="text-align:center">大写字母</td>
+</tr>
+<tr>
+<td style="text-align:center">digit</td>
+<td style="text-align:center">十进制数</td>
+<td style="text-align:center">word</td>
+<td style="text-align:center">单词字符</td>
+</tr>
+<tr>
+<td style="text-align:center">graph</td>
+<td style="text-align:center">可打印字符，不包括空格</td>
+<td style="text-align:center">xdigit</td>
+<td style="text-align:center">十六进制数字</td>
+</tr>
+<tr>
+<td style="text-align:center">lower</td>
+<td style="text-align:center">小写字符</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>了解完字符类后，那么一处的正则就很好了解了，^表示必须一某类字符开头，[[:praph:]]表示不包括空格的可打印字符，{12,}表示12个及以上，$表示以某类字符结尾。那么这里的判断就是传入的$password参数必须以除空格外的可打印字符开头结尾，且可打印字符个数必须大于等于12个。</p>
+<p>在来看第二处：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$reg = <span class="string">'/([[:punct:]]+|[[:digit:]]+|[[:upper:]]+|[[:lower:]]+)/'</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">6</span> &gt; preg_match_all($reg, $password, $arr))</span><br><span class="line">            <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<p>这段表示将$password中的连续的可打印字符（不包括字母和数字）、数字、大写、小写，作为子段，存入数组$arr中，preg_mathch_all返回的是匹配到的子段段数，也就是说$password必须分成六段或以上，比如H0ng+Ri匹配到的字串为H 0 ng + R i刚好六段，是符合要求的。</p>
+<p>最后来看第三处：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ps = <span class="keyword">array</span>(<span class="string">'punct'</span>, <span class="string">'digit'</span>, <span class="string">'upper'</span>, <span class="string">'lower'</span>);</span><br><span class="line"><span class="keyword">foreach</span> ($ps <span class="keyword">as</span> $pt)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">"/[[:$pt:]]+/"</span>, $password))</span><br><span class="line">    $c += <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ($c &lt; <span class="number">3</span>) <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<p>这段表示输入的字符串中至少包含可打印字符（不包括字母和数字）、数字、大写、小写中的三种类型。</p>
+<p>然后题目最后将$password与42进行弱比较。所以我们的payload可以有很多中写法，这里举两种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">password=42.00e+00000</span><br><span class="line">password=420.00000e-1</span><br></pre></td></tr></table></figure>
+<h2 id="配置文件写入问题漏洞"><a href="#配置文件写入问题漏洞" class="headerlink" title="配置文件写入问题漏洞"></a>配置文件写入问题漏洞</h2><p>再来看一个p总在小密圈放的一个经典的配置文件写入问题漏洞，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">'option'</span>])) <span class="keyword">die</span>();</span><br><span class="line">$str = addslashes($_GET[<span class="string">'option'</span>]);</span><br><span class="line">$file = file_get_contents(<span class="string">'./config.php'</span>);</span><br><span class="line">$file = preg_replace(<span class="string">'|\$option=\'.*\';|'</span>, <span class="string">"\$option='$str';"</span>, $file);</span><br><span class="line">file_put_contents(<span class="string">'./config.php'</span>, $file);</span><br></pre></td></tr></table></figure>
+<p>config.php文件的内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$option=<span class="string">'test'</span>;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到它先打开config.php文件，然后正则匹配文件，匹配内容如下：<code>$option=&#39;任意内容&#39;</code>，并将这些替换成<code>$option=&#39;$str&#39;</code>，$str就是新传入的配置内容，而在这之前，也使用了addslashes()函数对传入的参数进行了一次处理，addslashes函数的作用就是在预定义的字符前加上反斜杠，预定义的字符是：单引号，双引号，反斜杠，NULL。这样看起来安全，但是仍然还是可以被利用的。</p>
+<p><strong>利用换行符来绕过正则匹配的问题：</strong></p>
+<p>由于.*会匹配行内任意字符无数次，所以我们可以先用换行符把要写入的内容换到下一行，再把转义的东西替换掉。我们先使用这个payload：<code>?option=a&#39;;%0aphpinfo();//</code></p>
+<p>访问以后config.php文件内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$option=<span class="string">'a\';</span></span><br><span class="line"><span class="string">phpinfo();//'</span>;</span><br></pre></td></tr></table></figure>
+<p>这样我们是没办法执行phpinfo的，因为我们输入的单引号被转义掉了，phpinfo还在单引号内，所以我们再来一次替换，payoload：<code>?option=a</code></p>
+<p>这样我们就能把第一行替换成$option=’a’;这样转义符就被替换掉了，成功执行phpinfo。</p>
+<p><strong>利用preg_replace函数的问题：</strong></p>
+<p>preg_replace函数在处理字符串的时候,会自动对第二个参数的 \ 这个字符进行反转移。所以我们可以构造这样的payload：<code>http://127.0.0.1/index.php?option=a\&#39;;phpinfo();//</code></p>
+<p>这样config.php变为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$option=<span class="string">'a\\'</span>;phpinfo();<span class="comment">//';</span></span><br></pre></td></tr></table></figure>
+<p><strong>利用preg_replace()函数的第二个 参数的问题:</strong></p>
+<p>对replacement的描述：</p>
+<p>replacement中可以包含后向引用\n 或(php 4.0.4以上可用)$n，语法上首选后者。 每个 这样的引用将被匹配到的第n个捕获子组捕获到的文本替换。 n 可以是0-99，\0和$0代表完整的模式匹配文本。</p>
+<p>所以我们可以用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test/ph.php?option=;phpinfo();</span><br><span class="line">http://127.0.0.1/test/ph.php?option=%00 或者 http://127.0.0.1/test/ph.php?option=$0</span><br></pre></td></tr></table></figure>
+<p>执行第一条后config.php的内容为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$option=<span class="string">';phpinfo();'</span>;</span><br></pre></td></tr></table></figure>
+<p>再执行第二条后config.php的内容为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$option=<span class="string">'$option='</span>;phpinfo();<span class="string">';'</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=3932159&auto=1&height=66"></iframe></div>
 
-<p>​    </p>
-<p>​    </p>
+
+
+
+
+
+
 
       
     </div>
@@ -411,13 +493,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></p>
+        <p><span>本文标题:</span><a href="/2018/10/01/PHP-Audit-Labs-Day6/">PHP代码审计-正则使用不当导致的路径穿越</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-06-12, 19:33:42</p>
-        <p><span>最后更新:</span>2018-07-25, 20:00:48</p>
+        <p><span>发布时间:</span>2018-10-01, 17:50:19</p>
+        <p><span>最后更新:</span>2018-10-01, 19:55:11</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/12/Hash-Length-Extension-Attacks/" title="哈希长度扩展攻击">http://yoursite.com/2018/06/12/Hash-Length-Extension-Attacks/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/06/12/Hash-Length-Extension-Attacks/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/10/01/PHP-Audit-Labs-Day6/" title="PHP代码审计-正则使用不当导致的路径穿越">http://yoursite.com/2018/10/01/PHP-Audit-Labs-Day6/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/01/PHP-Audit-Labs-Day6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -429,16 +511,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/07/25/PHP-Anony/">
-                    PHP匿名函数
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/10/Crypto-RSA/">
-                    RSA学习笔记
+                <a href="/2018/09/29/Java-Servlet1/">
+                    Java-Servlet学习笔记（一）
                 </a>
             </div>
         
@@ -450,7 +526,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#MD5扩展攻击介绍"><span class="toc-number">1.</span> <span class="toc-text">MD5扩展攻击介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MD5扩展攻击的具体实现"><span class="toc-number">2.</span> <span class="toc-text">MD5扩展攻击的具体实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#学习文章："><span class="toc-number">3.</span> <span class="toc-text">学习文章：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY6-Forst-Pattern"><span class="toc-number">1.</span> <span class="toc-text">DAY6-Forst Pattern</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件写入问题漏洞"><span class="toc-number">3.</span> <span class="toc-text">配置文件写入问题漏洞</span></a></li></ol>
         
     </div>
     <style>
@@ -486,7 +562,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"哈希长度扩展攻击　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-正则使用不当导致的路径穿越　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -506,15 +582,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/07/25/PHP-Anony/" title="上一篇: PHP匿名函数">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/10/Crypto-RSA/" title="下一篇: RSA学习笔记">
+            <a href="/2018/09/29/Java-Servlet1/" title="下一篇: Java-Servlet学习笔记（一）">
                 <i class="fa fa-angle-right"></i>
             </a>
         
