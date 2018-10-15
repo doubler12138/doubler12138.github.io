@@ -203,6 +203,8 @@
                     
                       <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
                     
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fafo</a>
+                    
                       <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
@@ -312,6 +314,93 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-PHP-Audit-Labs-Day12" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/13/PHP-Audit-Labs-Day12/" class="article-date">
+      <time datetime="2018-10-13T06:44:30.000Z" itemprop="datePublished">2018-10-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/13/PHP-Audit-Labs-Day12/">PHP代码审计-误用htmlentities函数引发的漏洞</a>
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">1,253字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">5分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p><strong>前言</strong></p>
+<p>第一次听说误用函数还会导致错误，不管怎样还是来学学习一下</p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/37.jpg" alt=""></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2018/10/13/PHP-Audit-Labs-Day12/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-PHP-Audit-Labs-Day11" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1096,96 +1185,9 @@
 
 
   
-    <article id="post-异或构造字符串" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/09/22/异或构造字符串/" class="article-date">
-      <time datetime="2018-09-22T09:19:57.000Z" itemprop="datePublished">2018-09-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/22/异或构造字符串/">异或构造字符串</a>
-    </h1>
-  
-
-		<div style="margin-top:20px;">
-	<span class="post-time">
-		<span class="post-meta-item-icon">
-			<i class="fa fa-keyboard-o"></i>
-			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,379字</span>
-		</span>
-	</span>
-	
-	<span class="post-time">
-		&nbsp; | &nbsp;
-		<span class="post-meta-item-icon">
-			<i class="fa fa-hourglass-half"></i>
-			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
-		</span>
-	</span>
-</div>
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p><strong>前言</strong></p>
-<p>无论在平时的代码审计过程中还是在CTF的比赛里，都会存在将大小写字母和数字都过滤的情况，今天就来学习一下用异或来构造字符串的新姿势。</p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/24.jpg" alt=""></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小姿势/">小姿势</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2018/09/22/异或构造字符串/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

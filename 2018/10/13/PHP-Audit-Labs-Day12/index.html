@@ -15,20 +15,23 @@
 
 
 
-<meta name="description" content="前言 这一部分学习Java中最重要的类和对象部分，主要是概念。">
-<meta name="keywords" content="学习笔记,Java">
+<meta name="description" content="前言 第一次听说误用函数还会导致错误，不管怎样还是来学学习一下">
+<meta name="keywords" content="代码审计,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记（五）--类和对象">
-<meta property="og:url" content="http://yoursite.com/2018/09/06/JAVA5/index.html">
+<meta property="og:title" content="PHP代码审计-误用htmlentities函数引发的漏洞">
+<meta property="og:url" content="http://yoursite.com/2018/10/13/PHP-Audit-Labs-Day12/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言 这一部分学习Java中最重要的类和对象部分，主要是概念。">
+<meta property="og:description" content="前言 第一次听说误用函数还会导致错误，不管怎样还是来学学习一下">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/16.jpg">
-<meta property="og:updated_time" content="2018-09-08T02:39:08.906Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/37.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day12/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day12/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day12/3.png">
+<meta property="og:updated_time" content="2018-10-15T13:42:48.899Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记（五）--类和对象">
-<meta name="twitter:description" content="前言 这一部分学习Java中最重要的类和对象部分，主要是概念。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/16.jpg">
+<meta name="twitter:title" content="PHP代码审计-误用htmlentities函数引发的漏洞">
+<meta name="twitter:description" content="前言 第一次听说误用函数还会导致错误，不管怎样还是来学学习一下">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/37.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +63,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java学习笔记（五）--类和对象 | Double--R blog</title>
+<title>PHP代码审计-误用htmlentities函数引发的漏洞 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,11 +315,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JAVA5" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day12" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/06/JAVA5/" class="article-date">
-      <time datetime="2018-09-06T13:17:01.000Z" itemprop="datePublished">2018-09-06</time>
+      <a href="/2018/10/13/PHP-Audit-Labs-Day12/" class="article-date">
+      <time datetime="2018-10-13T06:44:30.000Z" itemprop="datePublished">2018-10-13</time>
 </a>
 
 
@@ -331,7 +334,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记（五）--类和对象
+      PHP代码审计-误用htmlentities函数引发的漏洞
     </h1>
   
 
@@ -340,7 +343,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">2,301字</span>
+			<span class="post-count">1,253字</span>
 		</span>
 	</span>
 	
@@ -349,7 +352,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">8分</span>
+			<span class="post-count">5分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +365,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -373,107 +376,54 @@
       
           
         <p><strong>前言</strong></p>
-<p>这一部分学习Java中最重要的类和对象部分，主要是概念。</p>
+<p>第一次听说误用函数还会导致错误，不管怎样还是来学学习一下</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/16.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/37.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="面向对象概述"><a href="#面向对象概述" class="headerlink" title="面向对象概述"></a>面向对象概述</h2><p><strong>对象：</strong></p>
-<p>对象是事物存在的实体，对象通常划分为两个部分，即静态部分与动态部分。静态部分通常被称为属性，任何对象都会具备其自身属性。动态部分通常成为行为。类实质上是封装对象属性和行为的载体，而对象则是类抽象出来的一个实例。</p>
-<p><strong>类：</strong></p>
-<p>类是同一类事物的统称，类是构造对象时所依赖的规范，具有相同特性和行为的一类事物就称为类。类是封装对象的属性和行为的载体，反过来说具有相同属性和行为的一类实体被称为类。</p>
-<p><strong>封装：</strong></p>
-<p>面向对象程序设计具有一下特点：</p>
+<h2 id="DAY12-String-Lights"><a href="#DAY12-String-Lights" class="headerlink" title="DAY12-String Lights"></a>DAY12-String Lights</h2><p>题目代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">$sanitized = [];</span><br><span class="line"><span class="keyword">foreach</span> ($_GET <span class="keyword">as</span> $key =&gt; $value)&#123;</span><br><span class="line">	$sanitized[$key] = intval($value);</span><br><span class="line">&#125;</span><br><span class="line">$queryParts = array_map(<span class="function"><span class="keyword">function</span> <span class="params">($key,$value)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> $key . <span class="string">'='</span> . $value;</span><br><span class="line">&#125;, array_keys($sanitized), array_values($sanitized));</span><br><span class="line">$query = implode(<span class="string">'&amp;'</span>, $queryParts);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;a href='/images/size.php?"</span> . htmlentities($query). <span class="string">"'&gt;link&lt;/a&gt;"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>漏洞解析：</strong></p>
+<p>首先代码通过foreach循环对$_GET传入的参数进行处理，分别写入对应的数组中，并且对$value变量进行了强制类型转换，但是并没有对$key变量进行转换。而后通过array_map函数，将数组重新变成字符串赋值给$queryParts变量。最后用’&amp;’将数组中的值拼接起来，最后将通过htmlentities函数处理的$query变量凭借到echo语句中。<strong>htmlentities</strong> 函数主要是会对一些特殊符号进行HTML实体编码。具体定义如下：</p>
+<blockquote>
+<p>[htmlentities]— 将字符转换为 HTML 转义字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; string htmlentities ( string $string [, int $flags = ENT_COMPAT | ENT_HTML401 [, string $encoding = ini_get(&quot;default_charset&quot;) [, bool $double_encode = true ]]] )</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>作用：在写PHP代码时，不能在字符串中直接写实体字符，PHP提供了一个将HTML特殊字符转换成实体字符的函数 htmlentities()。</p>
+</blockquote>
+<p>注：htmlentities()并不能转换所有的特殊字符，是转换除了空格之外的特殊字符，且单引号和双引号需要单独控制（通过第二个参数）。第2个参数取值有3种，分别如下：</p>
 <ul>
-<li>封装性</li>
-<li>继承性</li>
-<li>多态性</li>
+<li>ENT_COMPAT（默认值）：只转换双引号。</li>
+<li>ENT_QUOTES：两种引号都转换。</li>
+<li>ENT_NOQUOTES：两种引号都不转换。</li>
 </ul>
-<p>封装是面向对象编程的核心思想。将对象的属性和行为封装起来，其载体就是类，类通常对客户隐藏其实现细节，这就是封装的思想。</p>
-<p>采用封装的思想保证了类内部数据的完整性，应用该类的用户不能轻易地直接操作此数据结构，只能执行类允许公开的数据。这样就避免了外部操作对内部数据的影响，提高了程序的可维护性。使用类实现封装特性：</p>
-<p><code>类将内部数据隐藏--&gt;类--&gt;为用户提供对象的属性和行为接口--&gt;用户通过这些接口使用这些类</code></p>
-<p><strong>继承：</strong></p>
-<p>类之间的关系被称为关联。关联主要描述两个类之间的一般二元关系，继承是关联中的一种。</p>
-<p>继承性主要利用特定对象之间的共有属性。例如，平行四边形是四边形，平行四边形与四边形具有共同的特性，就是拥有四个边，可以将平行四边形类看做四边形的延伸，平行四边形复用了四边形的属性和行为，同时添加了平行四边形独有的属性和行为。这里可以将平行四边形类看做是从四边形类中继承的。在Java语言中将类似于平行四边形的类称为子类，将类似四边形类的类称为父类或超类。子类的实例都是父类的实例，但不能说父类的实例是子类的实例。</p>
-<p><strong>多态：</strong></p>
-<p>将父类对象应用于子类的特征就是多态。多态性允许以统一的风格编写程序，以处理种类繁多的已存在的类及相关类。多态的实现并不依赖具体类，而是依赖于抽象类和接口。抽象类不能实例化对象。在多态的机制中，父类通常会被定义为抽象类，在抽象类中给出一个方法的标准，而不给出实现的具体流程。由抽象方法组成的集合就是接口</p>
-<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p><strong>成员变量：</strong></p>
-<p>在Java中对象的属性也称为成员变量。成员变量可以设置为Java中合法的数据类型，其实成员变量就是普通变量，可以为他设置初始值，也可以不设置。如果不设置初始值，则会有默认值。</p>
-<p><strong>成员方法：</strong></p>
-<p>在Java语言中使用成员方法对应于类对象的行为。一个成员方法可以有参数，这个参数可以是对象也可以是基本数据类型的变量，同时成员方法有返回值和不返回值的选择，如果方法需要返回值可以子啊方法体中使用return关键字。</p>
-<p>如果一个方法中含有与成员变量同名的局部变量，则方法中对这个变量的访问以局部变量进行。</p>
-<p>类成员变量和成员方法也可以统称为类成员。</p>
-<p><strong>权限修饰符：</strong></p>
-<p>Java中的权限修饰符主要包括private、public和protected。其修饰权限如下：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">访问包位置</th>
-<th style="text-align:center"></th>
-<th style="text-align:center">类修饰符</th>
-<th style="text-align:center"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">private</td>
-<td style="text-align:center">protected</td>
-<td style="text-align:center">public</td>
-</tr>
-<tr>
-<td style="text-align:center">本类</td>
-<td style="text-align:center">可见</td>
-<td style="text-align:center">可见</td>
-<td style="text-align:center">可见</td>
-</tr>
-<tr>
-<td style="text-align:center">同包其他类或子类</td>
-<td style="text-align:center">不可见</td>
-<td style="text-align:center">可见</td>
-<td style="text-align:center">可见</td>
-</tr>
-<tr>
-<td style="text-align:center">其他包的类或子类</td>
-<td style="text-align:center">不可见</td>
-<td style="text-align:center">不可见</td>
-<td style="text-align:center">可见</td>
-</tr>
-</tbody>
-</table>
-<p>当声明类时不适用修饰符设置类的权限，则这个类预设为包存取范围，即只有一个包中的类可以调用这个类的成员变量或成员方法。类的权限设定会约束类成员的权限设定。</p>
-<p><strong>局部变量及其有效范围：</strong></p>
-<p>局部变量是在方法被执行时创建，在方法执行结束时被销毁。局部变量在使用时必须进行赋值操作或初始化。局部变量的有效范围从该变量的声明开始到该变量的结束为止。在相互不嵌套的作用域中可以同时声明两个名称和类型相同的局部变量。但是在相互嵌套的区域中不可以这样声明。</p>
-<p><strong>this关键字：</strong></p>
-<p>在Java语言中规定使用this关键字来代表本类对象的引用。this引用的就是本类的一个对象。this除了可以调用成员变量或成员方法之外，还可以作为方法的返回值，返回本类的对象。</p>
-<h2 id="类的构造方法"><a href="#类的构造方法" class="headerlink" title="类的构造方法"></a>类的构造方法</h2><p>构造方法是一个与类同名的方法，构造方法没有返回值，构造方法的名称要与本类的名称相同。在构造方法中可以为成员变量赋值，这样当实例化一个本类的对象时，相应的成员变量也将被初始化。如果类中没有明确定义构造方法，编译器会自动创建一个不带参数的默认构造方法。实例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnyThting</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AnyThting</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(<span class="string">"this调用有参构造方法"</span>);</span><br><span class="line">        System.out.println(<span class="string">"无参构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AnyThting</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        AnyThting test = <span class="keyword">new</span> AnyThting();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在无参构造方法中可以使用this关键字调用有参的构造方法，但是用这种方式需要注意的是只可以在无参构造方法中的第一句使用this调用有参构造方法。</p>
-<h2 id="静态变量、常量和方法"><a href="#静态变量、常量和方法" class="headerlink" title="静态变量、常量和方法"></a>静态变量、常量和方法</h2><p>由static修饰的变量、常量和方法被称为静态变量、常量和方法。被声明为static的变量、常量和方法被称为静态成员。静态成员属于类所有，区别于个别对象，可以在本类或其它类中是哦那个类名和”.”运算符调用静态成员。静态数据与静态方法的作用通常是为了提供共享数据或方法，但静态成员同样遵循着public、private和protected修饰符的约束。</p>
-<p>注意：在静态方法中不可以使用this关键字，不可以直接调用非静态方法。</p>
-<h2 id="类的主方法"><a href="#类的主方法" class="headerlink" title="类的主方法"></a>类的主方法</h2><p>主方法是类的入口点，它定义了程序从何处开始；主方法提供对程序流向的控制。主方法具有以下特征：</p>
-<ul>
-<li>主方法是静态的，所以如要在主方法中调用其它方法，则该方法必须也是静态的。</li>
-<li>主方法没有返回值</li>
-<li>主方法的形参为数组。其中arg[0]~arg[n]分别代表程序的第一个参数到第n个参数，可以使用args.length获取参数个数</li>
-</ul>
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p><strong>对象的创建：</strong></p>
-<p>在Java语言中使用new操作符调用构造方法创建对象，创建与初始化是被捆绑在一起的。每个对象都是相互独立的，在内存中占据独立的内存地址，并且每个对象都具有自己的生命周期，当一个对象的生命周期结束时，对象就会变成垃圾，由Java虚拟机自带的垃圾回收机制处理，不能再被使用</p>
-<p><strong>访问对象的属性和行为：</strong><br>当用户使用new操作符创建一个对象后，可以使用“对象.类成员”来获取对象的属性和行为。</p>
-<p>两个对象的产生是相互独立的，一个对象得知的改变不会影响另一个对象。</p>
-<p><strong>对象的引用：</strong></p>
-<p>引用的语法：<code>类名 对象引用名称</code></p>
-<p>通常一个引用不一定需要一个对象相关联。引用与对象相关联的语法如下：<code>类名 对象 = new 类名</code></p>
-<p>引用只是存放一个对象的内存地址，并非存放一个对象</p>
-<p><strong>对象的比较：</strong><br>在Java中有两种对象的比较形式，”==”运算符比较两个对象的引用的地址是否相同，equals()方法是String类中的方法，用于比较两个对象引用所指的内容是否相同</p>
-<p><strong>对象的销毁：</strong></p>
-<p>对象被视为垃圾的两种情况：</p>
-<ul>
-<li>对象引用超过其范围</li>
-<li>对象赋值为null</li>
-</ul>
+<p>这里虽然进行了htmlentities函数处理，但由于使用的是默认的方式，所有只转换双引号，单引号可以逃逸出来从而造成XSS，payload如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?a&apos;onclick%3dalert(1)%2f%2f=c</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day12/1.png" alt=""></p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p><strong>题目源码：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$con=@mysql_connect(<span class="string">'localhost'</span>,<span class="string">'root'</span>,<span class="string">'root'</span>);</span><br><span class="line">mysql_select_db(<span class="string">'day12'</span>,$con);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_REQUEST[<span class="string">'username'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/(?:\w*)\W*?[a-z].*(R|ELECT|OIN|NTO|HERE|NION)/i"</span>, $_REQUEST[<span class="string">'username'</span>]))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Attack detected!!!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_REQUEST[<span class="string">'password'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/(?:\w*)\W*?[a-z].*(R|ELECT|OIN|NTO|HERE|NION)/i"</span>, $_REQUEST[<span class="string">'password'</span>]))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Attack detected!!!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clean</span><span class="params">($str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(get_magic_quotes_gpc())&#123;</span><br><span class="line">        $str=stripslashes($str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> htmlentities($str, ENT_QUOTES);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$username = @clean((string)$_GET[<span class="string">'username'</span>]);</span><br><span class="line">$password = @clean((string)$_GET[<span class="string">'password'</span>]);</span><br><span class="line"></span><br><span class="line">$query=<span class="string">'SELECT * FROM day12.users WHERE name=\''</span>.$username.<span class="string">'\' AND pass=\''</span>.$password.<span class="string">'\';'</span>;</span><br><span class="line"></span><br><span class="line">$result=mysql_query($query);</span><br><span class="line"><span class="keyword">while</span>($row = mysql_fetch_array($result))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;tr&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;td&gt;"</span> . $row[<span class="string">'name'</span>] . <span class="string">"&lt;/td&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;/tr&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//数据库创建语句</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`users`</span> (</span><br><span class="line">    -&gt;   <span class="string">`Id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    -&gt;   <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">    -&gt;   <span class="string">`pass`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">    -&gt;   <span class="string">`flag`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">    -&gt;   PRIMARY <span class="keyword">KEY</span> (<span class="string">`Id`</span>)</span><br><span class="line">    -&gt; ) <span class="keyword">ENGINE</span>=MyISAM AUTO_INCREMENT=<span class="number">2</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`users`</span> <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="string">'admin'</span>,<span class="string">'qwer!@#zxca'</span>,<span class="string">'hrctf&#123;sql_Inject1on_Is_1nterEst1ng&#125;'</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>题目分析：</strong></p>
+<p>从题目27行可以明显的看出这是一道SQL注入的题，重点是我们怎么绕过它的过滤。他的过滤有两个部分，一个是正则匹配，一个是自定的clean函数。</p>
+<p>第一部分：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clean</span><span class="params">($str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(get_magic_quotes_gpc())&#123;</span><br><span class="line">        $str=stripslashes($str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> htmlentities($str, ENT_QUOTES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们先来看一下自定义的clean函数，他用htmlentities函数来处理，这里可选参数使用的是ENT_QUOTES，因此会对单引号和双引号进行转义处理，而我们要注入的是字符型，需要闭合单引号或者逃逸单引号。那么我们的方法就是使用反引号逃逸单引号。我们传入参数时，将username传入反引号，password传入的是我们注入的内容。这样我们构成的注入语句就是这样的：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> day12.users <span class="keyword">WHERE</span> <span class="keyword">name</span>=<span class="string">'\' AND pass='</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,flag,<span class="number">3</span>,<span class="number">4</span> <span class="keyword">from</span> day12.users#<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>可以看到我们传入的反引号将原有的单引号转义了，这样第一个单引号就只能和第三个单引号闭合，从而我们的注入语句就从单引号中逃逸出来了。</p>
+<p>第二部分：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_REQUEST[<span class="string">'username'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/(?:\w*)\W*?[a-z].*(R|ELECT|OIN|NTO|HERE|NION)/i"</span>, $_REQUEST[<span class="string">'username'</span>]))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Attack detected!!!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_REQUEST[<span class="string">'password'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/(?:\w*)\W*?[a-z].*(R|ELECT|OIN|NTO|HERE|NION)/i"</span>, $_REQUEST[<span class="string">'password'</span>]))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Attack detected!!!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二部分就是对于传入的参数进行的正则匹配。但我们要注意到一个细节，就是它这里使用的是$_REQUEST来获得参数，而它在后面使用clean函数处理的是$_GET获得的参数。在PHP中REQUEST变量默认下包含GET，POST和COOKIE的数组。在php.ini配置文件中，有一个参数variables_order。他的默认内容如下：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day12/2.png" alt=""></p>
+<p>这其中的字母分别对应的是，<code>E:Environment，G:Get，P:Post，C:Cookie，S:Server</code>，字母出现顺序越靠后则数据加载的顺序越靠前，也就是说如果以POST、GET方式传入同样的变量，那么用REQUEST获取的就是POST的变量值。所以在这里我们可以用这样的方式绕过正则匹配。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day12/3.png" alt=""></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1296583188&auto=1&height=66"></iframe></div>
+<p><strong>参考链接：</strong></p>
+<p><a href="https://github.com/hongriSec/PHP-Audit-Labs/blob/master/Part1/Day12/files/README.md" target="_blank" rel="noopener">[红日安全]代码审计Day12 - 误用htmlentities函数引发的漏洞</a></p>
+<p><a href="https://github.com/hongriSec/PHP-Audit-Labs/blob/master/PHP-Audit-Labs%E9%A2%98%E8%A7%A3/Day9-12/files/README.md" target="_blank" rel="noopener">[红日安全]PHP-Audit-Labs题解之Day9-12</a></p>
+<hr>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1313107065&auto=1&height=66"></iframe><br></div>
 
 
       
@@ -483,13 +433,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/06/JAVA5/">Java学习笔记（五）--类和对象</a></p>
+        <p><span>本文标题:</span><a href="/2018/10/13/PHP-Audit-Labs-Day12/">PHP代码审计-误用htmlentities函数引发的漏洞</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-06, 21:17:01</p>
-        <p><span>最后更新:</span>2018-09-08, 10:39:08</p>
+        <p><span>发布时间:</span>2018-10-13, 14:44:30</p>
+        <p><span>最后更新:</span>2018-10-15, 21:42:48</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/06/JAVA5/" title="Java学习笔记（五）--类和对象">http://yoursite.com/2018/09/06/JAVA5/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/06/JAVA5/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/10/13/PHP-Audit-Labs-Day12/" title="PHP代码审计-误用htmlentities函数引发的漏洞">http://yoursite.com/2018/10/13/PHP-Audit-Labs-Day12/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/13/PHP-Audit-Labs-Day12/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -501,16 +451,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/07/DedeCMS4/">
-                    DedeCMS代码审计Day4
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/05/JAVA4/">
-                    Java学习笔记（四）--数组
+                <a href="/2018/10/09/PHP-Audit-Labs-Day11/">
+                    PHP代码审计-unserialize反序列化漏洞
                 </a>
             </div>
         
@@ -522,7 +466,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象概述"><span class="toc-number">1.</span> <span class="toc-text">面向对象概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类"><span class="toc-number">2.</span> <span class="toc-text">类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的构造方法"><span class="toc-number">3.</span> <span class="toc-text">类的构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态变量、常量和方法"><span class="toc-number">4.</span> <span class="toc-text">静态变量、常量和方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的主方法"><span class="toc-number">5.</span> <span class="toc-text">类的主方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-number">6.</span> <span class="toc-text">对象</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY12-String-Lights"><span class="toc-number">1.</span> <span class="toc-text">DAY12-String Lights</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a></li></ol>
         
     </div>
     <style>
@@ -558,7 +502,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（五）--类和对象　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-误用htmlentities函数引发的漏洞　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -578,15 +522,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/07/DedeCMS4/" title="上一篇: DedeCMS代码审计Day4">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/05/JAVA4/" title="下一篇: Java学习笔记（四）--数组">
+            <a href="/2018/10/09/PHP-Audit-Labs-Day11/" title="下一篇: PHP代码审计-unserialize反序列化漏洞">
                 <i class="fa fa-angle-right"></i>
             </a>
         
