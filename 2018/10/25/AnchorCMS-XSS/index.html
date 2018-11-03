@@ -15,27 +15,27 @@
 
 
 
-<meta name="description" content="前言 最近加入了P总的小密圈，虽然有些心痛，但还是物超所值。在密圈里看到呆哥的一篇关于反序列化构造拒绝服务攻击的文章，讲的主要是利用phar扩展进行反序列化漏洞攻击。于是就去搜了搜这方面的相关，打算学习一下。这一片先学个基础吧，下一篇再学习如何通过反序列化构造拒绝服务攻击。">
-<meta name="keywords" content="学习笔记,PHP">
+<meta name="description" content="前言 为了CVE，猛刷CMS漏洞，先刷它十几二十个CMS">
+<meta name="keywords" content="代码审计,CMS漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="phar扩展在PHP反序列化中的利用">
-<meta property="og:url" content="http://yoursite.com/2018/09/04/PHP-Phar/index.html">
+<meta property="og:title" content="AnchorCMS0.9.2-XSS漏洞">
+<meta property="og:url" content="http://yoursite.com/2018/10/25/AnchorCMS-XSS/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 最近加入了P总的小密圈，虽然有些心痛，但还是物超所值。在密圈里看到呆哥的一篇关于反序列化构造拒绝服务攻击的文章，讲的主要是利用phar扩展进行反序列化漏洞攻击。于是就去搜了搜这方面的相关，打算学习一下。这一片先学个基础吧，下一篇再学习如何通过反序列化构造拒绝服务攻击。">
+<meta property="og:description" content="前言 为了CVE，猛刷CMS漏洞，先刷它十几二十个CMS">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/14.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/3.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/4.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/5.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/6.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/7.jpg">
-<meta property="og:updated_time" content="2018-09-04T14:01:30.500Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/42.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/7.png">
+<meta property="og:updated_time" content="2018-11-03T15:03:10.028Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="phar扩展在PHP反序列化中的利用">
-<meta name="twitter:description" content="前言 最近加入了P总的小密圈，虽然有些心痛，但还是物超所值。在密圈里看到呆哥的一篇关于反序列化构造拒绝服务攻击的文章，讲的主要是利用phar扩展进行反序列化漏洞攻击。于是就去搜了搜这方面的相关，打算学习一下。这一片先学个基础吧，下一篇再学习如何通过反序列化构造拒绝服务攻击。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/14.jpg">
+<meta name="twitter:title" content="AnchorCMS0.9.2-XSS漏洞">
+<meta name="twitter:description" content="前言 为了CVE，猛刷CMS漏洞，先刷它十几二十个CMS">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/42.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -67,7 +67,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>phar扩展在PHP反序列化中的利用 | DoubleR&#39;s BLOG</title>
+<title>AnchorCMS0.9.2-XSS漏洞 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -319,11 +319,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-PHP-Phar" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-AnchorCMS-XSS" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/04/PHP-Phar/" class="article-date">
-      <time datetime="2018-09-04T09:49:59.000Z" itemprop="datePublished">2018-09-04</time>
+      <a href="/2018/10/25/AnchorCMS-XSS/" class="article-date">
+      <time datetime="2018-10-25T14:22:44.000Z" itemprop="datePublished">2018-10-25</time>
 </a>
 
 
@@ -338,7 +338,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      phar扩展在PHP反序列化中的利用
+      AnchorCMS0.9.2-XSS漏洞
     </h1>
   
 
@@ -347,7 +347,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,140字</span>
+			<span class="post-count">410字</span>
 		</span>
 	</span>
 	
@@ -356,7 +356,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">4分</span>
+			<span class="post-count">2分</span>
 		</span>
 	</span>
 </div>
@@ -369,7 +369,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -380,97 +380,32 @@
       
           
         <p><strong>前言</strong></p>
-<p>最近加入了P总的小密圈，虽然有些心痛，但还是物超所值。在密圈里看到呆哥的一篇关于反序列化构造拒绝服务攻击的文章，讲的主要是利用phar扩展进行反序列化漏洞攻击。于是就去搜了搜这方面的相关，打算学习一下。这一片先学个基础吧，下一篇再学习如何通过反序列化构造拒绝服务攻击。</p>
+<p>为了CVE，猛刷CMS漏洞，先刷它十几二十个CMS</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/14.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/42.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="什么是PHAR文件"><a href="#什么是PHAR文件" class="headerlink" title="什么是PHAR文件"></a>什么是PHAR文件</h2><p>PHAR(PHP Archives)是PHP里类似JAR的一种打包文件。php archives提供一种打包多个文件到一个文件的便利方式。这样，一个php archives提供一种只用一个文件就能发布整个php application的方法。另外php archives可以被php像其它php文件一样被执行，无论是在命令行上，还是在web server上。</p>
-<p>PHP 5.3或更高的版本，phar后缀文件是默认开启支持的。但phar文件缺省状态是只读的，使用phar文件不需要任何配置，但是当我们需要创建phar文件时，是需要允许写入phar文件的，这需要修改php.ini文件，将phar.readonly设置为0或off。</p>
-<h2 id="PHAR文件结构"><a href="#PHAR文件结构" class="headerlink" title="PHAR文件结构"></a>PHAR文件结构</h2><p>phar文件由四部分构成：</p>
-<p><strong>stub</strong></p>
-<p>这一部分可以理解为一个标志，格式为<code>xxx&lt;?php xxx; __HALT_COMPILER();?&gt;</code>，前面的内容不做限制，但是必须以<code>__HALT_COMPILER();?&gt;</code>来结尾，否则phar扩展无法识别这个文件为phar文件。</p>
-<p><strong>manifest</strong></p>
-<p>phar文件本质上还是一种压缩文件，这一部分主要就是储存每个被压缩的全选、属性等信息，而且在这一部分中，phar手册自己说明了将会用序列化的形式储存用户自定的meta-data，这就是利用的核心。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/1.jpg" alt=""></p>
-<p><strong>contents</strong></p>
-<p>这一部分就是被压缩文件的内容</p>
-<p><strong>signature</strong></p>
-<p>这一部分就是签名，放于文件末尾，格式如下：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/2.jpg" alt=""></p>
-<h2 id="创建一个PHAR文件"><a href="#创建一个PHAR文件" class="headerlink" title="创建一个PHAR文件"></a>创建一个PHAR文件</h2><p>根据文件结构，我们可以使用php内置的Phar类来创建phar文件。注意：这里一定要将php.ini中的phar.readonly选项设置为off，并把前面的分号去掉，然后重启apache。</p>
-<p><strong>phar_test.php:</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">TestObject</span></span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@unlink(<span class="string">"test.phar"</span>);</span><br><span class="line">	$phar = <span class="keyword">new</span> Phar(<span class="string">"test.phar"</span>);   </span><br><span class="line">	$phar-&gt;startBuffering();</span><br><span class="line">	$phar-&gt;setStub(<span class="string">"&lt;?php __halt_compiler(); ?&gt;"</span>);  <span class="comment">//设置stub</span></span><br><span class="line">	$o = <span class="keyword">new</span> TestObject();</span><br><span class="line">	$phar-&gt;setMetadata($o);  <span class="comment">//将自定义的meta-data存入manifest</span></span><br><span class="line">	$phar-&gt;addFromString(<span class="string">"test.txt"</span>,<span class="string">"test"</span>);  <span class="comment">//添加要压缩的文件</span></span><br><span class="line">	<span class="comment">//签名会自动计算</span></span><br><span class="line">	$phar-&gt;stopBuffering();  <span class="comment">//文件创建结束</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>成功创建test.phar文件：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/3.jpg" alt=""></p>
-<p>我们用winhex看一下meta-dat的储存情况，可以明显的看出它是以序列化的形式储存的</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/4.jpg" alt=""></p>
-<p>当一些php的文件系统函数在通过phar://伪协议解析phar文件时都会将meta-data进行反序列化，目前已知受影响的函数如下：</p>
-<table>
-<thead>
-<tr>
-<th>受影响的函数</th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fileatime</td>
-<td>filectime</td>
-<td>file_exists</td>
-<td>file_get_contents</td>
-</tr>
-<tr>
-<td>file_put_contents</td>
-<td>file</td>
-<td>filegroup</td>
-<td>fopen</td>
-</tr>
-<tr>
-<td>fileinode</td>
-<td>filemtime</td>
-<td>fileowner</td>
-<td>fileperms</td>
-</tr>
-<tr>
-<td>is_dir</td>
-<td>is_executable</td>
-<td>is_file</td>
-<td>is_link</td>
-</tr>
-<tr>
-<td>is_readable</td>
-<td>is_writable</td>
-<td>is_writeable</td>
-<td>parse_ini_file</td>
-</tr>
-<tr>
-<td>copy</td>
-<td>unlink</td>
-<td>stat</td>
-<td>readfile</td>
-</tr>
-</tbody>
-</table>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestObject</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'destruct'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $filename = <span class="string">'phar://test.phar/test.txt'</span>;</span><br><span class="line">    file_get_contents($filename); </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>测试结果：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/5.jpg" alt=""></p>
-<p>成功反序列化。</p>
-<p>如此一来反序列化的利用空间就被极大的放大了，当文件系统的参数可控时，我们可以在不调用unserialize()的情况下进行反序列化操作。</p>
-<h2 id="PHAR文件伪造成其它文件"><a href="#PHAR文件伪造成其它文件" class="headerlink" title="PHAR文件伪造成其它文件"></a>PHAR文件伪造成其它文件</h2><p>php识别phar文件的方式极其简单，当php识别到其文件头中的<code>__HALT_COMPILER();?&gt;</code>这段代码时就认定该文件是phar文件，对前面的内容或者后缀名是没有要求的。那么我们可以通过添加任意的文件头和修改后缀名的方式将phar文件伪造成其它格式的文件。示例代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestObject</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @unlink(<span class="string">"phar.phar"</span>);</span><br><span class="line">    $phar = <span class="keyword">new</span> Phar(<span class="string">"test1.phar"</span>); <span class="comment">//后缀名必须为phar</span></span><br><span class="line">    $phar-&gt;startBuffering();</span><br><span class="line">    $phar-&gt;setStub(<span class="string">"GIF89a"</span>.<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">//设置stub</span></span><br><span class="line">    $o = <span class="keyword">new</span> TestObject();</span><br><span class="line">    $phar-&gt;setMetadata($o); <span class="comment">//将自定义的meta-data存入manifest</span></span><br><span class="line">    $phar-&gt;addFromString(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line">    <span class="comment">//签名自动计算</span></span><br><span class="line">    $phar-&gt;stopBuffering();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我们在文件前加上了GIF文件头，生成了phar文件，这是我们把文件后缀改成”.gif”。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/6.jpg" alt=""></p>
-<p>这样我们就有了一个test1.gif文件，但是它的本质还是phar文件。我们尝试一下能不能被解析，测试代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestObject</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'Destruct'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $filename = <span class="string">'phar://test1.gif/test.txt'</span>;</span><br><span class="line">    file_get_contents($filename); </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>结果是可以的</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHAR/7.jpg" alt=""></p>
-<p>通过这样的方法我能就能绕过一部分针对后缀名的上传检测</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>AnchorCMS是一个轻量级博客CMS，这里我们使用的是0.9.2版本（<a href="https://github.com/anchorcms/anchor-cms/releases?after=0.9.3-a" target="_blank" rel="noopener">[下载地址]</a>）。下载解压，配置好数据库和登陆账号密码后，界面如下：</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/1.png" alt=""></p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>在该版本中，当用户访问一个不存在的URL链接时，程序会调用404模板，而这个模板则存在XSS漏洞。我们先去看一下它的404模板文件，文件目录为themes\default\404.php</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/2.png" alt=""></p>
+<p>这个模板的功能也很简单，当我们访问的URL不存在时它会输出current_url()函数的结果。我们追踪一下这个函数。函数定义在helpers.php文件中。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/3.png" alt=""></p>
+<p>函数作用是返Uri类中current()方法的结果，我们继续追踪这个类的方法。类定义在uri.php文件中。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/4.png" alt=""></p>
+<p>判断静态变量$current是否为空，为空则将静态方法detect()的值赋值给$current变量。我继续来看detect()方法，就定义在current()方法的下面。</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/5.png" alt=""></p>
+<p>该方法会获取 $_SERVER 数组中的’REQUEST_URI’、’PATH_INFO’, 、’ORIG_PATH_INFO’三个键的值(下图第3-4行代码)，如果存在其中的某一个键，并且符合 filter_var($uri, FILTER_SANITIZE_URL) 和 parse_url($uri, PHP_URL_PATH)，则直接将 $uri 传入static::format方法。我们继续追踪format方法</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/6.png" alt=""></p>
+<p>做了三次过滤，但都没有过滤掉XSS的一些关键字和符号，导致攻击十分容易。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>我们构造payload：</p>
+<p><code>http://127.0.0.1/anchor-cms-0.9.2/index.php/%3Cscript%3Ealert(1)%3C/script%3E</code></p>
+<p>访问，可以看出成功的弹出了弹窗</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CMS/7.png" alt=""></p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1301835417&auto=1&height=66"></iframe></div>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27538409&auto=1&height=66"></iframe></div>
+
+
       
     </div>
     
@@ -478,13 +413,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/04/PHP-Phar/">phar扩展在PHP反序列化中的利用</a></p>
+        <p><span>本文标题:</span><a href="/2018/10/25/AnchorCMS-XSS/">AnchorCMS0.9.2-XSS漏洞</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-04, 17:49:59</p>
-        <p><span>最后更新:</span>2018-09-04, 22:01:30</p>
+        <p><span>发布时间:</span>2018-10-25, 22:22:44</p>
+        <p><span>最后更新:</span>2018-11-03, 23:03:10</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/04/PHP-Phar/" title="phar扩展在PHP反序列化中的利用">http://yoursite.com/2018/09/04/PHP-Phar/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/04/PHP-Phar/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/10/25/AnchorCMS-XSS/" title="AnchorCMS0.9.2-XSS漏洞">http://yoursite.com/2018/10/25/AnchorCMS-XSS/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/25/AnchorCMS-XSS/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -497,15 +432,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/05/JAVA4/">
-                    Java学习笔记（四）--数组
+                <a href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/">
+                    SECCON 2018 CTFGhostKingdom Writeup
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/04/JAVA3/">
-                    Java学习笔记（三）--字符串
+                <a href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/">
+                    Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞
                 </a>
             </div>
         
@@ -517,7 +452,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是PHAR文件"><span class="toc-number">1.</span> <span class="toc-text">什么是PHAR文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHAR文件结构"><span class="toc-number">2.</span> <span class="toc-text">PHAR文件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个PHAR文件"><span class="toc-number">3.</span> <span class="toc-text">创建一个PHAR文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHAR文件伪造成其它文件"><span class="toc-number">5.</span> <span class="toc-text">PHAR文件伪造成其它文件</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-number">1.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞原理"><span class="toc-number">2.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用"><span class="toc-number">3.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
         
     </div>
     <style>
@@ -553,7 +488,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"phar扩展在PHP反序列化中的利用　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"AnchorCMS0.9.2-XSS漏洞　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -573,7 +508,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/05/JAVA4/" title="上一篇: Java学习笔记（四）--数组">
+            <a href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/" title="上一篇: SECCON 2018 CTFGhostKingdom Writeup">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -581,7 +516,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/04/JAVA3/" title="下一篇: Java学习笔记（三）--字符串">
+            <a href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/" title="下一篇: Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞">
                 <i class="fa fa-angle-right"></i>
             </a>
         
