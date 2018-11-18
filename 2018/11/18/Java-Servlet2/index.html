@@ -15,25 +15,20 @@
 
 
 
-<meta name="description" content="前言 是不是跟repalce沾边的函数都有问题，今天来看一下。">
-<meta name="keywords" content="代码审计,PHP">
+<meta name="description" content="前言 开始学习Java ee的基础Servlet，博客以笔记的形式，可能写的比较乱。">
+<meta name="keywords" content="Java,Servlet">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP代码审计-str_replace函数过滤不当">
-<meta property="og:url" content="http://yoursite.com/2018/10/03/PHP-Audit-Labs-Day9/index.html">
+<meta property="og:title" content="Java-Servlet学习笔记（二）">
+<meta property="og:url" content="http://yoursite.com/2018/11/18/Java-Servlet2/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 是不是跟repalce沾边的函数都有问题，今天来看一下。">
+<meta property="og:description" content="前言 开始学习Java ee的基础Servlet，博客以笔记的形式，可能写的比较乱。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/32.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/2.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/3.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/4.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/5.png">
-<meta property="og:updated_time" content="2018-10-03T14:44:30.195Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/47.jpg">
+<meta property="og:updated_time" content="2018-11-18T14:53:21.162Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP代码审计-str_replace函数过滤不当">
-<meta name="twitter:description" content="前言 是不是跟repalce沾边的函数都有问题，今天来看一下。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/32.jpg">
+<meta name="twitter:title" content="Java-Servlet学习笔记（二）">
+<meta name="twitter:description" content="前言 开始学习Java ee的基础Servlet，博客以笔记的形式，可能写的比较乱。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/47.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -65,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>PHP代码审计-str_replace函数过滤不当 | DoubleR&#39;s BLOG</title>
+<title>Java-Servlet学习笔记（二） | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -317,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day9" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java-Servlet2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/03/PHP-Audit-Labs-Day9/" class="article-date">
-      <time datetime="2018-10-03T08:17:33.000Z" itemprop="datePublished">2018-10-03</time>
+      <a href="/2018/11/18/Java-Servlet2/" class="article-date">
+      <time datetime="2018-11-18T11:23:36.000Z" itemprop="datePublished">2018-11-18</time>
 </a>
 
 
@@ -336,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      PHP代码审计-str_replace函数过滤不当
+      Java-Servlet学习笔记（二）
     </h1>
   
 
@@ -345,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,626字</span>
+			<span class="post-count">1,847字</span>
 		</span>
 	</span>
 	
@@ -367,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -378,64 +373,140 @@
       
           
         <p><strong>前言</strong></p>
-<p>是不是跟repalce沾边的函数都有问题，今天来看一下。</p>
+<p>开始学习Java ee的基础Servlet，博客以笔记的形式，可能写的比较乱。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/32.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/47.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="DAY9-Rabbit"><a href="#DAY9-Rabbit" class="headerlink" title="DAY9-Rabbit"></a>DAY9-Rabbit</h2><p>题目叫兔子，代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>漏洞解析：</strong></p>
-<p>这一题相对简单，它先获取请求头里面的<strong>HTTP_ACCEPT_LANGUAGE</strong>，这里的两个问号是php7新推的表达式，用来作为三元运算符，当<strong>HTTP_ACCEPT_LANGUAGE</strong>不为空时，$lang取其值，为空则取默认的”en”。获得值后调用sanitizeLanguage做处理。处理方式也很简单，用<strong>str_replace</strong>函数将值里面所有的<strong>../</strong>去除，防止路径穿越导致的任意文件包含。先来看一下<strong>str_repalce</strong>函数的定义：</p>
-<blockquote>
-<p>str_replace ：(PHP 4, PHP 5, PHP 7)</p>
-<p><strong>功能</strong> ：子字符串替换</p>
-<p><strong>定义</strong> ： <code>mixed str_replace ( mixed $search , mixed $replace , mixed $subject [, int &amp;$count ] )</code></p>
-<p>该函数返回一个字符串或者数组。如下：</p>
-<p>str_replace(字符串1，字符串2，字符串3)：将字符串3中出现的所有字符串1换成字符串2。</p>
-<p>str_replace(数组1，字符串1，字符串2)：将字符串2中出现的所有数组1中的值，换成字符串1。</p>
-<p>str_replace(数组1，数组2，字符串1)：将字符串1中出现的所有数组1一一对应，替换成数组2的值，多余的替换成空字符串。</p>
-</blockquote>
-<p>但是这样的过滤是不严格的，我们可以通过构造payload：<strong>….//</strong>或者<strong>…/./</strong>来绕过过滤，原理也很简单，当中间的<strong>../</strong>被去除以后，剩下部分仍能拼接成<strong>../</strong>。</p>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题目比较复杂，我们来仔细分析一下</p>
-<p><strong>题目源码：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="keyword">include</span> <span class="string">'config.php'</span>;</span><br><span class="line"><span class="keyword">include</span> <span class="string">'function.php'</span>;</span><br><span class="line"></span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername,$username,$password,$dbname);</span><br><span class="line"><span class="keyword">if</span>($conn-&gt;connect_error)&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'连接数据库失败'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$sql = <span class="string">"SELECT COUNT(*) FROM users"</span>;</span><br><span class="line">$result = $conn-&gt;query($sql);</span><br><span class="line"><span class="keyword">if</span>($result-&gt;num_rows &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    $row = $result-&gt;fetch_assoc();</span><br><span class="line">    $id = $row[<span class="string">'COUNT(*)'</span>] + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">die</span>($conn-&gt;error);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'msg'</span>]) &amp;&amp; $_POST[<span class="string">'msg'</span>] !==<span class="string">''</span>)&#123;</span><br><span class="line">    $msg = addslashes($_POST[<span class="string">'msg'</span>]);</span><br><span class="line">    $msg = replace_bad_word(convert($msg));</span><br><span class="line">    $sql = <span class="string">"INSERT INTO users VALUES($id,'"</span>.$msg.<span class="string">"')"</span>;</span><br><span class="line">    $result = $conn-&gt;query($sql);</span><br><span class="line">    <span class="keyword">if</span>($conn-&gt;error) <span class="keyword">die</span>($conn-&gt;error);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;center&gt;&lt;h1&gt;Welcome come to HRSEC message board&lt;/center&gt;&lt;/h1&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">&lt;center&gt;</span></span><br><span class="line"><span class="string">    &lt;form action="index.php" method="post"&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;Leave a message: &lt;input type="text" name="msg" /&gt;&lt;input type="submit" value="Submit" /&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;/form&gt;</span></span><br><span class="line"><span class="string">&lt;/center&gt;</span></span><br><span class="line"><span class="string">EOF;</span></span><br><span class="line">$sql = <span class="string">"SELECT * FROM users"</span>;</span><br><span class="line">$result = $conn-&gt;query($sql);</span><br><span class="line"><span class="keyword">if</span>($result-&gt;num_rows &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;center&gt;&lt;table border='1'&gt;&lt;tr&gt;&lt;th&gt;id&lt;/th&gt;&lt;th&gt;message&lt;/th&gt;&lt;tr&gt;&lt;/center&gt;"</span>;</span><br><span class="line">    <span class="keyword">while</span>($row = $result-&gt;fetch_row())&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;tr&gt;&lt;th&gt;$row[0]&lt;/th&gt;&lt;th&gt;$row[1]&lt;/th&gt;&lt;tr&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;/table&gt;&lt;/center&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$conn-&gt;close();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// function.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replace_bad_word</span><span class="params">($str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $limit_words;</span><br><span class="line">    <span class="keyword">foreach</span> ($limit_words <span class="keyword">as</span> $old =&gt; $new) &#123;</span><br><span class="line">        strlen($old) &gt; <span class="number">2</span> &amp;&amp; $str = str_replace($old,trim($new),$str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convert</span><span class="params">($str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> htmlentities($str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$limit_words = <span class="keyword">array</span>(<span class="string">'造反'</span> =&gt; <span class="string">'造**'</span>, <span class="string">'法轮功'</span> =&gt; <span class="string">'法**'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">array</span>(<span class="string">'_GET'</span>,<span class="string">'_POST'</span>) <span class="keyword">as</span> $method) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($$method <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">        $$key = $value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">"hongrisec"</span>;</span><br><span class="line">$password = <span class="string">"hongrisec"</span>;</span><br><span class="line">$dbname = <span class="string">"day9"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 搭建CTF环境使用的sql语句</span><br><span class="line">create database day9;</span><br><span class="line">use day9;</span><br><span class="line">create table users(</span><br><span class="line">id integer auto_increment not null primary key,</span><br><span class="line">message varchar(50)</span><br><span class="line">);</span><br><span class="line">create table flag( flag varchar(40));</span><br><span class="line">insert into flag values(&apos;HRCTF&#123;StR_R3p1ac3_anD_sQ1_inJ3ctIon_zZz&#125;&apos;);</span><br></pre></td></tr></table></figure>
-<p>搭建完后的效果：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/1.png" alt=""></p>
-<p><strong>题目分析：</strong></p>
-<p>这些代码主要实现的是留言板的功能。首先来看index.php，开始部分主要是数据库的连接，后面的部分主要是留言班和留言数据的查询展示。重要的是中间这一段：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'msg'</span>]) &amp;&amp; $_POST[<span class="string">'msg'</span>] !==<span class="string">''</span>)&#123;</span><br><span class="line">    $msg = addslashes($_POST[<span class="string">'msg'</span>]);</span><br><span class="line">    $msg = replace_bad_word(convert($msg));</span><br><span class="line">    $sql = <span class="string">"INSERT INTO users VALUES($id,'"</span>.$msg.<span class="string">"')"</span>;</span><br><span class="line">    $result = $conn-&gt;query($sql);</span><br><span class="line">    <span class="keyword">if</span>($conn-&gt;error) <span class="keyword">die</span>($conn-&gt;error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这一段主要接收msg的值，然后用<strong>addslashes</strong>函数做第一步处理，在每个单引号前加上转义符号。然后在用<strong>function.php</strong>里面的函数做后面的处理。我们接下来去看<strong>function.php</strong>里面函数的定义。</p>
-<p><strong>第一个函数：convert</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convert</span><span class="params">($str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> htmlentities($str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>用<strong>htmlentities</strong>对参数进行<strong>HTML实体编码</strong></p>
-<p><strong>第二个函数：replace_bad_word</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replace_bad_word</span><span class="params">($str)</span></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $limit_words;</span><br><span class="line">    <span class="keyword">foreach</span> ($limit_words <span class="keyword">as</span> $old =&gt; $new) &#123;</span><br><span class="line">        strlen($old) &gt; <span class="number">2</span> &amp;&amp; $str = str_replace($old,trim($new),$str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里全局定义了一个<strong>limit_words</strong>变量，<strong>limit_words</strong>是一些敏感词，这里将他替换成特殊的字符，<strong>limit_words</strong>内容如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$limit_words = <span class="keyword">array</span>(<span class="string">'造反'</span> =&gt; <span class="string">'造**'</span>, <span class="string">'法轮功'</span> =&gt; <span class="string">'法**'</span>);</span><br></pre></td></tr></table></figure>
-<p>按道理说代码写到这功能已经实现了，但是下面有多了一段这个：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>可以很清楚的看出这里存在一个变量覆盖的问题，加上<strong>limit_words</strong>是一个全局变量，我们可以利用这些绕过之前的<strong>addslashes</strong>函数和<strong>HTML实体编码</strong>，因为我们需要提前闭合SQL语句，所以我们需要在msg中加入单引号，而单引号经过<strong>addslashes</strong>函数的处理变成<strong>\‘</strong>，这样我们就没办法提前闭合。但是我们可以利用这里的变量覆盖将<strong>limit_words</strong> 覆盖成我们的替换，然后将<strong>\‘</strong>替换掉。payload如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msg=1%00&apos; and updatexml(1,concat(0x7e,(select * from flag),0x7e),1))#&amp;limit_words[\0\]=</span><br></pre></td></tr></table></figure>
-<p>我们来分析一下这个payload，首先是msg，它经过<strong>addslashes</strong>函数和<strong>HTML实体编码</strong>最后变成了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msg=1\0\&apos; and updatexml(1,concat(0x7e,(select * from flag),0x7e),1))#</span><br></pre></td></tr></table></figure>
-<p><strong>%00</strong>是空字符，编码后就是<strong>\0</strong>，而单引号经过<strong>addslashes</strong>函数处理变成了<strong>\‘</strong>，所以我们只要将<strong>\0\</strong>替换成空我们就能提前闭合原有的<strong>insert</strong>语句，执行我们的<strong>updatexml</strong>语句，从而实现报错注入。而后面的<strong>limit_words[\0\]=</strong>就是我们进行变量覆盖的操作。外层foreach语句将<strong>_GET</strong>和<strong>_POST</strong>作为<strong>$method</strong>的值。这样$$method就等于$_GET和$_POST。第二层foreach语句将传入的参数名作为$key，参数值作为$value。然后执行$$key=$value。这样我们post或者get传入的<strong>limit_words[\0\]=</strong>最终就变成了$limit_words[\0\]=’’，这样原先的$limit_words变量就被我们覆盖了，最后在进行敏感词替换的时候就不是原先的替换，而是将<strong>\0\</strong>替换成空。由于我的hackbar传post参数的时候不能为空，所以在这里我使用GET传参的方式进行变量覆盖，POST传参的方式进行注入。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/2.png" alt=""></p>
-<p>注入结果如下：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/3.png" alt=""></p>
-<p>flag没有显示全，这是因为updatexml报错最多只能显示32位，这里我们用reverse函数注出尾部数组，reverse函数的作用是返回字符顺序颠倒的字符串，这样输出得字符串是从最后一个开始往前的，我们把它反过来在和前面做个拼接就行。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/4.png" alt=""></p>
-<p>结果：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day9/5.png" alt=""></p>
+<h2 id="Servlet-API"><a href="#Servlet-API" class="headerlink" title="Servlet API"></a>Servlet API</h2><p><strong>1.Servlet API有一下四个包：</strong></p>
+<ul>
+<li><strong>javax.servlet</strong> 包含定义Servlet和Servlet容器之间契约的类和接口</li>
+<li><strong>javax.servlet.http</strong> 包含定义HTTP Servlet和Servlet容器之间契约的类和接口。</li>
+<li><strong>javax.servlet.annotation</strong> 包含标注Servlet、Filter、Listener的标注。它还为被标注原件定义数据</li>
+<li><strong>javax.servlet.descriptor</strong> 包含提供程序化登陆web应用程序的配置信息的类型</li>
+</ul>
+<p><strong>2.在一个应用程序中，每种Servlet类型只能有一个实例</strong></p>
+<p><strong>3.用户请求流程：</strong></p>
+<p>用户请求知识Servlet容器调用Servlet的service方法，并传入一个ServletRequest实例和一个ServletResponse实例。ServletRequest实例中封装了当前的HTTP请求，ServletResponse表示当前用户的HTTP响应。</p>
+<p><strong>4.对于每一个应用程序，Servlet容器会创建一个ServletContext实例。这个对象中封装了上下文（应用程序）的环境详情。每个上下文只有一个ServletContext。每个Servlet实例也都有封装一个Servlet配置的ServletConfig。</strong></p>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><p><strong>1.Servlet接口中定义了一下5个方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span> <span class="keyword">throws</span> ServletException</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest request, ServletResponse response)</span> <span class="keyword">throws</span> ServletException, java.io.IOException</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span></span></span><br><span class="line"><span class="function">java.lang.String <span class="title">getServletInfo</span><span class="params">()</span></span></span><br><span class="line"><span class="function">ServletConfig <span class="title">getServletConfig</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<p>java方法签名的惯例：对于与包含该方法的类型不处于同一个包中的类型，要使用全类名。因此service方法javax.servlet.ServletException的签名中是没有包信息的，而java.io.Exception则是编写完整的名称。</p>
+<p><strong>2.生命周期方法：</strong></p>
+<ul>
+<li><strong>init</strong> 当该Servlet第一次被请求时，Servlet容器会调用这个方法，这个方法在后续请求中不会再被调用，可以利用这个方法来执行相应的初始化工作</li>
+<li><strong>service</strong> 每当请求Servlet时，Servlet容器就会调用这个方法</li>
+<li><strong>destroy</strong> 当要销毁Servlet时，Servlet容器就会调用这个方法。一般会在这个方法中编写清除代码</li>
+</ul>
+<p><strong>3.非周期方法：</strong></p>
+<ul>
+<li><strong>getServletInfo</strong> 这个方法会返回Servlet的描述。可以返回有用的或为null的字符串</li>
+<li><strong>getServletConfig</strong> 返回有Servlet容器穿个init方法的ServletConfig</li>
+</ul>
+<p><strong>3.注意线程安全：</strong></p>
+<p>Servlet实例会被一个应用程序中的所用用户共享，因此不建议使用类级变量，除非他们是只读的，或者是<strong>java.util.concurrent.atomic</strong>包的成员</p>
+<h2 id="编写基础的Servlet应用程序"><a href="#编写基础的Servlet应用程序" class="headerlink" title="编写基础的Servlet应用程序"></a>编写基础的Servlet应用程序</h2><p><strong>1.标注</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(name = <span class="string">"MyServlet"</span>, urlPatterns = &#123;<span class="string">"/my"</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>WebServlet标注了用来说明一个Servlet。name属性可选，如有通常用Servlet类的而名称。urlPatterns属性可选，用来说明调用Servlet的路径。</p>
+<p><strong>2.transient</strong>不可被序列化</p>
+<p><strong>3.throw和throws：</strong>throw明确表示这里会抛出何种类型的异常，thows表示这里可能跑出的异常。</p>
+<p><strong>4.如果想通过Servlet内部使用ServletConfig，只需要将被传入的ServletConfig赋给一个类变量</strong></p>
+<h2 id="应用程序目录结构"><a href="#应用程序目录结构" class="headerlink" title="应用程序目录结构"></a>应用程序目录结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">应用总目录</span><br><span class="line">	——WEB-INF</span><br><span class="line">		--classes</span><br><span class="line">			--包</span><br><span class="line">				--类.class</span><br><span class="line">		--lib</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>classes</strong> Servlet类及其它Java类不许放在这里面。类一下的目录反映了类包的结构</li>
+<li><strong>lib</strong> Servlet应用此程序所需的JAR文件存放目录</li>
+<li>其它类似JSP页面、HTML页面、图片文件等，放置在应用程序目录下对应的文件夹中</li>
+</ul>
+<p><strong>放置在应用程序目录下的任何资源，只要用户输入资源URL，都可以直接访问到。如果想让某一个资源可以被Servlet访问，但不可以被用户访问，须将文件放入WEB-INF目录下。</strong></p>
+<h2 id="ServletRequest"><a href="#ServletRequest" class="headerlink" title="ServletRequest"></a>ServletRequest</h2><p><strong>1.对于每一个HTTP请求，Servlet容器都会创建要给ServletRequest实例，并将它传给Servlet的Service方法。ServletRequest封装了关于这个请求的信息</strong></p>
+<p><strong>2.ServletRequest接口中的方法：</strong></p>
+<ul>
+<li><strong>public int getContentLength()</strong>  返回请求主题的字节数。如果不知道字节长度，返回-1</li>
+<li><strong>public java.lang.String getContentType()</strong> 返回请求主题的MIME类型，如果不知道类型，返回null</li>
+<li><strong>public java.lang.String getParameter(java.lang.String name)</strong> 返回指定请求参数的值</li>
+<li><strong>public java.lang.String getProtocol()</strong> 返回这个HTTP请求的协议名称和版本</li>
+</ul>
+<p><strong>3.getParameter是ServletRequest中最常用的方法。该方法通常用于返回HTML表单域的值</strong></p>
+<p><strong>4.除了getParameter外，还可以使用getParameterNames、getParameterMap和getParameterValues获取表单域名、值以及查询字符串。</strong></p>
+<h2 id="ServletResponse"><a href="#ServletResponse" class="headerlink" title="ServletResponse"></a>ServletResponse</h2><p><strong>1.javax.servlet.ServletResponse接口：</strong>表示一个Servlet响应。在调用Servert的Service方法前，Servelet容器首先创建一个ServletResponse，并将他作为第二个参数传给Servlet方法。</p>
+<p><strong>2.getWriter方法：</strong>定义在ServletResponse中，返回要给可以向客户端能发送文本的java.io.PrintWriter。默认情况系，PrintWriter对象使用ISO-8859-1编码</p>
+<p><strong>3.getOutputStream方法：</strong> 同样可以想浏览器发送输出，发送的是二进制数据</p>
+<p><strong>4.setContentType方法：</strong> 在发送任何THML标签前，需调用setContentType方法，设置响应的内容类型。在没有内容类型的情况下，大多数浏览器会默认将响应渲染成HTML</p>
+<h2 id="ServletConfig"><a href="#ServletConfig" class="headerlink" title="ServletConfig"></a>ServletConfig</h2><p>当容器初始化Servlet时，Servlet容器会给Servlet的init方法传入一个ServletConfig。ServletConfig封装通过@WebServlet或者部署描述符（web.xml）传给Servlet的配置信息。这样传入的每一条信息就叫一个初始参数。一个初始参数有key和value两个元件。</p>
+<p><strong>1.getInitParameter方法：</strong>为了从Servlet内部获取到草书的值，咬字啊Servlet容器传给Servlet的init方法的ServletConfig中调用getInitParameter方法。getInitParameter的方法签名如下：</p>
+<p><code>java.lang.String getInitParmeter(java.lang.String name)</code></p>
+<p><strong>2.getInitParameterNames方法：</strong>getInitParameterNames方法返回所有初始参数名称的一个Enumeration（枚举类）<code>java.util.Enumeration&lt;java.lang.String&gt; getInitParameterNames()</code></p>
+<p><strong>3.getServletContext方法：</strong> 从Servlet内部获取ServletCongtext</p>
+<h2 id="GenericServlet"><a href="#GenericServlet" class="headerlink" title="GenericServlet"></a>GenericServlet</h2><p><strong>1.GenericServlet抽象类：</strong></p>
+<p>GenericServlet实现了Servlet和ServletConfig接口，并完成了一下任务：</p>
+<ul>
+<li>将init方法中的ServletConfig赋给一个类级变量，以便通过调用getServletConfig获取</li>
+<li>为Servlet接口中的所用方法提供默认的实现。</li>
+<li>提供方法，包围ServletConfig中的方法</li>
+</ul>
+<p><strong>2.GenericServlet可通过覆盖没有参数的init方法来编写初始化代码，ServletConfi则仍然有GenericServlet实例保存</strong></p>
+<h2 id="Http-Servlets"><a href="#Http-Servlets" class="headerlink" title="Http Servlets"></a>Http Servlets</h2><p><strong>1.HttpServlet:</strong></p>
+<p>HttpServlet类继承了javax.servlet.GenericServlet类。使用HttpServlet时，还要借助HttpServletRquest和HttpServletResponse。</p>
+<p>HttpServlet的两个特性：</p>
+<ul>
+<li>不用覆盖service方法，而是覆盖doGet、doPost等方法</li>
+<li>使用HttpServletRquest和HttpServletResponse</li>
+</ul>
+<p><strong>2.HttpServletRequest:</strong></p>
+<p>相对于ServletRequest新增的几个方法：</p>
+<ul>
+<li><strong>java.lang.String getContextPath()</strong> 返回表示请求上下文的请求URI部分</li>
+<li><strong>Cookie() getCookie()</strong> 返回一个Cookie对象数组</li>
+<li><strong>java.lang.String getMethod()</strong> 返回生成这个请求的HTTP方法名称</li>
+<li><strong>java.lang.String getHeader(java.lang.String name)</strong> 返回指定HTTP标题的值</li>
+<li><strong>java.lang.String getQueryString()</strong> 返回请求URL中的查询字符串</li>
+<li><strong>HttpSession getSession()</strong> 返回与这个请求相关的会话对象。如果没有则创建一个新的会话对象</li>
+</ul>
+<p><strong>HttpServeltResponse:</strong></p>
+<ul>
+<li><strong>void addCookie(Cookie cookie)</strong> 给这个响应对象添加一个cookie</li>
+<li><strong>void addHeader(java.lang.String name,java.lang.String value)</strong> 给这个响应对象添加一个header</li>
+<li><strong>void sendRedirect(java.lang.String location)</strong> 发送一条响应码，将浏览器跳转到指定位置</li>
+</ul>
+<h2 id="使用部署描述符"><a href="#使用部署描述符" class="headerlink" title="使用部署描述符"></a>使用部署描述符</h2><p><strong>1.部署描述符可以使用@WebServlet中没有对等元素的元素</strong></p>
+<p><strong>2.修改配置值时，不需要重新编译Servlet类</strong></p>
+<p><strong>3.部署描述符允许覆盖在Servlet标注中定义的值，及Servlet上的WebServlet标注如果同时也在部署描述符中进行声明，那么他将不起作用。</strong></p>
 <hr>
-<p><strong>参考链接：</strong></p>
-<p><a href="https://github.com/hongriSec/PHP-Audit-Labs/blob/master/Part1/Day9/files/README.md" target="_blank" rel="noopener">[红日安全]代码审计Day9 - str_replace函数过滤不当</a></p>
-<p><a href="https://github.com/hongriSec/PHP-Audit-Labs/blob/master/PHP-Audit-Labs%E9%A2%98%E8%A7%A3/Day9-12/files/README.md" target="_blank" rel="noopener">[红日安全]PHP-Audit-Labs题解之Day9-12</a></p>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29732659&auto=1&height=66"></iframe></div>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1315453387&auto=1&height=66"></iframe></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -447,13 +518,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/10/03/PHP-Audit-Labs-Day9/">PHP代码审计-str_replace函数过滤不当</a></p>
+        <p><span>本文标题:</span><a href="/2018/11/18/Java-Servlet2/">Java-Servlet学习笔记（二）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-10-03, 16:17:33</p>
-        <p><span>最后更新:</span>2018-10-03, 22:44:30</p>
+        <p><span>发布时间:</span>2018-11-18, 19:23:36</p>
+        <p><span>最后更新:</span>2018-11-18, 22:53:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/10/03/PHP-Audit-Labs-Day9/" title="PHP代码审计-str_replace函数过滤不当">http://yoursite.com/2018/10/03/PHP-Audit-Labs-Day9/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/03/PHP-Audit-Labs-Day9/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/11/18/Java-Servlet2/" title="Java-Servlet学习笔记（二）">http://yoursite.com/2018/11/18/Java-Servlet2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/11/18/Java-Servlet2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -465,16 +536,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/10/04/PHP-Audit-Labs-Day10/">
-                    PHP代码审计-程序未恰当使用exit导致的问题
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/10/02/PHP-Audit-Labs-Day8/">
-                    PHP代码审计-preg_replace函数命令执行
+                <a href="/2018/11/13/FTP-Sublime-Sftp/">
+                    服务器配置FTP环境并使用Sublime-sftp连接服务器
                 </a>
             </div>
         
@@ -486,7 +551,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY9-Rabbit"><span class="toc-number">1.</span> <span class="toc-text">DAY9-Rabbit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-API"><span class="toc-number">1.</span> <span class="toc-text">Servlet API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet"><span class="toc-number">2.</span> <span class="toc-text">Servlet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写基础的Servlet应用程序"><span class="toc-number">3.</span> <span class="toc-text">编写基础的Servlet应用程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用程序目录结构"><span class="toc-number">4.</span> <span class="toc-text">应用程序目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletRequest"><span class="toc-number">5.</span> <span class="toc-text">ServletRequest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletResponse"><span class="toc-number">6.</span> <span class="toc-text">ServletResponse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletConfig"><span class="toc-number">7.</span> <span class="toc-text">ServletConfig</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GenericServlet"><span class="toc-number">8.</span> <span class="toc-text">GenericServlet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http-Servlets"><span class="toc-number">9.</span> <span class="toc-text">Http Servlets</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用部署描述符"><span class="toc-number">10.</span> <span class="toc-text">使用部署描述符</span></a></li></ol>
         
     </div>
     <style>
@@ -522,7 +587,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-str_replace函数过滤不当　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java-Servlet学习笔记（二）　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -542,15 +607,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/10/04/PHP-Audit-Labs-Day10/" title="上一篇: PHP代码审计-程序未恰当使用exit导致的问题">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/10/02/PHP-Audit-Labs-Day8/" title="下一篇: PHP代码审计-preg_replace函数命令执行">
+            <a href="/2018/11/13/FTP-Sublime-Sftp/" title="下一篇: 服务器配置FTP环境并使用Sublime-sftp连接服务器">
                 <i class="fa fa-angle-right"></i>
             </a>
         
