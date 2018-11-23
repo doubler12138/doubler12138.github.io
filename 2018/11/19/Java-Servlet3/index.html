@@ -15,35 +15,20 @@
 
 
 
-<meta name="description" content="前言 最近几天开始审计DedeCMS，做一些已有漏洞的复现，看看能不能自己审个洞出来">
-<meta name="keywords" content="代码审计,CMS漏洞">
+<meta name="description" content="前言 继续学习Java Servlet">
+<meta name="keywords" content="Java,Servlet">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DedeCMS代码审计Day1">
-<meta property="og:url" content="http://yoursite.com/2018/08/04/DedeCMS1/index.html">
+<meta property="og:title" content="Java-Servlet学习笔记（三）--会话管理">
+<meta property="og:url" content="http://yoursite.com/2018/11/19/Java-Servlet3/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 最近几天开始审计DedeCMS，做一些已有漏洞的复现，看看能不能自己审个洞出来">
+<meta property="og:description" content="前言 继续学习Java Servlet">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/31.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/3.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/4.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/5.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/6.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/7.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/8.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/9.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/10.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/11.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/12.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/13.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/14.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/15.jpg">
-<meta property="og:updated_time" content="2018-08-21T13:35:50.027Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/48.jpg">
+<meta property="og:updated_time" content="2018-11-23T15:04:06.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DedeCMS代码审计Day1">
-<meta name="twitter:description" content="前言 最近几天开始审计DedeCMS，做一些已有漏洞的复现，看看能不能自己审个洞出来">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/31.jpg">
+<meta name="twitter:title" content="Java-Servlet学习笔记（三）--会话管理">
+<meta name="twitter:description" content="前言 继续学习Java Servlet">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/48.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -75,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>DedeCMS代码审计Day1 | DoubleR&#39;s BLOG</title>
+<title>Java-Servlet学习笔记（三）--会话管理 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -327,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-DedeCMS1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java-Servlet3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/04/DedeCMS1/" class="article-date">
-      <time datetime="2018-08-04T13:50:59.000Z" itemprop="datePublished">2018-08-04</time>
+      <a href="/2018/11/19/Java-Servlet3/" class="article-date">
+      <time datetime="2018-11-19T13:50:13.000Z" itemprop="datePublished">2018-11-19</time>
 </a>
 
 
@@ -346,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      DedeCMS代码审计Day1
+      Java-Servlet学习笔记（三）--会话管理
     </h1>
   
 
@@ -355,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,584字</span>
+			<span class="post-count">1,862字</span>
 		</span>
 	</span>
 	
@@ -364,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">6分</span>
+			<span class="post-count">7分</span>
 		</span>
 	</span>
 </div>
@@ -377,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -388,64 +373,74 @@
       
           
         <p><strong>前言</strong></p>
-<p>最近几天开始审计DedeCMS，做一些已有漏洞的复现，看看能不能自己审个洞出来</p>
+<p>继续学习Java Servlet</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/photo/blog/31.jpg" alt="Alt text"></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/48.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h2><ul>
-<li>漏洞公布时间：2018.01.17</li>
-<li>影响版本：V5.7SP2</li>
-<li>修复时间：未定</li>
-<li>漏洞条件：开启会员注册的功能，保证会员能正常地注册，且会员空间能正常访问</li>
+<h2 id="URL重写"><a href="#URL重写" class="headerlink" title="URL重写"></a>URL重写</h2><p><strong>1.URL重写是一种会话跟踪技术，它将一个或多个token添加到URL的查询字符串中，每个token通常为key=value的形式。</strong></p>
+<p><strong>2.URL和token间用问号(?)分割，token间用与号(&amp;)分割</strong></p>
+<p><strong>3.URL重写的限制：</strong></p>
+<ul>
+<li>URL在某些浏览器上最大长度为2000字符</li>
+<li>若是要传递值到下一个资源，需要将值插入到来链接中。换而言之，静态页面很难传值</li>
+<li>URL重写需要在服务器端上完成，所有的链接都必须带值</li>
+<li>某些字符，例如空格、与和问号等都必须用base64编码</li>
+<li>所有的信息都是可见的，某些情况下缺乏安全性</li>
 </ul>
-<h2 id="漏洞说明"><a href="#漏洞说明" class="headerlink" title="漏洞说明"></a>漏洞说明</h2><p>DedeCMS对前台用户认证时采用的是通过cookie的验证方式，通过cookie中的DedeUserID和DedeUserID_ckMd5对当前用户的身份以及登陆状态进行验证。此漏洞的原因是将DedeUserID和DedeUserID__ckMd5伪造成为了其他用户的值，这样就导致伪造其他用户的Cookie而能够以其他的用户登录。 </p>
-<h2 id="审计过程"><a href="#审计过程" class="headerlink" title="审计过程"></a>审计过程</h2><p>这个漏洞是已有漏洞，下面阐述一下我的审计过程。</p>
-<h3 id="登陆验证"><a href="#登陆验证" class="headerlink" title="登陆验证"></a>登陆验证</h3><p>DedeCMS对会员管理的文件存放在<code>uploads/member</code>路径下，在该路径下的<code>index.php</code>文件的第25行，对登陆状态进行了判断</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/1.jpg" alt=""></p>
-<p>当<code>$cfg_ml-&gt;IsLogin()</code>为false时，加载<code>index-notlogin.htm</code>文件，否则加载会员登陆界面。我们追踪<code>IsLogin()</code>方法，看它是如何返回值的。</p>
-<p>追踪IsLogin()函数到<code>\uploads\include\memberlogin.class.php</code>文件中，看到了IsLogin方法函数的定义</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/2.jpg" alt=""></p>
-<p>当$this-&gt;M_ID有值时返回TRUE否则返回FALSE，所以我们想要进入登陆后的界面就要让$this-&gt;M_ID有值。追踪这个变量，看它如何获取值。</p>
-<p>在同一文件的<code>__construct</code>方法中给<code>$this-&gt;M_ID</code>复制了</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/3.jpg" alt=""></p>
-<p>我们先去追踪GetNum方法，它也在当前文件，作用就是对传入的参数进行一次操作，将参数做所有非数字的字符全都替换成空。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/4.jpg" alt=""></p>
-<p>我们再去追踪GetCookie函数，它在<code>\uploads\include\helpers\cookie.helper.php</code>文件中定义。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/5.jpg" alt=""></p>
-<p>分析一下这个函数，它先判断以传入参数为名的cookie和传入参数与<code>__ckMd5</code>拼接为名的cookie是否存在。从之前的函数调用传入的参数来看，也就是判断以<code>DedeUserID</code>和<code>DedeUserID__ckMd5</code>为键名的cookie值是否存在。如果存在则对两个值进行比较，具体代码就是这一行：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>($_COOKIE[$key.<span class="string">'__ckMd5'</span>]!=substr(md5($cfg_cookie_encode.$_COOKIE[$key]),<span class="number">0</span>,<span class="number">16</span>))</span><br></pre></td></tr></table></figure>
-<p>它将<code>$cfg_cookie_encode</code>的值和<code>DedeUserID</code>的cookie值进行拼接，然后进行md5加密，并截取它前16个字符与<code>DedeUserID__ckMd5</code>的cookie值进行比较，防止前台任意更改cookie。如果不同返回空，相同就返回<code>DedeUserID</code>的值，就登陆成功了。</p>
-<p>而这里的DedeUserID就是就是当前用户的ID，也就是数据库中<code>dede_member</code>表中的mid字段</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/6.jpg" alt=""></p>
-<p>所以我们只要知道目标账号的<code>mid（也就是DedeUserID）</code>和<code>DedeUserID__ckMd5</code>就能通过更改cookie登入目标账号。但是<code>$cfg_cookie_encode</code>的值是在系统安装时管理员设置的，我们并不知掉，所以我们并没有办法直接获取<code>DedeUserID__ckMd5</code>的值。这时候我们就需要去找一个漏洞触发点。</p>
-<h3 id="漏洞触发"><a href="#漏洞触发" class="headerlink" title="漏洞触发"></a>漏洞触发</h3><p>在<code>/uploads/member/index.php</code>文件，也就是会员登陆界面，还有一段代码用来登陆会员空间，也就是最大分支的else部分，这个分支语句判断了$uid参数是否为空，为空就进行登陆，非空就执行下列代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span>(DEDEMEMBER.<span class="string">'/inc/config_space.php'</span>);</span><br><span class="line"><span class="keyword">if</span>($action == <span class="string">''</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">include_once</span>(DEDEINC.<span class="string">"/channelunit.func.php"</span>);</span><br><span class="line">    $dpl = <span class="keyword">new</span> DedeTemplate();</span><br><span class="line">    $tplfile = DEDEMEMBER.<span class="string">"/space/&#123;$_vars['spacestyle']&#125;/index.htm"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//更新最近访客记录及站点统计记录</span></span><br><span class="line">    $vtime = time();</span><br><span class="line">    $last_vtime = GetCookie(<span class="string">'last_vtime'</span>);</span><br><span class="line">    $last_vid = GetCookie(<span class="string">'last_vid'</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($last_vtime))</span><br><span class="line">    &#123;</span><br><span class="line">        $last_vtime = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>($vtime - $last_vtime &gt; <span class="number">3600</span> || !preg_match(<span class="string">'#,'</span>.$uid.<span class="string">',#i'</span>, <span class="string">','</span>.$last_vid.<span class="string">','</span>) )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>($last_vid!=<span class="string">''</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            $last_vids = explode(<span class="string">','</span>,$last_vid);</span><br><span class="line">            $i = <span class="number">0</span>;</span><br><span class="line">            $last_vid = $uid;</span><br><span class="line">            <span class="keyword">foreach</span>($last_vids <span class="keyword">as</span> $lsid)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>($i&gt;<span class="number">10</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>($lsid != $uid)</span><br><span class="line">                &#123;</span><br><span class="line">                    $i++;</span><br><span class="line">                    $last_vid .= <span class="string">','</span>.$last_vid;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            $last_vid = $uid;</span><br><span class="line">        &#125;</span><br><span class="line">        PutCookie(<span class="string">'last_vtime'</span>, $vtime, <span class="number">3600</span>*<span class="number">24</span>, <span class="string">'/'</span>);</span><br><span class="line">        PutCookie(<span class="string">'last_vid'</span>, $last_vid, <span class="number">3600</span>*<span class="number">24</span>, <span class="string">'/'</span>);</span><br><span class="line">        <span class="keyword">if</span>($cfg_ml-&gt;IsLogin() &amp;&amp; $cfg_ml-&gt;M_LoginID != $uid)</span><br><span class="line">        &#123;</span><br><span class="line">            $vip = GetIP();</span><br><span class="line">            $arr = $dsql-&gt;GetOne(<span class="string">"SELECT * FROM `#@__member_vhistory` WHERE mid='&#123;$_vars['mid']&#125;' AND vid='&#123;$cfg_ml-&gt;M_ID&#125;' "</span>);</span><br><span class="line">            <span class="keyword">if</span>(is_array($arr))</span><br><span class="line">            &#123;</span><br><span class="line">                $dsql-&gt;ExecuteNoneQuery(<span class="string">"UPDATE `#@__member_vhistory` SET vip='$vip',vtime='$vtime',count=count+1 WHERE mid='&#123;$_vars['mid']&#125;' AND vid='&#123;$cfg_ml-&gt;M_ID&#125;' "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                $query = <span class="string">"INSERT INTO `#@__member_vhistory`(mid,loginid,vid,vloginid,count,vip,vtime)</span></span><br><span class="line"><span class="string">                         VALUES('&#123;$_vars['mid']&#125;','&#123;$_vars['userid']&#125;','&#123;$cfg_ml-&gt;M_ID&#125;','&#123;$cfg_ml-&gt;M_LoginID&#125;','1','$vip','$vtime'); "</span>;</span><br><span class="line">                $dsql-&gt;ExecuteNoneQuery($query);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $dsql-&gt;ExecuteNoneQuery(<span class="string">"UPDATE `#@__member_tj` SET homecount=homecount+1 WHERE mid='&#123;$_vars['mid']&#125;' "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $dpl-&gt;LoadTemplate($tplfile);</span><br><span class="line">    $dpl-&gt;display();</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">require_once</span>(DEDEMEMBER.<span class="string">'/inc/space_action.php'</span>);</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们分析一下几个关键点：</p>
-<p>当<code>$action</code>参数为空时，回去获取<code>last_vid</code>的cookie值</p>
-<p>当上次来访时间间隔过长时，或者匹配到<code>$uid</code>的值试，当<code>last_vid</code>为空时，它将<code>$uid</code>的值赋值给<code>$last_vid</code>，然后作为参数传入<code>PutCookie</code>方法中，让我们去追踪一下这个方法</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/7.jpg" alt=""></p>
-<p>这个方法的作用就是根据传进来的参数设置两个cookie，仔细看它第二个cookie值的设置方法是不是很熟悉。没错，它和<code>DedeUserID__ckMd5</code>的设置方法是一样的，所以我们可以用它的这个缺陷，获取我们想要的<code>DedeUserID__ckMd5</code>的值。</p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>我们已知admin的账号的mid为1，所以它的<code>DedeUserID</code>是1，但是<code>DedeUserID__ckMd5</code>的值我们是不知道的。这时候我们去注册一个正常的账号，用户名比如说是test1，aaaa22之类的，只要前面是字母，最后的数字是目标账号的mid值就行了。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/8.jpg" alt=""></p>
-<p>刚注册的账号还访问不了自己的会员空间</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/9.jpg" alt=""></p>
-<p>当我们的账号在后台过审，资料状态编程正常使用的时候</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/10.jpg" alt=""></p>
-<p>我们正常登陆自己的会员账号，清除本地cookie。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/11.jpg" alt=""></p>
-<p>然后访问自己的会员空间，这时cookie设置了，然后刷新，抓包，就能看到cookie值了</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/12.jpg" alt=""></p>
-<p>这时候last_vid=test1，last_vid_ckMd5的值是用同样的算法对test1处理后的值。</p>
-<p>我们退出登陆，清除本地cookie，重新登陆，这时候我们能看到它的<code>DedeUserID</code>和<code>DedeUserID__ckMd5</code>值是我们自己的账号。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/13.jpg" alt=""></p>
-<p>我们把这里的<code>DedeUserID</code>设置成test1，把<code>DedeUserID__ckMd5</code>设置成抓包获得last_vid_ckMd5的值.</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/14.jpg" alt=""></p>
-<p>我们重新刷新这个界面，就将登陆admin的账号。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/DedeCMS/15.jpg" alt=""></p>
-<p>因为它们是同一个算法得出的，所以后台比较相等后返回test1，被GetNum函数处理后，将test全都替换成空，所以最后只剩下1，那我们就将登陆mid值为1的账号。利用这个漏洞我们可以进行任意会员账号的前台登陆。</p>
+<p><strong>4.URL重写仅适合于信息尽在少量页面间传递，且信息本省不敏感</strong></p>
+<h2 id="隐藏域"><a href="#隐藏域" class="headerlink" title="隐藏域"></a>隐藏域</h2><p>使用隐藏域来保持状态类似与URL重写技术，但不是将值附加到URL上，而是放到HTML表单的隐藏域中。当表单提交时，隐藏于的值也同时提交到服务器端。隐藏于技术仅当网页有表单时有效。该技术相对与URL重写的又是在于：没有字符数限制，同时无需额外的编码。但该技术同URL重写一样，不是和跨越多个界面。</p>
+<p>个人理解就是原先用URL传递的参数直接写在HTML表单的hidden的中，然后通过get或post的方式提交给服务器。</p>
+<h2 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h2><p><strong>1.Cookies可自动地在浏览器和Web服务器间交互，可存储在多个页面间传递的信息。Cookie作为HTTP header的一部分，其传输有HTTP协议控制。</strong></p>
+<p><strong>2.Cookies的额问题在与用户可以通过改变器浏览器设置来拒接接收cookies。</strong></p>
+<p><strong>3.可以通过传递name和value凉饿参数给Cookie类的构造函数来创建一个cookies：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(name, value);</span><br></pre></td></tr></table></figure>
+<p><strong>4.Cookie对象的主要属性：</strong></p>
+<ul>
+<li>domain 设置可以访问该Cookie的域名。</li>
+<li>path 设置cookie所在目录</li>
+<li>maxAge 设置过期时间</li>
+</ul>
+<p><strong>5.要将cookie发送到浏览器，需要调用HttpServletResponse的addcookie方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpServletResponse.addCookie(cookie)</span><br></pre></td></tr></table></figure>
+<p><strong>6.服务器若要读取浏览器提交的cookie，可以通过HttpServletRequest接口的getCookies方法，该方法返回一个Cookie数组，若没有cookie则返回null。需要遍历整个数组来查询某个特定名称的cookie：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line">Cookie maxRecordsCookie = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (cookies != <span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">for</span>(Cookie cookie : cookies)&#123;</span><br><span class="line">		<span class="keyword">if</span>(cookie.getName().equals(<span class="string">"maxRecords"</span>)&#123;</span><br><span class="line">            maxRecordsCookie = cookie;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>7.目前没有一个方法直接删除cookie，只能通过创建一个同名的cookie，并将maxAge属性设置为0，即立即过期，并添加到HttpServletResponse中，来替代之前的cookie达到删除的作用</strong></p>
+<h2 id="HttpSession对象"><a href="#HttpSession对象" class="headerlink" title="HttpSession对象"></a>HttpSession对象</h2><p><strong>1.一个用户可以有且最多有一个HttpSession，并且该Session不会被其它用户访问到。</strong></p>
+<p><strong>2.HttpSession对象在用户第一次访问网站的时候自动被创建，你可以通过调用HttpServletRequest的getSession方法来获取对象</strong></p>
+<p><strong>3.放到HttpSession中的值是存储在内存中的。</strong></p>
+<p><strong>4.任何实现java.io.Serializable（Java可序列化）的java对象都能存放到HttpSession中。不支持序列化的对象放入会导致容器视图序列化的时候失败报错</strong></p>
+<p><strong>5.通过调用setAttribute方法可以将对象放入到Session，如果传入的name参数之前已经使用过，则会用新值覆盖旧值</strong></p>
+<p><strong>6.通过调用getAttribute方法可以取回之前放入的对象（getAttribute后，对应对象更改，seesion中的会对应更改，不用重新setAttribute）</strong></p>
+<p><strong>7.所有保存在HttpSession的数据不会被发送到客户端，Servlet容器会为每一个HttpSession生成唯一的标识符，并将该标识发送到浏览器，或创建一个名为JESSIONID的cookie，或者在URL后附加要给jsessionid的参数，可以通过调用HttpSession的getId方法来读取该标识。</strong></p>
+<p><strong>8.HttpSession还定义了一个名为invalidate的方法，该方法会强制会话过期，并清空器保存的对象。</strong></p>
+<p><strong>9.会话的过期时间可以通过部署描述符的session-timeout元素配置，设置为0则永不过期</strong></p>
+<p><strong>10.可以通过调用HttpSession的getMaxInactiveInterval方法来查看会话多久过期，该方法返回一个数据类型，单位为秒。调用setMaxInactiveInterval方法来单独对某个HttpSession设定其超时时间。</strong></p>
+<h2 id="Tomcat启动慢的解决过程"><a href="#Tomcat启动慢的解决过程" class="headerlink" title="Tomcat启动慢的解决过程"></a>Tomcat启动慢的解决过程</h2><p><strong>起因：</strong></p>
+<p>写了几个Servlet后我再运行index.jsp后，发先它卡死在了下面这个警告上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WARNING: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [168,417] milliseconds.</span><br></pre></td></tr></table></figure>
+<p>我开始以为我的代码写错了，于是回去查看代码，并没有错误。后来觉得可能是我这个应用下写的文件太多了，于是又新建一个新的项目，写入代码后运行还是不行。再后来我不管写什么文件都启动不了Tomcat。于是就去找原因。</p>
+<p><strong>原因：</strong></p>
+<p>Tocmat的Session ID是通过SHA1算法计算得到的，计算Session ID的时候必须有一个密钥。为了提高安全性Tomcat在启动的时候回通过随机生成一个密钥。在 <a href="http://wiki.apache.org/tomcat/HowTo/FasterStartUp" target="_blank" rel="noopener">http://wiki.apache.org/tomcat/HowTo/FasterStartUp</a> (Entropy Source部分)有一段解释。stackoverflow上面也有一大批这方面的说明。它使用<strong>/dev/random</strong>作为熵池，随机数是从熵池中进行创建的。当读操作时，/dev/random设备会只返回熵池中噪声的随节。/dev/random非常适合那些需要非常高质量随机性的场景，比如一次性的支付或生成密钥的场景。当熵池为空时，来自/dev/random的读操作将被阻塞，直到熵池收集到足够的环境噪声数据。这么做的目的是成为一个密码安全的伪随机数发生器，熵池要有尽可能大的输出。对于生成高质量的加密密钥或者是需要长期保护的场景，一定要这么做。<strong>环境噪声：</strong>随机数产生器会收集来自设备驱动器和其它源的环境噪声数据，并放入熵池中。产生器会评估熵池中的噪声数据的数量。当熵池为空时，这个噪声数据的收集是比较花时间的。这就意味着，Tomcat在生产环境中使用熵池时，会被阻塞较长的时间。</p>
+<p><strong>解决方法：</strong></p>
+<p><strong>1.在Tomcat环境中解决（未尝试）：</strong></p>
+<p>可以通过配置JRE使用非阻塞的Entropy Source。</p>
+<p>在catalina.sh中加入这么一行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPTS=&quot;-Djava.security.egd=file:/dev/./urandom&quot;</span><br></pre></td></tr></table></figure>
+<p>加入后再启动Tomcat，整个启动耗时迅速下降。</p>
+<p><strong>2.在JVM环境中解决（尝试后能解决）：</strong></p>
+<p>打开<code>$JAVA_PATH/jre/lib/security/java.security</code>这个文件，找到下面的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source=file:/dev/urandom</span><br></pre></td></tr></table></figure>
+<p> 替换成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source=file:/dev/./urandom</span><br></pre></td></tr></table></figure>
+<p><strong>3.彻底解决的方法：</strong></p>
+<p>增大/dev/random的熵池。问题的原因是由于熵池不够大，所以增大它是最彻底的方法。熵池不仅仅Tomcat用，Linux下的所有应用程序产生随机数都会用到这个，所以不仅仅是Tomcat可能被阻塞 。如果你搜索会发现Apache、Nginx、OpenSSL都被这个问题坑过 。</p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=551591414&auto=1&height=66"></iframe></div>
+<p><strong>参考链接：</strong></p>
+<p><a href="https://blog.csdn.net/u013939884/article/details/72860358" target="_blank" rel="noopener">彻底找到 Tomcat 启动速度慢的元凶</a></p>
+<p><a href="https://www.cnblogs.com/canmeng-cn/p/7909214.html" target="_blank" rel="noopener">tomcat启动很慢很慢很慢</a></p>
+<hr>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=399552364&auto=1&height=66"></iframe></div>
       
     </div>
     
@@ -453,13 +448,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/04/DedeCMS1/">DedeCMS代码审计Day1</a></p>
+        <p><span>本文标题:</span><a href="/2018/11/19/Java-Servlet3/">Java-Servlet学习笔记（三）--会话管理</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-08-04, 21:50:59</p>
-        <p><span>最后更新:</span>2018-08-21, 21:35:50</p>
+        <p><span>发布时间:</span>2018-11-19, 21:50:13</p>
+        <p><span>最后更新:</span>2018-11-23, 23:04:06</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/04/DedeCMS1/" title="DedeCMS代码审计Day1">http://yoursite.com/2018/08/04/DedeCMS1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/04/DedeCMS1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/11/19/Java-Servlet3/" title="Java-Servlet学习笔记（三）--会话管理">http://yoursite.com/2018/11/19/Java-Servlet3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/11/19/Java-Servlet3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -471,16 +466,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/08/06/ThinkPHP6/">
-                    ThinkPHP框架学习--模型（二）
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/08/03/ThinkPHP5/">
-                    ThinkPHP框架学习--模型（一）
+                <a href="/2018/11/18/Java-Servlet2/">
+                    Java-Servlet学习笔记（二）--Servlets
                 </a>
             </div>
         
@@ -492,7 +481,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞信息"><span class="toc-number">1.</span> <span class="toc-text">漏洞信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞说明"><span class="toc-number">2.</span> <span class="toc-text">漏洞说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#审计过程"><span class="toc-number">3.</span> <span class="toc-text">审计过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#登陆验证"><span class="toc-number">3.1.</span> <span class="toc-text">登陆验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#漏洞触发"><span class="toc-number">3.2.</span> <span class="toc-text">漏洞触发</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用"><span class="toc-number">4.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#URL重写"><span class="toc-number">1.</span> <span class="toc-text">URL重写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐藏域"><span class="toc-number">2.</span> <span class="toc-text">隐藏域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookies"><span class="toc-number">3.</span> <span class="toc-text">Cookies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HttpSession对象"><span class="toc-number">4.</span> <span class="toc-text">HttpSession对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tomcat启动慢的解决过程"><span class="toc-number">5.</span> <span class="toc-text">Tomcat启动慢的解决过程</span></a></li></ol>
         
     </div>
     <style>
@@ -528,7 +517,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"DedeCMS代码审计Day1　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java-Servlet学习笔记（三）--会话管理　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -548,15 +537,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/06/ThinkPHP6/" title="上一篇: ThinkPHP框架学习--模型（二）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/08/03/ThinkPHP5/" title="下一篇: ThinkPHP框架学习--模型（一）">
+            <a href="/2018/11/18/Java-Servlet2/" title="下一篇: Java-Servlet学习笔记（二）--Servlets">
                 <i class="fa fa-angle-right"></i>
             </a>
         
