@@ -15,20 +15,20 @@
 
 
 
-<meta name="description" content="前言 这一部分学习Java对数字处理的包装类">
-<meta name="keywords" content="学习笔记,Java">
+<meta name="description" content="前言 这部分记录一下Java web中特别重要的JSP">
+<meta name="keywords" content="Java.Servlet">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记（七）--数字处理类">
-<meta property="og:url" content="http://yoursite.com/2018/09/09/JAVA7/index.html">
+<meta property="og:title" content="Java-Servlet学习笔记（四）--JavaServer Page(JSP)">
+<meta property="og:url" content="http://yoursite.com/2018/11/24/Java-Servlet4/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 这一部分学习Java对数字处理的包装类">
+<meta property="og:description" content="前言 这部分记录一下Java web中特别重要的JSP">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg">
-<meta property="og:updated_time" content="2018-09-09T08:12:06.198Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/49.jpg">
+<meta property="og:updated_time" content="2018-11-24T13:24:59.075Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记（七）--数字处理类">
-<meta name="twitter:description" content="前言 这一部分学习Java对数字处理的包装类">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg">
+<meta name="twitter:title" content="Java-Servlet学习笔记（四）--JavaServer Page(JSP)">
+<meta name="twitter:description" content="前言 这部分记录一下Java web中特别重要的JSP">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/49.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java学习笔记（七）--数字处理类 | DoubleR&#39;s BLOG</title>
+<title>Java-Servlet学习笔记（四）--JavaServer Page(JSP) | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JAVA7" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java-Servlet4" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/09/JAVA7/" class="article-date">
-      <time datetime="2018-09-09T01:37:42.000Z" itemprop="datePublished">2018-09-09</time>
+      <a href="/2018/11/24/Java-Servlet4/" class="article-date">
+      <time datetime="2018-11-24T02:50:22.000Z" itemprop="datePublished">2018-11-24</time>
 </a>
 
 
@@ -331,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记（七）--数字处理类
+      Java-Servlet学习笔记（四）--JavaServer Page(JSP)
     </h1>
   
 
@@ -340,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,210字</span>
+			<span class="post-count">2,192字</span>
 		</span>
 	</span>
 	
@@ -349,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
+			<span class="post-count">8分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Servlet/">Java.Servlet</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -373,109 +373,155 @@
       
           
         <p><strong>前言</strong></p>
-<p>这一部分学习Java对数字处理的包装类</p>
+<p>这部分记录一下Java web中特别重要的JSP</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/49.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="数字格式化"><a href="#数字格式化" class="headerlink" title="数字格式化"></a>数字格式化</h2><p>Java主要对浮点型数据进行数字格式化操作，其中浮点型数据包括double型和float型数据，在Java中使用java.text.DecimalFormat格式化数字。</p>
-<p>在Java中没有格式化的数据遵循以下原则：</p>
+<h2 id="JSP概述"><a href="#JSP概述" class="headerlink" title="JSP概述"></a>JSP概述</h2><p><strong>1.Servlet的两个缺点：</strong></p>
 <ul>
-<li>如果数据绝对值大于0.001并且小于10000000，Java将以常规小数形式表示</li>
-<li>如果数据绝对值小于0.001或者大于10000000，使用科学计数法表示</li>
+<li>写在Servlet中的所有HTML标签必须包含在Java字符串中</li>
+<li>所有的文本和HTML标记是硬编码，导致即使是表现层的微小变化也需要重新编译。</li>
 </ul>
-<p>DecimalFormat是NumberFormat的一个子类，用于格式化十进制数字。它可以将一些数字格式化为证书、浮点数、科学计数法、百分数等。一般情况下可以在实例化DecimalFormat对象时传递数字格式化，也可以通过DecimalFormat类中的applyPatter()方法来实现数字格式化。</p>
-<pre><code>DecimalFormat 类中特殊字符说明
-</code></pre><table>
+<p><strong>2.JSP的编写可以使用标准语法或XML语法，XML语法编写的JSP页面被称为JSP文档</strong></p>
+<p><strong>3.当一个JSP页面第一次被请求时，Servlet/JSP容器进行的主要工作：</strong></p>
+<ul>
+<li>转换JSP页面到JSP页面实现类，该实现类是一个实现javax.servlet.jsp.JspPage接口或子接口javax.servlet.jsp.HttpJspPage的Java类。JspPage是javax.servlet.Servlet的子接口，这使得每一个JSP页面都是要给Servlet。</li>
+<li>转后成功后，Servlet/JSP容器随后编译该类，并装载和实例化该类，像其它正常的Servlet一样执行生命周期操作</li>
+</ul>
+<p><strong>4.对同一个JSP页面的后续请求，Servlet/JSP容器会先检查JSP页面是否被修改过。如果被修改则该JSP页面会被重新翻译、编译并执行。如果不是，则执行已经在内存中的JSP Servlet。由此会导致一个JSP页面在第一次调用的实际花费总比后面的花费多。</strong></p>
+<p><strong>5.解决方法：</strong></p>
+<ul>
+<li>配置应用程序，是所有的JSP页面在应用程序启动时被调用，而不是在第一次请求时调用。</li>
+<li>预编译JSP页面，并将其部署为Servlet。</li>
+</ul>
+<p><strong>6.JSP自带API包含的四个包：</strong></p>
+<ul>
+<li>javax.servlet.jsp 包含用于Servl/JSP容器将JSP页面翻译为Servlet的核心类和接口。其中最为重要的是JspPage和HttpJspPage接口。所有的JSP页面实现类必须实现这两个接口。</li>
+<li>javax.servlet.jsp.tagext 包括用于开发自定义标签的类型。</li>
+<li>javax.el 提供统一表达式语言的API</li>
+<li>javax.servlet.jsp.el 提供一组必须由Servlet/JSP容器支持，以便在JSP页面中使用表达式语言的类。</li>
+</ul>
+<p><strong>7.JSP页面包含语法元素和模板元素：</strong></p>
+<ul>
+<li>语法元素 一些具有特殊意义的JSP转化符</li>
+<li>模板元素 出去语法元素外的一切都是模板元素，例如JSP页面中的HTML标记和文字都是模板元素，模板元素会原样发送给浏览器</li>
+</ul>
+<p><strong>8.在应用程序目录中的每一个JSP页面都可以直接在浏览器中输入路径页面访问</strong></p>
+<p><strong>9.Java代码可以出现在JSP页面中的任何位置，并通过”&lt;%”和”%&gt;”包括起来，其次可以使用page指令的import属性导入在JSP页面中使用的Java类型，如果没有导入则需要在代码中写Java类的全路径名称。</strong></p>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p><strong>1.JSP注释：</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>2.HTML/XHTMl注释：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &#123;comments here&#125; --&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>3.一个HTML/XHTML注释不会被容器处理，会原样发送到浏览器。因此HTML/XHTML注释的一个作用就是用来确定JSP页面本身。当应用运行多个JSP时，可以通过在浏览器中查看HTML源码来找出是哪一个JSP页面或片段产生了相应的页面</strong></p>
+<h2 id="隐式对象"><a href="#隐式对象" class="headerlink" title="隐式对象"></a>隐式对象</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">字符</th>
-<th style="text-align:center">说明</th>
+<th>对象</th>
+<th style="text-align:left">类型</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">表示数字的一位阿拉伯数字，如果该位不存在数字，则显示0</td>
+<td>request</td>
+<td style="text-align:left">javax.servlet.http.HttpServletRequest</td>
 </tr>
 <tr>
-<td style="text-align:center">#</td>
-<td style="text-align:center">表示数字的一位阿拉伯数字，如果存在则显示字符，不存在不显示</td>
+<td>response</td>
+<td style="text-align:left">javax.servlet.http.HttpServletResponse</td>
 </tr>
 <tr>
-<td style="text-align:center">.</td>
-<td style="text-align:center">小数分隔符</td>
+<td>out</td>
+<td style="text-align:left">javax.servlet.jsp.JspWriter</td>
 </tr>
 <tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">负号</td>
+<td>session</td>
+<td style="text-align:left">javax.servlet.http.HttpSession</td>
 </tr>
 <tr>
-<td style="text-align:center">，</td>
-<td style="text-align:center">分组分隔符</td>
+<td>application</td>
+<td style="text-align:left">javax.servlet.ServletContext</td>
 </tr>
 <tr>
-<td style="text-align:center">E</td>
-<td style="text-align:center">分隔科学计数法中的尾数和指数</td>
+<td>config</td>
+<td style="text-align:left">javax.servlet.ServletConfig</td>
 </tr>
 <tr>
-<td style="text-align:center">%</td>
-<td style="text-align:center">本符号放置在数字的前缀或后缀，将数字乘以100显示为百分数</td>
+<td>pageContext</td>
+<td style="text-align:left">javax.servlet.jsp.PageContext</td>
 </tr>
 <tr>
-<td style="text-align:center">\u2030</td>
-<td style="text-align:center">本符号放置在数字的前缀或后缀，将数字乘以1000显示为千分数</td>
+<td>page</td>
+<td style="text-align:left">javax.servlet.jsp.HttpJspPage</td>
 </tr>
 <tr>
-<td style="text-align:center">\u00A4</td>
-<td style="text-align:center">本符号放置在数字的前缀或后缀，作为货币记号</td>
-</tr>
-<tr>
-<td style="text-align:center">‘</td>
-<td style="text-align:center">当上述字符出现在数字中时，需要用单引号引起，系统会将其作为普通符号处理</td>
+<td>exception</td>
+<td style="text-align:left">java.lang.Throwable</td>
 </tr>
 </tbody>
 </table>
-<p>数字格式化的使用实例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.DecimalFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimgleFormat</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Simgle</span><span class="params">(String pattern,<span class="keyword">double</span> value)</span></span>&#123;</span><br><span class="line">        DecimalFormat myFormat = <span class="keyword">new</span> DecimalFormat(pattern);</span><br><span class="line">        String output = myFormat.format(value);</span><br><span class="line">        System.out.println(value + <span class="string">" "</span>+ pattern + <span class="string">" "</span> + output);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">UseApplyPatternMethodFormat</span><span class="params">(String pattern,<span class="keyword">double</span> value)</span></span>&#123;</span><br><span class="line">        DecimalFormat myFormat = <span class="keyword">new</span> DecimalFormat();</span><br><span class="line">        myFormat.applyPattern(pattern);</span><br><span class="line">        System.out.println(value + <span class="string">" "</span> + pattern + <span class="string">" "</span> + myFormat.format(value));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Simgle(<span class="string">"###,###.###"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        Simgle(<span class="string">"00000000.###kg"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        Simgle(<span class="string">"000000.000"</span>,<span class="number">123.45</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"#.###%"</span>,<span class="number">0.789</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"###.##"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"0.00\u2030"</span>,<span class="number">0.789</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在DecimalFormat类中除了可以设置格式化模式来格式化数字之外，还可以使用有些特殊方法对数字进行格式化设置，例如setGroupingSize方法可以设置格式化数字分组大小。</p>
-<h2 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h2><p>在Java语言中提供了一个执行数学基本运算的Math类，该类包括常用的数学孕妇按方法，如三角函数方法、指数函数方法、对数函数方法、平方根函数方法等一些常用数学函数，除此之外还提供了一些常用的数学方法。</p>
-<p><strong>三角函数方法：</strong></p>
+<p>以request为例，该隐式对象代表Servlet/JSP容器传递给Servlet服务方法的HttpServletRequest对象。可以将request理解为一个指向HttpServletRequest对象的引用变量。</p>
+<p><strong>1.PageContext用于获取和设置属性的方法：setAttribute和getAttribute方法。属性值可以被设置在四个范围之一：页面（PAGE_SCOPE）、请求（REQUEST_SCOPE）、会话（SESSION_SCOPE）和应用程序（APPLICATION_SCOPE）</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">例：下面两个设置效果是相同的</span><br><span class="line">pageContext.setAttribute(&quot;product&quot;,product,PageContext.REQUEST_SCOPE)</span><br><span class="line">request.setAttribute(&quot;product&quot;,product)</span><br></pre></td></tr></table></figure>
+<p><strong>2.隐式对象out引用了一个javax.servlet.jsp.JspWriter对象，这类似于在调用HttpServletResponse的getWriter方法得到java.ioPrintWriter。可以通过调用它的print方法将消息发送到浏览器</strong></p>
+<p><strong>3.默认情况下，JSP编译器会将JSP页面的内容类型设为text/html</strong></p>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><strong>可以使用page指令来控制JSP转换器转换当前JSP页面的某些方面</strong></p>
+<p><strong>1.page指令的属性列表：</strong></p>
 <ul>
-<li>public static double sin(double a)：返回一个值的三角正弦</li>
-<li>public static double cos(double a)：返回一个值的三角余弦</li>
-<li>public static double tan(double a)：返回一个值的三角正切</li>
-<li>public static double asin(double a)：返回一个值的反正弦</li>
-<li>public static double acos(double a)：返回一个值的反余弦</li>
-<li>public static double atan(double a)：返回一个值的反正切</li>
-<li>public static double toRadians(double a)：将角度转换为弧度</li>
-<li>public static double toDegrees(double a)：将弧度转换为角度</li>
+<li><strong>import</strong> 定义一个或多个本页面中将被导入和使用的Java类型包，可以使用通配符*导入整个包，两个类型之间用逗号分隔导入多个类型，JSP默认导入如下包：<strong>java.lang、javax.servlet、javax.servlet.http、javax.servlet.jsp</strong></li>
+<li><strong>session</strong> 值为true，本页面加入会话管理。默认值为True。访问该页面时，若当前不存在javax.servlet.http.HttpSession实例，则会创建一个</li>
+<li><strong>buffer</strong> 以KB为单位，定义隐式对象out的缓存大小。该值可以为none，这意味着没有缓冲，所有数据直接写入PrintWriter</li>
+<li><strong>info</strong> 返回调用容器生成的Servlet类的getServletInfo方法的结果</li>
+<li><strong>errorPage</strong> 定义当出错时用来处理错误的界面</li>
+<li><strong>isErrorPage</strong> 表示本页是一个错误处理页面</li>
+<li><strong>contentType</strong> 定义本页面隐式对象response的内容类型，默认是text/html</li>
+<li><strong>pageEncoding</strong> 定义本页面的字符编码，默认是ISO-8859-1</li>
+<li><strong>language</strong> 定义本页面的脚本语言类型，默认是Java，这是在JSP2.2中唯一的合法值</li>
+<li><strong>extends</strong> 定义JSP实现类要继承的父类</li>
 </ul>
-<p>使用示例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrigonometricFunction</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"90度的正弦值："</span> + Math.sin(Math.PI/<span class="number">2</span>));</span><br><span class="line">        System.out.println(<span class="string">"0度的余弦值："</span> + Math.cos(<span class="number">0</span>));</span><br><span class="line">        System.out.println(<span class="string">"60度的正切值："</span> + Math.tan(Math.PI/<span class="number">3</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>指数函数方法：</strong></p>
+<p><strong>2.大部分page之类可以出现在页面的任何位置，但当page指令包含contentType或pageEncoding属性时，器必须出现在Java代码发送任何内容之前。这是因为内容类型和字符编码必须在发送任何内容前设定</strong></p>
+<p><strong>3.include指令：可以使用include指令将其它文件中的内容包含到当前JSP页面</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：&lt;%@ include file=<span class="string">"url"</span> %&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>URL为被包含文件的相对路径，若URL以斜杠（/）开头，则该URL为文件在服务器上的绝对路径</strong></p>
+<p><strong>3.JSRF文件：</strong>以JSPF为扩展名的文件代表JSP fragement。虽然JSP fragement现在被称为JSP segement，但为了保证一致性，任使用JSPF为后缀名</p>
+<p><strong>4。include指令也可以包含静态HTML文件</strong></p>
+<h2 id="脚本元素"><a href="#脚本元素" class="headerlink" title="脚本元素"></a>脚本元素</h2><p><strong>1.表达式：每个表达式都会被JSP容器执行，并使用隐式对象out的打印方法输出结果。表达式以”&lt;%=”开始，并以”%&gt;”结束</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Today is &lt;%=java.util.Calendar.getInstance().getTime() %&gt;</span><br></pre></td></tr></table></figure>
+<p>表达式无需分号结尾</p>
+<p><strong>2.声明：可以声明在JSP页面中使用的变量和方法。声明以”&lt;%!”开始，并以”%&gt;”结尾。</strong></p>
+<p><strong>3.可以使用声明来重写JSP页面，，实现类的init和destroy方法。通过声明jspInit方法来重写init方法。声明jspDestroy方法来重写destroy方法，两种方法说明如下：</strong></p>
 <ul>
-<li>public static double exp(double a)：用于获取e的a次方</li>
-<li>public static double log(double a)：用于取自然对数</li>
-<li>public static double log10(double a)：用于取底数为10的对数</li>
-<li>public static double sqrt(double a)：用于取a的平方根</li>
-<li>public static double cbrt(double a)：用于取a的立方根</li>
-<li>public static double pow(double a,double b)：用于取a的b次方</li>
+<li>jspInit 这种发发类似与javax.servlet.Servlet的init方法。JSP页面在初始化时调用jdpInit，jspInit没有参数，可以通过隐式对象config访问ServletConfig对象</li>
+<li>jspDestroy 这种方法类似于Servlet的destroy方法，在JSP页面被销毁时调用</li>
 </ul>
-<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><p><strong>Math.random()方法：</strong></p>
-<p>这个方法默认生成大于等于0.0小于1.0的double型随机数</p>
-<p><strong>Random类：</strong></p>
-<p>Java中还提供一种可以获取随机数的java.util.Random类，语法如下：<code>Random r = new Random();</code></p>
-<h2 id="大数字运算"><a href="#大数字运算" class="headerlink" title="大数字运算"></a>大数字运算</h2><p><strong>BigInteger：</strong></p>
-<p>Java提供java.math.BigInteger类进行大数字运算，BigInteger类型的数字范围较Integer类型的数字范围要大很多。BigInteger支持任意精度的证书，也就是说在运算中BigInteger类型可以准确地表示任何大小的整数值而不不会丢失任何信息，语法如下：<code>public BigInteger(String val)</code></p>
-<p><strong>BigDecimal：</strong><br>BigDecimal和BigInteger都能实现大数字的运算，不同的是BigDecimal加入小数的概念。BigDecimal类支持任何精度的定点数。</p>
-<p>常用的两个构造方法如下：</p>
-<ul>
-<li>public BigDecimal(double val)：实例化时将双精度型转换为BigDecimal类型</li>
-<li>public BigDecimal(String val)：实例化时将字符串形式转换为BigDecimal类型</li>
-</ul>
+<p><strong>4.禁用脚本元素：</strong></p>
+<p>随着JSP2.0对表达式语言的加强，推荐使用的方法是在JSP页面中用EL访问服务器端对象且不写Java代码。</p>
+<p>从JSP2.0起，可以通过在部署描述符中的\<jsp-property-group>定义一个scripting-invalid元素来禁用脚本元素</jsp-property-group></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp-property-group</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*,jsp<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">scripting-invalid</span>&gt;</span>true<span class="tag">&lt;/<span class="name">scripting-invalid</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">jsp-property-group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h2><p><strong>动作是第三种类型的语法元素，它们被转换成Java代码来执行</strong></p>
+<p><strong>1.useBean</strong></p>
+<p>useBean将创建一个关联Java对象的脚本变量。这是早期分离表现层和业务逻辑的表现，语法如下</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:useBean id=<span class="string">"today"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"java.util.Date"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>2.setProperty和getProperty</strong></p>
+<p>setProperty动作可对一个Java对象设置属性，而getProperty则会输出Java对象的一个属性</p>
+<p><strong>3.include</strong></p>
+<p>include动作用来动态地引入一个资源。可以引入另一个JSP页面，也可以引入一个Servlet或一个静态的HTML页面。</p>
+<p><strong>4.include动作和include指令的区别：</strong></p>
+<p>include指令，资源的引入发生在页面转换时，及当JSP容器将页面转换为生成的Servlet时。而对于include动作，资源引入发生在请求页面时。因此，使用include动作是可以传递参数的，而include指令不支持。</p>
+<p><strong>5.forward</strong></p>
+<p>forward将当前页面转向到其它资源，例：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:forward page=<span class="string">"jsp/login.jsp"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>除了在Java代码中使用try语句外，还可以指定一个特殊页面。当引用页面遇到未捕获的异常时，将显示这个特殊的界面</p>
+<p>使用page指令的isErrorPage属性（属性值必须为true）来标识一个JSP页面是错误处理页面</p>
+<p>需要防止正常的页面使用page指令的errorPage属性来导向错误处理界面</p>
 <hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=26508186&auto=1&height=66"></iframe></div>
+<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=30352322&auto=1&height=66"></iframe></div>
+
+
+
+
+
+
 
 
       
@@ -485,13 +531,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/09/JAVA7/">Java学习笔记（七）--数字处理类</a></p>
+        <p><span>本文标题:</span><a href="/2018/11/24/Java-Servlet4/">Java-Servlet学习笔记（四）--JavaServer Page(JSP)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-09, 09:37:42</p>
-        <p><span>最后更新:</span>2018-09-09, 16:12:06</p>
+        <p><span>发布时间:</span>2018-11-24, 10:50:22</p>
+        <p><span>最后更新:</span>2018-11-24, 21:24:59</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/09/JAVA7/" title="Java学习笔记（七）--数字处理类">http://yoursite.com/2018/09/09/JAVA7/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/09/JAVA7/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/11/24/Java-Servlet4/" title="Java-Servlet学习笔记（四）--JavaServer Page(JSP)">http://yoursite.com/2018/11/24/Java-Servlet4/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/11/24/Java-Servlet4/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -503,16 +549,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/13/Vulhub-Weblogic-SSRF/">
-                    Vulhub-Weblogic-SSRF漏洞复现
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/08/JAVA6/">
-                    Java学习笔记（六）--包装类
+                <a href="/2018/11/19/Java-Servlet3/">
+                    Java-Servlet学习笔记（三）--会话管理
                 </a>
             </div>
         
@@ -524,7 +564,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数字格式化"><span class="toc-number">1.</span> <span class="toc-text">数字格式化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数学运算"><span class="toc-number">2.</span> <span class="toc-text">数学运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#随机数"><span class="toc-number">3.</span> <span class="toc-text">随机数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大数字运算"><span class="toc-number">4.</span> <span class="toc-text">大数字运算</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP概述"><span class="toc-number">1.</span> <span class="toc-text">JSP概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">2.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式对象"><span class="toc-number">3.</span> <span class="toc-text">隐式对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令"><span class="toc-number">4.</span> <span class="toc-text">指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本元素"><span class="toc-number">5.</span> <span class="toc-text">脚本元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动作"><span class="toc-number">6.</span> <span class="toc-text">动作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误处理"><span class="toc-number">7.</span> <span class="toc-text">错误处理</span></a></li></ol>
         
     </div>
     <style>
@@ -560,7 +600,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（七）--数字处理类　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java-Servlet学习笔记（四）--JavaServer Page(JSP)　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -580,15 +620,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/13/Vulhub-Weblogic-SSRF/" title="上一篇: Vulhub-Weblogic-SSRF漏洞复现">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/08/JAVA6/" title="下一篇: Java学习笔记（六）--包装类">
+            <a href="/2018/11/19/Java-Servlet3/" title="下一篇: Java-Servlet学习笔记（三）--会话管理">
                 <i class="fa fa-angle-right"></i>
             </a>
         
