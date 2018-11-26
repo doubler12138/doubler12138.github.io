@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言">
+<meta name="keywords" content="代码审计,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP代码审计-特定场合下addslashes函数的绕过">
+<meta property="og:url" content="http://yoursite.com/2018/10/20/PHP-Audit-Labs-Day13/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/38.jpg">
+<meta property="og:updated_time" content="2018-11-26T11:27:33.478Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP代码审计-特定场合下addslashes函数的绕过">
+<meta name="twitter:description" content="前言">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/38.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>PHP代码审计-特定场合下addslashes函数的绕过 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">既然决定出发，就别停下脚步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码审计/">代码审计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小姿势/">小姿势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境搭建/">环境搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">既然决定出发，就别停下脚步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day13" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/20/PHP-Audit-Labs-Day13/" class="article-date">
+      <time datetime="2018-10-20T01:26:30.000Z" itemprop="datePublished">2018-10-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP代码审计-特定场合下addslashes函数的绕过
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">1,347字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">6分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/38.jpg" alt=""></p>
+<a id="more"></a>
+<hr>
+<h2 id="DAY13-Turkey-Baster"><a href="#DAY13-Turkey-Baster" class="headerlink" title="DAY13-Turkey Baster"></a>DAY13-Turkey Baster</h2><p>代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginManager</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $em;</span><br><span class="line">	<span class="keyword">private</span> $user;</span><br><span class="line">	<span class="keyword">private</span> $password;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($user,$password)</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;em = DoctrineManager::getEntityManager();</span><br><span class="line">		<span class="keyword">$this</span>-&gt;user = $user;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;password = $password;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> funtion isValid()&#123;</span><br><span class="line">		$user = <span class="keyword">$this</span>-&gt;sanititzeInput(<span class="keyword">$this</span>-&gt;user);</span><br><span class="line">		$pass = <span class="keyword">$this</span>-&gt;sanitizeInput(<span class="keyword">$this</span>-&gt;password);</span><br><span class="line">		</span><br><span class="line">		$queryBuilder = <span class="keyword">$this</span>-&gt;em-&gt;createQueryBuilder()</span><br><span class="line">			-&gt;select(<span class="string">"COUNT(p)"</span>)</span><br><span class="line">			-&gt;from(<span class="string">"User"</span>,<span class="string">"u"</span>)</span><br><span class="line">			-&gt;where(<span class="string">"user = '$user' AND password = '$pass'"</span>);</span><br><span class="line">		</span><br><span class="line">		$query = $queryBuilder-&gt;getQuery();</span><br><span class="line">		<span class="keyword">return</span> boolval($query-getSIngleScalarResult());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sanitizeInput</span><span class="params">($input,$length = <span class="number">20</span>)</span></span>&#123;</span><br><span class="line">		$input = addslashes($input);</span><br><span class="line">		<span class="keyword">if</span> (strlen($input)&gt;$length)&#123;</span><br><span class="line">			$input = substr($input,<span class="number">0</span>,$length);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> $input;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$auth = <span class="keyword">new</span> LoginManager($_POST[<span class="string">'user'</span>],$_POST[<span class="string">'passwd'</span>]);</span><br><span class="line"><span class="keyword">if</span>(!$auth-&gt;isValid())&#123;</span><br><span class="line">	<span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>典型的登入绕过，过滤方式也很简单。通过sanittizeInput函数对传入的参数进行处理，先通过addslashes函数对参数进行第一步处理，addslashes函数定义如下：</p>
+<blockquote>
+<p>[addslashes]— 使用反斜线引用字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; string addslashes ( string $str )</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>作用：在单引号（’）、双引号（”）、反斜线（\）与 NUL（ <strong>NULL</strong> 字符）字符之前加上反斜线。</p>
+</blockquote>
+<p>所以说这里单引号已经被过滤掉了，但是由于他拼接语句的问题，我们可以通过反斜线转义掉原有的单引号，导致单引号逃逸，从而实现登陆绕过，种种方式已经讲过很多次了。payload如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user=1234567890123456789&apos;&amp;passwd=or 1=1#</span><br><span class="line">拼接后的SQL语句：</span><br><span class="line">user = &apos;1234567890123456789\&apos; AND password = &apos;or 1=1 #&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p><strong>题目源码：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'db.inc.php'</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">dhtmlspecialchars</span><span class="params">($string)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (is_array($string)) &#123;</span><br><span class="line">          <span class="keyword">foreach</span> ($string <span class="keyword">as</span> $key =&gt; $val) &#123;</span><br><span class="line">              $string[$key] = dhtmlspecialchars($val);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">          $string = str_replace(<span class="keyword">array</span>(<span class="string">'&amp;'</span>, <span class="string">'"'</span>, <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>, <span class="string">'('</span>, <span class="string">')'</span>), <span class="keyword">array</span>(<span class="string">'&amp;amp;'</span>, <span class="string">'&amp;quot;'</span>, <span class="string">'&amp;lt;'</span>, <span class="string">'&amp;gt;'</span>, <span class="string">'（'</span>, <span class="string">'）'</span>), $string);</span><br><span class="line">          <span class="keyword">if</span> (strpos($string, <span class="string">'&amp;amp;#'</span>) !== <span class="keyword">false</span>) &#123;</span><br><span class="line">              $string = preg_replace(<span class="string">'/&amp;amp;((#(\d&#123;3,5&#125;|x[a-fA-F0-9]&#123;4&#125;));)/'</span>, <span class="string">'&amp;\\1'</span>, $string);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> $string;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">dowith_sql</span><span class="params">($str)</span> </span>&#123;</span><br><span class="line">      $check = preg_match(<span class="string">'/select|insert|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile/is'</span>, $str);</span><br><span class="line">      <span class="keyword">if</span> ($check) &#123;</span><br><span class="line">          <span class="keyword">echo</span> <span class="string">"非法字符!"</span>;</span><br><span class="line">          <span class="keyword">exit</span>();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> $str;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 经过第一个waf处理</span></span><br><span class="line">  <span class="keyword">foreach</span> ($_REQUEST <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">      $_REQUEST[$key] = dowith_sql($value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 经过第二个WAF处理</span></span><br><span class="line">  $request_uri = explode(<span class="string">"?"</span>, $_SERVER[<span class="string">'REQUEST_URI'</span>]);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">isset</span>($request_uri[<span class="number">1</span>])) &#123;</span><br><span class="line">      $rewrite_url = explode(<span class="string">"&amp;"</span>, $request_uri[<span class="number">1</span>]);</span><br><span class="line">      <span class="keyword">foreach</span> ($rewrite_url <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">          $_value = explode(<span class="string">"="</span>, $value);</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">isset</span>($_value[<span class="number">1</span>])) &#123;</span><br><span class="line">              $_REQUEST[$_value[<span class="number">0</span>]] = dhtmlspecialchars(addslashes($_value[<span class="number">1</span>]));</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 业务处理</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">isset</span>($_REQUEST[<span class="string">'submit'</span>])) &#123;</span><br><span class="line">      $user_id = $_REQUEST[<span class="string">'i_d'</span>];</span><br><span class="line">      $sql = <span class="string">"select * from ctf.users where id=$user_id"</span>;</span><br><span class="line">      $result=mysql_query($sql);</span><br><span class="line">      <span class="keyword">while</span>($row = mysql_fetch_array($result))</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">echo</span> <span class="string">"&lt;tr&gt;"</span>;</span><br><span class="line">          <span class="keyword">echo</span> <span class="string">"&lt;td&gt;"</span> . $row[<span class="string">'name'</span>] . <span class="string">"&lt;/td&gt;"</span>;</span><br><span class="line">          <span class="keyword">echo</span> <span class="string">"&lt;/tr&gt;"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//db.inc.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$mysql_server_name=<span class="string">"localhost"</span>;</span><br><span class="line">$mysql_database=<span class="string">"ctf"</span>;    <span class="comment">/** 数据库的名称 */</span></span><br><span class="line">$mysql_username=<span class="string">"root"</span>;  <span class="comment">/** MySQL数据库用户名 */</span></span><br><span class="line">$mysql_password=<span class="string">"root"</span>;  <span class="comment">/** MySQL数据库密码 */</span></span><br><span class="line">$conn = mysql_connect($mysql_server_name, $mysql_username,$mysql_password,<span class="string">'utf-8'</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//数据库建立</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> ctf;</span><br><span class="line"><span class="keyword">USE</span> ctf;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`users`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`users`</span> (</span><br><span class="line">  <span class="string">`Id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`pass`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`flag`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`Id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=MyISAM AUTO_INCREMENT=<span class="number">2</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`users`</span> <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="string">'admin'</span>,<span class="string">'qwer!@#zxca'</span>,<span class="string">'hrctf&#123;R3qu3st_Is_1nterEst1ng&#125;'</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>题目分析：</strong></p>
+<p>前置知识：</p>
+<ul>
+<li>对于传入的非法的$_GET数组参数名，PHP会将它们替换成下划线。</li>
+<li>当使用PHP（HTTP参数污染）传入多个相同参数给服务器时，PHP只会接收后者的值</li>
+<li>通过$_SERVER[‘REQUEST_URI’]方式获得的参数，并不会对参数中的某些特殊字符进行替换。</li>
+</ul>
+<p>waf分析：</p>
+<p>这道题写了两个过滤，先来看第一个：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dowith_sql</span><span class="params">($str)</span> </span>&#123;</span><br><span class="line">      $check = preg_match(<span class="string">'/select|insert|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile/is'</span>, $str);</span><br><span class="line">      <span class="keyword">if</span> ($check) &#123;</span><br><span class="line">          <span class="keyword">echo</span> <span class="string">"非法字符!"</span>;</span><br><span class="line">          <span class="keyword">exit</span>();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> $str;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">// 经过第一个waf处理</span></span><br><span class="line"><span class="keyword">foreach</span> ($_REQUEST <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">      $_REQUEST[$key] = dowith_sql($value);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>它循环遍历$_REQUEST的参数名和参数值，将它的参数值用dowith_sql函数处理。如果值中存在黑名单中的敏感字，则直接exit()，如果不存在则直接返回原值。</p>
+<p>再来看第二个：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经过第二个WAF处理</span></span><br><span class="line">  $request_uri = explode(<span class="string">"?"</span>, $_SERVER[<span class="string">'REQUEST_URI'</span>]);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">isset</span>($request_uri[<span class="number">1</span>])) &#123;</span><br><span class="line">      $rewrite_url = explode(<span class="string">"&amp;"</span>, $request_uri[<span class="number">1</span>]);</span><br><span class="line">      <span class="keyword">foreach</span> ($rewrite_url <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">          $_value = explode(<span class="string">"="</span>, $value);</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">isset</span>($_value[<span class="number">1</span>])) &#123;</span><br><span class="line">              $_REQUEST[$_value[<span class="number">0</span>]] = dhtmlspecialchars(addslashes($_value[<span class="number">1</span>]));</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>该部分通过$_SERVER[‘REQUEST_URI’]获取参数，然后通过explode分别以?,&amp;,=来分割参数，最后通过dhtmlspecialchars函数对请求的参数值做过滤。看一下这个函数的定义。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dhtmlspecialchars</span><span class="params">($string)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (is_array($string)) &#123;</span><br><span class="line">          <span class="keyword">foreach</span> ($string <span class="keyword">as</span> $key =&gt; $val) &#123;</span><br><span class="line">              $string[$key] = dhtmlspecialchars($val);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">          $string = str_replace(<span class="keyword">array</span>(<span class="string">'&amp;'</span>, <span class="string">'"'</span>, <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>, <span class="string">'('</span>, <span class="string">')'</span>), <span class="keyword">array</span>(<span class="string">'&amp;amp;'</span>, <span class="string">'&amp;quot;'</span>, <span class="string">'&amp;lt;'</span>, <span class="string">'&amp;gt;'</span>, <span class="string">'（'</span>, <span class="string">'）'</span>), $string);</span><br><span class="line">          <span class="keyword">if</span> (strpos($string, <span class="string">'&amp;amp;#'</span>) !== <span class="keyword">false</span>) &#123;</span><br><span class="line">              $string = preg_replace(<span class="string">'/&amp;amp;((#(\d&#123;3,5&#125;|x[a-fA-F0-9]&#123;4&#125;));)/'</span>, <span class="string">'&amp;\\1'</span>, $string);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> $string;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>函数将’&amp;’,’”‘,’&lt;’,’&gt;’,’(‘,’)’等特殊字符替换掉，最后返回替换后的内容。</p>
+<p><strong>解题思路：</strong></p>
+<ul>
+<li>我们通过页面请求i_d=payload&amp;i.d=123</li>
+<li>当数据流到达第一个waf的时候它使用的是$_REQUEST获得参数和参数值，所以’.’会被替换成’_‘。这是的payload变成i_d=payload&amp;i_d=123。</li>
+<li>当参数相同的情况下，默认第二个参数传入的值会覆盖第一个参数传入的值。因此这是waf过滤的数据是123，没有任何问题。</li>
+<li>当数据六到达第二个waf时，是用$_SERVER[‘REQUEST_URI’]获取参数，它并不会替换特殊字符，所以i_d和i.d的数据都要经过waf2。</li>
+<li>第二个WAF中有一个防止注入的dhtmlspecialchars()函数，这个函数也很好过滤。加上后面的业务处理部分也是直接将i_d参数的值直接拼接到SQL语句中，所以我们可以直接注入</li>
+</ul>
+<p>最后的payload如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>参考链接：</strong></p>
+<p><a href="https://github.com/hongriSec/PHP-Audit-Labs/blob/master/Part1/Day13/files/README.md" target="_blank" rel="noopener">[红日安全]代码审计Day13 - 特定场合下addslashes函数的绕过</a></p>
+<p><a href="https://github.com/hongriSec/PHP-Audit-Labs/blob/master/PHP-Audit-Labs%E9%A2%98%E8%A7%A3/Day13-16/files/README.md" target="_blank" rel="noopener">[红日安全]PHP-Audit-Labs题解之Day13-16</a></p>
+<hr>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=533465371&auto=1&height=66"></iframe><br></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/10/20/PHP-Audit-Labs-Day13/">PHP代码审计-特定场合下addslashes函数的绕过</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2018-10-20, 09:26:30</p>
+        <p><span>最后更新:</span>2018-11-26, 19:27:33</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/10/20/PHP-Audit-Labs-Day13/" title="PHP代码审计-特定场合下addslashes函数的绕过">http://yoursite.com/2018/10/20/PHP-Audit-Labs-Day13/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/20/PHP-Audit-Labs-Day13/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/">
+                    Vulhub-ActiveMQ--反序列化漏洞
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/10/13/PHP-Audit-Labs-Day12/">
+                    PHP代码审计-误用htmlentities函数引发的漏洞
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY13-Turkey-Baster"><span class="toc-number">1.</span> <span class="toc-text">DAY13-Turkey Baster</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-特定场合下addslashes函数的绕过　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/" title="上一篇: Vulhub-ActiveMQ--反序列化漏洞">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/10/13/PHP-Audit-Labs-Day12/" title="下一篇: PHP代码审计-误用htmlentities函数引发的漏洞">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/11/24/Java-Servlet4/">Java-Servlet学习笔记（四）--JavaServer Page(JSP)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/Java-Servlet3/">Java-Servlet学习笔记（三）--会话管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/18/Java-Servlet2/">Java-Servlet学习笔记（二）--Servlets</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/13/FTP-Sublime-Sftp/">服务器配置FTP环境并使用Sublime-sftp连接服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/04/AnchorCMS-XSS/">AnchorCMS0.9.2-XSS漏洞审计</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/">SECCON 2018 CTFGhostKingdom Writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/">Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Vulhub-phpmyadmin4-8-1远程文件包含/">Vulhub-phpmyadmin4.8.1远程文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/">Vulhub-ActiveMQ--反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/20/PHP-Audit-Labs-Day13/">PHP代码审计-特定场合下addslashes函数的绕过</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/13/PHP-Audit-Labs-Day12/">PHP代码审计-误用htmlentities函数引发的漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/PHP-Audit-Labs-Day11/">PHP代码审计-unserialize反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/PHP-Audit-Labs-Day10/">PHP代码审计-程序未恰当使用exit导致的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/03/PHP-Audit-Labs-Day9/">PHP代码审计-str_replace函数过滤不当</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/PHP-Audit-Labs-Day8/">PHP代码审计-preg_replace函数命令执行</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/01/PHP-Audit-Labs-Day6/">PHP代码审计-正则使用不当导致的路径穿越</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Java-Servlet1/">Java-Servlet学习笔记（一）--IDEA和Tomcat的安装使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/PHP-Audit-Labs-Day5/">PHP代码审计-mail函数参数的漏洞利用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/PHP-Audit-Labs-Day4/">PHP代码审计-strpos使用不当引发漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/24/PHP-Audit-Labs-Day3/">PHP代码审计-实例化任意对象漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/22/异或构造字符串/">异或构造字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/16/PHP-Audit-Labs-Day2/">PHP代码审计-filter_var函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/Vulhub-Weblogic-SSRF/">Vulhub-Weblogic-SSRF漏洞复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/09/JAVA7/">Java学习笔记（七）--数字处理类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/08/JAVA6/">Java学习笔记（六）--包装类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/07/DedeCMS4/">DedeCMS代码审计Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/JAVA5/">Java学习笔记（五）--类和对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/05/JAVA4/">Java学习笔记（四）--数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/04/PHP-Phar/">phar扩展在PHP反序列化中的利用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/04/JAVA3/">Java学习笔记（三）--字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/03/JAVA2/">Java学习笔记（二）--流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/02/PHP-Audit-Labs-Day7/">PHP代码审计-parse_str函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/JAVA1/">Java学习笔记（一）--Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/DedeCMS3/">DedeCMS代码审计Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/ThinkPHP11/">ThinkPHP框架学习--缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/20/DedeCMS2/">DedeCMS代码审计Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/20/ThinkPHP10/">ThinkPHP框架学习--调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/ThinkPHP9/">ThinkPHP框架学习--模板（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/11/ThinkPHP8/">ThinkPHP框架学习--模板（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/10/ThinkPHP7/">ThinkPHP框架学习--模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/06/ThinkPHP6/">ThinkPHP框架学习--模型（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/DedeCMS1/">DedeCMS代码审计Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/03/ThinkPHP5/">ThinkPHP框架学习--模型（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/02/ThinkPHP4/">ThinkPHP框架学习--控制器（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/ThinkPHP3/">ThinkPHP框架学习--控制器（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/PHP-Audit-Labs-Day1/">代码审计-in_array函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/29/OneThink/">OneThink1.0文件缓存漏洞分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/28/ThinkPHP2/">ThinkPHP框架学习--路由</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/26/ThinkPHP1/">ThinkPHP框架学习--配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/25/PHP-Anony/">PHP匿名函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/12/Hash-Length-Extension-Attacks/">哈希长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/10/Crypto-RSA/">RSA学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/BugKu-MISC-WriteUp/">BugKuCTF训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/24/NanYouCTF-Crypto-WriteUp/">南京邮电大学网络攻防训练平台密码学题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/BugKu-Web-Welcome-WriteUp/">BugKuCTF-Web题 Welcome to bugkuctf Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/22/NanYouCTF-MISC-WriteUp/">南京邮电大学网络攻防训练平台MISC题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/20/NanYouCTF-Web-WriteUp/">南京邮电大学网络攻防训练平台Web题Write-Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/17/Makerctf-Wp/">MakerCTF Write Up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/12/Easy-Unserialize-Writeup/">php反序列化组会例题和makerctf easy_unserialize的wp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/ISCC-2018-web6/">ISCC-2018 web题"SQL注入的艺术" write up</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/BugKu-Login3/">BugKuCTF-Login3的Write Up</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2018 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

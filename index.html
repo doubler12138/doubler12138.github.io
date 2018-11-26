@@ -190,7 +190,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Servlet/">Java.Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码审计/">代码审计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小姿势/">小姿势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境搭建/">环境搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码审计/">代码审计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小姿势/">小姿势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境搭建/">环境搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组会内容/">组会内容</a></li></ul>
                     </div>
                 </section>
                 
@@ -378,7 +378,7 @@
 
       
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Servlet/">Java.Servlet</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
     </div>
 
       
@@ -1098,11 +1098,11 @@
 
 
   
-    <article id="post-PHP-Audit-Labs-Day12" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-PHP-Audit-Labs-Day13" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/13/PHP-Audit-Labs-Day12/" class="article-date">
-      <time datetime="2018-10-13T06:44:30.000Z" itemprop="datePublished">2018-10-13</time>
+      <a href="/2018/10/20/PHP-Audit-Labs-Day13/" class="article-date">
+      <time datetime="2018-10-20T01:26:30.000Z" itemprop="datePublished">2018-10-20</time>
 </a>
 
 
@@ -1117,7 +1117,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/13/PHP-Audit-Labs-Day12/">PHP代码审计-误用htmlentities函数引发的漏洞</a>
+      <a class="article-title" href="/2018/10/20/PHP-Audit-Labs-Day13/">PHP代码审计-特定场合下addslashes函数的绕过</a>
     </h1>
   
 
@@ -1126,7 +1126,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,253字</span>
+			<span class="post-count">1,347字</span>
 		</span>
 	</span>
 	
@@ -1135,7 +1135,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
+			<span class="post-count">6分</span>
 		</span>
 	</span>
 </div>
@@ -1148,9 +1148,8 @@
       
           
               <p><strong>前言</strong></p>
-<p>第一次听说误用函数还会导致错误，不管怎样还是来学学习一下</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/37.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/zhoubao/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/38.jpg" alt=""></p>
           
       
     </div>
@@ -1166,7 +1165,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2018/10/13/PHP-Audit-Labs-Day12/#more">阅读全文 >></a>
+          <a href="/2018/10/20/PHP-Audit-Labs-Day13/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -1187,7 +1186,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
