@@ -15,28 +15,20 @@
 
 
 
-<meta name="description" content="前言 学习PHP-Audit-Labs第七篇中的parse_str函数缺陷">
-<meta name="keywords" content="代码审计,PHP">
+<meta name="description" content="前言 JSTL是很大一块的内容，也很重要，所以这篇笔记可能长一点">
+<meta name="keywords" content="Java,Servlet">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP代码审计-parse_str函数缺陷">
-<meta property="og:url" content="http://yoursite.com/2018/09/02/PHP-Audit-Labs-Day7/index.html">
+<meta property="og:title" content="Java-Servlet学习笔记（六）--JSTL">
+<meta property="og:url" content="http://yoursite.com/2018/11/28/Java-Servlet6/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 学习PHP-Audit-Labs第七篇中的parse_str函数缺陷">
+<meta property="og:description" content="前言 JSTL是很大一块的内容，也很重要，所以这篇笔记可能长一点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/9.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/3.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/4.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/5.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/6.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/7.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/8.jpg">
-<meta property="og:updated_time" content="2018-12-15T13:22:06.174Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/51.jpg">
+<meta property="og:updated_time" content="2018-12-15T13:17:05.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP代码审计-parse_str函数缺陷">
-<meta name="twitter:description" content="前言 学习PHP-Audit-Labs第七篇中的parse_str函数缺陷">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/9.jpg">
+<meta name="twitter:title" content="Java-Servlet学习笔记（六）--JSTL">
+<meta name="twitter:description" content="前言 JSTL是很大一块的内容，也很重要，所以这篇笔记可能长一点">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/51.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -68,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>PHP代码审计-parse_str函数缺陷 | DoubleR&#39;s BLOG</title>
+<title>Java-Servlet学习笔记（六）--JSTL | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -320,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day7" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java-Servlet6" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/02/PHP-Audit-Labs-Day7/" class="article-date">
-      <time datetime="2018-09-02T13:01:19.000Z" itemprop="datePublished">2018-09-02</time>
+      <a href="/2018/11/28/Java-Servlet6/" class="article-date">
+      <time datetime="2018-11-28T12:55:54.000Z" itemprop="datePublished">2018-11-28</time>
 </a>
 
 
@@ -339,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      PHP代码审计-parse_str函数缺陷
+      Java-Servlet学习笔记（六）--JSTL
     </h1>
   
 
@@ -348,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,116字</span>
+			<span class="post-count">1,576字</span>
 		</span>
 	</span>
 	
@@ -357,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
+			<span class="post-count">6分</span>
 		</span>
 	</span>
 </div>
@@ -370,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -381,55 +373,221 @@
       
           
         <p><strong>前言</strong></p>
-<p>学习PHP-Audit-Labs第七篇中的parse_str函数缺陷</p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/9.jpg" alt=""></p>
+<p>JSTL是很大一块的内容，也很重要，所以这篇笔记可能长一点</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/51.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="parse-str函数分析"><a href="#parse-str函数分析" class="headerlink" title="parse_str函数分析"></a>parse_str函数分析</h2><p><strong>功能：</strong></p>
-<p>parse_str的作用就是解析字符串并且注册成变量。</p>
-<p><strong>定义：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void parse_str( string $encoded_string [, <span class="keyword">array</span> &amp;$result])</span><br></pre></td></tr></table></figure>
-<p>如果encoded_string 是URL传入的查询字符串（query string)，则将它解析为变量并设置到当前作用域（如果提供了result则会设置到该数组里）。</p>
-<p><strong>缺陷：</strong></p>
-<p>parse_str函数在注册变量之前不会验证当前变量是否存在，所以会直接覆盖掉当前作用域中原有的变量，这就带来了一定的风险。</p>
-<h2 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h2><p>这里提供一个demo漏洞样例代码，以及demo的修复方法</p>
-<p><strong>demo漏洞：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$b=<span class="number">3</span>;</span><br><span class="line">parse_str($_GET[<span class="string">'test'</span>]);</span><br><span class="line">print_r($b)</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>demo漏洞修复：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$b=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($b))&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'$b 已经 set'</span>.<span class="string">'&lt;br/&gt;'</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'$b 没有set'</span>.<span class="string">'&lt;br/&gt;'</span>;</span><br><span class="line">    parse_str($_GET[<span class="string">'test'</span>]);</span><br><span class="line">&#125;</span><br><span class="line">print_r($b);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p><strong>题目源码：</strong></p>
-<p>index.php文件</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="string">"doubler"</span>;</span><br><span class="line">$id = $_GET[<span class="string">'id'</span>];</span><br><span class="line">@parse_str($id);</span><br><span class="line"><span class="keyword">if</span> ($a[<span class="number">0</span>] != <span class="string">'QNKCDZO'</span> &amp;&amp; md5($a[<span class="number">0</span>]) == md5(<span class="string">'QNKCDZO'</span>)) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'&lt;a href="uploadsomething.php"&gt;flag is here&lt;/a&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>uploadsomething.php文件</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"Content-type:text/html;charset=utf-8"</span>);</span><br><span class="line">$referer = $_SERVER[<span class="string">'HTTP_REFERER'</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($referer)!== <span class="keyword">false</span>) &#123;</span><br><span class="line">    $savepath = <span class="string">"uploads/"</span> . sha1($_SERVER[<span class="string">'REMOTE_ADDR'</span>]) . <span class="string">"/"</span>;</span><br><span class="line">    <span class="keyword">if</span> (!is_dir($savepath)) &#123;</span><br><span class="line">        $oldmask = umask(<span class="number">0</span>);</span><br><span class="line">        mkdir($savepath,<span class="number">0777</span>);</span><br><span class="line">        umask($oldmask);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((@$_GET[<span class="string">'filename'</span>]) &amp;&amp; (@$_GET[<span class="string">'content'</span>])) &#123;</span><br><span class="line">        <span class="comment">//$fp = fopen("$savepath".$_GET['filename'], 'w');</span></span><br><span class="line">        $content = <span class="string">'HRCTF&#123;y0u_n4ed_f4st&#125;   by:l1nk3r'</span>;</span><br><span class="line">        file_put_contents(<span class="string">"$savepath"</span> . $_GET[<span class="string">'filename'</span>], $content);</span><br><span class="line">        $msg = <span class="string">'Flag is here,come on~ '</span> . $savepath . htmlspecialchars($_GET[<span class="string">'filename'</span>]) . <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">echo</span> $msg;</span><br><span class="line">        usleep(<span class="number">100000</span>);</span><br><span class="line">        $content = <span class="string">"Too slow!"</span>;</span><br><span class="line">        file_put_contents(<span class="string">"$savepath"</span> . $_GET[<span class="string">'filename'</span>], $content);</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">print</span> <span class="string">&lt;&lt;&lt;EOT</span></span><br><span class="line"><span class="string">&lt;form action="" method="get"&gt;</span></span><br><span class="line"><span class="string">&lt;div class="form-group"&gt;</span></span><br><span class="line"><span class="string">&lt;label for="exampleInputEmail1"&gt;Filename&lt;/label&gt;</span></span><br><span class="line"><span class="string">&lt;input type="text" class="form-control" name="filename" id="exampleInputEmail1" placeholder="Filename"&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;div class="form-group"&gt;</span></span><br><span class="line"><span class="string">&lt;label for="exampleInputPassword1"&gt;Content&lt;/label&gt;</span></span><br><span class="line"><span class="string">&lt;input type="text" class="form-control" name="content" id="exampleInputPassword1" placeholder="Contont"&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;button type="submit" class="btn btn-default"&gt;Submit&lt;/button&gt;</span></span><br><span class="line"><span class="string">&lt;/form&gt;</span></span><br><span class="line"><span class="string">EOT;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'you can not see this page'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>代码知识：</strong></p>
-<p>PHP在函数前面加个@的作用：@是错误控制运算符，用来屏蔽错误提示</p>
-<p>usleep函数和sleep函数的区别：usleep函数和sleep函数在PHP中都起暂停作用，sleep函数的单位是秒，usleep的单位是微秒</p>
-<p>EOT定界符：当PHP中要输出大量复杂的HTML代码时，可以使用EOT定界符，将HTML代码包括在定界符中。注意：关闭的定界符要置于行首，且该行出定界符和分号外不能有其它任何符号。</p>
-<p><strong>解题分析：</strong></p>
-<p>在index.php文件中有一个弱类型，只要a[0]的MD5值以0e开头就能绕过判断，但是a[0]的初始值是d。所以这里我们就要通过parse_str函数的缺陷覆盖掉a[0]。这样我们就有了下一个页面的跳转链接。</p>
-<p>uploadsomething.php文件对referer做判断，当请求头中有referer时，将生成文件路径，文件名就是我们上传的Filename参数，并在文件中写入flag，然后输出文件路径。本来我们只要访问这个文件就能获得flag了。但是它后面写了一个usleep函数，且暂停时间是0.1秒，在0.1秒以后就重新写入其它内容，将原先的flag覆盖掉了。这里就涉及到时间竞争的问题了。那么我们的解决方案就是不断的提供同一个表单，这样它生成的文件就是同一个，但是它每一次都是先写入flag再覆盖掉，这时候我们用一个脚本不断的去请求生成的文件，总有一次能在它覆盖掉之前访问到flag的内容。</p>
-<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>首先，我们找一段MD5加密之后是0e开头的字段，然后利用parse_str函数的缺陷获得下一部分的跳转链接</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/1.jpg" alt=""></p>
-<p>点击链接跳转</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/2.jpg" alt=""></p>
-<p>Filename和Content随便输入，获得文件地址</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/3.jpg" alt=""></p>
-<p>重新提交相同的表单，burp抓包</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/4.jpg" alt=""></p>
-<p>send to Intruder，clear</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/5.jpg" alt=""></p>
-<p>payload set 设置为1，payload type 设置为Null payloads，payload count设置为发送次数，这里我设置为200 。这样我们就能不断发送同样的请求两百次。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/6.jpg" alt=""></p>
-<p>在开始之前我们先把请求脚本写好：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url2 = <span class="string">"http://127.0.0.1/PHP-Audit-Labs/DAY7/uploads/4b84b15bff6ee5796152495a230e45e3d7e947d9/flag"</span></span><br><span class="line"></span><br><span class="line">r2 = requests.Session()</span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">    result = r2.get(url2)</span><br><span class="line">    <span class="keyword">print</span> result.content</span><br></pre></td></tr></table></figure>
-<p>我们burp开始攻击，然后我们运行脚本，当我们的表单提交和文件访问请求间隔在0.1秒以内时，就能输出flag</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/7.jpg" alt=""></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/8.jpg" alt=""></p>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28188179&auto=1&height=66"></iframe></div>
-
+<h2 id="JSTL库"><a href="#JSTL库" class="headerlink" title="JSTL库"></a>JSTL库</h2><p>JSP标准标签库(JavaServlet Pages Standard Tag Library, JSTL)是一个定制标签库的集合。用来解决像遍历Map或集合、条件测试、XML处理，甚至数据库访问和数据操作等常见问题。</p>
+<p><strong>1.下载及使用：</strong></p>
+<p>下载地址：<code>http://jstl.java.net</code></p>
+<p>使用：将下载解压后的lib目录下的两个JAR文件复制到每个应用程序的WEB-INF/lib目录下</p>
+<p><strong>2.JSTL标签库：</strong></p>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th>子函数</th>
+<th>URI</th>
+<th>前缀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心</td>
+<td>变量支持、流控制、URL管理、其它</td>
+<td><code>http://java.sun.com/jsp/jstl/core</code></td>
+<td>c</td>
+</tr>
+<tr>
+<td>XML</td>
+<td>核心、流控制、转换</td>
+<td><code>http://java.sun.com/jsp/jstl/xml</code></td>
+<td>x</td>
+</tr>
+<tr>
+<td>国际化</td>
+<td>语言区域、消息格式化、数字和日期格式化</td>
+<td><code>http://java.sun.com/jsp/jstml/fmt</code></td>
+<td>fmt</td>
+</tr>
+<tr>
+<td>数据库</td>
+<td>SQL</td>
+<td><code>http://java.sun.com/jsp/jstml/sql</code></td>
+<td>sql</td>
+</tr>
+<tr>
+<td>函数</td>
+<td>集合长度、字符串操作</td>
+<td><code>http://java.sun.com/jsp/jstl/functions</code></td>
+<td>fn</td>
+</tr>
+</tbody>
+</table>
+<p>在JSP页面中使用JSTL库，必须通过以下格式使用taglib指令：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib uri=<span class="string">"uri"</span> prefix=<span class="string">"c/x/fmt/sql/fn"</span> %&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="一般行为"><a href="#一般行为" class="headerlink" title="一般行为"></a>一般行为</h2><p><strong>说明：</strong></p>
+<p>在接下来的属性解析中，所有带星号(*)的属性都是必须的，带加号(+)的代表该属性的rtexprvalue为true，即该属性可以赋静态字符串或动态值（Java表达式、EL表达式或者通过\<a href="jsp:attribute\" target="_blank" rel="noopener">jsp:attribute\</a>设置的值），为False时属性只能赋静态字符串的值。[]表示可选属性，如果有多个值，写在前面的为默认值</p>
+<h3 id="out标签："><a href="#out标签：" class="headerlink" title="out标签："></a>out标签：</h3><p><strong>1.定义方式：</strong></p>
+<p>没有body content的定义方式：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:out value=<span class="string">"value"</span> [escapeXml=<span class="string">"true|false"</span> <span class="keyword">default</span>=<span class="string">"dafaultValue"</span>] /&gt;</span><br></pre></td></tr></table></figure>
+<p>带有body content的定义方式：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:out value=<span class="string">"value"</span> [escapeXml=<span class="string">"true|false"</span>] &gt;</span><br><span class="line">	<span class="keyword">default</span> value</span><br><span class="line">&lt;/c:out&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>2.标签属性解析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value*+</td>
+<td>对象</td>
+<td>要输出的表达式</td>
+</tr>
+<tr>
+<td>escapeXml+</td>
+<td>布尔</td>
+<td>表示要输出的字符的&lt;、&gt;、%、’、”是否要转换成相应的实体编码</td>
+</tr>
+<tr>
+<td>default+</td>
+<td>对象</td>
+<td>输出默认值</td>
+</tr>
+</tbody>
+</table>
+<p>在JSP2.0中，除非要将某个值XML转义输出，否则一般输出使用EL表达式。</p>
+<p>当要输出的表达式的结果为null时，就输出默认值，默认值也可以赋动态值，当默认值的动态值也为null时则输出空字符串。</p>
+<p>如果包含一个或多个特殊字符的字符串没有机型XML转义，它的值就无法在浏览器中正常显示。</p>
+<h3 id="set标签"><a href="#set标签" class="headerlink" title="set标签"></a>set标签</h3><p><strong>1.set标签的功能：</strong></p>
+<ul>
+<li>创建一个字符串和一个引用该字符串的有界变量</li>
+<li>创建一个引用现存在有界对象的有界变量</li>
+<li>设置邮件对象的属性。</li>
+</ul>
+<p><strong>2.定义方式：</strong></p>
+<p>第一种：创建一个有界变量，并用value属性在其中定义一个要创建的字符串或者现存在的有界对象：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:set var=<span class="string">"varName"</span> value=<span class="string">"value"</span> [scope=<span class="string">"&#123;page|request|session|application&#125;] /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第二种：与第一种形式相似，只是要创建的字符串或者要引用的有界对象是作为body content赋值的：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:set var=<span class="string">"varName"</span> [scope=<span class="string">"&#123;page|request|session|application&#125;]&gt;</span></span><br><span class="line"><span class="string">	body content</span></span><br><span class="line"><span class="string">&lt;/c:set&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第三种：设置有界对象的属性值。target属性定义有界对象，以及有界对象的property属性。对该属性的赋值是通过value属性进行的：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:set target=<span class="string">"target"</span> property=<span class="string">"propertyName"</span> value=<span class="string">"value"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>第四种：形式和第三种类似，只是赋值作为body content完成：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>3.标签属性解析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value+</td>
+<td>对象</td>
+<td>要创建的字符串，或者要引用的有界对象，或者新的属性值</td>
+</tr>
+<tr>
+<td>var</td>
+<td>字符串</td>
+<td>要创建的有界变量</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>字符串</td>
+<td>新建的有界变量的范围</td>
+</tr>
+<tr>
+<td>target+</td>
+<td>对象</td>
+<td>其属性要被赋新值的有界对象，这必须是一个JavaBean实例或者java.util.Map对象</td>
+</tr>
+<tr>
+<td>property+</td>
+<td>字符串</td>
+<td>要被赋新值的属性名称</td>
+</tr>
+</tbody>
+</table>
+<h3 id="remove标签"><a href="#remove标签" class="headerlink" title="remove标签"></a>remove标签</h3><p><strong>1.定义方式：</strong></p>
+<p>remove标签用于删除有界变量，其语法如下：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:remove var=<span class="string">"varName"</span> [scope=<span class="string">"&#123;page|request|session|application&#125;"</span>] /&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：有界变量引用的对象不会被删除，删除的只是对象实例</p>
+<p><strong>2.标签属性解析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>var</td>
+<td>字符串</td>
+<td>要删除的有界变量的名称</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>字符串</td>
+<td>要删除的有界变量的范围</td>
+</tr>
+</tbody>
+</table>
+<h2 id="条件行为"><a href="#条件行为" class="headerlink" title="条件行为"></a>条件行为</h2><p>条件行为用于处理页面输出取决于特定输入值的情况，JSTL中执行条件行为的有四个标签，即if、choose、when和otherwis。</p>
+<h3 id="if标签"><a href="#if标签" class="headerlink" title="if标签"></a>if标签</h3><p>if标签是对某一个条件进行测试，假如结果为True，就处理它的body content。测是结果保存在Boolean对象中，并创建游街变量来引用这个Boolean对象。</p>
+<p><strong>1.定义方式：</strong></p>
+<p>第一种：没有body content：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">"testCondition"</span> var=<span class="string">"varName"</span> [scope=<span class="string">"&#123;page|request|session|application&#125;"</span>] /&gt;</span><br></pre></td></tr></table></figure>
+<p>这种情况下，var定义的有界对象一般是通过其它标签在同一个JSP的后续阶段再进行测试。</p>
+<p>第二种：使用一个body content：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">"testCondition"</span> var=<span class="string">"varName"</span> [scope=<span class="string">"&#123;page|request|session|application&#125;"</span>] &gt;</span><br><span class="line">	body content</span><br><span class="line">&lt;/c:if&gt;</span><br></pre></td></tr></table></figure>
+<p>body content是JSP，当测试条件为true是，就会得到处理</p>
+<p><strong>2.标签属性解析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test+</td>
+<td>布尔</td>
+<td>if里面的判断语句</td>
+</tr>
+<tr>
+<td>var</td>
+<td>字符串</td>
+<td>定义存放结果的有界变量的名称，存放的值非1即0</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>字符串</td>
+<td>决定var定义的有界变量的范围</td>
+</tr>
+</tbody>
+</table>
+<h3 id="choose、when和otherwise标签"><a href="#choose、when和otherwise标签" class="headerlink" title="choose、when和otherwise标签"></a>choose、when和otherwise标签</h3><p><strong>1.choose和when标签的作用与Java中的关键字switch和case类似。choose标签中必嵌有一个或多个when标签。otherwise标签则用于默认的条件块。when标签必须带有定义测试条件的test属性。</strong></p>
+<p><strong>2.例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:choose&gt;</span><br><span class="line">	&lt;c:when test=&quot;$&#123;param.status==&apos;full&apos;&#125;&quot;&gt;</span><br><span class="line">		You are a full member</span><br><span class="line">	&lt;/c:when&gt;</span><br><span class="line">	&lt;c:when test=&quot;$&#123;param.status==&apos;student&apos;&#125;&quot;&#125;&gt;</span><br><span class="line">		You are a student member</span><br><span class="line">	&lt;/c:when&gt;</span><br><span class="line">	&lt;c:otherwise&gt;</span><br><span class="line">		Please register</span><br><span class="line">	&lt;/c:otherwise&gt;</span><br><span class="line">&lt;/c:choose&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="遍历行为"><a href="#遍历行为" class="headerlink" title="遍历行为"></a>遍历行为</h2><h3 id="forEach标签"><a href="#forEach标签" class="headerlink" title="forEach标签"></a>forEach标签</h3><p><strong>1.forEach标签：</strong></p>
+<p>会多次地反复遍历body content或者对象集合。可以被遍历的对象包括java.util.Collection和java.utilMap的所有实现，以及对象数组或者主类型。也可以遍历java.util.Iterator和java.util.Enumeration。</p>
+<p><strong>2.定义方式：</strong></p>
+<p>第一种：以固定次数地重复body content：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:forEach [var=<span class="string">"varName"</span>] begin=<span class="string">"begin"</span> end=<span class="string">"end"</span> step=<span class="string">"step"</span>&gt;</span><br><span class="line">	body content</span><br><span class="line">&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+<p>第二种：遍历对象集合：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:forEach items=<span class="string">"collection"</span> [var=<span class="string">"varName"</span> varStatus=<span class="string">"varStatusName"</span> begin=<span class="string">"begin"</span> end=<span class="string">"end"</span>] &gt;</span><br><span class="line">	body content</span><br><span class="line">&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>3.标签属性解析：</strong></p>
 
       
     </div>
@@ -438,13 +596,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/02/PHP-Audit-Labs-Day7/">PHP代码审计-parse_str函数缺陷</a></p>
+        <p><span>本文标题:</span><a href="/2018/11/28/Java-Servlet6/">Java-Servlet学习笔记（六）--JSTL</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-02, 21:01:19</p>
-        <p><span>最后更新:</span>2018-12-15, 21:22:06</p>
+        <p><span>发布时间:</span>2018-11-28, 20:55:54</p>
+        <p><span>最后更新:</span>2018-12-15, 21:17:05</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/02/PHP-Audit-Labs-Day7/" title="PHP代码审计-parse_str函数缺陷">http://yoursite.com/2018/09/02/PHP-Audit-Labs-Day7/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/02/PHP-Audit-Labs-Day7/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/11/28/Java-Servlet6/" title="Java-Servlet学习笔记（六）--JSTL">http://yoursite.com/2018/11/28/Java-Servlet6/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/11/28/Java-Servlet6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -456,16 +614,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/03/JAVA2/">
-                    Java学习笔记（二）--流程控制
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/01/JAVA1/">
-                    Java学习笔记（一）--Java语言基础
+                <a href="/2018/11/27/Java-Servlet5/">
+                    Java-Servlet学习笔记（五）--表达式语言
                 </a>
             </div>
         
@@ -477,7 +629,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#parse-str函数分析"><span class="toc-number">1.</span> <span class="toc-text">parse_str函数分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修复建议"><span class="toc-number">2.</span> <span class="toc-text">修复建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">3.</span> <span class="toc-text">题目分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解题过程"><span class="toc-number">4.</span> <span class="toc-text">解题过程</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSTL库"><span class="toc-number">1.</span> <span class="toc-text">JSTL库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般行为"><span class="toc-number">2.</span> <span class="toc-text">一般行为</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#out标签："><span class="toc-number">2.1.</span> <span class="toc-text">out标签：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set标签"><span class="toc-number">2.2.</span> <span class="toc-text">set标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove标签"><span class="toc-number">2.3.</span> <span class="toc-text">remove标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件行为"><span class="toc-number">3.</span> <span class="toc-text">条件行为</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if标签"><span class="toc-number">3.1.</span> <span class="toc-text">if标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#choose、when和otherwise标签"><span class="toc-number">3.2.</span> <span class="toc-text">choose、when和otherwise标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遍历行为"><span class="toc-number">4.</span> <span class="toc-text">遍历行为</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#forEach标签"><span class="toc-number">4.1.</span> <span class="toc-text">forEach标签</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -513,7 +665,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-parse_str函数缺陷　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java-Servlet学习笔记（六）--JSTL　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -533,15 +685,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/03/JAVA2/" title="上一篇: Java学习笔记（二）--流程控制">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/01/JAVA1/" title="下一篇: Java学习笔记（一）--Java语言基础">
+            <a href="/2018/11/27/Java-Servlet5/" title="下一篇: Java-Servlet学习笔记（五）--表达式语言">
                 <i class="fa fa-angle-right"></i>
             </a>
         
