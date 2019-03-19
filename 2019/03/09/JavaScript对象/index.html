@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言 JavaScript同样作为前端三大项之一，用来控制行为。这篇博客用来记录一下JavaScript的重难点之一的对象。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/53.jpg">
-<meta property="og:updated_time" content="2019-03-17T12:33:28.141Z">
+<meta property="og:updated_time" content="2019-03-19T12:16:21.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript对象">
 <meta name="twitter:description" content="前言 JavaScript同样作为前端三大项之一，用来控制行为。这篇博客用来记录一下JavaScript的重难点之一的对象。">
@@ -340,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">2,583字</span>
+			<span class="post-count">3,951字</span>
 		</span>
 	</span>
 	
@@ -349,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">9分</span>
+			<span class="post-count">14分</span>
 		</span>
 	</span>
 </div>
@@ -444,6 +444,82 @@
 <p>propertyIsEnumerable()是hasOwnProperty()的增强版，只有检测到是自有属性且这个属性的可枚举性为true时它才返回true。</p>
 <h2 id="属性getter和setter"><a href="#属性getter和setter" class="headerlink" title="属性getter和setter"></a>属性getter和setter</h2><p>在ECMAscript 5中，属性值可以用一个或两个方法来代替，这两个方法就是getter和setter。由getter和setter定义的属性称为“存取器属性”。</p>
 <p>和数据属性不同，存取器属性不具有可写性。如果属性同时具有getter和setter方法，那么它是一个读/写属性。如果它只有getter方法，那么他就是一个只读属性。如果它只有setter方法，那么他就是一个只写属性。</p>
+<h2 id="属性的特性"><a href="#属性的特性" class="headerlink" title="属性的特性"></a>属性的特性</h2><p>属性包含一些标识它们可写、可枚举和可配置的特性。ECMAScript 5中定义了一些查询和设置这些属性特性的API，这些API的作用有：</p>
+<ul>
+<li>通过这些API给原型对象添加方法，并将它们设置成不可枚举，这让它们看起来更像内置方法</li>
+<li>可以通过这些API给对象定义不能修改或删除的属性，借此“锁定”这个对象</li>
+</ul>
+<p>可以认为一个普通属性包含一个名字和四个特性：</p>
+<ul>
+<li>值(value)</li>
+<li>可写性(writabl)</li>
+<li>可配置型(enumerable)</li>
+<li>可配置性(configurable)</li>
+</ul>
+<p>而存取器属性的四个特性是：</p>
+<ul>
+<li>读取</li>
+<li>写入</li>
+<li>可枚举性</li>
+<li>可配置性</li>
+</ul>
+<p>ECMAScript 5定义了一个名为“属性描述符”(property descriptor)的对象。数据属性的描述符对象有value、writable、enumerable和configurable。存取器属性的描述符对象则用get属性和set属性代替value和writable。</p>
+<p>通过调用Object.getOwnPropertyDescriptor()可以获得某个对象特定属性的属性描述符：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;,<span class="string">"x"</span>);</span><br><span class="line"><span class="comment">//返回&#123;value:1, writable:true, enumerable:true, configurable:true&#125;</span></span><br></pre></td></tr></table></figure>
+<p>对于继承属性和不存在的属性，返回undefined。</p>
+<p>Object.getOwnPropertyDescriptor()只能得到自有属性的描述符，想要获得继承属性的特性，需要遍历原型链。</p>
+<p>想要设置属性的特性，或者想让新建属性具有某种特性，则需要调用Object.definePeoperty()，传入要修改的对象、要创建或修改的属性名称以及属性描述符对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o,<span class="string">"x"</span>,&#123;</span><br><span class="line">    value:<span class="number">1</span>,</span><br><span class="line">    writable:<span class="literal">true</span>,</span><br><span class="line">    enumerable:<span class="literal">false</span>,</span><br><span class="line">    configurable:<span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这个方法要么修改已有属性要么新建自有属性，但不能修改继承属性</p>
+<p>如果要同时修改或创建多个属性，则需要使用Object.defineProperties()</p>
+<p>对于哪些不允许创建或修改的属性来说，如果用Object.defineProperty()和Object.defineProperties()对其操作（新建或修改）就会抛出类型错误异常。</p>
+<p><strong>完整的规则：</strong></p>
+<ul>
+<li>如果对象是不可扩展的，则可以编辑已有的自有属性，但不能给它添加新属性</li>
+<li>如果属性是不可配置的，则不能修改它的可配置性和可枚举性</li>
+<li>如果存取器属性是不可配置的，则不能修改器getter和setter方法，也不可以将它转换为数据属性</li>
+<li>如果数据属性是不可配置的，则不能将它转换为存取器属性</li>
+<li>如果数据属性是不可配置的，则不能将它的可写性从false修改为true，但是可以从true修改为false</li>
+<li>如果数据属性是不可配置且不可写的，则不能修改它的值。然而可配置但不可写属性的值是可以修改的（实际上就是先将它标记为可写的，然后修改它的值，最后转换回不可写）</li>
+</ul>
+<h2 id="对象的三个属性"><a href="#对象的三个属性" class="headerlink" title="对象的三个属性"></a>对象的三个属性</h2><p>每个对象都有与之相关的原型、类和可扩展性</p>
+<h3 id="原型属性"><a href="#原型属性" class="headerlink" title="原型属性"></a>原型属性</h3><p>对象的原型属性是用来继承属性的，这个属性十分重用，以至于我们经常将“o的原型属性”直接叫作“o的原型”。</p>
+<p>原型属性是在实例对象创建之初就设置好的。</p>
+<p>在ECMAScript 5中，将对象传入Object.getprototypeof()可以查询它的原型。</p>
+<h3 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h3><p>对象的类属性是一个字符串，用以表示对象的类型信息。</p>
+<p>想要获得对象的类，可以调用对象的toString()方法，然后提取已返回字符串的第8个到倒数第二个位置之间的字符。</p>
+<h3 id="可扩展性"><a href="#可扩展性" class="headerlink" title="可扩展性"></a>可扩展性</h3><p>对象的可扩展性用以表示是否可以给对象添加新属性。所有内置对象和自定义对象都是显示可扩展的，宿主对象的可扩展性是由JavaScript引擎定义的。</p>
+<p>通过将对象传入Object.esExtensible()，来判断对象是否是可扩展的。</p>
+<p>可扩展属性的目的是将对象“锁定”，防止外界的干扰</p>
+<p><strong>将对象转换为不可扩展的三种方法：</strong></p>
+<ul>
+<li>Object.preventExtensions()，将带转换的对象转换为不可扩展的，一旦转换后就不能再转换回可扩展的。这个方法只影响对象本身的可扩展性，如果给一个不可扩展的对象的原型添加属性，这个不可扩展对象同样会继承这些新属性</li>
+<li>Object.seal()，这个方法除了可以将对象设置为不可扩展的，还可已将对象的所有自有属性都设置为不可配置的。</li>
+<li>Object.freeze()，这个方法将更严格的锁定对象——“冻结”，除了将对象设置为不可扩展的和将其属性设置为不可配置外，哈可以将其自有的所有数据属性设置为只读（如果对象的存取器属性具有setter方法，setter不受影响）</li>
+</ul>
+<h2 id="序列化对象"><a href="#序列化对象" class="headerlink" title="序列化对象"></a>序列化对象</h2><p>对象序列化(serialization)是指将对象的状态转换成字符串，也可将字符串还原成对象。ECMAScript 5提供内置函数JSON.stringify()和JSON.parse()用来序列化和反序列化</p>
+<p>JSON的羽凡是JavaScript语法的子集，它并不能表示JavaScript里的所有值。支持对象、数组、字符串、无穷大数字、true、false和null，并且它们可以序列化和还原。NaN、Infinity和-Infinity序列化的结果是null。</p>
+<hr>
+<div align="centern"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=461544312&auto=1&height=66"></iframe><br></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     </div>
@@ -455,7 +531,7 @@
         <p><span>本文标题:</span><a href="/2019/03/09/JavaScript对象/">JavaScript对象</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2019-03-09, 14:34:59</p>
-        <p><span>最后更新:</span>2019-03-17, 20:33:28</p>
+        <p><span>最后更新:</span>2019-03-19, 20:16:21</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/03/09/JavaScript对象/" title="JavaScript对象">http://yoursite.com/2019/03/09/JavaScript对象/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/09/JavaScript对象/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -485,7 +561,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-number">2.</span> <span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象直接量"><span class="toc-number">2.1.</span> <span class="toc-text">对象直接量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过new创建对象"><span class="toc-number">2.2.</span> <span class="toc-text">通过new创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型"><span class="toc-number">2.3.</span> <span class="toc-text">原型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-create"><span class="toc-number">2.4.</span> <span class="toc-text">Object.create()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的查询和设置"><span class="toc-number">3.</span> <span class="toc-text">属性的查询和设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">3.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性访问错误"><span class="toc-number">3.2.</span> <span class="toc-text">属性访问错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除属性"><span class="toc-number">4.</span> <span class="toc-text">删除属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测属性"><span class="toc-number">5.</span> <span class="toc-text">检测属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性getter和setter"><span class="toc-number">6.</span> <span class="toc-text">属性getter和setter</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-number">2.</span> <span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象直接量"><span class="toc-number">2.1.</span> <span class="toc-text">对象直接量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过new创建对象"><span class="toc-number">2.2.</span> <span class="toc-text">通过new创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型"><span class="toc-number">2.3.</span> <span class="toc-text">原型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-create"><span class="toc-number">2.4.</span> <span class="toc-text">Object.create()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的查询和设置"><span class="toc-number">3.</span> <span class="toc-text">属性的查询和设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">3.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性访问错误"><span class="toc-number">3.2.</span> <span class="toc-text">属性访问错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除属性"><span class="toc-number">4.</span> <span class="toc-text">删除属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测属性"><span class="toc-number">5.</span> <span class="toc-text">检测属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性getter和setter"><span class="toc-number">6.</span> <span class="toc-text">属性getter和setter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的特性"><span class="toc-number">7.</span> <span class="toc-text">属性的特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的三个属性"><span class="toc-number">8.</span> <span class="toc-text">对象的三个属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型属性"><span class="toc-number">8.1.</span> <span class="toc-text">原型属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类属性"><span class="toc-number">8.2.</span> <span class="toc-text">类属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可扩展性"><span class="toc-number">8.3.</span> <span class="toc-text">可扩展性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化对象"><span class="toc-number">9.</span> <span class="toc-text">序列化对象</span></a></li></ol>
         
     </div>
     <style>
