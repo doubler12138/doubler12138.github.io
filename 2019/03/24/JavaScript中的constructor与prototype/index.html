@@ -15,24 +15,21 @@
 
 
 
-<meta name="description" content="前言 重拾这个项目的学习，今天学习PHP-Audit-Labs第二篇的filter_var函数缺陷">
-<meta name="keywords" content="代码审计,PHP">
+<meta name="description" content="前言 JavaScript中的类继承相比于其它的一些面向对象的语言来说有点独特，这就涉及到JavaScript中的两个很重要的概念，prototype和constructor。           JavaScript类在了解constructor和prototype前，我们先来了解一下JavaScript的类。 JavaScript中也可以定义对象的类。类的成员或实例都包含一些属性，用以存放或定">
+<meta name="keywords" content="WEB前端,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP代码审计-filter_var函数缺陷">
-<meta property="og:url" content="http://yoursite.com/2018/09/16/PHP-Audit-Labs-Day2/index.html">
+<meta property="og:title" content="JavaScript中的constructor与prototype">
+<meta property="og:url" content="http://yoursite.com/2019/03/24/JavaScript中的constructor与prototype/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 重拾这个项目的学习，今天学习PHP-Audit-Labs第二篇的filter_var函数缺陷">
+<meta property="og:description" content="前言 JavaScript中的类继承相比于其它的一些面向对象的语言来说有点独特，这就涉及到JavaScript中的两个很重要的概念，prototype和constructor。           JavaScript类在了解constructor和prototype前，我们先来了解一下JavaScript的类。 JavaScript中也可以定义对象的类。类的成员或实例都包含一些属性，用以存放或定">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/23.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day2/1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day2/2.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day2/3.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day2/4.png">
-<meta property="og:updated_time" content="2018-12-15T13:19:52.304Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/56.jpg">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/qiantuwuliang/208703/o_js.constructor.prototype001.jpg">
+<meta property="og:updated_time" content="2019-03-24T13:45:56.426Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP代码审计-filter_var函数缺陷">
-<meta name="twitter:description" content="前言 重拾这个项目的学习，今天学习PHP-Audit-Labs第二篇的filter_var函数缺陷">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/23.jpg">
+<meta name="twitter:title" content="JavaScript中的constructor与prototype">
+<meta name="twitter:description" content="前言 JavaScript中的类继承相比于其它的一些面向对象的语言来说有点独特，这就涉及到JavaScript中的两个很重要的概念，prototype和constructor。           JavaScript类在了解constructor和prototype前，我们先来了解一下JavaScript的类。 JavaScript中也可以定义对象的类。类的成员或实例都包含一些属性，用以存放或定">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/56.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -64,7 +61,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>PHP代码审计-filter_var函数缺陷 | DoubleR&#39;s BLOG</title>
+<title>JavaScript中的constructor与prototype | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -316,11 +313,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-PHP-Audit-Labs-Day2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JavaScript中的constructor与prototype" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/16/PHP-Audit-Labs-Day2/" class="article-date">
-      <time datetime="2018-09-16T03:40:39.000Z" itemprop="datePublished">2018-09-16</time>
+      <a href="/2019/03/24/JavaScript中的constructor与prototype/" class="article-date">
+      <time datetime="2019-03-24T11:51:41.000Z" itemprop="datePublished">2019-03-24</time>
 </a>
 
 
@@ -335,7 +332,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      PHP代码审计-filter_var函数缺陷
+      JavaScript中的constructor与prototype
     </h1>
   
 
@@ -344,7 +341,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,262字</span>
+			<span class="post-count">1,369字</span>
 		</span>
 	</span>
 	
@@ -366,7 +363,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB前端/">WEB前端</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -377,85 +374,39 @@
       
           
         <p><strong>前言</strong></p>
-<p>重拾这个项目的学习，今天学习PHP-Audit-Labs第二篇的filter_var函数缺陷</p>
+<p>JavaScript中的类继承相比于其它的一些面向对象的语言来说有点独特，这就涉及到JavaScript中的两个很重要的概念，prototype和constructor。</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/23.jpg" alt=""></p>
-<a id="more"></a>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/56.jpg" alt=""></p>
 <hr>
-<h2 id="DAY2-Twig"><a href="#DAY2-Twig" class="headerlink" title="DAY2-Twig"></a>DAY2-Twig</h2><p>这道题是PHP-SECURITY-CALENDAR-2017-Day2题，题目名Twig，题目代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'vendor/autoload.php'</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Template</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $twig;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $indexTemplate =<span class="string">'&lt;img '</span> .<span class="string">'src="https://loremflickr.com/320/240"&gt;'</span> .<span class="string">'&lt;a href="&#123;&#123;link|escape&#125;&#125;"&gt;Next slide&lt;/a&gt;'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Default twig setup, simulate loading</span></span><br><span class="line">        <span class="comment">// index.html file from disk</span></span><br><span class="line">        $loader = <span class="keyword">new</span> Twig\Loader\ArrayLoader([</span><br><span class="line">            <span class="string">'index.html'</span> =&gt; $indexTemplate</span><br><span class="line">        ]);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;twig = <span class="keyword">new</span> Twig\Environment($loader);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getNexSlideUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $nextSlide = $_GET[<span class="string">'nextSlide'</span>];</span><br><span class="line">        <span class="keyword">return</span> filter_var($nextSlide, FILTER_VALIDATE_URL);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">render</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;twig-&gt;render(</span><br><span class="line">            <span class="string">'index.html'</span>,</span><br><span class="line">            [<span class="string">'link'</span> =&gt; <span class="keyword">$this</span>-&gt;getNexSlideUrl()]</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">new</span> Template())-&gt;render()</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>漏洞解析：</strong></p>
-<p>这一题运用到了PHP的一个模板引擎Twig，具体如何使用composer下载引擎我会在后面的博客中介绍，这个引擎的具体运用我会在学习之后介绍。题目搭建完成后的界面如下：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day2/1.png" alt=""></p>
-<p>这段代码对传入的nextSlide参数进行了两次过滤，一次是在第8行使用了Twig模板的escape过滤器对它进行了过滤，实际上这里的escape过滤器是使用PHP的内置函数htmlspecialchars来实现的，这不是重点。重点是第20行，使用了filter_var函数对其进行了一次过虑。</p>
-<p><strong>filter_var函数：</strong><br>语法：<code>filter_var(variable,filter,option)</code></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">variable</td>
-<td style="text-align:center">必需。规定要过滤的变量</td>
-</tr>
-<tr>
-<td style="text-align:center">filter</td>
-<td style="text-align:center">可选。规定要使用的过滤器的ID</td>
-</tr>
-<tr>
-<td style="text-align:center">options</td>
-<td style="text-align:center">规定包含标志/选项的数组。检查每个过滤器可能的标志和选项</td>
-</tr>
-</tbody>
-</table>
-<p>题目代码中使用的是FILTER_VALIDATE_URL过滤器，它拥有四个可能的标识：</p>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1336856447&auto=1&height=66"></iframe><br></div>
+
+<hr>
+<h2 id="JavaScript类"><a href="#JavaScript类" class="headerlink" title="JavaScript类"></a>JavaScript类</h2><p>在了解constructor和prototype前，我们先来了解一下JavaScript的类。</p>
+<p>JavaScript中也可以定义对象的类。类的成员或实例都包含一些属性，用以存放或定义它们的状态，其中有些属性定义了它们的行为（称为方法）。这些行为通常是由类定义的，而且为所有实例所共享。</p>
+<p>在JavaScript中，类的实现是基于其原型（也就是prototype）继承机制的。如果两个实例都从同一个原型对象那个上继承了属性，我们说它们是同一个类的实例。</p>
+<p>而两个对象继承自同一个原型，往往意味着（但不是绝对的）它们是由同一个构造函数创建并初始化的，这里就设计到另一个概念constructor了。</p>
+<p>首先我们来看一下，构造函数的定义和调用方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.showMe = funciton()&#123; alert(<span class="keyword">this</span>.name); &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> test = <span class="keyword">new</span> Person(<span class="string">'javascript'</span>);</span><br><span class="line">test.showMe(); <span class="comment">//alert javascript</span></span><br></pre></td></tr></table></figure>
+<p>这个new操作符出现在很多其它的面向对象的语言中，例如Java，c++。但是JavaScript的new和这些传统的面向对象的语言有所不同。JavaScript使用new调用构造函数时会自动创建一个新对象，而构造函数本身只是初始化这个新对象的状态。就上面的例子而言，构造函数给对象创建了两个属性，一个是name一个是showMe，由于showMe的值是个函数，所以我们也可以把showMe属性称为方法。构造函数有一个重要特征是，构造函数的prototype属性被用作新对象的原型。这也就意味着通过同一个构造函数创建的所有对象都继承自一个相同的对象（称为原型对象），因此它们都是同一个类的成员。</p>
+<p>在调用构造函数之前就已经创建了新对象，所以在构造函数内我们可以通过this关键字来获取对象的上下文。</p>
+<p>需要注意的是原型对象才是类的唯一标识，但是构造函数可以视作类的“外在表现”，所以一般来说我们可以把构造函数名当作类名，所以上面的示例我们可以看作Person类。</p>
+<h2 id="类的定义、实例化"><a href="#类的定义、实例化" class="headerlink" title="类的定义、实例化"></a>类的定义、实例化</h2><p>之前我们提到过构造函数，构造函数本身就是个对象，这个对象有一个prototype属性，而这个属性会指向一个prototype对象，而prototype对象又有一个属性叫constructor，它的值是一个函数对象，这个函数对象就是构造函数，所以prototype对象通过constructor属性又指回了构造函数。这样听起来有点绕，我用一幅图来说明：</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/qiantuwuliang/208703/o_js.constructor.prototype001.jpg" alt=""></p>
+<p>而prototype对象的存在可以让我们通过修改或者重写这个对象来给类增加属性或者方法，下面给个示例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Range</span>(<span class="params">from, to</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.from = <span class="keyword">from</span>;</span><br><span class="line">    <span class="keyword">this</span>.to = to;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里重写了构造函数的Range的原型，所以这个新定义的原型对象是没有constructor属性的，可以显示定义,这个我们后面提到</span></span><br><span class="line">Range.prototype = &#123;</span><br><span class="line">    includes: <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.from &lt;=x &amp;&amp; x &lt;= <span class="keyword">this</span>.to; &#125;,</span><br><span class="line">    foreach: <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> x = <span class="built_in">Math</span>.ceil(<span class="keyword">this</span>.from); x &lt;= <span class="keyword">this</span>.to; x++) f(x);</span><br><span class="line">    &#125;,</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">"("</span> + <span class="keyword">this</span>.from + <span class="string">"..."</span> + <span class="keyword">this</span>.to + <span class="string">")"</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>分析一下这个例子，构造函数Range初始化对象的from和to属性，而我们通过重写Range的原型对象为通过Range初始化的新对象添加属性，因为所有通过Range初始化的对象都会继承这个原型对象。这里我们添加了三个方法：includes、foreach、toString。</p>
+<p>这里需要注意的是由于我们是重写的Range的原型对象，所以这个示例的原型对象并没有constructor属性，我们可以显示添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Range.prototype = &#123;</span><br><span class="line">	<span class="keyword">constructor</span>: Ragne,</span><br><span class="line">    includes: function (x) &#123; <span class="keyword">return</span> <span class="keyword">this</span>.from &lt;=x &amp;&amp; x &lt;= <span class="keyword">this</span>.to; &#125;,</span><br><span class="line">    foreach: <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> x = <span class="built_in">Math</span>.ceil(<span class="keyword">this</span>.from); x &lt;= <span class="keyword">this</span>.to; x++) f(x);</span><br><span class="line">    &#125;,</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">"("</span> + <span class="keyword">this</span>.from + <span class="string">"..."</span> + <span class="keyword">this</span>.to + <span class="string">")"</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>当让我们可以使用预定义的原型对象，预定义的原型对象包含constructor属性，我们只要在这基础上添加其它的属性就行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Range.prototype.includes = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.from &lt;=x &amp;&amp; x &lt;= <span class="keyword">this</span>.to; &#125;;</span><br><span class="line">Range.prototype.foreach = <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> x = <span class="built_in">Math</span>.ceil(<span class="keyword">this</span>.from); x &lt;= <span class="keyword">this</span>.to; x++) f(x);</span><br><span class="line">    &#125;;</span><br><span class="line">Range.prototype.toString = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">"("</span> + <span class="keyword">this</span>.from + <span class="string">"..."</span> + <span class="keyword">this</span>.to + <span class="string">")"</span>; &#125;;</span><br></pre></td></tr></table></figure>
+<p>new形式创建对象的步骤可以分成三步：</p>
 <ul>
-<li>FILTER_FLAG_SCHEME_REQUIRED - 要求 URL 是 RFC 兼容 URL。（比如：<code>http://example</code>）</li>
-<li>FILTER_FLAG_HOST_REQUIRED - 要求 URL 包含主机名（<code>http://www.example.com</code>）</li>
-<li>FILTER_FLAG_PATH_REQUIRED - 要求 URL 在主机名后存在路径（比如：<code>eg.com/example1/</code>）</li>
-<li>FILTER_FLAG_QUERY_REQUIRED - 要求 URL 存在查询字符串（比如：<code>eg.php?age=37</code>）</li>
+<li>建立一个新对象A</li>
+<li>将该对象(A)的内置原型对象设置为构造函数prototype属性所指向的prototype对象</li>
+<li>将该对象(A)作为this参数调用构造函数，完成初始化</li>
 </ul>
-<p>我们举例说明，示例代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$url = <span class="string">"http://example"</span>;</span><br><span class="line">	var_dump(filter_var($url,FILTER_VALIDATE_URL));</span><br><span class="line">	var_dump(filter_var($url,FILTER_VALIDATE_URL,FILTER_FLAG_SCHEME_REQUIRED));</span><br><span class="line">	var_dump(filter_var($url,FILTER_VALIDATE_URL,FILTER_FLAG_HOST_REQUIRED));</span><br><span class="line">	var_dump(filter_var($url,FILTER_VALIDATE_URL,FILTER_FLAG_PATH_REQUIRED));</span><br><span class="line">	var_dump(filter_var($url,FILTER_VALIDATE_URL,FILTER_FLAG_QUERY_REQUIRED));</span><br></pre></td></tr></table></figure>
-<p>结果：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day2/2.png" alt=""></p>
-<p>当没有设置函数的第三个参数时，对于只要满足四种可能标志之一的变量都能通过过滤。而且filter_var的URL过滤非常的若，它只是单纯的从形式上检测并没有检测协议，所以像xxx://xxx.xxx这样的变量也是能通过过滤的，这就是这个函数最大的缺陷。</p>
-<p><strong>漏洞利用：</strong></p>
-<p>当我们了解到filter_var函数的缺陷后，我们就可以利用一些伪协议来进行绕过。对于这道题，我们可以使用javascript伪协议来绕过，从而触发xss。我们使用payload：</p>
-<p><code>?nextSlide=javascript://comment%250aalert(1)</code></p>
-<p>很显然这个值满足了filter_var对URL过滤的第一种可能的标志。但是，实际上javascript:是协议头，//是javascript中的单行注释，comment是被注释掉的内容，%25是被url编码过后的%，%加上0a就是换行符，这样就避免了我们后面的alert(1)被单行注释注释掉。最后我们的payload绕过了过滤，成功的被写入了echo的语句，成为了一个链接，但是当链接被点击时，最后的结果是：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day2/3.png" alt=""></p>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>下面对留下的题目进行分析，至于他分析的CMS方面，由于内容过多所以我分开来写。</p>
-<p><strong>题目源码：</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">$url = $_GET[<span class="string">'url'</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($url) &amp;&amp; filter_var($url, FILTER_VALIDATE_URL))&#123;</span><br><span class="line">    $site_info = parse_url($url);</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">'/sec-redclub.com$/'</span>,$site_info[<span class="string">'host'</span>]))&#123;</span><br><span class="line">        exec(<span class="string">'curl "'</span>.$site_info[<span class="string">'host'</span>].<span class="string">'"'</span>, $result); </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;center&gt;&lt;h1&gt;You have curl &#123;$site_info['host']&#125; successfully!&lt;/h1&gt;&lt;/center&gt;</span></span><br><span class="line"><span class="string">              &lt;center&gt;&lt;textarea rows='20' cols='90'&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> implode(<span class="string">' '</span>, $result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"&lt;center&gt;&lt;h1&gt;Error: Host not allowed&lt;/h1&gt;&lt;/center&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;center&gt;&lt;h1&gt;Just curl sec-redclub.com!&lt;/h1&gt;&lt;/center&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">          &lt;center&gt;&lt;h3&gt;For example:?url=http://sec-redclub.com&lt;/h3&gt;&lt;/center&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//flagi3hEre.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">$flag = <span class="string">"HRCTF&#123;f1lt3r_var_1s_s0_c00l&#125;"</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>题目分析：</strong></p>
-<p>题目代码在原有的filter_var的过滤以外还加了一次正则匹配的过滤，但是原理还是一样的，首先我们构造payload:<code>xxx://&quot;;ls;&quot;sec-redclub.com</code>。这个payload显然是符合filter_var的过滤要求的，也符合正则匹配的要求，然后当这个值与exec函数中的字段拼接后就形成了三个命令：</p>
-<ul>
-<li>curl “xxx://“</li>
-<li>ls</li>
-<li>“sec-redclub.com”</li>
-</ul>
-<p>这里就涉及到命令执行了，第一个和第三个命令显然是不会执行成功的，当ls被执行后我们就能知道当前目录下的文件。当找到flagi3hEre.php后，我们用cat命令去读取。但是这里需要注意一点，cat命令和文件名之间有一个空格，如果我们直接使用空格就无法绕过filter_var函数的过滤，所以我们这里要使用&lt;来代替空格，所以我们最后读取flag的payload如下：<code>xxx://&quot;;cat&lt;flagi3hEre.php;&quot;sec-redclub.com</code></p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/PHP-Audit-Labs/Day2/4.png" alt=""></p>
-<hr>
-<p><strong>参考链接：</strong></p>
-<p><a href="http://www.w3school.com.cn/php/filter_validate_url.asp" target="_blank" rel="noopener">PHP FILTER_VALIDATE_URL 过滤器</a></p>
-<p><a href="https://xz.aliyun.com/t/2457" target="_blank" rel="noopener">[红日安全]代码审计Day2 - filter_var函数缺陷</a></p>
-<p><a href="https://xz.aliyun.com/t/2491" target="_blank" rel="noopener">[红日安全]PHP-Audit-Labs题解之Day1-4</a></p>
-<p><a href="http://www.vulnspy.com/cn-ripstech-presents-php-security-calendar-2017/rips_2017_php%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E6%8C%91%E6%88%98%E5%9C%A8%E7%BA%BF%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83/writeup/" target="_blank" rel="noopener">RIPS 2017 PHP代码安全审计挑战在线测试环境/Writeup</a></p>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=408250378&auto=1&height=66"></iframe></div>
-
-
-
-
-
-
-
+<p>这里对象A的是由构造函数生成的实例，它的内置原型对象是继承自构造函数的prototype对象的，所以对象A可以调用prototype对象中定义的属性和方法。</p>
+<p><strong>这就是JavaScript基于原型的继承机制。而这个机制是动态的：对象从其原型继承属性，如果创建对象后原型的属性发生变化，也会影响到继承这个原型的所有实例对象。</strong></p>
 
       
     </div>
@@ -464,13 +415,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/16/PHP-Audit-Labs-Day2/">PHP代码审计-filter_var函数缺陷</a></p>
+        <p><span>本文标题:</span><a href="/2019/03/24/JavaScript中的constructor与prototype/">JavaScript中的constructor与prototype</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-16, 11:40:39</p>
-        <p><span>最后更新:</span>2018-12-15, 21:19:52</p>
+        <p><span>发布时间:</span>2019-03-24, 19:51:41</p>
+        <p><span>最后更新:</span>2019-03-24, 21:45:56</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/16/PHP-Audit-Labs-Day2/" title="PHP代码审计-filter_var函数缺陷">http://yoursite.com/2018/09/16/PHP-Audit-Labs-Day2/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/16/PHP-Audit-Labs-Day2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/03/24/JavaScript中的constructor与prototype/" title="JavaScript中的constructor与prototype">http://yoursite.com/2019/03/24/JavaScript中的constructor与prototype/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/03/24/JavaScript中的constructor与prototype/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -482,16 +433,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/22/异或构造字符串/">
-                    异或构造字符串
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/13/Vulhub-Weblogic-SSRF/">
-                    Vulhub-Weblogic-SSRF漏洞复现
+                <a href="/2019/03/24/JavaScript函数/">
+                    JavaScript函数
                 </a>
             </div>
         
@@ -503,7 +448,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY2-Twig"><span class="toc-number">1.</span> <span class="toc-text">DAY2-Twig</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目分析"><span class="toc-number">2.</span> <span class="toc-text">题目分析</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript类"><span class="toc-number">1.</span> <span class="toc-text">JavaScript类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的定义、实例化"><span class="toc-number">2.</span> <span class="toc-text">类的定义、实例化</span></a></li></ol>
         
     </div>
     <style>
@@ -539,7 +484,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"PHP代码审计-filter_var函数缺陷　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JavaScript中的constructor与prototype　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -559,15 +504,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/22/异或构造字符串/" title="上一篇: 异或构造字符串">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/13/Vulhub-Weblogic-SSRF/" title="下一篇: Vulhub-Weblogic-SSRF漏洞复现">
+            <a href="/2019/03/24/JavaScript函数/" title="下一篇: JavaScript函数">
                 <i class="fa fa-angle-right"></i>
             </a>
         
