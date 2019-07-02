@@ -15,17 +15,20 @@
 
 
 
-<meta name="description" content="一直学习就好">
+<meta name="description" content="前言 这部分继续《你不知道的JavaScript》的第二章，词法作用域">
+<meta name="keywords" content="WEB前端,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript学习笔记2">
 <meta property="og:url" content="http://yoursite.com/2019/07/02/JavaScript学习笔记2/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="一直学习就好">
+<meta property="og:description" content="前言 这部分继续《你不知道的JavaScript》的第二章，词法作用域">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-02T12:08:36.664Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/58.jpg">
+<meta property="og:updated_time" content="2019-07-02T13:52:56.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript学习笔记2">
-<meta name="twitter:description" content="一直学习就好">
+<meta name="twitter:description" content="前言 这部分继续《你不知道的JavaScript》的第二章，词法作用域">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/58.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -337,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">0字</span>
+			<span class="post-count">1,006字</span>
 		</span>
 	</span>
 	
@@ -346,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">1分</span>
+			<span class="post-count">4分</span>
 		</span>
 	</span>
 </div>
@@ -358,6 +361,10 @@
         
 
         
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB前端/">WEB前端</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -365,7 +372,35 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p><strong>前言</strong></p>
+<p>这部分继续《你不知道的JavaScript》的第二章，词法作用域</p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/58.jpg" alt=""></p>
+<hr>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1367609413&auto=1&height=66"></iframe><br></div>
+
+<h2 id="词法阶段"><a href="#词法阶段" class="headerlink" title="词法阶段"></a>词法阶段</h2><p>词法作用域就是定义在词法阶段的作用域，换句话说，词法作用域是由编写代码时将变量和块作用域写在哪里决定的，因此当词法分析其处理代码时会保持作用域不变</p>
+<p>作用域气泡的结构和相互之间的位置关系给引擎提供了足够的位置信息，引擎用这些信息来查找标识符的位置。</p>
+<p>引擎会从当前引用变量的作用域开始查找，逐级向上，直到找到第一个匹配的标识符或到全局作用域，但是不会向下查找。</p>
+<p><strong>遮蔽效应：</strong>底层作用域内部的标识符会遮蔽顶层的相同的标识符</p>
+<p>无论函数在哪里被调用，也无论它如何被调用，他的词法作用域都只由函数被声明是所处的位置决定</p>
+<p>词法作用域查找只会查找以及标识符，对于foo.bar.baz这样的引用，词法作用域查找只会试图查找foo标识符，找到这个变量后，对象属性访问规则会分别接管对bar和baz属性的访问</p>
+<h2 id="欺骗词法"><a href="#欺骗词法" class="headerlink" title="欺骗词法"></a>欺骗词法</h2><p>欺骗词法作用域会导致性能下降</p>
+<h3 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h3><p>eval函数可以接收一个字符串为参数，并将其中的内容视为代码执行。</p>
+<p>在执行eval(….)之后的代码时，引擎并不知道或在意前面的代码是一动态形式插入进来的，并对词法作用域的环境进行修改的。引擎只会如往常地进行词法作用域查找。</p>
+<p>默认情况下，如果eval(…)中所执行的代码包含有一个或多个声明（无论是变量还是函数），就会对eval(…)所处的词法作用域进行修改。</p>
+<p>在严格模式下，eval(…)在运行时有其自己的词法作用域，意味着其中的声明无法修改所在的作用域。</p>
+<p>在程序中动态生成代码的使用场景非常罕见，因为它所带来的好处无法抵消性能上的损失。</p>
+<h3 id="with"><a href="#with" class="headerlink" title="with"></a>with</h3><p>with通常被当作重复引用同一个对象中的多个属性的快捷方式，可以不需要重复引用对象本身</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">with</span>(obj)&#123;</span><br><span class="line">        a = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o1 = &#123; <span class="attr">a</span> : <span class="number">3</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> o2 = &#123; <span class="attr">b</span> : <span class="number">4</span> &#125;;</span><br><span class="line">foo(o1);</span><br><span class="line"><span class="built_in">console</span>.log(o1.a); <span class="comment">//2</span></span><br><span class="line">foo(o2);</span><br><span class="line"><span class="built_in">console</span>.log(o2.a); <span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//2,有一个定义到了全局作用域的a</span></span><br></pre></td></tr></table></figure>
+<p><strong>分析：</strong></p>
+<p>with可以将一个没有或有多个属性的对象处理为要给完全隔离的词法作用域，因此这个对象的属性也会被处理为定义在这个作用域中的词法标识符</p>
+<p>可以这样理解，当我们传递o1给with时，with所声明的作用域是o1，而这个作用域中含有要给同o1.a属性相符的标识符。但当我们将o2作为作用域时，其中并没有a标识符，因此进行正常的LHS标识符查找。但是整个作用域链中都没有找到标识符a，因此当a=2执行时，自动创建了一个全局变量a</p>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>JavaScript引擎会在编译阶段进行数项的性能优化。其中有些优化依赖于能够根据代码的词法进行静态分析，并预先确定所有变量和函数的定义位置，才能在执行过程中快速找到标识符。</p>
+<p>但是如果引擎在代码中发现eval(…)或with，她只能简单地假设关于标识符位置的判断都是无效的，所有的优化可能都是无意义的，所以如果代码中大量使用eval(…)或with，那么运行起来将很慢。</p>
+
       
     </div>
     
@@ -376,7 +411,7 @@
         <p><span>本文标题:</span><a href="/2019/07/02/JavaScript学习笔记2/">JavaScript学习笔记2</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2019-07-02, 20:08:36</p>
-        <p><span>最后更新:</span>2019-07-02, 20:08:36</p>
+        <p><span>最后更新:</span>2019-07-02, 21:52:56</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/02/JavaScript学习笔记2/" title="JavaScript学习笔记2">http://yoursite.com/2019/07/02/JavaScript学习笔记2/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/02/JavaScript学习笔记2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -406,7 +441,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#词法阶段"><span class="toc-number">1.</span> <span class="toc-text">词法阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#欺骗词法"><span class="toc-number">2.</span> <span class="toc-text">欺骗词法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#eval"><span class="toc-number">2.1.</span> <span class="toc-text">eval</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with"><span class="toc-number">2.2.</span> <span class="toc-text">with</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能"><span class="toc-number">2.3.</span> <span class="toc-text">性能</span></a></li></ol></li></ol>
         
     </div>
     <style>
