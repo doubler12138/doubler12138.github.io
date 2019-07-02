@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言 这部分主要学习JavaScript作用域和闭包，作用域是任何一个语言中都很重要的部分">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/57.jpg">
-<meta property="og:updated_time" content="2019-07-02T12:25:32.959Z">
+<meta property="og:updated_time" content="2019-07-02T12:31:27.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript学习笔记1">
 <meta name="twitter:description" content="前言 这部分主要学习JavaScript作用域和闭包，作用域是任何一个语言中都很重要的部分">
@@ -340,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,655字</span>
+			<span class="post-count">1,646字</span>
 		</span>
 	</span>
 	
@@ -380,7 +380,7 @@
 <a id="more"></a>
 <div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1363078221&auto=1&height=66">        </iframe><br></div>
 
-<h1 id="第一章-作用域是什么"><a href="#第一章-作用域是什么" class="headerlink" title="第一章 作用域是什么"></a>第一章 作用域是什么</h1><h2 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h2><p> <strong>传统编译语言的源代码的编译过程：</strong></p>
+<h2 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h2><p> <strong>传统编译语言的源代码的编译过程：</strong></p>
 <ul>
 <li><p>分词/词法分析（Tokenizing/Lexing）：</p>
 <p>这个过程将由字符组成的字符串分解成有意义的代码块，这些代码块被称为词法单元（token）。空格是否会被当成词法单元，取决于空格在这门语言中是否具有具体意义。</p>
@@ -395,12 +395,9 @@
 <p><strong>分词和词法分析之间的区别：</strong></p>
 <p>​    主要差异在于词法单元的识别是通过有状态还是无状态的方式进行的。简单来说，如果词法单元生成器在判断一个变量是一个独立的词法单元还是其它词法单元的一部分时，调用的是有状态的解析规则，那么这个过程被称为词法分析</p>
 <h2 id="理解作用域"><a href="#理解作用域" class="headerlink" title="理解作用域"></a>理解作用域</h2><h3 id="参与作用域的几个重要部分"><a href="#参与作用域的几个重要部分" class="headerlink" title="参与作用域的几个重要部分"></a>参与作用域的几个重要部分</h3><ul>
-<li><p>引擎：从头到尾负责整个JavaScript程序的编译及执行过程</p>
-</li>
-<li><p>编译器：引擎的好朋友之一，负责语法分析及代码生成等脏活累活</p>
-</li>
-<li><p>作用域：引擎的另一个位好朋友，负责收集并维护由所有声明的标识符（变量）组成的一系列查询，并实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限</p>
-</li>
+<li>引擎：从头到尾负责整个JavaScript程序的编译及执行过程</li>
+<li>编译器：引擎的好朋友之一，负责语法分析及代码生成等脏活累活</li>
+<li>作用域：引擎的另一个位好朋友，负责收集并维护由所有声明的标识符（变量）组成的一系列查询，并实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限</li>
 </ul>
 <h3 id="对话"><a href="#对话" class="headerlink" title="对话"></a>对话</h3><p>通过<code>var a = 2;</code>这个例子分析，来简单的看一下引擎和其它部分是如何协同工作的</p>
 <ul>
@@ -462,7 +459,7 @@
         <p><span>本文标题:</span><a href="/2019/06/30/JavaScript学习笔记1/">JavaScript学习笔记1</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2019-06-30, 20:55:28</p>
-        <p><span>最后更新:</span>2019-07-02, 20:25:32</p>
+        <p><span>最后更新:</span>2019-07-02, 20:31:27</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/06/30/JavaScript学习笔记1/" title="JavaScript学习笔记1">http://yoursite.com/2019/06/30/JavaScript学习笔记1/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/06/30/JavaScript学习笔记1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -498,7 +495,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-作用域是什么"><span class="toc-number">1.</span> <span class="toc-text">第一章 作用域是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译原理"><span class="toc-number">1.1.</span> <span class="toc-text">编译原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解作用域"><span class="toc-number">1.2.</span> <span class="toc-text">理解作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参与作用域的几个重要部分"><span class="toc-number">1.2.1.</span> <span class="toc-text">参与作用域的几个重要部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对话"><span class="toc-number">1.2.2.</span> <span class="toc-text">对话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引擎的查询类型"><span class="toc-number">1.2.3.</span> <span class="toc-text">引擎的查询类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引擎和作用域的对话"><span class="toc-number">1.2.4.</span> <span class="toc-text">引擎和作用域的对话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.2.5.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域嵌套"><span class="toc-number">1.3.</span> <span class="toc-text">作用域嵌套</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-number">1.4.</span> <span class="toc-text">异常</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译原理"><span class="toc-number">1.</span> <span class="toc-text">编译原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解作用域"><span class="toc-number">2.</span> <span class="toc-text">理解作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参与作用域的几个重要部分"><span class="toc-number">2.1.</span> <span class="toc-text">参与作用域的几个重要部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对话"><span class="toc-number">2.2.</span> <span class="toc-text">对话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引擎的查询类型"><span class="toc-number">2.3.</span> <span class="toc-text">引擎的查询类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引擎和作用域的对话"><span class="toc-number">2.4.</span> <span class="toc-text">引擎和作用域的对话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">2.5.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域嵌套"><span class="toc-number">3.</span> <span class="toc-text">作用域嵌套</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-number">4.</span> <span class="toc-text">异常</span></a></li></ol>
         
     </div>
     <style>
