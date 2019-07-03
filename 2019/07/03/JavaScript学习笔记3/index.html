@@ -15,20 +15,20 @@
 
 
 
-<meta name="description" content="前言 在Java中不能定义基本类型对象，为了能将基本类型视为对象进行处理，并能连接相关的方法，Java为每个基本类型都提供了包装类，今天主要学习各个基本类型的包装类。">
-<meta name="keywords" content="Java,学习笔记">
+<meta name="description" content="前言这部分继续《你不知道的JavaScript》的第三章，函数作用域和块作用域">
+<meta name="keywords" content="WEB前端,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记（六）--包装类">
-<meta property="og:url" content="http://yoursite.com/2018/09/08/JAVA6/index.html">
+<meta property="og:title" content="JavaScript学习笔记3">
+<meta property="og:url" content="http://yoursite.com/2019/07/03/JavaScript学习笔记3/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 在Java中不能定义基本类型对象，为了能将基本类型视为对象进行处理，并能连接相关的方法，Java为每个基本类型都提供了包装类，今天主要学习各个基本类型的包装类。">
+<meta property="og:description" content="前言这部分继续《你不知道的JavaScript》的第三章，函数作用域和块作用域">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/18.jpg">
-<meta property="og:updated_time" content="2018-12-15T13:14:37.186Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/61.jpg">
+<meta property="og:updated_time" content="2019-07-03T07:44:21.218Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记（六）--包装类">
-<meta name="twitter:description" content="前言 在Java中不能定义基本类型对象，为了能将基本类型视为对象进行处理，并能连接相关的方法，Java为每个基本类型都提供了包装类，今天主要学习各个基本类型的包装类。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/18.jpg">
+<meta name="twitter:title" content="JavaScript学习笔记3">
+<meta name="twitter:description" content="前言这部分继续《你不知道的JavaScript》的第三章，函数作用域和块作用域">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/61.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java学习笔记（六）--包装类 | DoubleR&#39;s BLOG</title>
+<title>JavaScript学习笔记3 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JAVA6" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JavaScript学习笔记3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/08/JAVA6/" class="article-date">
-      <time datetime="2018-09-08T02:38:12.000Z" itemprop="datePublished">2018-09-08</time>
+      <a href="/2019/07/03/JavaScript学习笔记3/" class="article-date">
+      <time datetime="2019-07-03T05:20:06.000Z" itemprop="datePublished">2019-07-03</time>
 </a>
 
 
@@ -331,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记（六）--包装类
+      JavaScript学习笔记3
     </h1>
   
 
@@ -340,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">992字</span>
+			<span class="post-count">1,697字</span>
 		</span>
 	</span>
 	
@@ -349,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">4分</span>
+			<span class="post-count">6分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB前端/">WEB前端</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -372,103 +372,50 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>前言</strong></p>
-<p>在Java中不能定义基本类型对象，为了能将基本类型视为对象进行处理，并能连接相关的方法，Java为每个基本类型都提供了包装类，今天主要学习各个基本类型的包装类。</p>
+        <p><strong>前言</strong><br>这部分继续《你不知道的JavaScript》的第三章，函数作用域和块作用域</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/18.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/61.jpg" alt=""></p>
+<hr>
 <a id="more"></a>
-<hr>
-<h2 id="Integer"><a href="#Integer" class="headerlink" title="Integer"></a>Integer</h2><p>java.lang包中的Integer类、Long类和Short类，分别将基本类型int、long和short封装成一个类。由于这些类都是Number的子类，区别就是封装不同的数据类型，其包含的方法基本相同，所以这里主要通过Integer类为例学习整数包装类。</p>
-<p><strong>构造方法：</strong></p>
-<p><code>Integer(int number)</code>：以一个int型变量作为参数创建Integer对象。</p>
-<p><code>Integer(String str)</code>：以一个String型变量作为参数创建Integer对象。</p>
-<p><strong>Integer类的常用方法：</strong></p>
+<p><div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1371537419&auto=1&height=66"></iframe><br></div></p>
+<h2 id="函数中的作用域"><a href="#函数中的作用域" class="headerlink" title="函数中的作用域"></a>函数中的作用域</h2><p>函数作用域的含义是指，属于这个函数的全部变量都可以在整个函数的范围内使用及复用（事实上在嵌套的作用域中也可以使用）。这种设计方案是非常有用的，能充分利用JavaScript便来给你可以根据需要改变值类型的“动态”特性</p>
+<p>需要强调的是，外部作用域访问不了内部作用域中的变量，但是内部作用域能访问外部作用域中的变量，直到最外部的全局作用域</p>
+<h2 id="隐藏内部实现"><a href="#隐藏内部实现" class="headerlink" title="隐藏内部实现"></a>隐藏内部实现</h2><p>使用基于作用域的隐藏方法多是从最小特权原则中引申出来的。</p>
+<p><strong>最小特权原则：</strong>在软件设计汇总，应该最小限度的暴露必要内容，而将其它内容都“隐藏”起来，不如某个模块或对象的API设计。</p>
+<p>这个原则可以延申到如何选择作用域来包含变量和函数。如果所有变量和函数都在全局作用域中，当然可以在所有的内部嵌套作用域中访问到它们。但这样会破坏前面提到的最小特权原则，因为可能会暴露过多的变量或函数，而这些变量或函数本应该是私有的，正确的代码应该是可以阻止这些变量或函数进行访问。</p>
+<h3 id="规避冲突"><a href="#规避冲突" class="headerlink" title="规避冲突"></a>规避冲突</h3><p>“隐藏”作用域中的变量和函数所带来的另一个好处，是可以避免同名标识符之间的冲突，两个标识符可能具有同样的名字但用途却不一样，无意间可能造成命名冲突。冲突会导致变量的值被意外覆盖。</p>
+<h4 id="全局命名空间"><a href="#全局命名空间" class="headerlink" title="全局命名空间"></a>全局命名空间</h4><p>变量冲突的一个典型例子存在与全局作用域中。当程序中加载了多个第三方库时，如果他们没有妥善地将内部私有的函数或变量隐藏起来，就会容易引发冲突。</p>
+<p>这些库通常会在全局作用域中声明要给名字足够独特的变量，通常是一个对象。这个对象被用作库的命名空间，所有需要暴露给外界的功能都会成为这个对象属性，而不是将自己的标识符暴露在顶级的词法作用域中</p>
+<h4 id="模块管理"><a href="#模块管理" class="headerlink" title="模块管理"></a>模块管理</h4><p>从众多模块管理器中挑选要给使用。使用这些工具，任何库都无需将标识符加入到全局作用域中，而是通过依赖管理器的机制将库的标识符显示地导入到领域给特定的作用域。</p>
+<h2 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h2><p>区分函数声明和表达式最简单的方法是看function关键字出现在声明中的位置。如果function是声明中单额抵押给词，那么就是要给函数声明，否则就是要给函数表达式。</p>
+<h3 id="匿名和具名"><a href="#匿名和具名" class="headerlink" title="匿名和具名"></a>匿名和具名</h3><p>匿名函数表达式示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout( <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"I waited 1 second!"</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>函数表达式可以是可以是匿名的，而函数声明则不可以省略函数名</p>
+<p>匿名函数表达式书写起来快捷方便，但是它有几个无法避免的缺点：</p>
 <ul>
-<li>byteValue()：以byte类型返回改Integer的值</li>
-<li>compareTo()：比较两个Integer独享。如果相等返回0，前者小于后者返回负值，反之正值。</li>
-<li>equals(Object IntegerObj)：比较此对象与指定的对象是否相等。</li>
-<li>intValue()：以int类型返回此Integer对象</li>
-<li>shortValue()：以short类型返回此Integer对象</li>
-<li>toString()：返回一个表示该Integer值的String对象</li>
-<li>valueOf(String str)：返回保存指定的String值的Integer对象</li>
-<li>parseInt(String str)：返回包含在由str指定的字符串中的数字的等价整数值</li>
+<li>匿名函数在栈追踪中不会显示出有意义的函数名，使得调试很困难</li>
+<li>如果没有函数名，函数在自身递归调用时只能使用已经过期的arguments.callee引用</li>
+<li>匿名函数省略了对于代码可读性/可理解性很重要的函数名</li>
 </ul>
-<p><strong>常量：</strong></p>
-<p>Integer类提供了以下4个常量：</p>
-<ul>
-<li>MAX_VALUE：表示int类型可取的最大值</li>
-<li>MIN_ VALUE：表示int类型可取的最小值</li>
-<li>SIZE：表示用二进制补码形式表示int值的位数</li>
-<li>TYPE：表示基本类型int的Class实例</li>
-</ul>
-<h2 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h2><p>Boolean类将基本类型为Boolean的值包装在一个对象中。一个Boolean类型的对象只包含一个类型为Boolean的字段。</p>
-<p><strong>构造方法：</strong></p>
-<ul>
-<li>Boolean(boolean value)：创建一个表示value参数的Boolean对象</li>
-<li>Boolean（String str)：以String变量作为参数创建Boolean对象</li>
-</ul>
-<p><strong>常用方法：</strong></p>
-<ul>
-<li>booleanValue：将Boolean对象那的值以对应的boolean值返回</li>
-<li>parseBoolean：将字符串参数解析为boolean值</li>
-</ul>
-<p><strong>常量：</strong></p>
-<p>Boolean提供一下三种常量：</p>
-<ul>
-<li>TRUE：对应基值为true的Boolean对象</li>
-<li>FALSE：对应基值为false的Boolean对象</li>
-<li>TYPE：基本类型boolean的Class对象</li>
-</ul>
-<h2 id="Byte"><a href="#Byte" class="headerlink" title="Byte"></a>Byte</h2><p><strong>构造方法：</strong></p>
-<p>和之前的一样</p>
-<p><strong>常用方法：</strong></p>
-<ul>
-<li>doubleValue：以一个double值返回此Byte的值</li>
-<li>intValue：以一个int值返回此Byte的值</li>
-</ul>
-<p><strong>常量：</strong></p>
-<ul>
-<li>MIN_VALUE：byte类型可取的最小值</li>
-<li>MAX_VALUE：byte类型可取的最大值</li>
-<li>SIZE：用于以二进制补码形式表示byte值的位数</li>
-<li>TYPE：表示基本类型byte的Class实例</li>
-</ul>
-<h2 id="Character"><a href="#Character" class="headerlink" title="Character"></a>Character</h2><p><strong>构造方法：</strong></p>
-<p><code>Character(char value)</code>：该类的构造函数必须是一个char类型的数据。通过该构造函数创建的Character类对象包含由char类型参数提供的值，一旦Character类被创建，它包含的数值就不能改变。</p>
-<p><strong>常用函数：</strong></p>
-<ul>
-<li>toUpperCase(char ch)：将字符参数转换为大写</li>
-<li>toLowerCase(char ch)：将字符参数转换为小写</li>
-<li>isUpperCase(char ch)：判断指定字符是否是大写</li>
-<li>isLowerCase(char ch)：判断指定字符是否是小写</li>
-</ul>
-<p><strong>常量：</strong></p>
-<ul>
-<li>CONNECTOR_PUNCTUATION：返回byte型值，表示Unicode规范中的常规类别”Pe”</li>
-<li>UNASSIGNED：返回byte型值，表示Unicode规范中的常规类别”Cn”</li>
-<li>TITLECASE_LETTER：返回byte型值，</li>
-</ul>
-<h2 id="Double"><a href="#Double" class="headerlink" title="Double"></a>Double</h2><p>Double和Float包装类是对double、float基本类型的封装，他们都是Number类的子类</p>
-<p><strong>构造方法：</strong></p>
-<ul>
-<li>Double(double value)：基于double参数创建Double类对象</li>
-<li>Double(String str)：构造一个新分配的Double对象，表示用字符串表示的都办了类型的浮点值</li>
-</ul>
-<p><strong>常用方法：</strong></p>
-<ul>
-<li>isNaN()：如果次double值是非数字值，则返回true；否则返回false</li>
-<li>longValue()：以long形式返回此double的值</li>
-</ul>
-<p><strong>常量：</strong></p>
-<ul>
-<li>MAX_EXPONENT：返回int值，表示有限double变量可能具有的最大指数</li>
-<li>MIN_EXPONENT：返回int值，表示标准化double变量可能具有的最小指数</li>
-<li>NEGATIVE_INFINTY：返回double值，表示保存double类型的负无穷大值的常量</li>
-<li>POSTIVE_INFINTY：返回double值，表示保存double类型的正无穷大值的常量</li>
-</ul>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29761059&auto=1&height=66"></iframe></div>
-
+<p>行内函数表达式非常强大且有用——匿名和具名之间的区别并不会对这点有任何影响。函数表达式指定一个函数名可以解决上述问题，且不会污染作用域。</p>
+<h3 id="立即执行函数表达式"><a href="#立即执行函数表达式" class="headerlink" title="立即执行函数表达式"></a>立即执行函数表达式</h3><p>立即执行函数表达式示例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span>  a = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>社区给这种形式规定了要给术语：<code>IIFE</code>，代表立即执行函数表达式(Immediately Invoked Function Expression)</p>
+<p>函数名对IIFE当然不是必须的，IIFE最常见的用法是使用一个匿名函数表达式。虽然使用剧名函数的IIFE并不常见，但它具有上述匿名函数表达式的所有优势。</p>
+<p>相较于传统的IIFE，还有一种改进形式<code>(function(){ .. }())</code>。他将用来调用的()括号移进了用来包装的()括号中。</p>
+<p>这两种形式在功能上是一致的</p>
+<p>IIFE的另一个非常普遍的进阶用法是把他们当作函数调用并传递参数进去。</p>
+<p>IIFE还有一种变化的用途是倒置代码的运行顺序，将需要运行的函数放在第二位在IIFE执行之后当作参数传递进去。这种模式在UMD(Universal Module  Definition)项目中被广泛使用。尽管这种模式略显冗长，但有些人认为它更容易理解</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params">def</span>)</span>&#123;</span><br><span class="line">    def(<span class="built_in">window</span>);</span><br><span class="line">&#125;)(<span class="function"><span class="keyword">function</span> <span class="title">def</span>(<span class="params">global</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">//3</span></span><br><span class="line">    <span class="built_in">console</span>.log(global.a); <span class="comment">//2</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>函数表达式定义在片段的第二部分，然后作为参数（这个参数也叫做def）被传递进IIFE函数定义的第一部分。最后，参数def（也就是传递进去的函数）被调用，并将window传入当作global参数的值。</p>
+<h2 id="块作用域"><a href="#块作用域" class="headerlink" title="块作用域"></a>块作用域</h2><h3 id="with"><a href="#with" class="headerlink" title="with"></a>with</h3><p>用with从对象中创建出的作用域尽在with声明中而非外部作用域中有效</p>
+<h3 id="try-catch"><a href="#try-catch" class="headerlink" title="try/catch"></a>try/catch</h3><p>ES3规范中规定try/catch分句会创建要给块作用域，其中声明的变量仅在catch内部有效</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="literal">undefined</span>();<span class="comment">//执行一个非法操作来强制创造一个异常；</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err); <span class="comment">//能过正常执行</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(err); <span class="comment">//ReferenceError: err not found</span></span><br></pre></td></tr></table></figure>
+<p>err仅存在catch分句内部</p>
+<h3 id="let"><a href="#let" class="headerlink" title="let"></a>let</h3><p>ES6引入了新的let关键字，提供了除var以外的另一种变量声明方式。</p>
+<p>let关键字可以将变量绑定到所在的任意作用域中（通常是{…}内部）。用let将变狼附加在一个已经存在的块作用域上的行为是隐式的。</p>
+<p>使用let进行声明不会在块作用域中进行提升。声明的代码被运行之前，声明并不存在</p>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>除了let以外，ES6还引入了const，同样可以用来创建块作用域变量，但其值是固定的（常量）。之后任何视图修改值的操作都会引起错误。</p>
 
       
     </div>
@@ -477,13 +424,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/08/JAVA6/">Java学习笔记（六）--包装类</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/03/JavaScript学习笔记3/">JavaScript学习笔记3</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-08, 10:38:12</p>
-        <p><span>最后更新:</span>2018-12-15, 21:14:37</p>
+        <p><span>发布时间:</span>2019-07-03, 13:20:06</p>
+        <p><span>最后更新:</span>2019-07-03, 15:44:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/08/JAVA6/" title="Java学习笔记（六）--包装类">http://yoursite.com/2018/09/08/JAVA6/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/08/JAVA6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/03/JavaScript学习笔记3/" title="JavaScript学习笔记3">http://yoursite.com/2019/07/03/JavaScript学习笔记3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/03/JavaScript学习笔记3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -495,16 +442,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/09/JAVA7/">
-                    Java学习笔记（七）--数字处理类
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/07/DedeCMS4/">
-                    DedeCMS代码审计Day4
+                <a href="/2019/07/02/JavaScript学习笔记2/">
+                    JavaScript学习笔记2
                 </a>
             </div>
         
@@ -516,7 +457,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Integer"><span class="toc-number">1.</span> <span class="toc-text">Integer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Boolean"><span class="toc-number">2.</span> <span class="toc-text">Boolean</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Byte"><span class="toc-number">3.</span> <span class="toc-text">Byte</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Character"><span class="toc-number">4.</span> <span class="toc-text">Character</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Double"><span class="toc-number">5.</span> <span class="toc-text">Double</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数中的作用域"><span class="toc-number">1.</span> <span class="toc-text">函数中的作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐藏内部实现"><span class="toc-number">2.</span> <span class="toc-text">隐藏内部实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规避冲突"><span class="toc-number">2.1.</span> <span class="toc-text">规避冲突</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#全局命名空间"><span class="toc-number">2.1.1.</span> <span class="toc-text">全局命名空间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块管理"><span class="toc-number">2.1.2.</span> <span class="toc-text">模块管理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作用域"><span class="toc-number">3.</span> <span class="toc-text">函数作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名和具名"><span class="toc-number">3.1.</span> <span class="toc-text">匿名和具名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#立即执行函数表达式"><span class="toc-number">3.2.</span> <span class="toc-text">立即执行函数表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块作用域"><span class="toc-number">4.</span> <span class="toc-text">块作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#with"><span class="toc-number">4.1.</span> <span class="toc-text">with</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#try-catch"><span class="toc-number">4.2.</span> <span class="toc-text">try/catch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#let"><span class="toc-number">4.3.</span> <span class="toc-text">let</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#const"><span class="toc-number">4.4.</span> <span class="toc-text">const</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -552,7 +493,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（六）--包装类　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JavaScript学习笔记3　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -572,15 +513,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/09/JAVA7/" title="上一篇: Java学习笔记（七）--数字处理类">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/07/DedeCMS4/" title="下一篇: DedeCMS代码审计Day4">
+            <a href="/2019/07/02/JavaScript学习笔记2/" title="下一篇: JavaScript学习笔记2">
                 <i class="fa fa-angle-right"></i>
             </a>
         
