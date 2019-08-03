@@ -15,19 +15,19 @@
 
 
 
-<meta name="description" content="前言 这一部分主要学习Java的语言基础">
-<meta name="keywords" content="Java,学习笔记">
+<meta name="description" content="前言 不会Node.js的前端和咸鱼有什么区别，开始Node.js学习之路">
+<meta name="keywords" content="WEB后端，Node.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记（一）--Java语言基础">
-<meta property="og:url" content="http://yoursite.com/2018/09/01/JAVA1/index.html">
+<meta property="og:title" content="NodeJs学习笔记1">
+<meta property="og:url" content="http://yoursite.com/2019/07/06/NodeJs学习笔记1/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 这一部分主要学习Java的语言基础">
+<meta property="og:description" content="前言 不会Node.js的前端和咸鱼有什么区别，开始Node.js学习之路">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/8.jpg">
-<meta property="og:updated_time" content="2019-02-21T08:18:37.948Z">
+<meta property="og:updated_time" content="2019-08-03T03:35:18.295Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记（一）--Java语言基础">
-<meta name="twitter:description" content="前言 这一部分主要学习Java的语言基础">
+<meta name="twitter:title" content="NodeJs学习笔记1">
+<meta name="twitter:description" content="前言 不会Node.js的前端和咸鱼有什么区别，开始Node.js学习之路">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/8.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java学习笔记（一）--Java语言基础 | DoubleR&#39;s BLOG</title>
+<title>NodeJs学习笔记1 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JAVA1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-NodeJs学习笔记1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/01/JAVA1/" class="article-date">
-      <time datetime="2018-09-01T14:54:45.000Z" itemprop="datePublished">2018-09-01</time>
+      <a href="/2019/07/06/NodeJs学习笔记1/" class="article-date">
+      <time datetime="2019-07-06T12:08:21.000Z" itemprop="datePublished">2019-07-06</time>
 </a>
 
 
@@ -331,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记（一）--Java语言基础
+      NodeJs学习笔记1
     </h1>
   
 
@@ -340,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,011字</span>
+			<span class="post-count">2,882字</span>
 		</span>
 	</span>
 	
@@ -349,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">4分</span>
+			<span class="post-count">11分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB后端，Node-js/">WEB后端，Node.js</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -373,105 +373,108 @@
       
           
         <p><strong>前言</strong></p>
-<p>这一部分主要学习Java的语言基础</p>
+<p>不会Node.js的前端和咸鱼有什么区别，开始Node.js学习之路</p>
 <hr>
 <p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/8.jpg" alt=""></p>
 <a id="more"></a>
-<hr>
-<h2 id="Java主类结构"><a href="#Java主类结构" class="headerlink" title="Java主类结构"></a>Java主类结构</h2><p>Java程序的基本组成单元是类，类体中又包括属性与方法。每个应用程序都必须包含一个main()方法，含有main()方法的类称为主类。</p>
-<p><strong>包声明：</strong></p>
-<p>package Number为声明该类所在的包，package为包的关键字</p>
-<p><strong>声明成员变量和局部变量：</strong></p>
-<p>通常将类的属性成为类的全局变量（成员变量），将方法中的属性称之为局部变量。全局变量生命在类体中，局部变量声明在方法体中。</p>
-<p><strong>编写主方法：</strong></p>
-<p>main()方法是类体中的主方法。public、static和void分别是main()方法的权限修饰符、静态修饰符和返回值修饰符。Java程序中的main()方法必须声明为public static void。String[] args是一个字符串类型数组，它是main()方法的参数</p>
-<p><strong>导入API类库：</strong></p>
-<p>在Java语言中可以通过import关键字导入相关的类，详细描述见API文档</p>
-<p><strong>注意：</strong></p>
-<p>Java语言严格区分大小写</p>
-<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p><strong>整数类型：</strong></p>
-<p>整数类型在Java程序中有三种表示形式：</p>
-<ul>
-<li>十进制：不能以0作为十进制的开头（0除外）</li>
-<li>八进制：八进制必须一0开头</li>
-<li>十六进制：十六进制必须以0X或0x开头</li>
-</ul>
-<p>整数数据根据它所占内存大小的不同，可分为byte、short、int和long四种：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">数据类型</th>
-<th style="text-align:center">内存空间</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">byte</td>
-<td style="text-align:center">8位</td>
-<td style="text-align:center">-128~127</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">16位</td>
-<td style="text-align:center">-32768~32767</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">32位</td>
-<td style="text-align:center">-2148483648~2148483647</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">64位</td>
-<td style="text-align:center">-9.22E18~9.22E18</td>
-</tr>
-</tbody>
-</table>
-<p>对于long型值，若复制个的值大于int类型的最大值或最小值，则需要在数字后加L或l，表示改数值为长整型</p>
-<p><strong>浮点类型：</strong></p>
-<p>Java语言中浮点类型分为单精度浮点类型和双精度浮点类型：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">数据类型</th>
-<th style="text-align:center">内存空间</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">32位</td>
-<td style="text-align:center">1.4E-45~3.4028235E38</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">64位</td>
-<td style="text-align:center">4.9E-324~1.79769E308</td>
-</tr>
-</tbody>
-</table>
-<p>在默认情况下小数都被看做double型，若使用float型小数，则必须在小数后面添加F或f。</p>
-<h2 id="变量与常量"><a href="#变量与常量" class="headerlink" title="变量与常量"></a>变量与常量</h2><p>常量通常也被称为”final变量”，声明方式：<code>final 数据类型 常量名称=值</code></p>
-<p>当定义的final变量属于“成员变量”时，必须在定义是就设定它的初值</p>
-<p>在程序中，一般会根据变量的“有效范围”将变量分为“成员变量”和“局部变量”：</p>
-<ul>
-<li>成员变量：在类体中所定义的变量称为成员变量，成员变量在整个类中都有效。成员变量又可分为静态变量和实例变量，静态变量的有效范围可以跨类，可以直接以“类名.静态变量”的方式在其他类中使用。</li>
-<li>局部变量：在类的方法中定义的变量，只在当前定义的方法中有效，局部变量可与成员变量的名字相同，此时成员变量将被隐藏，即这个成员变量在此方法中暂时失效。</li>
-</ul>
-<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><p>从低精度数据类型向高精度数据类型转换，则永远不会溢出，并且总是成功；而把高精度数据类型向低精度数据类型转换则必然会有信息丢失，有可能失败</p>
-<p>数据类型转换可分为隐式转换和显示转换：</p>
-<p><strong>隐式类型转换：</strong></p>
-<p>从低级类型向高级类型的转换，系统将自动执行，无需任何操作，这种转换成为隐式转换。类型排序</p>
-<p><code>byte&lt;short&lt;int&lt;long&lt;float&lt;double</code></p>
-<p><strong>显式类型转换：</strong></p>
-<p>当把高精度的变量的值赋值给低精度的变量时，必须使用显示类型转换（又称强制类型转换），语法如下：</p>
-<p><code>(类型名)要转换的值</code></p>
-<p>当执行显示类型转换时可能导致精度损失。只要是Boolean类型以外其他类型之间的转换，全部都能以显示类型转换的方法达到</p>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28461736&auto=1&height=66"></iframe></div>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1372970873&auto=1&height=66"></iframe><br></div>
 
+<h2 id="开始使用Node-js编程"><a href="#开始使用Node-js编程" class="headerlink" title="开始使用Node.js编程"></a>开始使用Node.js编程</h2><p>跳过那些无聊的介绍，直接进入最有意思的编程部分</p>
+<h3 id="Node-js命令行工具"><a href="#Node-js命令行工具" class="headerlink" title="Node.js命令行工具"></a>Node.js命令行工具</h3><p>当我们将Node.js的安装路径放入到系统的环境变量时，我们就可以在CMD中使用node命令。</p>
+<p>运行Node.js程序的基本方法就是执行<code>node script.js</code>，其中<code>script.js</code>是脚本文件名。</p>
+<p>此外我们还可以使用<code>node -e &quot;console.log(&#39;Hello World&#39;)&quot;</code>的方式执行语句，可以把要执行的语句作为<code>node -e</code>的参数</p>
+<p><strong>使用node的REPL模式：</strong></p>
+<p>REPL(Read-eval-print loop)，即输入——求值——输出循环。运行无参数的node将会启动一个JavaScript的交互式shell。</p>
+<p>进入REPL模式以后，会出现一个”&gt;”提示符提示你输入命令，输入后按回车，Node.js将会解析并执行命令。如果你执行了一个函数，那么REPL还会在下面显示这个函数的返回值。如果你输入一个错误的指令，REPL则会立即显示错误并输出调试栈。</p>
+<p>在任何时候，连续按两次的<code>Ctrl+C</code>即可退出Node.js的REPL模式。</p>
+<h3 id="建立HTTP服务器"><a href="#建立HTTP服务器" class="headerlink" title="建立HTTP服务器"></a>建立HTTP服务器</h3><p>Node.js与ASP、PHP最大的不同在于，Node.js不需要配置HTTP服务器（譬如Apache、IIS或Nginx）。</p>
+<p>Node.js将“HTTP服务器”这一层抽离，直接面向浏览器用户。</p>
+<p>我们先来实现一个简单的HTTP服务器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">	res.writeHead(<span class="number">200</span>, &#123;<span class="string">"Content-type"</span>: <span class="string">"text/html"</span>&#125;);</span><br><span class="line">	res.write(<span class="string">"&lt;h1&gt;Node.js&lt;/h1&gt;"</span>);</span><br><span class="line">	res.end(<span class="string">"&lt;p&gt;Hello World"</span>);</span><br><span class="line">&#125;).listen(<span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"HTTP server is listening at port 3000."</span>);</span><br></pre></td></tr></table></figure>
+<p>这样我们就在3000端口实现了一个HTTP服务器</p>
+<p><strong>使用supervisor：</strong></p>
+<p>在开发Node.js实现HTTP应用时会发现，无论你修改代码的哪一部分，都必须终止Node.js再重新运行才会奏效。这是因为Node.js只有在第一次引用到某部分时才会去解析脚本文件，以后都会直接访问内存，避免重复载入。Node.js的这种设计虽然有利于提高性能，但是却不利于开发调试。因为我们在开发过程中总是希望修改后立即看到效果，而不是每次都要终止进程并重启。</p>
+<p>supervisor可以帮助你实现这个功能，它会监视你对代码的改动，并自动重启Node.js。</p>
+<p>使用方法很简单，首先使用npm安装supervisor：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g supervisor</span><br></pre></td></tr></table></figure>
+<p>接下来使用supervisor命令启动脚本解决就行了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisor app.js</span><br></pre></td></tr></table></figure>
+<h2 id="异步式I-O与事件式编程"><a href="#异步式I-O与事件式编程" class="headerlink" title="异步式I/O与事件式编程"></a>异步式I/O与事件式编程</h2><p>Node.js最大的特点就是异步式I/O（或者非阻塞I/O）与事件紧密结合的编程模式。这种模式与传统的同步式I/O线性的编程思路有很大的不同，因为控制流很大程度上要靠事件和回调函数来组织，一个逻辑要拆分为若干个单元。</p>
+<p>想要了解异步式，先得知道阻塞与线程的概念</p>
+<h3 id="阻塞与线程："><a href="#阻塞与线程：" class="headerlink" title="阻塞与线程："></a>阻塞与线程：</h3><p>线程在执行汇总如果遇到磁盘读写或网络通信（统称为I/O操作），通常要耗费较长的时间，这时操作系统会剥夺这个线程的CPU控制权，使其暂停执行，同时将资源让给其它的工作线程，这种线程调度方式叫<strong>阻塞</strong>。当I/O操作执行完毕时，操作系统将这个线程的阻塞状态解除，恢复其对CPU的控制权，令其继续执行。这种I/O模式就是通常的同步式I/O（Synchronous I/O）或阻塞式I/O（Blocking I/O）</p>
+<p>异步式 I/O （Asynchronous I/O）或非阻塞式 I/O （Non-blocking I/O）则针对 所有 I/O 操作不采用阻塞的策略。当线程遇到 I/O 操作时，不会以阻塞的方式等待 I/O 操作 的完成或数据的返回，而只是将 I/O 请求发送给操作系统，继续执行下一条语句。当操作 系统完成 I/O 操作时，以事件的形式通知执行 I/O 操作的线程，线程会在特定时候处理这个 事件。为了处理异步 I/O，线程必须有事件循环，不断地检查有没有未处理的事件，依次予 以处理。</p>
+<p> 阻塞模式下，一个线程只能处理一项任务，要想提高吞吐量必须通过多线程。而非阻塞 模式下，一个线程永远在执行计算操作，这个线程所使用的 CPU 核心利用率永远是 100%， I/O 以事件的方式通知。在阻塞模式下，多线程往往能提高系统吞吐量，因为一个线程阻塞 时还有其他线程在工作，多线程可以让 CPU 资源不被阻塞中的线程浪费。而在非阻塞模式 下，线程不会被 I/O 阻塞，永远在利用 CPU。多线程带来的好处仅仅是在多核 CPU 的情况 下利用更多的核，而Node.js的单线程也能带来同样的好处。这就是为什么 Node.js 使用了单 线程、非阻塞的事件编程模式。</p>
+<p>​                                    </p>
+<p>​                                    <strong>同步式I/O和异步式I/O的特点</strong> </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">同步式I/0（阻塞式）</th>
+<th style="text-align:center">异步式I/O（非阻塞式）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">利用多线程提供吞吐量</td>
+<td style="text-align:center">单线程即可实现高吞吐量</td>
+</tr>
+<tr>
+<td style="text-align:center">通过事件片分割和线程调度利用多核CPU</td>
+<td style="text-align:center">通过功能划分利用多核CPU</td>
+</tr>
+<tr>
+<td style="text-align:center">需要由操作系统调度多线程使用多核CPU</td>
+<td style="text-align:center">可以将单进程绑定到单核CPU</td>
+</tr>
+<tr>
+<td style="text-align:center">难以充分利用CPU资源</td>
+<td style="text-align:center">可以充分利用CPU资源</td>
+</tr>
+<tr>
+<td style="text-align:center">内存轨迹大、数据局部性弱</td>
+<td style="text-align:center">内存轨迹小，数据局部性强</td>
+</tr>
+<tr>
+<td style="text-align:center">符合线性的编程思维</td>
+<td style="text-align:center">不符合传统编程思维</td>
+</tr>
+</tbody>
+</table>
+<h3 id="回调函数："><a href="#回调函数：" class="headerlink" title="回调函数："></a>回调函数：</h3><p>让我们来看看Node.js如何异步读取一个文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line">fs.readFile(<span class="string">'file.txt'</span>, <span class="string">'utf-8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(err)&#123;</span><br><span class="line">		<span class="built_in">console</span>.error(err);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(data);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"end."</span>);</span><br></pre></td></tr></table></figure>
+<p>运行结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">end.</span><br><span class="line">Contents of the file.</span><br></pre></td></tr></table></figure>
+<p>同时Node.js也提供同步读取文件的API：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> data = fs.readFileSync(<span class="string">'file.txt'</span>, <span class="string">'utf-8'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(data);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"end."</span>)</span><br></pre></td></tr></table></figure>
+<p>运行结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Contents of the file.</span><br><span class="line">end.</span><br></pre></td></tr></table></figure>
+<p>这就是同步式和异步式的区别。fs.readFile接收了3个参数，第一个是文件名，第二个是编码方式，第三个是一个函数，我们称这个函数为回调函数。</p>
+<p>fs.readFile 调用时所做的工作只是将异步式 I/O 请求发送给了操作系统，然后立即返回并执行后面的语句，执行完以后进入事件循环监听事件。当 fs 接收到 I/O 请求完成的 事件时，事件循环会主动调用回调函数以完成后续工作。因此我们会先看到 end.，再看到 file.txt 文件的内容。</p>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>Node.js所有的异步I/O操作在完成时都会发送要给事件到事件队列。在开发者看来，事件由<code>EventEmitter</code>对象提供。下面我们用一个简单的例子说明EventEmitter的用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events).EventEmitter;</span></span><br><span class="line"><span class="string">var event = new EventEmitter();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">event.on('</span>some_event<span class="string">', function() &#123;</span></span><br><span class="line"><span class="string">    console.log('</span>some_event occured.<span class="string">');</span></span><br><span class="line"><span class="string">&#125;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">setTimeout(function() &#123;</span></span><br><span class="line"><span class="string">    event.emit('</span>some_event<span class="string">');</span></span><br><span class="line"><span class="string">&#125;, 1000);</span></span><br></pre></td></tr></table></figure>
+<p>event对象注册了时间some_event的一个监听器，然后通过setTimeout在1000毫秒以后向event对象发送事件some_event，此时会调用some_event的监听器</p>
+<p><strong>Node.js的时间循环机制：</strong></p>
+<p>Node.js 程序由事件循环开始，到事件循 环结束，所有的逻辑都是事件的回调函数，所以 Node.js 始终在事件循环中，程序入口就是 事件循环第一个事件的回调函数。事件的回调函数在执行的过程中，可能会发出 I/O 请求或 直接发射（emit）事件，执行完毕后再返回事件循环，事件循环会检查事件队列中有没有未 处理的事件，直到程序结束</p>
+<h2 id="模块和包"><a href="#模块和包" class="headerlink" title="模块和包"></a>模块和包</h2><p>模块（Module）和包（Package）是 Node.js 重要的支柱。Node.js 的模块和包机制的实现参照了 CommonJS 的标准，但并未完全遵循。</p>
+<p>我们经常把 Node.js 的模块和包相提并论，因为模块和包是没有本质区别的，两个概念 也时常混用。如果要辨析，那么可以把包理解成是实现了某个功能模块的集合，用于发布和维护。</p>
+<h3 id="什么是模块"><a href="#什么是模块" class="headerlink" title="什么是模块"></a>什么是模块</h3><p>模块是 Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块，这个文件可能是 JavaScript 代码、JSON 或者编译过的 C/C++ 扩展。<br> 在前面章节的例子中，我们曾经用到了 var http = require(‘http’)，其中 http 是 Node.js 的一个核心模块，其内部是用 C++ 实现的，外部用 JavaScript 封装。我们通过 require 函数获取了这个模块，然后才能使用其中的对象。 </p>
+<h3 id="创建及加载模块"><a href="#创建及加载模块" class="headerlink" title="创建及加载模块"></a>创建及加载模块</h3><p>在Node.js中，创建一个模块非常简单，因为一个文件就是一个模块，问题在于如何获取。Node.js提供了exports和require两个对象，其中exports是模块的公开接口，require用于从外部获取一个模块的接口，即所获取模块的exports对象。</p>
+<p>我们先创建一个模块文件module.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name;</span><br><span class="line"></span><br><span class="line">exports.setName = <span class="function"><span class="keyword">function</span>(<span class="params">theName</span>) </span>&#123;</span><br><span class="line">	name = theName;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">exports.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'Hello '</span> + name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>然后在同目录创建引用文件getmodule.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = <span class="built_in">require</span>(<span class="string">'./module'</span>);</span><br><span class="line">myModule.setName(<span class="string">'Double--R'</span>);</span><br><span class="line">myModule.sayHello();</span><br></pre></td></tr></table></figure>
+<p><strong>单次加载：</strong></p>
+<p>require不会重复加载模块，也就是说无论调用多少次require，获得的模块都是同一个</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hello1 = <span class="built_in">require</span>(<span class="string">'./module'</span>);</span><br><span class="line">hello1.setName(<span class="string">'test1'</span>);</span><br><span class="line"><span class="keyword">var</span> hello2 = <span class="built_in">require</span>(<span class="string">'./module'</span>);</span><br><span class="line">hello2.setName(<span class="string">'test2'</span>);</span><br><span class="line">hello1.sayHello();</span><br></pre></td></tr></table></figure>
+<p>最终的输出结果是hello2，这是因为变量hello1和hello2指向的是同一个实例，因此 hello1.setName 的结果被 hello2.setName 覆盖，终输出结果是 由后者决定的。 </p>
+<p><strong>覆盖exports:</strong></p>
+<p>有时候我们只是想把一个对象封装到模块中，例如： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Hello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name;</span><br><span class="line">	<span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">theName</span>) </span>&#123;</span><br><span class="line">		name = theName;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">this</span>.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Hello "</span> + name);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.Hello = Hello;</span><br></pre></td></tr></table></figure>
+<p>此时我们在其他文件中需要通过 require(‘./singleobject’).Hello 来获取 Hello 对象，这略显冗余，可以用下面方法稍微简化： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Hello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name;</span><br><span class="line">	<span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">theName</span>) </span>&#123;</span><br><span class="line">		name = theName;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">this</span>.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Hello "</span> + name);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = Hello;</span><br></pre></td></tr></table></figure>
+<p>这样就可以直接获得这个对象了： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Hello = <span class="built_in">require</span>(<span class="string">'./singleobject'</span>); </span><br><span class="line"> </span><br><span class="line">hello = <span class="keyword">new</span> Hello(); </span><br><span class="line">hello.setName(<span class="string">'BYVoid'</span>); </span><br><span class="line">hello.sayHello();</span><br></pre></td></tr></table></figure>
+<p>注意，模块接口的唯一变化是使用 module.exports = Hello 代替了 exports.Hello= Hello。在外部引用该模块时，其接口对象就是要输出的 Hello 对象本身，而不是原先的 exports。 事实上，exports 本身仅仅是一个普通的空对象，即 {}，它专门用来声明接口，本 质上是通过它为模块闭包的内部建立了一个有限的访问接口。因为它没有任何特殊的地方， 所以可以用其他东西来代替，譬如我们上面例子中的 Hello 对象。 </p>
 
       
     </div>
@@ -480,13 +483,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/01/JAVA1/">Java学习笔记（一）--Java语言基础</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-01, 22:54:45</p>
-        <p><span>最后更新:</span>2019-02-21, 16:18:37</p>
+        <p><span>发布时间:</span>2019-07-06, 20:08:21</p>
+        <p><span>最后更新:</span>2019-08-03, 11:35:18</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/01/JAVA1/" title="Java学习笔记（一）--Java语言基础">http://yoursite.com/2018/09/01/JAVA1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/01/JAVA1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/06/NodeJs学习笔记1/" title="NodeJs学习笔记1">http://yoursite.com/2019/07/06/NodeJs学习笔记1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/06/NodeJs学习笔记1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -498,16 +501,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/02/PHP-Audit-Labs-Day7/">
-                    PHP代码审计-parse_str函数缺陷
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/01/DedeCMS3/">
-                    DedeCMS代码审计Day3
+                <a href="/2019/07/04/JavaScript学习笔记4/">
+                    JavaScript学习笔记4
                 </a>
             </div>
         
@@ -519,7 +516,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java主类结构"><span class="toc-number">1.</span> <span class="toc-text">Java主类结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本数据类型"><span class="toc-number">2.</span> <span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量与常量"><span class="toc-number">3.</span> <span class="toc-text">变量与常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型转换"><span class="toc-number">4.</span> <span class="toc-text">数据类型转换</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开始使用Node-js编程"><span class="toc-number">1.</span> <span class="toc-text">开始使用Node.js编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js命令行工具"><span class="toc-number">1.1.</span> <span class="toc-text">Node.js命令行工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建立HTTP服务器"><span class="toc-number">1.2.</span> <span class="toc-text">建立HTTP服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步式I-O与事件式编程"><span class="toc-number">2.</span> <span class="toc-text">异步式I/O与事件式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阻塞与线程："><span class="toc-number">2.1.</span> <span class="toc-text">阻塞与线程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调函数："><span class="toc-number">2.2.</span> <span class="toc-text">回调函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件"><span class="toc-number">2.3.</span> <span class="toc-text">事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块和包"><span class="toc-number">3.</span> <span class="toc-text">模块和包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是模块"><span class="toc-number">3.1.</span> <span class="toc-text">什么是模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建及加载模块"><span class="toc-number">3.2.</span> <span class="toc-text">创建及加载模块</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -555,7 +552,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（一）--Java语言基础　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"NodeJs学习笔记1　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -575,15 +572,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/02/PHP-Audit-Labs-Day7/" title="上一篇: PHP代码审计-parse_str函数缺陷">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/01/DedeCMS3/" title="下一篇: DedeCMS代码审计Day3">
+            <a href="/2019/07/04/JavaScript学习笔记4/" title="下一篇: JavaScript学习笔记4">
                 <i class="fa fa-angle-right"></i>
             </a>
         
