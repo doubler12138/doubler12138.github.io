@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 万物皆对象">
+<meta name="keywords" content="WEB前端,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript学习笔记7">
+<meta property="og:url" content="http://yoursite.com/2019/09/09/JavaScript学习笔记7/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 万物皆对象">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/22.jpg">
+<meta property="og:updated_time" content="2019-09-09T08:34:57.981Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript学习笔记7">
+<meta name="twitter:description" content="前言 万物皆对象">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/22.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>JavaScript学习笔记7 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我爱你三千遍</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript/">ECMAScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB前端/">WEB前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB前端，JavaScript/">WEB前端，JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB后端，Node-js/">WEB后端，Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码审计/">代码审计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小姿势/">小姿势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境搭建/">环境搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我爱你三千遍</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-JavaScript学习笔记7" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/09/JavaScript学习笔记7/" class="article-date">
+      <time datetime="2019-09-09T06:18:16.000Z" itemprop="datePublished">2019-09-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript学习笔记7
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">2,222字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">8分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB前端/">WEB前端</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>万物皆对象</p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/22.jpg" alt=""></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1372970873&auto=1&height=66"></iframe><br></div>
+
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>对象可以通过两种方式来定义：声明形式和构造形式</p>
+<p>声明形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Obj = &#123;</span><br><span class="line">	key: value,</span><br><span class="line">	....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">Obj.key = value;</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+<p>构造形式和文字形式生成的对象是一样的额，唯一的区别在于，声明形式可以直接添加多个键值对，而构造形式需要逐个添加对象属性</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>对象是JavaScript的主要类型，除此之外JavaScript还有许多特殊的对象子类型，称之为复杂基本类型。</p>
+<p>函数就是对象的一个子类型（可调用对象）</p>
+<p>数组也是对象的一种类型，数组中的内容的组织方式比一般的对象要复杂一些。</p>
+<h3 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h3><p>JavaScript中还有一些对象子类型，成为内置对象，包括：</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Object</li>
+<li>Function</li>
+<li>Array</li>
+<li>Error</li>
+<li>Date</li>
+<li>RegExp</li>
+</ul>
+<p>这些内置对象看起来像是传统面向对象语言中的类，但是其实它们只是一些内置的构造函数，可以通过new操作符来调用生成一个对应子类型的新对象。</p>
+<p>Date只有构造，没有文字形式</p>
+<p>Object、Array、Function和RegExp无论使用文字形式还是构造形式，它们都是对象而不是字面量。</p>
+<p>Error对象很少在代码中显示创建，一般只在抛出异常时自动创建</p>
+<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>对象的内容是由一些存储在特定命名空间的值组成的，称之为属性。</p>
+<p>在引擎内部，对象容器只存储了属性的名称，这种名称是一种引用，指向真正的存储位置</p>
+<p>属性可以通过”.”操作符和”[]”操作符访问。两者的区别在于点操作符要求访问的属性名满足标识符的命名规范，而”[]”操作符可以接收任意UTF-8/Unicode字符串作为属性名。</p>
+<p>属性名永远都是字符串，如果使用string(字面量)以外的其它属性名，会被先转换为字符串。</p>
+<h3 id="可计算属性名"><a href="#可计算属性名" class="headerlink" title="可计算属性名"></a>可计算属性名</h3><p>ES6标准增加了可计算属性名，可以在文字行驶中使用[]包裹一个表达式作为属性名：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prefix = <span class="string">"foo"</span>;</span><br><span class="line"><span class="keyword">var</span> Obj = &#123;</span><br><span class="line">	[prefix + <span class="string">"bar"</span>]: <span class="string">"Hello"</span>;</span><br><span class="line">	[prefix + <span class="string">"baz"</span>]: <span class="string">"World"</span>;</span><br><span class="line">&#125;</span><br><span class="line">Obj[prefix + <span class="string">"bar"</span>]; <span class="comment">//Hello</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性与方法"><a href="#属性与方法" class="headerlink" title="属性与方法"></a>属性与方法</h3><p>如果访问的对象属性是一个函数，很多人称之为方法，但这种说法并不严谨。在JavaScript中，哪怕以文字形式声明对象的方法为一个函数，这个函数仍然不会”属于“这个对象，只能说这个对象持有一个对该函数的引用</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组也支持[]访问形式，数组拥有一套更加结构话的值存储方式（不过它并不限制值的类型）。数组期望的是数值下标，也就是值的存储位置。但数组仍然是一个对象，准确来说，是一个期望属性名为数字的对象，所以我们仍然可以给数组台添加属性。</p>
+<h3 id="复制对象"><a href="#复制对象" class="headerlink" title="复制对象"></a>复制对象</h3><p>浅复制较为简单，对于值是值复制，对于引用类型（对象，方法， 数组）来说，复制的是引用。也就是说原对象和被浅复制的新对象，保持的都是同样的引用。</p>
+<p>如何深复制，对于一个JSON安全（可以被序列化为一个JSON字符串，并能被正确解析的对象），可以使用下面这个语法糖来进行深复制：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newObj = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(oldObj));</span><br></pre></td></tr></table></figure>
+<p>ES6定义了Object.assign()方法来进行对象的浅复制。Object.assign()的第一个参数为目标对象，之后可以跟一或多个源对象，方法会遍历源对象的可枚举的自有键并把它们复制（使用=）到目标对象，最后返回目标对象。</p>
+<p>由于Object.assign()方法使用的是=赋值，所以源对象的一些特性并不会被复制到目标对象。</p>
+<h3 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h3><p>可以通过getOwnPropertyDescriptor(对象, “属性名”)来获得一个对象的特定属性的属性描述符。</p>
+<p>创建普通对象的属性时属性描述符使用默认值，可以通过Object.defineProperty()和Object.defineProperties()方法来添加一个新属性并设置它的属性描述符或修改一个已有属性的属性描述符。</p>
+<p>使用delete操作符来删除一个不可配置的属性时会失败。除此之外，如果对象的某个属性是某个对象的最后一个引用者，当这个属性被delete后，这个未引用的对象会被垃圾回收。</p>
+<h3 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h3><p>ES5可以通过多种方法来实现对象属性的不可变，但是所有的方法只能实现浅不变形，也就是说它只能保证目标对象、对象的直接属性和对象属性的引用不变，引用的对象仍可改变。</p>
+<p><strong>JavaScript程序中很少需要深不可变性。可能存在特殊的情况需要使用深不可变性。但根据通用的设计模式来说，如果你发现一个对象需要深不可变性，那么可能需要重新考虑程序的设计。</strong></p>
+<p><strong>1.对象常量：</strong></p>
+<p>通过将对象属性的属性描述符的writable和configurable设置为false，即可实现一个常量属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Obj = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Obj, <span class="string">"FAVORITE_NUMBER"</span>, &#123;</span><br><span class="line">	value: <span class="number">42</span>,</span><br><span class="line">	writable: <span class="literal">false</span>,</span><br><span class="line">	configurable: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>2.禁止扩展：</strong><br>如果想要禁止一个对象扩展它的属性，可以通过调用内部方法Object.preventExtensions()：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Obj = &#123;</span><br><span class="line">	a: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(Obj);</span><br></pre></td></tr></table></figure>
+<p>在非严格模式下扩展这个对象将失败，在严格模式下将会导致TypeError错误。</p>
+<p><strong>3.密封：</strong></p>
+<p>可以使用Object.seal()方法来创建一个密封对象，这个方式实际上会在一个现有对象上调用Object.preventExtensions()并把对象的所有属性标记为configurable: false。密封之后，对象无法扩展，且无法重新配置删除现有属性（但仍能改变属性的值）。</p>
+<p><strong>4.冻结：</strong><br>Object.freeze()会创建一个冻结对象，这个方法实际上会在一个现有对象上调用Object.seal()并把所有数据访问属性标记为writable: false，这样就无法修改对象属性的值。</p>
+<p>冻结是最高级别的不可变性，他会禁止对于对象本身及其任意直接属性的修改（同样的，并不影响对象的引用对象的修改，但影响对象引用的修改）</p>
+<h3 id="Get"><a href="#Get" class="headerlink" title="[[Get]]"></a>[[Get]]</h3><p>属性访问存在一个难以被注意到的细节。当我们访问一个对象的属性时，其实实在属性上实现了[[Get]]操作。对象默认的内置[[Get]]操作首先会在杜希昂中查找是否有名称相同的属性，如果有返回。如果没有，按照[[Get]]算法的定义，他将开始遍历对象的原型链，如果有，返回。如果仍没有，返回undefined。</p>
+<h3 id="Put"><a href="#Put" class="headerlink" title="[[Put]]"></a>[[Put]]</h3><p>既然存在Get就会存在对应的Put操作，[[Put]]被触发时取决于许多因素：</p>
+<ul>
+<li>属性是否是访问器属性，是则检测setter，存在则调用setter</li>
+<li>属性数据描述符的writable是否为false，是则在非严格模式下静默失败，在严格模式下抛出TypeError错误</li>
+<li>如果都不是，则将该值设置为属性的值</li>
+</ul>
+<p>上述判断都是在对象存在对应属性的情况下的。</p>
+<h3 id="存在性"><a href="#存在性" class="headerlink" title="存在性"></a>存在性</h3><p>当我们访问一个属性得到undefined的返回值时，我们怎么判断是它的值为undefined还是没有找到。或者说，我们如何判断一个属性是否存在要给对象中。</p>
+<p>in操作符会检查一个属性名是否存在于一个对象及其原型链中</p>
+<p>hasOwnProperty()方法只会检查属性是否在对象中，而并不会检查原型链。</p>
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><p>for…in循环可以遍历对象的可枚举属性列表（包括原型链）。</p>
+<p>对于数值索引的数组来说，可以使用标准for循环，但是它是通过遍历下标来指向值。</p>
+<p>ES5增加了一些数组迭代器，包括forEach()、every()和some()。每种辅助迭代器都可以设置一个回调函数并把他应用在数组的每个元素上，唯一的区别就是它们对于回调函数返回值的处理方式不同。</p>
+<ul>
+<li>forEach()会遍历数组中的所有值并忽略回调函数的返回值</li>
+<li>every()会一直运行到回调函数返回false</li>
+<li>some()会一直运行到回调函数返回true</li>
+</ul>
+<p>ES6增加了一种用来遍历数组的for..of循环语法可以直接遍历值</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/09/09/JavaScript学习笔记7/">JavaScript学习笔记7</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2019-09-09, 14:18:16</p>
+        <p><span>最后更新:</span>2019-09-09, 16:34:57</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/09/JavaScript学习笔记7/" title="JavaScript学习笔记7">http://yoursite.com/2019/09/09/JavaScript学习笔记7/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/09/JavaScript学习笔记7/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/08/31/JavaScript学习笔记6/">
+                    JavaScript学习笔记6
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型"><span class="toc-number">2.</span> <span class="toc-text">类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内置对象"><span class="toc-number">2.1.</span> <span class="toc-text">内置对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内容"><span class="toc-number">3.</span> <span class="toc-text">内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可计算属性名"><span class="toc-number">3.1.</span> <span class="toc-text">可计算属性名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性与方法"><span class="toc-number">3.2.</span> <span class="toc-text">属性与方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">3.3.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制对象"><span class="toc-number">3.4.</span> <span class="toc-text">复制对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性描述符"><span class="toc-number">3.5.</span> <span class="toc-text">属性描述符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不变性"><span class="toc-number">3.6.</span> <span class="toc-text">不变性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get"><span class="toc-number">3.7.</span> <span class="toc-text">[[Get]]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Put"><span class="toc-number">3.8.</span> <span class="toc-text">[[Put]]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存在性"><span class="toc-number">3.9.</span> <span class="toc-text">存在性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遍历"><span class="toc-number">4.</span> <span class="toc-text">遍历</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"JavaScript学习笔记7　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/08/31/JavaScript学习笔记6/" title="下一篇: JavaScript学习笔记6">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7/">JavaScript学习笔记7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6/">JavaScript学习笔记6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1/">ES6学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5/">JavaScript学习笔记5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4/">JavaScript学习笔记4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3/">JavaScript学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2/">JavaScript学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1/">JavaScript学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS选择器/">CSS选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/28/Java-Servlet6/">Java-Servlet学习笔记（六）--JSTL</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/Java-Servlet5/">Java-Servlet学习笔记（五）--表达式语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/24/Java-Servlet4/">Java-Servlet学习笔记（四）--JavaServer Page(JSP)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/Java-Servlet3/">Java-Servlet学习笔记（三）--会话管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/18/Java-Servlet2/">Java-Servlet学习笔记（二）--Servlets</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/13/FTP-Sublime-Sftp/">服务器配置FTP环境并使用Sublime-sftp连接服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/04/AnchorCMS-XSS/">AnchorCMS0.9.2-XSS漏洞审计</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/">SECCON 2018 CTFGhostKingdom Writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/">Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/">Vulhub-ActiveMQ--反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/20/PHP-Audit-Labs-Day13/">PHP代码审计-特定场合下addslashes函数的绕过</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/13/PHP-Audit-Labs-Day12/">PHP代码审计-误用htmlentities函数引发的漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/PHP-Audit-Labs-Day11/">PHP代码审计-unserialize反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/PHP-Audit-Labs-Day10/">PHP代码审计-程序未恰当使用exit导致的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/03/PHP-Audit-Labs-Day9/">PHP代码审计-str_replace函数过滤不当</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/PHP-Audit-Labs-Day8/">PHP代码审计-preg_replace函数命令执行</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/01/PHP-Audit-Labs-Day6/">PHP代码审计-正则使用不当导致的路径穿越</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Java-Servlet1/">Java-Servlet学习笔记（一）--IDEA和Tomcat的安装使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/PHP-Audit-Labs-Day5/">PHP代码审计-mail函数参数的漏洞利用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/PHP-Audit-Labs-Day4/">PHP代码审计-strpos使用不当引发漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/24/PHP-Audit-Labs-Day3/">PHP代码审计-实例化任意对象漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/16/PHP-Audit-Labs-Day2/">PHP代码审计-filter_var函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/Vulhub-Weblogic-SSRF/">Vulhub-Weblogic-SSRF漏洞复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/09/JAVA7/">Java学习笔记（七）--数字处理类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/08/JAVA6/">Java学习笔记（六）--包装类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/07/DedeCMS4/">DedeCMS代码审计Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/JAVA5/">Java学习笔记（五）--类和对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/05/JAVA4/">Java学习笔记（四）--数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/04/PHP-Phar/">phar扩展在PHP反序列化中的利用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/04/JAVA3/">Java学习笔记（三）--字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/03/JAVA2/">Java学习笔记（二）--流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/02/PHP-Audit-Labs-Day7/">PHP代码审计-parse_str函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/JAVA1/">Java学习笔记（一）--Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/DedeCMS3/">DedeCMS代码审计Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/ThinkPHP11/">ThinkPHP框架学习--缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/20/DedeCMS2/">DedeCMS代码审计Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/20/ThinkPHP10/">ThinkPHP框架学习--调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/ThinkPHP9/">ThinkPHP框架学习--模板（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/11/ThinkPHP8/">ThinkPHP框架学习--模板（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/10/ThinkPHP7/">ThinkPHP框架学习--模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/06/ThinkPHP6/">ThinkPHP框架学习--模型（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/DedeCMS1/">DedeCMS代码审计Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/03/ThinkPHP5/">ThinkPHP框架学习--模型（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/02/ThinkPHP4/">ThinkPHP框架学习--控制器（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/ThinkPHP3/">ThinkPHP框架学习--控制器（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/PHP-Audit-Labs-Day1/">代码审计-in_array函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/28/ThinkPHP2/">ThinkPHP框架学习--路由</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/26/ThinkPHP1/">ThinkPHP框架学习--配置</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
