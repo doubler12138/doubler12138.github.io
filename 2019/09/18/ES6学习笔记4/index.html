@@ -15,20 +15,20 @@
 
 
 
-<meta name="description" content="前言 今天看Java的字符串部分的内容，主要是字符串的操作部分">
-<meta name="keywords" content="Java,学习笔记">
+<meta name="description" content="前言 解构：更方便的数据访问">
+<meta name="keywords" content="WEB前端,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记（三）--字符串">
-<meta property="og:url" content="http://yoursite.com/2018/09/04/JAVA3/index.html">
+<meta property="og:title" content="ES6学习笔记4">
+<meta property="og:url" content="http://yoursite.com/2019/09/18/ES6学习笔记4/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 今天看Java的字符串部分的内容，主要是字符串的操作部分">
+<meta property="og:description" content="前言 解构：更方便的数据访问">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/11.jpg">
-<meta property="og:updated_time" content="2018-12-15T13:13:57.985Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/26.jpg">
+<meta property="og:updated_time" content="2019-09-18T11:23:47.805Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记（三）--字符串">
-<meta name="twitter:description" content="前言 今天看Java的字符串部分的内容，主要是字符串的操作部分">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/11.jpg">
+<meta name="twitter:title" content="ES6学习笔记4">
+<meta name="twitter:description" content="前言 解构：更方便的数据访问">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/26.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java学习笔记（三）--字符串 | DoubleR&#39;s BLOG</title>
+<title>ES6学习笔记4 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JAVA3" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ES6学习笔记4" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/04/JAVA3/" class="article-date">
-      <time datetime="2018-09-04T05:15:56.000Z" itemprop="datePublished">2018-09-04</time>
+      <a href="/2019/09/18/ES6学习笔记4/" class="article-date">
+      <time datetime="2019-09-18T09:37:45.000Z" itemprop="datePublished">2019-09-18</time>
 </a>
 
 
@@ -331,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记（三）--字符串
+      ES6学习笔记4
     </h1>
   
 
@@ -340,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">2,181字</span>
+			<span class="post-count">1,068字</span>
 		</span>
 	</span>
 	
@@ -349,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">8分</span>
+			<span class="post-count">4分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB前端/">WEB前端</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -373,137 +373,44 @@
       
           
         <p><strong>前言</strong></p>
-<p>今天看Java的字符串部分的内容，主要是字符串的操作部分</p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/11.jpg" alt=""></p>
+<p>解构：更方便的数据访问</p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/26.jpg" alt=""></p>
 <a id="more"></a>
-<hr>
-<h2 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h2><p><strong>声明字符串：</strong></p>
-<p>字符串声明语法格式：</p>
-<p><code>String str = [null]</code></p>
-<ul>
-<li>String:指定该变量为字符串类型</li>
-<li>str:任意有效的标识符，表示字符串的名称</li>
-<li>null:如果省略null，表示str变量是未初始化的状态，否则表示声明的字符串的值等于null。</li>
-</ul>
-<p>声明字符串必须经过初始化才能使用，否则编译器会报出”变量未被初始化错误“</p>
-<p><strong>创建字符串：</strong></p>
-<p>用一个字符数组a创建String对象：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[] = &#123;<span class="string">'g'</span>,<span class="string">'o'</span>,<span class="string">'o'</span>,<span class="string">'d'</span>&#125;;</span><br><span class="line">String s = <span class="keyword">new</span> String(a);  <span class="comment">//等价于 String s = new String("good")</span></span><br></pre></td></tr></table></figure>
-<p>通过字符串常量的引用赋值创建String对象：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1,str2;</span><br><span class="line">str1 = <span class="string">"We are students"</span>;</span><br><span class="line">str2 = <span class="string">"We are students"</span>;</span><br></pre></td></tr></table></figure>
-<p>此时str1和str2引用相同的字符串常量，因此具有相同的实体。</p>
-<h2 id="连接字符串"><a href="#连接字符串" class="headerlink" title="连接字符串"></a>连接字符串</h2><p>使用”+”运算符可以实现连接多个字符串的功能。</p>
-<p>字符串也可以同其它基本数据类型进行连接。如果将字符串同这些数据类型进行连接，会自动调用toString()方法，将其转换成字符串形式。</p>
-<p>只要”+”运算符的一个操作数是字符串，编译器就会将其它数据都转换成字符串形式。</p>
-<h2 id="获取字符串信息"><a href="#获取字符串信息" class="headerlink" title="获取字符串信息"></a>获取字符串信息</h2><p><strong>获取字符串长度：</strong></p>
-<p>使用String类的length()方法可以获取声明的字符串对象的长度。示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"We are students"</span>;</span><br><span class="line"><span class="keyword">int</span> size = str.length();</span><br></pre></td></tr></table></figure>
-<p><strong>字符串查找：</strong></p>
-<p>String类提供了两种查找字符串的方法，即indexOf()与lastIndexOf()方法。这两种方法都允许在字符串中搜索指定条件的字符或字符串。indexOf()方法返回的是搜索的字符或字符串首次出现的位置，lastIndexOf()方法返回的是搜索的字符或字符串最后一次出现的位置。</p>
-<p>如果lastIndexOf()方法中的参数是空字符串””，则返回的结果为当前字符串的长度。</p>
-<p><strong>获得指定索引位置的字符：</strong><br>使用charAt()方法可以将指定索引处的字符返回，语法如下：<code>str.charAt(int index)</code></p>
-<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p><strong>获取子字符串：</strong></p>
-<p>通过String类的substring()方法可对字符串进行截取。substring()方法被两种不同的方法重载：</p>
-<ul>
-<li>substring(int beginIndex)：该方法返回的是从指定的索引位置开始截取直到改字符串结尾的子串</li>
-<li>substring(int beginIndex,int endIndex)：该方法返回的是从字符串某一索引位置开始截取至某一索引位置结束</li>
-</ul>
-<p><strong>去掉空格：</strong></p>
-<p>trim()方法返回字符串的副本，忽略前导空格和尾部空格，语法如下：<code>str.trim()</code></p>
-<p><strong>字符串替换：</strong></p>
-<p>replace()方法可实现将指定的字符或字符串替换成新的字符或字符串，语法如下：</p>
-<p><code>str.replace(char oldChar,char newChar)</code></p>
-<p>replace()方法返回的结果是一个新的字符串，如果要替换的字符oldChar在字符串中重复出现多次，replace()方法会将所有oldChar全部替换掉。</p>
-<p><strong>判断字符串的开始与结尾：</strong></p>
-<p>startsWith()方法与endsWith()方法分别用于判断字符串是否以指定的内容开始或结束，两个方法的返回值都为Boolean型。语法如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.startsWith(String prefix); <span class="comment">//prefix是指作为前缀的字符串</span></span><br><span class="line">str.endsWith(String suffix);   <span class="comment">//suffix是指作为后缀的字符串</span></span><br></pre></td></tr></table></figure>
-<p><strong>判断字符串是否相等：</strong></p>
-<p>对字符串对象进行比较不能简单地使用比较运算符”==”，因为比较运算符比较的是两个字符串的地址是否相同。即使两个字符串的内容相同，连个对象的内存地址也是不同的，使用比较运算符仍然会返回false。</p>
-<p>因此，比较两个字符串是否相等，应使用equals()方法和equalsIgnoreCase()方法，前者对字符串进行比较时区分大小写，后者不区分。语法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.equals(String otherstr);</span><br><span class="line">str.equalsIngoreCase(String otherstr);</span><br></pre></td></tr></table></figure>
-<p><strong>按字典顺序比较两个字符串：</strong></p>
-<p>compareTo()方法为按字典顺序比较两个字符串，该比较基于字符串中的各个字符的Unicode值。如果按字典吮吸此String对象位于参数字符串之前，则比较结果为一个负整数；如果按字典顺序此String对象位于参数字符串之后，则比较结果为一个正整数；如果这两个字符串相等，则结果为0 。语法如下：</p>
-<p><code>str.compareTo(String otherstr)</code></p>
-<p><strong>字母大小写转换：</strong></p>
-<p>字符串的toLowerCase()方法可将字符串中的所有字符从大写字母改写为小写字母，而toUpperCase()方法可将字符串中的小写字母改写为大写字母。</p>
-<ul>
-<li>toLowerCase()方法：将String转换为小写，如果没有应该被转换的字符则将原字符串返回，否则将返回一个新字符串。</li>
-<li>toUpperCase()方法：将String转换为大写。如果没有应该被转换的字符则将原字符串返回，否则将返回一个新字符串。</li>
-</ul>
-<p><strong>字符串分割：</strong></p>
-<p>使用split()方法可以是字符串按指定的分割字符或字符串对内容进行分割，并将分割后的结果存放在字符串数组中。split()方法提供以下两种重载形式。</p>
-<ul>
-<li>split(String sign)：该方法可根据给定的分隔符对字符串进行拆分，其中sign为分割字符串的分割符，也可以使用正则表达。</li>
-<li>split(String sign,int limit)：该方法可根据给定的分割符对字符串进行拆分，并限定拆分的次数</li>
-</ul>
-<p>实例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Division</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        String str = <span class="keyword">new</span> String(<span class="string">"abc,def,ghi,jkl"</span>);</span><br><span class="line">        String[] newstr = str.split(<span class="string">","</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; newstr.length;i++)&#123;</span><br><span class="line">            System.out.println(newstr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        String[] newstr2 = str.split(<span class="string">","</span>,<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; newstr2.length;i++)&#123;</span><br><span class="line">            System.out.println(newstr2[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h2><p>String类的静态format()方法用创建格式化的字符串。format()有两种重载形式：</p>
-<ul>
-<li>format(String format,Object…args)：该方法使用指定的格式字符串和参数返回要给格式化字符串，格式化后的新字符使用本地默认的语言环境。</li>
-<li>format(Local,String format,Object…args)：Local格式化过程中要应用的语言环境。如果为null，则不进行本地化</li>
-</ul>
-<p><strong>日期和时间字符串格式化：</strong></p>
-<p>实例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Date;  <span class="comment">//导入java.util.Date类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Eval</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        String year = String.format(<span class="string">"%tY"</span>,date);</span><br><span class="line">        String month = String.format(<span class="string">"%tB"</span>,date);</span><br><span class="line">        String day = String.format(<span class="string">"%td"</span>,date);</span><br><span class="line">        String hour = String.format(<span class="string">"%tH"</span>,date);</span><br><span class="line">        String minute = String.format(<span class="string">"%tM"</span>,date);</span><br><span class="line">        String second = String.format(<span class="string">"%tS"</span>,date);</span><br><span class="line">        System.out.println(<span class="string">"今年是："</span> + year + <span class="string">"年"</span>);</span><br><span class="line">        System.out.println(<span class="string">"现在是："</span> + month);</span><br><span class="line">        System.out.println(<span class="string">"今天是："</span> + day + <span class="string">"号"</span>);</span><br><span class="line">        System.out.println(<span class="string">"现在是"</span> + hour + <span class="string">"时"</span> + minute + <span class="string">"分"</span> + second + <span class="string">"秒"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>格式化常见的日期时间组合：</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">转换符</th>
-<th style="text-align:center">说明</th>
-<th style="text-align:center">示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">%tF</td>
-<td style="text-align:center">“年-月-日”格式（4位年份）</td>
-<td style="text-align:center">2018-09-04</td>
-</tr>
-<tr>
-<td style="text-align:center">%tD</td>
-<td style="text-align:center">“月/日/年”（2位年份）</td>
-<td style="text-align:center">09/04/18</td>
-</tr>
-<tr>
-<td style="text-align:center">%tc</td>
-<td style="text-align:center">全部日期和时间信息</td>
-<td style="text-align:center">星期二 九月 4 15:15:00 CST 2018</td>
-</tr>
-<tr>
-<td style="text-align:center">%tr</td>
-<td style="text-align:center">“时：分：秒 PM(AM)”格式（12时制）</td>
-<td style="text-align:center">03:16:06 下午</td>
-</tr>
-<tr>
-<td style="text-align:center">%tT</td>
-<td style="text-align:center">“时：分：秒”格式（24时制）</td>
-<td style="text-align:center">15:17:33</td>
-</tr>
-<tr>
-<td style="text-align:center">%tR</td>
-<td style="text-align:center">“时：分”格式（24时制）</td>
-<td style="text-align:center">15:18</td>
-</tr>
-</tbody>
-</table>
-<h2 id="字符串生成器"><a href="#字符串生成器" class="headerlink" title="字符串生成器"></a>字符串生成器</h2><p>创建成功的字符串对象，其长度是固定的，内容不能被改变和编译。虽然使用”+”可以达到附加新字符和字符串的效果，但是”+”会产生一个新的String实例，会在内存中创建新字符串对象。如果重复地对字符串进行修改，将极大地增加系统开销。如果在程序中频繁地附加字符串，建议使用StringBuilder。新建的StringBuilder对象初始容量是16个字符，可以自行指定初始长度。如果附加字符超过可容纳的长度，则StringBuilder对象将自动增长长度以容纳被附加的字符。若要使用StringBuilder最后输出字符串结果，可以使用toString方法。利用StringBuilder类中的方法可动态的执行添加、删除和插入操作。该类的常用方法如下：</p>
-<ul>
-<li>append()方法：该方法用于向字符串生成器中追加内容。通过该方法的多个重载形式，可实现接收任何类型的数据</li>
-<li>insert(int offset,arg)方法：该方法用于向字符串生成器中的指定位置插入数据内容</li>
-<li>delete(int start, int end)方法：移除此序列的子字符串中的字符。</li>
-</ul>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1305425959&auto=1&height=66"></iframe></div>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1389863996&auto=1&height=66"></iframe><br></div>
 
-
-
-
-
-
-
+<h2 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h2><p>在ES5及更早的版本，当我们需要从对象中获取信息，并将信息存入到本地变量时需要书写大量的重复代码。</p>
+<p>因此ES6给对象添加了解构，使得当把数据结构分解成更小的部分时，从中提取需要的数据变得更加简单</p>
+<p>对象结构语法在赋值语句左侧使用对象字面量，例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">	type: <span class="string">"Identifier"</span>,</span><br><span class="line">	name: <span class="string">"foo"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123; type, name &#125; = node;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<p>当使用解构来配合var、let或const来声明变量时，必须提供初始化器（及等号右边的值）</p>
+<h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><p>之前的结构都是用于变量的声明，不过结构也可以用于赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">	type: <span class="string">"Identifier"</span>,</span><br><span class="line">	name: <span class="string">"foo"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	type = <span class="string">"Literal"</span>,</span><br><span class="line">	name = <span class="number">5</span>;</span><br><span class="line">(&#123; type, name&#125; = node);</span><br></pre></td></tr></table></figure>
+<p>解构赋值表达式的值为表达式右侧的值。也就是说任何期望有个值的位置都可以使用解构赋值表达式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">	type: <span class="string">"Identifier"</span>,</span><br><span class="line">	name: <span class="string">"foo"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	type = <span class="string">"Literal"</span>,</span><br><span class="line">	name = <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputInfo</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(value === node);</span><br><span class="line">&#125;</span><br><span class="line">outputInfo(&#123; type, name&#125; = node);</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<p>当解构赋值表达式的右侧的计算结构为Null或undefined时，就会抛出错误</p>
+<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>当使用解构赋值语句时，如果指定的本地变量在对象中没有找到同名属性，那么该变量会被赋值为undefined</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">	type: <span class="string">"Indefieral"</span>,</span><br><span class="line">	name: <span class="string">"foo"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> &#123; type, name, value &#125; = node;</span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">//"undefined"</span></span><br></pre></td></tr></table></figure>
+<p>当然我们可以选择性的定义一个默认值，以便在指定属性不存在时使用该值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">	type: <span class="string">"Indefieral"</span>,</span><br><span class="line">	name: <span class="string">"foo"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123; type, name, value = <span class="literal">true</span>&#125; = node;</span><br><span class="line"><span class="built_in">console</span>.log(value) <span class="comment">// "true"</span></span><br></pre></td></tr></table></figure>
+<h3 id="赋值给不同的本地变量名"><a href="#赋值给不同的本地变量名" class="headerlink" title="赋值给不同的本地变量名"></a>赋值给不同的本地变量名</h3><p>之前的解构都是基于本地变量名和对象属性名相同的情况下，那么如果本地变量名和对象属性名不想同时我们要如何进行解构。对此ES6提供了一个扩展语法，类似与使用对象字面量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">	type: <span class="string">"Identifier"</span>,</span><br><span class="line">	name: <span class="string">"foo"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">type</span>: localType, <span class="attr">name</span>: localName &#125; = node;</span><br><span class="line"><span class="built_in">console</span>.log(value);</span><br></pre></td></tr></table></figure>
+<p>这种语法其实与传统的对象字面量相反，传统语法将名称凡在冒号左边，值放右边。但是在本例中，名称在右边， 值在左边</p>
+<p>同样的我们可以给变量别名来添加默认值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">	type: <span class="string">"Identifier"</span>,</span><br><span class="line">	name: <span class="string">"foo"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">type</span>: localType, <span class="attr">name</span>: localName, <span class="attr">value</span>: localValue = <span class="string">"true"</span> &#125; = node;</span><br><span class="line"><span class="built_in">console</span>.log(localValue);</span><br></pre></td></tr></table></figure>
+<h3 id="嵌套对象的解构"><a href="#嵌套对象的解构" class="headerlink" title="嵌套对象的解构"></a>嵌套对象的解构</h3><p>使用类似于嵌套对象字面量的方法，可以深入到嵌套的对象结构中去提取想要的数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">	type: <span class="string">"Indentifier"</span>,</span><br><span class="line">	name: <span class="string">"foo"</span>,</span><br><span class="line">	loc: &#123;</span><br><span class="line">		start: &#123;</span><br><span class="line">			line: <span class="number">1</span>,</span><br><span class="line">			column: <span class="number">1</span></span><br><span class="line">		&#125;,</span><br><span class="line">		end: &#123;</span><br><span class="line">			line: <span class="number">1</span>,</span><br><span class="line">			column: <span class="number">4</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123;<span class="attr">loc</span>: &#123;<span class="attr">start</span>: &#123; <span class="attr">line</span>: localLine &#125;&#125;&#125; = node;</span><br><span class="line"><span class="built_in">console</span>.log(localLine);</span><br></pre></td></tr></table></figure>
+<p>这里运用到了嵌套解构，其实只要掌握了解构与对象字面量语法的区别我们就可以轻易的解构嵌套了任意层次的对象，及解构的值在左侧名在右侧，而对象字面量的名在左侧，值在右侧</p>
+<p><strong>注意：</strong></p>
+<p>由于花括号在结构中是合法的，所以我们需要谨慎的使用花括号来构造解构语法，从而避免创建毫无意义的解构语句</p>
+<h2 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h2><p>数组解构与对象解构大体来说是相同的，只是将对象字面量替换成了数组字面量。数组在解构时，解构直接作用在数组内部的位置上而不是作用在对象的具名属性上</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [ <span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span> ];</span><br><span class="line"><span class="keyword">let</span> [ firstColer, secondColor ] = colors;</span><br><span class="line"><span class="built_in">console</span>.log(firstColor); <span class="comment">//"red"</span></span><br></pre></td></tr></table></figure>
+<p>被解构的值得选择根据值在数组中的位置决定，实际变量名是任意的（与位置无关）。任何没有在解构模式中明确指出的项会被忽略。</p>
+<p><strong>注意：</strong></p>
+<p>解构并不影响原数组的结构</p>
+<p>可以选择性的忽略数组中的一些项，只给感兴趣的项提供变量名，不感兴趣的项可以使用逗号跳过</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line"><span class="keyword">let</span> [ , , thirdColor] = colors;</span><br><span class="line"><span class="built_in">console</span>.log(thirdColor);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -512,13 +419,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/04/JAVA3/">Java学习笔记（三）--字符串</a></p>
+        <p><span>本文标题:</span><a href="/2019/09/18/ES6学习笔记4/">ES6学习笔记4</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-04, 13:15:56</p>
-        <p><span>最后更新:</span>2018-12-15, 21:13:57</p>
+        <p><span>发布时间:</span>2019-09-18, 17:37:45</p>
+        <p><span>最后更新:</span>2019-09-18, 19:23:47</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/04/JAVA3/" title="Java学习笔记（三）--字符串">http://yoursite.com/2018/09/04/JAVA3/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/04/JAVA3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/18/ES6学习笔记4/" title="ES6学习笔记4">http://yoursite.com/2019/09/18/ES6学习笔记4/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/18/ES6学习笔记4/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -530,16 +437,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/04/PHP-Phar/">
-                    phar扩展在PHP反序列化中的利用
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/03/JAVA2/">
-                    Java学习笔记（二）--流程控制
+                <a href="/2019/09/16/ES6学习笔记3/">
+                    ES6学习笔记3
                 </a>
             </div>
         
@@ -551,7 +452,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String类"><span class="toc-number">1.</span> <span class="toc-text">String类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接字符串"><span class="toc-number">2.</span> <span class="toc-text">连接字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取字符串信息"><span class="toc-number">3.</span> <span class="toc-text">获取字符串信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串操作"><span class="toc-number">4.</span> <span class="toc-text">字符串操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化字符串"><span class="toc-number">5.</span> <span class="toc-text">格式化字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串生成器"><span class="toc-number">6.</span> <span class="toc-text">字符串生成器</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象解构"><span class="toc-number">1.</span> <span class="toc-text">对象解构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解构赋值"><span class="toc-number">1.1.</span> <span class="toc-text">解构赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#默认值"><span class="toc-number">1.2.</span> <span class="toc-text">默认值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#赋值给不同的本地变量名"><span class="toc-number">1.3.</span> <span class="toc-text">赋值给不同的本地变量名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#嵌套对象的解构"><span class="toc-number">1.4.</span> <span class="toc-text">嵌套对象的解构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组解构"><span class="toc-number">2.</span> <span class="toc-text">数组解构</span></a></li></ol>
         
     </div>
     <style>
@@ -587,7 +488,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（三）--字符串　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ES6学习笔记4　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -607,15 +508,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/04/PHP-Phar/" title="上一篇: phar扩展在PHP反序列化中的利用">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/03/JAVA2/" title="下一篇: Java学习笔记（二）--流程控制">
+            <a href="/2019/09/16/ES6学习笔记3/" title="下一篇: ES6学习笔记3">
                 <i class="fa fa-angle-right"></i>
             </a>
         
