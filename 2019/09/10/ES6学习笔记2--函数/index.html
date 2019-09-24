@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前端 函数">
+<meta name="keywords" content="WEB前端,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6学习笔记2--函数">
+<meta property="og:url" content="http://yoursite.com/2019/09/10/ES6学习笔记2--函数/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前端 函数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/24.jpg">
+<meta property="og:updated_time" content="2019-09-24T02:26:28.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6学习笔记2--函数">
+<meta name="twitter:description" content="前端 函数">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/24.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>ES6学习笔记2--函数 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我爱你三千遍</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS漏洞/">CMS漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF-WriteUp/">CTF-WriteUp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript/">ECMAScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vulhub/">Vulhub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB前端/">WEB前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB前端，JavaScript/">WEB前端，JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB后端，Node-js/">WEB后端，Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码审计/">代码审计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小姿势/">小姿势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞复现/">漏洞复现</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境搭建/">环境搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目计划/">项目计划</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我爱你三千遍</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-ES6学习笔记2--函数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/10/ES6学习笔记2--函数/" class="article-date">
+      <time datetime="2019-09-10T12:09:24.000Z" itemprop="datePublished">2019-09-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6学习笔记2--函数
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">4,816字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">19分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB前端/">WEB前端</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前端</strong></p>
+<p>函数</p>
+<hr>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/24.jpg" alt=""></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1372971002&auto=1&height=66"></iframe><br></div>
+
+<h2 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h2><p>JS函数最独特的一点就是可以接受任意数量的参数，而无视函数声明处的参数数量。这让定义的函数可以使用不同的参数数量调用，调用时未提供的参数会使用默认值来代替。</p>
+<h3 id="ES5模拟参数默认值"><a href="#ES5模拟参数默认值" class="headerlink" title="ES5模拟参数默认值"></a>ES5模拟参数默认值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeRequest</span>(<span class="params">url, timeout, callback</span>) </span>&#123;</span><br><span class="line">	timeout = (<span class="keyword">typeof</span> timeout !== <span class="string">"undefined"</span>) ? timeout : <span class="number">2000</span>;</span><br><span class="line">	callback = callback || <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ES6中的参数默认值"><a href="#ES6中的参数默认值" class="headerlink" title="ES6中的参数默认值"></a>ES6中的参数默认值</h3><p>ES6使用初始化的形式，以便在参数未被正式传递进函数时使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeRequest</span>(<span class="params">url, timeout = <span class="number">2000</span>, callback = function(</span>) </span>&#123;&#125;)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>未被设置默认值的参数被认为是必须传递的。当设置默认值的参数未被传递时使用默认值</p>
+<p>在函数声明中可以指定任意一个参数的默认值，即使该参数排在未指定默认值的参数之前也是可以的，这是如果需要使用默认值，则在参数位置传递undefined即可。</p>
+<h3 id="参数默认值与arguments对象"><a href="#参数默认值与arguments对象" class="headerlink" title="参数默认值与arguments对象"></a>参数默认值与arguments对象</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixArgs</span>(<span class="params">first, second</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);</span><br><span class="line">	<span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]) ;</span><br><span class="line">	first = <span class="string">"c"</span>;</span><br><span class="line">	second = <span class="string">"d"</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);</span><br><span class="line">	<span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>在ES5非严格模式下，arguments对象会反映出具名参数的变化，因此当first和second变量被赋予新值时arguments中的值也相应变化了</p>
+<p>在严格模式下这种情况被消除了，具名参数的变化并不会引起arguments的变化</p>
+<p>在使用ES6参数默认值的函数中，arguments对象跟ES5严格模式一样，且arguments中不包含使用默认值的参数。无论是否在严格模式下，都可以通过arguments对象来反映初始调用状态。</p>
+<h3 id="参数默认值表达式"><a href="#参数默认值表达式" class="headerlink" title="参数默认值表达式"></a>参数默认值表达式</h3><p>在ES6中，参数默认值并不要求一定是基本类型的值。可以通过函数来产生一个参数默认值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> value = <span class="number">5</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> value++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">first, second = getValue(</span>)) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> first + second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>甚至可以使用前面的参数作为后面参数的默认值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">frist, second = first</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> first + second</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者将前面的参数作为后面参数表达式的参数传入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">frist, second = getValue(first</span>))</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="参数默认值的暂时性死区"><a href="#参数默认值的暂时性死区" class="headerlink" title="参数默认值的暂时性死区"></a>参数默认值的暂时性死区</h3><p>参数默认值同样有着无法访问特定参数的暂时性死区。与let声明相似，函数每个参数都会创建一个新的标识符绑定，它在初始化之前不允许被访问，否则会抛出错误。参数初始化会在函数被调用时进行，无论使给参数传递一个值还是使用参数的默认值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">first = second, second</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> first + second;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">1</span>)); <span class="comment">//2</span></span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="literal">undefined</span>, <span class="number">1</span>)); <span class="comment">//抛出错误</span></span><br></pre></td></tr></table></figure>
+<p>这段示例很好的说明了暂时性死区导致的函数默认值问题，在不使用默认值的时候，这个函数调用不会出现问题，但是当我们使用默认值时，由于first被初始化时second尚未被初始化，此时second存在于暂时性死区内，对于second的引用就会导致错误发生。</p>
+<h2 id="不具名参数"><a href="#不具名参数" class="headerlink" title="不具名参数"></a>不具名参数</h2><p>由于JS的函数并不强求参数的数量要等于已定义具名参数的数量，因此可能会导致调用函数时会有不具有参数名的多余参数</p>
+<h3 id="ES5的不具名参数"><a href="#ES5的不具名参数" class="headerlink" title="ES5的不具名参数"></a>ES5的不具名参数</h3><p>JS早就提供了arguments对象来查看传递给函数的所有的参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">object</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> result = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++) &#123;</span><br><span class="line">		result[<span class="built_in">arguments</span>[i]] = object[<span class="built_in">arguments</span>[i]];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> book = &#123;</span><br><span class="line">	title: <span class="string">"Understanding ES6"</span>,</span><br><span class="line">	author: <span class="string">"Nicholas C.Zakas"</span>,</span><br><span class="line">	year: <span class="number">2015</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> bookData = pick(book, <span class="string">"author"</span>, <span class="string">"year"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(bookData.author); <span class="comment">// "Nicholas C.Zakas"</span></span><br></pre></td></tr></table></figure>
+<p>我们用这个函数模拟了Underscore.js代码库中的Pick方法，能够返回包含原有对象特定属性的子集副本。由于我们在定义函数时，并不知道要复制的对象有几个属性，属性名具体为什么，所以只能使用不具名参数。但是这样的操作有些麻烦，我们需要从arguments中避开具名参数。所以ES6引入了剩余参数的概念</p>
+<h3 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h3><p>剩余参数有三个点(…)与一个紧跟着的具名参数指定，它回包含传递给函数的其余参数的一个数组。我们用剩余参数来改写一下Pick方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">object, ...keys</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> result = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>, len = keys.length; i&lt; len; i++) &#123;</span><br><span class="line">		result[keys[i]] = object[keys[i]];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中keys是一个包含所有在object之后的参数的剩余参数（与arguments最大的不同在于，剩余参数不会包含具名参数）</p>
+<p>剩余参数存在两个限制：</p>
+<p>一是一个函数只用有一个剩余参数，且必须放在参数最后</p>
+<p>二是不能在对象字面量的setter属性中使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	set name(...value) &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>存在此限制的原因是因为对象字面两的setter被限制只能使用单个参数</p>
+<h3 id="函数构造器的增强"><a href="#函数构造器的增强" class="headerlink" title="函数构造器的增强"></a>函数构造器的增强</h3><p>Function构造器允许动态创建一个函数，但在JS中并不常用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"first"</span>, <span class="string">"second"</span>, <span class="string">"return first+second"</span>);</span><br></pre></td></tr></table></figure>
+<p>ES6增强了Function构造器的能力，允许在构造器中使用默认参数以及剩余参数，使用方法与函数声明形式相同</p>
+<h3 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h3><p>扩展运算符允许将一个数组分割，并将各个项作为分离的参数传给函数。使用方法与剩余参数一样，在数组前添加<code>...</code>即可</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> values = [<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span>,<span class="number">100</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max(...values))</span><br></pre></td></tr></table></figure>
+<p>扩展运算符可以与其它参数混用。</p>
+<p>使用扩展运算符传递参数，使得更容易将数组作为函数参数来使用，在大多数场景中扩展运算符都是apply()方法的合适替代品。</p>
+<h2 id="ES6的名称属性"><a href="#ES6的名称属性" class="headerlink" title="ES6的名称属性"></a>ES6的名称属性</h2><p>ES6给所有函数添加了name属性</p>
+<h3 id="选择合适的名称"><a href="#选择合适的名称" class="headerlink" title="选择合适的名称"></a>选择合适的名称</h3><p>ES6中所有函数都有适当的name属性值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> doAnotherthing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(doSomething.name) <span class="comment">//"doSomething"</span></span><br><span class="line"><span class="built_in">console</span>.log(doAnotherthing.name) <span class="comment">//"doAnotherthing"</span></span><br></pre></td></tr></table></figure>
+<h3 id="名称属性的特殊情况"><a href="#名称属性的特殊情况" class="headerlink" title="名称属性的特殊情况"></a>名称属性的特殊情况</h3><p>函数声明和函数表达式的名称易于查找，ES6为了更进一步的确保所有函数都拥有合适的名称，为一些特殊的函数的name属性添加了一些特殊的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doSomething = <span class="function"><span class="keyword">function</span> <span class="title">doSomethingElse</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">	get firstName() &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Nicholas"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	sayName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(doSomething.name); <span class="comment">//"doSomethingElse"</span></span><br><span class="line"><span class="built_in">console</span>.log(person.sayName.name); <span class="comment">//"sayName"</span></span><br><span class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(person, <span class="string">"firstName"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(descriptor.get.name) <span class="comment">//"get firstName"</span></span><br></pre></td></tr></table></figure>
+<p>这个例子中doSomething.name并不是doSomething，而是doSomething，因为函数表达式自己拥有一个名称，且这个名称的优先级高于赋值目标的变量名。person.sayName的name属性是sayName，这个跟对象字面量指定的一样。而person.firstName是一个getter函数，因此他的名称是”get firstName”，以标明它的特征。同样的，setter函数也会带有set前缀。</p>
+<p>除此之外使用bind()创建的函数会在名称属性值之前带有”bound”前缀；而是用Function构造器创建的函数，其名称属性则会有”anonymous”前缀</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(doSomething.bind().name); <span class="comment">// "bound doSomething"</span></span><br><span class="line"><span class="built_in">console</span>.log((<span class="keyword">new</span> <span class="built_in">Function</span>()).name); <span class="comment">// "anonymous"</span></span><br></pre></td></tr></table></figure>
+<p>函数的name属性未必会关联到同名变量。name属性是为了在调试时获得有用的相关信息，所以不能用name属性去获取对函数的引用。</p>
+<h2 id="明确函数的双重用途"><a href="#明确函数的双重用途" class="headerlink" title="明确函数的双重用途"></a>明确函数的双重用途</h2><p>在ES5及以前，函数根据是否使用new来调用而有双重用途。当使用new时，函数作为构造器使用，函数内部的this是一个新对象，并作为函数的返回值。</p>
+<p>ES6为函数提供了两个不同的内部方法：<code>[[Call]]</code>与<code>[[Construct]]</code>。当函数未使用new进行调用时，Call方法会被执行，运行的是代码中显示的函数体。当函数使用new进行调用时，Construct方法则会被执行，负责创建要给被称为新目标的新的对象，并且使用该新目标作为this去执行函数体。拥有Construct方法的函数被称为构造器</p>
+<p><strong>注意：</strong>并不是所有函数都可以拥有C<code>[[Construct]]</code>方法，因此并不是所有函数都已用new来调用</p>
+<h3 id="在ES5中如何判断函数如何被调用"><a href="#在ES5中如何判断函数如何被调用" class="headerlink" title="在ES5中如何判断函数如何被调用"></a>在ES5中如何判断函数如何被调用</h3><p>最流行的方法是使用instanceof：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">this</span> <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"you must use new with Person."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>);</span><br><span class="line"><span class="keyword">var</span> notAPerson = Person(<span class="string">"nicholas"</span>); <span class="comment">//抛出错误</span></span><br></pre></td></tr></table></figure>
+<p>通过对this的检查，检查this是否为一个构造器实例。这种方法之所以能奏效是因为Construct方法创建了Person的一个新实例并将其赋值给this。但是这种方法并不绝对可靠，当我们使用call或者apply来将函数调用的this绑定为一个Person实例时，我们还是能绕过这种判断</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>);</span><br><span class="line"><span class="keyword">var</span> notAPerson = Person.call(person, <span class="string">"Michael"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="new-target元属性"><a href="#new-target元属性" class="headerlink" title="new.target元属性"></a>new.target元属性</h3><p>为了更好的解决函数是被怎样调用的问题，ES6引进了<code>new.target</code>元属性。</p>
+<p><strong>元属性：</strong>非对象（例如new)上的一个属性，并提供关联到它的目标的附加信息。</p>
+<p>当函数的<code>[[Consturct]]</code>方法被调用时，new.target会被填入new运算符的作用目标，而若<code>[[Call]]</code>被执行，new.target的值则会是undefined</p>
+<p>通过检查new.target是否被定义或者是否为具体的值，来判断函数使用使用new进行（特定的构造器）调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">new</span>.target === Person) &#123;</span><br><span class="line">		<span class="comment">// (new.target !== undefined)</span></span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"You must use new with Person."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>警告：</strong>在函数之外使用new.target会有语法错误</p>
+<h2 id="块级函数"><a href="#块级函数" class="headerlink" title="块级函数"></a>块级函数</h2><p>在ES3或更早版本中，在代码块中声明函数（即块级函数）严格来说应当是一个语法错误，但所有的浏览器都支持该语法，但是支持都有轻微差异。为了控制这种不兼容行为，ES5的严格模式为代码块内部的函数声明引入一个错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ES6并不会报错，他会将doSomething()函数视为块级声明，并允许它在定义所在的代码块内部被访问。</p>
+<h3 id="决定何时使用块级函数"><a href="#决定何时使用块级函数" class="headerlink" title="决定何时使用块级函数"></a>决定何时使用块级函数</h3><p>块级函数与let关键字相似，在执行流跳出定义所在的代码块之后，函数定义就会被移除。关键区别在于：块级函数会被提升到所在代码块的顶部；而是用let的函数表达式则不会</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">typeof</span> doSomething);</span><br><span class="line">	<span class="keyword">let</span> doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	&#125; <span class="comment">//Cannot access 'doSomething' before initialization</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	&#125; <span class="comment">//输出function</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里解释一下，我看书的时候它在这里说let的函数表达式不会被提升到代码快顶部，我又查了很多资料有些也说let声明并不会提升。所以这里解释一下let到底会不会提升</p>
+<p>let定义其实会提升，但它与var的提升又有点不同，var在提升的时候会将变量初始化undefined，而let并不初始化，所以变现的跟没有提升一样，但是它确实提升了。所以这其中会出现暂时性死区的问题，这也是我们之前说过，在let声明并赋值之前调用变量会报错</p>
+<h3 id="非严格模式的块级函数"><a href="#非严格模式的块级函数" class="headerlink" title="非严格模式的块级函数"></a>非严格模式的块级函数</h3><p>ES6在非严格模式下也是可以使用块级函数的，但是块级函数的作用域会被提升到所在函数或全局环境的顶部，而不是代码块的的顶部。这也就意味着，在代码块之外，我们同样可以访问这个块级函数</p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>箭头函数与传统的函数不同点：</p>
+<ul>
+<li>没有this、super、arguments，也没有new.target绑定：这些值都有箭头函数所在的、最靠近的非箭头函数来决定</li>
+<li>不能使用new调用</li>
+<li>没有原型：prototype属性</li>
+<li>不能更改this：this的值在整个函数的生命周期内保持不变</li>
+<li>没有arguments对象：函数必须依赖具名参数或剩余参数</li>
+<li>不允许重复的具名参数</li>
+</ul>
+<p>箭头函数使用单一的this值来执行代码，使得JS引擎可以更容易对代码的操作进行优化，其余差异也聚集在减少箭头函数内部的错误与不确定性</p>
+<p><strong>注意：</strong>箭头函数也拥有name属性，并且遵循与其它函数相同的规则</p>
+<h3 id="箭头函数的语法"><a href="#箭头函数的语法" class="headerlink" title="箭头函数的语法"></a>箭头函数的语法</h3><p>箭头函数的语法有很多写法，取决与你要完成的目标。</p>
+<p>但是所有的变体都一函数参数开头，紧跟着箭头，再接下来是函数体。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reflect = <span class="function"><span class="params">value</span> =&gt;</span> value;</span><br><span class="line"><span class="comment">// 等效于</span></span><br><span class="line"><span class="keyword">var</span> reflect = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果需要传入多个参数，则需要将参数用括号包裹</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="function">(<span class="params">num1, num2</span>) =&gt;</span> num1 + num2;</span><br><span class="line"><span class="comment">//等效于</span></span><br><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果函数没有任何参数，那么声明时必须使用一对括号</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="params">()</span> =&gt;</span> <span class="string">"Nicholas"</span>;</span><br><span class="line"><span class="comment">// 等效于</span></span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"Nocholas"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当想使用更多传统的函数体、也就是可能包含多个语句时，需要将函数体统一用一对换括号进行包裹，并明确定义一个返回值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="function">(<span class="params">num1, num2</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>花括号被用于表示函数的主体，但是若箭头函数想要从函数体内向外返回一个对象字面量，就必须将该字面量包裹在圆括号内</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getTempItem = <span class="function"><span class="params">id</span> =&gt;</span> (&#123;<span class="attr">id</span>: id, <span class="attr">name</span>: <span class="string">"Temp"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>将对象字面量包裹在括号内，标识括号内的是一个字面量而不是一个函数体。</p>
+<h3 id="创建立即执行函数"><a href="#创建立即执行函数" class="headerlink" title="创建立即执行函数"></a>创建立即执行函数</h3><p>在ES5中有一种流行的函数调用方法，即IIFE，可以用来创建一个闭包作用域，将一部分变量隔离于其它程序作用域</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> name;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;(<span class="string">"Nicholas"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(person.getName()) <span class="comment">// "Nicholas"</span></span><br></pre></td></tr></table></figure>
+<p>我们同样可以使用的ES6中的箭头函数来完成这一个IIFE，将name包裹到闭包中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="function">(<span class="params">(name</span>) =&gt;</span> &#123;</span><br><span class="line">	reutrn &#123;</span><br><span class="line">		getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> name;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)(<span class="string">"Nocholas"</span>);</span><br></pre></td></tr></table></figure>
+<p>只不过箭头函数需要在被立即调用之前包裹在括号中，这与传统的IIFE不同，传统的IIFE可以使用两种方式即</p>
+<p><code>(function(value){//函数体})(value)</code>和<code>function(value){//函数体}(value)</code>    </p>
+<h3 id="没有this绑定"><a href="#没有this绑定" class="headerlink" title="没有this绑定"></a>没有this绑定</h3><p>在JS编程中的常见错误就是this的指向在编程中出现混淆，导致程序出错或者出现非预期情况，例如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> PageHandler = &#123;</span><br><span class="line">	id: <span class="string">"123456"</span>,</span><br><span class="line">	init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">document</span>.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.doSomething(event.type);</span><br><span class="line">		&#125;, <span class="literal">false</span>);</span><br><span class="line">	&#125;,</span><br><span class="line">	doSomething: <span class="function"><span class="keyword">function</span>(<span class="params">type</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Handing"</span> + type + <span class="string">" for "</span> + <span class="keyword">this</span>.id);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码乍一看并没有什么问题，我们闯进啊了一个PageHandler对象，如果调用它的init函数，会为当前文档界面创建一个点击事件的监听，当点击事件触发，调用doSomething函数。但是真正的问题是，当点击事件触发时，我们调用不到doSomething函数。这是因为在事件的回调函数中的this并不是指向PageHandler对象，而是指向了事件触发对象，这里就是document对象。对于这个问题，我们可以使用bind函数来强制绑定函数执行时的this指向</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> PageHandler = &#123;</span><br><span class="line">	id: <span class="string">"123456"</span>,</span><br><span class="line">	init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">document</span>.addEventListener(<span class="string">"click"</span>, (<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.doSomething(event.type);</span><br><span class="line">		&#125;).bind(<span class="keyword">this</span>), <span class="literal">false</span>);</span><br><span class="line">	&#125;,</span><br><span class="line">	doSomething: <span class="function"><span class="keyword">function</span>(<span class="params">type</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Handing "</span> + type +<span class="string">" for "</span> + <span class="keyword">this</span>.id);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我还考虑到了一种解决方法，但是这种方法会额外扩大对象所占用的内存，并不推荐</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> PageHandler = &#123;</span><br><span class="line">	id: <span class="string">"123456"</span>,</span><br><span class="line">	self: <span class="keyword">this</span>,</span><br><span class="line">	init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">document</span>.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">			self.doSomething(event.type);</span><br><span class="line">		&#125;, <span class="literal">false</span>);</span><br><span class="line">	&#125;,</span><br><span class="line">	doSomething: <span class="function"><span class="keyword">function</span>(<span class="params">type</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Handing "</span> + type + <span class="string">" for "</span> + <span class="keyword">this</span>.id);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实修正这种问题的最好方法就是使用箭头函数，我们利用箭头函数并没有自己的this这个特定，箭头函数的this继承自包含箭头函数最近一层的非箭头函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> PageHandler = &#123;</span><br><span class="line">	id: <span class="string">"123456"</span>,</span><br><span class="line">	init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">document</span>.addEventListener(<span class="string">"click"</span>, event =&gt; <span class="keyword">this</span>.doSomething(event.type), <span class="literal">false</span>);</span><br><span class="line">	&#125;,</span><br><span class="line">	doSomething: <span class="function"><span class="keyword">function</span>(<span class="params">type</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Handing "</span> + type + <span class="string">" for "</span> + <span class="keyword">this</span>.id)；</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>箭头函数没有this绑定，箭头函数内部的this的值只能通过查找作用域链来继承，在这个例子中箭头函数的this继承字init函数，所以完美的解决了this指向的问题。</p>
+<p>箭头函数被设计成抛弃型函数，因此它不具备<code>[[Consturctor]]</code>方法，无法使用new调用，而且不发通过call()、apply()或bind()方法来改变它的this值</p>
+<h3 id="箭头函数与数组"><a href="#箭头函数与数组" class="headerlink" title="箭头函数与数组"></a>箭头函数与数组</h3><p>箭头函数的便利性使得它成为了对数组操作的理想选择。当我们需要使用自定义比较器对数组进行排序时</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = value.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a-b;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//可以简写为</span></span><br><span class="line"><span class="keyword">var</span> result = value.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a-b);</span><br></pre></td></tr></table></figure>
+<p>能够使用回调函数的数组方法（譬如sort()、map()与reduce方法），都能通过箭头函数简化它的返回方法。</p>
+<h3 id="没有arguments绑定"><a href="#没有arguments绑定" class="headerlink" title="没有arguments绑定"></a>没有arguments绑定</h3><p>尽管箭头函数没有自己的arguments对象，但是它可以从作用域链中继承包含它的函数的arguments对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createArrowFunctionReturningFirstArg</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">arguments</span>[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arrowFunction = createArrowFunctionReturningFirstArg(); </span><br><span class="line">arrowFunction(); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<p>外层函数返回了一个箭头函数，箭头函数形成闭包，包裹了从作用域链中继承的arguments对象的首个参数，尽管arrowFunction并不存在与外层函数中，仍然能访问闭包中的值</p>
+<h2 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h2><p>ES6对函数进行了一项引擎优化，它改变了尾部调用系统。</p>
+<p><strong>尾调用：</strong>指的是调用函数的语句是另一个函数的最后语句</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> doSomethingElse();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ES6在严格模式下力图为特定的尾调用减少调用栈的大小（非严格模式不变）。在一下条件下，尾调用优化会清除当前栈帧并再次利用它，而不是为尾调用创建新的栈帧：</p>
+<ul>
+<li>尾调用不能引用当前栈帧中的变量（意味着尾调用函数不能形成闭包）</li>
+<li>进行尾调用的函数在尾调用返回结果后不能有额外的操作</li>
+<li>尾调用的结果作为当前函数的返回值</li>
+</ul>
+<p>当满足这三个条件的尾调用就会被轻易的优化了</p>
+<p>下面举对应的反例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">1</span>,</span><br><span class="line">		func = <span class="function"><span class="params">()</span> =&gt;</span> num;</span><br><span class="line">	<span class="keyword">return</span> func;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span> + doSomethingElse();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> result = doSomethingElse();</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2019-09-10, 20:09:24</p>
+        <p><span>最后更新:</span>2019-09-24, 10:26:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/10/ES6学习笔记2--函数/" title="ES6学习笔记2--函数">http://yoursite.com/2019/09/10/ES6学习笔记2--函数/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/10/ES6学习笔记2--函数/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/09/16/ES6学习笔记3--对象/">
+                    ES6学习笔记3--对象
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/09/09/JavaScript学习笔记8--原型/">
+                    JavaScript学习笔记8--原型
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#参数默认值"><span class="toc-number">1.</span> <span class="toc-text">参数默认值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES5模拟参数默认值"><span class="toc-number">1.1.</span> <span class="toc-text">ES5模拟参数默认值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6中的参数默认值"><span class="toc-number">1.2.</span> <span class="toc-text">ES6中的参数默认值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数默认值与arguments对象"><span class="toc-number">1.3.</span> <span class="toc-text">参数默认值与arguments对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数默认值表达式"><span class="toc-number">1.4.</span> <span class="toc-text">参数默认值表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数默认值的暂时性死区"><span class="toc-number">1.5.</span> <span class="toc-text">参数默认值的暂时性死区</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不具名参数"><span class="toc-number">2.</span> <span class="toc-text">不具名参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES5的不具名参数"><span class="toc-number">2.1.</span> <span class="toc-text">ES5的不具名参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#剩余参数"><span class="toc-number">2.2.</span> <span class="toc-text">剩余参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数构造器的增强"><span class="toc-number">2.3.</span> <span class="toc-text">函数构造器的增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展运算符"><span class="toc-number">2.4.</span> <span class="toc-text">扩展运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6的名称属性"><span class="toc-number">3.</span> <span class="toc-text">ES6的名称属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选择合适的名称"><span class="toc-number">3.1.</span> <span class="toc-text">选择合适的名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#名称属性的特殊情况"><span class="toc-number">3.2.</span> <span class="toc-text">名称属性的特殊情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#明确函数的双重用途"><span class="toc-number">4.</span> <span class="toc-text">明确函数的双重用途</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在ES5中如何判断函数如何被调用"><span class="toc-number">4.1.</span> <span class="toc-text">在ES5中如何判断函数如何被调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-target元属性"><span class="toc-number">4.2.</span> <span class="toc-text">new.target元属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块级函数"><span class="toc-number">5.</span> <span class="toc-text">块级函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#决定何时使用块级函数"><span class="toc-number">5.1.</span> <span class="toc-text">决定何时使用块级函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非严格模式的块级函数"><span class="toc-number">5.2.</span> <span class="toc-text">非严格模式的块级函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#箭头函数"><span class="toc-number">6.</span> <span class="toc-text">箭头函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数的语法"><span class="toc-number">6.1.</span> <span class="toc-text">箭头函数的语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建立即执行函数"><span class="toc-number">6.2.</span> <span class="toc-text">创建立即执行函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#没有this绑定"><span class="toc-number">6.3.</span> <span class="toc-text">没有this绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数与数组"><span class="toc-number">6.4.</span> <span class="toc-text">箭头函数与数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#没有arguments绑定"><span class="toc-number">6.5.</span> <span class="toc-text">没有arguments绑定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#尾调用优化"><span class="toc-number">7.</span> <span class="toc-text">尾调用优化</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"ES6学习笔记2--函数　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/09/16/ES6学习笔记3--对象/" title="上一篇: ES6学习笔记3--对象">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/09/09/JavaScript学习笔记8--原型/" title="下一篇: JavaScript学习笔记8--原型">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8--原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7--对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS选择器/">CSS选择器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/28/Java-Servlet6/">Java-Servlet学习笔记（六）--JSTL</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/Java-Servlet5/">Java-Servlet学习笔记（五）--表达式语言</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/24/Java-Servlet4/">Java-Servlet学习笔记（四）--JavaServer Page(JSP)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/Java-Servlet3/">Java-Servlet学习笔记（三）--会话管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/18/Java-Servlet2/">Java-Servlet学习笔记（二）--Servlets</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/13/FTP-Sublime-Sftp/">服务器配置FTP环境并使用Sublime-sftp连接服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/04/AnchorCMS-XSS/">AnchorCMS0.9.2-XSS漏洞审计</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/SECCON-2018-CTF-GhostKingdom-Write-up/">SECCON 2018 CTFGhostKingdom Writeup</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/23/Vulhub-phpmyadmin4-0-x-4-6-2远程代码执行/">Vulhub-phpmyadmin4.0.x-4.6.2远程代码执行漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/21/Vulhub-ActiveMQ-反序列化漏洞/">Vulhub-ActiveMQ--反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/20/PHP-Audit-Labs-Day13/">PHP代码审计-特定场合下addslashes函数的绕过</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/13/PHP-Audit-Labs-Day12/">PHP代码审计-误用htmlentities函数引发的漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/PHP-Audit-Labs-Day11/">PHP代码审计-unserialize反序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/PHP-Audit-Labs-Day10/">PHP代码审计-程序未恰当使用exit导致的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/03/PHP-Audit-Labs-Day9/">PHP代码审计-str_replace函数过滤不当</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/PHP-Audit-Labs-Day8/">PHP代码审计-preg_replace函数命令执行</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/01/PHP-Audit-Labs-Day6/">PHP代码审计-正则使用不当导致的路径穿越</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/29/Java-Servlet1/">Java-Servlet学习笔记（一）--IDEA和Tomcat的安装使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/PHP-Audit-Labs-Day5/">PHP代码审计-mail函数参数的漏洞利用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/PHP-Audit-Labs-Day4/">PHP代码审计-strpos使用不当引发漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/24/PHP-Audit-Labs-Day3/">PHP代码审计-实例化任意对象漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/16/PHP-Audit-Labs-Day2/">PHP代码审计-filter_var函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/Vulhub-Weblogic-SSRF/">Vulhub-Weblogic-SSRF漏洞复现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/09/JAVA7/">Java学习笔记（七）--数字处理类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/08/JAVA6/">Java学习笔记（六）--包装类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/07/DedeCMS4/">DedeCMS代码审计Day4</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/JAVA5/">Java学习笔记（五）--类和对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/05/JAVA4/">Java学习笔记（四）--数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/04/PHP-Phar/">phar扩展在PHP反序列化中的利用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/04/JAVA3/">Java学习笔记（三）--字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/03/JAVA2/">Java学习笔记（二）--流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/02/PHP-Audit-Labs-Day7/">PHP代码审计-parse_str函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/JAVA1/">Java学习笔记（一）--Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/DedeCMS3/">DedeCMS代码审计Day3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/ThinkPHP11/">ThinkPHP框架学习--缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/20/DedeCMS2/">DedeCMS代码审计Day2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/20/ThinkPHP10/">ThinkPHP框架学习--调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/ThinkPHP9/">ThinkPHP框架学习--模板（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/11/ThinkPHP8/">ThinkPHP框架学习--模板（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/10/ThinkPHP7/">ThinkPHP框架学习--模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/06/ThinkPHP6/">ThinkPHP框架学习--模型（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/DedeCMS1/">DedeCMS代码审计Day1</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/03/ThinkPHP5/">ThinkPHP框架学习--模型（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/02/ThinkPHP4/">ThinkPHP框架学习--控制器（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/ThinkPHP3/">ThinkPHP框架学习--控制器（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/PHP-Audit-Labs-Day1/">代码审计-in_array函数缺陷</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/28/ThinkPHP2/">ThinkPHP框架学习--路由</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/26/ThinkPHP1/">ThinkPHP框架学习--配置</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
