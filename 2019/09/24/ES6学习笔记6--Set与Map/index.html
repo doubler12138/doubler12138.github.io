@@ -15,20 +15,20 @@
 
 
 
-<meta name="description" content="前言 这一部分学习Java对数字处理的包装类">
-<meta name="keywords" content="Java,学习笔记">
+<meta name="description" content="前言 Set个Map类型">
+<meta name="keywords" content="WEB前端,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记（七）--数字处理类">
-<meta property="og:url" content="http://yoursite.com/2018/09/09/JAVA7/index.html">
+<meta property="og:title" content="ES6学习笔记6--Set与Map">
+<meta property="og:url" content="http://yoursite.com/2019/09/24/ES6学习笔记6--Set与Map/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 这一部分学习Java对数字处理的包装类">
+<meta property="og:description" content="前言 Set个Map类型">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg">
-<meta property="og:updated_time" content="2018-12-15T13:14:56.339Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/30.jpg">
+<meta property="og:updated_time" content="2019-09-24T13:57:01.168Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记（七）--数字处理类">
-<meta name="twitter:description" content="前言 这一部分学习Java对数字处理的包装类">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg">
+<meta name="twitter:title" content="ES6学习笔记6--Set与Map">
+<meta name="twitter:description" content="前言 Set个Map类型">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/30.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Java学习笔记（七）--数字处理类 | DoubleR&#39;s BLOG</title>
+<title>ES6学习笔记6--Set与Map | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -312,11 +312,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JAVA7" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ES6学习笔记6--Set与Map" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/09/JAVA7/" class="article-date">
-      <time datetime="2018-09-09T01:37:42.000Z" itemprop="datePublished">2018-09-09</time>
+      <a href="/2019/09/24/ES6学习笔记6--Set与Map/" class="article-date">
+      <time datetime="2019-09-24T07:04:52.000Z" itemprop="datePublished">2019-09-24</time>
 </a>
 
 
@@ -331,7 +331,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记（七）--数字处理类
+      ES6学习笔记6--Set与Map
     </h1>
   
 
@@ -340,7 +340,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,210字</span>
+			<span class="post-count">542字</span>
 		</span>
 	</span>
 	
@@ -349,7 +349,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
+			<span class="post-count">2分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +362,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB前端/">WEB前端</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -373,111 +373,24 @@
       
           
         <p><strong>前言</strong></p>
-<p>这一部分学习Java对数字处理的包装类</p>
+<p>Set个Map类型</p>
 <hr>
-<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/19.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/doubler12138/Blog/master/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/BLOG/30.jpg" alt=""></p>
 <a id="more"></a>
-<hr>
-<h2 id="数字格式化"><a href="#数字格式化" class="headerlink" title="数字格式化"></a>数字格式化</h2><p>Java主要对浮点型数据进行数字格式化操作，其中浮点型数据包括double型和float型数据，在Java中使用java.text.DecimalFormat格式化数字。</p>
-<p>在Java中没有格式化的数据遵循以下原则：</p>
-<ul>
-<li>如果数据绝对值大于0.001并且小于10000000，Java将以常规小数形式表示</li>
-<li>如果数据绝对值小于0.001或者大于10000000，使用科学计数法表示</li>
-</ul>
-<p>DecimalFormat是NumberFormat的一个子类，用于格式化十进制数字。它可以将一些数字格式化为证书、浮点数、科学计数法、百分数等。一般情况下可以在实例化DecimalFormat对象时传递数字格式化，也可以通过DecimalFormat类中的applyPatter()方法来实现数字格式化。</p>
-<pre><code>DecimalFormat 类中特殊字符说明
-</code></pre><table>
-<thead>
-<tr>
-<th style="text-align:center">字符</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">表示数字的一位阿拉伯数字，如果该位不存在数字，则显示0</td>
-</tr>
-<tr>
-<td style="text-align:center">#</td>
-<td style="text-align:center">表示数字的一位阿拉伯数字，如果存在则显示字符，不存在不显示</td>
-</tr>
-<tr>
-<td style="text-align:center">.</td>
-<td style="text-align:center">小数分隔符</td>
-</tr>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">负号</td>
-</tr>
-<tr>
-<td style="text-align:center">，</td>
-<td style="text-align:center">分组分隔符</td>
-</tr>
-<tr>
-<td style="text-align:center">E</td>
-<td style="text-align:center">分隔科学计数法中的尾数和指数</td>
-</tr>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:center">本符号放置在数字的前缀或后缀，将数字乘以100显示为百分数</td>
-</tr>
-<tr>
-<td style="text-align:center">\u2030</td>
-<td style="text-align:center">本符号放置在数字的前缀或后缀，将数字乘以1000显示为千分数</td>
-</tr>
-<tr>
-<td style="text-align:center">\u00A4</td>
-<td style="text-align:center">本符号放置在数字的前缀或后缀，作为货币记号</td>
-</tr>
-<tr>
-<td style="text-align:center">‘</td>
-<td style="text-align:center">当上述字符出现在数字中时，需要用单引号引起，系统会将其作为普通符号处理</td>
-</tr>
-</tbody>
-</table>
-<p>数字格式化的使用实例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.DecimalFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimgleFormat</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Simgle</span><span class="params">(String pattern,<span class="keyword">double</span> value)</span></span>&#123;</span><br><span class="line">        DecimalFormat myFormat = <span class="keyword">new</span> DecimalFormat(pattern);</span><br><span class="line">        String output = myFormat.format(value);</span><br><span class="line">        System.out.println(value + <span class="string">" "</span>+ pattern + <span class="string">" "</span> + output);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">UseApplyPatternMethodFormat</span><span class="params">(String pattern,<span class="keyword">double</span> value)</span></span>&#123;</span><br><span class="line">        DecimalFormat myFormat = <span class="keyword">new</span> DecimalFormat();</span><br><span class="line">        myFormat.applyPattern(pattern);</span><br><span class="line">        System.out.println(value + <span class="string">" "</span> + pattern + <span class="string">" "</span> + myFormat.format(value));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Simgle(<span class="string">"###,###.###"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        Simgle(<span class="string">"00000000.###kg"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        Simgle(<span class="string">"000000.000"</span>,<span class="number">123.45</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"#.###%"</span>,<span class="number">0.789</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"###.##"</span>,<span class="number">123456.789</span>);</span><br><span class="line">        UseApplyPatternMethodFormat(<span class="string">"0.00\u2030"</span>,<span class="number">0.789</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在DecimalFormat类中除了可以设置格式化模式来格式化数字之外，还可以使用有些特殊方法对数字进行格式化设置，例如setGroupingSize方法可以设置格式化数字分组大小。</p>
-<h2 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h2><p>在Java语言中提供了一个执行数学基本运算的Math类，该类包括常用的数学孕妇按方法，如三角函数方法、指数函数方法、对数函数方法、平方根函数方法等一些常用数学函数，除此之外还提供了一些常用的数学方法。</p>
-<p><strong>三角函数方法：</strong></p>
-<ul>
-<li>public static double sin(double a)：返回一个值的三角正弦</li>
-<li>public static double cos(double a)：返回一个值的三角余弦</li>
-<li>public static double tan(double a)：返回一个值的三角正切</li>
-<li>public static double asin(double a)：返回一个值的反正弦</li>
-<li>public static double acos(double a)：返回一个值的反余弦</li>
-<li>public static double atan(double a)：返回一个值的反正切</li>
-<li>public static double toRadians(double a)：将角度转换为弧度</li>
-<li>public static double toDegrees(double a)：将弧度转换为角度</li>
-</ul>
-<p>使用示例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrigonometricFunction</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"90度的正弦值："</span> + Math.sin(Math.PI/<span class="number">2</span>));</span><br><span class="line">        System.out.println(<span class="string">"0度的余弦值："</span> + Math.cos(<span class="number">0</span>));</span><br><span class="line">        System.out.println(<span class="string">"60度的正切值："</span> + Math.tan(Math.PI/<span class="number">3</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>指数函数方法：</strong></p>
-<ul>
-<li>public static double exp(double a)：用于获取e的a次方</li>
-<li>public static double log(double a)：用于取自然对数</li>
-<li>public static double log10(double a)：用于取底数为10的对数</li>
-<li>public static double sqrt(double a)：用于取a的平方根</li>
-<li>public static double cbrt(double a)：用于取a的立方根</li>
-<li>public static double pow(double a,double b)：用于取a的b次方</li>
-</ul>
-<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><p><strong>Math.random()方法：</strong></p>
-<p>这个方法默认生成大于等于0.0小于1.0的double型随机数</p>
-<p><strong>Random类：</strong></p>
-<p>Java中还提供一种可以获取随机数的java.util.Random类，语法如下：<code>Random r = new Random();</code></p>
-<h2 id="大数字运算"><a href="#大数字运算" class="headerlink" title="大数字运算"></a>大数字运算</h2><p><strong>BigInteger：</strong></p>
-<p>Java提供java.math.BigInteger类进行大数字运算，BigInteger类型的数字范围较Integer类型的数字范围要大很多。BigInteger支持任意精度的证书，也就是说在运算中BigInteger类型可以准确地表示任何大小的整数值而不不会丢失任何信息，语法如下：<code>public BigInteger(String val)</code></p>
-<p><strong>BigDecimal：</strong><br>BigDecimal和BigInteger都能实现大数字的运算，不同的是BigDecimal加入小数的概念。BigDecimal类支持任何精度的定点数。</p>
-<p>常用的两个构造方法如下：</p>
-<ul>
-<li>public BigDecimal(double val)：实例化时将双精度型转换为BigDecimal类型</li>
-<li>public BigDecimal(String val)：实例化时将字符串形式转换为BigDecimal类型</li>
-</ul>
-<hr>
-<div align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=26508186&auto=1&height=66"></iframe></div>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=4064268&auto=1&height=66"></iframe><br></div>
 
-
+<h2 id="ES5中的Set和Map"><a href="#ES5中的Set和Map" class="headerlink" title="ES5中的Set和Map"></a>ES5中的Set和Map</h2><p>在ES5中，开发者使用对象属性来模拟Set和Map</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">set.foo = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span>(set.foo) &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本例中的set变量是一个原型null的对象，确保在此对象没有继承属性。使用对象的属性作为需要检查的唯一值在ES5中是很常用的方法。当一个属性被添加到set对象时，它的值也被设为true，因此条件判断语句就可以简单判断出该值是否存在。</p>
+<p>使用对象模拟Set与模拟Map之间唯一真正的区别是所存储的值。Map皴法的是数据</p>
+<h2 id="变通方法的问题"><a href="#变通方法的问题" class="headerlink" title="变通方法的问题"></a>变通方法的问题</h2><p>尽管在简单情况下将对象作为Set与Map来使用都是可行的，但是一旦接触到对象属性的局限性，此方式就会遇到更多麻烦。例如，由于对象属性名的类型必须是字符串，你就必须保证任意两个键不能被转换为相同的字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">map[<span class="number">5</span>] = <span class="string">"foo"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(map[<span class="string">"5"</span>]); <span class="comment">//"foo"</span></span><br></pre></td></tr></table></figure>
+<p>数值类型的键会在内部被转换为字符串，因此map[“5”]与map[5]实际上引用了同一个属性。当想将数值和字符串都作为键来使用时，这种内部转换就会引起问题。而若使用对象作为键，就会出现另一个问题</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>),</span><br><span class="line">	key1 = &#123;&#125;,</span><br><span class="line">	key2 = &#123;&#125;;</span><br><span class="line">map[key1] = <span class="string">"foo"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(map[key2]); <span class="comment">//"foo"</span></span><br></pre></td></tr></table></figure>
+<p>由于对象的属性名只能是字符串，key1与key2都均会被转换成”[object Object]”。</p>
+<p>将对象转换为默认的字符串表现形式，使得对象很难被当作Map的键来使用</p>
+<h2 id="ES6的Set"><a href="#ES6的Set" class="headerlink" title="ES6的Set"></a>ES6的Set</h2><p>ES6新增了Set类型，这是一种无重复值的有序列表。Set允许对他包含的数据进行快速访问，从而增加了一个追踪离散值的更有效方式</p>
+<h3 id="创建Set并添加项目"><a href="#创建Set并添加项目" class="headerlink" title="创建Set并添加项目"></a>创建Set并添加项目</h3><h3 id="移除值"><a href="#移除值" class="headerlink" title="移除值"></a>移除值</h3><h3 id="Set上的forEach-方法"><a href="#Set上的forEach-方法" class="headerlink" title="Set上的forEach()方法"></a>Set上的forEach()方法</h3><h3 id="将Set转换为数组"><a href="#将Set转换为数组" class="headerlink" title="将Set转换为数组"></a>将Set转换为数组</h3><h3 id="Weak-Set"><a href="#Weak-Set" class="headerlink" title="Weak Set"></a>Weak Set</h3><h2 id="ES6中的Map"><a href="#ES6中的Map" class="headerlink" title="ES6中的Map"></a>ES6中的Map</h2><h3 id="Map的方法"><a href="#Map的方法" class="headerlink" title="Map的方法"></a>Map的方法</h3><h3 id="Map的初始化"><a href="#Map的初始化" class="headerlink" title="Map的初始化"></a>Map的初始化</h3><h3 id="Map上的forEach方法"><a href="#Map上的forEach方法" class="headerlink" title="Map上的forEach方法"></a>Map上的forEach方法</h3><h3 id="Weak-Map"><a href="#Weak-Map" class="headerlink" title="Weak Map"></a>Weak Map</h3>
       
     </div>
     
@@ -485,13 +398,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/09/JAVA7/">Java学习笔记（七）--数字处理类</a></p>
+        <p><span>本文标题:</span><a href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2018-09-09, 09:37:42</p>
-        <p><span>最后更新:</span>2018-12-15, 21:14:56</p>
+        <p><span>发布时间:</span>2019-09-24, 15:04:52</p>
+        <p><span>最后更新:</span>2019-09-24, 21:57:01</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/09/JAVA7/" title="Java学习笔记（七）--数字处理类">http://yoursite.com/2018/09/09/JAVA7/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/09/JAVA7/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/24/ES6学习笔记6--Set与Map/" title="ES6学习笔记6--Set与Map">http://yoursite.com/2019/09/24/ES6学习笔记6--Set与Map/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/24/ES6学习笔记6--Set与Map/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -504,15 +417,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/09/13/Vulhub-Weblogic-SSRF/">
-                    Vulhub-Weblogic-SSRF漏洞复现
+                <a href="/2019/09/24/利用Canvas实现手写板的插件1/">
+                    利用Canvas实现手写板的插件1
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/08/JAVA6/">
-                    Java学习笔记（六）--包装类
+                <a href="/2019/09/24/秋招复习计划/">
+                    秋招复习计划
                 </a>
             </div>
         
@@ -524,7 +437,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数字格式化"><span class="toc-number">1.</span> <span class="toc-text">数字格式化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数学运算"><span class="toc-number">2.</span> <span class="toc-text">数学运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#随机数"><span class="toc-number">3.</span> <span class="toc-text">随机数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大数字运算"><span class="toc-number">4.</span> <span class="toc-text">大数字运算</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ES5中的Set和Map"><span class="toc-number">1.</span> <span class="toc-text">ES5中的Set和Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变通方法的问题"><span class="toc-number">2.</span> <span class="toc-text">变通方法的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6的Set"><span class="toc-number">3.</span> <span class="toc-text">ES6的Set</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建Set并添加项目"><span class="toc-number">3.1.</span> <span class="toc-text">创建Set并添加项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移除值"><span class="toc-number">3.2.</span> <span class="toc-text">移除值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set上的forEach-方法"><span class="toc-number">3.3.</span> <span class="toc-text">Set上的forEach()方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将Set转换为数组"><span class="toc-number">3.4.</span> <span class="toc-text">将Set转换为数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Weak-Set"><span class="toc-number">3.5.</span> <span class="toc-text">Weak Set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6中的Map"><span class="toc-number">4.</span> <span class="toc-text">ES6中的Map</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map的方法"><span class="toc-number">4.1.</span> <span class="toc-text">Map的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map的初始化"><span class="toc-number">4.2.</span> <span class="toc-text">Map的初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map上的forEach方法"><span class="toc-number">4.3.</span> <span class="toc-text">Map上的forEach方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Weak-Map"><span class="toc-number">4.4.</span> <span class="toc-text">Weak Map</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -560,7 +473,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Java学习笔记（七）--数字处理类　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ES6学习笔记6--Set与Map　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -580,7 +493,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/13/Vulhub-Weblogic-SSRF/" title="上一篇: Vulhub-Weblogic-SSRF漏洞复现">
+            <a href="/2019/09/24/利用Canvas实现手写板的插件1/" title="上一篇: 利用Canvas实现手写板的插件1">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -588,7 +501,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/08/JAVA6/" title="下一篇: Java学习笔记（六）--包装类">
+            <a href="/2019/09/24/秋招复习计划/" title="下一篇: 秋招复习计划">
                 <i class="fa fa-angle-right"></i>
             </a>
         
