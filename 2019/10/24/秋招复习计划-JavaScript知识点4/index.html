@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
 <meta property="og:description" content="前言 Array.sort()方法与实现机制，Ajax的请求过程，JS的垃圾回收机制，JS中的String、Math方法，addEventListener和onClick()的区别。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="d:/Git/Blog/博客图片/BLOG/27.jpg">
-<meta property="og:image" content="d:/hexo/source/picture/互相引用1.png">
-<meta property="og:image" content="d:/hexo/source/picture/互相引用2.png">
-<meta property="og:image" content="d:/hexo/source/picture/互相引用3.png">
-<meta property="og:image" content="d:/hexo/source/picture/互相引用4.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/24/秋招复习计划-JavaScript知识点4/Git/Blog/博客图片/BLOG/27.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/10/24/秋招复习计划-JavaScript知识点4/hexo/source/picture/互相引用1.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/24/秋招复习计划-JavaScript知识点4/hexo/source/picture/互相引用2.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/24/秋招复习计划-JavaScript知识点4/hexo/source/picture/互相引用3.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/24/秋招复习计划-JavaScript知识点4/hexo/source/picture/互相引用4.png">
 <meta property="og:updated_time" content="2019-11-03T01:14:05.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="秋招复习计划-JavaScript知识点4">
 <meta name="twitter:description" content="前言 Array.sort()方法与实现机制，Ajax的请求过程，JS的垃圾回收机制，JS中的String、Math方法，addEventListener和onClick()的区别。">
-<meta name="twitter:image" content="d:/Git/Blog/博客图片/BLOG/27.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/24/秋招复习计划-JavaScript知识点4/Git/Blog/博客图片/BLOG/27.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -193,7 +193,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript/">ECMAScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript知识点/">JavaScript知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB前端/">WEB前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB前端，JavaScript/">WEB前端，JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB后端，Node-js/">WEB后端，Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目计划/">项目计划</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript/">ECMAScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript知识点/">JavaScript知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB前端/">WEB前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB后端/">WEB后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目计划/">项目计划</a></li></ul>
                     </div>
                 </section>
                 
@@ -379,7 +379,7 @@
         <p><strong>前言</strong></p>
 <p>Array.sort()方法与实现机制，Ajax的请求过程，JS的垃圾回收机制，JS中的String、Math方法，addEventListener和onClick()的区别。</p>
 <hr>
-<p><img src="D:\Git\Blog\博客图片\BLOG\27.jpg" alt="27"></p>
+<p><img src="/2019/10/24/秋招复习计划-JavaScript知识点4/Git\Blog\博客图片\BLOG\27.jpg" alt="27"></p>
 <a id="more"></a>
 <div algin="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1399534395&auto=1&height=66"></iframe><br></div>
 
@@ -427,15 +427,15 @@
 <p>JavaScript引擎有一个垃圾回收的后台进程，监控着所有对象，当对象不可触及时会将其删除。</p>
 <h3 id="互相引用下的不可触及"><a href="#互相引用下的不可触及" class="headerlink" title="互相引用下的不可触及"></a>互相引用下的不可触及</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">marry</span>(<span class="params">man, women</span>) </span>&#123;</span><br><span class="line">	man.wife = women;</span><br><span class="line">	women.husband = man;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		father: man,</span><br><span class="line">		mother: women</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> family = marry(&#123;<span class="attr">name</span>: <span class="string">'John'</span>&#125;, &#123;<span class="attr">name</span>: <span class="string">'Ann'</span>&#125;),</span><br></pre></td></tr></table></figure>
 <p>在这个示例中marry函数让传入的两个参数对象互相引用，返回一个包含两者的新对象，结构如下：</p>
-<p><img src="D:\hexo\source\picture\互相引用1.png" alt="互相引用1"></p>
+<p><img src="/2019/10/24/秋招复习计划-JavaScript知识点4/hexo\source\picture\互相引用1.png" alt="互相引用1"></p>
 <p>如果我们在这时切断对father对象的所有引用</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> family.father;</span><br><span class="line"><span class="keyword">delete</span> family.mother.husband</span><br></pre></td></tr></table></figure>
 <p>那么结构就变成了这样的</p>
-<p><img src="D:\hexo\source\picture\互相引用2.png" alt="互相引用2"></p>
+<p><img src="/2019/10/24/秋招复习计划-JavaScript知识点4/hexo\source\picture\互相引用2.png" alt="互相引用2"></p>
 <p>那么father这个对象已经变得不可触及了，虽然它人保持对其它对象的引用，但它还是会被移除</p>
-<p><img src="D:\hexo\source\picture\互相引用3.png" alt="互相引用3"></p>
+<p><img src="/2019/10/24/秋招复习计划-JavaScript知识点4/hexo\source\picture\互相引用3.png" alt="互相引用3"></p>
 <p>移除后的结构就变成了</p>
-<p><img src="D:\hexo\source\picture\互相引用4.png" alt="互相引用4"></p>
+<p><img src="/2019/10/24/秋招复习计划-JavaScript知识点4/hexo\source\picture\互相引用4.png" alt="互相引用4"></p>
 <p><strong>孤岛</strong></p>
 <p>当一堆互相引用的对象整块都不可触及时（就像一个孤岛）</p>
 <p>譬如针对相面这个例子</p>
