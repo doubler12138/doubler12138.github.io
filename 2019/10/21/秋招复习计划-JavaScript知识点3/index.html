@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
 <meta property="og:description" content="前言 这部分复习的内容包括：深拷贝与浅拷贝的区别，防抖与节流，执行上下文，DOM常见的操作方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/Git/Blog/博客图片/BLOG/26.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/hexo/source/picture/throttle.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/hexo/source/picture/debounce.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/hexo/source/picture/ECStack.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/hexo/source/picture/EC的构成.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/hexo/source/picture/作用域链.png">
-<meta property="og:updated_time" content="2019-11-03T01:13:42.630Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/25.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/throttle.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/debounce.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/ECStack.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/EC的构成.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/作用域链.png">
+<meta property="og:updated_time" content="2019-11-03T02:25:05.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="秋招复习计划-JavaScript知识点3">
 <meta name="twitter:description" content="前言 这部分复习的内容包括：深拷贝与浅拷贝的区别，防抖与节流，执行上下文，DOM常见的操作方法">
-<meta name="twitter:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/Git/Blog/博客图片/BLOG/26.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/25.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -380,7 +380,7 @@
         <p><strong>前言</strong></p>
 <p>这部分复习的内容包括：深拷贝与浅拷贝的区别，防抖与节流，执行上下文，DOM常见的操作方法</p>
 <hr>
-<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/Git\Blog\博客图片\BLOG\26.jpg" alt="26"></p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/25.jpg" alt="25"></p>
 <a id="more"></a>
 <div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1374731756&auto=1&height=66"></iframe><br></div>
 
@@ -403,7 +403,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newArray = $.extend(<span class="literal">true</span>, [], array); <span class="comment">// true为深拷贝， false为浅拷贝</span></span><br></pre></td></tr></table></figure>
 <h2 id="防抖和节流"><a href="#防抖和节流" class="headerlink" title="防抖和节流"></a>防抖和节流</h2><h3 id="节流（Throttle）"><a href="#节流（Throttle）" class="headerlink" title="节流（Throttle）"></a>节流（Throttle）</h3><p><strong>节流概念</strong></p>
 <p>当持续触发事件时，保证按照设定的时间固定调用一次事件处理函数函数，例如200ms执行一次。</p>
-<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/hexo\source\picture\throttle.jpg" alt="throttle"></p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/throttle.jpg" alt="throttle"></p>
 <p>应用场景有：scroll、touchmove</p>
 <p><strong>节流的实现方式</strong><br>函数节流主要有两种实现方法：时间戳和定时器</p>
 <p>两者的设计思路是不一样的。</p>
@@ -417,7 +417,7 @@
 <p>而定时器则不同，它是事件触发后，间隔固定时间后执行。在触发和执行这段期间，再次触发没有任何结果。当间隔时间过去后，执行。然后等待下次触发，触发后还是等待固定时间后执行。</p>
 <h3 id="防抖（debounce）"><a href="#防抖（debounce）" class="headerlink" title="防抖（debounce）"></a>防抖（debounce）</h3><p><strong>防抖的概念</strong></p>
 <p>抖动（持续触发事件）停止后的时间超过设定的时间间隔时执行一次函数。需要注意的是，这里的抖动停止表示你停止了触发这个事件，从这个时间点开始计算。如果在设定的时间间隔内再次触发，则重新开始计时。</p>
-<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/hexo\source\picture\debounce.jpg" alt="debounce"></p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/debounce.jpg" alt="debounce"></p>
 <p>应用场景：input验证、搜索联想、resize</p>
 <p><strong>防抖的实现方式</strong></p>
 <p>防抖最普遍的还是定时器的方式，其实现原理是在首次运行时把定时器赋值给一个变量，第二次执行时，如果间隔没超过定时器设定的时间则会清除掉定时器，重新设置定时器，依次反复，当我们停止下来时，没有执行清除定时器，则超过一定时间后触发回调函数</p>
@@ -425,9 +425,9 @@
 <h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><h3 id="JS代码的执行环境"><a href="#JS代码的执行环境" class="headerlink" title="JS代码的执行环境"></a>JS代码的执行环境</h3><p>js的执行环境又称为执行上下文（Execution Context，之后简称为EC）</p>
 <p>JS是单线程的，运行在全局EC，每进入一个function，就做一次入栈操作，向栈顶压入一个属于该function的新的EC。若function中又调用了另一个function，再执行一次入栈…依次执行完后在依次出栈，回到全局EC。全局EC一定是在栈底的，在浏览器关闭后出栈。</p>
 <p>执行上下文，出入栈的过程</p>
-<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/hexo\source\picture\ECStack.png" alt="ECStack"></p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/ECStack.png" alt="ECStack"></p>
 <p>EC的构成</p>
-<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/hexo\source\picture\EC的构成.png" alt="EC的构成"></p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/EC的构成.png" alt="EC的构成"></p>
 <p>JavaScript对于作用域（Scope）和上下文（Context）的实现是这门语言的一个非常独到的地方，部分归功于器独特的灵活性。函数可以接收不同的上下文和作用域。</p>
 <h3 id="作用域和上下文"><a href="#作用域和上下文" class="headerlink" title="作用域和上下文"></a>作用域和上下文</h3><p>作用域和上下文是两个完全不同的概念。作用域是基于函数的，而上下文是基于对象的。作用域涉及到所被调用函数中的变量访问，而上下文是函数被调用的场景，上下文始终是this关键字的值，它是拥有当前所执行代码的对象的引用</p>
 <p><strong>变量作用域</strong></p>
@@ -443,7 +443,7 @@
 <h3 id="作用域链（The-Scope-Chain）"><a href="#作用域链（The-Scope-Chain）" class="headerlink" title="作用域链（The Scope Chain）"></a>作用域链（The Scope Chain）</h3><p>当程序在一个环境中执行时，或创建一个由变量对象组成的作用域链。作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链包含在环境栈中的每个执行环境对应的变量对象。注意，全局执行环境的变量对象始终都是作用域链的最后一个对象。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> color = <span class="string">'blue'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> anotherColor = <span class="string">'red'</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">swapColors</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">let</span> tempColor = anotherColor;</span><br><span class="line">		anotherColor = color;</span><br><span class="line">		color = tempColor;</span><br><span class="line">	&#125;</span><br><span class="line">	swapColors();</span><br><span class="line">&#125;</span><br><span class="line">changeColor()</span><br></pre></td></tr></table></figure>
 <p>这个示例代码一共包括三个执行环境：全局环境、changeColor()的局部环境、swapColors()的局部环境，那么由这三个环境构成的作用域链如下图所示</p>
-<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/hexo\source\picture\作用域链.png" alt="作用域链"></p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/作用域链.png" alt="作用域链"></p>
 <p>内部环境可以通过作用域链访问所有的外部环境，但是外部环境无法访问内部环境中的任何变量和函数。</p>
 <p>对于标识符的解析是沿着作用域链一级一级的搜索标识符的过程。</p>
 <h2 id="常见的DOM操作方法"><a href="#常见的DOM操作方法" class="headerlink" title="常见的DOM操作方法"></a>常见的DOM操作方法</h2><h3 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h3><p>document.querySelector(selectors)：接受一个CSS选择器作为参数，返回第一个匹配该选择器的元素节点。<br>document.querySelectorAll(selectors) ：接受一个CSS选择器作为参数，返回所有匹配该选择器的元素节点。<br>document.getElementsByTagName(tagName)： 返回所有指定HTML标签的元素<br>document.getElementsByClassName(className)：返回包括了所有class名字符合指定条件的元素<br>document.getElementById(id)：返回匹配指定id属性的元素节点。<br>document.getElementsByName(name) ：用于选择拥有name属性的HTML元素（比如\&lt;form>、\&lt;radio>、\&lt;img>、\&lt;frame>、\&lt;embed>和 &lt;object>等）</p>
@@ -465,7 +465,7 @@
         <p><span>本文标题:</span><a href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2019-10-21, 15:49:04</p>
-        <p><span>最后更新:</span>2019-11-03, 09:13:42</p>
+        <p><span>最后更新:</span>2019-11-03, 10:25:05</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/21/秋招复习计划-JavaScript知识点3/" title="秋招复习计划-JavaScript知识点3">http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -571,7 +571,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8-JS的类/">ES6学习笔记8-JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7-迭代器与生成器/">ES6学习笔记7-迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件1/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8--原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7--对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS选择器/">CSS选择器</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8-JS的类/">ES6学习笔记8-JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7-迭代器与生成器/">ES6学习笔记7-迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8--原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7--对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS选择器/">CSS选择器</a></li></ul>
 
 
 
