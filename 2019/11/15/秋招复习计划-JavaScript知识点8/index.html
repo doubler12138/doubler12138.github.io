@@ -15,27 +15,22 @@
 
 
 
-<meta name="description" content="前言 new和Object.create的区别，DOM的location对象">
+<meta name="description" content="前言 浏览器的回流和重绘、JavaScript的arguments、EventLoop事件循环">
 <meta name="keywords" content="JavaScript,复习计划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="秋招复习计划-JavaScript知识点5">
-<meta property="og:url" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/index.html">
+<meta property="og:title" content="秋招复习计划-JavaScript知识点8">
+<meta property="og:url" content="http://yoursite.com/2019/11/15/秋招复习计划-JavaScript知识点8/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 new和Object.create的区别，DOM的location对象">
+<meta property="og:description" content="前言 浏览器的回流和重绘、JavaScript的arguments、EventLoop事件循环">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/32.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/hexo/source/_posts/秋招复习计划-JavaScript知识点5/空对象.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/propertiesObject.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/myCreate.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/protocol.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/host.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/hexo/source/_posts/秋招复习计划-JavaScript知识点5/pathname.png">
-<meta property="og:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/示例.png">
-<meta property="og:updated_time" content="2019-11-04T08:23:02.548Z">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/秋招复习计划-JavaScript知识点8/36.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/秋招复习计划-JavaScript知识点8/渲染过程.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/15/秋招复习计划-JavaScript知识点8/renderTree.png">
+<meta property="og:updated_time" content="2019-11-18T07:18:37.989Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="秋招复习计划-JavaScript知识点5">
-<meta name="twitter:description" content="前言 new和Object.create的区别，DOM的location对象">
-<meta name="twitter:image" content="http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/32.jpg">
+<meta name="twitter:title" content="秋招复习计划-JavaScript知识点8">
+<meta name="twitter:description" content="前言 浏览器的回流和重绘、JavaScript的arguments、EventLoop事件循环">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/15/秋招复习计划-JavaScript知识点8/36.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -67,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>秋招复习计划-JavaScript知识点5 | DoubleR&#39;s BLOG</title>
+<title>秋招复习计划-JavaScript知识点8 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -319,11 +314,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-秋招复习计划-JavaScript知识点5" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="new-秋招复习计划-JavaScript知识点8" class="article article-type-new" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/11/03/秋招复习计划-JavaScript知识点5/" class="article-date">
-      <time datetime="2019-11-03T02:59:02.000Z" itemprop="datePublished">2019-11-03</time>
+      <a href="/2019/11/15/秋招复习计划-JavaScript知识点8/" class="article-date">
+      <time datetime="2019-11-15T02:18:53.000Z" itemprop="datePublished">2019-11-15</time>
 </a>
 
 
@@ -338,7 +333,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      秋招复习计划-JavaScript知识点5
+      秋招复习计划-JavaScript知识点8
     </h1>
   
 
@@ -347,7 +342,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">759字</span>
+			<span class="post-count">1,823字</span>
 		</span>
 	</span>
 	
@@ -356,7 +351,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">3分</span>
+			<span class="post-count">7分</span>
 		</span>
 	</span>
 </div>
@@ -380,74 +375,109 @@
       
           
         <p><strong>前言</strong></p>
-<p>new和Object.create的区别，DOM的location对象</p>
+<p>浏览器的回流和重绘、JavaScript的arguments、EventLoop事件循环</p>
 <hr>
-<p><img src="/2019/11/03/秋招复习计划-JavaScript知识点5/32.jpg" alt="32"></p>
+<p><img src="/2019/11/15/秋招复习计划-JavaScript知识点8/36.jpg" alt="36"></p>
 <a id="more"></a>
-<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1303453732&auto=1&height=66"></iframe><br></div>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=567999629&auto=1&height=66"></iframe><br></div>
 
-<h2 id="new和Object-create-的区别"><a href="#new和Object-create-的区别" class="headerlink" title="new和Object.create()的区别"></a>new和Object.create()的区别</h2><h3 id="Object-create-proto-propertiesObject"><a href="#Object-create-proto-propertiesObject" class="headerlink" title="Object.create(proto, propertiesObject)"></a>Object.create(proto, propertiesObject)</h3><p>Object.create()的定义是使用指定的原型proto对象及其本身的属性propertiesObject去创建一个新的对象（mdn的定义）</p>
-<p><strong>proto</strong></p>
-<p>是必填参数，为新创建的对象指定原型（及新对象的__proto__属性的指向），需要注意的是proto参数可以为null，这是新创建的对象没有原型，也无法继承Object.prototype上的方法</p>
-<p><img src="/2019/11/03/秋招复习计划-JavaScript知识点5/hexo\source\_posts\秋招复习计划-JavaScript知识点5\空对象.png" alt="空对象"></p>
-<p><strong>propertiesObject</strong></p>
-<p>参数可选，参数为一个对象，为新对象添加新属性及其描述器，构成形式与Object.defineProperties()方法的第二个参数相同。添加的属性为新对象自身具有的属性，并不是添加到新对象的原型中</p>
-<p><img src="/2019/11/03/秋招复习计划-JavaScript知识点5/propertiesObject.png" alt="propertiesObject"></p>
-<p><strong>Object.create()的具体步骤</strong></p>
+<h2 id="浏览器的回流与重绘"><a href="#浏览器的回流与重绘" class="headerlink" title="浏览器的回流与重绘"></a>浏览器的回流与重绘</h2><p>想要了解浏览器的回流和重绘，我们首先要了解浏览器的渲染过程</p>
+<h3 id="浏览器的渲染过程"><a href="#浏览器的渲染过程" class="headerlink" title="浏览器的渲染过程"></a>浏览器的渲染过程</h3><p><img src="/2019/11/15/秋招复习计划-JavaScript知识点8/渲染过程.png" alt="渲染过程"></p>
+<p>渲染过程：</p>
 <ul>
-<li>创建一个新对象</li>
-<li>继承指定父类对象</li>
-<li>为新对象扩展新属性</li>
+<li>解析HTML生成DOM树，DOM树包含所有的标签，包括<code>display: none</code>的隐藏节点和JS动态添加的元素</li>
+<li>解析CSS生成CSSOM（样式结构体），在这个过程中会去掉浏览器不能识别的样式</li>
+<li>将DOM树和CSSOM结合生成渲染树renderTree，renderTree不包含隐藏的节点，但是<code>visibility: hidden</code>仍会被包含，因为他会影响布局</li>
+<li>Layout（回流）：也叫重排，根据生成的渲染树，进行回流，得到节点的几何信息（位置，大小）</li>
+<li>Paintiing（重绘）：根据渲染树和回流得到的集合信息，得到节点的绝对像素</li>
+<li>Display：将像素发送给GPU，展示</li>
 </ul>
-<p><strong>手写实现Object.create()</strong></p>
-<p>利用的就是原型式的继承</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.myCreate = <span class="function"><span class="keyword">function</span>(<span class="params">obj, properties</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    F.prototype = obj;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="keyword">new</span> F();</span><br><span class="line">    <span class="keyword">if</span>(properties) &#123;</span><br><span class="line">        <span class="built_in">Object</span>.defineProperties(result, properties);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/03/秋招复习计划-JavaScript知识点5/myCreate.png" alt="myCreate"></p>
-<h3 id="new-Object"><a href="#new-Object" class="headerlink" title="new Object()"></a>new Object()</h3><p>new不想多讲了，已经写过无数遍了</p>
-<h2 id="DOM的location对象"><a href="#DOM的location对象" class="headerlink" title="DOM的location对象"></a>DOM的location对象</h2><h3 id="location的介绍"><a href="#location的介绍" class="headerlink" title="location的介绍"></a>location的介绍</h3><p>location指示当前窗口的url位置。Document和window对象中都拥有一个location属性对象。</p>
-<p>想要获得当前文档完整的URL，可以使用一下方法：</p>
+<p><strong>CSSOM</strong></p>
+<p>样式表解析完毕后，系统会根据选择器将CSS规则添加到对应的哈希表中。这些哈希表包括：ID哈希表、类名称哈希表、标记名哈希表，还有通用哈希表。如果选择器是ID，规则会被添加到ID表中。</p>
+<p>注意，这里CSSOM中的规则并不一定会全被引用</p>
+<p><strong>生成渲染树</strong></p>
+<p><img src="/2019/11/15/秋招复习计划-JavaScript知识点8/renderTree.png" alt="renderTree"></p>
+<p>为了构建渲染树，浏览器主要完成以下工作：</p>
 <ul>
-<li>document.location</li>
-<li>document.location.href</li>
-<li>document.URL</li>
-<li>document.location.toString()</li>
+<li>从DOM树的根节点开始遍历每个可见节点</li>
+<li>对于每个可见节点，从CSSOM中找到对应规则，并应用它们</li>
+<li>根据每个可见节点以及其对应的样式，组合生成渲染树</li>
 </ul>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p><strong>location.href</strong></p>
-<p>当前文档完整的url，如果改变，文档就会被导航到另一个页面</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.location.href = <span class="string">"http://www.baidu.com"</span></span><br></pre></td></tr></table></figure>
-<p><strong>location.protocol</strong></p>
-<p>当前url使用的协议，包括结尾的冒号</p>
-<p><img src="/2019/11/03/秋招复习计划-JavaScript知识点5/protocol.png" alt="protocol"></p>
-<p><strong>location.host</strong></p>
-<p>包括当前主机的信息，主机名和端口号</p>
-<p><img src="/2019/11/03/秋招复习计划-JavaScript知识点5/host.png" alt="host"></p>
-<p>如果服务器使用的是Web服务的默认80端口，则不返回端口号</p>
-<p><strong>location.hostname</strong></p>
-<p>返回当前url的主机名</p>
-<p><strong>location.port</strong></p>
-<p>返回url的端口信息。没有写端口信息的url使用的是与默认协议相关的默认端口</p>
-<p><strong>location.pathname</strong></p>
-<p>返回url的路径字符串</p>
-<p><img src="/2019/11/03/秋招复习计划-JavaScript知识点5/hexo\source\_posts\秋招复习计划-JavaScript知识点5\pathname.png" alt="pathname"></p>
-<p>字符串包括最前面的<code>/</code></p>
-<p><strong>location.search</strong></p>
-<p>返回get请求的查询字符串及?后的内容</p>
-<p><strong>location.hash</strong><br>返回url中代表页面某个区域带有#的字符串</p>
-<p><strong>location.username</strong></p>
-<p>设置或返回url中域名前面的用户名</p>
-<p><strong>location.password</strong></p>
-<p>设置或返回url中的密码部分</p>
-<p><strong>location.orgin</strong></p>
-<p>返回url中完整的协议和主机地址部分，包括端口</p>
-<h3 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h3><p><img src="/2019/11/03/秋招复习计划-JavaScript知识点5/示例.png" alt="示例"></p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><strong>location.assign()</strong></p>
-<p>是浏览器加载并展示url所指定的文档</p>
-<p><strong>location.reload()</strong><br>该方法用于重新加载当前页面，可以接受一个Boolean类型的参数，为true是重载将强制从服务器重新获取，为false时从缓存中重载。默认为false</p>
-<p><strong>location.replace()</strong></p>
-<p>提供一个url用来替换当前页面，他与assign的区别是，assign是可追溯的，但是replace跳转后页面不会保留在记录中，所以无法使用返回按钮来返回到前页面</p>
-<p><strong>location.toString()</strong></p>
-<p>获得当前页面的字符串输出</p>
-
+<p>不可见的节点：</p>
+<ul>
+<li>一些不会渲染输出的节点，比如script、meta、link</li>
+<li>一些通过CSS隐藏的节点，比如说<code>display:none</code>。注意，利用visibility和opacity</li>
+</ul>
+<h3 id="回流-Layout"><a href="#回流-Layout" class="headerlink" title="回流(Layout)"></a>回流(Layout)</h3><p>回流是指通过构造渲染树，计算DOM节点在设备视口(viewport)内的确切位置和大小。这会导致渲染树的改变，也就是会重新构造renderTree，所以这个过程也称为重排</p>
+<p>为了弄清每个对象在网站的确切大小和位置，浏览器从渲染树的根节点开始遍历，而在回流这个阶段，我们就需要根据视口具体的宽度，将其转换为实际的像素值。</p>
+<p>每个页面至少需要一次回流，就是在页面第一次加载的时候</p>
+<h3 id="重绘-Painting"><a href="#重绘-Painting" class="headerlink" title="重绘(Painting)"></a>重绘(Painting)</h3><p>当renderTree中的一些元素需要更新属性，而这些属性知识影响元素的外观，风格而不会影响布局，这个过程称为重绘</p>
+<h3 id="什么情况下会发生回流和重绘"><a href="#什么情况下会发生回流和重绘" class="headerlink" title="什么情况下会发生回流和重绘"></a>什么情况下会发生回流和重绘</h3><p>不同条件下发生回流的范围及程度会不同，一下的操作都会导致回流：</p>
+<ul>
+<li>页面初始化渲染</li>
+<li>改变字体，改变元素尺寸（盒式模型的所有属性值的改变都会导致），各种情况有:<ul>
+<li>设置style属性的值</li>
+<li>激活CSS伪类</li>
+<li>操作class属性</li>
+</ul>
+</li>
+<li>改变元素内容（文本或图片等，例如在input框中输入文字）</li>
+<li>添加或删除可见的DOM元素（删除本身就是不可见的元素不会发生回流）</li>
+<li>fixed定位的元素，在拖动滚动条时会一直回流</li>
+<li>调整窗口大小</li>
+<li>计算offsetWIdth和offsetHeight属性</li>
+</ul>
+<p>对以下属性</p>
+<p>offsetTop、offsetLeft、 offsetWidth、offsetHeight、scrollTop、scrollLeft、scrollWidth、scrollHeight、clientTop、clientLeft、clientWidth、clientHeight、getComputedStyle() (currentStyle in IE)。</p>
+<p>的操作，浏览器并不立即执行，而是会先会存在队列中，有一定时间顺序的去执行这些操作，但是在这个过程中我们需要去获取在该队列中的属性是，浏览器为了取得正确的值就会触发回流。这回影响到浏览器优化，所以在多次使用这些值时需要进行缓存。</p>
+<p>需要注意的是，回流必将引起重绘，而重回不一定会回流。回流的成本开销要高于重绘，一个节点的回流往往会导致其子节点以及同级节点的回流。</p>
+<p>在CSS3标准下，什么元素的改变会导致浏览器的回流和重绘，可以查看<a href="https://csstriggers.com/" target="_blank" rel="noopener">https://csstriggers.com/</a> 。这个网站包含了CSS3标准下的哪些属性在不同浏览器内核的情况下会导致回流或者重绘。</p>
+<h3 id="如何减少回流和重绘"><a href="#如何减少回流和重绘" class="headerlink" title="如何减少回流和重绘"></a>如何减少回流和重绘</h3><p>由于回流和重绘会消耗额外的计算资源，所以我们在编写页面时需要尽量减少回流和重绘的触发，从而达到页面的优化。</p>
+<p><strong>cssText</strong></p>
+<p>当我们使用JS去修改一个元素的CSS样式时，我们需要尽量注意我们的方式，譬如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="built_in">document</span>.body.style;</span><br><span class="line">s.padding = <span class="string">"2px"</span>; <span class="comment">// 回流+重绘</span></span><br><span class="line">s.border = <span class="string">"1px solid red"</span>; <span class="comment">//回流+重绘</span></span><br><span class="line">s.margin = <span class="string">"2px"</span>; <span class="comment">// 回流+重绘</span></span><br></pre></td></tr></table></figure>
+<p>这里元素的集合信息被修改了三次，由于浏览器的优化机制，这些修改会被缓存起来，但是如果这期间有特定的方法或属性访问位置信息的话就会触发三次回流加重绘。所以最好还是通过cssText一次性修改CSS样式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el.style.cssText += <span class="string">'borde: 1px solid red; padding: 2px; margin: 2px'</span></span><br></pre></td></tr></table></figure>
+<p><strong>修改class名</strong></p>
+<p>利用修改class名来代替JS对CSS样式的操作。例如对于按钮我们有两两套样式，点击前和点击后，那么我们可以在style标签内写入两套样式，然后在按钮点击后，替换按钮的class名，应用点击后的样式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el.class = <span class="string">"click"</span></span><br></pre></td></tr></table></figure>
+<p>这个方法的优化原理和cssText是一样的，及将对样式的修改一次性完成。</p>
+<p><strong>display:none</strong></p>
+<p>隐藏元素，应用修改，确定以后重新显示</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">el.style.display = <span class="string">'none'</span>;</span><br><span class="line">el.style.padding = <span class="string">'2px'</span>;</span><br><span class="line">el.style.margin = <span class="string">'2px'</span>;</span><br><span class="line">el.style.display = <span class="string">'block'</span></span><br></pre></td></tr></table></figure>
+<p>还是一样的，先让元素不可见，这样对它的所有操作都不会触发回流和重绘，等所有的修改确定后再重新显示，但是我总觉得这种方法怪怪的。</p>
+<p><strong>cloneNode</strong></p>
+<p>将原始元素拷贝到一个脱离文档的系欸但中，修改副本，完成后再进行替换，其实就是避免对原生DOM树的操作，大体来说就是虚拟DOM的理念</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> old = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line"><span class="keyword">let</span> clone = old.cloneNode(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">// 对clone进行一些操作</span></span><br><span class="line">old.parentNode.replaceChild(clone,old);</span><br></pre></td></tr></table></figure>
+<p><strong>document.createDocumentFragment</strong></p>
+<p>使用文档片段在当前DOM之外建立一个子树，再将其插入回去</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fragment = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line"><span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"list"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> _li = <span class="built_in">document</span>.createElement(<span class="string">"li"</span>);</span><br><span class="line">    _li.onmouseover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.style.backgroundColor = <span class="string">"#22b909"</span>;</span><br><span class="line">        <span class="keyword">this</span>.style.width = <span class="string">"120px"</span>;</span><br><span class="line">        <span class="keyword">this</span>.style.height = <span class="string">"50px"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    _li.onmouseout = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.style.backgroundColor = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">this</span>.style.width = <span class="string">"100px"</span>;</span><br><span class="line">        <span class="keyword">this</span>.style.height = <span class="string">"40px"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    fragment.appendChild(_li);</span><br><span class="line">&#125;</span><br><span class="line">list.appendChild(fragment);</span><br></pre></td></tr></table></figure>
+<p><strong>其它的优化方式</strong></p>
+<ul>
+<li>使用translate代替top改变，top会触发回流而translate不会</li>
+<li>使用opacity替代visibility，前者回流和重绘都不会触发，而后者都会</li>
+<li>不要使用table布局，table的一个小改动都有可能触发回流，尽量使用div</li>
+<li>启动GPU硬件加速，使用transform:translateZ(0)、transform:tanslate3d(0,0,0)来启动GPU硬件加速</li>
+</ul>
+<h3 id="CSS与JS对DOM解析和渲染的阻塞"><a href="#CSS与JS对DOM解析和渲染的阻塞" class="headerlink" title="CSS与JS对DOM解析和渲染的阻塞"></a>CSS与JS对DOM解析和渲染的阻塞</h3><p>通过\<script>和\<link>引入外部资源，当解析到该标签的时候，会进行下载。</p>
+<ul>
+<li>CSS脚本的加载不会阻塞DOM解析过程，但是会阻塞渲染过程</li>
+<li>JS脚本的加载与执行会阻塞DOM解析过程，但是不会阻塞后续的资源加载</li>
+<li>JS脚本的加载中，如果你确定没必要阻塞DOM解析的话，不凡按需要加上defer或async属性，此时脚本下载的过程是不会阻塞DOM解析的。</li>
+<li>浏览器遇到scirpt且没有的肥肉或async属性的标签时，为了给script标签内部的JS提供最新的信息，会触发页面的回流和重绘过程。</li>
+<li>如果前面CSS资源尚未加载完毕时，浏览器会等待它加载完毕之后再执行脚本。及CSS不阻塞JS的加载，但阻塞它的执行</li>
+</ul>
+<p>对于之前的种种情况，针对的优化方式是，尽量将script标签放在底部，防止阻塞DOM解析，而link标签最好放在头部，为渲染过程提供样式。如果头部同时有script和link的情况下，最好将scirpt放在link上面，防止css脚本加载时间过长，使js等待时间也很长。</p>
+<p><strong>defer和async</strong></p>
+<p>先来试个一句话解释仨，当浏览器碰到 <code>script</code> 脚本的时候：</p>
+<ul>
+<li><code>&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;</code></li>
+<li><code>&lt;script async src=&quot;script.js&quot;&gt;&lt;/script&gt;</code></li>
+<li><code>&lt;script defer src=&quot;myscript.js&quot;&gt;&lt;/script&gt;</code></li>
+</ul>
+<p>然后从实用角度来说呢，首先把所有脚本都丢到 <code>&lt;/body&gt;</code> 之前是最佳实践，因为对于旧浏览器来说这是唯一的优化选择，此法可保证非脚本的其他一切元素能够以最快的速度得到加载和解析。</p>
+<p><img src="D:\hexo\source\_posts\秋招复习计划-JavaScript知识点8\refer和async.jpg" alt="refer和async"></p>
+</script></p>
       
     </div>
     
@@ -455,13 +485,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></p>
+        <p><span>本文标题:</span><a href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2019-11-03, 10:59:02</p>
-        <p><span>最后更新:</span>2019-11-04, 16:23:02</p>
+        <p><span>发布时间:</span>2019-11-15, 10:18:53</p>
+        <p><span>最后更新:</span>2019-11-18, 15:18:37</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/11/03/秋招复习计划-JavaScript知识点5/" title="秋招复习计划-JavaScript知识点5">http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/03/秋招复习计划-JavaScript知识点5/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/15/秋招复习计划-JavaScript知识点8/" title="秋招复习计划-JavaScript知识点8">http://yoursite.com/2019/11/15/秋招复习计划-JavaScript知识点8/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/15/秋招复习计划-JavaScript知识点8/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -473,16 +503,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/11/04/秋招复习计划-JavaScript知识点6/">
-                    秋招复习计划--JavaScript知识点6
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/11/01/秋招复习计划-算法题3/">
-                    秋招复习计划-算法题3
+                <a href="/2019/11/12/秋招复习计划-算法题4/">
+                    秋招复习计划-算法题4
                 </a>
             </div>
         
@@ -494,7 +518,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#new和Object-create-的区别"><span class="toc-number">1.</span> <span class="toc-text">new和Object.create()的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-create-proto-propertiesObject"><span class="toc-number">1.1.</span> <span class="toc-text">Object.create(proto, propertiesObject)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-Object"><span class="toc-number">1.2.</span> <span class="toc-text">new Object()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM的location对象"><span class="toc-number">2.</span> <span class="toc-text">DOM的location对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#location的介绍"><span class="toc-number">2.1.</span> <span class="toc-text">location的介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">2.2.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整示例"><span class="toc-number">2.3.</span> <span class="toc-text">完整示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">2.4.</span> <span class="toc-text">方法</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器的回流与重绘"><span class="toc-number">1.</span> <span class="toc-text">浏览器的回流与重绘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器的渲染过程"><span class="toc-number">1.1.</span> <span class="toc-text">浏览器的渲染过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回流-Layout"><span class="toc-number">1.2.</span> <span class="toc-text">回流(Layout)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重绘-Painting"><span class="toc-number">1.3.</span> <span class="toc-text">重绘(Painting)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么情况下会发生回流和重绘"><span class="toc-number">1.4.</span> <span class="toc-text">什么情况下会发生回流和重绘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何减少回流和重绘"><span class="toc-number">1.5.</span> <span class="toc-text">如何减少回流和重绘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS与JS对DOM解析和渲染的阻塞"><span class="toc-number">1.6.</span> <span class="toc-text">CSS与JS对DOM解析和渲染的阻塞</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -530,7 +554,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"秋招复习计划-JavaScript知识点5　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"秋招复习计划-JavaScript知识点8　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -550,15 +574,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/11/04/秋招复习计划-JavaScript知识点6/" title="上一篇: 秋招复习计划--JavaScript知识点6">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/11/01/秋招复习计划-算法题3/" title="下一篇: 秋招复习计划-算法题3">
+            <a href="/2019/11/12/秋招复习计划-算法题4/" title="下一篇: 秋招复习计划-算法题4">
                 <i class="fa fa-angle-right"></i>
             </a>
         
