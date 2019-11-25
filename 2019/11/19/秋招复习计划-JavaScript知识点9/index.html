@@ -27,7 +27,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/11/19/秋招复习计划-JavaScript知识点9/基本的事件循环.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/19/秋招复习计划-JavaScript知识点9/执行结果.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/19/秋招复习计划-JavaScript知识点9/宏微任务.png">
-<meta property="og:updated_time" content="2019-11-23T15:31:07.297Z">
+<meta property="og:image" content="http://yoursite.com/2019/11/19/秋招复习计划-JavaScript知识点9/垃圾语言.png">
+<meta property="og:updated_time" content="2019-11-25T13:37:40.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="秋招复习计划-JavaScript知识点9">
 <meta name="twitter:description" content="前言 EventLoop事件循环和宏任务与微任务">
@@ -343,7 +344,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,933字</span>
+			<span class="post-count">2,867字</span>
 		</span>
 	</span>
 	
@@ -352,7 +353,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">7分</span>
+			<span class="post-count">11分</span>
 		</span>
 	</span>
 </div>
@@ -479,6 +480,128 @@
 <li>第一次事件循环结束</li>
 <li>开始第二次事件循环，从macrotask queue中取出任务执行，也就是setTimeout的回调函数，输出time over</li>
 </ul>
+<h3 id="一个复杂的例子"><a href="#一个复杂的例子" class="headerlink" title="一个复杂的例子"></a>一个复杂的例子</h3><p>通过之前对宏任务和微任务的分析，我们已经了解到了ES6版本的事件循环机制了，那么接下来，就让我们来看一个复杂的例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1'</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'2'</span>);</span><br><span class="line">	process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'3'</span>);</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'4'</span>);</span><br><span class="line">		resolve();</span><br><span class="line">	&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'5'</span>);</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;);</span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'6'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'7'</span>);</span><br><span class="line">	resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'8'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'9'</span>);</span><br><span class="line">	process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'10'</span>);</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'11'</span>);</span><br><span class="line">		resolve();</span><br><span class="line">	&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'12'</span>);</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>让我们开始分析这个过程</p>
+<p>首先第一轮事件循环：</p>
+<ul>
+<li>整体script作为第一个宏任务进入主线程执行栈执行遇到console.log，输出1</li>
+<li>遇到setTimeout，其回调函数被分发到macrotask queue内，我们将其记为setTimeout1</li>
+<li>遇到process.nextTick()，其回调函数被分发到microtask queue内，我们将其记为process1</li>
+<li>遇到Promise，new Promise直接执行，输出7。the被发送到microtask queue内，我们将其记为then1</li>
+<li>又遇到setTimeout，将其回调函数发送到macrotask queue内，我们将其记为setTimeout2</li>
+</ul>
+<p>此时我们已经输出了1、7，而这时的macrotask queue和microtask queue队列内有</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">macrotask queue</th>
+<th style="text-align:center">microtask queue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">setTimeout1</td>
+<td style="text-align:center">process1</td>
+</tr>
+<tr>
+<td style="text-align:center">setTimeout2</td>
+<td style="text-align:center">then1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第一个宏任务执行完毕，执行栈空，将microtask queue中的任务压入执行栈执行，注意队列是先进先出的</li>
+<li>执行process1，输出6</li>
+<li>执行then1，输出8</li>
+</ul>
+<p>第一轮事件循环结束，目前我们输出了1，7，6，8。接下来执行第二轮事件循环：</p>
+<ul>
+<li>从macrotask queue中取出setTimeout1压入执行栈执行，输出2，这时队列里有</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">macrotask queue</th>
+<th style="text-align:center">microtask queue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">setTimeout1</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>接下来，我们遇到了process.nextTick()，将其分发到microtask queue中，记为process2。</li>
+<li>new Promise立即执行，输出4，then被分发到microtask queue中，记为then2，这时队列里</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">macrotask queue</th>
+<th style="text-align:center">microtask queue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">setTimeout2</td>
+<td style="text-align:center">process2</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">then2</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>这是setTimeout1执行完毕，执行栈栈空，开始执行process2和then2这两个微任务</li>
+<li>输出3，5，第二轮事件循环结束</li>
+</ul>
+<p>目前我们已经输出了1，7，6，8，2，4，3，5。之后是第三次事件循环：</p>
+<ul>
+<li>将setTimeout2压入执行栈执行，输出9</li>
+<li>将process.nextTick()方法到microtask queue中，记为process3</li>
+<li>执行new Promise，输出11</li>
+<li>将then分发到microtask queue中，记为then3，这时队列里</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">macrotask queue</th>
+<th style="text-align:center">microtask queue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">process2</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">then3</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>setTimeout2执行完毕，执行栈空，执行microtask queue中的任务</li>
+<li>输出10</li>
+<li>输出12</li>
+</ul>
+<p>到现在我们进行了三次事件循环，所有的结果都已输出，输出结果为1 7 6 8 2 4 3 5 9 11 10 12。（这个在Node11下是正确的，而我在Node10下输出的结果是1 7 6 8 2 4 9 11 3 10 5 12，这可能跟Node的事件监听以来libuv有关，具体还是不清楚）</p>
+<h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h2><h4 id="js的异步"><a href="#js的异步" class="headerlink" title="js的异步"></a>js的异步</h4><p>我们从最开头就说javascript是一门单线程语言，不管是什么新框架新语法糖实现的所谓异步，其实都是用同步的方法去模拟的，牢牢把握住单线程这点非常重要。</p>
+<h4 id="事件循环Event-Loop"><a href="#事件循环Event-Loop" class="headerlink" title="事件循环Event Loop"></a>事件循环Event Loop</h4><p>事件循环是js实现异步的一种方法，也是js的执行机制。</p>
+<h4 id="javascript的执行和运行"><a href="#javascript的执行和运行" class="headerlink" title="javascript的执行和运行"></a>javascript的执行和运行</h4><p>执行和运行有很大的区别，javascript在不同的环境下，比如node，浏览器，Ringo等等，执行方式是不同的。而运行大多指javascript解析引擎，是统一的。</p>
+<h4 id="setImmediate"><a href="#setImmediate" class="headerlink" title="(setImmediate"></a>(setImmediate</h4><p>微任务和宏任务还有很多种类，比如<code>setImmediate</code>等等，执行都是有共同点的，有兴趣的同学可以自行了解。</p>
+<h4 id="最后的最后"><a href="#最后的最后" class="headerlink" title="最后的最后"></a>最后的最后</h4><ul>
+<li>javascript是一门单线程语言</li>
+<li>Event Loop是javascript的执行机制</li>
+</ul>
+<p><img src="/2019/11/19/秋招复习计划-JavaScript知识点9/垃圾语言.png" alt="垃圾语言"></p>
 
       
     </div>
@@ -490,7 +613,7 @@
         <p><span>本文标题:</span><a href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2019-11-19, 19:43:23</p>
-        <p><span>最后更新:</span>2019-11-23, 23:31:07</p>
+        <p><span>最后更新:</span>2019-11-25, 21:37:40</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/11/19/秋招复习计划-JavaScript知识点9/" title="秋招复习计划-JavaScript知识点9">http://yoursite.com/2019/11/19/秋招复习计划-JavaScript知识点9/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/19/秋招复习计划-JavaScript知识点9/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -520,7 +643,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#EventLoop的相关概念"><span class="toc-number">1.</span> <span class="toc-text">EventLoop的相关概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#堆（Heap）"><span class="toc-number">1.1.</span> <span class="toc-text">堆（Heap）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈（Stack）"><span class="toc-number">1.2.</span> <span class="toc-text">栈（Stack）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#队列"><span class="toc-number">1.3.</span> <span class="toc-text">队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的JavaScript事件循环"><span class="toc-number">2.</span> <span class="toc-text">基本的JavaScript事件循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#setTimeout"><span class="toc-number">2.1.</span> <span class="toc-text">setTimeout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setInterval"><span class="toc-number">2.2.</span> <span class="toc-text">setInterval</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6的事件循环"><span class="toc-number">3.</span> <span class="toc-text">ES6的事件循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#宏任务和微任务"><span class="toc-number">3.1.</span> <span class="toc-text">宏任务和微任务</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#EventLoop的相关概念"><span class="toc-number">1.</span> <span class="toc-text">EventLoop的相关概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#堆（Heap）"><span class="toc-number">1.1.</span> <span class="toc-text">堆（Heap）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈（Stack）"><span class="toc-number">1.2.</span> <span class="toc-text">栈（Stack）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#队列"><span class="toc-number">1.3.</span> <span class="toc-text">队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的JavaScript事件循环"><span class="toc-number">2.</span> <span class="toc-text">基本的JavaScript事件循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#setTimeout"><span class="toc-number">2.1.</span> <span class="toc-text">setTimeout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setInterval"><span class="toc-number">2.2.</span> <span class="toc-text">setInterval</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6的事件循环"><span class="toc-number">3.</span> <span class="toc-text">ES6的事件循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#宏任务和微任务"><span class="toc-number">3.1.</span> <span class="toc-text">宏任务和微任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一个复杂的例子"><span class="toc-number">3.2.</span> <span class="toc-text">一个复杂的例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结一下"><span class="toc-number">4.</span> <span class="toc-text">总结一下</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#js的异步"><span class="toc-number">4.0.1.</span> <span class="toc-text">js的异步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件循环Event-Loop"><span class="toc-number">4.0.2.</span> <span class="toc-text">事件循环Event Loop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#javascript的执行和运行"><span class="toc-number">4.0.3.</span> <span class="toc-text">javascript的执行和运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#setImmediate"><span class="toc-number">4.0.4.</span> <span class="toc-text">(setImmediate</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#最后的最后"><span class="toc-number">4.0.5.</span> <span class="toc-text">最后的最后</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
