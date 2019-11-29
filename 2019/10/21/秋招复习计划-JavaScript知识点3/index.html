@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 这部分复习的内容包括：深拷贝与浅拷贝的区别，防抖与节流，执行上下文，DOM常见的操作方法">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招复习计划-JavaScript知识点3">
+<meta property="og:url" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 这部分复习的内容包括：深拷贝与浅拷贝的区别，防抖与节流，执行上下文，DOM常见的操作方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/25.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/throttle.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/debounce.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/ECStack.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/EC的构成.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/作用域链.png">
+<meta property="og:updated_time" content="2019-11-29T12:09:02.254Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="秋招复习计划-JavaScript知识点3">
+<meta name="twitter:description" content="前言 这部分复习的内容包括：深拷贝与浅拷贝的区别，防抖与节流，执行上下文，DOM常见的操作方法">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/25.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>秋招复习计划-JavaScript知识点3 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写签名/">手写签名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zzzwyyy.github.io/">小仙女的博客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-秋招复习计划-JavaScript知识点3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/21/秋招复习计划-JavaScript知识点3/" class="article-date">
+      <time datetime="2019-10-21T07:49:04.000Z" itemprop="datePublished">2019-10-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      秋招复习计划-JavaScript知识点3
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">3,751字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">14分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/复习计划/">复习计划</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>这部分复习的内容包括：深拷贝与浅拷贝的区别，防抖与节流，执行上下文，DOM常见的操作方法</p>
+<hr>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/25.jpg" alt="25"></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1374731756&auto=1&height=66"></iframe><br></div>
+
+<h2 id="深拷贝与浅拷贝的区别"><a href="#深拷贝与浅拷贝的区别" class="headerlink" title="深拷贝与浅拷贝的区别"></a>深拷贝与浅拷贝的区别</h2><p>深拷贝和浅拷贝的使用场景是在复杂对象中。</p>
+<p>浅拷贝值复制一层对象，当对象的属性是引用类型时，实质上复制的是其引用。当引用指向的值改变时也会跟着变化。</p>
+<p>深拷贝是指向复制对象的所有层级，而且深拷贝的副本不会影响到原先的值。JS中所有的原始数据类型默认执行深拷贝。</p>
+<h3 id="实现浅拷贝的方法"><a href="#实现浅拷贝的方法" class="headerlink" title="实现浅拷贝的方法"></a>实现浅拷贝的方法</h3><p><strong>for…in只循环第一层</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">simpleCopy</span>(<span class="params">obj1</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> obj2 = <span class="built_in">Array</span>.isArray(obj1) ? [] : &#123;&#125;;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> obj1) &#123;</span><br><span class="line">		obj2[i] = obj1[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> obj2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Object.assign()方法</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = <span class="built_in">Object</span>.assgin(&#123;&#125;, obj);</span><br></pre></td></tr></table></figure>
+<p><strong>等号赋值</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = obj;</span><br></pre></td></tr></table></figure>
+<h3 id="实现深拷贝的方法"><a href="#实现深拷贝的方法" class="headerlink" title="实现深拷贝的方法"></a>实现深拷贝的方法</h3><p><strong>采用递归去拷贝所有层级属性</strong></p>
+<p>当遍历完所有层级后，复制的就是原始值而不是引用值，所以就不会存在修改副本而影响到原对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> objClone = <span class="built_in">Array</span>.isArray(obj)? [] : &#123;&#125;;</span><br><span class="line">	<span class="keyword">if</span>(obj &amp;&amp; <span class="keyword">typeof</span> obj===<span class="string">"object"</span>) &#123;</span><br><span class="line">		<span class="keyword">for</span>(key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">			<span class="keyword">if</span>(obj.hasOwnProperty(key)) &#123;</span><br><span class="line">				<span class="keyword">if</span>(obj[key] &amp;&amp; <span class="keyword">typeof</span> obj[key] === <span class="string">"object"</span>) &#123;</span><br><span class="line">					objClone[key] = deepClone(obj[key]);</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					objClone[key] = obj[key]</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> objClone</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>通过JSON对象来实现深拷贝</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> _obj = <span class="built_in">JSON</span>.stringify(obj);</span><br><span class="line">	<span class="keyword">return</span> objClone = <span class="built_in">JSON</span>.parse(_obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法的缺点就是无法深拷贝目标对象中的方法，会显示为undefined</p>
+<p><strong>通过jQuery的extend方法实现深拷贝</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newArray = $.extend(<span class="literal">true</span>, [], array); <span class="comment">// true为深拷贝， false为浅拷贝</span></span><br></pre></td></tr></table></figure>
+<h2 id="防抖和节流"><a href="#防抖和节流" class="headerlink" title="防抖和节流"></a>防抖和节流</h2><h3 id="节流（Throttle）"><a href="#节流（Throttle）" class="headerlink" title="节流（Throttle）"></a>节流（Throttle）</h3><p><strong>节流概念</strong></p>
+<p>当持续触发事件时，保证按照设定的时间固定调用一次事件处理函数函数，例如200ms执行一次。</p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/throttle.jpg" alt="throttle"></p>
+<p>应用场景有：scroll、touchmove</p>
+<p><strong>节流的实现方式</strong><br>函数节流主要有两种实现方法：时间戳和定时器</p>
+<p>两者的设计思路是不一样的。</p>
+<p>时间戳，是第一次就执行的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> throttle = <span class="function"><span class="keyword">function</span>(<span class="params">func, delay</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> prev = <span class="built_in">Date</span>.now();</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">let</span> _this = <span class="keyword">this</span>;</span><br><span class="line">		<span class="keyword">let</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">		<span class="keyword">let</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">		<span class="keyword">if</span>(now - prev &gt;= delay) &#123;</span><br><span class="line">			func.apply(_this, args);</span><br><span class="line">			prev = <span class="built_in">Date</span>.now();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当事件首次触发与绑定之间的间隔时间大于delay时，第一次就会执行。而后无论事件如何频繁的被触发，只有与上一次执行间隔的时间大于delay的那次触发才会被执行，然后更新时间。</p>
+<p>定时器，第一次不执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> throttle = <span class="function"><span class="keyword">function</span>(<span class="params">func, delay</span>) </span>&#123;</span><br><span class="line">	 <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">	 <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	 	<span class="keyword">let</span> _this = <span class="keyword">this</span>;</span><br><span class="line">	 	<span class="keyword">let</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">	 	<span class="keyword">if</span>(!timer) &#123;</span><br><span class="line">	 		timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	 			func.apply(_this, args);</span><br><span class="line">	 			timer = <span class="literal">null</span>;</span><br><span class="line">	 		&#125;, delay);</span><br><span class="line">	 	&#125;</span><br><span class="line">	 &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首次事件触发并不会执行，而是设定一个定时器，当在定时器的时间间隔内事件再次触发并不会执行，等到间隔时间到了后，执行操作然后将定时器设置为null。当下次事件触发后再次设定定时器。</p>
+<p>时间戳和定时器虽然都能达到节流的效果，但是它们执行起来还是有区别的。时间戳被触发后会立即执行，然后在执行后的一定时间内无法再次执行。等这段时间过去后，事件触发还是立即执行。</p>
+<p>而定时器则不同，它是事件触发后，间隔固定时间后执行。在触发和执行这段期间，再次触发没有任何结果。当间隔时间过去后，执行。然后等待下次触发，触发后还是等待固定时间后执行。</p>
+<h3 id="防抖（debounce）"><a href="#防抖（debounce）" class="headerlink" title="防抖（debounce）"></a>防抖（debounce）</h3><p><strong>防抖的概念</strong></p>
+<p>抖动（持续触发事件）停止后的时间超过设定的时间间隔时执行一次函数。需要注意的是，这里的抖动停止表示你停止了触发这个事件，从这个时间点开始计算。如果在设定的时间间隔内再次触发，则重新开始计时。</p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/debounce.jpg" alt="debounce"></p>
+<p>应用场景：input验证、搜索联想、resize</p>
+<p><strong>防抖的实现方式</strong></p>
+<p>防抖最普遍的还是定时器的方式，其实现原理是在首次运行时把定时器赋值给一个变量，第二次执行时，如果间隔没超过定时器设定的时间则会清除掉定时器，重新设置定时器，依次反复，当我们停止下来时，没有执行清除定时器，则超过一定时间后触发回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay=<span class="number">200</span></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(timer) clearTimeout(timer);</span><br><span class="line">		timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">			fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">			timer = <span class="literal">null</span>;</span><br><span class="line">		&#125;, delay);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><h3 id="JS代码的执行环境"><a href="#JS代码的执行环境" class="headerlink" title="JS代码的执行环境"></a>JS代码的执行环境</h3><p>js的执行环境又称为执行上下文（Execution Context，之后简称为EC）</p>
+<p>JS是单线程的，运行在全局EC，每进入一个function，就做一次入栈操作，向栈顶压入一个属于该function的新的EC。若function中又调用了另一个function，再执行一次入栈…依次执行完后在依次出栈，回到全局EC。全局EC一定是在栈底的，在浏览器关闭后出栈。</p>
+<p>执行上下文，出入栈的过程</p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/ECStack.png" alt="ECStack"></p>
+<p>EC的构成</p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/EC的构成.png" alt="EC的构成"></p>
+<p>JavaScript对于作用域（Scope）和上下文（Context）的实现是这门语言的一个非常独到的地方，部分归功于器独特的灵活性。函数可以接收不同的上下文和作用域。</p>
+<h3 id="作用域和上下文"><a href="#作用域和上下文" class="headerlink" title="作用域和上下文"></a>作用域和上下文</h3><p>作用域和上下文是两个完全不同的概念。作用域是基于函数的，而上下文是基于对象的。作用域涉及到所被调用函数中的变量访问，而上下文是函数被调用的场景，上下文始终是this关键字的值，它是拥有当前所执行代码的对象的引用</p>
+<p><strong>变量作用域</strong></p>
+<p>一个变量可以被定义在局部或全局作用域中，这建立在运行时期间变量的访问性的不同作用于范围。全局变量在函数体的外部被声明，并且存活于整个运行时，并且在任何作用域中都可以访问到。在ES6之前，局部变量只能存在于函数体中，并且函数的每次调用它们都拥有不同的作用域范围。局部变量只能在其被调用期的作用域范围内被赋值检索和操作。</p>
+<p><strong>this上下文</strong></p>
+<p>当一个函数被当作对象的方法调用时，this被设置为调用该方法的对象上。</p>
+<p>当使用new操作符调用函数时，this被绑定到新创建的对象上。</p>
+<p>当调用一个未绑定函数时，在严格模式下thi为undefined，非严格模式下指向window对象。</p>
+<h3 id="执行环境"><a href="#执行环境" class="headerlink" title="执行环境"></a>执行环境</h3><p>JavaScript是一个单线程语言，意味着同一时间只能执行一个任务。当JavaScript解释器初始化执行代码是，它首先默认进入全局执行环境，从此刻开始，函数的每次调用都会创建一个新的执行环境。</p>
+<p>执行环境，它定义了变量或函数有权访问的其它数据，决定了它们各自的行为。单从这方面来看，执行环境的概念更贴近于作用域的概念。</p>
+<p>每个函数都有自己的执行环境。当执行流进入要一个函数时，函数的环境就会被推入一个环境栈。在函数执行完后，栈将其环境弹出，把控制权返回给之前的执行环境。</p>
+<p>执行环境可以分为创建和执行两个阶段。在创建阶段，解析器首先会创建一个变量对象（也称为活动对象），它由定义在执行环境汇中的变量、函数声明和参数组成。在这个阶段，作用域会被初始化，this的值也会被绑定确认。在执行阶段，代码被解释执行。这个变量对象无法手动访问，只有解析器才能访问。</p>
+<h3 id="作用域链（The-Scope-Chain）"><a href="#作用域链（The-Scope-Chain）" class="headerlink" title="作用域链（The Scope Chain）"></a>作用域链（The Scope Chain）</h3><p>当程序在一个环境中执行时，或创建一个由变量对象组成的作用域链。作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链包含在环境栈中的每个执行环境对应的变量对象。注意，全局执行环境的变量对象始终都是作用域链的最后一个对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> color = <span class="string">'blue'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> anotherColor = <span class="string">'red'</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">swapColors</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">let</span> tempColor = anotherColor;</span><br><span class="line">		anotherColor = color;</span><br><span class="line">		color = tempColor;</span><br><span class="line">	&#125;</span><br><span class="line">	swapColors();</span><br><span class="line">&#125;</span><br><span class="line">changeColor()</span><br></pre></td></tr></table></figure>
+<p>这个示例代码一共包括三个执行环境：全局环境、changeColor()的局部环境、swapColors()的局部环境，那么由这三个环境构成的作用域链如下图所示</p>
+<p><img src="/2019/10/21/秋招复习计划-JavaScript知识点3/作用域链.png" alt="作用域链"></p>
+<p>内部环境可以通过作用域链访问所有的外部环境，但是外部环境无法访问内部环境中的任何变量和函数。</p>
+<p>对于标识符的解析是沿着作用域链一级一级的搜索标识符的过程。</p>
+<h2 id="常见的DOM操作方法"><a href="#常见的DOM操作方法" class="headerlink" title="常见的DOM操作方法"></a>常见的DOM操作方法</h2><h3 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h3><p>document.querySelector(selectors)：接受一个CSS选择器作为参数，返回第一个匹配该选择器的元素节点。<br>document.querySelectorAll(selectors) ：接受一个CSS选择器作为参数，返回所有匹配该选择器的元素节点。<br>document.getElementsByTagName(tagName)： 返回所有指定HTML标签的元素<br>document.getElementsByClassName(className)：返回包括了所有class名字符合指定条件的元素<br>document.getElementById(id)：返回匹配指定id属性的元素节点。<br>document.getElementsByName(name) ：用于选择拥有name属性的HTML元素（比如\&lt;form>、\&lt;radio>、\&lt;img>、\&lt;frame>、\&lt;embed>和 &lt;object>等）</p>
+<h3 id="生成节点"><a href="#生成节点" class="headerlink" title="生成节点"></a>生成节点</h3><p>document.createElement(tagName) ： 用来生成HTML元素节点。<br>document.createTextNode(text) ：用来生成文本节点<br>document.createAttribute(name) ：生成一个新的属性对象节点，并返回它。<br>document.createDocumentFragment() ： 生成一个DocumentFragment对象</p>
+<h3 id="Element节点的属性"><a href="#Element节点的属性" class="headerlink" title="Element节点的属性"></a>Element节点的属性</h3><p>Element.attributes ： 返回当前元素节点的所有属性节点<br>Element.id ： 返回指定元素的id属性，可读写<br>Element.tagName ： 返回指定元素的大写标签名<br>Element.innerHTML ： 返回该元素包含的HTML代码，可读写<br>Element.outerHTML ： 返回指定元素节点的所有HTML代码，包括它自身和包含的的所有子元素，可读写<br>Element.className ： 返回当前元素的class属性，可读写<br>Element.classList ： 返回当前元素节点的所有class集合<br>Element.dataset ： 返回元素节点中所有的data-*属性。<br>Element.clientHeight ： 返回元素节点可见部分的高度<br>Element.clientWidth ： 返回元素节点可见部分的宽度<br>Element.clientLeft ： 返回元素节点左边框的宽度<br>Element.clientTop ： 返回元素节点顶部边框的宽度<br>Element.scrollHeight ： 返回元素节点的总高度<br>Element.scrollWidth ： 返回元素节点的总宽度<br>Element.scrollLeft ： 返回元素节点的水平滚动条向右滚动的像素数值,通过设置这个属性可以改变元素的滚动位置<br>Element.scrollTop ： 返回元素节点的垂直滚动向下滚动的像素数值<br>Element.offsetHeight ： 返回元素的垂直高度(包含border,padding)<br>Element.offsetWidth ： 返回元素的水平宽度(包含border,padding)<br>Element.offsetLeft ： 返回当前元素左上角相对于Element.offsetParent节点的垂直偏移<br>Element.offsetTop ： 返回水平位移<br>Element.style ： 返回元素节点的行内样式<br>Element.children ： 包括当前元素节点的所有子元素<br>Element.childElementCount ： 返回当前元素节点包含的子HTML元素节点的个数<br>Element.firstElementChild ： 返回当前节点的第一个Element子节点<br>Element.lastElementChild ： 返回当前节点的最后一个Element子节点<br>Element.nextElementSibling ： 返回当前元素节点的下一个兄弟HTML元素节点<br>Element.previousElementSibling ： 返回当前元素节点的前一个兄弟HTML节点<br>Element.offsetParent ： 返回当前元素节点的最靠近的、并且CSS的position属性不等于static的父元素。</p>
+<h3 id="节点属性"><a href="#节点属性" class="headerlink" title="节点属性"></a>节点属性</h3><p>Node.nodeName ： 返回节点名称，只读<br>Node.nodeType ： 返回节点类型的常数值，只读<br>Node.nodeValue ： 返回Text或Comment节点的文本值，只读<br>Node.textContent ： 返回当前节点和它的所有后代节点的文本内容，可读写<br>Node.baseURI ： 返回当前网页的绝对路径<br>Node.ownerDocument ： 返回当前节点所在的顶层文档对象，即document<br>Node.nextSibling ： 返回紧跟在当前节点后面的第一个兄弟节点<br>Node.previousSibling ： 返回当前节点前面的、距离最近的一个兄弟节点<br>Node.parentNode ： 返回当前节点的父节点<br>Node.parentElement ： 返回当前节点的父Element节点<br>Node.childNodes ： 返回当前节点的所有子节点<br>Node.firstChild ： 返回当前节点的第一个子节点<br>Node.lastChild ： 返回当前节点的最后一个子节点<br>Node.children ： 返回指定节点的所有Element子节点<br>Node.firstElementChild ： 返回当前节点的第一个Element子节点<br>Node.lastElementChild ： 返回当前节点的最后一个Element子节点<br>Node.childElementCount ： 返回当前节点所有Element子节点的数目。</p>
+<h3 id="生成节点-1"><a href="#生成节点-1" class="headerlink" title="生成节点"></a>生成节点</h3><p>document.createEvent(type) ： 生成一个事件对象，该对象能被element.dispatchEvent()方法使用<br>document.addEventListener(type,listener,capture) ： 注册事件<br>document.removeEventListener(type,listener,capture) ： 注销事件<br>document.dispatchEvent(event) ： 触发事件</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>Element.getAttribute()：读取指定属性<br>Element.setAttribute()：设置指定属性<br>Element.hasAttribute()：返回一个布尔值，表示当前元素节点是否有指定的属性<br>Element.removeAttribute()：移除指定属性</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>Node.appendChild(node) ： 向节点添加最后一个子节点<br>Node.hasChildNodes() ： 返回布尔值，表示当前节点是否有子节点<br>Node.cloneNode(true); ：  默认为false(克隆节点), true(克隆节点及其属性，以及后代)<br>Node.insertBefore(newNode,oldNode) ：  在指定子节点之前插入新的子节点<br>Node.removeChild(node) ： 删除节点，在要删除节点的父节点上操作<br>Node.replaceChild(newChild,oldChild) ： 替换节点<br>Node.contains(node) ： 返回一个布尔值，表示参数节点是否为当前节点的后代节点。<br>Node.compareDocumentPosition(node) ： 返回一个7个比特位的二进制值，表示参数节点和当前节点的关系<br>Node.isEqualNode(noe) ： 返回布尔值，用于检查两个节点是否相等。所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同。<br>Node.normalize() ： 用于清理当前节点内部的所有Text节点。它会去除空的文本节点，并且将毗邻的文本节点合并成一个。<br>Node.remove() ： 用于删除当前节点<br>Node.before() ：<br>Node.after()<br>Node.replaceWith()</p>
+<h3 id="事件方法"><a href="#事件方法" class="headerlink" title="事件方法"></a>事件方法</h3><p>document.createEvent(type) ： 生成一个事件对象，该对象能被element.dispatchEvent()方法使用<br>document.addEventListener(type,listener,capture) ： 注册事件<br>document.removeEventListener(type,listener,capture) ： 注销事件<br>document.dispatchEvent(event) ： 触发事件</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2019-10-21, 15:49:04</p>
+        <p><span>最后更新:</span>2019-11-29, 20:09:02</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/10/21/秋招复习计划-JavaScript知识点3/" title="秋招复习计划-JavaScript知识点3">http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/10/21/秋招复习计划-JavaScript知识点3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/10/22/秋招复习计划-算法题2/">
+                    秋招复习计划-算法题2
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/10/21/秋招复习计划-算法题1/">
+                    秋招复习计划-算法题1
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#深拷贝与浅拷贝的区别"><span class="toc-number">1.</span> <span class="toc-text">深拷贝与浅拷贝的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现浅拷贝的方法"><span class="toc-number">1.1.</span> <span class="toc-text">实现浅拷贝的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现深拷贝的方法"><span class="toc-number">1.2.</span> <span class="toc-text">实现深拷贝的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防抖和节流"><span class="toc-number">2.</span> <span class="toc-text">防抖和节流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节流（Throttle）"><span class="toc-number">2.1.</span> <span class="toc-text">节流（Throttle）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防抖（debounce）"><span class="toc-number">2.2.</span> <span class="toc-text">防抖（debounce）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行上下文"><span class="toc-number">3.</span> <span class="toc-text">执行上下文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JS代码的执行环境"><span class="toc-number">3.1.</span> <span class="toc-text">JS代码的执行环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域和上下文"><span class="toc-number">3.2.</span> <span class="toc-text">作用域和上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行环境"><span class="toc-number">3.3.</span> <span class="toc-text">执行环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域链（The-Scope-Chain）"><span class="toc-number">3.4.</span> <span class="toc-text">作用域链（The Scope Chain）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见的DOM操作方法"><span class="toc-number">4.</span> <span class="toc-text">常见的DOM操作方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查找节点"><span class="toc-number">4.1.</span> <span class="toc-text">查找节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成节点"><span class="toc-number">4.2.</span> <span class="toc-text">生成节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Element节点的属性"><span class="toc-number">4.3.</span> <span class="toc-text">Element节点的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节点属性"><span class="toc-number">4.4.</span> <span class="toc-text">节点属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成节点-1"><span class="toc-number">4.5.</span> <span class="toc-text">生成节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">4.6.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-number">4.7.</span> <span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件方法"><span class="toc-number">4.8.</span> <span class="toc-text">事件方法</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"秋招复习计划-JavaScript知识点3　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/10/22/秋招复习计划-算法题2/" title="上一篇: 秋招复习计划-算法题2">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/10/21/秋招复习计划-算法题1/" title="下一篇: 秋招复习计划-算法题1">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/秋招复习计划-Vue知识点1/">秋招复习计划-Vue知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/秋招复习计划-算法题5/">秋招复习计划-算法题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/秋招复习计划-算法题4/">秋招复习计划-算法题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/秋招复习计划-JavaScript知识点7/">秋招复习计划-JavaScript知识点7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8--JS的类/">ES6学习笔记8--JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7--迭代器与生成器/">ES6学习笔记7--迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8-原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7-对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS选择器/">CSS选择器</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 今天来学些Node.js的核心模块，它有一些精简而高效的库组成，为Node.js提供了基本的API">
+<meta name="keywords" content="Nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NodeJs学习笔记2">
+<meta property="og:url" content="http://yoursite.com/2019/08/09/NodeJs学习笔记2/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 今天来学些Node.js的核心模块，它有一些精简而高效的库组成，为Node.js提供了基本的API">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/NodeJs学习笔记2/20.jpg">
+<meta property="og:updated_time" content="2019-11-29T12:07:37.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NodeJs学习笔记2">
+<meta name="twitter:description" content="前言 今天来学些Node.js的核心模块，它有一些精简而高效的库组成，为Node.js提供了基本的API">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/09/NodeJs学习笔记2/20.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>NodeJs学习笔记2 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写签名/">手写签名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zzzwyyy.github.io/">小仙女的博客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-NodeJs学习笔记2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/09/NodeJs学习笔记2/" class="article-date">
+      <time datetime="2019-08-09T14:14:03.000Z" itemprop="datePublished">2019-08-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NodeJs学习笔记2
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">4,196字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">16分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nodejs/">Nodejs</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>今天来学些Node.js的核心模块，它有一些精简而高效的库组成，为Node.js提供了基本的API</p>
+<hr>
+<p><img src="/2019/08/09/NodeJs学习笔记2/20.jpg" alt="20"></p>
+<a id="more"></a>
+<div align="cneter"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=439121995&auto=1&height=66"></iframe><br></div>
+
+<h2 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h2><p>JavaScript 中有一个特殊的对象，称为全局对象（Global Object），它及其所有属性都可 以在程序的任何地方访问，即全局变量。在浏览器 JavaScript 中，通常 window 是全局对象， 而 Node.js 中的全局对象是 global，所有全局变量（除了 global 本身以外）都是 global 对象的属性</p>
+<h3 id="全局对象与全局变量"><a href="#全局对象与全局变量" class="headerlink" title="全局对象与全局变量"></a>全局对象与全局变量</h3><p>global最根本的作用是作为全局变量的宿主。满足以下条件的变量是全局变量：</p>
+<ul>
+<li>在最外层定义的变量；</li>
+<li>全局对象的属性</li>
+<li>隐式定义的变量（未定义直接赋值的变量）</li>
+</ul>
+<p>在Node.js中你不可能在最外层定义变量，因为所有用户代码都属于当前的模块，而模块本身不是最外层上下文</p>
+<h3 id="process"><a href="#process" class="headerlink" title="process"></a>process</h3><p>process是一个全局变量，即global对象的属性。它用于描述当前Node.js进程状态的对象，提供了一个与操作系统的简单接口。</p>
+<p><strong>process对象常用的成员方法：</strong></p>
+<ul>
+<li>process.argv是命令行参数数组，第一个元素是node，第二个元素是脚本名，从第三个元素开始每个元素是一个运行参数</li>
+<li>process.stdout是标准输出流，通常我们使用console.log()向标准输出打印字符，而process.stdout.write()函数提供更底层的接口</li>
+<li>process.stdin是标准输入流，初始时它是被暂停的，要想从标准输入读取数据，你必须恢复流，并手动编写流的事件响应函数</li>
+<li>process.nextTick(callback)的功能是为事件循环设置一项任务，Node.js会在下次事件循环响应时调用callback</li>
+</ul>
+<p>Node.js适合I/O密集型的应用，而不是计算密集型（CPU密集型）的应用，因为Node.js进程只有一个线程，因此在任何时刻都只有一个事件在执行。如果这个事件占用大量的CPU时间，执行事件循环中的下一个事件就需要等待很久，因此Node.js的要给编程原则就是尽量缩短每个事件的执行时间。process.nextTick()提供了要给这样的工具，可以把复杂的工作拆散成一个个较小的事件，在不同的事件循环中执行</p>
+<h3 id="console"><a href="#console" class="headerlink" title="console"></a>console</h3><p>console用于提供控制台标准输出，用于向标准输出流(stdout)或标准错误流(stderr)输出字符</p>
+<ul>
+<li>console.log()：向标准输出流打印字符并以换行符结束。console.log接受若干个参数。多个参数则类似于C语言的printf()命令的格式输出</li>
+<li>console.error()：与console.log的用法相同，只是想标准错误流输出。</li>
+<li>console.trace()：向标准错误流输出当前的调用栈</li>
+</ul>
+<h2 id="常用工具util"><a href="#常用工具util" class="headerlink" title="常用工具util"></a>常用工具util</h2><p>util是一个Node.js核心模块，提供常用函数的集合，用于弥补核心JavaScript的功能过于精简的不足。</p>
+<h3 id="until-inherits"><a href="#until-inherits" class="headerlink" title="until.inherits"></a>until.inherits</h3><p><code>until.inherits(constructor, superConstructor)</code>是实现一个对象间原型继承的函数。</p>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Base</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'base'</span>;</span><br><span class="line">	<span class="keyword">this</span>.base = <span class="number">1991</span>;</span><br><span class="line">	<span class="keyword">this</span>.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'Hello'</span> + <span class="keyword">this</span>.name);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Base.prototype.showName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'sub'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">util.inherits(Sub, Base);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objBase = <span class="keyword">new</span> Base();</span><br><span class="line">objBase.showName();</span><br><span class="line">objBase.sayHello();</span><br><span class="line"><span class="built_in">console</span>.log(objBase);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objSub = <span class="keyword">new</span> Sub();</span><br><span class="line">objSub.showName();</span><br><span class="line"><span class="built_in">console</span>.log(objSub);</span><br></pre></td></tr></table></figure>
+<p>我们定义了一个基础对象Base和一个继承自Base的Sub，Base有三个在构造函数内定义的属性和一个在原型中定义的函数，通过util.inherits实现继承。运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">base</span><br><span class="line">Hellobase</span><br><span class="line">Base &#123; name: &apos;base&apos;, base: 1991, sayHello: [Function] &#125;</span><br><span class="line">sub</span><br><span class="line">Sub &#123; name: &apos;sub&apos; &#125;</span><br></pre></td></tr></table></figure>
+<p>注意，Sub 仅仅继承了 Base 在原型中定义的函数，而构造函数内部创造的 base 属 性和 sayHello 函数都没有被 Sub 继承。同时，在原型中定义的属性不会被 console.log 作 为对象的属性输出。</p>
+<h3 id="util-inspect"><a href="#util-inspect" class="headerlink" title="util.inspect"></a>util.inspect</h3><p><code>util.inspect(object, [showHidden], [depth], [colors])</code>是一个将任意对象转换为字符串的方法，通常用于调试和错误输出。</p>
+<p><strong>参数分析：</strong></p>
+<ul>
+<li>object：必须，要转换的对象</li>
+<li><p>showHIdden：可选，值为true将会输出更多隐藏信息</p>
+</li>
+<li><p>depth：可选，表示最大递归的层数，如果对象很复杂，你可以指定层数以控制输出信息的多少，默认递归2层</p>
+</li>
+<li>color：可选，为true，输出格式将会以ANSI颜色编码</li>
+</ul>
+<p>util.inspect并不会简单的调用对象定义的toString方法</p>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'byvoid'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">this</span>.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(util.inspect(obj));</span><br><span class="line"><span class="built_in">console</span>.log(util.inspect(obj, <span class="literal">true</span>));</span><br></pre></td></tr></table></figure>
+<p>除此之外，util还提供了<code>util.isArray()</code>、<code>util.isRegExp()</code>、<code>util.isDate()</code>、<code>util.isError</code>四个类型测试工具，以及<code>util.format()</code>、<code>util.debug()</code>等工具</p>
+<h2 id="事件驱动events"><a href="#事件驱动events" class="headerlink" title="事件驱动events"></a>事件驱动events</h2><p>events是Node.js最重要的模块，Node.js本身架构就是事件式的，而它提供了唯一的接口。events模块不仅用于用户代码与Node.js下层事件循环的交互，还几乎被所有的模块依赖。</p>
+<h3 id="事件发射器"><a href="#事件发射器" class="headerlink" title="事件发射器"></a>事件发射器</h3><p>events模块只提供了一个对象：<code>events.EventEmitter</code>。EventEmitter的核心就是事件发射与事件监听器功能的封装。EventEmitter的每个事件由一个事件名和若干个参数组成，事件名是一个字符串，通常表达一定的语义。对于每个事件，EventEmitter支持若干个事件监听器。当事件发射时，注册到这个事件的事件监听器被依次调用，事件参数作为回调函数参数传递。我们通过下面这个例子来解释这一整个过程：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.EventEmitter();</span><br><span class="line"></span><br><span class="line">emitter.on(<span class="string">'someEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'listener1'</span>, arg1, arg2);</span><br><span class="line">&#125;);</span><br><span class="line">emitter.on(<span class="string">'someEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'listener2'</span>, arg1, arg2);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">emitter.emit(<span class="string">'someEvent'</span>, <span class="string">'byvoid'</span>, <span class="number">1991</span>);</span><br></pre></td></tr></table></figure>
+<p>emitter为someEvent事件注册了两个事件监听器，然后发射了someEvent事件。</p>
+<p><strong>EventEmitter常用的API：</strong></p>
+<ul>
+<li>EventEmitter.on(event, listener)：为指定事件注册一个接收器，接受一个字符串event和一个回调函数listener。</li>
+<li>EventEmitter.emit(event, [arg1], [arg2], […])：发射event事件，传递若干个可选参数到事件监听器的参数表。</li>
+<li>EventEmitter.once(evnet, listener)：为指定事件注册一个单次监听器，即监听器最多只会触发一次，触发后立刻解除该监听器。</li>
+<li>EventEmitter.removeListener(event, listener) 移除指定事件的某个监听器，listener必须是该事件已经注册过的监听器。</li>
+<li>EventEmitter.removeAllListener([event]) 移除所有事件的所有监听器，如果指定event，则以出指定事件的所有监听器。</li>
+</ul>
+<h3 id="error事件"><a href="#error事件" class="headerlink" title="error事件"></a>error事件</h3><p>EventEmitter定义了一个特殊的事件error，它包含了“错误”的语义，我们在遇到异常的时候通常会发射error事件。当error被发射时，EventEmitter规定如果没有响应的监听器，Node.js会把它当作异常，退出程序并打印调用栈。我们一般要为会发射error事件的对象设置监听器，避免遇到错误后整个程序崩溃。</p>
+<h3 id="继承EventEmitter"><a href="#继承EventEmitter" class="headerlink" title="继承EventEmitter"></a>继承EventEmitter</h3><p>大多数情况下我们不会直接使用EventEmitter，而是在对象中继承它。包括fs、net、http在内的，只要支持事件响应的核心模块都是EventEmitter的子类</p>
+<p>这样的做的原因有两点：首先，具有某个实体功能的对象实现事件符合语义，时间的监听和发射应该是一个对象的方法。其次JavaScript的对象机制是基于原型链的，支持部分多重继承，继承EventEmitter不会打乱对象原有的继承关系。</p>
+<h2 id="文件系统fs"><a href="#文件系统fs" class="headerlink" title="文件系统fs"></a>文件系统fs</h2><p>fs模块是文件操作的封装，它提供了文件的读取、写入、更名、删除、目录遍历、链接等POSIX文件系统操作。与其它模块不同的是，fs模块中所有的操作都提供了异步和同步两个版本。</p>
+<p><strong>fs.readFile：</strong></p>
+<p><code>fs.readFile(filename, [encoding], [callback(err, data)])</code></p>
+<p>最简单的读取文件函数，接受一个必选参数filename，表示读取的文件名。第二个encoding，可选，表示文件的字符编码方式。callback是回调函数，回调函数提供两个参数，err表示是否发生错误，data是文件内容</p>
+<p><strong>fs.readFileSync：</strong></p>
+<p><code>fs.readFileSync(filename, [encoding])</code>是文件读取的同步方式，没有回调函数，文件内容以函数返回值的形式返回</p>
+<p><strong>fs.open：</strong></p>
+<p><code>fs.open(path, flags, [mode], [callback(err, fd)])</code>是POSIX open函数的封装，接收两个必选参数，path为文件的路径，flags是打开文件的模式：</p>
+<ul>
+<li>r：以只读模式打开文件</li>
+<li>r+：以读写模式打开文件</li>
+<li>w：以写入模式打开文件，如果文件不存在则创建</li>
+<li>w+：以读写模式打开文件，如果文件不存在则创建</li>
+<li>a：以追加模式打开文件，如果文件不存在则创建</li>
+<li>a+：以读取追加模式打开文件，如果文件不存在则创建</li>
+</ul>
+<p>mode参数可选，用于创建时给文件指定权限，以要给八进制数来表示（例如777、755）</p>
+<p>回调函数会传递一个文件描述符fd，是一个非负整数，表示操作系统内核为当前进程维护的打开文件的记录表索引</p>
+<p><strong>fs.read：</strong></p>
+<p><code>fs.read(fd, buffer, offset, length, position, [callback(err, bytesRead, buffer)])</code></p>
+<p>是 POSIX read 函数的封装，相比 fs.readFile 提供了更底层的接口。</p>
+<p>fs.read 的功能是从指定的文件描述符 fd 中读取数据并写入 buffer 指向的缓冲区对象。offset 是 buffer 的写入偏移量。length 是要从文件中读取的字节数。position 是文件读取的起始 位置，如果 position 的值为 null，则会从当前文件指针的位置读取。回调函数传递 bytesRead 和 buffer，分别表示读取的字节数和缓冲区对象。 </p>
+<h2 id="HTTP服务器与客户端"><a href="#HTTP服务器与客户端" class="headerlink" title="HTTP服务器与客户端"></a>HTTP服务器与客户端</h2><p>Node.js标准库提供了http模块，其中封装了一个高效的HT TP服务器和一个简易的HTTP客户端。http.Server是一个基于事件的HTTP服务器，http.request则是一个HTTP客户端工具，用于向HTTP服务器发起请求。</p>
+<h3 id="HTTP服务器"><a href="#HTTP服务器" class="headerlink" title="HTTP服务器"></a>HTTP服务器</h3><p><strong>http.Server的事件：</strong></p>
+<p>http.Server是一个基于事件的HTTP服务器，所有的请求都被封装为独立的事件，开发者只需要对它的事件白那些响应函数即可实现HTTP服务器的所有功能。它继承自EventEmitter，提供了以下几个事件：</p>
+<ul>
+<li>request：当客户端请求到来时触发，提供两个参数req和res，分别是http.ServertRequest和http.ServerResponse的实例，表示请求和响应信息</li>
+<li>connection：当TCP连接建立时事件触发，提供要给参数socket，为net.Socket的实例。connection事件的粒度要大于request，因为客户端在Keep-Alive模式下可能会在同意给连接内发送多次请求</li>
+<li>close：当服务器关闭时事件触发，注意不是用户断开连接</li>
+</ul>
+<p><strong>http.ServerRequest：</strong></p>
+<p>http.ServerRequest是HTTP请求的信息。它一般由http.Server的request事件发送，作为第一个参数传递。http.ServerRequest提供以下事件来控制请求体传输：</p>
+<ul>
+<li>data：当请求体数据到来时事件触发。该事件提供一个参数chunk，表示接收到的数据。如果该事件没有被监听，那么请求体将会被抛弃。</li>
+<li>end：当请求体数据传输完成时，该事件被触发，此后将不会再有数据到来。</li>
+<li>close：当用户当不起那请求结束时，该事件被触发。不同于end，如果用户强制终止了传输，也还是会调用close。</li>
+</ul>
+<p><strong>获取GET请求内容：</strong></p>
+<p>注意，http.ServerRequest 提供的属性中没有类似于 PHP 语言中的 $_GET 或 $_POST 的属性，那我们如何接受客户端的表单请求呢？由于 GET 请求直接被嵌入在路径 中，URL是完整的请求路径，包括了 ? 后面的部分，因此你可以手动解析后面的内容作为 GET 请求的参数。Node.js 的 url 模块中的 parse 函数提供了这个功能，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">	res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</span><br><span class="line">	res.end(util.inspect(url.parse(req.url, <span class="literal">true</span>)));</span><br><span class="line">&#125;).listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>通过 url.parse，原始的 path 被解析为一个对象，其中 query 就是我们所谓的 GET 请求的内容，而路径则是 pathname</p>
+<p><strong>获取POST请求的内容：</strong></p>
+<p>POST 请求的内容全部都在请求体中。 http.ServerRequest 并没有一个属性内容为请求体，原因是等待请求体传输可能是一件 耗时的工作，譬如上传文件。而很多时候我们可能并不需要理会请求体的内容，恶意的 POST 请求会大大消耗服务器的资源。所以 Node.js 默认是不会解析请求体的，当你需要的时候， 需要手动来做。让我们看看实现方法： </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = rquire(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> querystring = reuqire(<span class="string">'qureystring'</span>);</span><br><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> post = <span class="string">''</span>;</span><br><span class="line">    req.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">        post += chunk;</span><br><span class="line">    &#125;);</span><br><span class="line">    req,on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        post = querystring.parse(post);</span><br><span class="line">        res.end(tuil.inspect(post));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+<p>上面代码并没有在请求响应函数中向客户端返回信息，而是定义了一个 post 变量，用 于在闭包中暂存请求体的信息。通过 req 的 data 事件监听函数，每当接受到请求体的数据， 就累加到 post 变量中。在 end 事件触发后，通过 querystring.parse 将 post 解析为 真正的 POST 请求格式，然后向客户端返回</p>
+<p><strong>http.ServerResponse：</strong></p>
+<p>http.ServerResponse 是返回给客户端的信息，决定了用户最终能看到的结果。它 也是由 http.Server 的 request 事件发送的，作为第二个参数传递，一般简称为 response 或 res。</p>
+<p>http.ServerResponse有三个重要的成员函数，用于返回响应头、响应内容以及结束请求：</p>
+<ul>
+<li>response.writeHead(statusCode, [headers])：向请求的客户端发送响应头。 statusCode 是 HTTP 状态码，如 200 （请求成功）、404 （未找到）等。headers 是一个类似关联数组的对象，表示响应头的每个属性。该函数在一个请求内最多只 能调用一次，如果不调用，则会自动生成一个响应头</li>
+<li>response.write(data, [encoding])：向请求的客户端发送响应内容。data 是 一个 Buffer 或字符串，表示要发送的内容。如果 data 是字符串，那么需要指定 encoding 来说明它的编码方式，默认是 utf-8。在 response.end 调用之前， response.write 可以被多次调用</li>
+<li>response.end([data], [encoding])：结束响应，告知客户端所有发送已经完 成。当所有要返回的内容发送完毕的时候，该函数 必须 被调用一次。它接受两个可 选参数，意义和 response.write 相同。如果不调用该函数，客户端将永远处于 等待状态。 </li>
+</ul>
+<h3 id="HTTP客户端"><a href="#HTTP客户端" class="headerlink" title="HTTP客户端"></a>HTTP客户端</h3><p>http模块提供了两个函数http.request和http.get，功能是作为客户端向HTTP服务器发起请求。</p>
+<p><strong>http.request(options, callback)：</strong></p>
+<p>http.request(options, callback) 发起 HTTP 请求。接受两个参数，option 是 一个类似关联数组的对象，表示请求的参数，callback 是请求的回调函数。option 常用的参数如下所示：</p>
+<ul>
+<li>host：请求网站的域名或IP地址。</li>
+<li>port：请求网站的端口，默认80。</li>
+<li>method：请求方法，默认是GET。</li>
+<li>path：请求的相对于根的路径，默认是”/“</li>
+<li>headers：要给关联数组对象，为请求头的内容</li>
+</ul>
+<p>callback 传递一个参数，为 http.ClientResponse 的实例。 </p>
+<p>http.request 返回一个 http.ClientRequest 的实例。 </p>
+<p><strong>http.get(options,  callback)：</strong></p>
+<p> http 模块还提供了一个更加简便的方法用于处 理GET请求：http.get。它是 http.request 的简化版，唯一的区别在于http.get 自动将请求方法设为了 GET 请求，同时不需要手动调用 req.end()。 </p>
+<p><strong>http.ClientRequest：</strong></p>
+<p>http.ClientRequest 是由 http.request 或 http.get 返回产生的对象，表示一 个已经产生而且正在进行中的 HTTP 请求。它提供一个 response 事件，即 http.request 或 http.get 第二个参数指定的回调函数的绑定对象</p>
+<p><strong>http.ClientResponse：</strong></p>
+<p>http.ClientResponse 与 http.ServerRequest 相似，提供了三个事件 data、end 和 close，分别在数据到达、传输结束和连接结束时触发，其中 data 事件传递一个参数 chunk，表示接收到的数据。 </p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2019-08-09, 22:14:03</p>
+        <p><span>最后更新:</span>2019-11-29, 20:07:37</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/09/NodeJs学习笔记2/" title="NodeJs学习笔记2">http://yoursite.com/2019/08/09/NodeJs学习笔记2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/08/09/NodeJs学习笔记2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/08/26/JavaScript设计模式学习笔记1/">
+                    JavaScript设计模式学习笔记1
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/07/06/NodeJs学习笔记1/">
+                    NodeJs学习笔记1
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#全局对象"><span class="toc-number">1.</span> <span class="toc-text">全局对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局对象与全局变量"><span class="toc-number">1.1.</span> <span class="toc-text">全局对象与全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#process"><span class="toc-number">1.2.</span> <span class="toc-text">process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#console"><span class="toc-number">1.3.</span> <span class="toc-text">console</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用工具util"><span class="toc-number">2.</span> <span class="toc-text">常用工具util</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#until-inherits"><span class="toc-number">2.1.</span> <span class="toc-text">until.inherits</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inspect"><span class="toc-number">2.2.</span> <span class="toc-text">util.inspect</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件驱动events"><span class="toc-number">3.</span> <span class="toc-text">事件驱动events</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件发射器"><span class="toc-number">3.1.</span> <span class="toc-text">事件发射器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#error事件"><span class="toc-number">3.2.</span> <span class="toc-text">error事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承EventEmitter"><span class="toc-number">3.3.</span> <span class="toc-text">继承EventEmitter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统fs"><span class="toc-number">4.</span> <span class="toc-text">文件系统fs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP服务器与客户端"><span class="toc-number">5.</span> <span class="toc-text">HTTP服务器与客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP服务器"><span class="toc-number">5.1.</span> <span class="toc-text">HTTP服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP客户端"><span class="toc-number">5.2.</span> <span class="toc-text">HTTP客户端</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"NodeJs学习笔记2　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/08/26/JavaScript设计模式学习笔记1/" title="上一篇: JavaScript设计模式学习笔记1">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/07/06/NodeJs学习笔记1/" title="下一篇: NodeJs学习笔记1">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/秋招复习计划-Vue知识点1/">秋招复习计划-Vue知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/秋招复习计划-算法题5/">秋招复习计划-算法题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/秋招复习计划-算法题4/">秋招复习计划-算法题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/秋招复习计划-JavaScript知识点7/">秋招复习计划-JavaScript知识点7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8--JS的类/">ES6学习笔记8--JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7--迭代器与生成器/">ES6学习笔记7--迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8-原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7-对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS选择器/">CSS选择器</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
