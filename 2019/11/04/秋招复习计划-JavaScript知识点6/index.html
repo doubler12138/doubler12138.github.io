@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 本来这部分是跟着上篇文章一起的，但是觉得这部分的内容太多了，所以单独拿出来写一章，着重来讲讲从输入url到页面渲染的过程">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招复习计划--JavaScript知识点6">
+<meta property="og:url" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 本来这部分是跟着上篇文章一起的，但是觉得这部分的内容太多了，所以单独拿出来写一章，着重来讲讲从输入url到页面渲染的过程">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/33.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/DNS解析.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/递归解析.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/迭代解析.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/组织形式.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/TCP报文中文版.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/TCP报文英文版.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/三次握手.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/四次挥手.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/负载均衡.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/响应头.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/webkit.png">
+<meta property="og:updated_time" content="2019-11-29T11:46:23.549Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="秋招复习计划--JavaScript知识点6">
+<meta name="twitter:description" content="前言 本来这部分是跟着上篇文章一起的，但是觉得这部分的内容太多了，所以单独拿出来写一章，着重来讲讲从输入url到页面渲染的过程">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/33.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>秋招复习计划--JavaScript知识点6 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写签名/">手写签名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="new-秋招复习计划-JavaScript知识点6" class="article article-type-new" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/04/秋招复习计划-JavaScript知识点6/" class="article-date">
+      <time datetime="2019-11-04T08:24:29.000Z" itemprop="datePublished">2019-11-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      秋招复习计划--JavaScript知识点6
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">4,717字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">17分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/复习计划/">复习计划</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>本来这部分是跟着上篇文章一起的，但是觉得这部分的内容太多了，所以单独拿出来写一章，着重来讲讲从输入url到页面渲染的过程</p>
+<hr>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/33.jpg" alt="33"></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1374673362&auto=1&height=66"></iframe><br></div>
+
+<h2 id="从输入地址到页面渲染完成并展示"><a href="#从输入地址到页面渲染完成并展示" class="headerlink" title="从输入地址到页面渲染完成并展示"></a>从输入地址到页面渲染完成并展示</h2><p><strong>概述</strong></p>
+<p>从输入url到页面渲染完成并展示，期间涉及了很多过程，很多知识都具有专门的研究学科，这里尽量写的全一点。</p>
+<p>整个过程大致分成下面几个步骤：</p>
+<ul>
+<li>输入网址</li>
+<li>DNS解析</li>
+<li>建立TCP连接</li>
+<li>客户端发送HTTP请求</li>
+<li>服务器处理请求</li>
+<li>服务器返回响应</li>
+<li>浏览器渲染展示HTML</li>
+<li>浏览器发送请求获取其它在HTML中的资源</li>
+</ul>
+<p>下面将详细讲述在这个过程中发生了什么，涉及到哪些知识，以及可能出现的问题</p>
+<h2 id="输入地址"><a href="#输入地址" class="headerlink" title="输入地址"></a>输入地址</h2><p>当我们在浏览器中输入网址时，大多数浏览器都会开始智能匹配可能的url，浏览器会从历史记录、书签等地方查找符合目前输入的url，可以让用户补全地址。像chrome浏览器，他甚至会从缓存中直接将网页展示出，哪怕你还没有确定访问</p>
+<h2 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h2><p>DNS解析就是获取用户输入的网址对应的IP地址。</p>
+<ul>
+<li>请求发起，浏览器开始解析域名，它首先查看本地硬盘的hosts文件，查看是否存在和这个域名对应的规则，如果有，直接使用hosts文件中的ip地址</li>
+<li>如果在hosts文件中没有查找到，浏览器会发送一个DNS请求到本地DNS服务器（由网络接入服务器商：移动、联通、电信提供）</li>
+<li>DNS请求到达本地DNS服务器，服务器查询缓存中是否存在域名对应IP的记录，如果有直接返回结果，查询过程按递归的方式进行。如果没有本地DNS服务器将向根DNS服务器进行查询</li>
+<li><p>根服务器并不直接记录具体域名和IP地址的对应关系，他只会告诉本地DNS服务器，这个域名在哪个域服务器上继续查询，并给出域服务器的地址。这个过程是一个迭代的过程</p>
+</li>
+<li><p>本地DNS服务器继续向域服务器发送请求，以我的博客地址为例<code>www.doubler.cn</code>，请求的是.cn域服务器。.cn域服务器接收到请求后，也不会直接返回域名和IP地址，而是告诉本地DNS服务器，你的域名的解析服务器的地址。譬如我这个域名是从腾讯买的，那么这个域名的解析服务器也是腾讯的</p>
+</li>
+<li>最后，本地DNS服务器向域名的解析服务器发送请求，这时就能收到一个域名和地址对应关系，本地DNS服务器不仅要把IP地址返回给用户电脑，还要把这个对应关系保存在缓存中，以备下次查询时，可以直接返回结果，加快网络访问。</li>
+</ul>
+<p>下图展示的就是整个过程</p>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/DNS解析.jpg" alt="DNS解析"></p>
+<h3 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h3><p><strong>DNS是什么</strong></p>
+<p>DNS–Domain Name System，域名系统，因特网上作为域名和IP地址相互映射的一个分布式数据库，能够是用户更方便的访问互联网，而不用去记住那些能够被机器直接读取的IP地址</p>
+<p><strong>DNS查询的两种方式</strong></p>
+<p>递归解析</p>
+<p>局部服务器自己负责想其它DNS服务器进行查询，一般是先向该域名的根域服务器查询，再由根域名服务器一级一级往下查询，最后得到的查询结果返回给局部DNS服务器，再由局部DNS服务器返回给客户端</p>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/递归解析.png" alt="递归解析"></p>
+<p>迭代解析</p>
+<p>局部DNS服务器并不会自己向其它DNS服务器进行查询，而是把能解析该域名的其它DNS服务器的IP地址返回给客户端DNS程序，客户端程序再继续向这些DNS服务器进行查询。知道查到位置</p>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/迭代解析.png" alt="迭代解析"></p>
+<p><strong>DNS域名称空间的组织形式</strong></p>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/组织形式.jpg" alt="组织形式"></p>
+<p><strong>DNS负载均衡</strong></p>
+<p>当一个网站拥有大量用户时，加入每次请求都访问同一台机器，那么着他机器的负载将会很大。处理的方法就是使用DNS负载均衡技术，它的原理就是在DNS服务器中为同一个主机名配置多个IP地址，譬如<code>www.baidu.com</code>它可能配置了<code>1.1.1.1</code>还配置了<code>2.2.2.2</code>。在应答DNS解析时，DNS服务器对每个查询将DNS文件中主机记录的IP地址按顺序返回不同的解析结果，这样就能将客户访问导流到不同IP的机器上去了。</p>
+<h2 id="建立TCP连接"><a href="#建立TCP连接" class="headerlink" title="建立TCP连接"></a>建立TCP连接</h2><p>在拿到域名对应的IP地址之后，浏览器或以一个随机端口（1024&lt;port&lt;65535）像服务器的WEB应用程序80端口发起TCP请求。</p>
+<h3 id="TCP报文机构"><a href="#TCP报文机构" class="headerlink" title="TCP报文机构"></a>TCP报文机构</h3><p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/TCP报文中文版.png" alt="TCP报文中文版"></p>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/TCP报文英文版.png" alt="TCP报文英文版"></p>
+<p>报文结构：</p>
+<p><strong>源端口和目的端口：</strong>各占两个字节，分别写入源端口号和目的端口号</p>
+<p><strong>序号：</strong>占4个字节，序号使用mode运算。TCP是面向字节流的，在一个TCP连接中传送的字节流中的每一个字节都按顺序编号。</p>
+<p><strong>确认序号：</strong>占4个字节，是期望收到对方下一个报文段的第一个数据字节的序号。若确认序号=N，则表明到序号N-1为止的所有数据都已正确收到</p>
+<p><strong>数据偏移：</strong>占4位，表示TCP报文字段的首部长度。以4字节为一个单位，4位最多能表示到15，那么TCP首部的最大长度为60字节（4*15字节）</p>
+<p><strong>6个保留标志位：</strong>占6位，默认全置0</p>
+<ul>
+<li>紧急URG：当它为1时，表明紧急指针字段有效。这是发送发TCP就把紧急数据插入到本报文段数据的最前面，后面仍为普通数据</li>
+<li>确认ACK：当它为1时，确认序号才有效。当ACK为0时，确认号无效。TCP规定，在建立连接后所有传输的报文段都必须把ACK置1</li>
+<li>推送PSH：当它为1时，及受访TCP收到后就需要尽快地交付给接收应用进程，而不再等到整个缓存都填满后再向上交付</li>
+<li>复位RST：当它为1时，表明TCP连接中出现了严重差错，必须释放连接，重新建立</li>
+<li>同步SYN：在连接建立时用来同步序号。但它为1时，表明这是一个连接请求和连接接收报文</li>
+<li>终止FIN：用来释放连接，当它为1时，表明此报文段的发送方的数据已经发送完毕，并要求释放连接</li>
+</ul>
+<p><strong>校验和：</strong>占2字节。检验和字段检验的范围包括首部和数据这两部分。和UDP数据报一样，在计算检验和时，也要在TCP报文段的前面加上12字节的伪首部。伪首部的格式与UDP用户数据报的伪首部一样，但要将伪首部第四个字段中的17 改为6（协议号），把第5字段中的UDP长度改为TCP长度。</p>
+<p><strong>紧急指针：</strong>占2字节。紧急指针仅在URG=1时才有意义，它指出本报文段中的紧急数据的字节数。</p>
+<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>讲完了TCP报文头的结构，下面讲讲TCP连接的建立和断开。TCP连接的建立需要通过客户端与服务端的三次握手</p>
+<ul>
+<li>第一次握手：客户端主动打开，发送连接请求报文段，将SYN标识为置为1，Sequence Number置为x（TCP规定SYN为1时，不能携带数据，x为随机产生的一个值），然后客户端进入SYN_SEND状态</li>
+<li>第二次握手：服务器收到SYN报文段进行确认，将SYN设置为1，ACK置为1，SequenceNumber置为y， Acknowledgment Number置为x+1，然后进入SYN_RECV状态，这个状态被称为半连接状态</li>
+<li>第三次握手：客户端再进行一次取人，将ACK置为1（SYN不再使用，为0），Sequence Number置为x+1，Acknowledgment Number置为y+1发向服务器，最后客户端与服务器进入连接转台</li>
+</ul>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/三次握手.png" alt="三次握手"></p>
+<p><strong>为什么客户端需要第三次握手来再次确认</strong></p>
+<p>这主要是为了防止已经失效的连接请求报文段突然又传回到服务器而产生错误的场景。假设有这样一个场景，客户端发送的第一个连接请求报文在网络节点中长时间的滞留了。客户端以为它丢失了，然后发送了第二个连接请求报文，并成功连接完成数据传输，最后断开连接。这时候，滞留的请求报文来到了服务器。假设没有三次确认的话，那么服务器会以为客户端再一次请求了连接，然后他会一直等待客户端传输数据，这样服务端的大量资源会被占用。</p>
+<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>TCP四次挥手是TCP连接释放的过程：</p>
+<ul>
+<li>客户端发送一个报文给服务端（没有数据），其中FIN设置为1，Sequence Number置为u，客户端进入FIN_WAIT_1状态</li>
+<li>服务端收到客户端请求，发送一个ACK给客户端，Acknowledge置为u+1，同时发送Sequence Number为v，服务端进入CLOSE_WAIT状态</li>
+<li>服务端发送一个FIN给客户端，ACK置为1，Sequence Number置为w，Acknowledge置为u+1，用来关闭服务端到客户端的数据传送，服务端进入LAST_ACK状态</li>
+<li>客户端收到FIN后，进入TIME_WAIT状态，接着发送一个ACK给服务端，Acknowledge置为w+1，Sequence Number置为u+1，最后客户端和服务端都进入关闭状态</li>
+</ul>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/四次挥手.png" alt="四次挥手"></p>
+<p><strong>为什么握手是三次而挥手需要四次</strong></p>
+<p>因为服务器在第二次握手的时候收到建立连接请求的SYN报文后，将ACK和SYN放在一个报文里发送给客户端。而在关闭连接的时候，由于TCP是全双工的，所以发送发和接收方都需要FIN和ACK。而关闭连接是，当收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，己方也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方表示同意现在关闭连接，因此，己方ACK和FIN一般分开发送。</p>
+<h2 id="客户端发送HTTP请求"><a href="#客户端发送HTTP请求" class="headerlink" title="客户端发送HTTP请求"></a>客户端发送HTTP请求</h2><p>建立TCP连接后，客户端会发起一个HTTP请求，请求信息包括三个部分：</p>
+<ul>
+<li>请求方法/URI协议/版本</li>
+<li>请求头</li>
+<li>请求正文</li>
+</ul>
+<p>但是在发送HTTP请求的时候可能还会出现一点问题。</p>
+<h3 id="服务器永久重定向响应"><a href="#服务器永久重定向响应" class="headerlink" title="服务器永久重定向响应"></a>服务器永久重定向响应</h3><p>当我们发送的HTTP请求收到的响应不是200，而是30X时，就会触发重定向。当响应是301时，就会导致永久重定向。</p>
+<p>为什么服务器一定要重定向而不是直接发送具体的网页内容呢。这跟维护搜索引擎的排名有关。如果一个页面有两个网址，例如<code>http://www.yy.com/</code>和<code>http://yy.com/</code>那么搜索引擎会认为它们是两个网站，结果会导致两个网址的搜索链接都会减少从而排名降低。但是搜索引擎知道301永久重定向，这样就会把访问带www和不带的地址归在同一个网址排名下。</p>
+<p><strong>301和302的共同和区别</strong></p>
+<p>301和302都表示重定向，当浏览器拿到服务器返回的状态码是，会过根据Loction首部的地址跳转到新地址页面</p>
+<p>301表示就地址A的资源已经被永久移除（这个资源不可用），搜索引擎在抓取新内容的同时也将旧地址的网址替换为重定向后的网址</p>
+<p>302表示旧地址还在（仍可访问），这个重定向知识临时从就地址A跳转到地址B，搜索引擎会抓取新的内容，但保存的仍是旧地址。</p>
+<p>302对于SEO而言是优于301的</p>
+<p><strong>重定向的原因</strong></p>
+<ul>
+<li>网站调整（如改变网页目录结构）</li>
+<li>网页被移动到一个新地址</li>
+<li><p>网页扩展名改变（如从.php改到.html）</p>
+<p>这种情况下，如果不做重定向，则用户收藏夹或搜索引擎数据库中旧地址只能让访问客户得到一个404页面错误信息，访问流量白白丧失；再者某些注册了多个域名的网站，也需要通过重定向让访问这些域名的用户自动跳转到主站点等。</p>
+</li>
+</ul>
+<p><strong>什么时候使用302什么时候使用301</strong></p>
+<p>当一个网站或网页在24-48个小时内临时移动到一个新的地址，使用302，而当原有资源因为某种原因被移除，需要到新地址访问，且是永久的，使用301</p>
+<h3 id="浏览器跟踪重定向地址"><a href="#浏览器跟踪重定向地址" class="headerlink" title="浏览器跟踪重定向地址"></a>浏览器跟踪重定向地址</h3><p>当浏览器重定向获得正确的网址后，重新发送HTTP请求到正确的地址</p>
+<h2 id="服务器处理处理请求"><a href="#服务器处理处理请求" class="headerlink" title="服务器处理处理请求"></a>服务器处理处理请求</h2><p>在经历的之前的所有步骤后，客户端的HTTP请求到达了服务器。后端从固定的端口接收到TCP报文开始，他就会对TCP连接进行处理，对HTTP协议进行解析，并按报文格式进一步封装成HTTP Request对象，为上层提供接口</p>
+<p>一些大一点的网站会将你的请求转到反向代理服务器中，因为当网站访问量非常大时，网站会越来越卡，一台服务器已经不够用了。于时将同一个应用部署在多台服务器上，将大量用户的请求分配给多台机器处理。此时，客户端不是直接通过HTTP协议访问某网站应用服务器，而是先请求到Nginx，Nginx再请求应用服务器，然后将结果返回给客户端，这里Nginx的作用是反向代理服务器。</p>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/负载均衡.jpg" alt="负载均衡"></p>
+<h3 id="正向代理和反向代理的区别"><a href="#正向代理和反向代理的区别" class="headerlink" title="正向代理和反向代理的区别"></a>正向代理和反向代理的区别</h3><p>正向代理和反向代理的最大区别在于代理服务器是为谁服务的。</p>
+<p>正向代理是顺着请求的方向进行的代理，及代理服务器由客户端配置，去请求目标服务器的地址。典型的正向代理的应用就是VPN服务。用通俗例子来讲，A想借钱，C有这笔钱，但是A不认识C，于是A找到了B，B找C去借这笔钱。在这个例子中，B是你找的，它是为你服务的，这就是正向代理</p>
+<p>反向代理与正向代理相反，代理服务器是为目标服务器服务的。同样举个例子，A同样需要借钱，但他不知道问谁借，于时它找到了一个借款平台，借款平台把钱借给了它， 但是这笔钱从哪里来的A并不知道。同样的，我们的请求发送给反向代理服务器，服务器将我们的请求发送给具体的服务器，我们获得了服务，但是具体是哪台服务器提供的，我们并不知道。</p>
+<h2 id="服务器返回响应"><a href="#服务器返回响应" class="headerlink" title="服务器返回响应"></a>服务器返回响应</h2><p>经过前面的步骤，服务器收到并处理完了我们的请求，于时它把它的处理结果返回，也就是返回了一个HTTP响应</p>
+<p>HTTP响应由三部分构成，分别是：</p>
+<ul>
+<li>状态行</li>
+<li>响应头</li>
+<li>响应正文</li>
+</ul>
+<h3 id="状态行"><a href="#状态行" class="headerlink" title="状态行"></a>状态行</h3><p>状态行由协议版本、数字形式的状态代码、以及相应的状态描述构成</p>
+<p><strong>状态代码：</strong></p>
+<p><strong>1xx：</strong>信息性状态码，表示是服务器已经接收客户端请求，客户端可继续发送请求，包括</p>
+<ul>
+<li>100 Continue</li>
+<li>101 Switching Protocols</li>
+</ul>
+<p><strong>2xx：</strong>成功状态码，表示服务器已成功接收到请求并进行处理</p>
+<ul>
+<li>200 OK 表示客户端请求成功</li>
+<li>204 No Content 成功，但不返回任何实体的主体部分</li>
+<li>206 Partial Content 成功执行了一个范围请求</li>
+</ul>
+<p><strong>3xx：</strong>重定向状态码，表示服务器要求客户端进行重定向</p>
+<ul>
+<li>301 Moved Permanentily 永久性重定向，响应报文的Location首部应该有该资源的新URL</li>
+<li>302 Found 临时性重定向，响应报文的Locaiton首部给出的URL用来临时定位资源</li>
+<li>303 See Other 请求的资源存在着另一个URL，客户端应使用GET方法定向获取请求的资源</li>
+<li>304 Not Modified 服务器内容没有更新，可以直接读取浏览器缓存</li>
+<li>307 Temporary Redirect临时从定向</li>
+</ul>
+<p><strong>4xx：</strong>客户端错误状态码，表示客户端的请求有非法内容</p>
+<ul>
+<li>400 Bad Request 表示客户端请求有语法错误，不能被服务器所理解</li>
+<li>401 Unauthonzed 表示请求未经授权，该状态码需要与WWW-Authenticate报头域一起使用</li>
+<li>403 Forbidden 表示服务器收到了请求，但是拒绝提供服务，通常会在响应正文中给出不提供服务的原因</li>
+<li>404 Not Found 请求的资源不存在，例如输入了错误的地址</li>
+</ul>
+<p><strong>5xx：</strong>服务器错误状态码，表示服务器未能正常处理客户端的请求而出现意外的错误</p>
+<ul>
+<li>500 Internel Server Error 表示服务器发生了不可预期的而错误，导致无法完成客户端的请求</li>
+<li>503 Service Unavailable 表示服务器当前不能够处理客户端的请求，在一段时间后服务器可能会恢复正常</li>
+</ul>
+<h3 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h3><p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/响应头.png" alt="响应头"></p>
+<h2 id="浏览器显示HTML"><a href="#浏览器显示HTML" class="headerlink" title="浏览器显示HTML"></a>浏览器显示HTML</h2><p>在浏览器没有完整接受全部HTML文档时，他就已经开始显示这个页面了，不同的浏览器解析渲染的过程可能不太一样，这里我们介绍一下webkit的渲染过程</p>
+<p><img src="/2019/11/04/秋招复习计划-JavaScript知识点6/webkit.png" alt="webkit"></p>
+<p>解析HTML构成DOM树，解析CSS构成样式规则，构建render树，布局render树，最后绘制render树</p>
+<p>浏览器在解析HTML文件时，会“自上而下”加载，并在加载的过程中进行解析渲染。在解析过程中，如果遇到请求外部资源时，如图片、外链的CSS等，请求过程是异步的，并不影响html文档进行加载。</p>
+<h2 id="浏览器发送请求获取其它在HTML中的资源"><a href="#浏览器发送请求获取其它在HTML中的资源" class="headerlink" title="浏览器发送请求获取其它在HTML中的资源"></a>浏览器发送请求获取其它在HTML中的资源</h2>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2019-11-04, 16:24:29</p>
+        <p><span>最后更新:</span>2019-11-29, 19:46:23</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/04/秋招复习计划-JavaScript知识点6/" title="秋招复习计划--JavaScript知识点6">http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/04/秋招复习计划-JavaScript知识点6/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/11/09/秋招复习计划-JavaScript知识点7/">
+                    秋招复习计划-JavaScript知识点7
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/11/03/秋招复习计划-JavaScript知识点5/">
+                    秋招复习计划-JavaScript知识点5
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#从输入地址到页面渲染完成并展示"><span class="toc-number">1.</span> <span class="toc-text">从输入地址到页面渲染完成并展示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入地址"><span class="toc-number">2.</span> <span class="toc-text">输入地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS解析"><span class="toc-number">3.</span> <span class="toc-text">DNS解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展知识"><span class="toc-number">3.1.</span> <span class="toc-text">扩展知识</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立TCP连接"><span class="toc-number">4.</span> <span class="toc-text">建立TCP连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP报文机构"><span class="toc-number">4.1.</span> <span class="toc-text">TCP报文机构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP三次握手"><span class="toc-number">4.2.</span> <span class="toc-text">TCP三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP四次挥手"><span class="toc-number">4.3.</span> <span class="toc-text">TCP四次挥手</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端发送HTTP请求"><span class="toc-number">5.</span> <span class="toc-text">客户端发送HTTP请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器永久重定向响应"><span class="toc-number">5.1.</span> <span class="toc-text">服务器永久重定向响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器跟踪重定向地址"><span class="toc-number">5.2.</span> <span class="toc-text">浏览器跟踪重定向地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器处理处理请求"><span class="toc-number">6.</span> <span class="toc-text">服务器处理处理请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#正向代理和反向代理的区别"><span class="toc-number">6.1.</span> <span class="toc-text">正向代理和反向代理的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器返回响应"><span class="toc-number">7.</span> <span class="toc-text">服务器返回响应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#状态行"><span class="toc-number">7.1.</span> <span class="toc-text">状态行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#响应头"><span class="toc-number">7.2.</span> <span class="toc-text">响应头</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器显示HTML"><span class="toc-number">8.</span> <span class="toc-text">浏览器显示HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器发送请求获取其它在HTML中的资源"><span class="toc-number">9.</span> <span class="toc-text">浏览器发送请求获取其它在HTML中的资源</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"秋招复习计划--JavaScript知识点6　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/11/09/秋招复习计划-JavaScript知识点7/" title="上一篇: 秋招复习计划-JavaScript知识点7">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/11/03/秋招复习计划-JavaScript知识点5/" title="下一篇: 秋招复习计划-JavaScript知识点5">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/秋招复习计划-Vue知识点1/">秋招复习计划-Vue知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/秋招复习计划-算法题5/">秋招复习计划-算法题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/秋招复习计划-算法题4/">秋招复习计划-算法题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/秋招复习计划-JavaScript知识点7/">秋招复习计划-JavaScript知识点7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8--JS的类/">ES6学习笔记8--JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7--迭代器与生成器/">ES6学习笔记7--迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8-原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7-对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS选择器/">CSS选择器</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
