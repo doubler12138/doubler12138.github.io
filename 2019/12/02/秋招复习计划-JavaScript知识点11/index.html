@@ -15,20 +15,21 @@
 
 
 
-<meta name="description" content="前言这部分继续《你不知道的JavaScript》的第三章，函数作用域和块作用域">
+<meta name="description" content="前言 基本类型与引用类型转换中的装箱和拆箱操作，BOM属性对象方法，JS的map()和reduce()方法，JavaScript中的arguments">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript学习笔记3--函数作用域与块作用域">
-<meta property="og:url" content="http://yoursite.com/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/index.html">
+<meta property="og:title" content="秋招复习计划-JavaScript知识点11">
+<meta property="og:url" content="http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言这部分继续《你不知道的JavaScript》的第三章，函数作用域和块作用域">
+<meta property="og:description" content="前言 基本类型与引用类型转换中的装箱和拆箱操作，BOM属性对象方法，JS的map()和reduce()方法，JavaScript中的arguments">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/13.jpg">
-<meta property="og:updated_time" content="2019-11-29T12:06:16.790Z">
+<meta property="og:image" content="http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/41.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/隐式装箱1.png">
+<meta property="og:updated_time" content="2019-12-02T14:12:39.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript学习笔记3--函数作用域与块作用域">
-<meta name="twitter:description" content="前言这部分继续《你不知道的JavaScript》的第三章，函数作用域和块作用域">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/13.jpg">
+<meta name="twitter:title" content="秋招复习计划-JavaScript知识点11">
+<meta name="twitter:description" content="前言 基本类型与引用类型转换中的装箱和拆箱操作，BOM属性对象方法，JS的map()和reduce()方法，JavaScript中的arguments">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/41.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +61,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>JavaScript学习笔记3--函数作用域与块作用域 | DoubleR&#39;s BLOG</title>
+<title>秋招复习计划-JavaScript知识点11 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -314,11 +315,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JavaScript学习笔记3--函数作用域与块作用域" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="new-秋招复习计划-JavaScript知识点11" class="article article-type-new" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/" class="article-date">
-      <time datetime="2019-07-03T05:20:06.000Z" itemprop="datePublished">2019-07-03</time>
+      <a href="/2019/12/02/秋招复习计划-JavaScript知识点11/" class="article-date">
+      <time datetime="2019-12-02T12:45:06.000Z" itemprop="datePublished">2019-12-02</time>
 </a>
 
 
@@ -333,7 +334,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JavaScript学习笔记3--函数作用域与块作用域
+      秋招复习计划-JavaScript知识点11
     </h1>
   
 
@@ -342,7 +343,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,697字</span>
+			<span class="post-count">1,310字</span>
 		</span>
 	</span>
 	
@@ -351,7 +352,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">6分</span>
+			<span class="post-count">5分</span>
 		</span>
 	</span>
 </div>
@@ -362,7 +363,7 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+    <a class="article-category-link" href="/categories/复习计划/">复习计划</a>
     </div>
 
 
@@ -378,49 +379,54 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>前言</strong><br>这部分继续《你不知道的JavaScript》的第三章，函数作用域和块作用域</p>
+        <p><strong>前言</strong></p>
+<p>基本类型与引用类型转换中的装箱和拆箱操作，BOM属性对象方法，JS的map()和reduce()方法，JavaScript中的arguments</p>
 <hr>
-<p><img src="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/13.jpg" alt="13"></p>
+<p><img src="/2019/12/02/秋招复习计划-JavaScript知识点11/41.jpg" alt="41"></p>
 <a id="more"></a>
-<p><div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1371537419&auto=1&height=66"></iframe><br></div></p>
-<h2 id="函数中的作用域"><a href="#函数中的作用域" class="headerlink" title="函数中的作用域"></a>函数中的作用域</h2><p>函数作用域的含义是指，属于这个函数的全部变量都可以在整个函数的范围内使用及复用（事实上在嵌套的作用域中也可以使用）。这种设计方案是非常有用的，能充分利用JavaScript便来给你可以根据需要改变值类型的“动态”特性</p>
-<p>需要强调的是，外部作用域访问不了内部作用域中的变量，但是内部作用域能访问外部作用域中的变量，直到最外部的全局作用域</p>
-<h2 id="隐藏内部实现"><a href="#隐藏内部实现" class="headerlink" title="隐藏内部实现"></a>隐藏内部实现</h2><p>使用基于作用域的隐藏方法多是从最小特权原则中引申出来的。</p>
-<p><strong>最小特权原则：</strong>在软件设计汇总，应该最小限度的暴露必要内容，而将其它内容都“隐藏”起来，不如某个模块或对象的API设计。</p>
-<p>这个原则可以延申到如何选择作用域来包含变量和函数。如果所有变量和函数都在全局作用域中，当然可以在所有的内部嵌套作用域中访问到它们。但这样会破坏前面提到的最小特权原则，因为可能会暴露过多的变量或函数，而这些变量或函数本应该是私有的，正确的代码应该是可以阻止这些变量或函数进行访问。</p>
-<h3 id="规避冲突"><a href="#规避冲突" class="headerlink" title="规避冲突"></a>规避冲突</h3><p>“隐藏”作用域中的变量和函数所带来的另一个好处，是可以避免同名标识符之间的冲突，两个标识符可能具有同样的名字但用途却不一样，无意间可能造成命名冲突。冲突会导致变量的值被意外覆盖。</p>
-<h4 id="全局命名空间"><a href="#全局命名空间" class="headerlink" title="全局命名空间"></a>全局命名空间</h4><p>变量冲突的一个典型例子存在与全局作用域中。当程序中加载了多个第三方库时，如果他们没有妥善地将内部私有的函数或变量隐藏起来，就会容易引发冲突。</p>
-<p>这些库通常会在全局作用域中声明要给名字足够独特的变量，通常是一个对象。这个对象被用作库的命名空间，所有需要暴露给外界的功能都会成为这个对象属性，而不是将自己的标识符暴露在顶级的词法作用域中</p>
-<h4 id="模块管理"><a href="#模块管理" class="headerlink" title="模块管理"></a>模块管理</h4><p>从众多模块管理器中挑选要给使用。使用这些工具，任何库都无需将标识符加入到全局作用域中，而是通过依赖管理器的机制将库的标识符显示地导入到另外一个特定的作用域。</p>
-<h2 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h2><p>区分函数声明和表达式最简单的方法是看function关键字出现在声明中的位置。如果function是声明中的第一个词，那么就是一个函数声明，否则就是一个函数表达式。</p>
-<h3 id="匿名和具名"><a href="#匿名和具名" class="headerlink" title="匿名和具名"></a>匿名和具名</h3><p>匿名函数表达式示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout( <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"I waited 1 second!"</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-<p>函数表达式可以是可以是匿名的，而函数声明则不可以省略函数名</p>
-<p>匿名函数表达式书写起来快捷方便，但是它有几个无法避免的缺点：</p>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1349960604&auto=1&height=66"></iframe><br></div>
+
+<h2 id="基本类型与引用类型转换中的装箱和拆箱操作"><a href="#基本类型与引用类型转换中的装箱和拆箱操作" class="headerlink" title="基本类型与引用类型转换中的装箱和拆箱操作"></a>基本类型与引用类型转换中的装箱和拆箱操作</h2><p><strong>装箱：</strong>指将基本数据类型转换为对应的引用类型操作。装箱又分为<code>隐式装箱</code>和<code>显示装箱</code></p>
+<p><strong>拆箱：</strong>指将引用类型转换回基本的数据类型</p>
+<h3 id="隐式装箱"><a href="#隐式装箱" class="headerlink" title="隐式装箱"></a>隐式装箱</h3><p>对于隐式装箱，我们先看个例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">"test"</span>;</span><br><span class="line"><span class="keyword">let</span> s2 = s1.substring(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>在<code>s1.substring(2)</code>这一段代码执行的过程中，其实发生了很多步骤</p>
 <ul>
-<li>匿名函数在栈追踪中不会显示出有意义的函数名，使得调试很困难</li>
-<li>如果没有函数名，函数在自身递归调用时只能使用已经过期的arguments.callee引用</li>
-<li>匿名函数省略了对于代码可读性/可理解性很重要的函数名</li>
+<li>基于s1创建一个String类型的实例</li>
+<li>在实例中调用substring方法</li>
+<li>销毁这个实例</li>
 </ul>
-<p>行内函数表达式非常强大且有用——匿名和具名之间的区别并不会对这点有任何影响。函数表达式指定一个函数名可以解决上述问题，且不会污染作用域。</p>
-<h3 id="立即执行函数表达式"><a href="#立即执行函数表达式" class="headerlink" title="立即执行函数表达式"></a>立即执行函数表达式</h3><p>立即执行函数表达式示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span>  a = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>社区给这种形式规定了要给术语：<code>IIFE</code>，代表立即执行函数表达式(Immediately Invoked Function Expression)</p>
-<p>函数名对IIFE当然不是必须的，IIFE最常见的用法是使用一个匿名函数表达式。虽然使用剧名函数的IIFE并不常见，但它具有上述匿名函数表达式的所有优势。</p>
-<p>相较于传统的IIFE，还有一种改进形式<code>(function(){ .. }())</code>。他将用来调用的()括号移进了用来包装的()括号中。</p>
-<p>这两种形式在功能上是一致的</p>
-<p>IIFE的另一个非常普遍的进阶用法是把他们当作函数调用并传递参数进去。</p>
-<p>IIFE还有一种变化的用途是倒置代码的运行顺序，将需要运行的函数放在第二位在IIFE执行之后当作参数传递进去。这种模式在UMD(Universal Module  Definition)项目中被广泛使用。尽管这种模式略显冗长，但有些人认为它更容易理解</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params">def</span>)</span>&#123;</span><br><span class="line">    def(<span class="built_in">window</span>);</span><br><span class="line">&#125;)(<span class="function"><span class="keyword">function</span> <span class="title">def</span>(<span class="params">global</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">//3</span></span><br><span class="line">    <span class="built_in">console</span>.log(global.a); <span class="comment">//2</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>函数表达式定义在片段的第二部分，然后作为参数（这个参数也叫做def）被传递进IIFE函数定义的第一部分。最后，参数def（也就是传递进去的函数）被调用，并将window传入当作global参数的值。</p>
-<h2 id="块作用域"><a href="#块作用域" class="headerlink" title="块作用域"></a>块作用域</h2><h3 id="with"><a href="#with" class="headerlink" title="with"></a>with</h3><p>用with从对象中创建出的作用域尽在with声明中而非外部作用域中有效</p>
-<h3 id="try-catch"><a href="#try-catch" class="headerlink" title="try/catch"></a>try/catch</h3><p>ES3规范中规定try/catch分句会创建要给块作用域，其中声明的变量仅在catch内部有效</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="literal">undefined</span>();<span class="comment">//执行一个非法操作来强制创造一个异常；</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err); <span class="comment">//能过正常执行</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(err); <span class="comment">//ReferenceError: err not found</span></span><br></pre></td></tr></table></figure>
-<p>err仅存在catch分句内部</p>
-<h3 id="let"><a href="#let" class="headerlink" title="let"></a>let</h3><p>ES6引入了新的let关键字，提供了除var以外的另一种变量声明方式。</p>
-<p>let关键字可以将变量绑定到所在的任意作用域中（通常是{…}内部）。用let将变狼附加在一个已经存在的块作用域上的行为是隐式的。</p>
-<p>使用let进行声明不会在块作用域中进行提升。声明的代码被运行之前，声明并不存在</p>
-<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>除了let以外，ES6还引入了const，同样可以用来创建块作用域变量，但其值是固定的（常量）。之后任何视图修改值的操作都会引起错误。</p>
+<p>隐式装箱在读取一个基本类型值时，后台会创建一个该基本类型所对应的基本包装类型对象。在这个基本类型的对象上调用方法。这个基本类型的对象是临时的，它只存在于方法调用的那一行代码执行的瞬间，执行方法后立即本销毁。这也是在基本类型上添加属性和方法会不识别或报错的原因了。在添加属性和方法的代码执行的时候的确创建了一个基本包装类型的对象，所以添加的过程是没有问题的。但是添加完毕后，对象就被销毁了，所以后续的访问和调用就会报错。</p>
+<p><strong>衍生问题：</strong></p>
+<p>在研究隐式装箱的时候，我发现一个衍生的问题，就是数字在隐式装箱的时候会存在报错的现象。比如：</p>
+<p><img src="/2019/12/02/秋招复习计划-JavaScript知识点11/隐式装箱1.png" alt="隐式装箱1"></p>
+<p>研究了一下，发现，这是JS引擎无法正确解析这里的点符号导致的。因为这里的点符号既可以理解为点运算符，是对对象方法或属性的访问。也可以理解为浮点数。</p>
+<p>针对这个问题我们可以做出点调整，方法有很多</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>.toString()    </span><br><span class="line"><span class="comment">//成功，运算结果"1" 解析: 第二个点被视为点运算符，前面的是浮点数。</span></span><br><span class="line"><span class="number">1.0</span>.toString()   </span><br><span class="line"><span class="comment">//成功，运算结果"1" 解析: 第二个点被视为点运算符，前面的是浮点数。</span></span><br><span class="line"><span class="number">1</span> .toString()    </span><br><span class="line"><span class="comment">//成功，运算结果"1" 解析: 用空格和后面的.toString()隔开, 把前面的当成运算式处理</span></span><br></pre></td></tr></table></figure>
+<h3 id="显示装箱"><a href="#显示装箱" class="headerlink" title="显示装箱"></a>显示装箱</h3><p>显示装箱就很好理解了，就是通过基本包装类型对象对基本类型进行装箱</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'test'</span>);</span><br></pre></td></tr></table></figure>
+<p>显示装箱的操作可以对new出来的对象进行属性和方法的添加了，因为通过new操作符创建的引用类型的实例，在执行流离开当前作用域之前一直保留在内存中。</p>
+<h3 id="拆箱操作"><a href="#拆箱操作" class="headerlink" title="拆箱操作"></a>拆箱操作</h3><p>拆箱操作通常通过引用类型的<code>valueOf()</code>和<code>toString()</code>方法来实现</p>
+<p>不过需要注意valueOf和toStirng的区别</p>
+<p><strong>toString：</strong>将值转换为字符串形式并返回，不同类型的toString方法各有不同</p>
+<p><strong>valueOf：</strong>返回对象的原始值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> objNum = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">64</span>);</span><br><span class="line"><span class="keyword">let</span> objStr = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'64'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objNum); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objStr); <span class="comment">// object</span></span><br><span class="line"># 拆箱</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objNum.valueOf()); <span class="comment">// number 基本的数字类型，想要的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objNum.toString()); <span class="comment">// string 基本的字符类型，不想要的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objStr.valueOf()); <span class="comment">// string 基本的数据类型，不想要的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objStr.toString()); <span class="comment">// string 基本的数据类型，想要的</span></span><br></pre></td></tr></table></figure>
+<p>还有一个值得注意的点，就是当一个对象同时定义了valueOf方法和toString方法，那么先执行哪个的问题</p>
+<p><strong>直接输出对象名：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用了 obj.toString'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'toString'</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用了 obj.valueOf'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'valueOf'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(obj);</span><br><span class="line"><span class="comment">// 调用了 obj.toString</span></span><br><span class="line"><span class="comment">// 弹出toString</span></span><br></pre></td></tr></table></figure>
+<p>执行tostring()</p>
+<p>如果toString返回一个对象呢</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用了 obj.toString'</span>);</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用了 obj.valueOf'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'1'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(obj);</span><br><span class="line"><span class="comment">// 调用了 obj.toString</span></span><br><span class="line"><span class="comment">// 调用了 obj.valueOf</span></span><br><span class="line"><span class="comment">// 弹出1</span></span><br></pre></td></tr></table></figure>
+<p>先toString，后valueOf</p>
+<p><strong>对象参与运算：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用了 obj.toString'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用了 obj.valueOf'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj + <span class="number">1</span>; </span><br><span class="line"><span class="comment">//调用了 obj.valueOf</span></span><br><span class="line"><span class="comment">//3</span></span><br></pre></td></tr></table></figure>
+<p>执行valueOf()</p>
+<p>而如果valueOf返回一个对象呢</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用 valueOf'</span>);</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用 toString'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj + <span class="number">1</span>);</span><br><span class="line"><span class="comment">//调用 valueOf</span></span><br><span class="line"><span class="comment">//调用 toString</span></span><br><span class="line"><span class="comment">//11</span></span><br></pre></td></tr></table></figure>
+<p>先执行valueOf，然后执行toString。</p>
+<p>通过这两个例子我们就能知道了，虽然会先执行一个，但是如果先执行的那个返回的并不是基本类型的值得话，就会执行另一个。而如果两个都返回对象的话，我试了一下，会报错</p>
+<p><strong>方法名运算：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">test.valueOf = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'调用 valueOf方法'</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">test.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'调用 toString方法'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">test;</span><br><span class="line"><span class="comment">// 调用 valueOf 方法</span></span><br><span class="line"><span class="comment">// 调用 toString 方法</span></span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -429,13 +435,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></p>
+        <p><span>本文标题:</span><a href="/2019/12/02/秋招复习计划-JavaScript知识点11/">秋招复习计划-JavaScript知识点11</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2019-07-03, 13:20:06</p>
-        <p><span>最后更新:</span>2019-11-29, 20:06:16</p>
+        <p><span>发布时间:</span>2019-12-02, 20:45:06</p>
+        <p><span>最后更新:</span>2019-12-02, 22:12:39</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/" title="JavaScript学习笔记3--函数作用域与块作用域">http://yoursite.com/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/12/02/秋招复习计划-JavaScript知识点11/" title="秋招复习计划-JavaScript知识点11">http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -447,16 +453,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">
-                    JavaScript学习笔记4--提升与作用域闭包
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/02/JavaScript学习笔记2--词法作用域/">
-                    JavaScript学习笔记2--词法作用域
+                <a href="/2019/12/01/秋招复习计划-JavaScript知识点10/">
+                    秋招复习计划-JavaScript知识点10
                 </a>
             </div>
         
@@ -468,7 +468,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数中的作用域"><span class="toc-number">1.</span> <span class="toc-text">函数中的作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐藏内部实现"><span class="toc-number">2.</span> <span class="toc-text">隐藏内部实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规避冲突"><span class="toc-number">2.1.</span> <span class="toc-text">规避冲突</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#全局命名空间"><span class="toc-number">2.1.1.</span> <span class="toc-text">全局命名空间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块管理"><span class="toc-number">2.1.2.</span> <span class="toc-text">模块管理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数作用域"><span class="toc-number">3.</span> <span class="toc-text">函数作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名和具名"><span class="toc-number">3.1.</span> <span class="toc-text">匿名和具名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#立即执行函数表达式"><span class="toc-number">3.2.</span> <span class="toc-text">立即执行函数表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块作用域"><span class="toc-number">4.</span> <span class="toc-text">块作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#with"><span class="toc-number">4.1.</span> <span class="toc-text">with</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#try-catch"><span class="toc-number">4.2.</span> <span class="toc-text">try/catch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#let"><span class="toc-number">4.3.</span> <span class="toc-text">let</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#const"><span class="toc-number">4.4.</span> <span class="toc-text">const</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型与引用类型转换中的装箱和拆箱操作"><span class="toc-number">1.</span> <span class="toc-text">基本类型与引用类型转换中的装箱和拆箱操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#隐式装箱"><span class="toc-number">1.1.</span> <span class="toc-text">隐式装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#显示装箱"><span class="toc-number">1.2.</span> <span class="toc-text">显示装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆箱操作"><span class="toc-number">1.3.</span> <span class="toc-text">拆箱操作</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -504,7 +504,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"JavaScript学习笔记3--函数作用域与块作用域　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"秋招复习计划-JavaScript知识点11　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -524,15 +524,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/04/JavaScript学习笔记4--作用域闭包/" title="上一篇: JavaScript学习笔记4--提升与作用域闭包">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/02/JavaScript学习笔记2--词法作用域/" title="下一篇: JavaScript学习笔记2--词法作用域">
+            <a href="/2019/12/01/秋招复习计划-JavaScript知识点10/" title="下一篇: 秋招复习计划-JavaScript知识点10">
                 <i class="fa fa-angle-right"></i>
             </a>
         
