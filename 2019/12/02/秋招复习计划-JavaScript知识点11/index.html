@@ -25,7 +25,9 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/41.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/隐式装箱1.png">
-<meta property="og:updated_time" content="2019-12-02T14:12:39.768Z">
+<meta property="og:image" content="http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/reduce1.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/reduce2.png">
+<meta property="og:updated_time" content="2019-12-03T14:16:33.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="秋招复习计划-JavaScript知识点11">
 <meta name="twitter:description" content="前言 基本类型与引用类型转换中的装箱和拆箱操作，BOM属性对象方法，JS的map()和reduce()方法，JavaScript中的arguments">
@@ -343,7 +345,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,310字</span>
+			<span class="post-count">3,460字</span>
 		</span>
 	</span>
 	
@@ -352,7 +354,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">5分</span>
+			<span class="post-count">14分</span>
 		</span>
 	</span>
 </div>
@@ -411,7 +413,7 @@
 <p><strong>toString：</strong>将值转换为字符串形式并返回，不同类型的toString方法各有不同</p>
 <p><strong>valueOf：</strong>返回对象的原始值</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> objNum = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">64</span>);</span><br><span class="line"><span class="keyword">let</span> objStr = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'64'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objNum); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objStr); <span class="comment">// object</span></span><br><span class="line"># 拆箱</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objNum.valueOf()); <span class="comment">// number 基本的数字类型，想要的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objNum.toString()); <span class="comment">// string 基本的字符类型，不想要的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objStr.valueOf()); <span class="comment">// string 基本的数据类型，不想要的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objStr.toString()); <span class="comment">// string 基本的数据类型，想要的</span></span><br></pre></td></tr></table></figure>
-<p>还有一个值得注意的点，就是当一个对象同时定义了valueOf方法和toString方法，那么先执行哪个的问题</p>
+<p>还有一个值得注意的点，就是当一个对象同时定义了valueOf方法和toString方法，那么先执行哪个的问题。如果存在Symbol.toPrimitive()方法，这个是最优先的。然后对于不同的情况，valueOf和toString有不同的先后顺序</p>
 <p><strong>直接输出对象名：</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用了 obj.toString'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'toString'</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'调用了 obj.valueOf'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'valueOf'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(obj);</span><br><span class="line"><span class="comment">// 调用了 obj.toString</span></span><br><span class="line"><span class="comment">// 弹出toString</span></span><br></pre></td></tr></table></figure>
 <p>执行tostring()</p>
@@ -427,6 +429,113 @@
 <p>通过这两个例子我们就能知道了，虽然会先执行一个，但是如果先执行的那个返回的并不是基本类型的值得话，就会执行另一个。而如果两个都返回对象的话，我试了一下，会报错</p>
 <p><strong>方法名运算：</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">test.valueOf = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'调用 valueOf方法'</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">test.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'调用 toString方法'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">test;</span><br><span class="line"><span class="comment">// 调用 valueOf 方法</span></span><br><span class="line"><span class="comment">// 调用 toString 方法</span></span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<h2 id="BOM属性对象方法"><a href="#BOM属性对象方法" class="headerlink" title="BOM属性对象方法"></a>BOM属性对象方法</h2><h3 id="Window对象"><a href="#Window对象" class="headerlink" title="Window对象"></a>Window对象</h3><h4 id="Window方法"><a href="#Window方法" class="headerlink" title="Window方法"></a>Window方法</h4><p><strong>confirm：</strong></p>
+<p>创建一个需要用户确认的对话框，参数为提示信息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.confirm(<span class="string">'确认信息'</span>);</span><br><span class="line"><span class="comment">//点确认返回true</span></span><br></pre></td></tr></table></figure>
+<p><strong>open：</strong></p>
+<p>打开一个新的浏览器窗口或查找一个已命名的窗口</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.open(URL, name, features, replace);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>URL：一个可选字符串，声明了要在新窗口显示的文档的URL。如果省略了这个参数，或者它的值是空字符串，那么新窗口不会显示任何文档</li>
+<li>name：一个可选的字符串，该字符串是一个由逗号分隔的特征列表，其中包含数字、字母和下划线，该字符声明了新窗口的名称。这个名称可以用作标记 \&lt;a> 和\&lt;form> 的属性 target 的值。如果该参数指定了一个已经存在的窗口，那么 open() 方法就不再创建一个新窗口，而只是返回对指定窗口的引用。在这种情况下，features 将被忽略。</li>
+<li><p>featrues：一个可选的字符串，声明了新窗口要显示的标准浏览器的特征。如果省略该参数，新窗口将具有所有标准特征。在<a href="https://www.w3school.com.cn/jsref/met_win_open.asp#windowfeatures" target="_blank" rel="noopener">窗口特征</a>这个表格中，我们对该字符串的格式进行了详细的说明。</p>
+</li>
+<li><p>replace：一个可选的布尔值。规定了装载到窗口的URL是在窗口的浏览历史中创建一个新条目，还是替换浏览器历史中的当前条目。支持下面的值：</p>
+<ul>
+<li>true - URL替换浏览器历史中的当前条目</li>
+<li>false - URL在浏览器历史中创建新的条目</li>
+</ul>
+</li>
+</ul>
+<p><strong>close：</strong></p>
+<p>关闭当前窗口</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.close();</span><br></pre></td></tr></table></figure>
+<h4 id="Window属性"><a href="#Window属性" class="headerlink" title="Window属性"></a>Window属性</h4><p><strong>closed：</strong></p>
+<p>页面是否关闭</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myWindow = <span class="built_in">window</span>.open(<span class="string">'http://www.baidu.com'</span>, <span class="string">'baidu'</span>);</span><br><span class="line">myWindow.closed; <span class="comment">// false</span></span><br><span class="line">myWindow.close();</span><br><span class="line">myWindow.closed; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><strong>opener：</strong></p>
+<p>返回打开该窗口的窗口的引用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myWindow = <span class="built_in">window</span>.open(<span class="string">'http://www.baidu.com'</span>, <span class="string">'baidu'</span>);</span><br><span class="line">myWindow.opener</span><br></pre></td></tr></table></figure>
+<p><strong>document和history：</strong></p>
+<p>window和document以及history没有明确的所属关系。window只是存在一个document和history引用。因为window对象除了充当控制浏览器的对象外，还充当全局作用域。所以必须存在有document的引用。</p>
+<h3 id="Navigator对象"><a href="#Navigator对象" class="headerlink" title="Navigator对象"></a>Navigator对象</h3><p><strong>appName属性：</strong></p>
+<p>一般浏览器除了ie(Internet explore)以外差不多打出来的appName几乎都是”Netscape”</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.appName; <span class="comment">//"Netscape"</span></span><br></pre></td></tr></table></figure>
+<p><strong>online属性：</strong></p>
+<p>指明系统是否处于脱机状态，也就是检查有没有网，没网返回false，有网返回true</p>
+<p><strong>userAgent属性：</strong>返回客户端的完整信息，可以判断机型、浏览器、手机端还是PC端</p>
+<h3 id="Screen对象"><a href="#Screen对象" class="headerlink" title="Screen对象"></a>Screen对象</h3><p><strong>deviceXDPI：</strong></p>
+<p>返回显示屏幕的每英寸水平点（像素）数。返回的其实就是分辨率，而那个水平点数中的一点就是一像素，DPI是显示分辨率的一个比例值，DPI越高说明分辨率越高</p>
+<p><strong>availHeight：</strong></p>
+<p>屏幕的像素高度减去系统部件高度之后的值(只读)，代表屏幕可用高度，单位为像素</p>
+<p><strong>height：</strong></p>
+<p>屏幕的像素高度</p>
+<p><strong>width：</strong></p>
+<p>屏幕的像素宽度</p>
+<h3 id="History对象"><a href="#History对象" class="headerlink" title="History对象"></a>History对象</h3><h4 id="History对象属性"><a href="#History对象属性" class="headerlink" title="History对象属性"></a>History对象属性</h4><p><strong>length：</strong></p>
+<p>在同一个标签页中，跳转了多少次。</p>
+<p>例如，我们打开一个标签页，length为1，在标签页内访问百度，length为2。百度搜索一个内容，跳转到搜索结果页面，length为3.</p>
+<h4 id="History对象方法"><a href="#History对象方法" class="headerlink" title="History对象方法"></a>History对象方法</h4><p><strong>back：</strong></p>
+<p>加载history列表中的前一个URL</p>
+<p><strong>forward：</strong></p>
+<p>加载history列表中的下一个URL</p>
+<p><strong>go：</strong></p>
+<p>加载history列表中的某个具体页面</p>
+<h3 id="Location对象"><a href="#Location对象" class="headerlink" title="Location对象"></a>Location对象</h3><p><strong>host属性：</strong></p>
+<p>设置或返回当前主机名和当前URL的端口号</p>
+<p><strong>hostname：</strong></p>
+<p>设置或返回当前URL的主机名</p>
+<p><strong>protocol：</strong></p>
+<p>返回或设置当前URL的协议</p>
+<p><strong>search：</strong></p>
+<p>返回或设置从问号开始的URL部分，及查询部分</p>
+<p><strong>hash：</strong></p>
+<p>设置或返回从井号开始的URL（锚）</p>
+<h2 id="JS中的map和reduce"><a href="#JS中的map和reduce" class="headerlink" title="JS中的map和reduce"></a>JS中的map和reduce</h2><h3 id="map方法"><a href="#map方法" class="headerlink" title="map方法"></a>map方法</h3><p><strong>定义：</strong> map方法创建一个新数组。数组内容为调用map方法的数组中的每个元素调用一个提供函数后的返回的结果。</p>
+<p>例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">const</span> map1 = array.map(<span class="function"><span class="params">x</span> =&gt;</span> x * <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(map1);</span><br><span class="line"><span class="comment">//[2,4,6,8,10]</span></span><br></pre></td></tr></table></figure>
+<p>需要注意的是，map()方法创建了一个新数组，但新数组并不是在遍历完原数组后才被复制，而是遍历一次就得到一个值。下面就是一个很好的例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array1 = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> map1 = array1.map(<span class="function"><span class="params">x</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (x == <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> x * <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(map1);</span><br><span class="line"><span class="comment">// [undefined, 8, undefined, undefined]</span></span><br></pre></td></tr></table></figure>
+<h3 id="reduce方法"><a href="#reduce方法" class="headerlink" title="reduce方法"></a>reduce方法</h3><p><strong>定义：</strong>为数组中的每一个元素一次执行回调函数，不包括数组中被删除或未被赋值的元素。</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.reduce(callback, [initiaValue]);</span><br></pre></td></tr></table></figure>
+<p>回调函数接受四个参数：</p>
+<ul>
+<li>previousValue： 上次调用回调函数返回的值，或者是提供的初始值（initiaValue)</li>
+<li>currentValue：数组中当前被处理的元素</li>
+<li>index：当前元素在数组中的索引</li>
+<li>array：调用reduce的数组</li>
+</ul>
+<p>initialValue参数作为第一次调用回调函数的第一个参数。</p>
+<p><strong>几个例子：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> sum = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, cur, index, arr</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(prev, cur, index);</span><br><span class="line">    <span class="keyword">return</span> prev + cur;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(arr, sum);</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/02/秋招复习计划-JavaScript知识点11/reduce1.png" alt="reduce1"></p>
+<p>index从1开始，第一次的prev的值是数组的第一个值。数组长度是4，但是reduce函数循环3次。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> sum = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, cur, index, arr</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(prev, cur, index);</span><br><span class="line">    <span class="keyword">return</span> prev + cur;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr, sum);</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/02/秋招复习计划-JavaScript知识点11/reduce2.png" alt="reduce2"></p>
+<p>这个例子index从0开始，因为我们传入了一个初始值0。</p>
+<p>由这两个例子我们可以得出一个结论：</p>
+<p>如果没有提供initialValue，reduce会从索引1的地方开始执行回调函数，跳过第一个索引。如果提供了，从索引0开始。</p>
+<p>而如果调用reduce方法的数组为空，且没提供初始值，会引发报错。提供初始值就不会报错。</p>
+<p><strong>reduce的高级用法：</strong></p>
+<p>1.计算数组中每个元素出现的次数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> names = [<span class="string">'Alice'</span>, <span class="string">'Bob'</span>, <span class="string">'Tiff'</span>, <span class="string">'Bruce'</span>, <span class="string">'Alice'</span>, <span class="string">'Bob'</span>];</span><br><span class="line"><span class="keyword">let</span> nameNum = names.reduce(<span class="function">(<span class="params">pre, cur</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(cur <span class="keyword">in</span> pre) &#123;</span><br><span class="line">        pre[cur]++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        pre[cur] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pre;</span><br><span class="line">&#125;, &#123;&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(nameNum);</span><br><span class="line"><span class="comment">//&#123;Alice: 2, Bob: 2, Tiff: 1, Bruce: 1&#125;</span></span><br></pre></td></tr></table></figure>
+<p>2.数组去重</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">1</span>]</span><br><span class="line"><span class="keyword">let</span> newArr = arr.reduce(<span class="function">(<span class="params">pre, cur</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!pre.includes(cur)) &#123;</span><br><span class="line">        <span class="keyword">return</span> pre.concat(cur);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, []);</span><br><span class="line"><span class="built_in">console</span>.log(newArr);</span><br><span class="line"><span class="comment">//[1,2,3,4,1]</span></span><br></pre></td></tr></table></figure>
+<p>这个程序我在写的时候第一次考虑的不是用concat，而是push。当时我的想法就是把当前值压入之前返回的数组。但是运行的时候报错了。pre.includes不是一个方法。后来一想，push方法的返回值是压入的那个值，所以改用了concat。这也暴露我对一些函数的返回值记得不清楚的问题。</p>
+<p>3.将二维数组转换为一维数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>]]</span><br><span class="line"><span class="keyword">let</span> newArr = arr.reduce(<span class="function">(<span class="params">pre,cur</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> pre.concat(cur)</span><br><span class="line">&#125;,[])</span><br><span class="line"><span class="built_in">console</span>.log(newArr); </span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+<p>4.将多维数组转换为一维</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>,[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]]]</span><br><span class="line"><span class="keyword">const</span> newArr = <span class="function"><span class="keyword">function</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> arr.reduce(<span class="function">(<span class="params">pre,cur</span>)=&gt;</span>pre.concat(<span class="built_in">Array</span>.isArray(cur)?newArr(cur):cur),[])</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(newArr(arr)); </span><br><span class="line"><span class="comment">//[0, 1, 2, 3, 4, 5, 6, 7]</span></span><br></pre></td></tr></table></figure>
+<p>5.对象里的属性求和</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = [</span><br><span class="line">    &#123;</span><br><span class="line">        subject: <span class="string">'math'</span>,</span><br><span class="line">        score: <span class="number">10</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        subject: <span class="string">'chinese'</span>,</span><br><span class="line">        score: <span class="number">20</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        subject: <span class="string">'english'</span>,</span><br><span class="line">        score: <span class="number">30</span></span><br><span class="line">    &#125;</span><br><span class="line">];</span><br><span class="line"><span class="keyword">let</span> sum = result.reduce(<span class="function">(<span class="params">pre, cur</span>) =&gt;</span> &#123; <span class="keyword">return</span> cur.score + pre; &#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(sum)</span><br><span class="line"><span class="comment">// 60</span></span><br></pre></td></tr></table></figure>
+<h2 id="JS中的arguments"><a href="#JS中的arguments" class="headerlink" title="JS中的arguments"></a>JS中的arguments</h2><p><strong>定义：</strong> arguments是所在函数的一个内置类数组对象。存放函数的调用时的参数。</p>
+<p>在ES5的非严格模式下，arguments对象会反应出具名参数的变化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixArgs</span>(<span class="params">first, second</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);</span><br><span class="line">	<span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]) ;</span><br><span class="line">	first = <span class="string">"c"</span>;</span><br><span class="line">	second = <span class="string">"d"</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(first === <span class="built_in">arguments</span>[<span class="number">0</span>]);</span><br><span class="line">	<span class="built_in">console</span>.log(second === <span class="built_in">arguments</span>[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>在严格模式下，这种情况被消除了，具名参数的变化不会引起arguments的变化。</p>
+<p>在ES6中，arguments对象跟ES5严格模式一样。而且在ES6引入参数默认值后，使用默认值的参数不会包含在arguments中。arguments对象反应了最初是的函数调用状态。</p>
+<p>arguments对象还拥有一个callee属性，callee属性指向arguments所属的函数，因此我们可以不使用函数名来进行递归调用。</p>
+<p>而且由于JS不存在函数重载，所以我们可以使用arguments来模拟函数重载。</p>
 
       
     </div>
@@ -438,7 +547,7 @@
         <p><span>本文标题:</span><a href="/2019/12/02/秋招复习计划-JavaScript知识点11/">秋招复习计划-JavaScript知识点11</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2019-12-02, 20:45:06</p>
-        <p><span>最后更新:</span>2019-12-02, 22:12:39</p>
+        <p><span>最后更新:</span>2019-12-03, 22:16:33</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/12/02/秋招复习计划-JavaScript知识点11/" title="秋招复习计划-JavaScript知识点11">http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/12/02/秋招复习计划-JavaScript知识点11/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -468,7 +577,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型与引用类型转换中的装箱和拆箱操作"><span class="toc-number">1.</span> <span class="toc-text">基本类型与引用类型转换中的装箱和拆箱操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#隐式装箱"><span class="toc-number">1.1.</span> <span class="toc-text">隐式装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#显示装箱"><span class="toc-number">1.2.</span> <span class="toc-text">显示装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆箱操作"><span class="toc-number">1.3.</span> <span class="toc-text">拆箱操作</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型与引用类型转换中的装箱和拆箱操作"><span class="toc-number">1.</span> <span class="toc-text">基本类型与引用类型转换中的装箱和拆箱操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#隐式装箱"><span class="toc-number">1.1.</span> <span class="toc-text">隐式装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#显示装箱"><span class="toc-number">1.2.</span> <span class="toc-text">显示装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆箱操作"><span class="toc-number">1.3.</span> <span class="toc-text">拆箱操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM属性对象方法"><span class="toc-number">2.</span> <span class="toc-text">BOM属性对象方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Window对象"><span class="toc-number">2.1.</span> <span class="toc-text">Window对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Window方法"><span class="toc-number">2.1.1.</span> <span class="toc-text">Window方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Window属性"><span class="toc-number">2.1.2.</span> <span class="toc-text">Window属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Navigator对象"><span class="toc-number">2.2.</span> <span class="toc-text">Navigator对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Screen对象"><span class="toc-number">2.3.</span> <span class="toc-text">Screen对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#History对象"><span class="toc-number">2.4.</span> <span class="toc-text">History对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#History对象属性"><span class="toc-number">2.4.1.</span> <span class="toc-text">History对象属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#History对象方法"><span class="toc-number">2.4.2.</span> <span class="toc-text">History对象方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Location对象"><span class="toc-number">2.5.</span> <span class="toc-text">Location对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS中的map和reduce"><span class="toc-number">3.</span> <span class="toc-text">JS中的map和reduce</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#map方法"><span class="toc-number">3.1.</span> <span class="toc-text">map方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce方法"><span class="toc-number">3.2.</span> <span class="toc-text">reduce方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS中的arguments"><span class="toc-number">4.</span> <span class="toc-text">JS中的arguments</span></a></li></ol>
         
     </div>
     <style>
