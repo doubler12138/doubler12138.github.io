@@ -15,20 +15,20 @@
 
 
 
-<meta name="description" content="前言 这部分记录《你不知道的JavaScript》的第四章-提升，还有第五章，也是JS中最重要的部分之一，作用域闭包">
-<meta name="keywords" content="JavaScript">
+<meta name="description" content="前言 CSS一直学的很烂，所以打算在这个寒假重新系统的学一遍">
+<meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript学习笔记4--提升与作用域闭包">
-<meta property="og:url" content="http://yoursite.com/2019/07/04/JavaScript学习笔记4--作用域闭包/index.html">
+<meta property="og:title" content="CSS学习笔记2--结构和层叠">
+<meta property="og:url" content="http://yoursite.com/2020/01/06/CSS学习笔记2-结构和层叠/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 这部分记录《你不知道的JavaScript》的第四章-提升，还有第五章，也是JS中最重要的部分之一，作用域闭包">
+<meta property="og:description" content="前言 CSS一直学的很烂，所以打算在这个寒假重新系统的学一遍">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/04/JavaScript学习笔记4--作用域闭包/14.jpg">
-<meta property="og:updated_time" content="2019-12-01T06:10:29.587Z">
+<meta property="og:image" content="http://yoursite.com/2020/01/06/CSS学习笔记2-结构和层叠/44.jpg">
+<meta property="og:updated_time" content="2020-01-06T13:56:45.235Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript学习笔记4--提升与作用域闭包">
-<meta name="twitter:description" content="前言 这部分记录《你不知道的JavaScript》的第四章-提升，还有第五章，也是JS中最重要的部分之一，作用域闭包">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/04/JavaScript学习笔记4--作用域闭包/14.jpg">
+<meta name="twitter:title" content="CSS学习笔记2--结构和层叠">
+<meta name="twitter:description" content="前言 CSS一直学的很烂，所以打算在这个寒假重新系统的学一遍">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/06/CSS学习笔记2-结构和层叠/44.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>JavaScript学习笔记4--提升与作用域闭包 | DoubleR&#39;s BLOG</title>
+<title>CSS学习笔记2--结构和层叠 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -314,11 +314,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JavaScript学习笔记4--作用域闭包" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-CSS学习笔记2-结构和层叠" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/07/04/JavaScript学习笔记4--作用域闭包/" class="article-date">
-      <time datetime="2019-07-04T13:35:06.000Z" itemprop="datePublished">2019-07-04</time>
+      <a href="/2020/01/06/CSS学习笔记2-结构和层叠/" class="article-date">
+      <time datetime="2020-01-06T09:07:05.000Z" itemprop="datePublished">2020-01-06</time>
 </a>
 
 
@@ -333,7 +333,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JavaScript学习笔记4--提升与作用域闭包
+      CSS学习笔记2--结构和层叠
     </h1>
   
 
@@ -342,7 +342,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,648字</span>
+			<span class="post-count">1,798字</span>
 		</span>
 	</span>
 	
@@ -368,7 +368,7 @@
 
         
     <div class="article-tag tagcloud" style="margin-top:30px;">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -379,45 +379,66 @@
       
           
         <p><strong>前言</strong></p>
-<p>这部分记录《你不知道的JavaScript》的第四章-提升，还有第五章，也是JS中最重要的部分之一，作用域闭包</p>
+<p>CSS一直学的很烂，所以打算在这个寒假重新系统的学一遍</p>
 <hr>
-<p><img src="/2019/07/04/JavaScript学习笔记4--作用域闭包/14.jpg" alt="14"></p>
+<p><img src="/2020/01/06/CSS学习笔记2-结构和层叠/44.jpg" alt="44"></p>
 <a id="more"></a>
-<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1364411567&auto=1&height=66"></iframe><br></div>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=564396902&auto=1&height=66"></iframe><br></div>
 
-<h2 id="提升"><a href="#提升" class="headerlink" title="提升"></a>提升</h2><p>为什么在JS中声明会被提前，这与编译器的处理有关。所以在JS中<code>var a = 2;</code>这个语句会被拆分成两部分。声明：<code>var a</code>和<code>a = 2</code>。第一个声明在编译阶段进行，第二个赋值声明会被留在原地等待执行。所以下面这两个示例就很好理解</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\\示例<span class="number">1</span></span><br><span class="line">a = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//2</span></span><br><span class="line"></span><br><span class="line">\\示例<span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//undefine</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-<p>需要注意的是<strong>只有声明本身会被提升，而复制或其它运算逻辑会留在原地</strong></p>
-<p>每个作用域都会进行提升操作，但并不是把所有声明提到整个程序的最上方，而是将声明提到声明所处作用域的最前。</p>
-<p>函数声明也会被提升，但是函数表达式不会被提升</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">foo();  <span class="comment">//是可执行的</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">//undefined</span></span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(); </span><br><span class="line"><span class="comment">//不是ReferencError而是TypeError，因为声明是存在的，但是foo未被复制为undefined，对于undefined值进行函数调用而导致了非法操作</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// ....</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>函数声明和变量声明都会被提升，但是函数会首先被提升，然后才是变量。</p>
-<h2 id="作用域闭包"><a href="#作用域闭包" class="headerlink" title="作用域闭包"></a>作用域闭包</h2><p>先来看一个清晰展示了闭包的示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(a);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> bar<span class="string">'</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">var baz = foo();</span></span><br><span class="line"><span class="string">baz(); //2 ————这就是闭包的效果</span></span><br></pre></td></tr></table></figure>
-<p>函数bar()的词法作用域能够访问foo()的内部作用域。然后我们将bar()函数本身当作一个值类型进行传递。在这个例子中，我们将bar所引用的函数对象本身当作返回值。</p>
-<p>在foo()执行后，其返回值（也就是内部的bar()函数）赋值给变量baz并调用baz()，实际上只是通过不同的标识符引用调用了内部的函数bar()。</p>
-<p>在foo()执行后，通常会期待foo()的整个内部作用域都被销毁，因为引擎有垃圾回收器来释放不再使用的内存空间，但是由于闭包的存在，回收被阻止了，内部作用域依然存在。因为bar()本身仍在使用这个内部作用域。</p>
-<p>由于bar()定义在foo()内部，所以它拥有覆盖foo()内部作用域的闭包，使得该作用域能够一直存活，以供bar()在之后任何时间进行引用。</p>
-<p>bar()依然持有对该作用域的引用，而这个引用就叫做闭包。</p>
-<p>函数在定义时的词法作用域以外的地方被调用。闭包使得函数可以继续访问定义时的词法作用域</p>
-<p>再来看个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a); <span class="comment">//2</span></span><br><span class="line">	&#125;</span><br><span class="line">	bar(baz);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    fn(); <span class="comment">//这就是闭包，当baz以实参的形式在这里运行时，它在定义的词法作用域外被调用了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>无论通过何种手段将内部函数传递到所在的词法作用域以外，它都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包。</p>
-<p>再来看一个比较难理解的，关于jQuery的例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setupBot</span>(<span class="params">name, selector</span>) </span>&#123;</span><br><span class="line">    $(selector).click( <span class="function"><span class="keyword">function</span> <span class="title">activator</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"Activationg: "</span> + name);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">setupBot( <span class="string">"Closure Bot 1"</span>, <span class="string">"#bot_1"</span>);</span><br><span class="line">setupBot( <span class="string">"Closure Bot 2"</span>, <span class="string">"#bot_2"</span>);</span><br></pre></td></tr></table></figure>
-<p>这里难理解的是activator是作为对应选择器选择的dom节点的click事件响应函数执行的，所以它还是在其词法作用域以外执行。因为它的词法作用在setupBot()内。</p>
-<p>本质上无论何时何地，如果将函数（访问它们各自的词法作用域）当作第一级的值类型并到处传递，你就会看到闭包在这些函数中的应用。在定时器、事件监听器、Ajax请求、跨窗口通信、Web Workers或任何其它的异步（或者同步）任务中，只要使用了回调函数，实际上就是在使用闭包.</p>
-<p><strong>通常认为IIFE模式是典型的闭包例子，但是之间还是有所区别的：</strong></p>
-<p>IIFE并不是在它本身的词法作用域以外执行的。它在定义时所在的作用域中执行。但是闭包是发生在定义时的，所以IIFE的确创建了闭包，但是并没有真正使用闭包</p>
-<h2 id="循环中的闭包"><a href="#循环中的闭包" class="headerlink" title="循环中的闭包"></a>循环中的闭包</h2><p>先来看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++)&#123;</span><br><span class="line">    setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i);</span><br><span class="line">    &#125;, i*<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个代码的执行结果是每隔1秒输出一个6，为什么是每隔一秒呢。因为第一次定义延时函数的时候是一秒延时，第二次是两秒，第三次是三秒…….。所以每次输出之间间隔1秒。但又为什么每次输出都是6呢？因为所有的回调函数都是在循环结束后才会被执行，而根据作用域的工作原理，虽然循环中的五个函数是在各个迭代中分别定义的，并且延时函数也是在各个迭代中定义的，所以延时函数后的i是改变的。但是五个函数都备份比在要给共享的全局作用域中。而回调函数的执行在循环之后，这是在全局共享的全局作用域中i已经变成了6.</p>
-<p>如果想要解决这个问题，我们需要为循环过程中每个迭代都创建一个闭包作用域</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++)&#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>)</span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, j*<span class="number">1000</span>)</span><br><span class="line">	&#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样我们就将原先的作用域分成了五个闭包作用域，每个timer函数都有对应一个闭包作用域，在其对应的闭包作用域中，i就是迭代到的值。</p>
-<p>但是我们可以使用一种更简单的方式解决这个问题，就是使用ES6中新定义的let关键字。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i);</span><br><span class="line">    &#125;, i*<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>let声明指出变量在循环过程中不止被声明一次，每次迭代都会声明。随后每个迭代都会使用上一个迭代结束时的值初始化这个变量。</p>
+<h2 id="特殊性"><a href="#特殊性" class="headerlink" title="特殊性"></a>特殊性</h2><p>同一个元素可以使用两个或多个规则来选择，每个规则都有其自己的选择器。那么当样式冲突时，浏览器到底怎么渲染，这就涉及到了CSS选择器的特殊性了。</p>
+<p>选择器的特殊性有选择器本身的嘴贱确定。特殊性值表述为4个部分，如：0,0,0,0。</p>
+<p>越高位特殊性越高。一个选择器的具体特殊性如下确定：</p>
+<ul>
+<li>对于选择器中给定的各个ID属性值，加0,1,0,0</li>
+<li>对于选择器中给定的各个类属性值、属性选择或伪类，加0,0,1,0</li>
+<li>对于选择器中给定的各个元素和伪元素，加0,0,0,1</li>
+<li>结合符和通配选择器对特殊性没有任何贡献。</li>
+</ul>
+<p>最后根据选择器特殊性的值的比较结果决定应用那个选择器的样式。</p>
+<p>分组选择器会将其“解组”为单独的规则，然后确定其对应的特殊性。</p>
+<p><strong>通配符的特殊性：</strong>通配符的特殊性是0,0,0,0，但是这与根本没有特殊性还是有区别的，主要体现在继承上</p>
+<p><strong>结合符：</strong>子结合符（&gt;）、兄弟结合符（+）根本不具有特殊性</p>
+<p><strong>ID和属性选择器的特殊性：</strong>要注意，ID选择器和指定ID属性的属性选择器在特殊性上是不同的。前者的特殊性是0,1,0,0，而后者只有0,0,1,0</p>
+<p>这里可能会奇怪，为什么特殊性有四位，而我们只用了三位，这是因为第一位是为了内联样式保留的，在CSS2.1以后，内联样式的特殊性为1,0,0,0。</p>
+<p><strong>重要性：</strong></p>
+<p>当一个声明十分重要，超过其它声明时，CSS2.1称之为重要声明，其使用方式实在这些声明的结束分号之前插入<code>!important</code>标志。注意，一定是在结束分号之前，和结束分号之间不能有任何的关键词。</p>
+<p><code>!important</code>标志并不会增加声明的特殊性，它的作用在于让重要声明之间解决特殊性冲突问题，非重要声明之间解决特殊性冲突。重要声明永远优先于非重要声明。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>基于继承机制，样式不仅应用于指定的元素，还会应用到它的后代元素，并且这个向下继承的过程会一直传递，直到没有更多的后代元素。</p>
+<p>样式值只会向下传播，绝不会向上传递给它们的祖先，除了body元素。应用到body元素的背景样式可以传递到html元素，相应的可以定义其画布。</p>
+<p>但不是所有的属性都会被继承。一般的，大多数盒式模型的属性（包括外边距、内边距、背景和边框）都不能被继承。</p>
+<p><strong>继承的样式没有特殊性。</strong></p>
+<p>所以即使是统配选择器也要优先于继承值，因为统配选择器是拥有特殊性的，虽然为0,0,0,0</p>
+<h2 id="层叠"><a href="#层叠" class="headerlink" title="层叠"></a>层叠</h2><p>在之前我们讨论的时候，一直忽略了一个问题，就是当特殊性相等的两个规则同时应用到同一个元素，浏览器到底会怎么渲染。这个时候，就需要使用“层叠样式表”。CSS所基于的方法就是让样式层叠在一起。这是通过结合继承和特殊性做到的。在接好层叠规则之前，首先先了解一下CSS样式的三种来源：</p>
+<ul>
+<li>创作人员：及程序员写的样式</li>
+<li>读者：及用户通过F12调的样式</li>
+<li>用户代理：及浏览器默认的一些渲染，比如说网页中的链接默认蓝色。</li>
+</ul>
+<p>层叠规则如下：</p>
+<ul>
+<li>找出所有相关的规则，这些规则都包含一个给定元素匹配的选择器。</li>
+<li>按显示权重对应用到该元素的所有声明进行排序。标志!important的规则的权重要高于没有!important标志的规则。根据来源进行排序。正常情况下创作人员的样式&gt;读者的样式&gt;用户代理的样式。但是有!important标志的都这样是要强于所有样式。</li>
+<li>按特殊性对应用到给定元素的所有声明排序。有较高特殊性的元素权重要大于有较低特殊性的元素。</li>
+<li>按出现顺序对应用到给定元素的所有声明排序。一个声明在样式表中或文档中越后出现，它的权重就越大。如果样式表中有导入的样式表，一般认为导入样式表的声明出现的比主样式表早。</li>
+</ul>
+<p>总结一下就是，在声明权重方面，权重从大到小的顺序依次为：</p>
+<ul>
+<li>读者的重要声明</li>
+<li>创作人员的重要声明（其中再按特殊性进行排序，特殊性相同按出现前后排序）</li>
+<li>创作人员的正常声明（其中再按特殊性进行排序， 特殊性相同按出现前后排序）</li>
+<li>读者的正常声明</li>
+<li>用户代理声明</li>
+</ul>
+<p><strong>顺序排序的重要应用：</strong></p>
+<p>顺序排许的一个重要应用就是链接样式顺序。一般建议按link-visited-hover-active(LVHA)的顺序声明</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: bule;&#125;</span><br><span class="line"><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: purple;&#125;</span><br><span class="line"><span class="selector-pseudo">:hover</span> &#123;<span class="attribute">color</span>: red;&#125;</span><br><span class="line"><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: orange;&#125;</span><br></pre></td></tr></table></figure>
+<p>按照这个顺序，当我们点击一个未访问的连接时，link,hover,active都可以应用，但是根据顺序，最后应用的是active，这也正是我们期望的。而如果顺序不正确，则会导致一些问题</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:hover</span> &#123;<span class="attribute">color</span>: red;&#125;</span><br><span class="line"><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: orange;&#125;</span><br><span class="line"><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: bule;&#125;</span><br><span class="line"><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: purple;&#125;</span><br></pre></td></tr></table></figure>
+<p>按照这个顺序hover和active都不会的到应用，因为一个链接要么是未访问的，要么就是已经访问过的。加上它两的顺序在后，所以link和visited的样式总会覆盖hover和active。</p>
+<p>不过我们可以根据具体需要，修改一下顺序。比如说，我们只希望未被访问过的链接出翔悬停样式，已经访问过的链接没有这样的样式。那么我们可以应用一下的顺序</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: blue;&#125;</span><br><span class="line"><span class="selector-pseudo">:hover</span> &#123;<span class="attribute">color</span>: yellow;&#125;</span><br><span class="line"><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: blue;&#125;</span><br><span class="line"><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: red;&#125;</span><br></pre></td></tr></table></figure>
+<p>当然这只是在所有规则设置同一个属性时才要考虑的问题，如果各规则为不同的属性设置样式，则无需考虑顺序的问题。而且这个问题也可以通过将伪类链接起来解决。</p>
+<h2 id="非CSS表现提示"><a href="#非CSS表现提示" class="headerlink" title="非CSS表现提示"></a>非CSS表现提示</h2><p>除了CSS还有一些标签也能改变样式，譬如font元素，虽然现在已经很少使用元素去确定样式了，但是我们还是不能忽略这个问题。所有的非CSS提示被处理为特殊性为0，并且出现在创作人员样式表的最前面</p>
 
       
     </div>
@@ -426,13 +447,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></p>
+        <p><span>本文标题:</span><a href="/2020/01/06/CSS学习笔记2-结构和层叠/">CSS学习笔记2--结构和层叠</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2019-07-04, 21:35:06</p>
-        <p><span>最后更新:</span>2019-12-01, 14:10:29</p>
+        <p><span>发布时间:</span>2020-01-06, 17:07:05</p>
+        <p><span>最后更新:</span>2020-01-06, 21:56:45</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/" title="JavaScript学习笔记4--提升与作用域闭包">http://yoursite.com/2019/07/04/JavaScript学习笔记4--作用域闭包/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/04/JavaScript学习笔记4--作用域闭包/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/06/CSS学习笔记2-结构和层叠/" title="CSS学习笔记2--结构和层叠">http://yoursite.com/2020/01/06/CSS学习笔记2-结构和层叠/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/06/CSS学习笔记2-结构和层叠/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -444,16 +465,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/06/NodeJs学习笔记1/">
-                    NodeJs学习笔记1
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">
-                    JavaScript学习笔记3--函数作用域与块作用域
+                <a href="/2020/01/03/高德地图API的使用/">
+                    高德地图API的使用
                 </a>
             </div>
         
@@ -465,7 +480,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#提升"><span class="toc-number">1.</span> <span class="toc-text">提升</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域闭包"><span class="toc-number">2.</span> <span class="toc-text">作用域闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环中的闭包"><span class="toc-number">3.</span> <span class="toc-text">循环中的闭包</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊性"><span class="toc-number">1.</span> <span class="toc-text">特殊性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">2.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#层叠"><span class="toc-number">3.</span> <span class="toc-text">层叠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非CSS表现提示"><span class="toc-number">4.</span> <span class="toc-text">非CSS表现提示</span></a></li></ol>
         
     </div>
     <style>
@@ -501,7 +516,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"JavaScript学习笔记4--提升与作用域闭包　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"CSS学习笔记2--结构和层叠　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -521,15 +536,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/06/NodeJs学习笔记1/" title="上一篇: NodeJs学习笔记1">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/" title="下一篇: JavaScript学习笔记3--函数作用域与块作用域">
+            <a href="/2020/01/03/高德地图API的使用/" title="下一篇: 高德地图API的使用">
                 <i class="fa fa-angle-right"></i>
             </a>
         
