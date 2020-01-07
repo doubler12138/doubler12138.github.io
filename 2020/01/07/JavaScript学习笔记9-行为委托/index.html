@@ -15,20 +15,22 @@
 
 
 
-<meta name="description" content="前言 这部分主要学习JavaScript作用域和闭包，作用域是任何一个语言中都很重要的部分">
+<meta name="description" content="前言 继续看《你不知道的JavaScript》">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript学习笔记1--作用域">
-<meta property="og:url" content="http://yoursite.com/2019/06/30/JavaScript学习笔记1--编译原理/index.html">
+<meta property="og:title" content="JavaScript学习笔记9-行为委托">
+<meta property="og:url" content="http://yoursite.com/2020/01/07/JavaScript学习笔记9-行为委托/index.html">
 <meta property="og:site_name" content="DoubleR&#39;s BLOG">
-<meta property="og:description" content="前言 这部分主要学习JavaScript作用域和闭包，作用域是任何一个语言中都很重要的部分">
+<meta property="og:description" content="前言 继续看《你不知道的JavaScript》">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/06/30/JavaScript学习笔记1--编译原理/11.jpg">
-<meta property="og:updated_time" content="2019-11-29T12:05:56.981Z">
+<meta property="og:image" content="http://yoursite.com/2020/01/07/JavaScript学习笔记9-行为委托/45.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/07/JavaScript学习笔记9-行为委托/类.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/07/JavaScript学习笔记9-行为委托/对象关联.png">
+<meta property="og:updated_time" content="2020-01-07T13:51:20.481Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript学习笔记1--作用域">
-<meta name="twitter:description" content="前言 这部分主要学习JavaScript作用域和闭包，作用域是任何一个语言中都很重要的部分">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/30/JavaScript学习笔记1--编译原理/11.jpg">
+<meta name="twitter:title" content="JavaScript学习笔记9-行为委托">
+<meta name="twitter:description" content="前言 继续看《你不知道的JavaScript》">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/07/JavaScript学习笔记9-行为委托/45.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>JavaScript学习笔记1--作用域 | DoubleR&#39;s BLOG</title>
+<title>JavaScript学习笔记9-行为委托 | DoubleR&#39;s BLOG</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -314,11 +316,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JavaScript学习笔记1--编译原理" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JavaScript学习笔记9-行为委托" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/06/30/JavaScript学习笔记1--编译原理/" class="article-date">
-      <time datetime="2019-06-30T12:55:28.000Z" itemprop="datePublished">2019-06-30</time>
+      <a href="/2020/01/07/JavaScript学习笔记9-行为委托/" class="article-date">
+      <time datetime="2020-01-07T04:10:17.000Z" itemprop="datePublished">2020-01-07</time>
 </a>
 
 
@@ -333,7 +335,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JavaScript学习笔记1--作用域
+      JavaScript学习笔记9-行为委托
     </h1>
   
 
@@ -342,7 +344,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,646字</span>
+			<span class="post-count">1,090字</span>
 		</span>
 	</span>
 	
@@ -351,7 +353,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">6分</span>
+			<span class="post-count">4分</span>
 		</span>
 	</span>
 </div>
@@ -379,80 +381,40 @@
       
           
         <p><strong>前言</strong></p>
-<p>这部分主要学习JavaScript作用域和闭包，作用域是任何一个语言中都很重要的部分</p>
+<p>继续看《你不知道的JavaScript》</p>
 <hr>
-<p><img src="/2019/06/30/JavaScript学习笔记1--编译原理/11.jpg" alt="11"></p>
+<p><img src="/2020/01/07/JavaScript学习笔记9-行为委托/45.jpg" alt="45"></p>
 <a id="more"></a>
-<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1363078221&auto=1&height=66">        </iframe><br></div>
+<div aling="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=450795499&auto=1&height=66"></iframe><br></div>
 
-<h2 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h2><p> <strong>传统编译语言的源代码的编译过程：</strong></p>
+<h2 id="面向委托的设计"><a href="#面向委托的设计" class="headerlink" title="面向委托的设计"></a>面向委托的设计</h2><p>在之前我们讨论原型的时候，我们一直在讨论如何利用[[Prototype]]来模拟类的实现和继承。但是为了更好的学习如何直观的使用[[Prototype]]，我们必须要知道它代表的是一种不同于类的设计模式。我们必须要把思路从类和继承的设计模式转换到委托行为的模式。</p>
+<h3 id="类理论"><a href="#类理论" class="headerlink" title="类理论"></a>类理论</h3><p>当我们需要在软件中建模一些类似的任务。如果使用类的方式，那设计方法可能是这样的：定义一个父类，可以将其命名为Task，在Task类中定义所有任务都有的行为。接着定义子类XYZ和ABC，它们都继承自Task并且会添加一些特殊的行为来处理对应的任务。</p>
+<p>非常重要的是，类世界模式鼓励在继承时使用方法重写（和堕胎）。</p>
+<h3 id="委托理论"><a href="#委托理论" class="headerlink" title="委托理论"></a>委托理论</h3><p>现在我们尝试用委托行为的方式来思考同样的问题。</p>
+<p>首先我们会定义一个名为Task的对象，他会包含所有任务都可以使用的具体行为。接着，对于每个任务，我们在定义一个对象了存储对应的数据和行为。然后把特定的任务对象关联到Task功能对象上，让它们在需要的时候可以进行委托。下面是推荐形式的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Task = &#123;</span><br><span class="line">    setID: <span class="function"><span class="keyword">function</span>(<span class="params">ID</span>) </span>&#123; <span class="keyword">this</span>.id = ID; &#125;,</span><br><span class="line">    outputID: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>.id); &#125;</span><br><span class="line">&#125;;</span><br><span class="line">XYZ = <span class="built_in">Object</span>.create(Task); <span class="comment">//让XYZ委托Task</span></span><br><span class="line">XYZ.prepareTask = <span class="function"><span class="keyword">function</span>(<span class="params">ID, label</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setID(ID);</span><br><span class="line">    <span class="keyword">this</span>.label = label</span><br><span class="line">&#125;;</span><br><span class="line">XYZ.outputTaskDatails = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.outpustID();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.label);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在这段代码中，Task和XYZ并不是类（或者函数），它们是对象。XYZ通过Object.create()创建，它的[[Prototype]]委托给Task对象。</p>
+<p>相比于面向类（或者说面向对象），这种编码风格称为“对象关联”。</p>
+<p>在JavaScript中，[[Prototype]]机制会把对象关联到其它对象上。对象关联风格的代码跟面向类的风格有些不同：</p>
 <ul>
-<li><p>分词/词法分析（Tokenizing/Lexing）：</p>
-<p>这个过程将由字符组成的字符串分解成有意义的代码块，这些代码块被称为词法单元（token）。空格是否会被当成词法单元，取决于空格在这门语言中是否具有具体意义。</p>
-</li>
-<li><p>解析/语法分析（Parsing）：</p>
-<p>这个过程是将词法单元流（数组）装换成要给由元素逐级嵌套所组成的代表了程序语法结构的树，这个数被成为“抽象语法树”（Abstract Syntax Tree, AST）</p>
-</li>
-<li><p>代码生成：</p>
-<p>将AST转换为可执行代码的过程被成为代码生成。这个过程与语言、目标平台等息息相关。</p>
-</li>
+<li>通常来说，在[[Prototye]]委托中最好把状态保存在委托者（及XYZ）而不是委托目标（及Task）上</li>
+<li>在委托行为中，我们会尽量避免在[[Prototype]]链的不同级别中使用相同的命名</li>
+<li>在API接口设计中，委托最好在内部实现，不要直接暴露出去。就像我们在XYZ.prepareTask()中委托Task.setID()</li>
 </ul>
-<p><strong>分词和词法分析之间的区别：</strong></p>
-<p>​    主要差异在于词法单元的识别是通过有状态还是无状态的方式进行的。简单来说，如果词法单元生成器在判断一个变量是一个独立的词法单元还是其它词法单元的一部分时，调用的是有状态的解析规则，那么这个过程被称为词法分析</p>
-<h2 id="理解作用域"><a href="#理解作用域" class="headerlink" title="理解作用域"></a>理解作用域</h2><h3 id="参与作用域的几个重要部分"><a href="#参与作用域的几个重要部分" class="headerlink" title="参与作用域的几个重要部分"></a>参与作用域的几个重要部分</h3><ul>
-<li>引擎：从头到尾负责整个JavaScript程序的编译及执行过程</li>
-<li>编译器：引擎的好朋友之一，负责语法分析及代码生成等脏活累活</li>
-<li>作用域：引擎的另一个位好朋友，负责收集并维护由所有声明的标识符（变量）组成的一系列查询，并实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限</li>
-</ul>
-<h3 id="对话"><a href="#对话" class="headerlink" title="对话"></a>对话</h3><p>通过<code>var a = 2;</code>这个例子分析，来简单的看一下引擎和其它部分是如何协同工作的</p>
-<ul>
-<li>首先，遇到<code>var a</code>，编译器会询问作用域是否已经有一个该名称的变量存在于同一作用域的集合中。如果是，编译器会忽略该声明，继续进行编译；否则他会要求作用域在当前作用域的集合中声明一个新的变量，并命名为a。</li>
-<li>记下来编译器会为引擎生成运行时所需的代码，这些代码并用来处理a = 2这个复制操作。引擎运行时会首先询问作用域，在当前的作用域集合中是否存在一个叫做a的变量。如果是，引擎会使用这个变量。如果否，引擎会继续查找该变量。</li>
-<li>如果引擎最终找到了a变量，就会将2赋值给它。否则引擎就会抛出一个未定义的异常</li>
-</ul>
-<p><strong>总结：</strong> 变量的复制操作会执行两个动作，首先编译器会在当前作用域中声明一个变量（如果之前没有声明过），然后在运行时引擎会在作用域中查找该变量，如果能够找到就会对它赋值。</p>
-<h3 id="引擎的查询类型"><a href="#引擎的查询类型" class="headerlink" title="引擎的查询类型"></a>引擎的查询类型</h3><p>引擎查找变量的方式分为LHS和RHS：</p>
-<ul>
-<li>LHS：查找复制操作的目标是谁，举例<code>a = 2</code>，其中查询变量a的方式就是LHS</li>
-<li>RHS：查找谁是复制曹祖哦的源头，举例<code>console.log(a)</code>，这里对于变量a的查询方式就是RHS，它在于找到a的原值</li>
-</ul>
-<p>由于编译器可以在代码生成的同时处理声明和值的定义。所以并不能将<code>function foo(a){}</code>概念化为<code>var foo;foo = function(a){}</code>这样的普通的变量声明和复制。所以将函数声明理解为LHS查询和赋值的形式并不合适</p>
-<h3 id="引擎和作用域的对话"><a href="#引擎和作用域的对话" class="headerlink" title="引擎和作用域的对话"></a>引擎和作用域的对话</h3><p>示例代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<p>下面分析一下这部分代码在执行时引擎和作用域之间到底进行了哪些对话：</p>
-<ul>
-<li>引擎在执行foo(2)时，会对foo进行RHS查询。</li>
-<li>作用域会在自身进行查询，然后会发现编译器在之前声明了foo这个函数</li>
-<li>引擎会执行foo，这里有一个隐式的对a的LHS引用，就是对于2的复制</li>
-<li>作用域会在自身进行查询，然后会发现编译器在之前将a声明为了foo的一个形参</li>
-<li>引擎对a进行复制操作，并对console进行RHS引用</li>
-<li>作用域查询发现console是个内置对象</li>
-<li>引擎再一次对a进行RHS查询</li>
-<li>作用域检测变量a</li>
-<li>引擎将a传递给log()</li>
-</ul>
-<p>这就是引擎与作用域交互的整个过程</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>分析这部分代码中的所有LHS查询和RHS查询：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = a;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = foo(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<p><strong>LHS查询：</strong></p>
-<ul>
-<li><code>var c = foo(2)</code>中对变量c的LHS查询</li>
-<li><code>var c = foo(2)</code>中对与形参a的隐式LHS查询</li>
-<li><code>var b = a</code>中对变量b的LHS查询</li>
-</ul>
-<p><strong>RHS查询：</strong></p>
-<ul>
-<li><code>var c = foo(2)</code>中对foo()函数的RHS查询</li>
-<li><code>var b = a</code>中对变量a的RHS查询</li>
-<li><code>return a + b</code>中对变量a和变量b的两次RHS查询</li>
-</ul>
-<h2 id="作用域嵌套"><a href="#作用域嵌套" class="headerlink" title="作用域嵌套"></a>作用域嵌套</h2><p>作用域是根据名称查找变量的一套规则。当一个块或函数嵌套在另一个块或函数中时，就会发生作用域的嵌套。因此，在当前作用域中无法找到某个变量时，引擎就会在外层嵌套的作用域汇总继续查找，知道找到该变量，或地道最外层作用域（全局作用域）为止。</p>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>区分LHS和RHS是因为在变量还没有声明（在任何作用域中都无法找到该变量）的情况下，这两种查询的行为是不一样的：</p>
-<ul>
-<li>如果RHS查询在所有嵌套的作用域中遍寻不到所需的变量，引擎就会抛出ReferenceError异常</li>
-<li>在引擎执行LHS查询时，如果在顶层（全局作用域）中也无法找到目标变量，在非“严格模式”下，全局作用域中就会创建一个具有该名称的变量，并将其返回给引擎。而在ES5及以后的严格模式下，LHS查询失败同样会抛出ReferenceError异常</li>
-</ul>
-<p>当RHS查询成功后，如果尝试对这个变量的值进行不合理的操作，就会抛出TypeError异常</p>
+<p>需要注意的是，互相委托是被禁止的。及如果你把B关联到A然后试着把A关联到B，就会出错。</p>
+<h2 id="比较两种思维模型"><a href="#比较两种思维模型" class="headerlink" title="比较两种思维模型"></a>比较两种思维模型</h2><p>在前面我们已经明白了“类”和“委托”这两种设计模式的理论区别。下面我们来看看它们在思维模型上的区别</p>
+<p>我们先来看一下典型的面向对象的风格</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params">who</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.me = who;</span><br><span class="line">&#125;</span><br><span class="line">Foo.prototype.identify = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"I am "</span> + <span class="keyword">this</span>.me;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params">who</span>) </span>&#123;</span><br><span class="line">    Foo.call(<span class="keyword">this</span>, who);</span><br><span class="line">&#125;</span><br><span class="line">Bar.prototype = <span class="built_in">Object</span>.create(Foo.prototype);</span><br><span class="line">Bar.prototype.speak = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"Hello, "</span> + <span class="keyword">this</span>.identify() + <span class="string">"."</span> ); </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b1 = <span class="keyword">new</span> Bar(<span class="string">"b1"</span>);</span><br><span class="line"><span class="keyword">var</span> b2 = <span class="keyword">new</span> Bar(<span class="string">"b2"</span>);</span><br><span class="line">b1.speak();</span><br><span class="line">b2.speak();</span><br></pre></td></tr></table></figure>
+<p>子类Bar继承了父类Foo，然后生成了b1和b2两个实例。</p>
+<p>下面我们来看看如何使用对象关联风格来编写功能完全相同的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Foo = &#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params">who</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.me = who;</span><br><span class="line">    &#125;,</span><br><span class="line">    identify: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"I am "</span> + <span class="keyword">this</span>,me;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Bar = <span class="built_in">Object</span>.create(Foo);</span><br><span class="line">Bar.speak = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"Hello, "</span> + <span class="keyword">this</span>.indentify() + <span class="string">"."</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b1 = <span class="built_in">Object</span>.create(Bar);</span><br><span class="line">b1.init(<span class="string">"b1"</span>);</span><br><span class="line"><span class="keyword">var</span> b2 = <span class="built_in">Object</span>.create(Bar);</span><br><span class="line">b2.init(<span class="string">"b2"</span>);</span><br><span class="line">b1.speak();</span><br><span class="line">b2.speak();</span><br></pre></td></tr></table></figure>
+<p>这段代码中我们同样利用 [[Prototype]] 把 b1 委托给 Bar 并把 Bar 委托给 Foo，和上一段<br>代码一模一样。我们仍然实现了三个对象之间的关联。</p>
+<p>类风格的思维模型强调实体以及实体间的关系</p>
+<p><img src="/2020/01/07/JavaScript学习笔记9-行为委托/类.png" alt="类"></p>
+<p>这是一个很复杂的关系网络，但是通过箭头走向，我们还是可以看出JavaScript机制有很强的内部连贯关系。</p>
+<p>而我们再来看看对象关联风格代码的思维模型</p>
+<p><img src="/2020/01/07/JavaScript学习笔记9-行为委托/对象关联.png" alt="对象关联"></p>
+<p>通过比较就可以看出，对象关联风格的代码显然更简洁，因为这种代码只关注一件事：对象之间的关联关系。</p>
 
       
     </div>
@@ -461,13 +423,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></p>
+        <p><span>本文标题:</span><a href="/2020/01/07/JavaScript学习笔记9-行为委托/">JavaScript学习笔记9-行为委托</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
-        <p><span>发布时间:</span>2019-06-30, 20:55:28</p>
-        <p><span>最后更新:</span>2019-11-29, 20:05:56</p>
+        <p><span>发布时间:</span>2020-01-07, 12:10:17</p>
+        <p><span>最后更新:</span>2020-01-07, 21:51:20</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/06/30/JavaScript学习笔记1--编译原理/" title="JavaScript学习笔记1--作用域">http://yoursite.com/2019/06/30/JavaScript学习笔记1--编译原理/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/06/30/JavaScript学习笔记1--编译原理/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/07/JavaScript学习笔记9-行为委托/" title="JavaScript学习笔记9-行为委托">http://yoursite.com/2020/01/07/JavaScript学习笔记9-行为委托/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/07/JavaScript学习笔记9-行为委托/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -479,16 +441,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/02/JavaScript学习笔记2--词法作用域/">
-                    JavaScript学习笔记2--词法作用域
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/03/06/CSS学习笔记1-选择器/">
-                    CSS学习笔记1--选择器
+                <a href="/2020/01/06/CSS学习笔记2-结构和层叠/">
+                    CSS学习笔记2--结构和层叠
                 </a>
             </div>
         
@@ -500,7 +456,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译原理"><span class="toc-number">1.</span> <span class="toc-text">编译原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解作用域"><span class="toc-number">2.</span> <span class="toc-text">理解作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参与作用域的几个重要部分"><span class="toc-number">2.1.</span> <span class="toc-text">参与作用域的几个重要部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对话"><span class="toc-number">2.2.</span> <span class="toc-text">对话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引擎的查询类型"><span class="toc-number">2.3.</span> <span class="toc-text">引擎的查询类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引擎和作用域的对话"><span class="toc-number">2.4.</span> <span class="toc-text">引擎和作用域的对话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">2.5.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域嵌套"><span class="toc-number">3.</span> <span class="toc-text">作用域嵌套</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-number">4.</span> <span class="toc-text">异常</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向委托的设计"><span class="toc-number">1.</span> <span class="toc-text">面向委托的设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类理论"><span class="toc-number">1.1.</span> <span class="toc-text">类理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#委托理论"><span class="toc-number">1.2.</span> <span class="toc-text">委托理论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#比较两种思维模型"><span class="toc-number">2.</span> <span class="toc-text">比较两种思维模型</span></a></li></ol>
         
     </div>
     <style>
@@ -536,7 +492,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"JavaScript学习笔记1--作用域　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JavaScript学习笔记9-行为委托　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -556,15 +512,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/02/JavaScript学习笔记2--词法作用域/" title="上一篇: JavaScript学习笔记2--词法作用域">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/03/06/CSS学习笔记1-选择器/" title="下一篇: CSS学习笔记1--选择器">
+            <a href="/2020/01/06/CSS学习笔记2-结构和层叠/" title="下一篇: CSS学习笔记2--结构和层叠">
                 <i class="fa fa-angle-right"></i>
             </a>
         
