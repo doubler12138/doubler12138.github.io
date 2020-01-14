@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 TCP/IP协议分层管理，TCP三次握手四次挥手机制及原因">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招复习计划-计算机网络知识点1">
+<meta property="og:url" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 TCP/IP协议分层管理，TCP三次握手四次挥手机制及原因">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/47.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络1.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络2.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络3.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络4.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络5.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络6.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络7.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/TCP报文中文版.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/TCP报文英文版.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/三次握手.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/四次挥手.png">
+<meta property="og:updated_time" content="2020-01-10T07:19:06.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="秋招复习计划-计算机网络知识点1">
+<meta name="twitter:description" content="前言 TCP/IP协议分层管理，TCP三次握手四次挥手机制及原因">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/47.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>秋招复习计划-计算机网络知识点1 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写签名/">手写签名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试经历/">面试经历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高德地图/">高德地图</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zzzwyyy.github.io/">小仙女的博客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-秋招复习计划-计算机网络知识点1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/09/秋招复习计划-计算机网络知识点1/" class="article-date">
+      <time datetime="2020-01-09T11:36:09.000Z" itemprop="datePublished">2020-01-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      秋招复习计划-计算机网络知识点1
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">4,526字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">16分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/复习计划/">复习计划</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>TCP/IP协议分层管理，TCP三次握手四次挥手机制及原因</p>
+<hr>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/47.jpg" alt="47"></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1401353320&auto=1&height=66"></iframe><br></div>
+
+<h2 id="TCP-IP协议簇分层管理"><a href="#TCP-IP协议簇分层管理" class="headerlink" title="TCP/IP协议簇分层管理"></a>TCP/IP协议簇分层管理</h2><p>首先我们需要知道TCP/IP分为四层：应用层、传输层、网络层和网络接口层（网络接口层又可以分为数据链路层和物理层）。</p>
+<p>接下来我们要了解一下协议的概念。</p>
+<p><strong>协议：</strong>计算机网络中的数据交换必须遵守事先约定好的规则。 这些规则明确规定了所交换的数据的格式以及有关的同步问题（同步含有时序的意思）。为进行网络中的数据交换而建立的规则、标准或约定即网络协议(network protocol)，简称为协议</p>
+<p>而TCP/IP协议簇并不是只指TCP、IP这两个协议，而是涵盖了这四层的所有协议。不同层有不同层自己的协议，它控制对等层之间的通行规则，并向上层提供服务。</p>
+<p>接下来我们由下往上讲解TCP/IP协议簇分层体系中各层的功能及其包含的协议。</p>
+<h3 id="总体介绍"><a href="#总体介绍" class="headerlink" title="总体介绍"></a>总体介绍</h3><p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络1.png" alt="计算机网络1"></p>
+<p>TCP/IP协议簇的体系结构总体就是这样的。</p>
+<p>当一个主机的应用产生一个信息并需要发送给另一个主机时，需要经过TCP/IP协议簇的层层封装</p>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络2.png" alt="计算机网络2"></p>
+<p>同样的，当另一个主机接收到数据时，也需要层层解封。</p>
+<p>接下来我们就从下网上介绍各层的作用和相应的协议</p>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>物理层负责一跳（节点）到一跳（节点）的位传输。简单的来说物理层的主要作用，就是将上层传输给他的数据，转换为电信号等，然后在实际线路中传输。物理层并不是我们需要考虑的重点</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>数据链路：链路是一个节点到另一个节点之间的物理线路，且中间没有其它交换节点。当数据在链路上传输时，就需要一些通信协议来控制数据传输。</p>
+<p>数据链路层又可以分为两个子层：逻辑链路控制层和媒体访问控制层。具体这两层怎么划分又干什么，我们不需要了解。</p>
+<p>我们需要了解的就是数据链路层的主要功能。</p>
+<p>数据链路层的主要功能就是成帧和差错控制。</p>
+<p>首先，什么是帧？</p>
+<p>帧是数据链路上传递的协议数据单元。数据链路层将上层发送给他的数据加上帧首部和帧尾部，形成一个数据帧，然后交给物理层一位一位的发送。</p>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络3.png" alt="计算机网络3"></p>
+<p>由于物理层在传输的过程中，可能会出现一些数据位的丢失、错误等问题。所以数据链路层还有一个功能就是差错控制。数据链里层使用CRC编码来进行差错控制。具体怎么控制的我们也不需要了解。只要知道它有这么个功能就行了。</p>
+<p>那么链路层到底控制什么呢。链路层控制的是帧从一个节点到另一个节点的传输。假设主机A需要往主机B发送一跳消息。那么消息就需要从它的电脑发送到路由器，路由器可能需要发送到下一个路由器，如此传递，直到主机B。数据链路层就是控制从路由器到路由器之间的传递，也就是我们俗称的一跳（节点）到另一个跳（节点）。</p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>网络层是我们的重点，因为它涉及到了一个重要的协议-IP协议。</p>
+<p>众所周知，每台主机在网路中都有一个标识它的重要属性，IP地址。</p>
+<p>那么一台主机上的数据，又是怎么找到另一个主机的。这就需要IP协议。</p>
+<p>而IP层的数据，我们成为报文。IP层就是在上层数据上加上报文头。</p>
+<p>目前广泛使用的IP协议有两个版本IPv4和另一个并用来提议代替IPv4的IPv6。不同版本的IP协议，它们有着不同的数据报格式。</p>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络4.png" alt="计算机网络4"></p>
+<p>IPv4的报文头中，我们只需要关注三个内容。源IP地址、目的IP地址和生存时间。</p>
+<p>前两个很好理解，生存时间是什么呢。生存时间就是这个数据报能在网络中转发多少跳。比如说主机到路由器是一跳，路由器到下一个路由器又是一跳。这个生存时间就是这个数据报能在网络中转发多少跳。如果跳数用完了，数据报还没到达目的IP的主机，那么这个报文就会被丢弃。</p>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络5.png" alt="计算机网络5"></p>
+<p>这个是IPv6的数据报结构，从这个结构中我们就能知道为什么IPv6能用来替代IPv4，因为他的地址从32位扩大到了128位，从而解决了IPv4地址不够用的问题。</p>
+<p>IP协议还有一个重要的内容叫做子网划分。</p>
+<p>子网：互联某些主机与一个路由器接口的网络形成一个子网。</p>
+<p>简单的来说，就是好几台主机的数据内容都是从一个路由器发出的，而子网外的主机想要发数据给子网内的主机，都要先把数据发给那个路由器。</p>
+<p>那么子网如何划分呢，这就要涉及到IP地址的构成方式和子网掩码了。</p>
+<p>首先IP地址由32位组成，分成四个部分，每个部分8位，表现形式为点分十进制。例如</p>
+<p><code>192.168.1.1</code>。同时我们把IP地址分为5类。其中网路号指的就是子网号，主机号就是指这个主机在子网中的号。</p>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络6.png" alt="计算机网络6"></p>
+<ul>
+<li>A类：(1.0.0.0-126.0.0.0)（默认子网掩码：255.0.0.0或 0xFF000000）</li>
+<li>B类：(128.0.0.0-191.255.0.0)（默认子网掩码：255.255.0.0或0xFFFF0000）</li>
+<li>C类：(192.0.0.0-223.255.255.0)（子网掩码：255.255.255.0或 0xFFFFFF00）</li>
+</ul>
+<p>拿要给A类地址举例，<code>1.0.0.1</code>，1是他的网络号，0.0.1是这个主机在网络1中的第一个主机。</p>
+<p>那么什么又是子网掩码呢。子网掩码其实就是用来标识子网中的主机的。子网掩码也是由32位组成，表现形式也是点分十进制。</p>
+<p>那么说了这么多，子网到底怎么划分呢。让我们来看一道我的期末复习题</p>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/计算机网络7.png" alt="计算机网络7"></p>
+<p>让我们来分析这道题，首先它给了一个IP地址<code>192.168.5.0</code>然后，后面写了个/24，/24表示，24位以前的是网络号，24位以后的都是主机号，那么这个IP网络中能有几个主机能，那就是2^(32-24)，也就是2^8个主机。那么子网掩码又是255.255.255.248，这是什么意思呢，我们把255.255.255.248转换为二进制，就是11111111.11111111.11111111.11111000，1的位数表示这个子网的网络位占几位。这里1有29位，说明一个子网的IP地址网络号占29位，主机号占3位，那么一个子网能有几个主机呢。有2^3次方个主机。那么这个<code>192.168.5.0/24</code>的IP网络能划分几个子网呢。那就是2^8 / 2^3 = 2^5 ，32个子网。那么每个子网有几个可分配的地址呢。有6个，之所以不是前面的8个，是因为子网中000和111是不能分配的，这又是什么意思呢。我们先划分一个子网出来，<code>192.168.5.0/29 ~ 192.168.5.7/29</code>是第一个子网，我们再划分一个<code>192.168.5.8/29~192.168.5.15/29</code>是第二个子网的范围。那么在第一个子网中，我们能分配的地址只有<code>192.168.5.1~192.168.5.6</code>。子网掩码0代表的位数，这里就是最后3位，有两个值是保留的，就是全0和全1。</p>
+<p>现在我们知道了子网是怎么划分的，所以一个正确的IP地址应该由是加上子网掩码的，就像</p>
+<p><code>192.168.5.1/29</code>一样，29就是简写的子网掩码，它表示的是前29位为网络号，后3位是主机号，就是主机在这个子网中是第几个主机。注意全0和全1的保留。</p>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>传输层是整个网络体系结构中最重要的一层，主要负责两个主机中进程间的通信。之前的网络层负责从一个主机到另一个主机，问题是一个主机上可能运行着很多程序，也就是进程。那么传输层就是负责主机间到底是哪两个进程在通信。</p>
+<p>传输层中最为常见的两个协议分别是传输控制协议TCP和用户数据报协议UDP。</p>
+<p>这里主要讲一下TCP和UDP的区别。后面会着重讲一下TCP。</p>
+<p>TCP是面向连接的传输协议，数据传输之前必须建立连接，数据传输完成后必须释放连接。每条链接只能由两个端点，只能进行点对点的连接。</p>
+<p>UDP是面向无连接的传输协议，UDP协议只会在上层数据上加上UDP报文头，然后就直接给目标发送，至于目标是否能收到，这就与UDP协议无关了。所以相比于TCP，UDP的传输效率更高，开销更小，但是无法保证数据传输的可靠性。</p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>应用层指的就是各主机端口上运行的进程。众所周知，Web服务器运行在80端口。Web服务器就是应用层的一个应用，它们发送原始的数据并接受数据，处理之后提供相应的服务。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>说了这么多，我们最后来讲一个例子，来说明TCP/IP四层在一次网络传输中到底怎么运行。</p>
+<p>例如，我们主机A的浏览器访问了主机B上的一个网页。</p>
+<p>那么浏览器就会以一个随机端口（1024~65535)向目标服务器的WEB应用程序，及80端口发送TCP请求，请求建立TCP连接。那么在连接建立后，浏览器就会向服务器发送HTTP请求。</p>
+<p>这个请求就是应用层中的浏览器生成的原始数据，然后应用层将这个数据交给传输层。传输层的TCP协议，在原始数据上加上TCP报文头，进行封装，用来增加一些信息，比如说源端口和目的端口（80）。然后传输层把封装好的信息交给网络层。网络层再在传输层报文上增加自己的信息，例如源IP地址和目的IP地址，进行封装。封装好后交给数据链路层。数据链路层同样会给数据上加上自己的信息，例如下一跳地址，差错控制信息等。然后数据链路层把最后封装好的信息交个物理层。物理层将信息一位一位的转换成可传输信号后在实际链路（网线啊啥的）中传输。当这个信息传递给下一个路由器的时候，路由器对数据中的一些信息做出修改，比如说链路层中的下一跳地址，网络层IP头中的存活时间等。然后发送给下一个路由器。经过一跳一跳的中转最后发送到目标主机的80端口。目标主机按层拆封数据，最后获得原始的HTTP请求，然后处理，然后返回HTTP响应报文。这个报文也需要经过四层封装，最后返回给请求主机。</p>
+<h2 id="TCP三次握手四次挥手机制"><a href="#TCP三次握手四次挥手机制" class="headerlink" title="TCP三次握手四次挥手机制"></a>TCP三次握手四次挥手机制</h2><p>在拿到域名对应的IP地址之后，浏览器或以一个随机端口（1024&lt;port&lt;65535）向服务器的WEB应用程序80端口发起TCP请求。</p>
+<h3 id="TCP报文结构"><a href="#TCP报文结构" class="headerlink" title="TCP报文结构"></a>TCP报文结构</h3><p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/TCP报文中文版.png" alt="TCP报文中文版"></p>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/TCP报文英文版.png" alt="TCP报文英文版"></p>
+<p>报文结构：</p>
+<p><strong>源端口和目的端口：</strong>各占两个字节，分别写入源端口号和目的端口号</p>
+<p><strong>序号：</strong>占4个字节，序号使用mode运算。TCP是面向字节流的，在一个TCP连接中传送的字节流中的每一个字节都按顺序编号。</p>
+<p><strong>确认序号：</strong>占4个字节，是期望收到对方下一个报文段的第一个数据字节的序号。若确认序号=N，则表明到序号N-1为止的所有数据都已正确收到</p>
+<p><strong>数据偏移：</strong>占4位，表示TCP报文字段的首部长度。以4字节为一个单位，4位最多能表示到15，那么TCP首部的最大长度为60字节（4*15字节）</p>
+<p><strong>6个保留标志位：</strong>占6位，默认全置0</p>
+<ul>
+<li>紧急URG：当它为1时，表明紧急指针字段有效。这是发送发TCP就把紧急数据插入到本报文段数据的最前面，后面仍为普通数据</li>
+<li>确认ACK：当它为1时，确认序号才有效。当ACK为0时，确认号无效。TCP规定，在建立连接后所有传输的报文段都必须把ACK置1</li>
+<li>推送PSH：当它为1时，及受访TCP收到后就需要尽快地交付给接收应用进程，而不再等到整个缓存都填满后再向上交付</li>
+<li>复位RST：当它为1时，表明TCP连接中出现了严重差错，必须释放连接，重新建立</li>
+<li>同步SYN：在连接建立时用来同步序号。但它为1时，表明这是一个连接请求和连接接收报文</li>
+<li>终止FIN：用来释放连接，当它为1时，表明此报文段的发送方的数据已经发送完毕，并要求释放连接</li>
+</ul>
+<p><strong>校验和：</strong>占2字节。检验和字段检验的范围包括首部和数据这两部分。和UDP数据报一样，在计算检验和时，也要在TCP报文段的前面加上12字节的伪首部。伪首部的格式与UDP用户数据报的伪首部一样，但要将伪首部第四个字段中的17 改为6（协议号），把第5字段中的UDP长度改为TCP长度。</p>
+<p><strong>紧急指针：</strong>占2字节。紧急指针仅在URG=1时才有意义，它指出本报文段中的紧急数据的字节数。</p>
+<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p>讲完了TCP报文头的结构，下面讲讲TCP连接的建立和断开。TCP连接的建立需要通过客户端与服务端的三次握手</p>
+<ul>
+<li>第一次握手：客户端主动打开，发送连接请求报文段，将SYN标识为置为1，Sequence Number置为x（TCP规定SYN为1时，不能携带数据，x为随机产生的一个值），然后客户端进入SYN_SEND状态</li>
+<li>第二次握手：服务器收到SYN报文段进行确认，将SYN设置为1，ACK置为1，SequenceNumber置为y， Acknowledgment Number置为x+1，然后进入SYN_RECV状态，这个状态被称为半连接状态</li>
+<li>第三次握手：客户端再进行一次确认，将ACK置为1（SYN不再使用，为0），Sequence Number置为x+1，Acknowledgment Number置为y+1发向服务器，最后客户端与服务器进入连接状态</li>
+</ul>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/三次握手.png" alt="三次握手"></p>
+<p><strong>为什么客户端需要第三次握手来再次确认</strong></p>
+<p>是为了防止资源浪费。假设只需要两次握手，如果客户端向服务器发送第一次连接请求在网络节点上滞留了，没有收到服务器的确认，于是又重新发送了一次连接请求，服务器收到客户端的第二次请求发送确认，则连接建立完成。服务器客户端进行数据传输，传输完成断开连接。此时，在网络上滞留的客户端第一次连接请求到达服务器，服务器发送确认连接但是客户端实际上并没有发送请求，因此不会理睬服务器发送的请求。但是服务器认为连接已完成，并等待客户端进行数据传输。这样会造成资源的浪费</p>
+<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p>TCP四次挥手是TCP连接释放的过程：</p>
+<ul>
+<li>客户端发送一个报文给服务端（没有数据），其中FIN设置为1，Sequence Number置为u，客户端进入FIN_WAIT_1状态</li>
+<li>服务端收到客户端请求，发送一个ACK给客户端，Acknowledge置为u+1，同时发送Sequence Number为v，服务端进入CLOSE_WAIT状态</li>
+<li>服务端发送一个FIN给客户端，ACK置为1，Sequence Number置为w，Acknowledge置为u+1，用来关闭服务端到客户端的数据传送，服务端进入LAST_ACK状态</li>
+<li>客户端收到FIN后，进入TIME_WAIT状态，接着发送一个ACK给服务端，Acknowledge置为w+1，Sequence Number置为u+1，最后客户端和服务端都进入关闭状态</li>
+</ul>
+<p><img src="/2020/01/09/秋招复习计划-计算机网络知识点1/四次挥手.png" alt="四次挥手"></p>
+<p><strong>为什么握手是三次而挥手需要四次</strong></p>
+<p>因为服务器在第二次握手的时候收到建立连接请求的SYN报文后，将ACK和SYN放在一个报文里发送给客户端。而在关闭连接的时候，由于TCP是全双工的，所以发送发和接收方都需要FIN和ACK。而关闭连接是，当收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，己方也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方表示同意现在关闭连接，因此，己方ACK和FIN一般分开发送。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/01/09/秋招复习计划-计算机网络知识点1/">秋招复习计划-计算机网络知识点1</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2020-01-09, 19:36:09</p>
+        <p><span>最后更新:</span>2020-01-10, 15:19:06</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/09/秋招复习计划-计算机网络知识点1/" title="秋招复习计划-计算机网络知识点1">http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/09/秋招复习计划-计算机网络知识点1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/01/14/面试经历-字节跳动好好学习方向/">
+                    面试经历-字节跳动好好学习方向
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/01/08/CSS学习笔记3-基本视觉格式化和盒式模型/">
+                    CSS学习笔记3-基本视觉格式化和盒式模型
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP协议簇分层管理"><span class="toc-number">1.</span> <span class="toc-text">TCP/IP协议簇分层管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#总体介绍"><span class="toc-number">1.1.</span> <span class="toc-text">总体介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#物理层"><span class="toc-number">1.2.</span> <span class="toc-text">物理层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据链路层"><span class="toc-number">1.3.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络层"><span class="toc-number">1.4.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输层"><span class="toc-number">1.5.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用层"><span class="toc-number">1.6.</span> <span class="toc-text">应用层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.7.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP三次握手四次挥手机制"><span class="toc-number">2.</span> <span class="toc-text">TCP三次握手四次挥手机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP报文结构"><span class="toc-number">2.1.</span> <span class="toc-text">TCP报文结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP三次握手"><span class="toc-number">2.2.</span> <span class="toc-text">TCP三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP四次挥手"><span class="toc-number">2.3.</span> <span class="toc-text">TCP四次挥手</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"秋招复习计划-计算机网络知识点1　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/01/14/面试经历-字节跳动好好学习方向/" title="上一篇: 面试经历-字节跳动好好学习方向">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/01/08/CSS学习笔记3-基本视觉格式化和盒式模型/" title="下一篇: CSS学习笔记3-基本视觉格式化和盒式模型">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/面试经历-字节跳动好好学习方向/">面试经历-字节跳动好好学习方向</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/09/秋招复习计划-计算机网络知识点1/">秋招复习计划-计算机网络知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/08/CSS学习笔记3-基本视觉格式化和盒式模型/">CSS学习笔记3-基本视觉格式化和盒式模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/07/JavaScript学习笔记9-行为委托/">JavaScript学习笔记9-行为委托</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/CSS学习笔记2-结构和层叠/">CSS学习笔记2--结构和层叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/高德地图API的使用/">高德地图API的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/04/ES6学习笔记9-增强的数组功能/">ES6学习笔记9--增强的数组功能</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/02/秋招复习计划-JavaScript知识点11/">秋招复习计划-JavaScript知识点11</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/秋招复习计划-JavaScript知识点10/">秋招复习计划-JavaScript知识点10</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/秋招复习计划-Vue知识点1/">秋招复习计划-Vue知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/秋招复习计划-算法题5/">秋招复习计划-算法题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/秋招复习计划-算法题4/">秋招复习计划-算法题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/秋招复习计划-JavaScript知识点7/">秋招复习计划-JavaScript知识点7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8--JS的类/">ES6学习笔记8--JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7--迭代器与生成器/">ES6学习笔记7--迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8-原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7-对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS学习笔记1-选择器/">CSS学习笔记1--选择器</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
