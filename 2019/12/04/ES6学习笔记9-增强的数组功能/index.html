@@ -24,7 +24,8 @@
 <meta property="og:description" content="前言 数组从一开始就是JS中的一种基本对象。但是随着ES的版本迭代，数组的功能却基本不变，直到ES6。ES6为数组添加了许多功能来强化数组，并且添加了创建类型化数组的能力">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/12/04/ES6学习笔记9-增强的数组功能/42.jpg">
-<meta property="og:updated_time" content="2019-12-04T12:10:02.092Z">
+<meta property="og:image" content="http://yoursite.com/2019/12/04/ES6学习笔记9-增强的数组功能/1.png">
+<meta property="og:updated_time" content="2020-01-18T11:32:28.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6学习笔记9--增强的数组功能">
 <meta name="twitter:description" content="前言 数组从一开始就是JS中的一种基本对象。但是随着ES的版本迭代，数组的功能却基本不变，直到ES6。ES6为数组添加了许多功能来强化数组，并且添加了创建类型化数组的能力">
@@ -342,7 +343,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,755字</span>
+			<span class="post-count">3,962字</span>
 		</span>
 	</span>
 	
@@ -351,7 +352,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">7分</span>
+			<span class="post-count">15分</span>
 		</span>
 	</span>
 </div>
@@ -416,9 +417,103 @@
 <p>数组从复制起始位开始复制，并对应填充到有填充起始位对应的位中。如果没有复制结束位，则一直填充到数组结束。如果具有复制结束位，则当复制到复制结束位前一位停止复制填充。</p>
 <p>同样的，如果copyWithin的参数为负数，它同样会加上数组长度以获得最终正确的索引位置。</p>
 <h2 id="类型化数组"><a href="#类型化数组" class="headerlink" title="类型化数组"></a>类型化数组</h2><p>类型化数组是具有特殊用途的数组，被设计用来处理数值类型数据。类型化数组的起源可以追溯到WebGL——Open GL ES 2.0的一个接口，设计用于配合网页上的<code>&lt;canvas&gt;</code>标签。类型化数组作为该接口实现的一部分，为JS提供了快速的按位运算能力。</p>
-<p>对于WebGL的需求来说，JS的原生数学运算实在太慢了，因为它使用64位浮点数格式来存储数值，并在必要时将其转换为32位整数。引入类型化数组突破了格式限制并带来了更好的数学运算性能，其基本的设计概念是：单个数值可以被视为有位构成的数组，并且可以对其使用与JS数组现有方法类似的方法。</p>
+<p>对于WebGL的需求来说，JS的原生数学运算实在太慢了，因为它使用64位浮点数格式来存储数值，并在必要时将其转换为32位整数。引入类型化数组突破了格式限制并带来了更好的数学运算性能，其基本的设计概念是：单个数值可以被视为由位构成的数组，并且可以对其使用与JS数组现有方法类似的方法。</p>
 <p>ES6采用了类型化数组，将其作为语言的一个正式部分，以确保在JS引擎之间有更好的兼容性，并确保与JS数组有更好的互操作性。</p>
-<h3 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h3><h3 id="数组缓冲区"><a href="#数组缓冲区" class="headerlink" title="数组缓冲区"></a>数组缓冲区</h3><h3 id="使用视图操作数组缓冲区"><a href="#使用视图操作数组缓冲区" class="headerlink" title="使用视图操作数组缓冲区"></a>使用视图操作数组缓冲区</h3><h4 id="获取视图信息"><a href="#获取视图信息" class="headerlink" title="获取视图信息"></a>获取视图信息</h4><h4 id="读取与写入数据"><a href="#读取与写入数据" class="headerlink" title="读取与写入数据"></a>读取与写入数据</h4><h4 id="类型化数组即为视图"><a href="#类型化数组即为视图" class="headerlink" title="类型化数组即为视图"></a>类型化数组即为视图</h4><h4 id="创建特定类型视图"><a href="#创建特定类型视图" class="headerlink" title="创建特定类型视图"></a>创建特定类型视图</h4><h2 id="类型化数组与常规数组的相似点"><a href="#类型化数组与常规数组的相似点" class="headerlink" title="类型化数组与常规数组的相似点"></a>类型化数组与常规数组的相似点</h2><h3 id="公共方法"><a href="#公共方法" class="headerlink" title="公共方法"></a>公共方法</h3><h3 id="相同的迭代器"><a href="#相同的迭代器" class="headerlink" title="相同的迭代器"></a>相同的迭代器</h3><h3 id="of-与from-方法"><a href="#of-与from-方法" class="headerlink" title="of()与from()方法"></a>of()与from()方法</h3><h2 id="类型化数组与常规数组的区别"><a href="#类型化数组与常规数组的区别" class="headerlink" title="类型化数组与常规数组的区别"></a>类型化数组与常规数组的区别</h2><h3 id="行为差异"><a href="#行为差异" class="headerlink" title="行为差异"></a>行为差异</h3><h3 id="遗漏的方法"><a href="#遗漏的方法" class="headerlink" title="遗漏的方法"></a>遗漏的方法</h3><h3 id="附加的方法"><a href="#附加的方法" class="headerlink" title="附加的方法"></a>附加的方法</h3>
+<h3 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h3><p>JS使用IEEE 754标准格式存储，使用64位来存储一个数值的浮点数表示形式，该格式在JS中同时用来表示整数与浮点数：当值改变时，可能会频繁发生整数与浮点数之间的格式转换。而类型化数组则允许存储并操作八种不同的数值类型：</p>
+<ul>
+<li>8位有符号整数</li>
+<li>8位无符号整数</li>
+<li>16位有符号整数</li>
+<li>16位无符号整数</li>
+<li>32位有符号整数</li>
+<li>32位无符号整数</li>
+<li>32位浮点数</li>
+<li>64位浮点数</li>
+</ul>
+<h3 id="数组缓冲区"><a href="#数组缓冲区" class="headerlink" title="数组缓冲区"></a>数组缓冲区</h3><p>数组缓冲区是内存中包含一定数量字节的区域，而所有的类型化数组都基于数组缓冲区。床架你数组缓冲区类似于在C语言中使用malloc()来分配内存，而不需要指定这块内存包含什么。</p>
+<p>创建方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">10</span>); <span class="comment">// 分配了10个字节</span></span><br></pre></td></tr></table></figure>
+<p>调用ArrayBuffer构造器时，只需要传入单个数值用于指定缓冲区包含的字节数。创建完毕后可以通过检查对象的byteLength属性来获得缓冲区的字节数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(buffer.byteLength); <span class="comment">//10</span></span><br></pre></td></tr></table></figure>
+<p>此外可以使用slice方法来创建要给新的、包含已有缓冲区部分内容的数组缓冲区。这个方法可以使用起始位置与结束位置参数，返回由原缓冲区元素组成的一个新的ArrayBuffer实例，例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">10</span>); </span><br><span class="line"><span class="keyword">let</span> buffer2 = buffer.slice(<span class="number">4</span>,<span class="number">6</span>);</span><br><span class="line"><span class="built_in">console</span>.log(buffer2.btyeLength); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>此代码创建了buffer2数组缓冲区，提取了原缓冲区索引值为4与5的元素，结束参数所对应的元素不会包含在结果中。</p>
+<p>数组缓冲区总是保持创建时指定的字节数，你可以修改其内部的数据，但永远不能修改它的容量。</p>
+<h3 id="使用视图操作数组缓冲区"><a href="#使用视图操作数组缓冲区" class="headerlink" title="使用视图操作数组缓冲区"></a>使用视图操作数组缓冲区</h3><p>数组缓冲区代表一块内存区域，而试图则是你操作这块区域的接口。视图工作在数组缓冲区或其子集上，你可以读写某种数值类型的数据。DateView类型是数组缓冲区的通用视图，允许对前述所有八种数值数据类型进行操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">let</span> view = <span class="keyword">new</span> <span class="built_in">DataView</span>(buffer, <span class="number">5</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>DataView类型的创建需要一个必须参数-缓冲区对象。此外还有两个可选参数-字节偏移量和所要包含的字节数。如果没有提供这两个参数，则从缓冲区开始到缓冲区结束。</p>
+<h4 id="获取视图信息"><a href="#获取视图信息" class="headerlink" title="获取视图信息"></a>获取视图信息</h4><p>可以通过查询DataView类型对象的一下只读属性来获取试图的信息：</p>
+<ul>
+<li>buffer：该试图所绑定的数组缓冲区</li>
+<li>byteOffset：传给DataView构造器的第二个参数，及字节偏移量，默认值为0</li>
+<li>byteLength：传给DataView构造器的第三个参数，默认值为该缓冲区的byteLength属性</li>
+</ul>
+<h4 id="读取与写入数据"><a href="#读取与写入数据" class="headerlink" title="读取与写入数据"></a>读取与写入数据</h4><p>对于JS所有八种数值数据类型，DataView视图的原型分别提供了在数组缓冲区上写入数据的一个方法和读取数据的一个方法。</p>
+<p>例如操作int8或unint8的读取/写入方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getInt8(btyeOffset, littleEndian)：从byteOffset处读取一个int8值</span><br><span class="line">setInt8(btyeOffset, value, littleEndian)：从byteOffset处写入一个int8值</span><br><span class="line">getUInt8(btyeOffset, littleEndian)：从byteOffset处读取一个无符号int8值</span><br><span class="line">setUInt8(btyeOffset, value, littleEndian)：从byteOffset处写入一个无符号int8值</span><br></pre></td></tr></table></figure>
+<p>littleEndian为一个布尔值，用来决定读写的值是否采用小端序。默认为false，及采用大端序。</p>
+<p>将方法名中的8改成16或32，便可以用来处理16位或32位值。</p>
+<p>而浮点数采用下列读写方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getFloat32(byteOffset, littleEndian)：从byteOffset处开始读取一个32位的浮点数；</span><br><span class="line">setFloat32(byteOffset, value, littleEndian)：从byteOffset	处开始写入一个32位的浮点数；</span><br><span class="line">getFloat64(byteOffset, littleEndian)：从byteOffset处开始读取一个64位的浮点数；</span><br><span class="line">setFloat64(byteOffset, value, littleEndian)：从byteOffset处开始写入一个64位的浮点数。</span><br></pre></td></tr></table></figure>
+<p>视图允许使用任意格式对任意位置进行读写，而无需考虑这些数据此前是使用什么格式存储的。例如可以向缓冲区写入两个int8值，将其作为一个int16值读取出来。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">let</span> view = <span class="keyword">new</span> <span class="built_in">DataView</span>(buffer);</span><br><span class="line">view.setInt8(<span class="number">0</span>, <span class="number">5</span>);</span><br><span class="line">view.setInt8(<span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(view.getInt16(<span class="number">0</span>)); <span class="comment">//1535</span></span><br></pre></td></tr></table></figure>
+<h4 id="类型化数组即为视图"><a href="#类型化数组即为视图" class="headerlink" title="类型化数组即为视图"></a>类型化数组即为视图</h4><p>ES6的类型化数组实际上就是针对数组缓冲区的特定类型视图，你可以使用这些数组对象来处理特定的数据类型，而不必使用通用的DataView对象</p>
+<p><img src="/2019/12/04/ES6学习笔记9-增强的数组功能/1.png" alt="1"></p>
+<p>Uint8ClampedArray的特性与Unit8Array基本相同，只是当缓冲区包含的值小于1时，将值转换为0，超过255时，存储255.</p>
+<p>类型化数组只能在特定的一种数据类型上工作，且类型化数组的元素可以使用数值型索引来访问，就像常规数组一样。</p>
+<h4 id="创建特定类型视图"><a href="#创建特定类型视图" class="headerlink" title="创建特定类型视图"></a>创建特定类型视图</h4><p>第一种方式就是使用与创建DataView时相同的参数</p>
+<p>第二种方式就是传递单个数值给类型化数组的构造器，此值表示该数组包含的元素数量。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ints = <span class="keyword">new</span> <span class="built_in">Int16Array</span>(<span class="number">2</span>),				</span><br><span class="line">	floats = <span class="keyword">new</span> <span class="built_in">Float32Array</span>(<span class="number">5</span>);</span><br><span class="line"><span class="built_in">console</span>.log(ints.byteLength);<span class="comment">//	4 </span></span><br><span class="line"><span class="built_in">console</span>.log(ints.length) <span class="comment">//	2</span></span><br><span class="line"><span class="built_in">console</span>.log(floats.byteLength);<span class="comment">// 20 </span></span><br><span class="line"><span class="built_in">console</span>.log(floats.length); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<p>第三种方式是向构造器传递单个对象参数，可以是下列四种对象之一：</p>
+<ul>
+<li>类型化数组：数组所有元素都会被复制到新的类型化数组中。例如，如果你传递一个int8 类型的数组给Int16Array构造器，这些int8的值会被复制到Int16数组中。新的类型化数组与原先的类型化数组会使用不同的数组缓冲区。 </li>
+<li>可迭代对象：该对象的迭代器会被调用以便将数据插入到类型化数组中。如果其中包含 了不匹配视图类型的值，那么构造器就会抛出错误。 </li>
+<li>数组：该数组的元素会被插入到新的类型化数组中。如果其中包含了不匹配视图类型的 值，那么构造器就会抛出错误。 </li>
+<li>类数组对象：与传入数组的表现一致</li>
+</ul>
+<h2 id="类型化数组与常规数组的相似点"><a href="#类型化数组与常规数组的相似点" class="headerlink" title="类型化数组与常规数组的相似点"></a>类型化数组与常规数组的相似点</h2><h3 id="公共方法"><a href="#公共方法" class="headerlink" title="公共方法"></a>公共方法</h3><p>类型化数组也拥有大量与常规数组等效的方法，你可以对类型化数组使用下列这些方法：</p>
+<ul>
+<li><p>copyWithin()        </p>
+</li>
+<li><p>entries()        </p>
+</li>
+<li>fill()        </li>
+<li>filter()        </li>
+<li>find()        </li>
+<li>findIndex()        </li>
+<li>forEach()        </li>
+<li>indexOf()        </li>
+<li>join()        </li>
+<li>keys()        </li>
+<li>lastIndexOf()        </li>
+<li>map()        </li>
+<li>reduce()        </li>
+<li>reduceRight()        </li>
+<li><p>reverse()    </p>
+</li>
+<li><p>slice()        </p>
+</li>
+<li>some()        </li>
+<li>sort()        </li>
+<li>values()    </li>
+</ul>
+<h3 id="相同的迭代器"><a href="#相同的迭代器" class="headerlink" title="相同的迭代器"></a>相同的迭代器</h3><p>与常规数组相同，类型化数组也拥有三个迭代器，它们是entries()方法、keys()方法与values()方法。这就意味着你可以对类型化数组使用扩展运算符，或者对其使用for-of循环，就像对待常规数组</p>
+<h3 id="of-与from-方法"><a href="#of-与from-方法" class="headerlink" title="of()与from()方法"></a>of()与from()方法</h3><p>最后，所有的类型化数组都包含静态的of()与from()方法，作用类似于Array.of()与Array.from()方法。其中的区别是类型化数组的版本会返回类型化数组，而不返回常规数组。</p>
+<h2 id="类型化数组与常规数组的区别"><a href="#类型化数组与常规数组的区别" class="headerlink" title="类型化数组与常规数组的区别"></a>类型化数组与常规数组的区别</h2><p>二者最重要的区别就是类型化数组并不是常规数组，类型化数组并不是从Array对象派生 的，使用Array.isArray()去检测会返回false        </p>
+<h3 id="行为差异"><a href="#行为差异" class="headerlink" title="行为差异"></a>行为差异</h3><p>常规数组可以被伸展或是收缩，然而类型化数组却会始终保持自身大小不变。你可以对常规数组一个不存在的索引位置进行赋值，但在类型化数组上这么做则会被忽略</p>
+<h3 id="遗漏的方法"><a href="#遗漏的方法" class="headerlink" title="遗漏的方法"></a>遗漏的方法</h3><p>尽管类型化数组拥有常规数组的很多同名方法，但仍然缺少了几个数组方法，包括下列这些：</p>
+<ul>
+<li>concat()        </li>
+<li>pop()        </li>
+<li>push()        </li>
+<li>shift()        </li>
+<li>splice()        </li>
+<li>unshift()    </li>
+</ul>
+<p>除了concat()方法之外，该列表中的其余方法都会改变数组的大小，而由于类型化数组的大小不可变，因此这些方法都不能作用于类型化数组</p>
+<p>concat()方法不可用的原因则是： 连接两个类型化数组的结果是不确定的（特别是当它们处理的数据类型不同时），这种不确定情况原本就不应当使用类型化数组。</p>
+<h3 id="附加的方法"><a href="#附加的方法" class="headerlink" title="附加的方法"></a>附加的方法</h3><p>最后，类型化数组还有两个常规数组所不具备的方法：set()方法与subarray()方法。这 两个方法作用相反：set()方法从另一个数组中复制元素到当前的类型化数组，而subarray()方法则是将当前类型化数组的一部分提取为新的类型化数组。<br>set()方法接受一个数组参数（无论是类型化的还是常规的）、以及一个可选的偏移量参数，后者指示了从什么位置开始插入数据（默认值为0）。数组参数中的数据会被复制到目标类型化数组中，并会确保数据值有效</p>
+
       
     </div>
     
@@ -429,7 +524,7 @@
         <p><span>本文标题:</span><a href="/2019/12/04/ES6学习笔记9-增强的数组功能/">ES6学习笔记9--增强的数组功能</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2019-12-04, 19:01:50</p>
-        <p><span>最后更新:</span>2019-12-04, 20:10:02</p>
+        <p><span>最后更新:</span>2020-01-18, 19:32:28</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/12/04/ES6学习笔记9-增强的数组功能/" title="ES6学习笔记9--增强的数组功能">http://yoursite.com/2019/12/04/ES6学习笔记9-增强的数组功能/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/12/04/ES6学习笔记9-增强的数组功能/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
