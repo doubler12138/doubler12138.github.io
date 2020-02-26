@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/61.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/1f.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/编程题.png">
-<meta property="og:updated_time" content="2020-02-26T08:53:10.377Z">
+<meta property="og:updated_time" content="2020-02-26T09:08:03.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阿里达摩院训练题2">
 <meta name="twitter:description" content="前言 每天一练">
@@ -344,7 +344,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,759字</span>
+			<span class="post-count">1,815字</span>
 		</span>
 	</span>
 	
@@ -476,7 +476,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">实现一个金额展示格式化的函数 formatAmount，金额展示规则为整数部分每三位用逗号分割，小数部分展示两位。输入数据不是数字时返回 <span class="string">"-"</span>。</span><br><span class="line">举例：</span><br><span class="line">formatAmount(<span class="number">2688</span>) =&gt; <span class="string">"2,688.00"</span></span><br><span class="line">formatAmount(<span class="string">"2e6"</span>) =&gt; <span class="string">"2,000,000.00"</span></span><br><span class="line">formatAmount(<span class="number">-2.33333333</span>) =&gt; <span class="string">"-2.33"</span></span><br><span class="line">formatAmount(<span class="string">"Alibaba"</span>) =&gt; <span class="string">"-"</span></span><br></pre></td></tr></table></figure>
 <p><strong>题目解析：</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> formatAmount = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> num = <span class="built_in">Number</span>(val);</span><br><span class="line">    <span class="keyword">if</span>(num !== num) <span class="keyword">return</span> <span class="string">'-'</span></span><br><span class="line">    <span class="keyword">let</span> str = num.toFixed(<span class="number">2</span>).split(<span class="string">'.'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Number</span>(str[<span class="number">0</span>]).toLocaleString() + <span class="string">'.'</span> + str[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>用Number()强制类型转换，再利用NaN的非自反性，判断输入的值能否转换为数字，不能输出’-‘，能得话，用toFixed()去限制小数点后的位数，通过toLocaleString()做格式化</p>
+<p>用Number()强制类型转换，再利用NaN的非自反性，判断输入的值能否转换为数字，不能输出’-‘，能得话，用toFixed()去限制小数点后的位数，由于toFixed()返回的是字符串，再调用toLocaleString()无法达到格式化的效果。所以我们先分隔字符串，然后将整数部分转换为数值类型，通过toLocaleString()做格式化，再重新拼接并返回</p>
 <p><img src="/2020/02/26/阿里达摩院训练题2/编程题.png" alt="编程题"></p>
 
       
@@ -489,7 +489,7 @@
         <p><span>本文标题:</span><a href="/2020/02/26/阿里达摩院训练题2/">阿里达摩院训练题2</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2020-02-26, 13:57:43</p>
-        <p><span>最后更新:</span>2020-02-26, 16:53:10</p>
+        <p><span>最后更新:</span>2020-02-26, 17:08:03</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/02/26/阿里达摩院训练题2/" title="阿里达摩院训练题2">http://yoursite.com/2020/02/26/阿里达摩院训练题2/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/26/阿里达摩院训练题2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
