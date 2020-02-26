@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/61.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/1f.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/编程题.png">
-<meta property="og:updated_time" content="2020-02-26T09:08:03.074Z">
+<meta property="og:updated_time" content="2020-02-26T14:10:13.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阿里达摩院训练题2">
 <meta name="twitter:description" content="前言 每天一练">
@@ -344,7 +344,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,815字</span>
+			<span class="post-count">1,817字</span>
 		</span>
 	</span>
 	
@@ -407,10 +407,10 @@
 <p><strong>d.Promise.race中如果当前数组中率先改变状态的Promise为fullfilled，则自己的状态即置为fullfilled</strong></p>
 <p>正确：Promise.race接收单个可迭代对象作为参数，并返回一个Promise。返回的Promise的状态，取决于可迭代对象中率先完成的Promise的状态。</p>
 <p><strong>e.Promise.all中数组项必须为Promise</strong></p>
-<p>错误：根据MDN的描述，如果参数中包含非Promise值，这些值将被忽略，但仍然会被放在返回数组中(如果Promise完成的话)</p>
+<p>错误：根据MDN的描述，如果参数中包含非Promise值，这些值将被忽略，但仍然会被放在返回数组中(其实就是使用Promise.resolve将其转变为Promise)</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="number">3</span>),</span><br><span class="line">	p2 = <span class="number">1234</span>,</span><br><span class="line">	p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        setTimeout(resolve, <span class="number">100</span>, <span class="string">'foo'</span>);</span><br><span class="line">	&#125;);</span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2, p3]).then(<span class="function"><span class="params">values</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(values); <span class="comment">// [3, 1234, 'foo']</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p><strong>f.Promise.race中数组项必须为Promise</strong></p>
-<p>错误：虽然MDN没有明确的说明对于Promise.race中数组项是否都是为Promise。但是我试了一下，可以有其它值，会被忽略</p>
+<p>错误：虽然MDN没有明确的说明对于Promise.race中数组项是否都是为Promise。但是我试了一下，可以有其它值</p>
 <p><img src="/2020/02/26/阿里达摩院训练题2/1f.png" alt="1f"></p>
 <h2 id="不定项选择题2"><a href="#不定项选择题2" class="headerlink" title="不定项选择题2"></a>不定项选择题2</h2><p><strong>题目描述：</strong> 关于浏览器网络知识，一下说法正确的是</p>
 <p><strong>题目答案：</strong>b、f</p>
@@ -489,7 +489,7 @@
         <p><span>本文标题:</span><a href="/2020/02/26/阿里达摩院训练题2/">阿里达摩院训练题2</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2020-02-26, 13:57:43</p>
-        <p><span>最后更新:</span>2020-02-26, 17:08:03</p>
+        <p><span>最后更新:</span>2020-02-26, 22:10:13</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/02/26/阿里达摩院训练题2/" title="阿里达摩院训练题2">http://yoursite.com/2020/02/26/阿里达摩院训练题2/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/26/阿里达摩院训练题2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

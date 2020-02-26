@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言 了解和合理运用JavaScript的内置值类型">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/02/25/JavaScript学习笔记11-值/59.jpg">
-<meta property="og:updated_time" content="2020-02-26T07:30:54.671Z">
+<meta property="og:updated_time" content="2020-02-26T13:56:47.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript学习笔记11-值">
 <meta name="twitter:description" content="前言 了解和合理运用JavaScript的内置值类型">
@@ -342,7 +342,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,904字</span>
+			<span class="post-count">2,130字</span>
 		</span>
 	</span>
 	
@@ -448,13 +448,29 @@
 <p>然而undefined 却是一个标识符，可以被当作变量来使用和赋值。</p>
 <p>undefined是一个内置标识符，可以通过void运算符来获得该值。void并不改变表达式的结果，只是让表达式不返回值：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">42</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">void</span> a, a); <span class="comment">// undefined 42</span></span><br></pre></td></tr></table></figure>
-<h3 id="特殊的数字"><a href="#特殊的数字" class="headerlink" title="特殊的数字"></a>特殊的数字</h3><p>NaN意指不是一个数字，或者说表示执行数学运算没有成功，这是失败后返回的结果</p>
+<h3 id="特殊的数字"><a href="#特殊的数字" class="headerlink" title="特殊的数字"></a>特殊的数字</h3><p><strong>不是数的数</strong></p>
+<p>NaN意指不是一个数字，或者说表示执行数学运算没有成功，这是失败后返回的结果</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">2</span> / <span class="string">'foo'</span>; <span class="comment">// NaN</span></span><br><span class="line"><span class="keyword">typeof</span> a === <span class="string">'number'</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>且NaN它和自身不等，是唯一一个非自反的值</p>
 <p>所以我们只能使用isNaN来判断一个值是否为NaN，但是这个函数有一个缺陷，就是它只检查参数是否不是NaN，也不是数字</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">2</span> / <span class="string">'foo'</span>,</span><br><span class="line">	b = <span class="string">'foo'</span>;</span><br><span class="line"><span class="built_in">window</span>.isNaN(a); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">window</span>.isNaN(b); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>从ES6开始，我们使用Number.isNaN来判断。或者用一个更简单的办法，及利用NaN不等于自身的办法</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a !== a</span><br></pre></td></tr></table></figure>
+<p><strong>无穷数</strong></p>
+<p>在JavaScript，以下运算是被允许的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>/<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>他的结果是Infinity(即Number.POSITIVE_INFINITY)，就是无穷。同理还有-Infinity</p>
+<p>一旦JavaScript的运算结果溢出，此时结果为Infinity或者-Infinity。</p>
+<p>而且一旦溢出为无穷数，就再也无法得到有穷数了。</p>
+<p>而当无穷除以无穷，那么他得到的结果是NaN</p>
+<p><strong>零值</strong><br>JavaScript有一个常规的0（也叫做+0）和一个-0。</p>
+<p>-0除了可以用作常量外还可以是某些数学运算的返回值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">0</span> / <span class="number">-3</span>; <span class="comment">// -0</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">0</span> * <span class="number">-3</span>; <span class="comment">// -0</span></span><br></pre></td></tr></table></figure>
+<p>但是对-0进行字符串化会返回”0”。不过将字符串转换为数字，-0还是-0</p>
+<p>而且更特殊的一点是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> === <span class="number">-0</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>所以我们需要特殊的方式来判断-0</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNegZero</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">	n = <span class="built_in">Number</span>( n );</span><br><span class="line"> 	<span class="keyword">return</span> (n === <span class="number">0</span>) &amp;&amp; (<span class="number">1</span> / n === -<span class="literal">Infinity</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -466,7 +482,7 @@
         <p><span>本文标题:</span><a href="/2020/02/25/JavaScript学习笔记11-值/">JavaScript学习笔记11-值</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2020-02-25, 10:14:18</p>
-        <p><span>最后更新:</span>2020-02-26, 15:30:54</p>
+        <p><span>最后更新:</span>2020-02-26, 21:56:47</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/02/25/JavaScript学习笔记11-值/" title="JavaScript学习笔记11-值">http://yoursite.com/2020/02/25/JavaScript学习笔记11-值/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/25/JavaScript学习笔记11-值/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
