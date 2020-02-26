@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 有大佬在达摩院的微信交流群里出了一些题，做了一下还是很有收获的">
+<meta name="keywords" content="练习题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里达摩院训练题1">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/阿里达摩院训练题1/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 有大佬在达摩院的微信交流群里出了一些题，做了一下还是很有收获的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/阿里达摩院训练题1/60.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/阿里达摩院训练题1/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/阿里达摩院训练题1/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/阿里达摩院训练题1/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/阿里达摩院训练题1/4.png">
+<meta property="og:updated_time" content="2020-02-25T14:19:47.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿里达摩院训练题1">
+<meta name="twitter:description" content="前言 有大佬在达摩院的微信交流群里出了一些题，做了一下还是很有收获的">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/25/阿里达摩院训练题1/60.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>阿里达摩院训练题1 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写代码/">手写代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写签名/">手写签名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/练习题/">练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试经历/">面试经历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高德地图/">高德地图</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zzzwyyy.github.io/">小仙女的博客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-阿里达摩院训练题1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/25/阿里达摩院训练题1/" class="article-date">
+      <time datetime="2020-02-25T13:57:59.000Z" itemprop="datePublished">2020-02-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      阿里达摩院训练题1
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">1,395字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">6分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/复习计划/">复习计划</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/练习题/">练习题</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>有大佬在达摩院的微信交流群里出了一些题，做了一下还是很有收获的</p>
+<hr>
+<p><img src="/2020/02/25/阿里达摩院训练题1/60.jpg" alt="60"></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1425401581&auto=1&height=66"></iframe><br></div>
+
+<h2 id="单选题："><a href="#单选题：" class="headerlink" title="单选题："></a>单选题：</h2><p><strong>题目描述：</strong> 对于解构一下说法错误的是：</p>
+<p><strong>答案：</strong>d</p>
+<p><strong>题目解析：</strong></p>
+<p><strong>a.不完全解构，也会成功，不会报错</strong></p>
+<p>正确：不完全解构，等号左边的模式值匹配等号右边数组的一部分</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, [b], d] = [<span class="number">1</span>,[<span class="number">2</span>,<span class="number">3</span>],<span class="number">4</span>]</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//1</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">//2</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+<p><strong>b.只要支持Iterator接口，都可以被结构赋值</strong></p>
+<p>正确：只要某种数据结构具有Iterator接口，都可以采用数组的形式解构赋值</p>
+<p><strong>c.null可以代替默认值，而成功的解构赋值</strong></p>
+<p>正确：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [x, y = <span class="literal">null</span>] = [<span class="string">'a'</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// a</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p><strong>d.解构中不定参数可以出现在除第一个以外的其它位置</strong></p>
+<p>错误：不定参数只能出现在最后一个位置</p>
+<p><img src="/2020/02/25/阿里达摩院训练题1/1.png" alt="1"></p>
+<p><img src="/2020/02/25/阿里达摩院训练题1/2.png" alt="2"></p>
+<p><strong>e.解构是先找到同名属性，然后再赋给对应的变量</strong></p>
+<p>正确：对象的解构赋值的内部机制，是先找到同名属性，然后在赋给对应的变量。真正被赋值的是后者，而不是前者</p>
+<p><strong>f.默认值可以引用解构赋值的其它变量，但该变量必须已经声明</strong></p>
+<p>正确：</p>
+<p><img src="/2020/02/25/阿里达摩院训练题1/3.png" alt="3"></p>
+<h2 id="多选题"><a href="#多选题" class="headerlink" title="多选题"></a>多选题</h2><p><strong>题目描述：</strong>以下关于异步的说法正确的是：</p>
+<p><strong>答案：</strong>c、d、e</p>
+<p><strong>题目解析：</strong></p>
+<p><strong>a.在JavaScript中，任务被分为两种，一种宏任务（MacroTask），一种微任务（MicroTask），setTimeout属于微任务</strong></p>
+<p>错误：任务的分类是正确的，但是setTimeout属于宏任务</p>
+<p>宏任务包括：</p>
+<ul>
+<li>整体代码script</li>
+<li>setTimeout</li>
+<li>setIntervcal</li>
+</ul>
+<p>微任务包括：</p>
+<ul>
+<li>Promise</li>
+<li>process.nextTick</li>
+</ul>
+<p><strong>b.setTimeout(func, 500)会精确的在500ms后执行func</strong></p>
+<p>错误：会在500ms后将func加入宏任务队列，具体在什么时候执行，要考虑在宏任务队列中是否已经存在任务，这也是用setTimeout来做计时器存在误差的原因。</p>
+<p>JS的事件循环机制是先执行宏任务队列中的一个宏任务，这期间产生的宏任务会进入宏任务队列，微任务进入微任务队列。执行完一个宏任务后，会执行整个微任务中的所有任务，这期间产生的宏任务进入宏任务队列，微任务进入微任务队列后会得到执行。清空微任务队列后，再执行宏任务队列中的下一个任务。如此循环。</p>
+<p><strong>c.Promise、generator、async/await都是异步解决方案</strong></p>
+<p>正确：初次之前外还有callback</p>
+<p><strong>d.process.nextTick、Promise都属于node中的微队列</strong></p>
+<p>正确：具体看a选项</p>
+<p><strong>e.浏览器中的Event Loop和node的Event Loop是不同的，实现机制也不一样</strong></p>
+<p>正确：</p>
+<p>Node.js的event是基于libuv的，并且已经做出了实现</p>
+<p>而浏览器的event loop则在HTML5中做出了规定，具体实现留给了浏览器厂商。</p>
+<p>再具体的我就不知道了</p>
+<p><strong>f.在node中setTimeout和setImmediate执行阶段是一致的</strong></p>
+<p>错误：这应该是整个多选题里最有难度的一个选项了</p>
+<p>要理解这道题，首先需要了解setImmediate这个函数，它的作用是在下一个队列的首位执行回调函数。在来看一个例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line">setImmediate(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setImmediate'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这个例子的输出结果其实挺随缘的，可能也是setTimeout先，也可能是setImmediate先。这个跟Node.js的事件循环机制有关</p>
+<p><img src="/2020/02/25/阿里达摩院训练题1/4.png" alt="4"></p>
+<p>虽然我们setTimeout的设置的时间是0，但是还是会存在短暂的延迟，如果我们执行这个js文件稍微有点慢，那么在进入事件循环的timers阶段时，setTimeout的延迟已经过去了，那么setTimeout的回调会首先执行。但是如果这个延迟没有过去，那么在timers不存在任何的任务，那么在稍后进入poll阶段时，setImmediate()会的回调会执行。然后在下一轮的事件循环中，setTimeout的回调才会得到执行。但是不管是不是在同一轮中，两者都不是在同一阶段的到执行的，setTimeout在timers，setImmediate在poll</p>
+<h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><p><strong>题目描述：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Markdown 是非常受技术人员喜欢的一种文本格式，请使用 JavaScript 来实现 marked 方法来进行 markdown 文本的 HTML 渲染，可以满足以下需求：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">marked</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your code here</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">marked(<span class="string">'@@whatever@@'</span>).trim() </span><br><span class="line"><span class="comment">// &lt;p&gt;&lt;blink&gt;whatever&lt;/blink&gt;&lt;/p &gt;</span></span><br><span class="line">marked(<span class="string">'*abc* @@def@@ __ghi__'</span>).trim() </span><br><span class="line"><span class="comment">// &lt;p&gt;&lt;em&gt;abc&lt;/em&gt; &lt;blink&gt;def&lt;/blink&gt; &lt;strong&gt;ghi&lt;/strong&gt;&lt;/p &gt;</span></span><br><span class="line">marked(<span class="string">'@@**cool**@@'</span>).trim() </span><br><span class="line"><span class="comment">// &lt;p&gt;&lt;blink&gt;&lt;strong&gt;cool&lt;/strong&gt;&lt;/blink&gt;&lt;/p &gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>题目答案：</strong></p>
+<p>究极无敌笨方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">marked</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">changeStr</span>(<span class="params">str, before, after, changeStr</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> str.substring(<span class="number">0</span>, before) + changeStr + str.substring(after+<span class="number">1</span>, str.length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> atSign = <span class="number">0</span>,</span><br><span class="line">        starSign = <span class="number">0</span>,</span><br><span class="line">        doubleStarSign = <span class="number">0</span>,</span><br><span class="line">        underlineSign = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(str[i] == str[i+<span class="number">1</span>] &amp;&amp; str[i] == <span class="string">'@'</span> ) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!atSign) &#123;</span><br><span class="line">                str = changeStr(str, i, i+<span class="number">1</span>, <span class="string">'&lt;blink&gt;'</span>);</span><br><span class="line">                atSign = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                str = changeStr(str, i, i+<span class="number">1</span>, <span class="string">'&lt;/blink&gt;'</span>)</span><br><span class="line">                atSign = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(str[i] != str[i+<span class="number">1</span>] &amp;&amp; str[i] == <span class="string">'*'</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!starSign) &#123;</span><br><span class="line">                str = changeStr(str, i, i, <span class="string">'&lt;em&gt;'</span>);</span><br><span class="line">                starSign = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                str = changeStr(str, i, i, <span class="string">'&lt;/em&gt;'</span>);</span><br><span class="line">                starSign = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(str[i] == str[i+<span class="number">1</span>] &amp;&amp; str[i] == <span class="string">'*'</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!doubleStarSign) &#123;</span><br><span class="line">                str = changeStr(str, i, i+<span class="number">1</span>, <span class="string">'&lt;strong&gt;'</span>);</span><br><span class="line">                doubleStarSign = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                str = changeStr(str, i, i+<span class="number">1</span>, <span class="string">'&lt;/strong&gt;'</span>);</span><br><span class="line">                doubleStarSign = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(str[i] == str[i+<span class="number">1</span>] &amp;&amp; str[i] == <span class="string">'_'</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!underlineSign) &#123;</span><br><span class="line">                str = changeStr(str, i, i+<span class="number">1</span>, <span class="string">'&lt;strong&gt;'</span>);</span><br><span class="line">                underlineSign = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                str = changeStr(str, i, i+<span class="number">1</span>, <span class="string">'&lt;/strong&gt;'</span>);</span><br><span class="line">                underlineSign = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>  <span class="string">"&lt;p&gt;"</span> + str + <span class="string">"&lt;/p&gt;"</span></span><br><span class="line">&#125;</span><br><span class="line">marked(<span class="string">'*abc* @@def@@ __ghi__@@**cool**@@'</span>).trim()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/02/25/阿里达摩院训练题1/">阿里达摩院训练题1</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2020-02-25, 21:57:59</p>
+        <p><span>最后更新:</span>2020-02-25, 22:19:47</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/25/阿里达摩院训练题1/" title="阿里达摩院训练题1">http://yoursite.com/2020/02/25/阿里达摩院训练题1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/25/阿里达摩院训练题1/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/02/26/阿里达摩院训练题2/">
+                    阿里达摩院训练题2
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/02/25/JavaScript学习笔记11-值/">
+                    JavaScript学习笔记11-值
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单选题："><span class="toc-number">1.</span> <span class="toc-text">单选题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多选题"><span class="toc-number">2.</span> <span class="toc-text">多选题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编程题"><span class="toc-number">3.</span> <span class="toc-text">编程题</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"阿里达摩院训练题1　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/02/26/阿里达摩院训练题2/" title="上一篇: 阿里达摩院训练题2">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/02/25/JavaScript学习笔记11-值/" title="下一篇: JavaScript学习笔记11-值">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/阿里达摩院训练题2/">阿里达摩院训练题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/25/阿里达摩院训练题1/">阿里达摩院训练题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/25/JavaScript学习笔记11-值/">JavaScript学习笔记11-值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/21/面试经历-阿里钉钉前端实习/">面试经历-阿里钉钉前端实习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/秋招复习计划-算法题6/">秋招复习计划-算法题6</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/秋招复习计划-Vue知识点4/">秋招复习计划-Vue知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/09/秋招复习计划-Vue知识点3/">秋招复习计划-Vue知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/06/秋招复习计划-ES6知识点1/">秋招复习计划-ES6知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/01/秋招复习计划-手写代码1/">秋招复习计划-手写代码1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/31/秋招复习计划-Vue知识点2/">秋招复习计划-Vue知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/26/ES6学习笔记10-Promise与异步编程/">ES6学习笔记10-Promise与异步编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/18/JavaScript学习笔记10-类型/">JavaScript学习笔记10-类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/面试经历-字节跳动好好学习方向/">面试经历-字节跳动好好学习方向</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/10/秋招复习计划-CSS知识点1/">秋招复习计划-CSS知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/09/秋招复习计划-计算机网络知识点1/">秋招复习计划-计算机网络知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/08/CSS学习笔记3-基本视觉格式化和盒式模型/">CSS学习笔记3-基本视觉格式化和盒式模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/07/JavaScript学习笔记9-行为委托/">JavaScript学习笔记9-行为委托</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/CSS学习笔记2-结构和层叠/">CSS学习笔记2--结构和层叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/高德地图API的使用/">高德地图API的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/04/ES6学习笔记9-增强的数组功能/">ES6学习笔记9--增强的数组功能</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/02/秋招复习计划-JavaScript知识点11/">秋招复习计划-JavaScript知识点11</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/秋招复习计划-JavaScript知识点10/">秋招复习计划-JavaScript知识点10</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/秋招复习计划-Vue知识点1/">秋招复习计划-Vue知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/秋招复习计划-算法题5/">秋招复习计划-算法题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/秋招复习计划-算法题4/">秋招复习计划-算法题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/秋招复习计划-JavaScript知识点7/">秋招复习计划-JavaScript知识点7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8--JS的类/">ES6学习笔记8--JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7--迭代器与生成器/">ES6学习笔记7--迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8-原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7-对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS学习笔记1-选择器/">CSS学习笔记1--选择器</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

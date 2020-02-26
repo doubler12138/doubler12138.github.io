@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 每天一练">
+<meta name="keywords" content="练习题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里达摩院训练题2">
+<meta property="og:url" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 每天一练">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/61.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/1f.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/编程题.png">
+<meta property="og:updated_time" content="2020-02-26T08:53:10.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿里达摩院训练题2">
+<meta name="twitter:description" content="前言 每天一练">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/26/阿里达摩院训练题2/61.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>阿里达摩院训练题2 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写代码/">手写代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写签名/">手写签名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/练习题/">练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试经历/">面试经历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高德地图/">高德地图</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zzzwyyy.github.io/">小仙女的博客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-阿里达摩院训练题2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/26/阿里达摩院训练题2/" class="article-date">
+      <time datetime="2020-02-26T05:57:43.000Z" itemprop="datePublished">2020-02-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      阿里达摩院训练题2
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">1,759字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">7分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/复习计划/">复习计划</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/练习题/">练习题</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>每天一练</p>
+<hr>
+<p><img src="/2020/02/26/阿里达摩院训练题2/61.jpg" alt="61"></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1414608507&auto=1&height=66"></iframe><br></div>
+
+<h2 id="不定项选择题1"><a href="#不定项选择题1" class="headerlink" title="不定项选择题1"></a>不定项选择题1</h2><p><strong>题目描述：</strong>关于Promise的说法，下述正确的是</p>
+<p><strong>题目答案：</strong> a、b、d</p>
+<p><strong>题目解析：</strong></p>
+<p><strong>a.Promise.resolve 返回一个Promise并把状态置为fullfilled</strong></p>
+<p>正确：Promise.resolve方法接受单个参数并返回一个处于完成态的Promise。</p>
+<p>Promise的状态有：</p>
+<ul>
+<li>pending：挂起态</li>
+<li>fullfilled：完成态</li>
+<li>rejected：拒绝态</li>
+<li>resolve：决议态</li>
+<li>unsettled：未决态</li>
+</ul>
+<p><strong>b.Promise.reject返回一个Promise并把状态置为rejected</strong></p>
+<p>正确：Promise.reject方法接受单个参数并返回一个处于拒绝态的Promise</p>
+<p><strong>c.Promise.all如果当前数组中所有的Promise的状态置为fullfilled或rejected，自己的状态即置为fullfilled</strong></p>
+<p>错误：Promise.all接收单个可迭代对象作为参数，并返回一个Promise。这个可迭代对象的元素都是Promise。当所有Promise置为fullfilled时，返回的Promise置为fullfilled。但是<strong>任意一个</strong>Promise被拒绝，那么返回的Promise会立刻置为rejected，且不需要等待其它Promise决议，</p>
+<p><strong>d.Promise.race中如果当前数组中率先改变状态的Promise为fullfilled，则自己的状态即置为fullfilled</strong></p>
+<p>正确：Promise.race接收单个可迭代对象作为参数，并返回一个Promise。返回的Promise的状态，取决于可迭代对象中率先完成的Promise的状态。</p>
+<p><strong>e.Promise.all中数组项必须为Promise</strong></p>
+<p>错误：根据MDN的描述，如果参数中包含非Promise值，这些值将被忽略，但仍然会被放在返回数组中(如果Promise完成的话)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="number">3</span>),</span><br><span class="line">	p2 = <span class="number">1234</span>,</span><br><span class="line">	p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        setTimeout(resolve, <span class="number">100</span>, <span class="string">'foo'</span>);</span><br><span class="line">	&#125;);</span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2, p3]).then(<span class="function"><span class="params">values</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(values); <span class="comment">// [3, 1234, 'foo']</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>f.Promise.race中数组项必须为Promise</strong></p>
+<p>错误：虽然MDN没有明确的说明对于Promise.race中数组项是否都是为Promise。但是我试了一下，可以有其它值，会被忽略</p>
+<p><img src="/2020/02/26/阿里达摩院训练题2/1f.png" alt="1f"></p>
+<h2 id="不定项选择题2"><a href="#不定项选择题2" class="headerlink" title="不定项选择题2"></a>不定项选择题2</h2><p><strong>题目描述：</strong> 关于浏览器网络知识，一下说法正确的是</p>
+<p><strong>题目答案：</strong>b、f</p>
+<p><strong>题目解析：</strong></p>
+<p><strong>a.JSONP/CORS支持使用GET/POST/PUT/DElETE请求方式实现跨域</strong></p>
+<p>错误：CORS的确支持所有类型的HTTP请求，但是JSONP只支持GET请求</p>
+<p>除了这两种跨域方式，常见的跨域方式还有：</p>
+<ul>
+<li>图像PING跨域</li>
+<li>服务器代理</li>
+<li>document.domain跨域</li>
+<li>window.name跨域</li>
+<li>location.hash跨域</li>
+<li>postMessage跨域</li>
+</ul>
+<p>不过用的最多的还是CORS和JSONP</p>
+<p><strong>b.现代浏览器支持使用Fetch/XMLHttpRequest两种方式发送Ajax请求</strong></p>
+<p>正确：这道题我不太确定。我主要是这么想的，所以就判断它为正确</p>
+<p>Fetch和XMLHttpRequest非常类似，都可以用来发送网络请求，只不过Fetch使用了Promise</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'./api/some.json'</span>)</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (res.status !== <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Looks like there was a problem. Status Code: '</span> + res.status);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理响应中的文本信息 </span></span><br><span class="line">        res.json().then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Fetch Error : %S'</span>, err);</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<p>让我存在疑惑的点主要是Fetch和Ajax的两个区别：</p>
+<ul>
+<li>fetch返回的Promise不会拒绝http的错误状态</li>
+<li>在默认情况下fetch不会接收和发送cookies</li>
+</ul>
+<p><strong>c.HTTP 500 代表用户传入的参数错误，禁止访问</strong></p>
+<p>错误：500是服务器内部错误，400才是参数错误。HTTP协议常见响应码</p>
+<p><strong>1xx——信息类：表示收到http请求，正在进行下一步处理，通常是一种瞬间的响应状态</strong></p>
+<ul>
+<li>100（continue）：表示目前为止一切正常, 客户端应该继续请求, 如果已完成请求则忽略</li>
+<li>101 (Switching Protocol)：状态码表示服务器应客户端升级协议的请求（Upgrade请求头）正在进行协议切换。</li>
+</ul>
+<p><strong>2xx——成功类：表示用户请求被正确接收、理解和处理</strong></p>
+<ul>
+<li>200（OK）：请求成功。一般用于GET与POST请求</li>
+<li>201（Created）：已创建。成功请求并创建了新的资源</li>
+<li>202（Accepted）：表示服务器端已经收到请求消息，但是尚未进行处理。</li>
+</ul>
+<p><strong>3xx——重定向类：表示没有请求成功，必须采取进一步的动作</strong></p>
+<ul>
+<li>301（Moved Permanently）：资源被永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI</li>
+<li>302（Found）：资源临时移动。资源只是临时被移动，客户端应继续使用原有URI</li>
+</ul>
+<p><strong>4xx——客户端错误：表示客户端提交的请求包含语法错误或不能正确执行</strong></p>
+<ul>
+<li>400（Bad Requests）：客户端请求的地址不存在或者包含不支持的参数</li>
+<li>401（Unauthorized）：未授权，或认证失败。对于需要登录的网页，服务器可能返回此响应</li>
+<li>403（Forbidden）：没权限。服务器收到请求，但拒绝提供服务</li>
+<li>404（Not Found）：请求的资源不存在。遇到404首先检查请求url是否正确</li>
+</ul>
+<p><strong>5xx——服务端错误：表示服务器不能正确执行一个正确的请求</strong></p>
+<ul>
+<li>500（Internal Server Error）：服务器内部错误，无法完成请求</li>
+<li>503（Service Unavailable）：由于超载或系统维护（一般是访问人数过多），服务器无法处理客户端的请求 ，通常这只是暂时状态</li>
+</ul>
+<p><strong>d.HTTP协议在OSI七层模型中属于会话层，用于实现两台主机间的通信</strong></p>
+<p>错误：HTTP在OSI七层模型和TCP/IP协议中均处于应用层。应用层除了HTTP以外常见的协议还有Telnet、FTP、SMTP。而会话层的主要作用是使应用建立和维持会话，并能使会话同步</p>
+<p><strong>e.WebSocket有同源限制，因此会有跨域的问题</strong></p>
+<p>错误：webSocket本来就是设计成支持跨域访问的协议，所以并不存在同源限制。浏览器的SOP也无法限制他。HTTP是受同源策略限制的。</p>
+<p><strong>f.使用Gzip方式，可以有效压缩响应的体积</strong></p>
+<p>正确：这道题不会，只能百度一下。Gzip是前端常见的优化方式。但并不是所有浏览器都支持Gzip。需要在请求头中的Accept-Encoding来标识浏览器支持哪些压缩方式。然后服务端可以在响应头中加入<code>content-encoding:gzip</code>，来表明服务端使用了Gzip压缩方式。</p>
+<h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><p><strong>题目描述：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">实现一个金额展示格式化的函数 formatAmount，金额展示规则为整数部分每三位用逗号分割，小数部分展示两位。输入数据不是数字时返回 <span class="string">"-"</span>。</span><br><span class="line">举例：</span><br><span class="line">formatAmount(<span class="number">2688</span>) =&gt; <span class="string">"2,688.00"</span></span><br><span class="line">formatAmount(<span class="string">"2e6"</span>) =&gt; <span class="string">"2,000,000.00"</span></span><br><span class="line">formatAmount(<span class="number">-2.33333333</span>) =&gt; <span class="string">"-2.33"</span></span><br><span class="line">formatAmount(<span class="string">"Alibaba"</span>) =&gt; <span class="string">"-"</span></span><br></pre></td></tr></table></figure>
+<p><strong>题目解析：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> formatAmount = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> num = <span class="built_in">Number</span>(val);</span><br><span class="line">    <span class="keyword">if</span>(num !== num) <span class="keyword">return</span> <span class="string">'-'</span></span><br><span class="line">    <span class="keyword">let</span> str = num.toFixed(<span class="number">2</span>).split(<span class="string">'.'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Number</span>(str[<span class="number">0</span>]).toLocaleString() + <span class="string">'.'</span> + str[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用Number()强制类型转换，再利用NaN的非自反性，判断输入的值能否转换为数字，不能输出’-‘，能得话，用toFixed()去限制小数点后的位数，通过toLocaleString()做格式化</p>
+<p><img src="/2020/02/26/阿里达摩院训练题2/编程题.png" alt="编程题"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/02/26/阿里达摩院训练题2/">阿里达摩院训练题2</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2020-02-26, 13:57:43</p>
+        <p><span>最后更新:</span>2020-02-26, 16:53:10</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/26/阿里达摩院训练题2/" title="阿里达摩院训练题2">http://yoursite.com/2020/02/26/阿里达摩院训练题2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/26/阿里达摩院训练题2/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/02/25/阿里达摩院训练题1/">
+                    阿里达摩院训练题1
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#不定项选择题1"><span class="toc-number">1.</span> <span class="toc-text">不定项选择题1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不定项选择题2"><span class="toc-number">2.</span> <span class="toc-text">不定项选择题2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编程题"><span class="toc-number">3.</span> <span class="toc-text">编程题</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"阿里达摩院训练题2　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/02/25/阿里达摩院训练题1/" title="下一篇: 阿里达摩院训练题1">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/阿里达摩院训练题2/">阿里达摩院训练题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/25/阿里达摩院训练题1/">阿里达摩院训练题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/25/JavaScript学习笔记11-值/">JavaScript学习笔记11-值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/21/面试经历-阿里钉钉前端实习/">面试经历-阿里钉钉前端实习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/秋招复习计划-算法题6/">秋招复习计划-算法题6</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/秋招复习计划-Vue知识点4/">秋招复习计划-Vue知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/09/秋招复习计划-Vue知识点3/">秋招复习计划-Vue知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/06/秋招复习计划-ES6知识点1/">秋招复习计划-ES6知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/01/秋招复习计划-手写代码1/">秋招复习计划-手写代码1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/31/秋招复习计划-Vue知识点2/">秋招复习计划-Vue知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/26/ES6学习笔记10-Promise与异步编程/">ES6学习笔记10-Promise与异步编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/18/JavaScript学习笔记10-类型/">JavaScript学习笔记10-类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/面试经历-字节跳动好好学习方向/">面试经历-字节跳动好好学习方向</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/10/秋招复习计划-CSS知识点1/">秋招复习计划-CSS知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/09/秋招复习计划-计算机网络知识点1/">秋招复习计划-计算机网络知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/08/CSS学习笔记3-基本视觉格式化和盒式模型/">CSS学习笔记3-基本视觉格式化和盒式模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/07/JavaScript学习笔记9-行为委托/">JavaScript学习笔记9-行为委托</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/CSS学习笔记2-结构和层叠/">CSS学习笔记2--结构和层叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/高德地图API的使用/">高德地图API的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/04/ES6学习笔记9-增强的数组功能/">ES6学习笔记9--增强的数组功能</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/02/秋招复习计划-JavaScript知识点11/">秋招复习计划-JavaScript知识点11</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/秋招复习计划-JavaScript知识点10/">秋招复习计划-JavaScript知识点10</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/秋招复习计划-Vue知识点1/">秋招复习计划-Vue知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/秋招复习计划-算法题5/">秋招复习计划-算法题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/秋招复习计划-算法题4/">秋招复习计划-算法题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/秋招复习计划-JavaScript知识点7/">秋招复习计划-JavaScript知识点7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8--JS的类/">ES6学习笔记8--JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7--迭代器与生成器/">ES6学习笔记7--迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8-原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7-对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS学习笔记1-选择器/">CSS学习笔记1--选择器</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

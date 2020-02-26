@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 了解和合理运用JavaScript的内置值类型">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript学习笔记11-值">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/JavaScript学习笔记11-值/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 了解和合理运用JavaScript的内置值类型">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/JavaScript学习笔记11-值/59.jpg">
+<meta property="og:updated_time" content="2020-02-26T07:30:54.671Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript学习笔记11-值">
+<meta name="twitter:description" content="前言 了解和合理运用JavaScript的内置值类型">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/25/JavaScript学习笔记11-值/59.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>JavaScript学习笔记11-值 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写代码/">手写代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写签名/">手写签名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/练习题/">练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试经历/">面试经历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高德地图/">高德地图</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zzzwyyy.github.io/">小仙女的博客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-JavaScript学习笔记11-值" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/25/JavaScript学习笔记11-值/" class="article-date">
+      <time datetime="2020-02-25T02:14:18.000Z" itemprop="datePublished">2020-02-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript学习笔记11-值
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">1,904字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">8分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>了解和合理运用JavaScript的内置值类型</p>
+<hr>
+<p><img src="/2020/02/25/JavaScript学习笔记11-值/59.jpg" alt="59"></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1297742167&auto=1&height=66"></iframe><br></div>
+
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>与其它强类型语言不同，在JavaScript中，数组可以容纳任何类型的值。对数组声明后即可向其中加入值，不需要预设定大小。</p>
+<p>使用delete可以将单元从数组中删除，但是单元删除后，数组的length属性并不会发生改变。</p>
+<p>数组通过数字进行索引，但是在JS中，数组也是对象，所以也可以包含字符串键值和属性，但是这些并不计算在数组长度中。同时，如果字符串的键值能够强制类型转换为十进制数字的话，它就会被当作数字索引来使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = []; a[<span class="string">'13'</span>] = <span class="number">1</span>; a.length; <span class="comment">// 14</span></span><br></pre></td></tr></table></figure>
+<p>类数组的转换</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)l;</span><br></pre></td></tr></table></figure>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>字符串与数组很相似，都有length属性以及indexOf()和concat()方法</p>
+<p>JavaScript中字符串是不可变的，而数组是可变的。字符串的不可变指的是字符串的成员方法并不会改变字符串的原始值，而是创建并返回一个新的字符串。</p>
+<p>由于字符串和数组的相似性，所以使用许多数组函数来处理字符串很方便，虽然字符串中并没有这些函数，但是可以通过借用数组的非变更方法来处理字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">'foo'</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="built_in">Array</span>.prototype.join.call(a, <span class="string">'.'</span>);</span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">Array</span>.prototype.map.call(a, <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v.toUpperCase() + <span class="string">'.'</span>;</span><br><span class="line">&#125;).join(<span class="string">''</span>);</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">//f.o.o</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">//F.O.O</span></span><br></pre></td></tr></table></figure>
+<p>另一个不同的点在于字符串的反转。数组有要给字符串无法借用的可变更成员函数reverse();</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = [<span class="string">'f'</span>, <span class="string">'o'</span>, <span class="string">'o'</span>];</span><br><span class="line">b.reverse(); <span class="comment">// ['o', 'o', 'f'];</span></span><br></pre></td></tr></table></figure>
+<p>不过存在变通的方法，就是先将字符串转换为数组，处理完以后再将结果转换回字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = a.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，上述的所有方法对于包含复杂字符（Unicode，如星号、多字节字符）的字符串时并不适用，这些复杂字符需要额外的工具库来处理。</p>
+<h2 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h2><p>JavaScript只有一种数值类型：number，包括“整数”和带小数的十进制数。整数之所以带上引号，是因为JavaScript没有真正意义上的整数。JavaScript中的整数就是没有小数的十进制数。</p>
+<h3 id="数字的语法"><a href="#数字的语法" class="headerlink" title="数字的语法"></a>数字的语法</h3><p>数字前的0和小数点后小数部分最后的0可以省略</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">0.42</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">.42</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">42.0</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">42.</span></span><br></pre></td></tr></table></figure>
+<p>特别大和特别小的数字使用指数格式显示，与toExponential()函数输出的结果相同</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var  a = 5E10;</span><br><span class="line">a; // 50000000000</span><br><span class="line">a.toExponential(); // &quot;5e+10&quot;</span><br></pre></td></tr></table></figure>
+<p>由于数字值可以使用Number对象进行封装，所以数字值可以调用Number.prototype中的方法。</p>
+<p>toFixed方法指定小数部分的显示位数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">42.59</span>;</span><br><span class="line">a.toFixed(<span class="number">4</span>); <span class="comment">// 42.5900</span></span><br></pre></td></tr></table></figure>
+<p>toPrecision()方法来指定有效数位的显示位数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.toPrecision(<span class="number">1</span>); <span class="comment">//"4e+1"</span></span><br></pre></td></tr></table></figure>
+<p>这些方法不仅适用于数字变量，也适用于数字常量。不过对于<code>.</code>运算符需要给予特别的关注，因为它是一个有效的数字字符，会被优先识别为数字常量的一部分，然后才是对象属性访问运算符</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">42.</span>toFixed(<span class="number">3</span>); <span class="comment">// SyntaxError</span></span><br><span class="line">(<span class="number">42</span>).toFixed(<span class="number">3</span>); <span class="comment">// 42.000</span></span><br><span class="line"><span class="number">42.</span>.toFixed(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>数字常量还可以用其它格式来表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0xF3,0XF3; // 十六进制</span><br><span class="line">0o363, 0O363; // 八进制</span><br></pre></td></tr></table></figure>
+<h3 id="较小的数值"><a href="#较小的数值" class="headerlink" title="较小的数值"></a>较小的数值</h3><p>JavaScript遵循IEEE 754规范，使用二进制浮点数。这也导致了下列的情况</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.3</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>这个等式在数学上是严格成立的，但是由于二进制浮点数中0.1和0.2并不十分精确，它们相加的结果并非刚好等于0.3，而是一个比较接近的数字 0.30000000000000004，所以条件判断结果为 false。</p>
+<p>那么我们怎样使他们成立呢。最常见的方法就是设置一个误差范围，通常称为”机器精度”，对于JavaScript来说这个值通常是2^-52。</p>
+<p>从ES6开始，该值直接定义在了Number.EPSILON中，我们可以直接拿来使用，也可以为ES6之前的版本增加</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">Number</span>.EPSILON) &#123;</span><br><span class="line">    <span class="built_in">Number</span>.EPSILON = <span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">-52</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样我们就可以使用Number.EPSILON来比较两个数字是否相等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">numbersCloseEnoughToEqual</span>(<span class="params">n1,n2</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">Math</span>.abs( n1 - n2 ) &lt; <span class="built_in">Number</span>.EPSILON;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">0.1</span> + <span class="number">0.2</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">0.3</span>;</span><br><span class="line">numbersCloseEnoughToEqual( a, b ); <span class="comment">// true</span></span><br><span class="line">numbersCloseEnoughToEqual( <span class="number">0.0000001</span>, <span class="number">0.0000002</span> ); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>JavaScript能呈现的最大的浮点数是1.798e+308，它定义在Number.MAX_VALUE中。最小的浮点数是5e-324，定义在Number.MIN_VALUE中。</p>
+<h3 id="整数的安全范围"><a href="#整数的安全范围" class="headerlink" title="整数的安全范围"></a>整数的安全范围</h3><p>JavaScript的数字呈现方式决定了整数的范围远小于Number.MAX_VALUE。</p>
+<p>能被安全的呈现的最大整数是2^53-1，在ES6中定义为Number.MAX_SAFE_INTEGER。最小的整数是-(2^53-1)，在ES6中定义为Number.MIN_SAFE_INTEGER.</p>
+<p>在JavaScript中如果要处理一些比较大的数字，比如数据库中的64位ID，就需要将其转换为字符串来处理</p>
+<h3 id="整数检测"><a href="#整数检测" class="headerlink" title="整数检测"></a>整数检测</h3><p>要检测一个整数，可以使用ES6中的Number.isInteger()方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">42.000</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">42.3</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>也可以为ES6之前的版本polyfill Number.isInteger()方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">Number</span>.isInteger) &#123;</span><br><span class="line">    <span class="built_in">Number</span>.isInteger = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">typeof</span> num == <span class="string">'number'</span> &amp;&amp; num % <span class="number">1</span> == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要检测一个值是否是安全的整数，可以使用ES6中的Number.isSafeInteger()方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isSafeInteger(<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isSafeInteger(<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h3 id="32位有符号整数"><a href="#32位有符号整数" class="headerlink" title="32位有符号整数"></a>32位有符号整数</h3><p>虽然整数最大能够到达53位，但是有些数字操作（例如位操作）只适用于32位数字，所以这些操作中数的安全范围就要小很多了。</p>
+<p>可以使用<code>a | 0</code>将变量a中的数值转换为32位有符号整数，因为数位运算符符<code>|</code>只适用于32位整数，其它数位会被忽略。</p>
+<h2 id="特殊数值"><a href="#特殊数值" class="headerlink" title="特殊数值"></a>特殊数值</h2><h3 id="不是值的值"><a href="#不是值的值" class="headerlink" title="不是值的值"></a>不是值的值</h3><p>undefined 类型只有一个值，即 undefined。null 类型也只有一个值，即 null。它们的名<br>称既是类型也是值。<br>undefined 和 null 常被用来表示“空的”值或“不是值”的值。二者之间有一些细微的差<br>别。例如：</p>
+<ul>
+<li>null 指空值（empty value）</li>
+<li>undefined 指没有值（missing value</li>
+</ul>
+<p>或者：</p>
+<ul>
+<li>undefined 指从未赋值</li>
+<li>null 指曾赋过值，但是目前没有值</li>
+</ul>
+<p>null 是一个特殊关键字，不是标识符，我们不能将其当作变量来使用和赋值。</p>
+<p>然而undefined 却是一个标识符，可以被当作变量来使用和赋值。</p>
+<p>undefined是一个内置标识符，可以通过void运算符来获得该值。void并不改变表达式的结果，只是让表达式不返回值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">42</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">void</span> a, a); <span class="comment">// undefined 42</span></span><br></pre></td></tr></table></figure>
+<h3 id="特殊的数字"><a href="#特殊的数字" class="headerlink" title="特殊的数字"></a>特殊的数字</h3><p>NaN意指不是一个数字，或者说表示执行数学运算没有成功，这是失败后返回的结果</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">2</span> / <span class="string">'foo'</span>; <span class="comment">// NaN</span></span><br><span class="line"><span class="keyword">typeof</span> a === <span class="string">'number'</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>且NaN它和自身不等，是唯一一个非自反的值</p>
+<p>所以我们只能使用isNaN来判断一个值是否为NaN，但是这个函数有一个缺陷，就是它只检查参数是否不是NaN，也不是数字</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">2</span> / <span class="string">'foo'</span>,</span><br><span class="line">	b = <span class="string">'foo'</span>;</span><br><span class="line"><span class="built_in">window</span>.isNaN(a); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">window</span>.isNaN(b); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>从ES6开始，我们使用Number.isNaN来判断。或者用一个更简单的办法，及利用NaN不等于自身的办法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a !== a</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/02/25/JavaScript学习笔记11-值/">JavaScript学习笔记11-值</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2020-02-25, 10:14:18</p>
+        <p><span>最后更新:</span>2020-02-26, 15:30:54</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/25/JavaScript学习笔记11-值/" title="JavaScript学习笔记11-值">http://yoursite.com/2020/02/25/JavaScript学习笔记11-值/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/02/25/JavaScript学习笔记11-值/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/02/25/阿里达摩院训练题1/">
+                    阿里达摩院训练题1
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/02/21/面试经历-阿里钉钉前端实习/">
+                    面试经历-阿里钉钉前端实习
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-number">1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-number">2.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数字"><span class="toc-number">3.</span> <span class="toc-text">数字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数字的语法"><span class="toc-number">3.1.</span> <span class="toc-text">数字的语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#较小的数值"><span class="toc-number">3.2.</span> <span class="toc-text">较小的数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整数的安全范围"><span class="toc-number">3.3.</span> <span class="toc-text">整数的安全范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整数检测"><span class="toc-number">3.4.</span> <span class="toc-text">整数检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32位有符号整数"><span class="toc-number">3.5.</span> <span class="toc-text">32位有符号整数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊数值"><span class="toc-number">4.</span> <span class="toc-text">特殊数值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不是值的值"><span class="toc-number">4.1.</span> <span class="toc-text">不是值的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊的数字"><span class="toc-number">4.2.</span> <span class="toc-text">特殊的数字</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"JavaScript学习笔记11-值　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/02/25/阿里达摩院训练题1/" title="上一篇: 阿里达摩院训练题1">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/02/21/面试经历-阿里钉钉前端实习/" title="下一篇: 面试经历-阿里钉钉前端实习">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/阿里达摩院训练题2/">阿里达摩院训练题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/25/阿里达摩院训练题1/">阿里达摩院训练题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/25/JavaScript学习笔记11-值/">JavaScript学习笔记11-值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/21/面试经历-阿里钉钉前端实习/">面试经历-阿里钉钉前端实习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/秋招复习计划-算法题6/">秋招复习计划-算法题6</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/秋招复习计划-Vue知识点4/">秋招复习计划-Vue知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/09/秋招复习计划-Vue知识点3/">秋招复习计划-Vue知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/06/秋招复习计划-ES6知识点1/">秋招复习计划-ES6知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/01/秋招复习计划-手写代码1/">秋招复习计划-手写代码1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/31/秋招复习计划-Vue知识点2/">秋招复习计划-Vue知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/26/ES6学习笔记10-Promise与异步编程/">ES6学习笔记10-Promise与异步编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/18/JavaScript学习笔记10-类型/">JavaScript学习笔记10-类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/面试经历-字节跳动好好学习方向/">面试经历-字节跳动好好学习方向</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/10/秋招复习计划-CSS知识点1/">秋招复习计划-CSS知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/09/秋招复习计划-计算机网络知识点1/">秋招复习计划-计算机网络知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/08/CSS学习笔记3-基本视觉格式化和盒式模型/">CSS学习笔记3-基本视觉格式化和盒式模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/07/JavaScript学习笔记9-行为委托/">JavaScript学习笔记9-行为委托</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/CSS学习笔记2-结构和层叠/">CSS学习笔记2--结构和层叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/高德地图API的使用/">高德地图API的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/04/ES6学习笔记9-增强的数组功能/">ES6学习笔记9--增强的数组功能</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/02/秋招复习计划-JavaScript知识点11/">秋招复习计划-JavaScript知识点11</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/秋招复习计划-JavaScript知识点10/">秋招复习计划-JavaScript知识点10</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/秋招复习计划-Vue知识点1/">秋招复习计划-Vue知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/秋招复习计划-算法题5/">秋招复习计划-算法题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/秋招复习计划-算法题4/">秋招复习计划-算法题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/秋招复习计划-JavaScript知识点7/">秋招复习计划-JavaScript知识点7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8--JS的类/">ES6学习笔记8--JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7--迭代器与生成器/">ES6学习笔记7--迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8-原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7-对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS学习笔记1-选择器/">CSS学习笔记1--选择器</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
