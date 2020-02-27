@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://doubler.cn/2020/02/27/阿里达摩院训练题3/62.jpg">
 <meta property="og:image" content="http://doubler.cn/2020/02/27/阿里达摩院训练题3/变量交换.png">
-<meta property="og:updated_time" content="2020-02-27T10:10:30.735Z">
+<meta property="og:updated_time" content="2020-02-27T12:12:05.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阿里达摩院训练题3">
 <meta name="twitter:description" content="前言 每天一练">
@@ -343,7 +343,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
-			<span class="post-count">1,648字</span>
+			<span class="post-count">1,584字</span>
 		</span>
 	</span>
 	
@@ -403,14 +403,14 @@
 <p><strong>f.<code>div ~ p:first-child</code>是写法正确的选择器</strong></p>
 <p>正确：加号是相邻兄弟，<code>~</code>是后面所有兄弟。所以这个选择器是选择div后面所有作为第一个子元素的p标签</p>
 <h2 id="多项选择题"><a href="#多项选择题" class="headerlink" title="多项选择题"></a>多项选择题</h2><p><strong>题目描述：</strong>关于ES6编程，以下说法正确的是</p>
-<p><strong>题目答案：</strong>a、b、c、d、e</p>
+<p><strong>题目答案：</strong>b、d、e</p>
 <p><strong>题目解析：</strong></p>
-<p><strong>a.不要使用var，建议优先使用let</strong><br>正确：let实现了块作用域，所以优先使用let</p>
+<p><strong>a.不要使用var，建议优先使用let</strong><br>错误：建议优先const</p>
 <p><strong>b.[a, b] = [b, a]；可以用于变量交换</strong></p>
 <p>正确：</p>
 <p><img src="/2020/02/27/阿里达摩院训练题3/变量交换.png" alt="变量交换"></p>
 <p><strong>c.{…x}相当于对x做for in 操作,[…x]相当于对x做for of 操作</strong></p>
-<p>正确：<code>...</code>是扩展运算符。在<code>{}</code>中对x进行扩展运算说明x是一个对象，那么就相当于使用for in 遍历对象。同理，在<code>[]</code>中对x进行扩展运算说明x是一个数组，那么就相当于使用for of 遍历数组</p>
+<p>错误：<code>...</code>是扩展运算符。for in 不会遍历Symbol属性，而{…x}会</p>
 <p><strong>d.尽可能地使用箭头函数代替.bind/_self/that等针对this的操作</strong></p>
 <p>正确：这是利用箭头函数没有自己的this的特点。箭头函数内部的this就是其父执行上下文中的this，也就是箭头函数外层第一个包裹它的非箭头函数的代码块的执行环境中的this。这在它定义的时候就确定了。说起来可能有点绕，看个例子</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    x: <span class="number">22</span>,</span><br><span class="line">    say: <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.say();  <span class="comment">// 输出的值为11</span></span><br></pre></td></tr></table></figure>
@@ -458,7 +458,7 @@
         <p><span>本文标题:</span><a href="/2020/02/27/阿里达摩院训练题3/">阿里达摩院训练题3</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
         <p><span>发布时间:</span>2020-02-27, 15:54:36</p>
-        <p><span>最后更新:</span>2020-02-27, 18:10:30</p>
+        <p><span>最后更新:</span>2020-02-27, 20:12:05</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/02/27/阿里达摩院训练题3/" title="阿里达摩院训练题3">http://doubler.cn/2020/02/27/阿里达摩院训练题3/</a>
             <span class="copy-path" data-clipboard-text="原文: http://doubler.cn/2020/02/27/阿里达摩院训练题3/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
