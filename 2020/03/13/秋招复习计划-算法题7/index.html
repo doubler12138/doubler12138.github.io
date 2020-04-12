@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Double--R" />
+
+
+
+<meta name="description" content="前言 继续刷leetcode">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招复习计划-算法题7">
+<meta property="og:url" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="前言 继续刷leetcode">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/66.jpg">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/删除节点.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/删除节点结果1.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/删除节点结果2.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/前序遍历.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/灯泡开关.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/灯泡开关结果1.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/黄金矿工.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/黄金矿工提交结果.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/每日温度.png">
+<meta property="og:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/每日温度提交结果1.png">
+<meta property="og:updated_time" content="2020-03-19T15:17:30.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="秋招复习计划-算法题7">
+<meta name="twitter:description" content="前言 继续刷leetcode">
+<meta name="twitter:image" content="http://doubler.cn/2020/03/13/秋招复习计划-算法题7/66.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="DoubleR&#39;s BLOG" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>秋招复习计划-算法题7 | DoubleR&#39;s BLOG</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/13.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Double--R</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/pdf/">资料</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复习计划/">复习计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写代码/">手写代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手写签名/">手写签名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/练习题/">练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试经历/">面试经历</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高德地图/">高德地图</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://zzzwyyy.github.io/">小仙女的博客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/doubler12138">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://fofa.so/">Fofa</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.anquanke.com/">安全客</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://vulhub.org/">Vulhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.vulnhub.com/">Vulnhub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://wx.zsxq.com/">知识星球</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://paper.seebug.org/">SeeBug</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.sec-wiki.com/news">SecWiki</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kingfast.top/">KingFast</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://seclists.org/oss-sec/">SecList</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.jarvisoj.com/login">JarvisOJ</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://f1sh.site/">Fish</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.k0rz3n.com/">K0rz3n</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://pupiles.com/">Pupiles</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://ox1234.github.io/">Flight</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://wyb0.com/">Reber</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://codeqi.top/">Qiqi</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://quincyblog.top/">Quincy</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.void0red.top/">Void0red</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://yulige.top/">郁离歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.leavesongs.com/">离别歌</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.linkedbyx.com/home">Linked by X</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://chujian521.github.io/">Xin</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于学习</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Double--R</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/13.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Double--R</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">What We Talk About When We Talk About Love</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/pdf/">资料</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1036460042@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/doubler12138" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-秋招复习计划-算法题7" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/13/秋招复习计划-算法题7/" class="article-date">
+      <time datetime="2020-03-13T06:15:07.000Z" itemprop="datePublished">2020-03-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      秋招复习计划-算法题7
+    </h1>
+  
+
+		<div style="margin-top:20px;">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<span class="post-count">1,650字</span>
+		</span>
+	</span>
+	
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">7分</span>
+		</span>
+	</span>
+</div>
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/复习计划/">复习计划</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud" style="margin-top:30px;">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>前言</strong></p>
+<p>继续刷leetcode</p>
+<hr>
+<p><img src="/2020/03/13/秋招复习计划-算法题7/66.jpg" alt="66"></p>
+<a id="more"></a>
+<div align="center"><br>    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1402732350&auto=1&height=66"></iframe><br></div>
+
+<h2 id="删除链表的倒数第N个节点"><a href="#删除链表的倒数第N个节点" class="headerlink" title="删除链表的倒数第N个节点"></a>删除链表的倒数第N个节点</h2><h3 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h3><p><img src="/2020/03/13/秋招复习计划-算法题7/删除节点.png" alt="删除节点"></p>
+<h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p>两次遍历的方法，首先我们要找倒数第N个，就得知道链表总长L。那么我们要找到倒数第N个，就是正数L-N+1个。为了应对特殊的情况，譬如链表只有一个节点，或者我们要删除的正好是第一个节点。我们在原有头节点前再加一个我们的节点，那么我们现在要删除的节点就是整数L-N+2个，而要删除第L-N+2个节点，我们需要将L-N+1个节点的next属性指向L-N+3，那么从第一个节点到第L-N+1个节点之间有L-N个间隔，所以我们的代码是这样的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> removeNthFromEnd = <span class="function"><span class="keyword">function</span>(<span class="params">head, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> newHead = &#123;&#125;;</span><br><span class="line">    newHead.next = head;</span><br><span class="line">    <span class="keyword">let</span> length = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> first = head;</span><br><span class="line">    <span class="keyword">while</span>(first !== <span class="literal">null</span>) &#123;</span><br><span class="line">        length++;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    length -= n;</span><br><span class="line">    first = newHead;</span><br><span class="line">    <span class="keyword">while</span>(length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        length--;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    first.next = first.next.next;</span><br><span class="line">    <span class="keyword">return</span> newHead.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/13/秋招复习计划-算法题7/删除节点结果1.png" alt="删除节点结果1"></p>
+<p>因为要遍历两遍链表，所以执行时间很慢。那么有没有只遍历一次就解决的办法。有</p>
+<p>我们利用两个指针，要知道，倒数第N个节点和最后一个节点之间差N-1个间隔，那我们让第一个指针指向头节点，第二个指针指向整数N+1（N-1+1+1)个节点，然后同时向后遍历，当第二个指针指向最后一个节点时，第一个指针正好指向需要删除的节点的前一个节点。同样为了避免特殊情况，我们让需要加一个空的头节点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> removeNthFromEnd = <span class="function"><span class="keyword">function</span>(<span class="params">head, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> dump = &#123;&#125;;</span><br><span class="line">    dump.next = head;</span><br><span class="line">    <span class="keyword">let</span> first = dump,</span><br><span class="line">        second = dump;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(first !== <span class="literal">null</span>) &#123;</span><br><span class="line">        first = first.next;</span><br><span class="line">        second = second.next;</span><br><span class="line">    &#125;</span><br><span class="line">    second.next = second.next.next;</span><br><span class="line">    <span class="keyword">return</span> dump.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/13/秋招复习计划-算法题7/删除节点结果2.png" alt="删除节点结果2"></p>
+<h2 id="N叉树的前序遍历"><a href="#N叉树的前序遍历" class="headerlink" title="N叉树的前序遍历"></a>N叉树的前序遍历</h2><h3 id="题目内容-1"><a href="#题目内容-1" class="headerlink" title="题目内容"></a>题目内容</h3><p><img src="/2020/03/13/秋招复习计划-算法题7/前序遍历.png" alt="前序遍历"></p>
+<h3 id="解题过程-1"><a href="#解题过程-1" class="headerlink" title="解题过程"></a>解题过程</h3><p>这道题还是很简单的。递归的方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorder = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = [];</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">order</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(!node) <span class="keyword">return</span>;</span><br><span class="line">        result.push(node.val);</span><br><span class="line">        <span class="keyword">if</span>(node.children) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> node.children) &#123;</span><br><span class="line">                order(item);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    order(root);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>迭代</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> preorder = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> res = [], arr = [root];</span><br><span class="line">    <span class="keyword">while</span>(arr.length)&#123;</span><br><span class="line">        <span class="keyword">var</span> current = arr.pop();</span><br><span class="line">        res.push(current.val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = current.children.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            arr.push(current.children[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这里数组children之所以要从后往前遍历，是因为这个题目的输入很弱智，如果子树是从左往右的顺序是[3,2,4]，它的children数组确实[4,2,3]。</p>
+<h2 id="灯泡开关"><a href="#灯泡开关" class="headerlink" title="灯泡开关"></a>灯泡开关</h2><h3 id="题目内容-2"><a href="#题目内容-2" class="headerlink" title="题目内容"></a>题目内容</h3><p><img src="/2020/03/13/秋招复习计划-算法题7/灯泡开关.png" alt="灯泡开关"></p>
+<h3 id="解题过程-2"><a href="#解题过程-2" class="headerlink" title="解题过程"></a>解题过程</h3><p>这道题目乍一看感觉很难，其实我们只要仔细看他的要求，所有开着的灯都变成蓝色。拿什么情况下所有的灯会变蓝，就是所有亮着的灯是从1开始的顺序排序。那么如果是顺序排序的话，那所有亮着的灯的序号的最大值应该等于当前light数组的下标+1。我们选个例子来分析，light = [2,1,3,5,4]。当第0时刻，也就是light[0]，2号灯亮，这个时候亮着的灯的最大序号是2，当light[1]时，下标+1等于2，1号灯亮，这个时候，  亮灯最大的下标还是2，等于下标加一，这个时候刚好所有的亮灯都是蓝灯</p>
+<p>所以我们只要根据这个判断条件来写就行了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numTimesAllBlue = <span class="function"><span class="keyword">function</span>(<span class="params">light</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> time = <span class="number">0</span>,</span><br><span class="line">        maxNum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>, length = light.length; i &lt; length; i++) &#123;</span><br><span class="line">        maxNum = <span class="built_in">Math</span>.max(maxNum, light[i]);</span><br><span class="line">        <span class="keyword">if</span>(maxNum === i+<span class="number">1</span>) time++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> time;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/13/秋招复习计划-算法题7/灯泡开关结果1.png" alt="灯泡开关结果1"></p>
+<h2 id="黄金矿工"><a href="#黄金矿工" class="headerlink" title="黄金矿工"></a>黄金矿工</h2><h3 id="题目内容-3"><a href="#题目内容-3" class="headerlink" title="题目内容"></a>题目内容</h3><p><img src="/2020/03/13/秋招复习计划-算法题7/黄金矿工.png" alt="黄金矿工"></p>
+<h3 id="解题过程-3"><a href="#解题过程-3" class="headerlink" title="解题过程"></a>解题过程</h3><p>深度优先遍历算法的变形</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getMaximumGold = <span class="function"><span class="keyword">function</span>(<span class="params">grid</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(grid.length === <span class="number">0</span>) <span class="keyword">return</span> result;</span><br><span class="line">    <span class="keyword">let</span> rowLimit = grid.length,</span><br><span class="line">        colLimit = grid[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">let</span> ways = [</span><br><span class="line">        [<span class="number">-1</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">-1</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">    ];</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">dps</span>(<span class="params">count, row, col</span>) </span>&#123;</span><br><span class="line">        result = <span class="built_in">Math</span>.max(count, result);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">let</span> crow = row + ways[i][<span class="number">0</span>],</span><br><span class="line">                ccol = col + ways[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(crow &lt; <span class="number">0</span> || ccol &lt; <span class="number">0</span> || crow &gt;= rowLimit || ccol &gt;= colLimit || grid[crow][ccol] === <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">let</span> temp = grid[crow][ccol];</span><br><span class="line">            grid[crow][ccol] = <span class="number">0</span>;</span><br><span class="line">            dps(count + temp, crow, ccol);</span><br><span class="line">            grid[crow][ccol] = temp; <span class="comment">// 回退</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; rowLimit; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; colLimit; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(grid[i][j] === <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">let</span> remeber = grid[i][j];</span><br><span class="line">            grid[i][j] = <span class="number">0</span>;</span><br><span class="line">            dps(remeber, i, j);</span><br><span class="line">            grid[i][j] = remeber;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/13/秋招复习计划-算法题7/黄金矿工提交结果.png" alt="黄金矿工提交结果"></p>
+<h2 id="每日温度"><a href="#每日温度" class="headerlink" title="每日温度"></a>每日温度</h2><h3 id="题目内容-4"><a href="#题目内容-4" class="headerlink" title="题目内容"></a>题目内容</h3><p><img src="/2020/03/13/秋招复习计划-算法题7/每日温度.png" alt="每日温度"></p>
+<h3 id="解题过程-4"><a href="#解题过程-4" class="headerlink" title="解题过程"></a>解题过程</h3><p>最简单的方法，循环嵌套</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dailyTemperatures = <span class="function"><span class="keyword">function</span>(<span class="params">T</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> nextDays = [];</span><br><span class="line">    T.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> nextDay = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> x = index + <span class="number">1</span>; x &lt; T.length; x++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (T[x] &gt; item) &#123;</span><br><span class="line">          nextDay = x - index;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">     nextDays.push(nextDay);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> nextDays;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>巨慢无比</p>
+<p><img src="/2020/03/13/秋招复习计划-算法题7/每日温度提交结果1.png" alt="每日温度提交结果1"></p>
+<p>单调栈的方法</p>
+<p>先说单调栈，</p>
+<p>单调栈就是栈内元素保持一定单调性（单调递增或单调递减）的栈。这里的单调递增或递减是指的从<strong>栈顶</strong>到<strong>栈底</strong>单调递增或递减。既然是栈，就满足后进先出的特点。</p>
+<p>例如，现在有一个数组 [3, 4, 2, 6, 4, 5, 2, 3]，从左到右依次入栈，单调递增栈的实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 单调递增栈的实现</span><br><span class="line">let arr = [3, 4, 2, 6, 4, 5, 2, 3]</span><br><span class="line">let res = []</span><br><span class="line"></span><br><span class="line">for (let i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    while (res.length &amp;&amp; res[res.length - 1] &lt; arr[i]) &#123;</span><br><span class="line">        res.pop()</span><br><span class="line">    &#125;</span><br><span class="line">    res.push(arr[i])</span><br><span class="line">&#125;</span><br><span class="line">console.log(res)   // [6, 5, 3]</span><br></pre></td></tr></table></figure>
+<p>将破坏栈单调性的元素都出栈，结果从栈顶到栈底单调递增或者递减。</p>
+<p>了解了单调栈之后，再来看这道题。</p>
+<ol>
+<li>维护一个单调递增栈，栈内存储气温数组 T 的 index</li>
+<li>查看当前元素是否大于栈顶元素所对应的 T 的值，也就是 T[stack[stack.length - 1]]</li>
+<li>如果大于，那说明找到需要等待的天数。如果不大于那说明还没到找到比这天高的温度。同时继续维护这个单调栈</li>
+<li>如果大于，需要等待的天数就是当前数组 T 的下标减去单调栈顶对应的下标，然后出栈</li>
+<li>循环完毕，还没有找到需要等待的天数，为0</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; T</span><br><span class="line"> * @return &#123;number[]&#125;</span><br><span class="line"> */</span><br><span class="line">var dailyTemperatures = function(T) &#123;</span><br><span class="line">    let &#123; length &#125; = T</span><br><span class="line">    let res = new Array(length).fill(0)</span><br><span class="line">    let stack = []</span><br><span class="line">    for(let i = 0; i &lt; length; i++) &#123;</span><br><span class="line"></span><br><span class="line">        while(stack.length &amp;&amp; T[i] &gt; T[stack[stack.length - 1]]) &#123;</span><br><span class="line">            let index = stack.pop()</span><br><span class="line">            res[index] = i - index</span><br><span class="line">        &#125;</span><br><span class="line">        stack.push(i)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/13/秋招复习计划-算法题7/">秋招复习计划-算法题7</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Double--R</a></p>
+        <p><span>发布时间:</span>2020-03-13, 14:15:07</p>
+        <p><span>最后更新:</span>2020-03-19, 23:17:30</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/13/秋招复习计划-算法题7/" title="秋招复习计划-算法题7">http://doubler.cn/2020/03/13/秋招复习计划-算法题7/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://doubler.cn/2020/03/13/秋招复习计划-算法题7/　　作者: Double--R" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/03/23/秋招复习计划-浏览器缓存/">
+                    秋招复习计划-浏览器缓存
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/03/10/秋招复习计划-ES6知识点2/">
+                    秋招复习计划-ES6知识点2
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#删除链表的倒数第N个节点"><span class="toc-number">1.</span> <span class="toc-text">删除链表的倒数第N个节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目内容"><span class="toc-number">1.1.</span> <span class="toc-text">题目内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题过程"><span class="toc-number">1.2.</span> <span class="toc-text">解题过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#N叉树的前序遍历"><span class="toc-number">2.</span> <span class="toc-text">N叉树的前序遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目内容-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题过程-1"><span class="toc-number">2.2.</span> <span class="toc-text">解题过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灯泡开关"><span class="toc-number">3.</span> <span class="toc-text">灯泡开关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目内容-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题过程-2"><span class="toc-number">3.2.</span> <span class="toc-text">解题过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#黄金矿工"><span class="toc-number">4.</span> <span class="toc-text">黄金矿工</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目内容-3"><span class="toc-number">4.1.</span> <span class="toc-text">题目内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题过程-3"><span class="toc-number">4.2.</span> <span class="toc-text">解题过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#每日温度"><span class="toc-number">5.</span> <span class="toc-text">每日温度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目内容-4"><span class="toc-number">5.1.</span> <span class="toc-text">题目内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题过程-4"><span class="toc-number">5.2.</span> <span class="toc-text">解题过程</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"秋招复习计划-算法题7　| DoubleR's BLOG　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/03/23/秋招复习计划-浏览器缓存/" title="上一篇: 秋招复习计划-浏览器缓存">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/03/10/秋招复习计划-ES6知识点2/" title="下一篇: 秋招复习计划-ES6知识点2">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/10/春招的心路历程-字节跳动上岸/">春招的心路历程-字节跳动上岸</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/25/秋招复习计划-Cookie相关/">秋招复习计划-Cookie相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/23/秋招复习计划-浏览器缓存/">秋招复习计划-浏览器缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/13/秋招复习计划-算法题7/">秋招复习计划-算法题7</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/秋招复习计划-ES6知识点2/">秋招复习计划-ES6知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/10/秋招复习计划-手写代码2/">秋招复习计划-手写代码2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/阿里达摩院训练题5/">阿里达摩院训练题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/28/阿里达摩院训练题4/">阿里达摩院训练题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/27/阿里达摩院训练题3/">阿里达摩院训练题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/26/阿里达摩院训练题2/">阿里达摩院训练题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/25/阿里达摩院训练题1/">阿里达摩院训练题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/25/JavaScript学习笔记11-值/">JavaScript学习笔记11-值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/17/秋招复习计划-算法题6/">秋招复习计划-算法题6</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/秋招复习计划-Vue知识点4/">秋招复习计划-Vue知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/09/秋招复习计划-Vue知识点3/">秋招复习计划-Vue知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/06/秋招复习计划-ES6知识点1/">秋招复习计划-ES6知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/01/秋招复习计划-手写代码1/">秋招复习计划-手写代码1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/31/秋招复习计划-Vue知识点2/">秋招复习计划-Vue知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/26/ES6学习笔记10-Promise与异步编程/">ES6学习笔记10-Promise与异步编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/18/JavaScript学习笔记10-类型/">JavaScript学习笔记10-类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/面试经历-字节跳动好好学习方向/">面试经历-字节跳动好好学习方向</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/10/秋招复习计划-CSS知识点1/">秋招复习计划-CSS知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/09/秋招复习计划-计算机网络知识点1/">秋招复习计划-计算机网络知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/08/CSS学习笔记3-基本视觉格式化和盒式模型/">CSS学习笔记3-基本视觉格式化和盒式模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/07/JavaScript学习笔记9-行为委托/">JavaScript学习笔记9-行为委托</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/CSS学习笔记2-结构和层叠/">CSS学习笔记2--结构和层叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/高德地图API的使用/">高德地图API的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/04/ES6学习笔记9-增强的数组功能/">ES6学习笔记9--增强的数组功能</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/02/秋招复习计划-JavaScript知识点11/">秋招复习计划-JavaScript知识点11</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/秋招复习计划-JavaScript知识点10/">秋招复习计划-JavaScript知识点10</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/29/秋招复习计划-Vue知识点1/">秋招复习计划-Vue知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/秋招复习计划-算法题5/">秋招复习计划-算法题5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/19/秋招复习计划-JavaScript知识点9/">秋招复习计划-JavaScript知识点9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/秋招复习计划-JavaScript知识点8/">秋招复习计划-JavaScript知识点8</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/秋招复习计划-算法题4/">秋招复习计划-算法题4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/秋招复习计划-JavaScript知识点7/">秋招复习计划-JavaScript知识点7</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/秋招复习计划-JavaScript知识点6/">秋招复习计划--JavaScript知识点6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/03/秋招复习计划-JavaScript知识点5/">秋招复习计划-JavaScript知识点5</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/01/秋招复习计划-算法题3/">秋招复习计划-算法题3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/24/秋招复习计划-JavaScript知识点4/">秋招复习计划-JavaScript知识点4</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/22/秋招复习计划-算法题2/">秋招复习计划-算法题2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-JavaScript知识点3/">秋招复习计划-JavaScript知识点3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/21/秋招复习计划-算法题1/">秋招复习计划-算法题1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/15/秋招复习计划-JavaScript知识点2/">秋招复习计划-JavaScript知识点2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/ES6学习笔记8--JS的类/">ES6学习笔记8--JS的类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/14/秋招复习计划-JavaScript知识点1/">秋招复习计划-JavaScript知识点1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/ES6学习笔记7--迭代器与生成器/">ES6学习笔记7--迭代器与生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/手写签名识别项目2/">手写签名识别项目2--问题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/利用Canvas实现手写板的插件/">利用Canvas实现手写板的插件1--touch事件与Canvas的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/ES6学习笔记6--Set与Map/">ES6学习笔记6--Set与Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/秋招复习计划/">秋招复习计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/23/手写签名识别项目1/">手写签名识别项目1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/21/ES6学习笔记5--符号/">ES6学习笔记5--符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/ES6学习笔记4--解构赋值/">ES6学习笔记4--解构赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/ES6学习笔记3--对象/">ES6学习笔记3--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/ES6学习笔记2--函数/">ES6学习笔记2--函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记8-原型/">JavaScript学习笔记8--原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/JavaScript学习笔记7-对象/">JavaScript学习笔记7--对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/JavaScript学习笔记6--JSON与AJAX/">JavaScript学习笔记6--JSON与AJAX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/31/ES6学习笔记1--块级绑定/">ES6学习笔记1--块级绑定</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/29/NodeJs学习笔记3/">NodeJs学习笔记3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/28/JavaScript学习笔记5--this全面解析/">JavaScript学习笔记5--this全面解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/JavaScript设计模式学习笔记1/">JavaScript设计模式学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/NodeJs学习笔记2/">NodeJs学习笔记2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/NodeJs学习笔记1/">NodeJs学习笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/JavaScript学习笔记4--作用域闭包/">JavaScript学习笔记4--提升与作用域闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/JavaScript学习笔记3--函数作用域与块作用域/">JavaScript学习笔记3--函数作用域与块作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/JavaScript学习笔记2--词法作用域/">JavaScript学习笔记2--词法作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/30/JavaScript学习笔记1--编译原理/">JavaScript学习笔记1--作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/CSS学习笔记1-选择器/">CSS学习笔记1--选择器</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 Double--R
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+       
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+
+</script>
+<script type="text/javascript" src="/resources/love.js"></script>
+<script type="text/javascript" src="/resources/float.js"></script>
+<script type="text/javascript" src="/resources/typewriter.js"></script>
+<script type="text/javascript" color=0,104,183 opacity=1  zindex=-1 count=50 src="/resources/particle.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
