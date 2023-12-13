@@ -185,14 +185,14 @@
 <p>[!question] 为什么要进行跨平台的研究<br>【微观上】：企业要提高开发效率，降低开发成本，实现一次编码，到处运行；【宏观上】：现在处于多端发展时代，多种终端生态互不兼容，造成生产力浪费，势必会有一种新技术代表先进生产力</p>
 </blockquote>
 <h2 id="Native-App"><a href="#Native-App" class="headerlink" title="Native App"></a>Native App</h2><p>第三方应用程序会与平台进行交互，以创建 widgets（组件） 或访问相机等服务。其中 widgets 呈现给屏幕画布，并将事件传回给 widgets</p>
-<p><img src="/img/ReactNative/NativeApp%E6%9E%B6%E6%9E%84.png"></p>
+<p><img src="/img/friend_404.gif" data-original="/img/ReactNative/NativeApp%E6%9E%B6%E6%9E%84.png"></p>
 <h2 id="基于-WebView-的第一代跨平台框架"><a href="#基于-WebView-的第一代跨平台框架" class="headerlink" title="基于 WebView 的第一代跨平台框架"></a>基于 WebView 的第一代跨平台框架</h2><p>第一代跨平台框架基于 JavaScript 和 WebViews，代表者有：PhoneGap，微信小程序。</p>
 <p>第三方应用程序创建 HTML 并将其显示在平台的 WebView 上，对于平台提供的一些系统服务，通过 JS Bridge 来调用。由于这些调用不是很频繁，JS Bridge 并不会成为性能瓶颈。然而，一个完整 HTML5 页面的展示要经历浏览器控件的加载、解析和渲染三大过程，性能消耗要比原生开发增加 N 个数量级，所以这种方案的瓶颈在于 WebView 对于 H5 页面的渲染。这种开发模式开发的 App 既有原生应用代码又有 Web 应用代码，因此又被称为 Hybrid App（混合应用程序）</p>
-<p><img src="/img/ReactNative/WebView%E6%9E%B6%E6%9E%84.png"></p>
-<h2 id="以-React-Native-为代表的第二代跨平台框架"><a href="#以-React-Native-为代表的第二代跨平台框架" class="headerlink" title="以 React Native 为代表的第二代跨平台框架"></a>以 React Native 为代表的第二代跨平台框架</h2><p>这种方案也称为<strong>泛 Web 容器方案</strong> ，这种方案放弃了 WebView 渲染，采用原生自带的 UI 组件代替了核心的渲染引擎，所以这种方案的性能要比第一代方案好很多。代表者就是 RN 、Weex。同时这种方案保持了 JavaScript 作为开发语言，支持前端丰富的生态（比如 RN 使用 React.js 极大地方便了 UI 的创建）。由于前端和 Native 的交互都要通过中间的 Bridge，很自然的 Bridge 就成了这种方案的性能瓶颈<br><img src="/img/ReactNative/ReactNative%E6%97%A7%E6%9E%B6%E6%9E%84.png"></p>
-<h2 id="以-Flutter-为代表的第三代跨平台框架"><a href="#以-Flutter-为代表的第三代跨平台框架" class="headerlink" title="以 Flutter 为代表的第三代跨平台框架"></a>以 Flutter 为代表的第三代跨平台框架</h2><p>为什么说 Flutter 是一种新的方案呢？因为他采用了一种自绘引擎的方式，和以往的方案都不一样；Flutter 既不用 WebView 进行组件渲染，也不适用原生组件进行渲染，他完全自己搞了一套跨平台 UI 渲染框架，渲染引擎依靠跨平台的 Skia 图形库来实现，手机平台只需要提供一块画布即可。同时开发语言使用即支持 JIT 又支持 AOT 的 Dart 语言，即提升了执行效率，也为支持动态化提供可能<br><img src="/img/ReactNative/Flutter%E6%9E%B6%E6%9E%84.png"></p>
+<p><img src="/img/friend_404.gif" data-original="/img/ReactNative/WebView%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="以-React-Native-为代表的第二代跨平台框架"><a href="#以-React-Native-为代表的第二代跨平台框架" class="headerlink" title="以 React Native 为代表的第二代跨平台框架"></a>以 React Native 为代表的第二代跨平台框架</h2><p>这种方案也称为<strong>泛 Web 容器方案</strong> ，这种方案放弃了 WebView 渲染，采用原生自带的 UI 组件代替了核心的渲染引擎，所以这种方案的性能要比第一代方案好很多。代表者就是 RN 、Weex。同时这种方案保持了 JavaScript 作为开发语言，支持前端丰富的生态（比如 RN 使用 React.js 极大地方便了 UI 的创建）。由于前端和 Native 的交互都要通过中间的 Bridge，很自然的 Bridge 就成了这种方案的性能瓶颈<br><img src="/img/friend_404.gif" data-original="/img/ReactNative/ReactNative%E6%97%A7%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="以-Flutter-为代表的第三代跨平台框架"><a href="#以-Flutter-为代表的第三代跨平台框架" class="headerlink" title="以 Flutter 为代表的第三代跨平台框架"></a>以 Flutter 为代表的第三代跨平台框架</h2><p>为什么说 Flutter 是一种新的方案呢？因为他采用了一种自绘引擎的方式，和以往的方案都不一样；Flutter 既不用 WebView 进行组件渲染，也不适用原生组件进行渲染，他完全自己搞了一套跨平台 UI 渲染框架，渲染引擎依靠跨平台的 Skia 图形库来实现，手机平台只需要提供一块画布即可。同时开发语言使用即支持 JIT 又支持 AOT 的 Dart 语言，即提升了执行效率，也为支持动态化提供可能<br><img src="/img/friend_404.gif" data-original="/img/ReactNative/Flutter%E6%9E%B6%E6%9E%84.png"></p>
 <h1 id="ReactNative-架构一览"><a href="#ReactNative-架构一览" class="headerlink" title="ReactNative 架构一览"></a>ReactNative 架构一览</h1><p>本文基于 React Native 0.54.3 版本 Android 的架构分析</p>
-<p><img src="/img/ReactNative/ReactNative%E6%9E%B6%E6%9E%84%E5%B1%82%E7%BA%A7.png"><br>RN 的老架构主要包含 React、JavaScript、Bridge 和 Native 四个部分。从上到下可以分成四层，分别是 JS 代码层、JS 引擎层、通信层、原生层。最上面的 JS 代码层提供 React.js 支持，React.js 的 JSX 代码转换为 JS 代码运行在 [[JavaScriptCore]] 提供的 JavaScript 运行时环境中，通信层将 JavaScript 与 Native 层连接起来；通信层又分为三部分，其中 Shadow Tree 用来定义 UI 效果及交互功能、Native Modules 提供 Native 功能（比如相册、蓝牙等）、而他们之间的相互通信使用的是 JSON 异步消息</p>
+<p><img src="/img/friend_404.gif" data-original="/img/ReactNative/ReactNative%E6%9E%B6%E6%9E%84%E5%B1%82%E7%BA%A7.png"><br>RN 的老架构主要包含 React、JavaScript、Bridge 和 Native 四个部分。从上到下可以分成四层，分别是 JS 代码层、JS 引擎层、通信层、原生层。最上面的 JS 代码层提供 React.js 支持，React.js 的 JSX 代码转换为 JS 代码运行在 [[JavaScriptCore]] 提供的 JavaScript 运行时环境中，通信层将 JavaScript 与 Native 层连接起来；通信层又分为三部分，其中 Shadow Tree 用来定义 UI 效果及交互功能、Native Modules 提供 Native 功能（比如相册、蓝牙等）、而他们之间的相互通信使用的是 JSON 异步消息</p>
 <p>基于上述架构，RN 运行时创建三个线程：</p>
 <ul>
 <li>「<strong>JS Thread</strong>」： 主要负责 React，JS 的执行，输出 App 的视图信息（结构、样式、属性等）</li>
@@ -200,10 +200,10 @@
 <li>「<strong>Main Thead</strong>」：根据 ShadowTree 提供的完整试图信息，负责真实 Native View 的创建<br>下面，将分为启动流程、渲染原理、通信机制三个部分详细剖析一下 RN 的实现原理</li>
 </ul>
 <h1 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h1><p>总结起来，启动流程主要做了两件事：一件是准备环境，一件事调用 JS 侧的入口函数<br>准备环境：在后台创建上下文、初始化通信桥、加载 JSBundle、初始化 JS 执行环境。<br>调用 JS 侧的入口函数：即调用 Appregistry.js 的 runApplication 方法，为一次 Native 到 JS 的调用</p>
-<p><img src="/img/ReactNative/RN%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png"></p>
-<h1 id="渲染原理"><a href="#渲染原理" class="headerlink" title="渲染原理"></a>渲染原理</h1><p><img src="/img/ReactNative/RN%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86.png"></p>
+<p><img src="/img/friend_404.gif" data-original="/img/ReactNative/RN%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png"></p>
+<h1 id="渲染原理"><a href="#渲染原理" class="headerlink" title="渲染原理"></a>渲染原理</h1><p><img src="/img/friend_404.gif" data-original="/img/ReactNative/RN%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86.png"></p>
 <p>RN 运行时会创建三个线程：JS Thread、Shadow Thread、Main Thread，在这三个线程中分别会创建三棵树，JS 线程中会创建一棵叫做<strong>Fiber Tree</strong>，在 Shadow 线程中会创建一棵树叫做<strong>Shadow Tree</strong>，在 UI 线程中则是 <strong>View Tree</strong> 。其中，Fiber Tree 在 JS 侧创建，Shadow Tree 和 View Tree 在 Native 测创建，RN 渲染机制的重点就是这三棵树的创建和同步，关键步骤如下：</p>
-<p><img src="/img/ReactNative/RN%E6%B8%B2%E6%9F%93Tree%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%90%8C%E6%AD%A5.png"></p>
+<p><img src="/img/friend_404.gif" data-original="/img/ReactNative/RN%E6%B8%B2%E6%9F%93Tree%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%90%8C%E6%AD%A5.png"></p>
 <ol>
 <li><strong>第一步：</strong> 通过 React.js 的 JSX 定义 UI 结构</li>
 <li><strong>第二步：</strong> 编译阶段，通过 Babel 将 JSX 转化为 React.createElement 的形态</li>
@@ -218,11 +218,11 @@
 <li>LayoutOnly 节点指一个节点只会影响到它的子节点的位置，而本身不需要绘制任何内容，那么这个节点就是 LayoutOnly 节点，也不会生成相应的 Native 控件</li>
 </ol>
 </blockquote>
-<h1 id="通信机制"><a href="#通信机制" class="headerlink" title="通信机制"></a>通信机制</h1><p><img src="/img/ReactNative/RN%E5%8E%9F%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6.png"><br>在 RN 中有三个线程：JS 线程、UI 线程、Shadow 线程（即 Native Modules 线程），而在 Native Modules 线程中，主要用于进行 Yoga 布局计算，同时也负责 C++层和原生通信。我们知道 Java 可以通过 JNI 的方式和 C++代码实现相互调用，而 Objective-C 可以直接调用 C++代码。JS 可以通过 [[JavaScriptCore]] 实现和 C++的相互调用，而 JavaScriptCore 是由 C++实现的 JS 引擎，所以很自然的，C++就成为了连接原生和 JS 的桥梁。</p>
+<h1 id="通信机制"><a href="#通信机制" class="headerlink" title="通信机制"></a>通信机制</h1><p><img src="/img/friend_404.gif" data-original="/img/ReactNative/RN%E5%8E%9F%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6.png"><br>在 RN 中有三个线程：JS 线程、UI 线程、Shadow 线程（即 Native Modules 线程），而在 Native Modules 线程中，主要用于进行 Yoga 布局计算，同时也负责 C++层和原生通信。我们知道 Java 可以通过 JNI 的方式和 C++代码实现相互调用，而 Objective-C 可以直接调用 C++代码。JS 可以通过 [[JavaScriptCore]] 实现和 C++的相互调用，而 JavaScriptCore 是由 C++实现的 JS 引擎，所以很自然的，C++就成为了连接原生和 JS 的桥梁。</p>
 <p>所以 RN 的通信机制总结起来就是一句话：<strong>一个 C++实现的 bridge (桥)打通了原生和 JS，实现了两者的相互调用</strong></p>
 <h2 id="桥的初始化"><a href="#桥的初始化" class="headerlink" title="桥的初始化"></a>桥的初始化</h2><p>在 RN 的启动流程中，会对通信桥进行初始化。通信桥的初始化最关键的就是创建两张表和建立两个桥。两张表中，一张是 JavaScriptModuleRegistry，供原生调用 JS 使用，一张是 NativeModuleRegistry，供 JS 调用原生使用；两个桥中，一个是 NativeToJSBridge，是原生调用 JS 的桥梁，一个是 JSToNativeBridge，JS 调用原生的桥梁。</p>
 <h2 id="Native-调用-JS"><a href="#Native-调用-JS" class="headerlink" title="Native 调用 JS"></a>Native 调用 JS</h2><p>Native 调用 JS 的流程相对简单：</p>
-<p><img src="/img/ReactNative/RNNative%E8%B0%83%E7%94%A8JS.png"></p>
+<p><img src="/img/friend_404.gif" data-original="/img/ReactNative/RNNative%E8%B0%83%E7%94%A8JS.png"></p>
 <ol>
 <li>在 Java 层把要实现的功能编写成接口并继承 JavaScriptModule，并交由 ReactPackage 管理，最终会在RN初始化的时候添加到JavaScriptModuleRegistry注册表中</li>
 <li>JavaScriptModuleRegistry通过动态代理生成对应的JavaScriptModule，然后通过invoke()调用相应的JS方法，该方法会进一步去调用CatalystInstanceImpl.callJSFunction，该方法会通过JNI将相关参数传递到C++层</li>
@@ -234,7 +234,7 @@
 <li>「异步调用」：指的是在JSToNative的通信方式中，调用的发起在JS线程，逻辑处理和计算在Native Module线程和UI线程，异步的方式不会阻塞JS线程</li>
 <li>「同步调用」：指的是调用和处理过程都发生在JS线程中；如果逻辑计算简单，这没什么影响，但是如果逻辑计算复杂，那肯定得卡死JS线程。</li>
 </ul>
-<p><img src="/img/ReactNative/JSCallbackRN.png"><br>整个流程可以分为两个部分，第一个部分是JS调用Native，第二个部分是Native将执行结果回调至JS侧（和Native调用JS的流程很相似）<br>JS调用Native流程如下：</p>
+<p><img src="/img/friend_404.gif" data-original="/img/ReactNative/JSCallbackRN.png"><br>整个流程可以分为两个部分，第一个部分是JS调用Native，第二个部分是Native将执行结果回调至JS侧（和Native调用JS的流程很相似）<br>JS调用Native流程如下：</p>
 <ol>
 <li>从JS侧进入C++层，通过JSC桥接获取Java Module的注册表，然后回到JS侧，将它转换为对应的JS Native  Module，并根据不同的调用类型，将xxMethod的调用封装成消息，放入MessageQueue的队列里</li>
 <li>xxMethod消息处理的时候，会进入C++层，拿到对应的module信息，通过JSToNativeBridge，将该函数调用消息放到线程的消息队列中等待执行。此时C++层的函数调用会映射为同名的Java层JavaModuleWrapper对象，并调用其中的invoke方法，传入的参数是methodId和对应的参数信息</li>
@@ -322,4 +322,17 @@ document.addEventListener('pjax:error', e => {
   if (e.request.status === 404) {
     pjax.loadUrl('/404.html')
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: true,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
