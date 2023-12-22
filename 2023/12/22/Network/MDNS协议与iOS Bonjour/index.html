@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>MDNS协议与iOS Bonjour | DoubleR's BLOG</title><meta name="author" content="DoubleR"><meta name="copyright" content="DoubleR"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本章将讲解MDNS协议，以及如何通过iOS Bonjour架构进行局域网设备发现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MDNS协议与iOS Bonjour">
+<meta property="og:url" content="http://doubler.cn/2023/12/22/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour/index.html">
+<meta property="og:site_name" content="DoubleR&#39;s BLOG">
+<meta property="og:description" content="本章将讲解MDNS协议，以及如何通过iOS Bonjour架构进行局域网设备发现">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://doubler.cn/img/Archive/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour.jpeg">
+<meta property="article:published_time" content="2023-12-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-22T09:14:16.519Z">
+<meta property="article:author" content="DoubleR">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://doubler.cn/img/Archive/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour.jpeg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://doubler.cn/2023/12/22/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/db.json","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MDNS协议与iOS Bonjour',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-22 17:14:16'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/doubler.css"><meta name="generator" content="Hexo 7.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (true) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Archive/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="DoubleR's BLOG"><span class="site-name">DoubleR's BLOG</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MDNS协议与iOS Bonjour</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-21T16:00:00.000Z" title="发表于 2023-12-22 00:00:00">2023-12-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-22T09:14:16.519Z" title="更新于 2023-12-22 17:14:16">2023-12-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MDNS协议与iOS Bonjour"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="iOS-Bonjour与MDNS协议"><a href="#iOS-Bonjour与MDNS协议" class="headerlink" title="iOS Bonjour与MDNS协议"></a>iOS Bonjour与MDNS协议</h1><p><strong>背景</strong></p>
+<p>在VibeOne的早期版本中，是通过后端接口获得跟手机同一网络下的白板设备的。而后端判断手机和设备是否在同一网络的逻辑也相对比较简单，只是通过::判断手机和白板的IP地址是否相同::来判断两者是否处于同一网络。这种判断方式在相对简单的网络环境下，有一定的效果。但是对于复杂的，::多IP出口的网络::，哪怕手机跟白板都连接在同一WI-FI下，也无法正确判断。这个时候，我们就需::要采用局域网服务（设备）发现技术，在iOS端VibeOne采用了Bonjour协议，其中最核心的就是Multicast DNS（多播DNS）协议。::</p>
+<h1 id="DNS协议"><a href="#DNS协议" class="headerlink" title="DNS协议"></a>DNS协议</h1><blockquote>
+<p>既然MDNS是多播DNS协议，那么首先我们需要大致了解一下，什么是DNS协议</p>
+</blockquote>
+<p>::DNS 的全称是 <code>Domain Name System,DNS</code>:: ，是一个由分层的 <code>DNS 服务器（DNS server）</code>实现的分布式数据库，还是一个使得::主机能够查询分布式数据库的应用层协议。::最主要的作用，就是将我们平时访问网站的网址，例如<code>www.baidu.com</code> ，解析成路由器使用的IP地址，例如<code>121.17.106.8</code> 。</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/DNS%E8%A7%A3%E6%9E%90.jpg" alt="Image.tiff"><br>当我们在浏览器中输入<code>www.xxxx.com/xxxxx.html</code> 这个地址时，为了我们的主机能正确的将HTTP请求报文发送到对应的服务器主机，会经历以下的操作：</p>
+<ul>
+<li>主机上运行着DNS应用的客户端</li>
+<li>浏览器解析地址，获得主机名<code>www.xxxx.com</code> ，并将主机名传递给DNS应用</li>
+<li>DNS应用向DNS服务器发送包含主机名的查询请求</li>
+<li>DNS服务查询后，返回包含主机名对应IP地址的回答报文</li>
+<li>DNS应用客户端获得IP地址后，提供给浏览器，浏览器向位于该 IP 地址 80 端口的 HTTP 服务器进程发起一个 TCP 连接</li>
+</ul>
+<p>这就是DNS协议的基本作用和工作原理，详细的DNS协议内容可以阅读这篇文章<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==&mid=2247503366&idx=4&sn=288f0b3b137ef21712787c8b5ed29c29&chksm=fbb147f8ccc6ceee8d85f824cd2ae9102dd13649dd2861a79537cac293004d1defc394d242d9&scene=27">万字长文爆肝 DNS 协议</a></p>
+<h1 id="单播、广播、多播（组播）"><a href="#单播、广播、多播（组播）" class="headerlink" title="单播、广播、多播（组播）"></a>单播、广播、多播（组播）</h1><blockquote>
+<p>既然MDNS是多播DNS协议，那么什么是多播呢</p>
+</blockquote>
+<p>::单播、广播和多播（又称组播）是基本的计算机网络概念，表示在网络中报文的不同发送形式。::</p>
+<h2 id="单播"><a href="#单播" class="headerlink" title="单播"></a>单播</h2><p>当主机A中的某个程序想要将一段报文数据发送给计算机网络中的主机B的某个程序（及两个程序进行::目标明确且唯一的数据传输::）时，就可以采用单播的形式。通常的网络协议采用的就是单播的形式，例如TCP协议，需要建立点多点的连接。</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/%E5%8D%95%E6%92%AD.jpg" alt="Image.tiff"></p>
+<p>但是单播有个前提，就是主机A必::须明确的知道主机B的IP地址和主机B上某个程序所运行的端口::</p>
+<h2 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h2><p>如果主机A不知道主机B的IP地址，那么它还能用什么方式来找到主机B，答案就是采取广播的形式。</p>
+<p>如果主机A中的某个程序采用广播的形式，那么::报文信息将被发送到整个网络中的所有设备。::</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/%E5%B9%BF%E6%92%AD%E5%8F%91%E9%80%81.jpg" alt="Image.tiff"></p>
+<p>如果主机A在报文信息中携带了自己的IP地址和端口，那么主机B可以采用单播的形式应答主机A</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/%E5%B9%BF%E6%92%AD%E5%BA%94%E7%AD%94.jpg" alt="Image.tiff"></p>
+<p>如果没有，那么主机B也只能通过广播的形式应答主机A</p>
+<h2 id="组播"><a href="#组播" class="headerlink" title="组播"></a>组播</h2><p>从单播和组播的局限性来看，单播必须明确知道通信方的IP地址，而广播会导致不想收到信息的网络中设备（主机C）也收到报文信息。因此还有另外一种方式，就是组播。</p>
+<p>组播的形式就是将不同的主机::按照服务类型分组::，当请求报文到达组播路由器后，路由器就可以根据服务类型，发送到对应组内的主机。那么一台主机如何加入某个组中呢？</p>
+<p><strong>主机主动加入组：</strong></p>
+<p>主机主动告知网络中的组播路由器要加入某个组，这个时候组播路由器就知道网络内有224.0.0.251组的成员，会建立组的转发表</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/%E7%BB%84%E6%92%AD%E4%B8%BB%E5%8A%A8%E5%8A%A0%E5%85%A5%E7%BB%84.jpg" alt="Image.tiff"></p>
+<p>当有其他主机发送广播的目的地址为224.0.0.251时，组播路由器会将这个数据包转发给组内的其他成员，所以源主机根本不关注目的主机是谁。</p>
+<p><strong>组播路由器发现组：</strong></p>
+<p>组播路由器会周期的向局域网发送广播查询有哪些组存在</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/%E7%BB%84%E6%92%AD%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%91%E9%80%81%E5%B9%BF%E6%92%AD.jpg" alt="Image.tiff"></p>
+<p>当组形成以后，主机就可以向组播路由器发送组播信息，组播信息就会被发送到组内所有主机</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/%E7%BB%84%E6%92%AD%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%91%E9%80%81%E7%BB%84%E6%92%AD%E4%BF%A1%E6%81%AF.jpg" alt="Image.tiff"></p>
+<h1 id="Bonjour"><a href="#Bonjour" class="headerlink" title="Bonjour"></a>Bonjour</h1><p>Bonjour协议是由三种协议实现的::Link-Local Address协议、Multicast Dns协议和DNS-SD（dns-base service discovery）协议。::</p>
+<p>Bonjour将底层的具体实现屏蔽，提供给上层应用简单的API，使用者从三种基础通信变成了简单的函数调用：</p>
+<ul>
+<li>通告服务API：用来宣告自己提供哪些服务</li>
+<li>发现服务API：用来查询局域网内是否有它所需要的服务</li>
+<li>解析服务API：通过发现服务API获取服务实例，进一步解析服务提供的信息</li>
+</ul>
+<h2 id="Link-Local-Address协议"><a href="#Link-Local-Address协议" class="headerlink" title="Link-Local Address协议"></a>Link-Local Address协议</h2><p>我们知道，可用于网络通信的设备（计算机、智能手机、路由器等）都有唯一的MAC地址。但是在IP网络中，设备通常使用IP地址进行通信。所以需要将MAC地址和IP私有地址进行绑定。</p>
+<blockquote>
+<p>IPv4的私有地址范围指的是在局域网内部使用的地址，用于在私有网络中提供内部通信功能，不在公网上使用。</p>
+</blockquote>
+<p>::Link-Local Address协议就是将设备的MAC地址和IP私有地址进行绑定::。整个基本流程如下。</p>
+<ol>
+<li>主机选择一个私有地址，使用ARP协议查询选中IP对应的MAC地址，查询三次</li>
+</ol>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/%E6%9F%A5%E8%AF%A2Mac%E5%9C%B0%E5%9D%80%E5%8D%A0%E7%94%A8.jpg" alt="Image.tiff"></p>
+<ol start="2">
+<li>如果没有查到，则发送组播，宣告自己使用这个IP，同时把自己的MAC地址带上</li>
+</ol>
+<p><img src="/img/friend_404.gif" data-original="/%E5%AE%A3%E7%A7%B0%E4%BD%BF%E7%94%A8Mac%E5%9C%B0%E5%9D%80.jpg" alt="Image.tiff"></p>
+<ol start="3">
+<li>假设查到并得到使用这个IP地址的设备的单播回复，则重新选择IP，并重复流程。</li>
+</ol>
+<p>这样的IP分配算法效率相对低下，但是在局域网内是够用的。</p>
+<h2 id="Multicast-DNS"><a href="#Multicast-DNS" class="headerlink" title="Multicast DNS"></a>Multicast DNS</h2><p>该协议用于在局域网内建立不依赖DNS服务器的解析服务，将设备的IP地址和设备提供的服务的服务名建立联系。</p>
+<p>MDNS的顶级域名是<code>.local</code> ，具体流程如下：</p>
+<ol>
+<li>提供服务的主机将自己提供服务的域名<code>xxx.local</code> 与IP等信息通过组播发送出去查询，发送的是查询报文，重复3次。过程如下：</li>
+</ol>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/%E6%9F%A5%E8%AF%A2MDNS%E5%9C%B0%E5%9D%80%E5%8D%A0%E7%94%A8.jpg" alt="Image.tiff"></p>
+<p>Multicast DNS的组播地址为224.0.0.251，端口5353</p>
+<ol start="2">
+<li>如果没有其他主机回复，则会再发一次组播，宣告自己提供服务，IP是XXXX，端口是XXXX，发送的是响应报文，其他机器收到后会更新本地的DNS缓存。</li>
+</ol>
+<p>![Image.tiff](img&#x2F;Network&#x2F;宣称提供MDNS服务.jpg</p>
+<ol start="3">
+<li>如果有人回复该域名已经有映射关系，服务主机会更新域名，并重复。</li>
+</ol>
+<h2 id="DNS-SD-dns-based-serveice-discovery-协议"><a href="#DNS-SD-dns-based-serveice-discovery-协议" class="headerlink" title="DNS-SD (dns-based serveice discovery)协议"></a>DNS-SD (dns-based serveice discovery)协议</h2><p>DNS- SD协议使用MDNS的资源记录功能中的三种类型存储去建立服务类型、服务实例、服务实例IP+PORT的映射关系，以达到快速发现服务的目的。</p>
+<blockquote>
+<p>MDNS 为什么不直接实现服务发现功能？</p>
+</blockquote>
+<blockquote>
+<p>MDNS的功能定义是明确的，用于实现无DNS服务的域名解析。服务发现不属于它该有的功能，这种功能属于具体业务场景。所以Bonjour通过DNS- SD与MDNS结合起来，实现服务发现。</p>
+</blockquote>
+<p>简而言之：该协议定义了三种存储类型的数据格式，相当于建立通讯录，以及通讯录里面的数据格式，以便于发现服务。</p>
+<p>DNS- SD对MDNS数据段的使用方式如下：</p>
+<ul>
+<li>PTR记录：将服务名称与服务类型建立映射关系</li>
+<li>SRV记录：将服务于IP地址和端口号建立映射关系</li>
+<li>TXT记录：服务所附带的其他数据</li>
+</ul>
+<p>下面就是DNS- SD的工作过程：</p>
+<p><strong>查询及宣告服务：</strong></p>
+<ol>
+<li><p>查询服务</p>
+<p>发送的是查询报文，查询三次，DNS- SD基于MDNS将服务域名于IP和PORT的信息放在SRV区域：</p>
+</li>
+</ol>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/DNS-SD%E6%9F%A5%E8%AF%A2%E6%9C%8D%E5%8A%A1.jpg" alt="Image.tiff"></p>
+<ol>
+<li><p>宣告服务</p>
+<p>如果没有其他主机回复则会再次使用组播，宣告自己提供服务，发送的是PTR响应报文：</p>
+</li>
+</ol>
+<p><img src="/img/friend_404.gif" data-original="/img/Network/DNS-SD%E5%AE%A3%E5%91%8A%E6%9C%8D%E5%8A%A1.jpg" alt="Image.tiff"></p>
+<ol>
+<li><p>服务冲突</p>
+<p>如果有收到回复存在冲突，将服务域名更改并重复第1、2步</p>
+</li>
+</ol>
+<p><strong>发现服务：</strong></p>
+<p>主机定期通过组播查询某个类型的服务列表，发送的是PTR查询报文，因为一开始查的都是某个服务类型，进而获得某个服务类型的服务列表</p>
+<p><strong>解析服务：</strong></p>
+<p>发现服务发送的是PTR查询，IP和服务域名的映射关系存放在SRV数据段中，所以想获得具体IP需要进一步对服务进行解析</p>
+<p>在MAC中，可以是使用dns-sd命令进行查询，例如，我们使用<code>dns-sd -Z _vibecast._tcp</code> 命令查询当前网络中所有提供<code>_vibecast._tcp</code> 服务的信息</p>
+<p><img src="/img/friend_404.gif" data-original="https://res.craft.do/user/full/04f0041a-9b0f-c3ea-84a7-d85225a7805c/doc/3853E871-3CB5-439F-9D53-2A9AC7E63E7C/18C39D9B-82EA-427A-83BA-38E3EBF54A76_2/cm4btAE0h9eOCYNppZAwjT7l8arf2rgiYd4ieGj04Jwz/Image.png" alt="Image.png"></p>
+<p>其中SRV信息需要通过<code>dns-sd -q</code> 命令进一步解析</p>
+<p><img src="/img/friend_404.gif" data-original="https://res.craft.do/user/full/04f0041a-9b0f-c3ea-84a7-d85225a7805c/doc/3853E871-3CB5-439F-9D53-2A9AC7E63E7C/2A769DD1-EB7D-445A-A3C0-B00736D842BE_2/Q9IHSI2hAuEmPWEPxvcUCuxEGws7KI61xL5w95PQd4Ez/Image.png" alt="Image.png"></p>
+<h2 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">void</span>)createServiceBrowser &#123;</span><br><span class="line">  [<span class="keyword">self</span>.netDeviceArray removeAllObjects];</span><br><span class="line">  <span class="keyword">self</span>.vibeBrowser = [[<span class="built_in">NSNetServiceBrowser</span> alloc] init];</span><br><span class="line">  <span class="keyword">self</span>.vibeBrowser.delegate = <span class="keyword">self</span>;</span><br><span class="line">  [<span class="keyword">self</span>.vibeBrowser scheduleInRunLoop:[<span class="built_in">NSRunLoop</span> currentRunLoop] forMode:<span class="built_in">NSRunLoopCommonModes</span>];</span><br><span class="line">  [<span class="keyword">self</span>.vibeBrowser searchForServicesOfType:<span class="string">@&quot;_vibecast._tcp&quot;</span> inDomain:<span class="string">@&quot;local.&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这部分主要就是创建<code>NSNetServiceBrowser</code> 实例，并设置需要查询的服务域名和顶级域名。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">void</span>)netServiceBrowser:(<span class="built_in">NSNetServiceBrowser</span> *)browser</span><br><span class="line">           didFindService:(<span class="built_in">NSNetService</span> *)service</span><br><span class="line">               moreComing:(<span class="type">BOOL</span>)moreComing &#123;</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@&quot;NetServiceBrowser:: Find service: %@&quot;</span>, service);</span><br><span class="line">  <span class="keyword">for</span> (NetDevice *nd <span class="keyword">in</span> <span class="keyword">self</span>.netDeviceArray) &#123;</span><br><span class="line">    <span class="keyword">if</span> ([nd.service.hostName isEqualToString:service.hostName]) &#123;</span><br><span class="line">      DDLogError(<span class="string">@&quot;The service already exists in the cache! Please check!&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  service.delegate = <span class="keyword">self</span>;</span><br><span class="line">  [service startMonitoring];</span><br><span class="line">  [service resolveWithTimeout:<span class="number">15</span>];</span><br><span class="line">  NetDevice *netDevice = [[NetDevice alloc] initWithService:service];</span><br><span class="line">  [<span class="keyword">self</span>.netDeviceArray addObject:netDevice];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">void</span>)netServiceBrowser:(<span class="built_in">NSNetServiceBrowser</span> *)browser</span><br><span class="line">         didRemoveService:(<span class="built_in">NSNetService</span> *)service</span><br><span class="line">               moreComing:(<span class="type">BOOL</span>)moreComing &#123;</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@&quot;NetServiceBrowser:: Remove service: %@&quot;</span>, service);</span><br><span class="line">  <span class="keyword">for</span> (NetDevice *nd <span class="keyword">in</span> <span class="keyword">self</span>.netDeviceArray) &#123;</span><br><span class="line">    <span class="comment">// delegate will give a new service instance, so just can find the same device by name</span></span><br><span class="line">    <span class="keyword">if</span> ([nd.service.name isEqualToString:service.name]) &#123;</span><br><span class="line">      <span class="keyword">if</span> (nd.info[<span class="string">@&quot;deviceUserId&quot;</span>]) &#123;</span><br><span class="line">        [[FindDeviceModule share] deviceRemove:nd.info[<span class="string">@&quot;deviceUserId&quot;</span>]];</span><br><span class="line">      &#125;</span><br><span class="line">      [<span class="keyword">self</span>.netDeviceArray removeObject:nd];</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  DDLogError(<span class="string">@&quot;In general, code never run into here, please check!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这部分通过<code>NSNetServiceBrowser</code> 实例的两个生命周期函数，来记录搜寻到的和移除的服务记录</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">void</span>)netService:(<span class="built_in">NSNetService</span> *)sender didUpdateTXTRecordData:(<span class="built_in">NSData</span> *)data &#123;</span><br><span class="line">  <span class="built_in">NSDictionary</span> *recordDict = [<span class="built_in">NSNetService</span> dictionaryFromTXTRecordData:data];</span><br><span class="line">  <span class="keyword">for</span> (NetDevice *nd <span class="keyword">in</span> <span class="keyword">self</span>.netDeviceArray) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nd.service == sender) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="built_in">NSString</span> *str <span class="keyword">in</span> [recordDict allKeys]) &#123;</span><br><span class="line">        nd.info[str] = [[<span class="built_in">NSString</span> alloc] initWithData:recordDict[str] encoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">self</span>.isExecuted) &#123;</span><br><span class="line">        [[FindDeviceModule share] deviceChange];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  DDLogError(<span class="string">@&quot;In general, code never run into here, please check!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当一台设备的TXTRecord信息改变时，就会更新存储的设备列表里的信息</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://doubler.cn">DoubleR</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://doubler.cn/2023/12/22/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour/">http://doubler.cn/2023/12/22/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://doubler.cn" target="_blank">DoubleR's BLOG</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post_share"><div class="social-share" data-image="/img/Archive/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/12/13/Objective-C/Objetive-C%20-%20%E5%9F%BA%E4%BA%8E%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="Objetive-C - 基于引用计数的内存管理"><img class="cover" src="/img/Archive/Objective-C/%E5%9F%BA%E4%BA%8E%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Objetive-C - 基于引用计数的内存管理</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/12/01/Network/HTTP%E6%A6%82%E8%BF%B0/" title="HTTP概述"><img class="cover" src="/img/Archive/Network/HTTP%E6%A6%82%E8%BF%B0.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-01</div><div class="title">HTTP概述</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">DoubleR</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/doubler12138"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog</div></div><div class="card-widget user-map" id="user-map"><div class="item-headline"><i class="fas fa-music"></i><span>音乐</span></div><div class="item-content"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=240 src="//music.163.com/outchain/player?type=0&id=8887198973&auto=1&height=220"></iframe></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iOS-Bonjour%E4%B8%8EMDNS%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text">iOS Bonjour与MDNS协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DNS%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.</span> <span class="toc-text">DNS协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E6%92%AD%E3%80%81%E5%B9%BF%E6%92%AD%E3%80%81%E5%A4%9A%E6%92%AD%EF%BC%88%E7%BB%84%E6%92%AD%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">单播、广播、多播（组播）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E6%92%AD"><span class="toc-number">3.1.</span> <span class="toc-text">单播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD"><span class="toc-number">3.2.</span> <span class="toc-text">广播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E6%92%AD"><span class="toc-number">3.3.</span> <span class="toc-text">组播</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bonjour"><span class="toc-number">4.</span> <span class="toc-text">Bonjour</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Link-Local-Address%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.1.</span> <span class="toc-text">Link-Local Address协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multicast-DNS"><span class="toc-number">4.2.</span> <span class="toc-text">Multicast DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-SD-dns-based-serveice-discovery-%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.3.</span> <span class="toc-text">DNS-SD (dns-based serveice discovery)协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E4%BB%A3%E7%A0%81"><span class="toc-number">4.4.</span> <span class="toc-text">具体代码</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/12/22/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour/" title="MDNS协议与iOS Bonjour"><img src="/img/Archive/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MDNS协议与iOS Bonjour"/></a><div class="content"><a class="title" href="/2023/12/22/Network/MDNS%E5%8D%8F%E8%AE%AE%E4%B8%8EiOS%20Bonjour/" title="MDNS协议与iOS Bonjour">MDNS协议与iOS Bonjour</a><time datetime="2023-12-21T16:00:00.000Z" title="发表于 2023-12-22 00:00:00">2023-12-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/13/Objective-C/Objetive-C%20-%20%E5%9F%BA%E4%BA%8E%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="Objetive-C - 基于引用计数的内存管理"><img src="/img/Archive/Objective-C/%E5%9F%BA%E4%BA%8E%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Objetive-C - 基于引用计数的内存管理"/></a><div class="content"><a class="title" href="/2023/12/13/Objective-C/Objetive-C%20-%20%E5%9F%BA%E4%BA%8E%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="Objetive-C - 基于引用计数的内存管理">Objetive-C - 基于引用计数的内存管理</a><time datetime="2023-12-12T16:00:00.000Z" title="发表于 2023-12-13 00:00:00">2023-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/10/JavaScript/JavaScript%20-%20%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/" title="JavaScript - 作用域和闭包"><img src="/img/Archive/JavaScript/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScript - 作用域和闭包"/></a><div class="content"><a class="title" href="/2023/12/10/JavaScript/JavaScript%20-%20%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/" title="JavaScript - 作用域和闭包">JavaScript - 作用域和闭包</a><time datetime="2023-12-09T16:00:00.000Z" title="发表于 2023-12-10 00:00:00">2023-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/08/Other/%E6%88%90%E4%B8%BA%E4%B8%80%E5%90%8D%E4%BC%98%E7%A7%80%E7%9A%84%E8%B7%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" title="如何成为一名优秀的跨端开发"><img src="/img/Archive/Other/%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%B8%80%E5%90%8D%E4%BC%98%E7%A7%80%E7%9A%84%E8%B7%A8%E7%AB%AF%E5%BC%80%E5%8F%91.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何成为一名优秀的跨端开发"/></a><div class="content"><a class="title" href="/2023/12/08/Other/%E6%88%90%E4%B8%BA%E4%B8%80%E5%90%8D%E4%BC%98%E7%A7%80%E7%9A%84%E8%B7%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" title="如何成为一名优秀的跨端开发">如何成为一名优秀的跨端开发</a><time datetime="2023-12-07T16:00:00.000Z" title="发表于 2023-12-08 00:00:00">2023-12-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/06/Objective-C/Objecitve-C%20-%20%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/" title="Objecitve-C - 对象的类型和动态绑定"><img src="/img/Archive/Objective-C/%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Objecitve-C - 对象的类型和动态绑定"/></a><div class="content"><a class="title" href="/2023/12/06/Objective-C/Objecitve-C%20-%20%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/" title="Objecitve-C - 对象的类型和动态绑定">Objecitve-C - 对象的类型和动态绑定</a><time datetime="2023-12-05T16:00:00.000Z" title="发表于 2023-12-06 00:00:00">2023-12-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/Archive/index.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By DoubleR</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: true,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
