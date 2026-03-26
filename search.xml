@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>AI Agent 架构设计模式</title>
+      <link href="/2026/03/22/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0-Agent%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+      <url>/2026/03/22/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0-Agent%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="AI-Agent-架构模式"><a href="#AI-Agent-架构模式" class="headerlink" title="AI Agent 架构模式"></a>AI Agent 架构模式</h1><p>AI Agent 是当下最热门的技术方向之一，合理的架构设计是构建高效 Agent 的关键。</p><h2 id="常见架构模式"><a href="#常见架构模式" class="headerlink" title="常见架构模式"></a>常见架构模式</h2><h3 id="1-ReAct-模式"><a href="#1-ReAct-模式" class="headerlink" title="1. ReAct 模式"></a>1. ReAct 模式</h3><p>ReAct（Reasoning + Acting）是最经典的 Agent 模式：</p><ul><li><strong>Thought</strong>：思考当前状态</li><li><strong>Action</strong>：执行动作</li><li><strong>Observation</strong>：观察结果</li></ul><p>循环往复直到完成任务。</p><h3 id="2-Plan-and-Execute-模式"><a href="#2-Plan-and-Execute-模式" class="headerlink" title="2. Plan-and-Execute 模式"></a>2. Plan-and-Execute 模式</h3><p>先规划再执行：</p><ol><li>制定详细计划</li><li>按步骤执行</li><li>根据反馈调整</li></ol><h3 id="3-Multi-Agent-模式"><a href="#3-Multi-Agent-模式" class="headerlink" title="3. Multi-Agent 模式"></a>3. Multi-Agent 模式</h3><p>多个 Agent 协作：</p><ul><li>主 Agent 负责协调</li><li>子 Agent 负责具体任务</li><li>通过消息传递协作</li></ul><h2 id="架构设计要点"><a href="#架构设计要点" class="headerlink" title="架构设计要点"></a>架构设计要点</h2><h3 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h3><p>Agent 需要维护：</p><ul><li>对话历史</li><li>工具调用记录</li><li>中间结果</li></ul><h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><ul><li>重试机制</li><li>降级策略</li><li>人工介入</li></ul><h3 id="可观测性"><a href="#可观测性" class="headerlink" title="可观测性"></a>可观测性</h3><ul><li>日志记录</li><li>性能监控</li><li>调用链路追踪</li></ul><h2 id="实践建议"><a href="#实践建议" class="headerlink" title="实践建议"></a>实践建议</h2><ol><li>从简单开始，逐步增加复杂度</li><li>重视测试，特别是边界情况</li><li>保持模块化，便于维护</li></ol><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> Agent </tag>
+            
+            <tag> 架构设计 </tag>
+            
+            <tag> 设计模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Prompt 工程最佳实践</title>
+      <link href="/2026/03/20/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0-Prompt%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+      <url>/2026/03/20/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0-Prompt%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Prompt-工程的艺术"><a href="#Prompt-工程的艺术" class="headerlink" title="Prompt 工程的艺术"></a>Prompt 工程的艺术</h1><p>Prompt 工程是 AI 时代的重要技能，好的提示词能让 AI 发挥出惊人的能力。</p><h2 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h2><h3 id="1-清晰明确"><a href="#1-清晰明确" class="headerlink" title="1. 清晰明确"></a>1. 清晰明确</h3><ul><li>使用具体的指令</li><li>避免模糊的描述</li><li>提供足够的上下文</li></ul><h3 id="2-结构化输出"><a href="#2-结构化输出" class="headerlink" title="2. 结构化输出"></a>2. 结构化输出</h3><p>要求 AI 按照特定格式输出：</p><pre class="line-numbers language-none"><code class="language-none">请按以下格式回答：1. 核心观点：...2. 详细说明：...3. 示例：...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h3 id="3-角色设定"><a href="#3-角色设定" class="headerlink" title="3. 角色设定"></a>3. 角色设定</h3><p>为 AI 设定明确的角色：</p><ul><li>“你是一位资深软件架构师”</li><li>“你是一位专业的数据分析师”</li></ul><h2 id="高级技巧"><a href="#高级技巧" class="headerlink" title="高级技巧"></a>高级技巧</h2><h3 id="Few-shot-Learning"><a href="#Few-shot-Learning" class="headerlink" title="Few-shot Learning"></a>Few-shot Learning</h3><p>提供示例让 AI 学习：</p><pre class="line-numbers language-none"><code class="language-none">输入：今天天气很好输出：正面输入：这部电影太糟糕了输出：负面输入：这个产品质量一般输出：？<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="Chain-of-Thought"><a href="#Chain-of-Thought" class="headerlink" title="Chain of Thought"></a>Chain of Thought</h3><p>引导 AI 逐步思考：<br>“请一步一步思考这个问题…”</p><h2 id="常见陷阱"><a href="#常见陷阱" class="headerlink" title="常见陷阱"></a>常见陷阱</h2><ol><li><strong>过度指令</strong>：提示词太长反而效果不佳</li><li><strong>矛盾要求</strong>：同时要求简洁和详细</li><li><strong>缺乏示例</strong>：没有示例时 AI 可能理解偏差</li></ol><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> Prompt </tag>
+            
+            <tag> 最佳实践 </tag>
+            
+            <tag> 技巧 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MCP 协议入门指南</title>
+      <link href="/2026/03/18/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0-MCP%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8/"/>
+      <url>/2026/03/18/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0-MCP%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="MCP-协议简介"><a href="#MCP-协议简介" class="headerlink" title="MCP 协议简介"></a>MCP 协议简介</h1><p>MCP（Model Context Protocol）是一个开放协议，用于标准化 AI 助手与外部数据源、工具之间的连接。</p><h2 id="为什么需要-MCP"><a href="#为什么需要-MCP" class="headerlink" title="为什么需要 MCP"></a>为什么需要 MCP</h2><p>在没有 MCP 之前，每个 AI 应用都需要单独集成各种工具和服务，这导致：</p><ul><li>重复开发</li><li>标准不统一</li><li>维护困难</li></ul><h2 id="MCP-的核心组件"><a href="#MCP-的核心组件" class="headerlink" title="MCP 的核心组件"></a>MCP 的核心组件</h2><h3 id="MCP-Server"><a href="#MCP-Server" class="headerlink" title="MCP Server"></a>MCP Server</h3><p>MCP Server 是提供工具和资源的服务端，它可以：</p><ul><li>暴露可用的工具列表</li><li>处理工具调用请求</li><li>返回执行结果</li></ul><h3 id="MCP-Client"><a href="#MCP-Client" class="headerlink" title="MCP Client"></a>MCP Client</h3><p>MCP Client 是调用方，通常是 AI Agent 或应用程序，它负责：</p><ul><li>发现可用的 MCP Server</li><li>发送工具调用请求</li><li>处理返回结果</li></ul><h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><p>要创建一个简单的 MCP Server，你需要：</p><ol><li>定义工具 schema</li><li>实现工具逻辑</li><li>启动服务</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 示例代码</span><span class="token keyword">from</span> mcp<span class="token punctuation">.</span>server <span class="token keyword">import</span> Serverapp <span class="token operator">=</span> Server<span class="token punctuation">(</span><span class="token string">"my-server"</span><span class="token punctuation">)</span><span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>tool</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token keyword">def</span> <span class="token function">search</span><span class="token punctuation">(</span>query<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">str</span><span class="token punctuation">:</span>    <span class="token triple-quoted-string string">"""搜索工具"""</span>    <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f"搜索结果: </span><span class="token interpolation"><span class="token punctuation">{</span>query<span class="token punctuation">}</span></span><span class="token string">"</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> MCP </tag>
+            
+            <tag> 协议 </tag>
+            
+            <tag> 入门 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Function Calling 详解</title>
+      <link href="/2026/03/15/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0-Function-Calling%E8%AF%A6%E8%A7%A3/"/>
+      <url>/2026/03/15/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0-Function-Calling%E8%AF%A6%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Function-Calling-的核心概念"><a href="#Function-Calling-的核心概念" class="headerlink" title="Function Calling 的核心概念"></a>Function Calling 的核心概念</h1><p>Function Calling 是现代 AI 模型的重要特性，它允许 AI 不仅仅是回答问题，还能主动调用外部工具来完成复杂任务。</p><h2 id="什么是-Function-Calling"><a href="#什么是-Function-Calling" class="headerlink" title="什么是 Function Calling"></a>什么是 Function Calling</h2><p>Function Calling 是一种标准化的机制，让 AI 模型能够：</p><ul><li>理解可用的工具及其参数</li><li>决定何时调用哪个工具</li><li>按照规范格式返回调用请求</li></ul><h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><ol><li><strong>定义工具</strong>：开发者提供工具的名称、描述和参数 schema</li><li><strong>发送请求</strong>：将用户输入和工具定义一起发送给 AI</li><li><strong>AI 决策</strong>：AI 分析后决定是否调用工具</li><li><strong>执行工具</strong>：应用层解析 AI 的响应并执行相应函数</li><li><strong>返回结果</strong>：将执行结果返回给 AI 生成最终回复</li></ol><h2 id="实际应用案例"><a href="#实际应用案例" class="headerlink" title="实际应用案例"></a>实际应用案例</h2><p>在实际开发中，Function Calling 被广泛应用于：</p><ul><li>天气查询</li><li>数据库操作</li><li>API 调用</li><li>文件系统操作</li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> Function Calling </tag>
+            
+            <tag> 技术详解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>AI基础概念</title>
+      <link href="/2026/02/12/AI/AI%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/"/>
+      <url>/2026/02/12/AI/AI%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Prompt：一切的开始"><a href="#Prompt：一切的开始" class="headerlink" title="Prompt：一切的开始"></a>Prompt：一切的开始</h1><p>当2023年，OpenAI刚发布ChatGPT时，当时的AI还是对话式的AI，你发一条消息给AI，AI模型根据你的消息生成一条回复。而在这简单的对话式交互中，你所以发的消息，就是<strong>User Prompt(用户提示词)</strong>。<br>不过局限于当时模型的能力，AI针对我们的提问给出的回答可能相对通用或者宽泛，不够聚焦于某些领域。于是人们尝试在提示词中增加一些人设背景，比如：“你是一个计算机领域的专家，现在有一个XXX问题”。而这种人设背景相关的提示词，我们不希望每次提问时都输入一遍。<br>因此这些提示词被单独拿了出来，称为<strong>System Prompt(系统提示词)</strong>，系统提示词一般包含你希望AI所扮演的角色、性格、背景信息，语气等。每次用户发送 User Prompt 的时候，系统会自动把 System Prompt 一起发给 AI 模型。比如 ChatGPT 里有一个叫 <strong>CustomizeChatGPT</strong> 的功能，用户可以在里面写下自己的偏好，这些偏好就会自动变成 System Prompt 的一部分。<br><img src="/images/AI%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/SystemPrompt.png" alt="System Prompt"></p><h1 id="Agent-Agent-Tool：不只是聊天"><a href="#Agent-Agent-Tool：不只是聊天" class="headerlink" title="Agent/Agent Tool：不只是聊天"></a>Agent/Agent Tool：不只是聊天</h1><p>但是，即使为AI增加了System Prompt，AI还是只停留在聊天对话的程度，有没有什么办法能让AI执行一些具体的工作。有的，最早做出尝试的是一个名叫<strong>AutoGPT</strong>的开源项目。<br>如果你想让AutoGPT帮你管理你系统中的文件，那你得先为它准备一些文件管理函数，比如<code>list_files</code>(列出目录内容)、<code>read_file</code>(读取文件内容)等</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 示例：为 Agent 准备的工具函数</span><span class="token keyword">def</span> <span class="token function">list_files</span><span class="token punctuation">(</span>directory<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">list</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token comment"># … 实现代码 …</span><span class="token keyword">pass</span><span class="token keyword">def</span> <span class="token function">read_file</span><span class="token punctuation">(</span>file_path<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">str</span><span class="token punctuation">:</span><span class="token comment"># … 实现代码 …</span><span class="token keyword">pass</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>然后吧这些函数和它的功能描述注册到AutoGPT中。AutoGPT会用这些信息生成一个System Prompt，告诉AI模型：用户提供了哪些工具，分别是用来干什么的，如果你想调用某个工具时应该返回什么格式的信息。<br>最后AutoGPT会把这个System Prompt连同用户的请求及User prompt，比如：<br>`查询当前文件夹下的所有文件，如果有一个叫 文档.txt 的文件，请帮我读出文件的内容<br>一起发送给AI模型</p><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">// AutoGPT 生成的 System Prompt（简化版)“你是一个 AI 助手，可以使用一下工具来完成用户的请求：<span class="token list punctuation">-</span> 工具1: list_files(directory: str)  <span class="token list punctuation">-</span> 描述：列出指定目录下的所有文件和文件夹。<span class="token list punctuation">-</span> 工具2: read_file(file_path: str)  <span class="token list punctuation">-</span> 描述：读取制定文件的内容。当你需要使用工具时，请按以下格式回复：{“tool_name”: “工具名“,“tool_params”: { “参数名”： “参数值”}}“<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p> 如果AI模型足够聪明，就会按照格式要求返回一个调用某个函数的消息。AutoGPT解析后，调用对应的本地函数，再把执行结果返回给AI。AI根据返回结果，再决定下一步怎么操作……<br> 这个过程就这样反复，直到任务完成。<br> 人们吧AutoGPT 这种负责在 <strong>模型、工具和最终用户</strong> 之间”传话“的程序，叫做<strong>AIAgent</strong> 。而那些提供给AI调用的函数或服务，就叫做<strong>AgentTool</strong> </p><h1 id="Function-Calling：规范与定义"><a href="#Function-Calling：规范与定义" class="headerlink" title="Function Calling：规范与定义"></a>Function Calling：规范与定义</h1><p>但是AutoGPT的框架有个小问题：就是虽然我们在System Promot里写清楚了”AI应该用什么格式返回”，但AI模型说到底是概率模型——它不一定能完全按照System Prompt的要求返回。为了解决这种情况，很多AI Agent在检测返回的返回格式不符合要求是，会不停的重试。<br>但是这种反复的重试，总是不靠谱。于是各大模型厂商ChatGPT、Claude、Gemini等纷纷推出一个叫<strong>Function Calling</strong> 的新功能。<br>这个功能的核心思想就是——<strong>统一格式，规范描述</strong>。<br>回到之前AutoGPT的例子。Function Call对System Prompt中的描述进行了标准化，比如每个Tool都用一个JSON对象定义：</p><pre class="line-numbers language-JSON" data-language="JSON"><code class="language-JSON">{“name”: “read_file”,“description”: “读取指定文件的内容”,“parameters”: {“type”: “object”,“properties”: {“file_path”: {“type”: “string”,“description”: “要读取的文件的路径”}},“required”: [“file_path”]}}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>这些JSON对象也从 System Prompt中被“剥离”了出来，单独放在API请求的一个字段里。同时，Function Calling也规定了AI使用工具时返回的格式。这么一来，System Prompt中的格式定义也可以删掉了。<br>这样做的好处是：</p><ul><li><strong>描述统一：</strong> 所有的工具描述都放在相同地方，且都依照相同的格式。</li><li><strong>回复统一:</strong>  AI使用工具时的回复也依照相同的格式。<br>于是人们就能根据这些规范针对性地训练AI模型，让它更好地理解这种调用场景。甚至如果AI依然生成了错误的回复，因为格式是规定的。AI服务端自己就可以检测到并重试，用户根本感受不到。这不仅降低了用户开发Agent Tool的难度，也节省了Agent重试所带来的Token开销。<br>正式由于这些好处，现在越来越多的AI Agent开始从System Promot形式转向Function Calling。但是Function Calling也有自己的局限，就是各AI厂商之间没有统一标准。每家大厂API都不一样，而且很多开源模型根本不支持，如果要用Function Calling的方式写一个跨模型通用的AI Agent很难实现。因此，目前市面上System Prompt和Function Calling还是并存的。</li></ul><h1 id="MCP协议：工具的解耦"><a href="#MCP协议：工具的解耦" class="headerlink" title="MCP协议：工具的解耦"></a>MCP协议：工具的解耦</h1><p>Function Calling定义了AI  Agent和AI模型之间的通信方式。那么AI Agent怎么跟Agent Tool通信呢。最简单的方法就是把Agent Tool和AI Agent写在同一个程序内，直接通过程序内函数调用，无需通信。这也是现在大多数Agent的做法。<br>但是随着Agent数量数量的增多，大家发现其实很多Tool的功能是通用的。比如说一个流量网页的工具，很多Agent都需要。总不能每个Agent都实现一遍吧。于是大家想到了<strong>将Tool编程服务，从Agent中解耦出来，统一托管</strong>，这样可供所有Agent调用。这就是<strong>MCP</strong><br>MCP是一个通信协议，专门用来规范Agent和Tool服务之间怎么交互：</p><ul><li>运行Tool服务的程序叫做MCP Server</li><li>调用它的Agent则叫做 MCP Client<br>MCP规定了MCP Service要提供哪些接口，比如用来查询Server中有哪些Tool，Tool的功能描述、需要的参数格式等等。除了普通的Tool，MCP Server还可以提供数据（Resource）或提示词模版（Prompt Template）<br>MCP Server既可以和Agent一起跑在同一台机器上，也可以被部署在网络上<br>需要注意的是，虽说MCP是为AI而制定的标准，但实际上<strong>MCP本身跟AI模型没有关系</strong>。它只是负责帮Agent管理工具、资源和提示词，并不关心Agent用的是哪个模型。</li></ul><h1 id="总结：一个完整的流程"><a href="#总结：一个完整的流程" class="headerlink" title="总结：一个完整的流程"></a>总结：一个完整的流程</h1><p>现在，我们把所有概念串联起来，假设我们希望AI帮我们总结某个网页的内容，整个流程如下：</p><ol><li><strong>用户请求：</strong> 用户在Agent（MCP Client）中输入内容：请帮我总结XXX地址的网页内容</li><li><strong>Agent准备：</strong> Agent将问题包装在User Prompt中。同时，通过MCP协议从MCP Server获取所有可用的Tool的信息 </li><li><strong>与AI通信</strong>：Agent把这些Tool的信息，通过 System Prompt或Function Calling的格式，连同User Prompt一起打包发给AI模型</li><li><strong>AI决策：</strong> AI模型分析后，发现有个叫<code>web_browse</code>的浏览网页的工具，于是回复一个调用该工具的请求，希望去访问这个地址</li><li><strong>工具执行：</strong> Agent收到AI的回复后，通过MCP协议调用MCP Server里的<code>web_browse</code>工具</li><li><strong>结果返回：</strong><code>web_browse</code>工具访问指定的网站后，将内容返回给Agent，Agent再将这个结果转发给AI模型。</li><li><strong>生成最终答案：</strong> AI模型根据网页内容和自身知识，对网页内容进行总结</li><li><strong>展示给用户：</strong> 最后，AI返回最终内容返回给Agent，Agent将其展示给用户</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> 基础概念 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
