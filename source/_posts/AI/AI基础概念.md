@@ -1,0 +1,105 @@
+---
+title: AI基础概念
+date: 2026-02-12T20:41:00
+author: DoubleR
+img: /images/AI基础概念/cover.jpg
+top: true
+hide: false
+cover: true
+password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+toc: false
+mathjax: false
+summary: 本文简单介绍了AI相关的基础概念，包括Prompt、Agent/Agent Tool、Function Calling、MCP
+categories: AI
+tags:
+  - AI
+  - 基础概念
+---
+
+# Prompt：一切的开始
+当2023年，OpenAI刚发布ChatGPT时，当时的AI还是对话式的AI，你发一条消息给AI，AI模型根据你的消息生成一条回复。而在这简单的对话式交互中，你所以发的消息，就是**User Prompt(用户提示词)**。
+不过局限于当时模型的能力，AI针对我们的提问给出的回答可能相对通用或者宽泛，不够聚焦于某些领域。于是人们尝试在提示词中增加一些人设背景，比如：“你是一个计算机领域的专家，现在有一个XXX问题”。而这种人设背景相关的提示词，我们不希望每次提问时都输入一遍。
+因此这些提示词被单独拿了出来，称为**System Prompt(系统提示词)**，系统提示词一般包含你希望AI所扮演的角色、性格、背景信息，语气等。每次用户发送 User Prompt 的时候，系统会自动把 System Prompt 一起发给 AI 模型。比如 ChatGPT 里有一个叫 **CustomizeChatGPT** 的功能，用户可以在里面写下自己的偏好，这些偏好就会自动变成 System Prompt 的一部分。
+![System Prompt](/images/AI基础概念/SystemPrompt.png)
+# Agent/Agent Tool：不只是聊天
+但是，即使为AI增加了System Prompt，AI还是只停留在聊天对话的程度，有没有什么办法能让AI执行一些具体的工作。有的，最早做出尝试的是一个名叫**AutoGPT**的开源项目。
+如果你想让AutoGPT帮你管理你系统中的文件，那你得先为它准备一些文件管理函数，比如`list_files`(列出目录内容)、`read_file`(读取文件内容)等
+```python
+# 示例：为 Agent 准备的工具函数
+def list_files(directory: str) -> list[str]:
+	# … 实现代码 …
+	pass
+
+def read_file(file_path: str) -> str:
+	# … 实现代码 …
+	pass
+```
+然后吧这些函数和它的功能描述注册到AutoGPT中。AutoGPT会用这些信息生成一个System Prompt，告诉AI模型：用户提供了哪些工具，分别是用来干什么的，如果你想调用某个工具时应该返回什么格式的信息。
+最后AutoGPT会把这个System Prompt连同用户的请求及User prompt，比如：
+`查询当前文件夹下的所有文件，如果有一个叫 文档.txt 的文件，请帮我读出文件的内容
+一起发送给AI模型
+```markdown
+// AutoGPT 生成的 System Prompt（简化版)
+
+“你是一个 AI 助手，可以使用一下工具来完成用户的请求：
+- 工具1: list_files(directory: str)
+  - 描述：列出指定目录下的所有文件和文件夹。
+- 工具2: read_file(file_path: str)
+  - 描述：读取制定文件的内容。
+
+当你需要使用工具时，请按以下格式回复：
+{
+	“tool_name”: “工具名“,
+	“tool_params”: { “参数名”： “参数值”}
+}
+“
+```
+ 如果AI模型足够聪明，就会按照格式要求返回一个调用某个函数的消息。AutoGPT解析后，调用对应的本地函数，再把执行结果返回给AI。AI根据返回结果，再决定下一步怎么操作……
+ 这个过程就这样反复，直到任务完成。
+ 人们吧AutoGPT 这种负责在 **模型、工具和最终用户** 之间”传话“的程序，叫做**AIAgent** 。而那些提供给AI调用的函数或服务，就叫做**AgentTool** 
+# Function Calling：规范与定义
+但是AutoGPT的框架有个小问题：就是虽然我们在System Promot里写清楚了”AI应该用什么格式返回”，但AI模型说到底是概率模型——它不一定能完全按照System Prompt的要求返回。为了解决这种情况，很多AI Agent在检测返回的返回格式不符合要求是，会不停的重试。
+但是这种反复的重试，总是不靠谱。于是各大模型厂商ChatGPT、Claude、Gemini等纷纷推出一个叫**Function Calling** 的新功能。
+这个功能的核心思想就是——**统一格式，规范描述**。
+回到之前AutoGPT的例子。Function Call对System Prompt中的描述进行了标准化，比如每个Tool都用一个JSON对象定义：
+```JSON
+{
+	“name”: “read_file”,
+	“description”: “读取指定文件的内容”,
+	“parameters”: {
+		“type”: “object”,
+		“properties”: {
+			“file_path”: {
+				“type”: “string”,
+				“description”: “要读取的文件的路径”
+			}
+		},
+		“required”: [“file_path”]
+	}
+}
+```
+这些JSON对象也从 System Prompt中被“剥离”了出来，单独放在API请求的一个字段里。同时，Function Calling也规定了AI使用工具时返回的格式。这么一来，System Prompt中的格式定义也可以删掉了。
+这样做的好处是：
+* **描述统一：** 所有的工具描述都放在相同地方，且都依照相同的格式。
+* **回复统一:**  AI使用工具时的回复也依照相同的格式。
+于是人们就能根据这些规范针对性地训练AI模型，让它更好地理解这种调用场景。甚至如果AI依然生成了错误的回复，因为格式是规定的。AI服务端自己就可以检测到并重试，用户根本感受不到。这不仅降低了用户开发Agent Tool的难度，也节省了Agent重试所带来的Token开销。
+正式由于这些好处，现在越来越多的AI Agent开始从System Promot形式转向Function Calling。但是Function Calling也有自己的局限，就是各AI厂商之间没有统一标准。每家大厂API都不一样，而且很多开源模型根本不支持，如果要用Function Calling的方式写一个跨模型通用的AI Agent很难实现。因此，目前市面上System Prompt和Function Calling还是并存的。
+# MCP协议：工具的解耦
+Function Calling定义了AI  Agent和AI模型之间的通信方式。那么AI Agent怎么跟Agent Tool通信呢。最简单的方法就是把Agent Tool和AI Agent写在同一个程序内，直接通过程序内函数调用，无需通信。这也是现在大多数Agent的做法。
+但是随着Agent数量数量的增多，大家发现其实很多Tool的功能是通用的。比如说一个流量网页的工具，很多Agent都需要。总不能每个Agent都实现一遍吧。于是大家想到了**将Tool编程服务，从Agent中解耦出来，统一托管**，这样可供所有Agent调用。这就是**MCP**
+MCP是一个通信协议，专门用来规范Agent和Tool服务之间怎么交互：
+* 运行Tool服务的程序叫做MCP Server
+* 调用它的Agent则叫做 MCP Client
+MCP规定了MCP Service要提供哪些接口，比如用来查询Server中有哪些Tool，Tool的功能描述、需要的参数格式等等。除了普通的Tool，MCP Server还可以提供数据（Resource）或提示词模版（Prompt Template）
+MCP Server既可以和Agent一起跑在同一台机器上，也可以被部署在网络上
+需要注意的是，虽说MCP是为AI而制定的标准，但实际上**MCP本身跟AI模型没有关系**。它只是负责帮Agent管理工具、资源和提示词，并不关心Agent用的是哪个模型。
+# 总结：一个完整的流程
+现在，我们把所有概念串联起来，假设我们希望AI帮我们总结某个网页的内容，整个流程如下：
+1. **用户请求：** 用户在Agent（MCP Client）中输入内容：请帮我总结XXX地址的网页内容
+2. **Agent准备：** Agent将问题包装在User Prompt中。同时，通过MCP协议从MCP Server获取所有可用的Tool的信息 
+3. **与AI通信**：Agent把这些Tool的信息，通过 System Prompt或Function Calling的格式，连同User Prompt一起打包发给AI模型
+4. **AI决策：** AI模型分析后，发现有个叫`web_browse`的浏览网页的工具，于是回复一个调用该工具的请求，希望去访问这个地址
+5. **工具执行：** Agent收到AI的回复后，通过MCP协议调用MCP Server里的`web_browse`工具
+6. **结果返回：**`web_browse`工具访问指定的网站后，将内容返回给Agent，Agent再将这个结果转发给AI模型。
+7. **生成最终答案：** AI模型根据网页内容和自身知识，对网页内容进行总结
+8. **展示给用户：** 最后，AI返回最终内容返回给Agent，Agent将其展示给用户

@@ -1,0 +1,550 @@
+<!-- 网易云音乐风格播放器 -->
+<link rel="stylesheet" href="<%- theme.jsDelivr.url %><%- url_for(theme.libs.css.aplayer) %>">
+
+<% if (theme.music.title.enable) { %>
+<div class="title center-align">
+    <i class="fas fa-music"></i>&nbsp;&nbsp;<%- theme.music.title.show %>
+</div>
+<% } %>
+
+<div class="netease-music-player">
+    <!-- 左侧封面和中间信息区域 -->
+    <div class="player-main">
+        <!-- 唱片机指针 -->
+        <div class="tone-arm" id="toneArm">
+            <div class="tone-arm-head">
+                <div class="tone-arm-needle"></div>
+            </div>
+            <div class="tone-arm-body"></div>
+        </div>
+        
+        <!-- 封面区域 -->
+        <div class="cover-container">
+            <div class="cover-wrapper" id="coverWrapper">
+                <!-- 使用 data-src 避免被 hexo-lazyload-image 插件处理 -->
+                <img data-src="" class="cover-image" id="albumCover">
+                <div class="cover-hole"></div>
+            </div>
+        </div>
+        
+        <!-- 信息和控制区域 -->
+        <div class="player-info">
+            <!-- 歌曲信息 -->
+            <div class="song-info">
+                <div class="song-name" id="songName">未播放</div>
+                <div class="song-artist" id="songArtist">--</div>
+            </div>
+            
+            <!-- 进度条 -->
+            <div class="progress-container">
+                <span class="time-current" id="currentTime">00:00</span>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-played" id="progressPlayed">
+                        <div class="progress-dot"></div>
+                    </div>
+                </div>
+                <span class="time-total" id="totalTime">00:00</span>
+            </div>
+            
+            <!-- 控制按钮 -->
+            <div class="controls">
+                <button class="control-btn" id="prevBtn" title="上一首">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="control-btn play-btn" id="playBtn" title="播放/暂停">
+                    <i class="fas fa-play" id="playIcon"></i>
+                </button>
+                <button class="control-btn" id="nextBtn" title="下一首">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button class="control-btn" id="modeBtn" title="播放模式">
+                    <i class="fas fa-random" id="modeIcon"></i>
+                </button>
+                <div class="volume-control">
+                    <button class="control-btn" id="volumeBtn" title="音量">
+                        <i class="fas fa-volume-up" id="volumeIcon"></i>
+                    </button>
+                    <div class="volume-slider" id="volumeSlider">
+                        <div class="volume-bar" id="volumeBar">
+                            <div class="volume-current" id="volumeCurrent">
+                                <div class="volume-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 播放列表 -->
+    <div class="playlist-container" id="playlistContainer">
+        <div class="playlist-header" id="playlistHeader">
+            <span class="playlist-title">播放列表</span>
+            <div class="playlist-header-right">
+                <span class="playlist-count" id="playlistCount">0 首歌曲</span>
+                <button class="playlist-toggle" id="playlistToggle" title="展开/收起">
+                    <i class="fas fa-chevron-down" id="toggleIcon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="playlist-content" id="playlistContent">
+            <!-- 歌曲列表将通过JS动态生成 -->
+        </div>
+    </div>
+</div>
+
+<script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.aplayer) %>"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+<script>
+(function() {
+    // 播放器配置
+    const config = {
+        server: '<%- theme.music.server %>',
+        type: '<%- theme.music.type %>',
+        id: '<%- theme.music.id %>',
+        autoplay: <%- theme.music.autoplay === true %>,
+        theme: '<%- theme.music.theme %>',
+        loop: '<%- theme.music.loop %>',
+        order: '<%- theme.music.order %>',
+        preload: '<%- theme.music.preload %>',
+        volume: <%- Number(theme.music.volume) %>,
+        listFolded: <%- theme.music.listFolded ? 'true' : 'false' %>
+    };
+
+    // 播放器状态
+    let state = {
+        playlist: [],
+        currentIndex: 0,
+        isPlaying: false,
+        isDragging: false,
+        isDraggingVolume: false,
+        currentMode: 'list', // list, random, single
+        volume: config.volume,
+        playlistExpanded: false // 播放列表展开状态
+    };
+
+    // DOM元素
+    const elements = {
+        cover: document.getElementById('albumCover'),
+        coverWrapper: document.getElementById('coverWrapper'),
+        toneArm: document.getElementById('toneArm'),
+        songName: document.getElementById('songName'),
+        songArtist: document.getElementById('songArtist'),
+        currentTime: document.getElementById('currentTime'),
+        totalTime: document.getElementById('totalTime'),
+        progressBar: document.getElementById('progressBar'),
+        progressPlayed: document.getElementById('progressPlayed'),
+        playBtn: document.getElementById('playBtn'),
+        playIcon: document.getElementById('playIcon'),
+        prevBtn: document.getElementById('prevBtn'),
+        nextBtn: document.getElementById('nextBtn'),
+        modeBtn: document.getElementById('modeBtn'),
+        modeIcon: document.getElementById('modeIcon'),
+        volumeBtn: document.getElementById('volumeBtn'),
+        volumeIcon: document.getElementById('volumeIcon'),
+        volumeSlider: document.getElementById('volumeSlider'),
+        volumeBar: document.getElementById('volumeBar'),
+        volumeCurrent: document.getElementById('volumeCurrent'),
+        playlistContent: document.getElementById('playlistContent'),
+        playlistCount: document.getElementById('playlistCount'),
+        playlistContainer: document.getElementById('playlistContainer'),
+        playlistToggle: document.getElementById('playlistToggle'),
+        toggleIcon: document.getElementById('toggleIcon')
+    };
+
+    // 封面图片加载失败处理
+    elements.cover.onerror = function() {
+        this.onerror = null; // 防止无限循环
+    };
+    
+
+    // 音频元素
+    const audio = new Audio();
+    audio.volume = state.volume;
+
+    // 获取播放列表
+    async function fetchPlaylist() {
+        const url = `https://api.i-meto.com/meting/api?server=${config.server}&type=${config.type}&id=${config.id}&r=${Math.random()}`;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            state.playlist = data;
+            renderPlaylist();
+            elements.playlistCount.textContent = `${data.length} 首歌曲`;
+            if (data.length > 0) {
+                loadSong(0);
+                if (config.autoplay) {
+                    playSong();
+                }
+            }
+        } catch (error) {
+            console.error('Failed to fetch playlist:', error);
+        }
+    }
+
+    // 渲染播放列表
+    function renderPlaylist() {
+        elements.playlistContent.innerHTML = state.playlist.map((song, index) => `
+            <div class="playlist-item ${index === state.currentIndex ? 'active' : ''}" data-index="${index}">
+                <div class="item-index">${index + 1}</div>
+                <div class="item-info">
+                    <div class="item-title">${song.title || song.name}</div>
+                    <div class="item-artist">${song.author || song.artist}</div>
+                </div>
+                <div class="item-duration">${song.duration ? formatTime(song.duration) : '--:--'}</div>
+            </div>
+        `).join('');
+
+        // 绑定点击事件
+        elements.playlistContent.querySelectorAll('.playlist-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const index = parseInt(item.dataset.index);
+                loadSong(index);
+                playSong();
+            });
+        });
+    }
+
+    // 提取图片主色调
+    function extractDominantColor(imageSrc) {
+        return new Promise((resolve) => {
+            if (!imageSrc) {
+                resolve('#667eea');
+                return;
+            }
+            
+            const img = new Image();
+            img.crossOrigin = 'Anonymous';
+            
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // 缩小图片以提高性能
+                const size = 50;
+                canvas.width = size;
+                canvas.height = size;
+                
+                ctx.drawImage(img, 0, 0, size, size);
+                
+                const imageData = ctx.getImageData(0, 0, size, size);
+                const data = imageData.data;
+                
+                // 使用颜色量化算法提取主色调
+                const colorMap = {};
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = Math.round(data[i] / 32) * 32;
+                    const g = Math.round(data[i + 1] / 32) * 32;
+                    const b = Math.round(data[i + 2] / 32) * 32;
+                    
+                    // 过滤掉过亮或过暗的颜色
+                    const brightness = (r + g + b) / 3;
+                    if (brightness < 50 || brightness > 220) continue;
+                    
+                    const key = `${r},${g},${b}`;
+                    colorMap[key] = (colorMap[key] || 0) + 1;
+                }
+                
+                // 找出出现次数最多的颜色
+                let maxCount = 0;
+                let dominantColor = '#667eea';
+                
+                for (const [color, count] of Object.entries(colorMap)) {
+                    if (count > maxCount) {
+                        maxCount = count;
+                        const [r, g, b] = color.split(',').map(Number);
+                        // 转换为十六进制
+                        dominantColor = '#' + [r, g, b].map(x => {
+                            const hex = x.toString(16);
+                            return hex.length === 1 ? '0' + hex : hex;
+                        }).join('');
+                    }
+                }
+                
+                resolve(dominantColor);
+            };
+            
+            img.onerror = function() {
+                resolve('#667eea');
+            };
+            
+            img.src = imageSrc;
+        });
+    }
+
+    // 调整颜色亮度
+    function adjustColorBrightness(color, factor) {
+        const hex = color.replace('#', '');
+        const r = parseInt(hex.substr(0, 2), 16);
+        const g = parseInt(hex.substr(2, 2), 16);
+        const b = parseInt(hex.substr(4, 2), 16);
+        
+        const newR = Math.min(255, Math.round(r * factor));
+        const newG = Math.min(255, Math.round(g * factor));
+        const newB = Math.min(255, Math.round(b * factor));
+        
+        return '#' + [newR, newG, newB].map(x => {
+            const hex = x.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        }).join('');
+    }
+
+    // 混合两种颜色
+    function blendColors(color1, color2, ratio) {
+        const hex1 = color1.replace('#', '');
+        const hex2 = color2.replace('#', '');
+        
+        const r1 = parseInt(hex1.substr(0, 2), 16);
+        const g1 = parseInt(hex1.substr(2, 2), 16);
+        const b1 = parseInt(hex1.substr(4, 2), 16);
+        
+        const r2 = parseInt(hex2.substr(0, 2), 16);
+        const g2 = parseInt(hex2.substr(2, 2), 16);
+        const b2 = parseInt(hex2.substr(4, 2), 16);
+        
+        const r = Math.round(r1 * (1 - ratio) + r2 * ratio);
+        const g = Math.round(g1 * (1 - ratio) + g2 * ratio);
+        const b = Math.round(b1 * (1 - ratio) + b2 * ratio);
+        
+        return '#' + [r, g, b].map(x => {
+            const hex = x.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        }).join('');
+    }
+
+    // 更新播放器背景渐变
+    async function updatePlayerGradient(imageSrc) {
+        const dominantColor = await extractDominantColor(imageSrc);
+        const player = document.querySelector('.netease-music-player');
+        
+        if (player) {
+            // 生成中间过渡色（封面色和白色的混合，比例为60%白色）
+            const middleColor = blendColors(dominantColor, '#ffffff', 0.6);
+            
+            // 从主色调到中间色再到纯白色的三段渐变
+            player.style.background = `linear-gradient(180deg, ${dominantColor} 0%, ${middleColor} 50%, #ffffff 100%)`;
+        }
+    }
+
+    // 加载歌曲
+    async function loadSong(index) {
+        if (index < 0 || index >= state.playlist.length) return;
+        
+        state.currentIndex = index;
+        const song = state.playlist[index];
+        
+        // 获取封面URL，确保URL格式正确
+        let coverUrl = song.pic || song.cover || '';
+        
+        // 验证URL格式，确保是有效的URL
+        if (coverUrl && (coverUrl.startsWith('http://') || coverUrl.startsWith('https://') || coverUrl.startsWith('//'))) {
+            // 如果是//开头，添加https:
+            if (coverUrl.startsWith('//')) {
+                coverUrl = 'https:' + coverUrl;
+            }
+            elements.cover.src = coverUrl;
+        }
+        
+        elements.songName.textContent = song.title || song.name || '未知歌曲';
+        elements.songArtist.textContent = song.author || song.artist || '未知艺术家';
+        
+        audio.src = song.url;
+        
+        // 提取封面主色调并更新背景
+        await updatePlayerGradient(elements.cover.src);
+        
+        // 更新播放列表高亮
+        renderPlaylist();
+    }
+
+    // 播放歌曲
+    function playSong() {
+        audio.play();
+        state.isPlaying = true;
+        elements.playIcon.className = 'fas fa-pause';
+        elements.coverWrapper.classList.add('playing');
+        elements.toneArm.classList.add('playing');
+    }
+
+    // 暂停歌曲
+    function pauseSong() {
+        audio.pause();
+        state.isPlaying = false;
+        elements.playIcon.className = 'fas fa-play';
+        elements.coverWrapper.classList.remove('playing');
+        elements.toneArm.classList.remove('playing');
+    }
+
+    // 切换播放/暂停
+    function togglePlay() {
+        if (state.isPlaying) {
+            pauseSong();
+        } else {
+            playSong();
+        }
+    }
+
+    // 上一首
+    function prevSong() {
+        let index = state.currentIndex - 1;
+        if (index < 0) index = state.playlist.length - 1;
+        loadSong(index);
+        if (state.isPlaying) playSong();
+    }
+
+    // 下一首
+    function nextSong() {
+        let index;
+        if (state.currentMode === 'random') {
+            index = Math.floor(Math.random() * state.playlist.length);
+        } else {
+            index = state.currentIndex + 1;
+            if (index >= state.playlist.length) index = 0;
+        }
+        loadSong(index);
+        if (state.isPlaying) playSong();
+    }
+
+    // 切换播放模式
+    function toggleMode() {
+        const modes = ['list', 'random', 'single'];
+        const icons = ['fa-list', 'fa-random', 'fa-redo'];
+        const currentModeIndex = modes.indexOf(state.currentMode);
+        const nextModeIndex = (currentModeIndex + 1) % modes.length;
+        
+        state.currentMode = modes[nextModeIndex];
+        elements.modeIcon.className = 'fas ' + icons[nextModeIndex];
+    }
+
+    // 切换播放列表展开/收起
+    function togglePlaylist() {
+        state.playlistExpanded = !state.playlistExpanded;
+        
+        if (state.playlistExpanded) {
+            elements.playlistContainer.classList.add('expanded');
+            elements.toggleIcon.className = 'fas fa-chevron-up';
+        } else {
+            elements.playlistContainer.classList.remove('expanded');
+            elements.toggleIcon.className = 'fas fa-chevron-down';
+        }
+    }
+
+    // 格式化时间
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // 更新进度条
+    function updateProgress() {
+        if (!state.isDragging && audio.duration) {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            elements.progressPlayed.style.width = percent + '%';
+            elements.currentTime.textContent = formatTime(audio.currentTime);
+            elements.totalTime.textContent = formatTime(audio.duration);
+        }
+    }
+
+    // 更新音量
+    function updateVolume() {
+        elements.volumeCurrent.style.width = (state.volume * 100) + '%';
+        
+        if (state.volume === 0) {
+            elements.volumeIcon.className = 'fas fa-volume-mute';
+        } else if (state.volume < 0.5) {
+            elements.volumeIcon.className = 'fas fa-volume-down';
+        } else {
+            elements.volumeIcon.className = 'fas fa-volume-up';
+        }
+    }
+
+    // 初始化事件监听器
+    function initEventListeners() {
+        // 播放控制
+        elements.playBtn.addEventListener('click', togglePlay);
+        elements.prevBtn.addEventListener('click', prevSong);
+        elements.nextBtn.addEventListener('click', nextSong);
+        elements.modeBtn.addEventListener('click', toggleMode);
+        
+        // 播放列表展开/收起
+        elements.playlistToggle.addEventListener('click', togglePlaylist);
+
+        // 进度条拖动
+        elements.progressBar.addEventListener('mousedown', (e) => {
+            state.isDragging = true;
+            const rect = elements.progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            elements.progressPlayed.style.width = (percent * 100) + '%';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (state.isDragging) {
+                const rect = elements.progressBar.getBoundingClientRect();
+                let percent = (e.clientX - rect.left) / rect.width;
+                percent = Math.max(0, Math.min(1, percent));
+                elements.progressPlayed.style.width = (percent * 100) + '%';
+                audio.currentTime = percent * audio.duration;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            state.isDragging = false;
+        });
+
+        // 音量控制
+        elements.volumeBtn.addEventListener('click', () => {
+            if (audio.volume > 0) {
+                state.volume = 0;
+                audio.volume = 0;
+            } else {
+                state.volume = 0.7;
+                audio.volume = 0.7;
+            }
+            updateVolume();
+        });
+
+        elements.volumeBar.addEventListener('mousedown', (e) => {
+            state.isDraggingVolume = true;
+            const rect = elements.volumeBar.getBoundingClientRect();
+            state.volume = (e.clientX - rect.left) / rect.width;
+            audio.volume = Math.max(0, Math.min(1, state.volume));
+            updateVolume();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (state.isDraggingVolume) {
+                const rect = elements.volumeBar.getBoundingClientRect();
+                state.volume = (e.clientX - rect.left) / rect.width;
+                audio.volume = Math.max(0, Math.min(1, state.volume));
+                updateVolume();
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            state.isDraggingVolume = false;
+        });
+
+        // 音频事件
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('loadedmetadata', () => {
+            elements.totalTime.textContent = formatTime(audio.duration);
+        });
+        audio.addEventListener('ended', () => {
+            if (state.currentMode === 'single') {
+                audio.currentTime = 0;
+                playSong();
+            } else {
+                nextSong();
+            }
+        });
+    }
+
+    // 初始化
+    initEventListeners();
+    updateVolume();
+    fetchPlaylist();
+})();
+</script>

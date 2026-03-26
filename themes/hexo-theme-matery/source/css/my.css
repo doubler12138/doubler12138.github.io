@@ -1,0 +1,529 @@
+/* Here is your custom css styles. */
+
+/* ==================== 网易云音乐风格播放器样式 ==================== */
+
+.netease-music-player {
+    margin: 30px auto;
+    max-width: 900px;
+    background: linear-gradient(180deg, #667eea 0%, #ffffff 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    transition: background 0.8s ease-in-out;
+    position: relative;
+}
+
+/* 主播放区域：封面 + 信息控制 */
+.player-main {
+    display: flex;
+    padding: 30px;
+    background: transparent;
+    position: relative;
+    min-height: 260px;
+}
+
+/* 封面容器 */
+.cover-container {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+/* 唱片机指针 */
+.tone-arm {
+    position: absolute;
+    top: 10px;
+    left: 150px;
+    width: 120px;
+    height: 150px;
+    transform-origin: top left;
+    transform: rotate(-25deg);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.tone-arm.playing {
+    transform: rotate(-10deg);
+}
+
+.tone-arm-body {
+    width: 8px;
+    height: 100px;
+    background: linear-gradient(135deg, #666 0%, #999 50%, #666 100%);
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tone-arm-head {
+    position: absolute;
+    bottom: 0;
+    left: -11px;
+    width: 30px;
+    height: 20px;
+    background: linear-gradient(135deg, #888 0%, #ccc 50%, #888 100%);
+    border-radius: 8px 12px 8px 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tone-arm-needle {
+    position: absolute;
+    right: -15px;
+    bottom: 8px;
+    width: 20px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    transform: rotate(-30deg);
+}
+
+.cover-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 2px 10px rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rotatePaused 20s linear infinite;
+    animation-play-state: paused;
+}
+
+.cover-wrapper.playing {
+    animation-play-state: running;
+}
+
+@keyframes rotatePaused {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.cover-image {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.cover-hole {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* 信息和控制区域 */
+.player-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    padding: 10px 0;
+}
+
+/* 歌曲信息 */
+.song-info {
+    margin-bottom: 20px;
+}
+
+.song-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.song-artist {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 进度条 */
+.progress-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.time-current,
+.time-total {
+    min-width: 45px;
+    font-size: 12px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.time-current {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.time-total {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress-played {
+    height: 100%;
+    background: #fff;
+    border-radius: 2px;
+    position: relative;
+    width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.progress-dot {
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+}
+
+.progress-dot:active {
+    cursor: grabbing;
+}
+
+/* 控制按钮 */
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.play-btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.play-btn:hover {
+    background: rgba(0, 0, 0, 0.95);
+    transform: scale(1.15);
+}
+
+/* 音量控制 */
+.volume-control {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.volume-slider {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px 10px;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.volume-control:hover .volume-slider {
+    opacity: 1;
+    visibility: visible;
+}
+
+.volume-bar {
+    width: 4px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.volume-current {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    height: 70%;
+}
+
+.volume-dot {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 播放列表 */
+.playlist-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.playlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.playlist-header:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.playlist-header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.playlist-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.playlist-count {
+    font-size: 13px;
+    color: #999;
+}
+
+.playlist-toggle {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+}
+
+.playlist-toggle:hover {
+    color: #667eea;
+}
+
+.playlist-content {
+    max-height: 0;
+    overflow-y: auto;
+    padding: 0;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.playlist-container.expanded .playlist-content {
+    max-height: 300px;
+}
+
+.playlist-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.playlist-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.playlist-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+
+.playlist-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.playlist-item:hover {
+    background: rgba(102, 126, 234, 0.08);
+}
+
+.playlist-item.active {
+    background: rgba(102, 126, 234, 0.12);
+}
+
+.playlist-item.active .item-title {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.item-index {
+    min-width: 30px;
+    font-size: 14px;
+    color: #999;
+}
+
+.item-info {
+    flex: 1;
+    min-width: 0;
+    margin: 0 15px;
+}
+
+.item-title {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-artist {
+    font-size: 12px;
+    color: #999;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-duration {
+    font-size: 12px;
+    color: #999;
+}
+
+/* 响应式设计 */
+@media only screen and (max-width: 768px) {
+    .player-main {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .cover-container {
+        margin-right: 0;
+        margin-bottom: 25px;
+    }
+
+    .cover-wrapper {
+        width: 180px;
+        height: 180px;
+    }
+
+    .cover-image {
+        width: 140px;
+        height: 140px;
+    }
+
+    .player-info {
+        width: 100%;
+    }
+
+    .song-name {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .song-artist {
+        text-align: center;
+    }
+
+    .controls {
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .cover-wrapper {
+        width: 160px;
+        height: 160px;
+    }
+
+    .cover-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .song-name {
+        font-size: 18px;
+    }
+
+    .control-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .play-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+
+    .controls {
+        gap: 10px;
+    }
+}
