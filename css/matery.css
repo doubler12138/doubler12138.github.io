@@ -610,15 +610,22 @@ header .go-back i {
     object-fit: cover;
     border: 4px solid #fff;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     cursor: pointer;
     margin-bottom: 20px;
 }
 
 .dream-avatar:hover {
-    transform: scale(1.1) rotate(5deg);
+    animation: avatarShake 0.15s ease-in-out infinite;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
     border-color: #42b983;
+}
+
+/* 头像震动动画 - 以中心为圆点持续高频小幅震动 */
+@keyframes avatarShake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
 }
 
 .music-player,
