@@ -4,6 +4,43 @@
   
     
     <entry>
+      <title>深度学习-反向传播算法</title>
+      <link href="/2026/04/01/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/"/>
+      <url>/2026/04/01/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>上一章我们学习了梯度下降法，在那一章中提及了计算梯度所需使用的反向传播算法，这一章我们将进一步探讨什么是反向传播算法<br>反向传播算法（Backpropagation，简称 BP）是神经网络训练中最核心的算法之一。它通过计算损失函数对每个权重的梯度，指导网络参数的更新，从而使网络能够学习数据中的模式。</p><h1 id="什么是反向传播？"><a href="#什么是反向传播？" class="headerlink" title="什么是反向传播？"></a>什么是反向传播？</h1><p>在上一章我们提到了，梯度下降法的关键是求代价函数的负梯度<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E8%B4%9F%E6%A2%AF%E5%BA%A6.png"><br>梯度向量的每一项大小表示代价函数对于每个参数的敏感程度，即参数调整对代价结果的影响有多大</p><p>首先我们只关注一个训练样本，来讲解反向传播的过程。假设我们现在的模型还没完全训练好，那么当识别执行到这张2的时候，所获取的输出层的激活值看起来很随机。因为我们最终想要获得是2，因此我们希望第三个的输出值变大，其他的数值变小<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E8%AF%86%E5%88%AB2.png"><br>输出层的激活值，取决于上一层与输出层神经元之间的权重，偏置值和上一层神经元的激活值，通过修改这三个就可以调整输出层神经元的激活值。<br>当我们提到梯度下降时，我们并不只看每个参数是该增大还是减小，而是关注调整哪个参数的性价比最高。这涉及到“赫布理论”，简单的说就是一通激活的神经元关联在一起。<br>当我们把所有对于2的期待值和别的输出神经元的期待值全部加起来，作为对如何改变倒数第二层神经元的指示。<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/2%E7%9A%84%E5%85%A8%E9%83%A8%E5%8F%98%E5%8C%96.png"><br>这些期待变化不仅是对应权重的倍数，也可以是每个神经元激活值改变两的倍数。这其实就是在实现“反向传播”的理念了。当我们把所有期待值加起来，就得到了一串对倒数第二层改动的变化量。有了这些，你就可以重复这个过程，改变影响倒数第二层神经元激活值的相关参数。从后一层到前一层，把这个过程一直循环到第一层。<br>不过目前我们讨论的知识单个训练样本，回到整个训练集，将整个训练集过一遍反向传播<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E5%85%A8%E8%AE%AD%E7%BB%83%E9%9B%86.png"><br>记录下每个样本想要怎么修改权重与偏置，最后取一个平均值。这一系列的权重偏置的平均微调大小。不严格来说就是上一章提到的代价函数的负梯度<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E8%B4%9F%E6%A2%AF%E5%BA%A6.png"><br>不过实际操作中，如果每次梯度下降都需要用上所有的样本进行计算的话，整体耗时就太长了。因此实际上我们会将样本集打乱，然后分成很多小组。算出某个小组下降的一步，这也许不是整个训练集的梯度，但是这样够快，同样也能到达局部最低</p><h1 id="具体公式"><a href="#具体公式" class="headerlink" title="具体公式"></a>具体公式</h1><p>前面提到了反向传播的概念，那么这一部分，我们将进行公式的推导。首先为了简化推导过程，我们先简化神经网络，假设我们的网络每一层只有一个神经元<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E5%8D%95%E7%A5%9E%E7%BB%8F%E5%85%83.png"><br>我们先关注最后两个神经元。我们给最后一个神经元的激活值一个上标L，表示它在L层<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/AL.png"><br>那么前一个神经元的激活值就是 $a^{（L-1）}$。我们把最终层激活值要接近的目标叫做y，那么y要么是0要么是1。那么这个简单网络对于单个训练样本的代价，就等于$(a^{(L)}-y)^2$,对于这个样本，我们把这个代价值标记为$C_0$。而最终层的激活值$z^{(L)}=w^{(L)}*a^{(L-1)}+b^{(L)}$计算获得，即权重乘以上一层神经元激活值加偏置。将这个值至于一个特定的非线性函数中，及$a^{(L)}=\sigma(z^{(L)})$<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E5%8D%95%E7%A5%9E%E7%BB%8F%E5%85%83%E6%BF%80%E6%B4%BB%E5%80%BC%E8%AE%A1%E7%AE%97.png"><br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E4%BB%A3%E4%BB%B7%E8%AE%A1%E7%AE%97.png"><br>我们假设这些数字都对应一个数轴，我们第一个目标就是理解代价函数对权重$w^{(L)}$的微小变化有多敏感。或者换句话说，就是求C对$w^{(L)}$的偏微分</p><blockquote><p>偏导数：<br>偏导数是多元函数求导的一种方式。<br>当你有一个包含多个变量的函数（比如 f(x, y) = x²y），你想知道当只改变其中一个变量、而保持其他变量不变时，函数如何变化，这时就用偏导数。<br>简单例子：<br>假设 f(x, y) = x²y<br>对 x 求偏导数（把 y 当作常数）：∂f/∂x = 2xy<br>对 y 求偏导数（把 x 当作常数）：∂f/∂y = x²</p></blockquote><p><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E5%81%8F%E5%BE%AE%E5%88%86%E6%9D%83%E9%87%8D.png"><br>最终公式<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E5%AE%8C%E6%95%B4%E5%81%8F%E5%BE%AE%E5%88%86%E9%A1%B5%E9%9D%A2.png"><br>我们逐一求导<br>$C_0=(a^{(L)}-y)^{2}$的导数就是$2*(a^{(L)}-y)$<br>最终求导后相乘就是<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E5%81%8F%E5%BE%AE%E5%88%86%E4%B9%98%E7%A7%AF.png"><br>这个指示包含一个训练样本的大家对于$w^{(L)}$的导数。由于总的代价函数是许许多多训练样本所有代价的总平均。它对权重的导数就要求，这个表达式之于每个训练样本的平均<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E6%80%BB%E5%B9%B3%E5%9D%87.png"><br>当然这只是梯度向量的一个分量。梯度向量整体则由代价函数对每个权重和每个偏置求偏导构成<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E6%A2%AF%E5%BA%A6%E5%90%91%E9%87%8F%E5%81%8F%E5%BE%AE%E5%88%86.png"><br>偏置值的求导步骤也基本相同<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E5%81%8F%E7%BD%AE%E7%9A%84%E5%81%8F%E5%BE%AE%E5%88%86.png"><br>不过这个例子相对简单，每层只有一个神经元，不过即便变回我们的示例神经元，也不会复杂太多，只不过需要增加下标。<br>我们增加下标来表示神经元处在L层的第几个。我们用K表示L-1层的第K个，用J表示第L层的第K个。<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/JK%E5%B1%82.png"><br>那么$Z^{(L)}$和$C_0$的变化如下<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E5%A4%9A%E4%B8%AAZL.png"><br>最终的对于权重偏微分如下<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E6%9C%80%E7%BB%88%E7%9A%84%E5%81%8F%E5%BE%AE%E5%88%86.png"><br>对于上一层激活值的偏微分<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E4%B8%8A%E4%B8%80%E5%B1%82%E5%80%BC%E7%9A%84%E5%81%8F%E5%BE%AE%E5%88%86.png"><br>链式法则表达式给出了决定梯度每个分量的偏导<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99.png"></p><hr><h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><p>以下是关于反向传播算法的优质学习资源，供进一步深入学习：</p><h2 id="官方文档与经典教材"><a href="#官方文档与经典教材" class="headerlink" title="官方文档与经典教材"></a>官方文档与经典教材</h2><ul><li><a href="http://neuralnetworksanddeeplearning.com/chap2.html">Neural Networks and Deep Learning - Michael Nielsen</a> - 反向传播算法的经典免费在线教材，讲解深入浅出</li></ul><h2 id="技术博客"><a href="#技术博客" class="headerlink" title="技术博客"></a>技术博客</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/25081671">反向传播算法详解 - 知乎</a> - 中文详细推导，适合加深理解</li><li><a href="https://towardsdatascience.com/backpropagation-explained-visually-a9e9e5c2d3b1">Backpropagation Explained Visually</a> - 可视化讲解反向传播</li></ul><h2 id="实践教程"><a href="#实践教程" class="headerlink" title="实践教程"></a>实践教程</h2><ul><li><a href="https://cs231n.github.io/optimization-2/">CS231n Convolutional Neural Networks for Visual Recognition</a> - 斯坦福经典课程，反向传播专题</li><li><a href="https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html">PyTorch 官方教程 - Autograd</a> - 自动微分实现原理</li></ul><h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul><li><a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding LSTM Networks</a> - 理解反向传播在循环神经网络中的应用</li><li><a href="https://www.deeplearning.ai/ai-notes/initialization/">The Vanishing Gradient Problem</a> - 梯度消失问题及解决方案</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> 反向传播 </tag>
+            
+            <tag> 神经网络 </tag>
+            
+            <tag> 梯度下降 </tag>
+            
+            <tag> 优化算法 </tag>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> Backpropagation </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>深度学习-梯度下降法</title>
       <link href="/2026/03/28/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/"/>
       <url>/2026/03/28/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/</url>
