@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="深度学习—GPT与Transformer, DoubleR的博客">
+    <meta name="keywords" content="Agentic Design Patterns-提示词链, DoubleR的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>深度学习—GPT与Transformer | DoubleR的博客</title>
+    <title>Agentic Design Patterns-提示词链 | DoubleR的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -270,12 +270,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/cover.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/Agentic%20Design%20Patterns-%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%93%BE/cover.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">深度学习—GPT与Transformer</h1>
+                    <h1 class="description center-align post-title">Agentic Design Patterns-提示词链</h1>
                 </div>
             </div>
         </div>
@@ -391,24 +391,24 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">深度学习</span>
+                            <a href="/tags/LLM/">
+                                <span class="chip bg-color">LLM</span>
                             </a>
                         
-                            <a href="/tags/Transformer/">
-                                <span class="chip bg-color">Transformer</span>
+                            <a href="/tags/Prompt-Chaining/">
+                                <span class="chip bg-color">Prompt Chaining</span>
                             </a>
                         
-                            <a href="/tags/GPT/">
-                                <span class="chip bg-color">GPT</span>
+                            <a href="/tags/AI-Agent/">
+                                <span class="chip bg-color">AI Agent</span>
                             </a>
                         
-                            <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
-                                <span class="chip bg-color">注意力机制</span>
+                            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                <span class="chip bg-color">设计模式</span>
                             </a>
                         
-                            <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/">
-                                <span class="chip bg-color">大语言模型</span>
+                            <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">
+                                <span class="chip bg-color">上下文工程</span>
                             </a>
                         
                     </div>
@@ -432,21 +432,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2026-04-03
+                    2026-04-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-04-03
+                    2026-04-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.1k
                 </div>
                 
 
@@ -471,30 +471,78 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="GPT"><a href="#GPT" class="headerlink" title="GPT"></a>GPT</h1><p> GPT的全称是生成式预训练Transformer（Generative Pre-trained Transformer）。拆分理解：</p>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>提示词链（Prompt Chaining）是 Agentic Design Patterns 中的核心模式之一，它通过将复杂任务分解为多个有序的子任务，并通过一系列提示词逐步引导 AI 完成最终目标。</p>
+<h1 id="提示词链模式概述"><a href="#提示词链模式概述" class="headerlink" title="提示词链模式概述"></a>提示词链模式概述</h1><p>提示词链（Prompt Chaining），有时也称为管道模式（Pipeline pattern），是利用大型语言模型（LLM）处理复杂任务的强大范式。这种方法不再要求LLM在单一的整体化步骤中解决复杂问题，而是采用分而治之的策略：将原本令人望而却步的问题分解为一系列更小、更易管理的子任务，每个子任务问题通过专门设计的提示词单独处理，<strong>一个提示词的输出会作为输入策略性地传递给链中的下一个提示词。</strong><br>这种顺序处理技术天然地为与LLM的交互引入了模块化和清晰性。通过分解复杂任务，每个单独的步骤都变得更容易理解和调试，使整个过程更加健壮和可解释。链中的每一步都可以精心设计和优化，专注于更大问题的特定方面，从而产生更准确、更聚焦的输出。<br>一个步骤的输出作为下一个步骤的输入至关重要。这种信息传递建立了<strong>依赖链</strong>，其中先前操作的上下文和结果指导后续处理。<br>此外，提示词链不仅仅是分解问题，它还支持集成外部知识和工具（MCP和Skill）。这种能力极大地扩展了LLM的潜力，使它们不再仅作为独立模型运行，而是成为更广泛、更智能系统的组成部分。<br>提示词链的重要性超过了简单的问题解决。它是构建复杂AI智能体系统的基础技术。这些智能体可以利用提示词链在动态环境中自主规划、推理和行动。通过策略性地构建提示词序列，智能体可以参与需要多步推理、规划和决策的任务。这样的智能体工作流可以更紧密地模拟人类思维过程，从而实现与复杂领域和系统更自然、更有效的交互。</p>
+<p><strong>单一提示词的局限性：</strong> 对于多维任务，使用单一的复杂提示词往往效率低下。LLM可能难以处理多重约束和指令，导致以下问题：</p>
 <ul>
-<li>生成式：表示用来生成新文本的机器人</li>
-<li>预训练：表示模型经历了从大量数据中学习的过程。预字则暗示，模型能针对具体任务，通过额外训练来进行微调</li>
-<li>Transformer：一种特殊的神经网络，一种机器学习模型</li>
+<li><strong>指令忽略</strong>：部分提示内容被忽略</li>
+<li><strong>上下文偏离</strong>：模型失去对初始上下文的追踪</li>
+<li><strong>错误传播</strong>：早期错误被放大</li>
+<li><strong>上下文窗口不足</strong>：模型获取的信息不足以生成响应</li>
+<li><strong>幻觉</strong>：认知负荷增加导致生成错误信息</li>
 </ul>
-<p>本章节及后续章节将进一步了解Transformer内部运作的方式。基于Transformer可以构建多种不同的模型，包括语音转文本，文本转语音，生图模型等。Google最早在2017年推出了原版Transformer，专注于把一种语言的文本翻译成另外一种。而我们需要关注的，则是构建ChatGPT等工具的变种模型。这些变种模型是通过输入一段文本，甚至伴随着一些图像及音频，预测出文段接下来的内容，并将结果展示为接下来不同文本片段的概率分布。乍一看，预测下一个词与生成新文本的目标截然不同，但是有了这样的预测模型后，要让它生成更长的文本，一个简单方法是给它一个初始片段，然后从它给出的概率分布中取一个片段，追加到文本末尾，再用所有文本，包括追加的内容，进行新一轮的预测。<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/%E6%96%87%E6%9C%AC%E5%BE%AA%E7%8E%AF.png"><br>这个重复预测和抽样的过程，正是你与ChatGPT或其他大语言模型进行交互时所遇到的单词一个个蹦出来的样子</p>
-<h1 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h1><p>我们先来总览一下数据是如何在Transformer中流动的。当ChatGPT等聊天机器人生成特定单词时，背后实际在做这些事情：<br>将输入内容切分成许多个小片段（Token），这些小片段往往是单词或者单词片段。每个Token对应一个向量，即一组数字，旨在设法编码该片段<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/%E6%96%87%E6%9C%AC%E7%BC%96%E7%A0%81.png"><br>如果将向量看作高维空间中的坐标，那么意思相近的词，对应的向量往往也相近。这些向量随后经过“注意力模块”处理，使得向量之间能够相互交流。通过相互传递信息，来更新自己的值。<br>注意力模块的工作，就是找出上下文中哪些词会改变哪些词的含义，以及这些词应该更新为何种含义，而这里所说的含义是已经被某种形式完全编码进了向量中。<br>之后这些向量会经过另一层处理，取决于不同资料，有的叫做“多层感知器”（multi-layer perceptron），也有的叫做前馈层（feed-forward layer）。在前馈层，向量之间已经不再通信，而是并行经历同一处理。前馈层的处理有点抽象，可以粗浅理解为对每个向量提出一系列问题，然后根据这些问题的答案来更新向量<br>注意力模块和前馈层的处理，本质都是大量的矩阵乘法。我们的主要目标是弄懂，如何解读这些底层矩阵。<br>让我们略过中间一些归一化步骤的细节，之后就是不断的重复注意力模块和多层感知器模块，层层堆叠。最后的目标是，能将整段文字的所有关键含义以某种方式融入到序列的最后一个向量中，然后对最后一个向量进行某种操作，得出所有可能token的概率分布<br>这样，就像之前说的，只要能够根据给定文本，预测下一个词。就能给他喂一点初始文本，然后反复进行预测、抽样、追加这一个过程。<br>早在ChatGPT出现之前，GPT-3的早期演示就能根据初始文本自动补全故事和文章。要把这样的工具做成聊天机器人，最基础简单的方法就是准备一段文本，设定用户与AI助手互动的场景，即所谓的系统提示词（System Prompt）。然后将用户的初始问题或提示词，作为第一段对话，让模型预测热心的AI助手会如何回应<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA.png"></p>
-<h1 id="深度学习的基本概念和架构"><a href="#深度学习的基本概念和架构" class="headerlink" title="深度学习的基本概念和架构"></a>深度学习的基本概念和架构</h1><p>深度学习是机器学习中的一种方法。而机器学习采用数据驱动，反馈到模型参数，指导模型行为。<br>机器学习的理念就是，不要试图在代码中明确定义如何执行一个任务，那是AI发展初期的做法，而是去构建一个具有可调参数的灵活架构，然后通过大量样本，即给定一个输入时应该输出什么，设法调节各种参数值，以模仿这种表现。<br>最简单的机器学习可能就是线性回归，输入和输出都是单个数字，而要做的就是找到一条最佳拟合线，这条线由两个连续参数描述，斜率和截距。线性回归的目标就是确定这些参数，以尽可能拟合数据。当然，机器学习会复杂得多，单GPT-3模型的参数就有1750亿个。但是核心问题并不是不断地增加参数的个数就能解决，有时模型要么对训练数据严重过拟合，要么根本训练不出来。<br>深度学习描述的一类模型，在过往的几十年中，都展现出了出色的规模化能力。他们的共同点是都使用相同的训练算法，也就是上一章讲到的反向传播算法。但是要让这种训练算法在大规模应用中有效运行，模型必须遵循某种特定的结构。只有理解了这种结构，才能更好的理解Transformer对语言处理的许多选择，否则有些选择从我们的角度来看可能显得没有道理。<br>首先无论你在构建何种模型，输入的格式必须为实数数组。可以是一维数列，也可以是二维数组，或者更高维的多维数组，也就是所谓的“张量”。输入数据通常被逐步转换成多个不同的层，同样每一层的结构都是实数数组。到最后一层，就是最终的输出。在深度学习中，这些模型的参数通常被称为权重。这是因为这些模型的一个关键特征就是，参数与待处理数据之间的唯一交互方式就是通过加权和。虽然模型中也有一些非线性函数，但他们并不依赖于参数</p>
-<h1 id="GPT-3拆解"><a href="#GPT-3拆解" class="headerlink" title="GPT-3拆解"></a>GPT-3拆解</h1><p>第一步，需要将输入的文本拆分成token。模型会有一个预设的单词库，包含所有可能的词汇。这时我们将遇到第一个矩阵，称为嵌入矩阵（Embedding matrix），每个词都对应一列，这些列决定了第一步中，每个单词对应的向量<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/%E5%B5%8C%E5%85%A5%E7%9F%A9%E9%98%B5.png"><br>我们将嵌入矩阵记作$W_E$，就和其他矩阵一样，它的初始值随机，但将基于样本学习。早在Transformer之前，将单词转换成向量就是机器学习中的常见做法。我们通常将这种行为称为“词嵌入”<br>如果你要理解某个单词，它的词义显然会受到上下文语境影响，有时可能受到很远的上下文影响。因此，构建能够预测下一个单词的模型时，目标就是使其能有效结合上下文信息。而流经网络就是为了获取更多的上下文信息。这种网络一次只能处理特定数量的向量，这个数量被称为上下文长度。GPT-3的上下文长度为2048。因此GPT-3流经网络的数据就是2048列12288维数据<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/GPT-3%E4%B8%8A%E4%B8%8B%E6%96%87.png"><br>上下文长度限制了Transformer在预测下一个词时能结合的文本量，这就是为什么有些聊天机器人在进行长对话时，经常忘记之前的对话内容。<br>我们将最后一层，称为解嵌入矩阵，记作$W_U$。而最后一层需要经过softmax函数将向量乘积转换为概率<br><img src="/images/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/%E8%BD%AC%E6%A6%82%E7%8E%87.png"></p>
-<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><h2 id="官方论文"><a href="#官方论文" class="headerlink" title="官方论文"></a>官方论文</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a> - Transformer原版论文，了解架构的起源</li>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.14165">Language Models are Few-Shot Learners (GPT-3)</a> - GPT-3官方论文</li>
+<p>通过顺序分解增强可靠性：提示词链通过将复杂任务分解为聚焦的、顺序的工作流来解决这些挑战，显著提高了可靠性和控制力。<br>结构化输出：提示词链的可靠性高度依赖于步骤之间传递的数据完整性。如果一个提示词的输出不明确格式或格式不佳，后续提示词可能由于错误的输入而失败。为了缓解这一问题，制定结构化输出格式（如JSON或XML）至关重要。这种结构化格式确保数据是机器可读的，可以精确解析并无歧义地插入到下一个提示词中。</p>
+<h1 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h1><p>实现提示词链的范围从脚本中的直接顺序工具调用，到利用专门设计用于管理控制流、状态和组件集成的框架。诸如LangChain、LangGraph、Crew AI和Google智能体开发工具包（ADK）等框架，提供了用于构建和执行这些多步过程的结构化环境。<br>以下代码实现了一个两步提示词链，作为数据处理管道运行。初始阶段旨在解析非结构化文本并提取特定信息。后续阶段接收此提取的输出并将其转换为结构化数据格式。</p>
+<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import os
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+## 为了更好的安全性，从 .env 文件加载环境变量
+## from dotenv import load_dotenv
+## load_dotenv()
+## 确保你的 OPENAI_API_KEY 在 .env 文件中设置
+
+## 初始化语言模型（推荐使用 ChatOpenAI）
+llm = ChatOpenAI(temperature=0)
+
+## --- 提示词 1：提取信息 ---
+prompt_extract = ChatPromptTemplate.from_template(
+    "从以下文本中提取技术规格：\n\n{text_input}"
+)
+
+## --- 提示词 2：转换为 JSON ---
+prompt_transform = ChatPromptTemplate.from_template(
+    "将以下规格转换为 JSON 对象，使用 'cpu'、'memory' 和 'storage' 作为键：\n\n{specifications}"
+)
+
+## --- 利用 LCEL 构建处理链 ---
+## StrOutputParser() 将 LLM 的消息输出转换为简单字符串。
+extraction_chain = prompt_extract | llm | StrOutputParser()
+
+## 完整的链将提取链的输出传递到转换提示词的 'specifications' 变量中。
+full_chain = (
+    {"specifications": extraction_chain}
+    | prompt_transform
+    | llm
+    | StrOutputParser()
+)
+
+## --- 运行链 ---
+input_text = "新款笔记本电脑型号配备 3.5 GHz 八核处理器、16GB 内存和 1TB NVMe 固态硬盘。"
+
+## 使用输入文本字典执行链。
+final_result = full_chain.invoke({"text_input": input_text})
+
+print("\n--- 最终 JSON 输出 ---")
+print(final_result)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这段Python代码演示了如何使用LangChain库处理文本。它利用两个独立的提示词：一个从输入字符串中提取技术规格，另一个将这些规格格式化为JSON对象。ChatOpenAI模型用于语言模型交互，StrOutputParser确保输出为可用的字符串格式。LangChain表达式语句（LCEL）用于优雅地将这些提示词和语言模型链接在一起。第一个链extraction_chain提取规格。然后full_chain获取提取的输出，并将其用作转换提示词的输入。提供了描述笔记本电脑的示例输入文本。使用此文本调用full_chain，通过两个步骤处理它。最后打印最终结果，即包含提取和格式化规格的JSON字符串。</p>
+<h1 id="上下文工程和提示工程"><a href="#上下文工程和提示工程" class="headerlink" title="上下文工程和提示工程"></a>上下文工程和提示工程</h1><p>上下文工程是在 token生成之前系统地设计、构建和向AI模型提供完整信息环境的学科。这种方法论断言，模型输出的质量较少依赖于模型架构本身，而更多依赖于所提供的上下文的丰富性<br>![alt text](/images/Agentic Design Patterns-提示词链/上下文工程.png)<br>它代表着从传统提示工程的重大演进，传统提示工程主要专注于用户及时查询的措辞。上下文工程将这一范围扩展到包括多层信息，例如<strong>系统提示词</strong>，这是定义AI操作参数的基础指令集——例如：“你是一名技术作家；你的语气必须正式且精确”。上下文通过外部数据进一步丰富。这包括检索文档，其中AI主动从知识库获取信息以指导其响应，例如提取项目的技术规格。它还整合了工具输出，这是AI使用外部API获取实时数据的结果，例如查询日历以确定用户的可能性。这些显示数据与关键的隐式数据（如用户身份、交互历史和环境状态）相结合。核心原则是，即使是高级模型，在提供有限或构建不良的操作环境视图时也会表现不佳。<br>这种结构化方法是区分基本AI工具与更复杂、上下文感知系统的关键。它将上下文本身视为主要组件，对智能体系统知道什么、何时知道以及如何使用该信息给予关键重要性。这种实践确保模型对用户的意图、历史和当前环境有全面的理解。最终，上下文工程是将无状态聊天机器人提升为高度能干、情感感知系统的关键方法论。</p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://python.langchain.com/">LangChain Documentation</a> - LangChain官方文档，详细介绍提示词链的实现</li>
+<li><a target="_blank" rel="noopener" href="https://langchain-ai.github.io/langgraph/">LangGraph Documentation</a> - 构建复杂Agent工作流的官方指南</li>
 </ul>
-<h2 id="技术博客"><a href="#技术博客" class="headerlink" title="技术博客"></a>技术博客</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a> - 图解Transformer，可视化理解架构</li>
-<li><a target="_blank" rel="noopener" href="https://jalammar.github.io/illustrated-gpt2/">The Illustrated GPT-2</a> - 图解GPT-2工作原理</li>
+<h3 id="技术博客"><a href="#技术博客" class="headerlink" title="技术博客"></a>技术博客</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.promptingguide.ai/">Prompt Engineering Guide</a> - 提示词工程完整指南</li>
+<li><a target="_blank" rel="noopener" href="https://patterns.eecs.berkeley.edu/">LLM Patterns</a> - LLM应用设计模式合集</li>
 </ul>
-<h2 id="实践教程"><a href="#实践教程" class="headerlink" title="实践教程"></a>实践教程</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/">Hugging Face Transformers</a> - 主流Transformer库文档</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/karpathy/nanoGPT">NanoGPT</a> - Karpathy的简洁GPT实现，适合学习</li>
+<h3 id="实践教程"><a href="#实践教程" class="headerlink" title="实践教程"></a>实践教程</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/index/claudes-character">Building LLM Applications</a> - Anthropic官方最佳实践</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/google/agent-development-kit">Google Agent Development Kit</a> - Google智能体开发工具包</li>
 </ul>
-<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.3blue1brown.com/topics/neural-networks">3Blue1Brown Neural Networks Series</a> - 神经网络可视化系列视频</li>
+<h3 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://react-lm.github.io/">ReAct Pattern</a> - 推理+行动模式的经典论文</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.11903">Chain-of-Thought Prompting</a> - 思维链提示技术</li>
 </ul>
 
                 
@@ -522,7 +570,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://doubler12138.github.io/2026/04/03/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/">https://doubler12138.github.io/2026/04/03/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-GPT%E4%B8%8ETransformer/</a>
+                    <a href="https://doubler12138.github.io/2026/04/11/AI/Agentic%20Design%20Patterns-%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%93%BE/">https://doubler12138.github.io/2026/04/11/AI/Agentic%20Design%20Patterns-%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%93%BE/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -560,24 +608,24 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">深度学习</span>
+                                <a href="/tags/LLM/">
+                                    <span class="chip bg-color">LLM</span>
                                 </a>
                             
-                                <a href="/tags/Transformer/">
-                                    <span class="chip bg-color">Transformer</span>
+                                <a href="/tags/Prompt-Chaining/">
+                                    <span class="chip bg-color">Prompt Chaining</span>
                                 </a>
                             
-                                <a href="/tags/GPT/">
-                                    <span class="chip bg-color">GPT</span>
+                                <a href="/tags/AI-Agent/">
+                                    <span class="chip bg-color">AI Agent</span>
                                 </a>
                             
-                                <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
-                                    <span class="chip bg-color">注意力机制</span>
+                                <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                    <span class="chip bg-color">设计模式</span>
                                 </a>
                             
-                                <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/">
-                                    <span class="chip bg-color">大语言模型</span>
+                                <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">
+                                    <span class="chip bg-color">上下文工程</span>
                                 </a>
                             
                         </div>
@@ -663,15 +711,15 @@
 
 <div class="prev-next-nav">
     
-    <a href="/2026/04/07/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" class="prev-btn enabled">
+    <span class="prev-btn disabled">
         <i class="fas fa-chevron-left"></i>
-        <span>上一篇: 深度学习-注意力机制</span>
-    </a>
+        <span>上一篇: 没有了</span>
+    </span>
     
 
     
-    <a href="/2026/04/01/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/" class="next-btn enabled">
-        <span>下一篇: 深度学习-反向传播算法</span>
+    <a href="/2026/04/07/AI/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" class="next-btn enabled">
+        <span>下一篇: 深度学习-注意力机制</span>
         <i class="fas fa-chevron-right"></i>
     </a>
     
@@ -797,19 +845,6 @@
 
 </main>
 
-
-<script>
-    MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            displayMath: [['$$', '$$'], ['\\[', '\\]']]
-        },
-        svg: {
-            fontCache: 'global'
-        }
-    };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 
 
