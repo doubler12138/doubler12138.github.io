@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>Agentic Design Patterns-路由</title>
+      <link href="/2026/04/14/AI/Agentic%20Design%20Patterns-%E8%B7%AF%E7%94%B1/"/>
+      <url>/2026/04/14/AI/Agentic%20Design%20Patterns-%E8%B7%AF%E7%94%B1/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>路由（Routing）是 Agentic Design Patterns 中的核心模式之一，它通过智能决策机制，将用户请求导向最合适的处理路径，实现高效的任务分发和处理。</p><h1 id="路由模式概述"><a href="#路由模式概述" class="headerlink" title="路由模式概述"></a>路由模式概述</h1><p>虽然通过提示词链进行顺序处理是使用语言模型执行确定性、线性工作流的基础技术，但在需要自适应响应的场景中，它的适用性会受到限制。现实世界的智能体系统必须经常根据运行时条件在多个潜在行动之间进行决策，例如环境状态、用户输入或前一操作的结果。这种控制流向不同专门函数、工具或子流程的动态决策能力，是通过一种称为路由的机制实现的。</p><p>路由将条件逻辑引入智能体系统的操作框架，使其从固定的执行路径转变为这样一种模型：智能体动态评估特定标准，从一组可能的后续操作中进行选择。这使得系统行为更加灵活且具有上下文感知能力。</p><h2 id="路由模式的核心组件"><a href="#路由模式的核心组件" class="headerlink" title="路由模式的核心组件"></a>路由模式的核心组件</h2><p>路由模式的核心组件是执行评估并指导流程的机制。这种机制可以通过几种方式实现：</p><ol><li><strong>基于LLM的路由</strong>：可以提示语言模型本身分析输入并输出指示下一步或目的地的特定标识符或指令。例如，提示词可能要求LLM分析以下用户查询并仅输出类别：订单状态、产品信息、技术支持或其他。智能体系统然后读取此输出并相应地指导工作流。</li><li><strong>基于嵌入的路由</strong>：输入查询可以转换为向量嵌入。然后将此嵌入与代表不同路由或能力的嵌入进行比较。查询被路由到嵌入最相似的路由。这对于语义路由很有用，其中决策基于输入的含义而不仅仅是关键词。</li><li><strong>基于规则的路由</strong>：这涉及使用基于关键词、模式或从输入中提取的结构化数据的预定义规则或逻辑（if-else, switch case）。这可以比基于LLM的路由更快、更具确定性，但在处理细微或新颖输入方面的灵活性较差。</li><li><strong>基于机器学习模型的路由</strong>：它采用判别模型，例如分类器，该模型已经在小型标记数据语料库上专门训练以执行路由任务。虽然它与基于嵌入的方法在概念上有相似之处，但其关键特征是监督微调过程，该过程调整模型的参数以创建专门的路由功能。这种技术与基于LLM的路由不同，因为决策组件不是在推理时执行提示词的生成模型。相反，路由逻辑被编码在微调模型的学习权重中。虽然LLM可能在预处理步骤中用于生成合成数据以增强训练集，但它们不参与实时路由决策本身。</li></ol><p>路由机制可以在智能体系统的操作周期内的多个节点实现。它们可以在开始时应用以对主要任务进行分类，在处理链内的中间点应用以确定后续操作，或在子程序期间应用以从给定集合中选择最合适的工具。</p><h2 id="路由模式的应用场景"><a href="#路由模式的应用场景" class="headerlink" title="路由模式的应用场景"></a>路由模式的应用场景</h2><p>路由模式在实际的智能体系统中有广泛的应用场景：</p><ul><li><strong>客服系统</strong>：根据用户问题类型（订单查询、退换货、技术支持等）将请求路由到不同的专业处理模块，提高响应效率和准确度。</li><li><strong>内容审核</strong>：将用户生成的内容根据风险等级路由到不同的审核流程，低风险内容自动通过，高风险内容转人工审核。</li><li><strong>多领域问答</strong>：在涵盖多个知识领域的问答系统中，根据用户查询的语义将问题路由到最匹配的领域专家模型，确保回答的专业性。</li><li><strong>工具选择</strong>：智能体拥有多种工具时，根据当前任务需求动态选择最合适的工具执行，避免无效调用和资源浪费。</li></ul><h2 id="路由与其他模式的协作"><a href="#路由与其他模式的协作" class="headerlink" title="路由与其他模式的协作"></a>路由与其他模式的协作</h2><p>路由模式不是孤立运作的，它经常与 Agentic Design Patterns 中的其他模式协同使用：</p><ul><li><strong>路由 + 提示词链</strong>：路由决定走哪条分支后，每条分支内部可以采用提示词链进行顺序处理。例如，客服系统先通过路由将用户请求分类，再在各类别中使用提示词链完成多步骤处理。</li><li><strong>路由 + 并行化</strong>：当路由判断某个请求需要多方面信息时，可以在路由后触发并行化模式，同时调用多个工具或子流程获取信息，最后汇总结果。</li><li><strong>路由 + 记忆</strong>：路由决策可以结合历史记忆信息，例如根据用户的历史偏好或上下文状态选择不同的处理路径，使系统行为更加个性化和连贯。</li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>路由是 Agentic Design Patterns 中实现智能体灵活性的关键模式。通过将条件逻辑引入系统控制流，路由使智能体能够根据运行时条件动态选择最合适的处理路径。四种主要实现方式——基于LLM、基于嵌入、基于规则和基于机器学习模型——各有优劣，适用于不同场景。在实际系统设计中，路由通常与其他模式协同工作，共同构建具有自适应能力的智能体系统。</p><h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ul><li><a href="https://python.langchain.com/docs/how_to/routing/">LangChain - Routing</a> - LangChain 官方关于路由实现的 How-to 指南</li><li><a href="https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/">Agentic Design Patterns - Andrew Ng</a> - 吴恩达关于 Agentic Design Patterns 的系列文章，路由模式的原始参考</li><li><a href="https://github.com/aurelio-labs/semantic-router">Semantic Router</a> - 基于语义嵌入的开源路由框架，适合实践基于嵌入的路由</li><li><a href="https://langchain-ai.github.io/langgraph/concepts/multi_agent/">LangGraph - Multi-agent Orchestration</a> - LangGraph 多智能体编排中的路由机制实践</li><li><a href="/2026/04/11/AI/Agentic-Design-Patterns-%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%93%BE/">Agentic Design Patterns-提示词链</a> - 本博客同系列文章，了解提示词链模式</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI Agent </tag>
+            
+            <tag> LLM </tag>
+            
+            <tag> 设计模式 </tag>
+            
+            <tag> Routing </tag>
+            
+            <tag> Prompt-Chaining </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Agentic Design Patterns-提示词链</title>
       <link href="/2026/04/11/AI/Agentic%20Design%20Patterns-%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%93%BE/"/>
       <url>/2026/04/11/AI/Agentic%20Design%20Patterns-%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%93%BE/</url>
@@ -20,11 +53,11 @@
       
         <tags>
             
-            <tag> LLM </tag>
-            
             <tag> Prompt Chaining </tag>
             
             <tag> AI Agent </tag>
+            
+            <tag> LLM </tag>
             
             <tag> 设计模式 </tag>
             
@@ -216,13 +249,13 @@
             
             <tag> AI </tag>
             
+            <tag> LLM </tag>
+            
             <tag> 学习计划 </tag>
             
             <tag> Agent </tag>
             
             <tag> MCP </tag>
-            
-            <tag> LLM </tag>
             
         </tags>
       
