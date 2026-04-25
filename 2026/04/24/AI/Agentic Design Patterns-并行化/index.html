@@ -389,9 +389,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/AI/">
+                                <span class="chip bg-color">AI</span>
+                            </a>
+                        
+                            <a href="/tags/LLM/">
+                                <span class="chip bg-color">LLM</span>
+                            </a>
+                        
+                            <a href="/tags/AI-Agent/">
+                                <span class="chip bg-color">AI-Agent</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                <span class="chip bg-color">设计模式</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -419,21 +435,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-04-24
+                    2026-04-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -451,7 +467,56 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="并行化模式概述"><a href="#并行化模式概述" class="headerlink" title="并行化模式概述"></a>并行化模式概述</h1><p>前面的章节中，我们探讨了用于顺序工作流的提示词链，以及用于动态决策和不同路径间转换的路由。虽然这些模式不可或缺，但许多复杂的智能体任务涉及多个可<strong>同时执行而非顺序执行的子任务</strong>。这正是<strong>并行模式</strong>的用武之地。<br>并行化是指并发执行多个组件，包括LLM调用、工具使用乃至于整个子智能体。不同于顺序等待每个步骤完成后再开始下一步，并行执行允许独立任务同时运行，从而显著缩短可分解为独立部分的任务的总执行时间。<br>设想一个旨在研究某个主题并总结发现的智能体。顺序方法可能是这样的：</p>
+<ol>
+<li>搜索来源A</li>
+<li>总结来源A</li>
+<li>搜索来源B</li>
+<li>总结来源B</li>
+<li>基于摘要A和B合成最终答案<br>而并行方法则可改为：</li>
+<li>同时搜索来源A和来源B</li>
+<li>两个搜索完成后，同时总结来源A和来源B</li>
+<li>基于摘要A和摘要B合成最终答案<br>核心思想是识别工作流中不依赖于其他部分输出的环节并将它们并行执行。这在处理具有延迟的外部服务（如API或数据库）时尤其有效，因为你可以同时发出多个请求。</li>
+</ol>
+<p>实现并行化通常需要支持异步执行或多线程/多进程的框架。现代智能体框架在设计时已充分考虑异步操作，可以轻松定义并行运行的步骤。</p>
+<p>![并行示意](/images/Agentic Design Patterns-并行化/并行示意.png)</p>
+<p>并行化模式对于提升智能体系统的效率和响应能力至关重要，特别是在处理涉及多个独立查询、计算或与外部服务交互的任务时。它是优化复杂智能体工作流性能的关键技术。</p>
+<h1 id="实际应用与用例"><a href="#实际应用与用例" class="headerlink" title="实际应用与用例"></a>实际应用与用例</h1><p>并行化是优化智能体性能的强大模式，适用于多种应用场景：</p>
+<ol>
+<li>信息收集与研究：同时从多个来源收集信息是经典用例。<ul>
+<li>用例：公司调研智能体<ul>
+<li>并行任务：同时搜索新闻文章、获取股票数据、监控社交媒体提及和查询公司数据库</li>
+<li>优势：相比顺序查询能更快获得全面视图</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据处理与分析：对数据的不同部分进行并发处理，或同时应用不同的分析技术<ul>
+<li>用例：客户反馈分析智能体<ul>
+<li>并行任务：对一批反馈条目同时执行情感分析、关键词提取、反馈分类和紧急问题识别</li>
+<li>优势：快速提供多维度分析结果</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多API或工具交互：调用多个独立的API或工具以获取不同类型信息或执行不同操作<ul>
+<li>用例：旅行规划智能体<ul>
+<li>并行任务：同时查询航班价格、酒店可用性、当地活动和餐厅推荐</li>
+<li>优势： 更快呈现完整的旅行方案</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>并行化是智能体设计中的基础优化技术，使开发人员能够通过利用独立任务的并发执行来构建更高性能和响应更快的应用程序。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在本章中，我们探讨了并行化模式——继提示词链和路由之后的又一个重要智能体设计模式。并行化的核心思想是识别工作流中的独立环节并同时执行，从而显著缩短任务的总执行时间。无论是信息收集、数据分析还是多API交互，并行化都能帮助我们构建更高效的智能体系统。</p>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic - Building effective agents</a> - Anthropic 关于构建高效智能体的工程实践指南，涵盖并行化等核心设计模式</li>
+<li><a target="_blank" rel="noopener" href="https://blog.langchain.dev/agentic-design-patterns-parallelization/">LangChain - Parallelization</a> - LangChain 对并行化设计模式的深入解析与实现</li>
+<li><a target="_blank" rel="noopener" href="https://docs.crewai.com/">CrewAI Documentation</a> - 支持多智能体并行协作的实践框架</li>
+<li><a target="_blank" rel="noopener" href="https://cookbook.openai.com/examples/orchestrating_agents">OpenAI - Orchestrating Agents</a> - OpenAI Cookbook 中关于智能体编排的示例，包含并行执行模式</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -514,7 +579,23 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/AI/">
+                                    <span class="chip bg-color">AI</span>
+                                </a>
+                            
+                                <a href="/tags/LLM/">
+                                    <span class="chip bg-color">LLM</span>
+                                </a>
+                            
+                                <a href="/tags/AI-Agent/">
+                                    <span class="chip bg-color">AI-Agent</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                    <span class="chip bg-color">设计模式</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
