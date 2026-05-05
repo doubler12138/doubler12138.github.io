@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Agentic Design Patterns-路由, DoubleR的博客">
+    <meta name="keywords" content="Agentic Design Patterns-反思, DoubleR的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Agentic Design Patterns-路由 | DoubleR的博客</title>
+    <title>Agentic Design Patterns-反思 | DoubleR的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -270,12 +270,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/Agentic%20Design%20Patterns-%E8%B7%AF%E7%94%B1/cover.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/Agentic%20Design%20Patterns-%E5%8F%8D%E6%80%9D/cover.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Agentic Design Patterns-路由</h1>
+                    <h1 class="description center-align post-title">Agentic Design Patterns-反思</h1>
                 </div>
             </div>
         </div>
@@ -391,24 +391,24 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/LLM/">
-                                <span class="chip bg-color">LLM</span>
+                            <a href="/tags/AI/">
+                                <span class="chip bg-color">AI</span>
                             </a>
                         
-                            <a href="/tags/AI-Agent/">
-                                <span class="chip bg-color">AI Agent</span>
+                            <a href="/tags/LLM/">
+                                <span class="chip bg-color">LLM</span>
                             </a>
                         
                             <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
                                 <span class="chip bg-color">设计模式</span>
                             </a>
                         
-                            <a href="/tags/Routing/">
-                                <span class="chip bg-color">Routing</span>
+                            <a href="/tags/AI-Agent/">
+                                <span class="chip bg-color">AI-Agent</span>
                             </a>
                         
-                            <a href="/tags/Prompt-Chaining/">
-                                <span class="chip bg-color">Prompt-Chaining</span>
+                            <a href="/tags/Reflection/">
+                                <span class="chip bg-color">Reflection</span>
                             </a>
                         
                     </div>
@@ -432,28 +432,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2026-04-14
+                    2026-05-02
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-04-18
+                    2026-05-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    4 分
                 </div>
                 
 
@@ -471,37 +471,31 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>路由（Routing）是 Agentic Design Patterns 中的核心模式之一，它通过智能决策机制，将用户请求导向最合适的处理路径，实现高效的任务分发和处理。</p>
-<h1 id="路由模式概述"><a href="#路由模式概述" class="headerlink" title="路由模式概述"></a>路由模式概述</h1><p>虽然通过提示词链进行顺序处理是使用语言模型执行确定性、线性工作流的基础技术，但在需要自适应响应的场景中，它的适用性会受到限制。现实世界的智能体系统必须经常根据运行时条件在多个潜在行动之间进行决策，例如环境状态、用户输入或前一操作的结果。这种控制流向不同专门函数、工具或子流程的动态决策能力，是通过一种称为路由的机制实现的。</p>
-<p>路由将条件逻辑引入智能体系统的操作框架，使其从固定的执行路径转变为这样一种模型：智能体动态评估特定标准，从一组可能的后续操作中进行选择。这使得系统行为更加灵活且具有上下文感知能力。</p>
-<h2 id="路由模式的核心组件"><a href="#路由模式的核心组件" class="headerlink" title="路由模式的核心组件"></a>路由模式的核心组件</h2><p>路由模式的核心组件是执行评估并指导流程的机制。这种机制可以通过几种方式实现：</p>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="什么是反思模式"><a href="#什么是反思模式" class="headerlink" title="什么是反思模式"></a>什么是反思模式</h2><p>在前面的章节中，我们探讨了基础的智能体模式：用于顺序执行的提示词链、用于动态路径选择的路由以及用于并发任务执行的并行化。这些模式使智能体能够更高效、更灵活地执行复杂任务。然而，即便采用复杂的工作流，智能体的初始输出或计划也可能并非最优、准确或完整。这正是反思模式发挥关键作用之处。</p>
+<p>反思模式是指智能体评估自身工作、输出或内部状态，并利用该评估来提升性能或优化响应。这是一种自我纠错或自我改进机制，允许智能体基于反馈、内部评审或与预期标准的对比，迭代优化其输出或调整策略。反思有时可由专门的智能体来促进，其特定职责是分析初始智能体的输出。</p>
+<p>与输出直接传递至下一步的简单顺序链或选择路径的路由不同，反思引入反馈循环。智能体不仅产生输出，还会检查该输出，识别潜在问题或改进空间，并运用这些洞察生成更优版本或调整后续行动。</p>
+<h2 id="反思的核心流程"><a href="#反思的核心流程" class="headerlink" title="反思的核心流程"></a>反思的核心流程</h2><p>该过程通常包含以下步骤：</p>
 <ol>
-<li><strong>基于LLM的路由</strong>：可以提示语言模型本身分析输入并输出指示下一步或目的地的特定标识符或指令。例如，提示词可能要求LLM分析以下用户查询并仅输出类别：订单状态、产品信息、技术支持或其他。智能体系统然后读取此输出并相应地指导工作流。</li>
-<li><strong>基于嵌入的路由</strong>：输入查询可以转换为向量嵌入。然后将此嵌入与代表不同路由或能力的嵌入进行比较。查询被路由到嵌入最相似的路由。这对于语义路由很有用，其中决策基于输入的含义而不仅仅是关键词。</li>
-<li><strong>基于规则的路由</strong>：这涉及使用基于关键词、模式或从输入中提取的结构化数据的预定义规则或逻辑（if-else, switch case）。这可以比基于LLM的路由更快、更具确定性，但在处理细微或新颖输入方面的灵活性较差。</li>
-<li><strong>基于机器学习模型的路由</strong>：它采用判别模型，例如分类器，该模型已经在小型标记数据语料库上专门训练以执行路由任务。虽然它与基于嵌入的方法在概念上有相似之处，但其关键特征是监督微调过程，该过程调整模型的参数以创建专门的路由功能。这种技术与基于LLM的路由不同，因为决策组件不是在推理时执行提示词的生成模型。相反，路由逻辑被编码在微调模型的学习权重中。虽然LLM可能在预处理步骤中用于生成合成数据以增强训练集，但它们不参与实时路由决策本身。</li>
+<li><strong>执行</strong>：智能体执行任务或生成初始输出。</li>
+<li><strong>评估/评审</strong>：智能体（通常通过另一个 LLM 调用或规则集）分析上一步结果。此评估可能涉及事实准确性、连贯性、风格、完整性、指令遵循度或其他相关标准。</li>
+<li><strong>反思/优化</strong>：基于评审意见，智能体确定改进方向。这可能包括生成优化后的输出、调整后续步骤参数，甚至修改整体计划。</li>
+<li><strong>迭代（可选但常见）</strong>：优化后的输出或调整后的方法可继续执行，反思过程可重复进行，直至获得满意结果或达到停止条件。</li>
 </ol>
-<p>路由机制可以在智能体系统的操作周期内的多个节点实现。它们可以在开始时应用以对主要任务进行分类，在处理链内的中间点应用以确定后续操作，或在子程序期间应用以从给定集合中选择最合适的工具。</p>
-<h2 id="路由模式的应用场景"><a href="#路由模式的应用场景" class="headerlink" title="路由模式的应用场景"></a>路由模式的应用场景</h2><p>路由模式在实际的智能体系统中有广泛的应用场景：</p>
-<ul>
-<li><strong>客服系统</strong>：根据用户问题类型（订单查询、退换货、技术支持等）将请求路由到不同的专业处理模块，提高响应效率和准确度。</li>
-<li><strong>内容审核</strong>：将用户生成的内容根据风险等级路由到不同的审核流程，低风险内容自动通过，高风险内容转人工审核。</li>
-<li><strong>多领域问答</strong>：在涵盖多个知识领域的问答系统中，根据用户查询的语义将问题路由到最匹配的领域专家模型，确保回答的专业性。</li>
-<li><strong>工具选择</strong>：智能体拥有多种工具时，根据当前任务需求动态选择最合适的工具执行，避免无效调用和资源浪费。</li>
-</ul>
-<h2 id="路由与其他模式的协作"><a href="#路由与其他模式的协作" class="headerlink" title="路由与其他模式的协作"></a>路由与其他模式的协作</h2><p>路由模式不是孤立运作的，它经常与 Agentic Design Patterns 中的其他模式协同使用：</p>
-<ul>
-<li><strong>路由 + 提示词链</strong>：路由决定走哪条分支后，每条分支内部可以采用提示词链进行顺序处理。例如，客服系统先通过路由将用户请求分类，再在各类别中使用提示词链完成多步骤处理。</li>
-<li><strong>路由 + 并行化</strong>：当路由判断某个请求需要多方面信息时，可以在路由后触发并行化模式，同时调用多个工具或子流程获取信息，最后汇总结果。</li>
-<li><strong>路由 + 记忆</strong>：路由决策可以结合历史记忆信息，例如根据用户的历史偏好或上下文状态选择不同的处理路径，使系统行为更加个性化和连贯。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>路由是 Agentic Design Patterns 中实现智能体灵活性的关键模式。通过将条件逻辑引入系统控制流，路由使智能体能够根据运行时条件动态选择最合适的处理路径。四种主要实现方式——基于LLM、基于嵌入、基于规则和基于机器学习模型——各有优劣，适用于不同场景。在实际系统设计中，路由通常与其他模式协同工作，共同构建具有自适应能力的智能体系统。</p>
+<h2 id="生产者-评审者模型"><a href="#生产者-评审者模型" class="headerlink" title="生产者-评审者模型"></a>生产者-评审者模型</h2><p>反思模式的一种关键且高效的实现方式是将流程分离为两个不同的逻辑角色：生产者和评审者。这通常称为”生成器-评审者”或”生产者-审查者”模型。虽然单个智能体可执行自我反思，但使用两个专门智能体（或使用不同系统提示的两次独立 LLM 调用）通常会产生更稳健、更客观的结果。</p>
+<ol>
+<li><strong>生产者智能体（Producer）</strong>：此智能体的主要职责是执行任务的初始工作。它完全专注于内容生成，无论是编写代码、起草博客文章还是制定计划。它接收初始提示并生成输出的第一版。</li>
+<li><strong>评审者智能体（Critic）</strong>：此智能体的唯一目的是评估生产者的输出。它被赋予独立的指令集与角色设定，通常承担特定角色（如”高级软件工程师”、”严谨的事实核查员”）。评审者的指令引导其根据特定标准分析生产者的工作，包括事实准确性、代码质量、风格要求或完整性。其设计目标是发现缺陷、提出改进建议并提供结构化反馈。</li>
+</ol>
+<p>这种关注点分离之所以强大，是因为它避免了智能体评审自身工作时可能产生的”认知偏差”。评审者智能体以全新视角处理输出，专注于发现错误和改进空间。评审者的反馈随后传回生产者智能体，生产者以此为指南生成新的优化版本输出。</p>
+<h2 id="反思模式的价值"><a href="#反思模式的价值" class="headerlink" title="反思模式的价值"></a>反思模式的价值</h2><p>反思模式对于构建能够产生高质量输出、处理精细任务并展示一定程度自我意识和适应性的智能体至关重要。它推动智能体从单独执行指令转向更复杂的问题解决和内容生成形式。</p>
+<p>值得注意的是反思与目标设定和监控的交叉点。目标为智能体的自我评估提供最终基准，而监控则跟踪其进展。在许多实际案例中，反思可能充当纠错引擎，利用监控反馈分析偏差并调整策略。这种协同使智能体从被动执行转变为有目的的系统，能够自适应地工作以实现其目标。</p>
+<p>此外，当大语言模型保持对话记忆时，反思模式的有效性会显著增强。对话历史为评估阶段提供关键上下文，使智能体不仅能孤立地评估其输出，还能在先前交互、用户反馈和不断演变的目标背景下进行评估。它使智能体能够从过去的评审中学习并避免错误。没有记忆时，每次反思都是一个独立事件；有了记忆，反思成为一个积累过程，每个周期都建立在前一个周期的基础上，从而实现更智能、更具上下文感知的优化。</p>
 <h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://python.langchain.com/docs/how_to/routing/">LangChain - Routing</a> - LangChain 官方关于路由实现的 How-to 指南</li>
-<li><a target="_blank" rel="noopener" href="https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/">Agentic Design Patterns - Andrew Ng</a> - 吴恩达关于 Agentic Design Patterns 的系列文章，路由模式的原始参考</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/aurelio-labs/semantic-router">Semantic Router</a> - 基于语义嵌入的开源路由框架，适合实践基于嵌入的路由</li>
-<li><a target="_blank" rel="noopener" href="https://langchain-ai.github.io/langgraph/concepts/multi_agent/">LangGraph - Multi-agent Orchestration</a> - LangGraph 多智能体编排中的路由机制实践</li>
-<li><a href="/2026/04/11/AI/Agentic-Design-Patterns-%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%93%BE/">Agentic Design Patterns-提示词链</a> - 本博客同系列文章，了解提示词链模式</li>
+<li><a target="_blank" rel="noopener" href="https://www.antoniogulli.com/agentic-design-patterns-book/">Agentic Design Patterns（Antonio Gulli）</a> —— 智能体设计模式系列权威参考。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.11366">Reflexion: Language Agents with Verbal Reinforcement Learning (arXiv)</a> —— 经典反思型智能体论文，提出基于语言反馈的强化学习框架。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.17651">Self-Refine: Iterative Refinement with Self-Feedback (arXiv)</a> —— 单智能体自我反思与迭代优化的代表性工作。</li>
+<li><a target="_blank" rel="noopener" href="https://langchain-ai.github.io/langgraph/tutorials/reflection/reflection/">LangGraph Reflection Agents 教程</a> —— 基于 LangGraph 构建生产者-评审者反思循环的实战教程。</li>
+<li><a target="_blank" rel="noopener" href="https://www.promptingguide.ai/techniques/reflexion">Prompt Engineering Guide - Reflection</a> —— 反思式提示工程技巧系统梳理。</li>
 </ul>
 
                 
@@ -529,7 +523,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://doubler12138.github.io/2026/04/14/AI/Agentic%20Design%20Patterns-%E8%B7%AF%E7%94%B1/">https://doubler12138.github.io/2026/04/14/AI/Agentic%20Design%20Patterns-%E8%B7%AF%E7%94%B1/</a>
+                    <a href="https://doubler12138.github.io/2026/05/02/AI/Agentic%20Design%20Patterns-%E5%8F%8D%E6%80%9D/">https://doubler12138.github.io/2026/05/02/AI/Agentic%20Design%20Patterns-%E5%8F%8D%E6%80%9D/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -567,24 +561,24 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/LLM/">
-                                    <span class="chip bg-color">LLM</span>
+                                <a href="/tags/AI/">
+                                    <span class="chip bg-color">AI</span>
                                 </a>
                             
-                                <a href="/tags/AI-Agent/">
-                                    <span class="chip bg-color">AI Agent</span>
+                                <a href="/tags/LLM/">
+                                    <span class="chip bg-color">LLM</span>
                                 </a>
                             
                                 <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
                                     <span class="chip bg-color">设计模式</span>
                                 </a>
                             
-                                <a href="/tags/Routing/">
-                                    <span class="chip bg-color">Routing</span>
+                                <a href="/tags/AI-Agent/">
+                                    <span class="chip bg-color">AI-Agent</span>
                                 </a>
                             
-                                <a href="/tags/Prompt-Chaining/">
-                                    <span class="chip bg-color">Prompt-Chaining</span>
+                                <a href="/tags/Reflection/">
+                                    <span class="chip bg-color">Reflection</span>
                                 </a>
                             
                         </div>
@@ -670,15 +664,15 @@
 
 <div class="prev-next-nav">
     
-    <a href="/2026/04/24/AI/Agentic%20Design%20Patterns-%E5%B9%B6%E8%A1%8C%E5%8C%96/" class="prev-btn enabled">
+    <span class="prev-btn disabled">
         <i class="fas fa-chevron-left"></i>
-        <span>上一篇: Agentic Design Patterns-并行化</span>
-    </a>
+        <span>上一篇: 没有了</span>
+    </span>
     
 
     
-    <a href="/2026/04/11/AI/Agentic%20Design%20Patterns-%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%93%BE/" class="next-btn enabled">
-        <span>下一篇: Agentic Design Patterns-提示词链</span>
+    <a href="/2026/04/24/AI/Agentic%20Design%20Patterns-%E5%B9%B6%E8%A1%8C%E5%8C%96/" class="next-btn enabled">
+        <span>下一篇: Agentic Design Patterns-并行化</span>
         <i class="fas fa-chevron-right"></i>
     </a>
     
