@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Agentic Design Patterns-工具使用、规划</title>
+      <link href="/2026/05/23/AI/Agentic%20Design%20Patterns-%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+      <url>/2026/05/23/AI/Agentic%20Design%20Patterns-%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="工具使用模式概述"><a href="#工具使用模式概述" class="headerlink" title="工具使用模式概述"></a>工具使用模式概述</h1><p>截至目前，我们探讨了智能体模式主要聚焦于编排语言模型间的交互以及管理智能体内部工作流的信息流（提示词链、路由、并行化、反思）。然而，要让智能体真正发挥作用并与现实世界或外部系统交互，它们需要具备使用工具的能力。<br>工具使用模式通常通过**函数调用（Function Calling）**机制实现，使智能体能够与外部API、数据库、服务交互，甚至执行代码。该机制让位于智能体核心的大语言模型能根据用户请求或任务当前状态，决定何时以及如何调用特定的外部函数。<br>该过程通常包括：</p><ol><li>工具定义：向LLM定义并描述外部函数或能力。描述内容包括函数的用途、名称，以及它接受的参数及其类型和描述。</li><li>LLM决策：LLM接收用户的请求和可用的工具定义。基于其对请求和工具的理解，LLM决定是否需要调用一个或多个工具来满足请求</li><li>函数调用生成：如果LLM决定使用工具，它会生成结构化输出（通常是JSON对象），指定要调用的工具名称和要传递给它的参数，这些参数从用户请求中提取</li><li>工具执行：智能体框架或编排层拦截此结构化输出，识别请求的工具并使用提供的参数执行实际的外部函数</li><li>观察/结果：工具执行的输出或结果返回给智能体</li><li>LLM处理（可选但常见）：LLM接收工具的输出作为上下文，并使用它向用户制定最终响应或决定工作流中的下一步（可能涉及调用另一个工具、反思或提供最终答案）</li></ol><p>该模式是基础性的，因为它打破了LLM训练数据的限制，允许它访问最新信息、执行内部无法完成的计算、与用户特定数据交互或触发现实世界的行动。工具调用是链接LLM推理能力与大量可用外部功能之间差距的技术机制。</p><p>虽然“函数调用”准确描述了调用预定义代码函数的过程，但采用更广泛的“工具调用”概念更具时代价值。这一更宽泛的术语承认智能体的能力可以远超简单函数执行范畴——“工具”既可以是传统函数，也可以是复杂的API端点、数据库查询请求，甚至是向其他专业智能体发出的指令。这种视角帮助我们构建更复杂的系统，例如主智能体可以将复杂数据分析任务委托给专用的“分析师智能体”，或通过API查询外部知识库。从“工具调用”的角度思考，能更好地把握智能体作为跨多样化数字资源和其他智能实体生态系统编排者的全部潜力。</p><p>![](/images/Agentic Design Patterns-工具使用/工具使用.png)</p><h1 id="规划模式概述"><a href="#规划模式概述" class="headerlink" title="规划模式概述"></a>规划模式概述</h1><p>在AI背景下，可将规划智能体视为处理复杂目标的专家。当您要求“组织团队外出活动”时，您只需定义“目标”（内容及约束），而无需制定“方法”。智能体的核心任务是自主规划实现目标的路径：先理解初始状态（如预算、参与人数、期望日期）和目标状态（成功预定活动），再设计连接两者的最优行动序列。计划并非预先设定，而是根据请求动态生成。<br>此过程的核心在于适应性。初始计划仅是起点而非固定脚本，智能体的真正价值在于整合新信息、规避障碍的能力。例如，当首选场地不可用或餐饮服务商满员时，高效智能体不会失败，而是记录新约束、重新评估选项，并制定新计划（如推荐替代场地或日期）<br>然而，认识到灵活性与可预测性之间的权衡至关重要。动态规划是一种特定工具，而非通用解决方案。当问题的解决方案已被充分理解且可重复时，将智能体限制在预先确定的固定工作流会更有效。这种方法通过限制智能体的自主权来减少不确定性和不可预测行为的风险，确保结果可靠且一致。因此，是使用规划智能体还是使用预定义工作流的决定取决于一个关键问题：「方法」需要被发现，还是已知？</p><h1 id="关键要点"><a href="#关键要点" class="headerlink" title="关键要点"></a>关键要点</h1><ul><li>规划使智能体将复杂目标分解为可操作的顺序步骤</li><li>它对于处理多步任务、工作流自动化和导航复杂环境至关重要</li><li>LLM可以通过基于任务描述生成逐步方法来执行规划</li><li>明确提示或设计任务以要求规划步骤会在智能体框架中鼓励这种行为</li></ul><p>总之，规划模式是将智能体从简单的反应性响应者提升为战略性、目标导向的执行者的基础组件。现代大语言模型为此提供了核心能力，自主地将高级目标分解为连贯的可操作步骤。此模式从简单的顺序任务执行扩展到更复杂和动态的系统。</p><h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul><li><a href="https://platform.openai.com/docs/guides/function-calling">OpenAI Function Calling Guide</a> - OpenAI 官方函数调用指南</li><li><a href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview">Anthropic Tool Use Documentation</a> - Anthropic 工具使用官方文档</li><li><a href="https://www.anthropic.com/engineering/building-effective-agents">Building Effective Agents - Anthropic</a> - 构建高效智能体的工程实践</li><li><a href="https://python.langchain.com/docs/concepts/tool_calling/">LangChain Tool Calling</a> - LangChain 框架中工具调用的概念与实践</li><li><a href="https://docs.crewai.com/concepts/tools">CrewAI Tools Documentation</a> - CrewAI 多智能体框架中的工具使用</li><li><a href="https://langchain-ai.github.io/langgraph/">LangGraph Planning Patterns</a> - LangGraph 中的规划模式与工作流编排</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> LLM </tag>
+            
+            <tag> AI-Agent </tag>
+            
+            <tag> 设计模式 </tag>
+            
+            <tag> Tool Use </tag>
+            
+            <tag> Planning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Agentic Design Patterns-反思</title>
       <link href="/2026/05/02/AI/Agentic%20Design%20Patterns-%E5%8F%8D%E6%80%9D/"/>
       <url>/2026/05/02/AI/Agentic%20Design%20Patterns-%E5%8F%8D%E6%80%9D/</url>
@@ -24,9 +59,9 @@
             
             <tag> LLM </tag>
             
-            <tag> 设计模式 </tag>
-            
             <tag> AI-Agent </tag>
+            
+            <tag> 设计模式 </tag>
             
             <tag> Reflection </tag>
             
@@ -57,9 +92,9 @@
             
             <tag> LLM </tag>
             
-            <tag> 设计模式 </tag>
-            
             <tag> AI-Agent </tag>
+            
+            <tag> 设计模式 </tag>
             
         </tags>
       
@@ -86,9 +121,9 @@
             
             <tag> LLM </tag>
             
-            <tag> AI Agent </tag>
-            
             <tag> 设计模式 </tag>
+            
+            <tag> AI Agent </tag>
             
             <tag> Routing </tag>
             
@@ -119,11 +154,11 @@
             
             <tag> LLM </tag>
             
+            <tag> 设计模式 </tag>
+            
             <tag> Prompt Chaining </tag>
             
             <tag> AI Agent </tag>
-            
-            <tag> 设计模式 </tag>
             
             <tag> 上下文工程 </tag>
             
