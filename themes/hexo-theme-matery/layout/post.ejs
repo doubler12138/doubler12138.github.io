@@ -30,11 +30,17 @@
 
 </main>
 
-<% if (theme.mathjax.enable && page.mathjax) { %>
-<script src="<%- theme.mathjax.cdn %>"></script>
+<% if (theme.mathjax.enable && (page.mathjax || page.math)) { %>
 <script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
 </script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <% } %>

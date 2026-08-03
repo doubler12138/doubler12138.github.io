@@ -118,3 +118,37 @@ githubEmojis:
   inject: true
   styles:
   customEmojis:
+
+# hexo-math 数学公式配置 (hexo-math 5.0 使用 KaTeX)
+math:
+  katex:
+    enable: true
+    # 使用 KaTeX 服务端渲染
+    per_page: true
+    # 行内公式分隔符
+    delimiters:
+      - left: $
+        right: $
+        display: false
+      - left: $$
+        right: $$
+        display: true
+
+# hexo-reference 参考文献配置
+reference:
+  # 参考文献标题
+  title: '参考资料'
+  # 是否在每个文章末尾自动添加参考文献
+  auto_add: false
+
+# hexo-footnotes 脚注配置
+footnotes:
+  # 脚注标题
+  title: '脚注'
+  # 是否自动添加脚注列表
+  auto_add: true
+
+# hexo-tag-chart 图表配置
+chart:
+  # 是否启用图表
+  enable: true
