@@ -13,7 +13,7 @@
 
 | 节次 | 建议档位 | 知识点（沿主题层层推进） | 推荐资料（带链接，可替换） | 状态 |
 |------|----------|--------------------------|---------------------------|------|
-| S1 | 工作日档(30-45min) | 闭包与捕获语义：捕获列表、逃逸闭包、@autoclosure | 见下方「S1 资料详解」 | [ ] |
+| S1 | 工作日档(30-45min) | 闭包与捕获语义：捕获列表、逃逸闭包、@autoclosure | 见下方「S1 资料详解」 | [x] |
 | S2 | 工作日档(30-45min) | 协议与协议导向编程：协议扩展、条件一致性、协议组合 | [SwiftGG 协议章](https://doc.swiftgg.team/documentation/the-swift-programming-language/protocols/) | [ ] |
 | S3 | 工作日档(30-45min) | 泛型与关联类型：泛型约束、where 子句、PAT 问题 | [SwiftGG 泛型章](https://doc.swiftgg.team/documentation/the-swift-programming-language/generics/) | [ ] |
 | S4 | 工作日档(30-45min) | some/any 与类型擦除：不透明类型、存在类型、AnyEraser | [SwiftGG 不透明类型章](https://doc.swiftgg.team/documentation/the-swift-programming-language/opaquetypes/) + [SwiftGG 泛型章](https://doc.swiftgg.team/documentation/the-swift-programming-language/generics/) | [ ] |
@@ -62,3 +62,11 @@
 - Playground 中 3 段验证代码（保留，后续可回顾）
 - 一句话总结写在笔记里：「闭包捕获的是变量的引用而非值；逃逸闭包 + 引用类型 self 是循环引用的温床，[weak self] 是标准解法」
 - 为 S2 打前置：闭包是"行为抽象"，下一节的协议是"接口抽象"，思考两者的互补关系
+
+### S1 实际产出（2026-08-06 完成，耗时 90min）
+
+- 笔记：[学习笔记——Swift闭包与捕获语义](../source/_posts/学习笔记/学习笔记-Swift闭包与捕获语义.md)（线上：https://doubler12138.github.io/2026/08/03/学习笔记/学习笔记-Swift闭包与捕获语义/）
+- 3 段验证代码已完成并记录「预期输出 / 实际观察」：强引用 vs `[weak self]` 的 deinit 对比、`asyncAfter` 逃逸场景、`@autoclosure` 版 `log(level:_:)`
+- 已勾选 Checklist 4 项：闭包语法与尾随闭包 / 闭包捕获语义 / @escaping / @autoclosure
+- 待补（🟡）：「ARC 在 Swift 中的行为、循环引用排查」——笔记仅覆盖闭包场景，缺类实例互持与 Memory Graph / Instruments 排查手段，留到 A2 单元补上
+- 笔记里留下的开放问题：`[unowned self]` 的真实适用场景、非逃逸上下文栈分配是保证还是优化（想从 SIL 验证）、Swift 6 下 `Sendable` 闭包捕获检查与本节语义的叠加

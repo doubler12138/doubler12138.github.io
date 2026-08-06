@@ -20,7 +20,7 @@ tags:
 
 > 📌 **这是一篇持续更新的长文**。它既是我的学习计划书，也是我的进度看板——每完成一个节次、掌握一个知识点，都会回来更新这里的勾选状态和进度数字。
 >
-> **最近更新**：2026-08-03（初始化）· **总进度**：0 / 270（0%）· **当前主题**：主题 01 Swift 基础进阶
+> **最近更新**：2026-08-06（完成 S1 闭包与捕获语义）· **总进度**：4 / 270（1%）· **当前主题**：主题 01 Swift 基础进阶
 
 ## 为什么要写这份计划
 
@@ -104,10 +104,10 @@ tags:
 
 | 指标 | 当前值 |
 |------|--------|
-| 知识点掌握 | 0 / 270（`░░░░░░░░░░` 0%） |
+| 知识点掌握 | 4 / 270（`░░░░░░░░░░` 1%） |
 | 单元完成 | 0 / 31 |
-| 进行中主题 | 主题 01 Swift 基础进阶（单元 A1） |
-| 累计学习时长 | — |
+| 进行中主题 | 主题 01 Swift 基础进阶（单元 A1）· S1 已完成 |
+| 累计学习时长 | 90min |
 | 计划启动日 | 2026-08-03 |
 
 ### 模块进度表
@@ -116,7 +116,7 @@ tags:
 
 | 单元 | 名称 | 状态 | 掌握度(1-5) | 累计耗时 | 最后学习 |
 |------|------|------|-------------|----------|----------|
-| A1 | Swift 语言进阶 | 🔵 进行中 | - | - | 2026-08-03 |
+| A1 | Swift 语言进阶 | 🔵 进行中 | - | 90min | 2026-08-06 |
 | A2 | 内存管理与所有权 | ⚪ 未开始 | - | - | - |
 | A3 | 并发编程 | ⚪ 未开始 | - | - | - |
 | A4 | SwiftUI 与声明式 UI | ⚪ 未开始 | - | - | - |
@@ -186,7 +186,7 @@ tags:
 
 | 节次 | 建议档位 | 知识点 | 主要资料 | 状态 |
 |------|----------|--------|----------|------|
-| S1 | 工作日档 30-45min | 闭包与捕获语义：捕获列表、逃逸闭包、@autoclosure | [SwiftGG 闭包章](https://doc.swiftgg.team/documentation/the-swift-programming-language/closures/) | ⬜ |
+| S1 | 工作日档 30-45min | 闭包与捕获语义：捕获列表、逃逸闭包、@autoclosure | [SwiftGG 闭包章](https://doc.swiftgg.team/documentation/the-swift-programming-language/closures/) | ✅ |
 | S2 | 工作日档 30-45min | 协议与协议导向编程：协议扩展、条件一致性、协议组合 | [SwiftGG 协议章](https://doc.swiftgg.team/documentation/the-swift-programming-language/protocols/) | ⬜ |
 | S3 | 工作日档 30-45min | 泛型与关联类型：泛型约束、where 子句、PAT 问题 | [SwiftGG 泛型章](https://doc.swiftgg.team/documentation/the-swift-programming-language/generics/) | ⬜ |
 | S4 | 工作日档 30-45min | some/any 与类型擦除：不透明类型、存在类型、AnyEraser | [SwiftGG 不透明类型章](https://doc.swiftgg.team/documentation/the-swift-programming-language/opaquetypes/) | ⬜ |
@@ -222,13 +222,13 @@ tags:
 
 | 笔记 | 日期 | 对应节次 | 覆盖知识点 |
 |------|------|----------|------------|
-| 暂无 | - | - | - |
+| [学习笔记——Swift闭包与捕获语义](https://doubler12138.github.io/2026/08/03/学习笔记/学习笔记-Swift闭包与捕获语义/) | 2026-08-03 | 主题 01 · S1 | 闭包语法与尾随闭包、闭包捕获语义（引用/值捕获 · weak/unowned）、@escaping 与循环引用、@autoclosure 与惰性求值 |
 
 ## 五、知识点全量 Checklist（270 项）
 
 **使用约定**：标注「了解」的条目知道思想即可，不必深钻；标注「手写 / 能讲」的条目以**能输出**为准——能在白板上写出来、能给别人讲明白，才算掌握。已掌握的条目会标记为 `[x]` 并附上掌握日期。
 
-### 能力一：编程语言深度（Swift / Objective-C）· 0 / 41
+### 能力一：编程语言深度（Swift / Objective-C）· 4 / 41
 
 **Swift 语言核心**
 
@@ -239,10 +239,10 @@ tags:
 - [ ] 条件一致性：extension where 子句
 - [ ] 协议组合（`some P1 & P2`）与类型擦除（能手写 AnyXxx Eraser）
 - [ ] 泛型函数与泛型类型、泛型约束
-- [ ] 闭包语法与尾随闭包、从上下文推断类型
-- [ ] 闭包捕获语义：捕获列表 `[weak self]`/`[unowned]`、引用捕获 vs 值捕获
-- [ ] 逃逸闭包（@escaping）与循环引用、内存影响
-- [ ] @autoclosure 与惰性求值
+- [x] 闭包语法与尾随闭包、从上下文推断类型（2026-08-06）
+- [x] 闭包捕获语义：捕获列表 `[weak self]`/`[unowned]`、引用捕获 vs 值捕获（2026-08-06）
+- [x] 逃逸闭包（@escaping）与循环引用、内存影响（2026-08-06）
+- [x] @autoclosure 与惰性求值（2026-08-06）
 - [ ] ARC 在 Swift 中的行为、循环引用排查
 - [ ] Copy-on-Write 机制（能手写 isKnownUniquelyReferenced 判断）
 - [ ] 所有权模型：~Copyable、consuming/borrowing（了解）
