@@ -439,21 +439,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-08-03
+                    2026-08-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    369
+                    4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    15 分
                 </div>
                 
 
@@ -502,56 +502,375 @@
 <li>逃逸闭包（@escaping）与循环引用、内存影响</li>
 <li>@autoclosure 与惰性求值</li>
 </ul>
-<!-- 引言：用两三句话交代「为什么闭包是 Swift 抽象能力的根基」，以及本节想解决的疑问 -->
-
+<p>闭包可以捕获和存储其所在上下文中任意常量和变量的引用。这个过程可以看作是将这些常量和变量<strong>包含</strong>在闭包的作用域内。</p>
 <h1 id="闭包表达式：语法回顾"><a href="#闭包表达式：语法回顾" class="headerlink" title="闭包表达式：语法回顾"></a>闭包表达式：语法回顾</h1><!-- 目标：确认语法无障碍，5 min 快速过。原理点在于「闭包是可以捕获上下文的匿名函数」 -->
+<p>闭包表达式语法一般形式如下：</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">{ (&lt;#parameters#&gt;) -&gt; &lt;#return type#&gt; in
+  &lt;#statements#&gt;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>闭包表达式语法中的<strong>参数</strong>可以是in-out参数，但不能具有默认值。如果你命名了可变参数，也可以使用可变参数。</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">reversedNames = names.sorted(by: { (s1: String, s2: String) -&gt; Bool in 
+  return s1 &gt; s2
+})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>闭包函数主体以in关键字开始。这个关键字表示闭包的参数和返回类型定义已经结束，接下来是闭包的实际内容。</p>
+<p>当闭包作为內联表达式传递给函数或方法时，Swift通常能够推断出参数类型和返回类型。这意味着，在使用闭包作为函数或方法参数时，可以不写出完整的闭包形式</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">reversedNames = names.sorted(by: {s1, s2 in return s1 &gt; s2})<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="完整语法与简写规则"><a href="#完整语法与简写规则" class="headerlink" title="完整语法与简写规则"></a>完整语法与简写规则</h2><!-- 从完整写法逐步简写到 $0，说明每一步省略了什么、编译器凭什么推断 -->
+<p>单表达式闭包可以省略return关键字</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">reversedNames = names.sorted(by: {s1, s2 in s1 &gt; s2})<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Swift自动为内联闭包提供了简写参数名称功能，你可以直接通过$0,$1等来引用闭包参数的值</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">reversedNames = names.sorted(by: { $0 &gt; $1 })<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="尾随闭包"><a href="#尾随闭包" class="headerlink" title="尾随闭包"></a>尾随闭包</h2><!-- 尾随闭包语法糖、多尾随闭包写法；说明 SwiftUI 的 DSL 观感从何而来 -->
+<p>如果你需要将闭包表达式作为函数的最后一个参数传递给函数，并且闭包表达式很长，则将其编写为 <strong>尾随闭包</strong> 的形式</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">reversedNames = names.sorted() { $0 &gt; $1 }<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="从上下文推断类型"><a href="#从上下文推断类型" class="headerlink" title="从上下文推断类型"></a>从上下文推断类型</h2><!-- 参数类型/返回值/单表达式隐式返回的推断规则 -->
+<p>如果一个闭包表达式是函数或方法的唯一参数，则写作尾随闭包时可以省略括号</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">reversedNames = names.sorted { $0 &gt; $1 }<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h1 id="逃逸闭包-escaping"><a href="#逃逸闭包-escaping" class="headerlink" title="逃逸闭包 @escaping"></a>逃逸闭包 @escaping</h1><!-- 本节重点，面试高频点，约 10 min -->
-
-<h2 id="什么是逃逸：闭包生命周期超出函数调用"><a href="#什么是逃逸：闭包生命周期超出函数调用" class="headerlink" title="什么是逃逸：闭包生命周期超出函数调用"></a>什么是逃逸：闭包生命周期超出函数调用</h2><!-- 原理：非逃逸闭包可栈上分配、编译器可优化；逃逸闭包需堆分配并延长生命周期 -->
+<p>当闭包作为参数传递给函数，但是这个闭包在函数返回之后才被执行，该闭包被称为 <strong>逃逸闭包</strong>。当你声明一个将闭包作为其参数之一的函数时，你可以通过在参数类型之前写@escaping，以表示这个闭包是允许逃逸的</p>
+<p>闭包逃逸的一种常见方式是将其存储在函数外部定义的变量中</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">var completionHandlers: [() -&gt; Void] = []
+func someFunctionWithEscapingClosure(completionHandler: @escaping () -&gt; Void) {
+  completionHandlers.append(completionHandler)
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="为什么异步回调必须逃逸"><a href="#为什么异步回调必须逃逸" class="headerlink" title="为什么异步回调必须逃逸"></a>为什么异步回调必须逃逸</h2><!-- 以网络请求 / DispatchQueue.asyncAfter 为例说明 -->
-
+<p>@escaping不是一个“权限开关”，而是一个<strong>关于生命周期的契约声明</strong>。非逃逸闭包的契约是：函数返回之前，这个闭包一定被执行完或者被丢弃。异步回调天生违背这个契约——它的执行必定延迟，因此必须逃逸</p>
+<p>非逃逸不只是个标注，编译器会据此做优化：</p>
+<ul>
+<li>闭包的捕获上下文（context）可以放在栈上分配，不用走堆</li>
+<li>捕获的引用类型不需要额外的retain/release，反正闭包执行的时候调用方那边的引用类型变量还活着</li>
+</ul>
+<p>如果一个异步回调被当成非逃逸使用，等它真正执行时，那块栈内存早已被后续调用覆盖——捕获的变量变成了悬垂指针，直接是内存安全问题。所以这不是”要不要写 @escaping”的风格问题，而是编译器必须知道要不要把上下文装箱到堆上、要不要 retain 捕获物。</p>
 <h2 id="逃逸闭包中-self-的显式引用要求"><a href="#逃逸闭包中-self-的显式引用要求" class="headerlink" title="逃逸闭包中 self 的显式引用要求"></a>逃逸闭包中 self 的显式引用要求</h2><!-- 编译器强制写 self 的用意：提醒你此处正在延长 self 的生命周期 -->
-
-<h2 id="逃逸闭包与内存影响"><a href="#逃逸闭包与内存影响" class="headerlink" title="逃逸闭包与内存影响"></a>逃逸闭包与内存影响</h2><!-- 堆分配开销、被属性持有后的引用关系 -->
+<p>在逃逸闭包中引用self时，如果self指向一个类的实例，就需要特别注意。在逃逸闭包中捕获self很容易意外创建强引用循环，即实例self持有闭包，闭包捕获self，导致循环引用。</p>
+<p>因此，通常情况下，闭包会通过在其体内使用变量来隐式捕获这些变量，但使用self时，必须显式进行捕获，提醒检测是否存在循环引用</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">someFunctionWithEscapingClosure { [self] in x = 100} <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h1 id="自动闭包-autoclosure"><a href="#自动闭包-autoclosure" class="headerlink" title="自动闭包 @autoclosure"></a>自动闭包 @autoclosure</h1><!-- 了解层级，约 5 min -->
-
+<p><strong>自动闭包</strong>是一种自动创建的闭包，用于包装作为参数传递给函数的表达式。它不接受任何参数，当它被调用时，它返回包裹在其中的表达式的值</p>
 <h2 id="惰性求值：表达式为什么没被执行"><a href="#惰性求值：表达式为什么没被执行" class="headerlink" title="惰性求值：表达式为什么没被执行"></a>惰性求值：表达式为什么没被执行</h2><!-- 说明 @autoclosure 把表达式包装成无参闭包，延迟到调用点才求值 -->
+<p>自动闭包允许延迟计算，在调用闭包之前，内部代码不会运行。延迟计算对于有副作用或高计算成本的代码非常有用</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">var customersInLine = ["Chris", "Alex", "Eva", "Barry", "Daniella"]
+print(customersInLine.count) // 5
 
-<h2 id="典型场景：assert-与日志"><a href="#典型场景：assert-与日志" class="headerlink" title="典型场景：assert 与日志"></a>典型场景：assert 与日志</h2><!-- 结合标准库 assert / precondition 的签名说明设计意图 -->
+let customerProvider = { customersInLine.remove(at: 0) }
+
+print(customersInLine.count) // 5
+
+print("Now serving \(customerProvider())!")
+// Now serving Chris!
+print(customersInLine.count) // 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="捕获值与捕获列表"><a href="#捕获值与捕获列表" class="headerlink" title="捕获值与捕获列表"></a>捕获值与捕获列表</h1><!-- 本节最核心，5-10 min -->
-
+<p>闭包可以从定义它的环境上下文中捕获常量和变量。即使定义这些常量和变量的原作用域已经不存在，闭包仍可以在闭包函数体内引用和修改这些值</p>
 <h2 id="闭包如何捕获外部变量：引用捕获"><a href="#闭包如何捕获外部变量：引用捕获" class="headerlink" title="闭包如何捕获外部变量：引用捕获"></a>闭包如何捕获外部变量：引用捕获</h2><!-- 关键结论：默认捕获的是变量本身（引用），不是调用时刻的值快照。用计数器例子验证 -->
+<p>默认情况下，闭包捕获的是<strong>变量本身</strong>，而不是闭包创建那一刻的值快照。所以外部变量后续被修改，闭包看到的是最新值</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">var counter = 0
+let printCounter = { print(counter) }
+counter = 10
+printCounter() // 10，不是 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>更能说明问题的是嵌套函数的计数器例子。<code>runningTotal</code> 是 <code>makeIncrementer</code> 的局部变量，按常理函数返回后就该销毁，但因为被 <code>incrementer</code> 捕获，Swift 会把它从栈上挪到堆上装箱，其生命周期改为跟随闭包</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">func makeIncrementer(forIncrement amount: Int) -&gt; () -&gt; Int {
+  var runningTotal = 0
+  func incrementer() -&gt; Int {
+    runningTotal += amount
+    return runningTotal
+  }
+  return incrementer
+}
+
+let incrementByTen = makeIncrementer(forIncrement: 10)
+incrementByTen() // 10
+incrementByTen() // 20
+incrementByTen() // 30
+
+let incrementBySeven = makeIncrementer(forIncrement: 7)
+incrementBySeven() // 7，与 incrementByTen 各自持有独立的 runningTotal
+incrementByTen()   // 40，互不干扰<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>两个关键结论：</p>
+<ul>
+<li>闭包能<strong>读写</strong>捕获的变量，说明捕获的不是值拷贝而是存储位置</li>
+<li>每次调用 <code>makeIncrementer</code> 都会新建一个盒子，闭包与它捕获的变量构成一个独立的「状态单元」</li>
+</ul>
 <h2 id="捕获列表与值捕获"><a href="#捕获列表与值捕获" class="headerlink" title="捕获列表与值捕获"></a>捕获列表与值捕获</h2><!-- [x] 形式在闭包创建时拷贝当前值；对比引用捕获的行为差异 -->
+<p>如果希望捕获的是「此刻的值」，就要用捕获列表把变量显式列出来。<code>[counter]</code> 是 <code>[counter = counter]</code> 的简写，它在闭包<strong>创建时</strong>求值并把结果拷贝一份存进闭包，之后外部怎么改都与闭包无关</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">var counter = 0
+let byReference = { print("引用捕获: \(counter)") }
+let byValue = { [counter] in print("值捕获: \(counter)") }
 
+counter = 10
+byReference() // 引用捕获: 10
+byValue()     // 值捕获: 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意值捕获拿到的是<strong>常量</strong>，闭包内不能对它赋值。</p>
+<p>还有一个容易踩的点：对引用类型来说，值捕获拷贝的只是「引用」这个值（指针），指向的对象依然是共享的</p>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">class Box { var value = 0 }
+
+var box = Box()
+let closure = { [box] in print(box.value) }
+
+box.value = 42
+closure()   // 42：拷贝的是指针，对象还是同一个
+
+box = Box() // 让外部变量指向新对象
+closure()   // 42：闭包仍持有旧对象的强引用<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这条性质正是 <code>[weak self]</code> 能生效的基础——捕获列表操作的是「怎么持有这个引用」，而不是「拷贝一份对象」。</p>
 <h2 id="weak-self-与-unowned-self"><a href="#weak-self-与-unowned-self" class="headerlink" title="[weak self] 与 [unowned self]"></a>[weak self] 与 [unowned self]</h2><!-- 语义差异（Optional vs 非 Optional）、崩溃风险、各自适用场景与选择依据 -->
+<p>两者都<strong>不增加</strong>引用计数，差别在对象已释放之后的行为</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>[weak self]</code></th>
+<th><code>[unowned self]</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>闭包内 self 的类型</td>
+<td><code>Self?</code>（Optional）</td>
+<td><code>Self</code>（非 Optional）</td>
+</tr>
+<tr>
+<td>是否增加引用计数</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>对象已释放后访问</td>
+<td>得到 <code>nil</code>，可安全提前返回</td>
+<td>悬垂引用，访问即崩溃</td>
+</tr>
+<tr>
+<td>运行时开销</td>
+<td>需要维护 / 查询弱引用表</td>
+<td>几乎为零</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">class ViewModel {
+  var onFinish: (() -&gt; Void)?
 
+  func load() {
+    fetch { [weak self] result in
+      guard let self else { return }  // Swift 5.7+ 可省略 = self
+      self.handle(result)
+    }
+  }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>选择依据只有一条：能否<strong>从生命周期上证明</strong>闭包执行时 <code>self</code> 一定还活着。</p>
+<ul>
+<li>异步回调、存成属性的长生命周期闭包、通知/定时器回调 → 一律 <code>[weak self]</code></li>
+<li>只有当闭包与 <code>self</code> 同生共死（比如闭包由 <code>self</code> 独占持有且随 <code>self</code> 一起销毁），才值得用 <code>[unowned self]</code> 换掉那次可选解包</li>
+</ul>
+<p>拿不准就用 <code>weak</code>：weak 的代价是一次弱引用表查询，unowned 的代价是崩溃。</p>
 <h2 id="ARC-视角：循环引用如何形成与打破"><a href="#ARC-视角：循环引用如何形成与打破" class="headerlink" title="ARC 视角：循环引用如何形成与打破"></a>ARC 视角：循环引用如何形成与打破</h2><!-- 画出引用关系：self → 闭包属性 → 捕获 self；说明 [weak self] 在哪一环断开 -->
+<p>循环引用的本质是两条强引用首尾相接，让引用计数永远降不到 0</p>
+<pre class="line-numbers language-none"><code class="language-none">┌──────────────────────────────────────────────┐
+│                                              │
+│   ViewModel 实例 ──strong──▶ onFinish 闭包    │
+│         ▲                        │            │
+│         └────strong（捕获 self）──┘            │
+│                                              │
+└──────────────────────────────────────────────┘<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<ul>
+<li><code>self</code> 持有闭包：闭包被存进了 <code>onFinish</code> 属性</li>
+<li>闭包持有 <code>self</code>：闭包体内用到了 <code>self</code>，于是默认强引用捕获</li>
+</ul>
+<p>结果是即使外部所有变量都不再指向这个实例，它的引用计数仍是 1，<code>deinit</code> 永远不会执行，内存泄漏成立。</p>
+<p>打破环有两个下手处，实践中只推荐第一个：</p>
+<ol>
+<li><strong>改「闭包 → self」这一环</strong>：用 <code>[weak self]</code> 让这条边变成弱引用，不参与引用计数。外部最后一个强引用消失时实例正常析构，闭包内的 <code>self</code> 随即变为 <code>nil</code></li>
+<li>改「self → 闭包」这一环：在合适时机手动 <code>onFinish = nil</code>。但这依赖调用方记得清理，一旦漏掉又回到泄漏状态，不如捕获列表可靠</li>
+</ol>
+<p>判断口诀：<strong>闭包被 self 直接或间接持有（存成属性、或存进 self 的子对象），并且闭包里用到了 self</strong> → 存在循环引用风险。反过来，像 <code>map</code>、<code>sorted</code> 这种立即执行的非逃逸闭包不会形成循环，因为函数返回时闭包就已经释放了——这也解释了为什么编译器只在逃逸闭包里强制要求显式写 <code>self</code>。</p>
 <h1 id="验证理解：三段-Playground-代码"><a href="#验证理解：三段-Playground-代码" class="headerlink" title="验证理解：三段 Playground 代码"></a>验证理解：三段 Playground 代码</h1><!-- 把 S1 要求的三段验证代码贴进来，每段附「预期输出 / 实际观察」 -->
-
+<p>以下三段代码在 Playground 中可直接运行。涉及异步的那段需要先打开 <code>PlaygroundPage.current.needsIndefiniteExecution = true</code>，否则主线程执行完就退出，看不到延迟回调。</p>
 <h2 id="强引用-vs-weak-self-：观察-deinit-是否调用"><a href="#强引用-vs-weak-self-：观察-deinit-是否调用" class="headerlink" title="强引用 vs [weak self]：观察 deinit 是否调用"></a>强引用 vs [weak self]：观察 deinit 是否调用</h2><!-- class 持有闭包属性，两种捕获方式对比，用 deinit 打印验证 -->
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">class Downloader {
+  let name: String
+  var onComplete: (() -&gt; Void)?
 
+  init(name: String) {
+    self.name = name
+    print("\(name) init")
+  }
+
+  func setupStrong() {
+    onComplete = { print("\(self.name) 完成（强引用捕获）") }
+  }
+
+  func setupWeak() {
+    onComplete = { [weak self] in
+      guard let self else { return }
+      print("\(self.name) 完成（weak 捕获）")
+    }
+  }
+
+  deinit { print("\(name) deinit") }
+}
+
+do {
+  let a = Downloader(name: "A-强引用")
+  a.setupStrong()
+  a.onComplete?()
+}
+
+do {
+  let b = Downloader(name: "B-weak")
+  b.setupWeak()
+  b.onComplete?()
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>预期输出</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">A-强引用 init
+A-强引用 完成（强引用捕获）
+B-weak init
+B-weak 完成（weak 捕获）
+B-weak deinit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>实际观察</strong>：与预期一致。关键是 <code>A-强引用 deinit</code> 从头到尾没有出现——离开 <code>do</code> 作用域后局部变量 <code>a</code> 已经销毁，但实例的引用计数仍为 1（被自己的 <code>onComplete</code> 闭包持有），泄漏就发生在这里。B 因为闭包只持有弱引用，作用域结束即正常析构。</p>
 <h2 id="escaping-场景：体会编译器为何要求显式-self"><a href="#escaping-场景：体会编译器为何要求显式-self" class="headerlink" title="@escaping 场景：体会编译器为何要求显式 self"></a>@escaping 场景：体会编译器为何要求显式 self</h2><!-- DispatchQueue.main.asyncAfter 示例 -->
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">import Foundation
+import PlaygroundSupport
 
+PlaygroundPage.current.needsIndefiniteExecution = true
+
+class DelayedGreeter {
+  var name = "DoubleR"
+
+  // 非逃逸：函数返回前一定执行完，闭包里可以直接写 name
+  func greetNow(_ body: (String) -&gt; Void) {
+    body(name)
+  }
+
+  // 逃逸：执行时机在函数返回之后，必须显式捕获 self
+  func greetLater() {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+      guard let self else {
+        print("实例已释放，跳过问候")
+        return
+      }
+      print("Hello, \(self.name)")
+    }
+    print("greetLater 已返回")
+  }
+
+  deinit { print("DelayedGreeter deinit") }
+}
+
+var greeter: DelayedGreeter? = DelayedGreeter()
+greeter?.greetLater()
+greeter = nil   // 在回调触发之前就释放<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>预期输出</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">greetLater 已返回
+DelayedGreeter deinit
+实例已释放，跳过问候<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>实际观察</strong>：三点值得记下来。</p>
+<ul>
+<li><code>greetLater 已返回</code> 先于回调打印，直观印证「逃逸 = 执行时机晚于函数返回」</li>
+<li>把 <code>[weak self]</code> 整个去掉、直接在闭包里写 <code>name</code>，编译器会报 <code>Reference to property 'name' in closure requires explicit use of 'self'</code>。它并不是在为难你，而是逼你意识到「这里正在延长 self 的生命周期」</li>
+<li>改成 <code>[unowned self]</code> 同样能通过编译，但 1 秒后访问已释放的实例会直接崩溃。同一份代码，<code>weak</code> 打印一行日志，<code>unowned</code> 直接挂掉——这就是前面说的「拿不准就用 weak」</li>
+</ul>
+<p>对比 <code>greetNow</code>：它是非逃逸闭包，函数返回前必然执行完，所以既不用写 <code>self</code> 也不可能形成循环引用。</p>
 <h2 id="用-autoclosure-实现-log-level"><a href="#用-autoclosure-实现-log-level" class="headerlink" title="用 @autoclosure 实现 log(level:_:)"></a>用 @autoclosure 实现 log(level:_:)</h2><!-- 完整可运行实现，并验证参数只在需要时才求值（在表达式里打印以证明） -->
+<pre class="line-numbers language-Swift" data-language="Swift"><code class="language-Swift">enum LogLevel: Int, Comparable {
+  case debug = 0, info, warning, error
 
+  static func &lt; (lhs: LogLevel, rhs: LogLevel) -&gt; Bool {
+    lhs.rawValue &lt; rhs.rawValue
+  }
+}
+
+var minimumLevel: LogLevel = .warning
+
+func log(level: LogLevel, _ message: @autoclosure () -&gt; String) {
+  guard level &gt;= minimumLevel else { return }
+  print("[\(level)] \(message())")
+}
+
+func expensiveDescription() -&gt; String {
+  print("  ⚠️ expensiveDescription 被求值了")
+  return "一次昂贵的字符串拼接结果"
+}
+
+log(level: .debug, expensiveDescription())   // 被等级过滤，表达式不该求值
+log(level: .error, expensiveDescription())   // 通过过滤，表达式才求值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>预期输出</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">  ⚠️ expensiveDescription 被求值了
+[error] 一次昂贵的字符串拼接结果<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>实际观察</strong>：第一次 <code>log</code> 完全没有触发 <code>expensiveDescription</code> 的打印。原因是 <code>expensiveDescription()</code> 这个表达式被 <code>@autoclosure</code> 包装成了 <code>() -&gt; String</code>，<code>guard</code> 提前 <code>return</code>，闭包根本没被调用。</p>
+<p>把参数类型改回普通的 <code>String</code> 再跑一遍，两次调用都会先求值再进函数，输出里会多出一行被过滤掉却仍然付出了代价的求值日志——这就是 <code>assert</code>、<code>precondition</code> 以及各类日志 API 都选择 <code>@autoclosure</code> 的原因。</p>
+<p>还有一个细节：<code>@autoclosure</code> 修饰的闭包默认是<strong>非逃逸</strong>的。如果想把它存起来、延迟到函数返回之后再求值，必须写成 <code>@escaping @autoclosure</code>。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><!--
 用自己的话归纳，每个知识点一句话。参考基准：
 「闭包捕获的是变量的引用而非值；逃逸闭包 + 引用类型 self 是循环引用的温床，[weak self] 是标准解法」
 再补一条：还没弄明白 / 需要下一节回头看的问题
 -->
 
+<p>用一句话概括本节：<strong>闭包捕获的是变量的引用而非值；逃逸闭包 + 引用类型 self 是循环引用的温床，<code>[weak self]</code> 是标准解法。</strong></p>
+<p>拆开来，每个知识点各一句：</p>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>一句话总结</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>闭包表达式</td>
+<td>闭包是能捕获上下文的匿名函数，类型推断 + 简写参数名 + 隐式 return 让它逐步退化成 <code>{ $0 &gt; $1 }</code></td>
+</tr>
+<tr>
+<td>尾随闭包</td>
+<td>最后一个闭包参数可以移到括号外，唯一参数时括号能整个省掉，SwiftUI 的 DSL 观感就来自这里</td>
+</tr>
+<tr>
+<td>@escaping</td>
+<td>不是权限开关，而是生命周期契约：闭包会活过函数返回，因此上下文必须装箱到堆上并 retain 捕获物</td>
+</tr>
+<tr>
+<td>显式 self</td>
+<td>编译器只在逃逸闭包里强制写 <code>self</code>，用意是提醒你此处正在延长 self 的生命周期</td>
+</tr>
+<tr>
+<td>@autoclosure</td>
+<td>把实参表达式自动包成无参闭包，求值时机推迟到调用点，代价是可读性（调用方看不出这是闭包）</td>
+</tr>
+<tr>
+<td>引用捕获</td>
+<td>捕获的是存储位置而非快照，被捕获的局部变量会被装箱到堆上，生命周期跟随闭包</td>
+</tr>
+<tr>
+<td>值捕获</td>
+<td><code>[x]</code> 在闭包创建时拷贝一份常量；引用类型拷贝的只是指针，对象依然共享</td>
+</tr>
+<tr>
+<td>循环引用</td>
+<td>self 持有闭包 + 闭包捕获 self = 引用计数降不到 0，<code>deinit</code> 永不执行</td>
+</tr>
+<tr>
+<td>weak / unowned</td>
+<td>都不增加引用计数；weak 得到 Optional 可安全降级，unowned 非 Optional 但对象释放后访问即崩溃</td>
+</tr>
+</tbody></table>
+<p><strong>还没弄明白 / 留给后续回头看的问题</strong>：</p>
+<ul>
+<li><code>[unowned self]</code> 在真实项目里究竟有多少场景值得用？想找一份能证明「生命周期严格同步」的实际用例，而不是教科书式的假设</li>
+<li>「非逃逸闭包的上下文分配在栈上」是编译器的<strong>保证</strong>还是<strong>优化机会</strong>？想从 SIL 层面验证一次</li>
+<li>Swift 6 严格并发模式下 <code>Sendable</code> 闭包的捕获检查，与本节的捕获语义如何叠加——捕获列表是否会成为跨隔离域传值的主要手段</li>
+</ul>
 <h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://doc.swiftgg.team/documentation/the-swift-programming-language/closures/">The Swift Programming Language 中文版 ·「闭包」</a></li>
 <li><a target="_blank" rel="noopener" href="https://doc.swiftgg.team/documentation/the-swift-programming-language/automaticreferencecounting/">The Swift Programming Language 中文版 ·「自动引用计数」</a></li>
@@ -725,10 +1044,10 @@
 
 <div class="prev-next-nav">
     
-    <span class="prev-btn disabled">
+    <a href="/2026/08/06/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Swift%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%8D%8F%E8%AE%AE%E5%AF%BC%E5%90%91%E7%BC%96%E7%A8%8B/" class="prev-btn enabled">
         <i class="fas fa-chevron-left"></i>
-        <span>上一篇: 没有了</span>
-    </span>
+        <span>上一篇: 学习笔记——Swift协议与协议导向编程</span>
+    </a>
     
 
     
